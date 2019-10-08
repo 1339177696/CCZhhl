@@ -65,8 +65,6 @@ public class WorkFragemt_9 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view;
-
-
         if(BuildConfig.IsPad){
             if(SPUtils.get(getActivity(), "isLead", "").equals("0")) {
                 view = inflater.inflate(R.layout.fragment_work_fragemt_9_pad_lead, container, false);
