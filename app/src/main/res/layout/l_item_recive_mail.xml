@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/edit_background3"
+    android:padding="@dimen/dp_10"
+    android:layout_marginLeft="@dimen/dp_15"
+    android:layout_marginRight="@dimen/dp_15"
+    android:layout_marginTop="@dimen/dp_10"
+    android:layout_width="match_parent" android:layout_height="@dimen/dp_105">
+    <FrameLayout
+        android:layout_marginTop="@dimen/dp_10"
+        android:id="@+id/iv_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="@dimen/dp_46"
+            android:background="@mipmap/bg_agency_head"
+            android:layout_height="@dimen/dp_46" />
+        <TextView
+            android:id="@+id/tv_type"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:textColor="#0054CC"
+            android:text="报"
+            android:textSize="@dimen/sp_19"
+            android:gravity="center"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_toRightOf="@id/iv_image"
+        android:layout_width="wrap_content"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_toLeftOf="@+id/tv_time"
+        android:text="title"
+        android:textColor="#313131"
+        android:maxLines="1"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:textSize="@dimen/sp_15"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="@dimen/dp_5"
+        android:id="@+id/tv_content"
+        android:layout_below="@id/tv_name"
+        android:layout_width="match_parent"
+
+        android:text="------"
+        android:textColor="#313131"
+        android:textSize="14sp"
+        android:layout_toRightOf="@id/iv_image"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_centerVertical="true"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:background="@mipmap/mail_annex_icon"
+        android:id="@+id/iv_fijian"
+        android:layout_marginTop="@dimen/dp_35"
+        android:layout_alignParentRight="true"
+        android:layout_width="@dimen/dp_16"
+        android:layout_height="@dimen/dp_16" />
+    
+    <TextView
+        android:layout_marginTop="@dimen/dp_5"
+        android:id="@+id/tv_des"
+        android:layout_below="@id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_marginRight="@dimen/dp_20"
+        android:text="999999"
+        android:maxLines="2"
+        android:layout_toRightOf="@id/iv_image"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="@dimen/dp_5"
+        android:textSize="@dimen/sp_12"
+        android:id="@+id/tv_time"
+        android:textColor="#A7A7A7"
+        android:layout_width="wrap_content"
+        android:text="------"
+        android:layout_alignParentRight="true"
+        android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="@mipmap/mail_delete_icon"
+            android:id="@+id/bt_1"
+            android:layout_width="@dimen/dp_18"
+            android:layout_height="@dimen/dp_18" />
+</RelativeLayout>

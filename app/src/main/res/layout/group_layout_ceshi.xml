@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:descendantFocusability="blocksDescendants">
+
+    <RelativeLayout
+        android:id="@+id/group_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dp_64"
+        android:background="@drawable/ceshi_text_item_bg"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp" >
+
+        <CheckBox
+            android:layout_marginLeft="@dimen/dp_15"
+            android:id="@+id/bb"
+            style="@style/my_CheckBox"
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="@dimen/dp_25"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true" />
+        
+        <ImageView
+            android:layout_marginLeft="8dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/wenjianjia_qgl"
+            android:background="@drawable/liner_yuan_qgl9"
+            android:id="@+id/img_my1"
+            android:layout_toRightOf="@+id/bb"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+
+
+        <TextView
+            android:layout_marginLeft="@dimen/dp_11"
+            android:layout_centerVertical="true"
+            android:text="设计中心"
+            android:layout_toRightOf="@+id/img_my1"
+            android:id="@+id/group_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ff313131"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_count"
+            android:layout_marginRight="@dimen/dp_3"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/group_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已选0人"
+            android:textColor="#ff676767"
+            android:textSize="12sp"
+            />
+
+        <ImageView
+            android:src="@mipmap/qj_selected_icon_qgl"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="27dp"
+            android:id="@+id/group_state"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </RelativeLayout>
+    <View
+        android:layout_marginLeft="@dimen/dp_17"
+        android:background="#D3D3D3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"/>
+
+
+</LinearLayout>

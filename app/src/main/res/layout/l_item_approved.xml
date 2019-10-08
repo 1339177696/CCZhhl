@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_105"
+    android:layout_marginLeft="@dimen/dp_10"
+    android:layout_marginTop="@dimen/dp_10"
+    android:layout_marginRight="@dimen/dp_10"
+    android:background="@drawable/liner_border_gb_qgl">
+    <!--<ImageView-->
+        <!--android:id="@+id/iv_remind"-->
+        <!--android:layout_width="@dimen/dp_2"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="@drawable/l_collection_notice_bg"-->
+        <!--/>-->
+    <ImageView
+        android:id="@+id/iv_remind"
+        android:layout_width="@dimen/dp_9"
+        android:layout_height="@dimen/dp_9"
+        android:layout_marginLeft="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_22"
+        android:background="@drawable/liner_yuan_qgl1" />
+    <LinearLayout
+        android:layout_marginLeft="@dimen/dp_18"
+        android:layout_marginTop="@dimen/dp_20"
+        android:id="@+id/ll_content"
+        android:layout_toRightOf="@id/iv_remind"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_title"
+                android:textSize="@dimen/dp_14"
+                android:text="公文流转标题"
+                android:textColor="@color/black"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginRight="20dp"
+                android:id="@+id/tv_time"
+                android:text="2019-17-01"
+                android:textColor="@color/black"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <!--<TextView-->
+            <!--android:id="@+id/tv_roam_person_title"-->
+            <!--android:layout_marginTop="@dimen/dp_20"-->
+            <!--android:text="流转人："-->
+            <!--android:textColor="@color/black"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+        <!--<TextView-->
+            <!--android:id="@+id/tv_roam_person"-->
+            <!--android:textColor="@color/black"-->
+            <!--android:text="留专人、留专人、留专人、留专人、留专人、留专人、留专人、留专人、留专人、留专人、留专人、留专人、"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_roam_person_title"
+                android:text="流转人"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:id="@+id/tv_roam_person"
+                android:text="留专人、留专人、留专人、留专人、留专人、留专人、留专人、留专人、留专人、留专人、留专人、留专人、"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/tv_status"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

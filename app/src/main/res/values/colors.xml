@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#111962</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorTheme">#0053CB</color>
+    <color name="colorText">#676767</color>
+    <color name="colorBackground">#f8f8f8</color>
+    <color name="colorCircle">#00cc66</color>
+    <color name="colortip">#ea9518</color>
+    <color name="colorwhite">#ffffff</color>
+    <color name="color_xian">#ccccd5</color>
+    <!--新增色值start-->
+    <color name="color_a_yellow">#f7ad10</color>
+    <color name="color_b_yellow">#fa6a14</color>
+    <color name="color_a_green">#29cf9f</color>
+    <color name="color_a_blue">#4997f9</color>
+    <color name="color_b_blue">#434eb0</color>
+    <color name="color_a_gray">#eaebed</color>
+    <color name="color_b_gray">#e5e5e5</color>
+    <color name="color_f6">#f6f6f6</color>
+    <color name="color_a_black">#000000</color>
+    <color name="bar_grey">#393a3e</color>
+    <color name="bg_all">#EBEBEB</color>
+    <color name="bg_color">#E1F0FF</color>
+    <color name="bg_color2">#0090FF</color>
+    <!--新增色值end-->
+    <color name="line_default_color">#e5e5e5</color>
+    <color name="bg_yellow">#fc9b0d</color>
+</resources>

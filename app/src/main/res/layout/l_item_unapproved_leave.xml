@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginLeft="@dimen/dp_10"
+    android:layout_marginRight="@dimen/dp_10"
+    android:layout_marginTop="@dimen/dp_10"
+    android:background="#ffffff"
+    android:layout_height="@dimen/dp_105">
+    <ImageView
+        android:id="@+id/iv_remind"
+        android:layout_width="@dimen/dp_2"
+        android:layout_height="match_parent"
+        android:background="@drawable/l_collection_notice_bg"
+        />
+    <LinearLayout
+        android:layout_toRightOf="@id/iv_remind"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            >
+            <TextView
+                android:id="@+id/tv_title"
+                android:textSize="@dimen/dp_14"
+                android:text="公文流转标题"
+                android:textColor="@color/black"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_time"
+                android:text="2019-17-01"
+                android:layout_marginRight="@dimen/dp_10"
+                android:textColor="@color/black"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_deadline"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="截止日期:"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            >
+            <TextView
+                android:id="@+id/tv_deadline_time"
+                android:layout_marginTop="@dimen/dp_5"
+                android:text="7月12日"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_deadline_week"
+                android:layout_toRightOf="@id/tv_deadline_time"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:text="星期五"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_deadline_hours"
+                android:layout_toRightOf="@id/tv_deadline_week"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:text="18:00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_a_gray"
+            android:paddingLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"
+            >
+            <TextView
+                android:id="@+id/tv_launch_task_person"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="发起人:某某某"
+                android:textColor="@color/black"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <TextView
+                android:id="@+id/tv_completed"
+                android:gravity="center"
+                android:text="完成"
+                android:textColor="@color/white"
+                android:layout_alignParentRight="true"
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="match_parent"
+                android:background="@color/color_a_blue"
+                />
+            <TextView
+                android:id="@+id/tv_transfer_task"
+                android:gravity="center"
+                android:layout_toLeftOf="@id/tv_completed"
+                android:text="转交任务"
+                android:textColor="@color/white"
+                android:layout_marginRight="@dimen/dp_1"
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="match_parent"
+                android:background="@color/color_a_blue"
+                />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</RelativeLayout>

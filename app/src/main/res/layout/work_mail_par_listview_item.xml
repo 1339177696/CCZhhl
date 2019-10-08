@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40">
+            <ImageView
+                android:id="@+id/iv_icon"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/mail_annex_icon"
+                android:layout_marginRight="@dimen/dp_10" />
+
+            <TextView
+                android:layout_toRightOf="@id/iv_icon"
+                android:id="@+id/tv_file_name_x"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="文件名.txt"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dp_14"
+            />
+            <ImageView
+                android:src="@mipmap/mine_more"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp_20" />
+        </RelativeLayout>
+
+</LinearLayout>

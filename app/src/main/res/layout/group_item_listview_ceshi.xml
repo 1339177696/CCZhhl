@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:descendantFocusability="blocksDescendants">
+
+    <RelativeLayout
+
+        android:layout_marginLeft="@dimen/dp_40"
+        android:id="@+id/group_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/ceshi_text_item_bg"
+        android:paddingBottom="10dp">
+
+        <CheckBox
+            android:id="@+id/aa"
+            style="@style/my_CheckBox"
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="@dimen/dp_25"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true" />
+        
+        <ImageView
+            android:layout_marginLeft="8dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/tou_qgl"
+            android:id="@+id/img_my1"
+            android:layout_toRightOf="@+id/aa"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+
+
+        <TextView
+
+            android:layout_marginLeft="@dimen/dp_11"
+            android:layout_centerVertical="true"
+            android:text="张某某"
+            android:layout_toRightOf="@+id/img_my1"
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ff313131"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_role"
+            android:layout_marginLeft="@dimen/dp_4"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="一级领导"
+            android:textColor="#A8A8A8"
+            android:textSize="12sp"
+            />
+
+    </RelativeLayout>
+    <View
+        android:layout_marginLeft="@dimen/dp_45"
+        android:background="#D3D3D3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"/>
+
+</LinearLayout>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    <RelativeLayout
+        android:id="@+id/rl_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        >
+    <!--<com.hulian.oa.views.CircleImagview-->
+        <!--android:id="@+id/img_icon"-->
+        <!--android:layout_width="@dimen/dp_45"-->
+        <!--android:layout_height="@dimen/dp_45"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_below="@+id/top_line"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:src="@drawable/nim_avatar_default" />-->
+        <LinearLayout
+            android:gravity="center"
+            android:background="@drawable/ll_liner_yuan_qgl"
+            android:id="@+id/liner_qgl_my"
+            android:layout_width="20dp"
+            android:layout_height="20dp">
+            <TextView
+                android:textColor="#ffffffff"
+                android:textSize="10sp"
+                android:id="@+id/img_icon"
+                android:text="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    <View
+        android:id="@+id/bottom_line"
+        android:layout_centerHorizontal="true"
+        android:layout_width="@dimen/dp_2"
+        android:layout_height="@dimen/dp_25"
+        android:layout_below="@id/liner_qgl_my"
+        android:background="@color/color_a_blue" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_toRightOf="@id/rl_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/dp_10"
+        >
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_name"
+                android:text="某某某"
+                android:textSize="@dimen/dp_14"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_state"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_toRightOf="@id/tv_name"
+                android:text="审批状态"
+                android:textSize="@dimen/dp_14"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_approval"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dp_12"
+            android:text="正在审核"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:textColor="@color/black"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_20"
+            android:textSize="@dimen/dp_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="07-12 9:00" />
+    </RelativeLayout>
+</LinearLayout>

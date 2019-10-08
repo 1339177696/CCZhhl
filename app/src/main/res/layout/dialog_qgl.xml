@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn1"
+            android:textSize="15sp"
+            android:textColor="#FFFFFF"
+            android:visibility="gone"
+            android:background="@drawable/renwu_btn_yuan_qgl1"
+            android:text="转交任务"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <Button
+            android:id="@+id/btn2"
+            android:textSize="15sp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/liner_yuan_qgl8"
+            android:layout_marginTop="15dp"
+            android:text="完成"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <Button
+            android:id="@+id/btn3"
+            android:background="@drawable/renwu_btn_yuan_qgl2"
+            android:layout_marginBottom="21dp"
+            android:layout_marginTop="15dp"
+            android:text="取消"
+            android:textColor="#ff313131"
+            android:textSize="15sp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

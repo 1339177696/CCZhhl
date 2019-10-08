@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EBEBEB">
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:background="#101a62"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:layout_height="@dimen/dp_53">-->
+        <!--<ImageView-->
+            <!--android:layout_marginLeft="@dimen/dp_10"-->
+            <!--android:layout_width="@dimen/dp_20"-->
+            <!--android:id="@+id/iv_back"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:background="@mipmap/ic_left"-->
+            <!--android:layout_height="@dimen/dp_20" />-->
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:gravity="center"-->
+            <!--android:text="任务详情"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:textSize="@dimen/sp_16" />-->
+    <!--</RelativeLayout>-->
+    <LinearLayout
+        android:id="@+id/work_leave_list_liner"
+        android:orientation="vertical"
+        android:background="@mipmap/banner_bg_qgl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_170">
+
+        <RelativeLayout
+            android:id="@+id/iv_back"
+            android:layout_marginTop="@dimen/dp_25"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="@dimen/dp_53">
+            <ImageView
+                android:layout_marginLeft="@dimen/dp_15"
+                android:layout_width="@dimen/dp_15"
+
+                android:layout_centerVertical="true"
+                android:background="@mipmap/ic_left_white"
+                android:layout_height="@dimen/dp_15" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="任务详情"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/sp_17" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/la_un_start_time"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2019/8/8  9:50"
+                android:textColor="#ffffffff"
+                android:textSize="@dimen/sp_17" />
+
+            <TextView
+                android:id="@+id/la_un_stop_time"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2019/8/15  14:50"
+                android:textColor="#ffffffff"
+                android:textSize="@dimen/sp_17"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/dp_15"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发布时间"
+                android:textColor="#83ACF7"
+                android:textSize="@dimen/sp_12"
+                />
+
+            <TextView
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="截止时间"
+                android:textColor="#83ACF7"
+                android:textSize="@dimen/sp_12"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="@dimen/dp_145"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <!--回复-->
+        <RelativeLayout
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            >
+            <TextView
+                android:id="@+id/tv_send"
+                android:text="发送"
+                android:textColor="@color/black"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dp_20"
+                android:padding="@dimen/dp_10"
+                android:layout_width="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_height="wrap_content"
+                />
+            <EditText
+                android:layout_toLeftOf="@id/tv_send"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:background="@drawable/l_task_reply_shape"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:layout_marginTop="@dimen/dp_15"-->
+        <!--android:layout_marginLeft="@dimen/dp_10"-->
+        <!--android:layout_marginRight="@dimen/dp_10"-->
+        <!--android:layout_marginBottom="@dimen/dp_20"-->
+        <!--android:background="@color/colorwhite"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="vertical"-->
+        <!--&gt;-->
+    <!--<com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView-->
+        <!--android:id="@+id/listview"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="1"/>-->
+        <!--&lt;!&ndash;回复&ndash;&gt;-->
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:visibility="gone"-->
+        <!--&gt;-->
+        <!--<TextView-->
+            <!--android:id="@+id/tv_send"-->
+            <!--android:text="发送"-->
+            <!--android:textColor="@color/black"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="@dimen/dp_20"-->
+            <!--android:padding="@dimen/dp_10"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--/>-->
+        <!--<EditText-->
+            <!--android:layout_toLeftOf="@id/tv_send"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/dp_30"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginLeft="@dimen/dp_10"-->
+            <!--android:layout_marginRight="@dimen/dp_10"-->
+            <!--android:background="@drawable/l_task_reply_shape"/>-->
+    <!--</RelativeLayout>-->
+    <!--</LinearLayout>-->
+</RelativeLayout>

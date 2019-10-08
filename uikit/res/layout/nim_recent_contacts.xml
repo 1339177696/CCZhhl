@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="@dimen/dp_45">
+        <TextView
+            android:layout_width="match_parent"
+            android:text="消息"
+            android:gravity="center"
+            android:textSize="@dimen/sp_17"
+            android:textColor="#313131"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/iv_more"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="@dimen/dp_size_35"
+            android:background="@drawable/news_icon"
+            android:layout_marginRight="@dimen/dp_size_10"
+            android:layout_height="@dimen/dp_size_35" />
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/iv_people"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="@dimen/dp_size_35"
+            android:background="@drawable/capture_preview_finish"
+            android:layout_marginRight="@dimen/dp_size_76"
+            android:layout_height="@dimen/dp_size_35" />
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/iv_circle"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:gravity="center_vertical"
+            android:text="群聊"
+            android:textColor="#ffffff"
+            android:layout_marginRight="@dimen/dp_size_25"
+            android:layout_height="@dimen/dp_size_35" />
+        <ImageView
+            android:id="@+id/iv_gomine"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="@dimen/dp_25"
+            android:background="@drawable/ic_work_me"
+        />
+    </RelativeLayout>
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#dddddd" />
+    <LinearLayout
+        android:layout_margin="@dimen/dp_14"
+        android:layout_width="match_parent"
+        android:background="@drawable/edit_background2"
+        android:layout_height="@dimen/dp_size_35">
+        <TextView
+            android:drawableLeft="@drawable/search_icon"
+            android:id="@+id/tv_search"
+            android:drawablePadding="@dimen/dp_size_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/dp_10"
+            android:gravity="center_vertical"
+            android:textColor="#000000"
+            android:hint="搜索"
+            />
+    </LinearLayout>
+
+<FrameLayout android:id="@+id/messages_list_layout"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="@android:color/transparent"
+        />
+
+    <RelativeLayout
+        android:id="@+id/emptyBg"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:layout_marginBottom="50dp"
+        android:visibility="gone"
+  >
+
+        <ImageView
+            android:id="@+id/emptyBg1"
+            android:layout_width="@dimen/dp_260"
+            android:layout_height="@dimen/dp_150"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/empty"
+            android:src="@drawable/nim_messages_list_empty_bg"/>
+
+        <TextView
+            android:id="@+id/message_list_empty_hint"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/emptyBg1"
+            android:textSize="@dimen/sp_15"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dip"
+            android:gravity="center"/>
+    </RelativeLayout>
+</FrameLayout>
+</LinearLayout>

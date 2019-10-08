@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+ >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="#101a62"
+        android:gravity="center_vertical"
+        android:layout_height="@dimen/dp_53">
+        <ImageView
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_width="@dimen/dp_20"
+            android:id="@+id/iv_back"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/ic_left"
+            android:layout_height="@dimen/dp_20" />
+        <TextView
+            android:layout_gravity="center"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:text="授权详情"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/sp_22"
+            android:layout_height="match_parent" />
+        <TextView
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:text="发布"
+            android:layout_marginRight="@dimen/dp_20"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/sp_22"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:background="@color/colorText"
+        android:layout_height="@dimen/dp_0_5" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_70"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="#ffffff"
+        >
+        <TextView
+            android:layout_marginLeft="@dimen/dp_22"
+            android:gravity="center_vertical"
+            android:textColor="#000000"
+            android:textSize="@dimen/sp_18"
+            android:layout_width="wrap_content"
+            android:text="被授权人"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tv_sel_peo"
+            android:layout_marginRight="@dimen/dp_20"
+            android:gravity="center_vertical|right"
+            android:textSize="@dimen/sp_18"
+            android:layout_width="match_parent"
+            android:text="请选择 >"
+            android:textColor="@color/colorText"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="@dimen/dp_1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_70"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="#ffffff"
+        >
+        <TextView
+            android:layout_marginLeft="@dimen/dp_22"
+            android:gravity="center_vertical"
+            android:textColor="#000000"
+            android:textSize="@dimen/sp_18"
+            android:layout_width="wrap_content"
+            android:text="授权时间"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tv_sel_time"
+            android:layout_marginRight="@dimen/dp_20"
+            android:gravity="center_vertical|right"
+            android:textSize="@dimen/sp_18"
+            android:layout_width="match_parent"
+            android:text="请选择 >"
+            android:textColor="@color/colorText"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</LinearLayout>

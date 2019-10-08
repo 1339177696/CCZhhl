@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="#101a62"
+        android:gravity="center_vertical"
+        android:layout_height="@dimen/dp_53">
+        <ImageView
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_width="@dimen/dp_20"
+            android:id="@+id/iv_back"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/ic_left"
+            android:layout_height="@dimen/dp_20" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="详情"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/sp_22" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        >
+        <TextView
+            android:layout_marginTop="@dimen/dp_10"
+            android:textSize="@dimen/dp_16"
+            android:textColor="@color/black"
+            android:text="日期：2019-07-14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <EditText
+            android:id="@+id/et_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@drawable/l_write_mail_content_bg"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_80"
+            android:gravity="start"
+            android:padding="@dimen/dp_4"
+            />
+        <TextView
+            android:id="@+id/tv_back_instruct"
+            android:textSize="@dimen/dp_18"
+            android:text="反馈"
+            android:layout_width="@dimen/dp_160"
+            android:layout_height="@dimen/dp_40"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/l_document_agree_bg"
+            android:textColor="@color/white"
+            android:layout_marginBottom="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_10"
+            />
+    </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

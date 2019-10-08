@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_70"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="#ffffff"
+        >
+        <ImageView
+            android:id="@+id/iv_checkbox"
+            android:background="@mipmap/ic_check"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_centerVertical="true"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20" />
+        <com.shehuan.niv.NiceImageView
+            android:id="@+id/iv_image"
+            android:layout_centerVertical="true"
+            android:layout_width="@dimen/dp_48"
+            app:is_circle="true"
+            android:layout_toRightOf="@id/iv_checkbox"
+            android:layout_marginLeft="@dimen/dp_22"
+            android:src="@mipmap/ic_launcher_round"
+            android:layout_height="@dimen/dp_48" />
+        <TextView
+            android:layout_toRightOf="@id/iv_image"
+            android:id="@+id/tv_name"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/sp_18"
+            android:textColor="#000000"
+            android:layout_width="wrap_content"
+            android:text="王俊杰"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item  android:color="#0053CB"  android:state_checked="true"/>
+    <!-- 设置选中文字 -->
+    <item  android:color="#676767" android:state_checked="false"/>
+    <!-- 设置未选中文字 -->
+</selector>

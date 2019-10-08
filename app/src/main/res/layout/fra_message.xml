@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="#101a62"
+        android:gravity="center_vertical"
+        android:layout_height="@dimen/dp_50">
+        <TextView
+            android:layout_width="match_parent"
+            android:text="消息"
+            android:gravity="center"
+            android:textSize="@dimen/sp_16"
+            android:textColor="#ffffff"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:text="群聊"
+            android:textSize="@dimen/sp_16"
+            android:layout_marginRight="@dimen/dp_20"
+            android:textColor="#ffffff"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/iv_gomine"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_width="@dimen/dp_28"
+            android:layout_height="@dimen/dp_28"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/ic_work_me" />
+    </RelativeLayout>
+<ImageView
+    android:id="@+id/iv_message_info"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+</LinearLayout>

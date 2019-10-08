@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".work.fragment.WorkFragemt_9">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!--第一行-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_137"
+            android:layout_marginLeft="@dimen/dp_14"
+            android:layout_marginTop="@dimen/dp_14"
+            android:layout_marginRight="@dimen/dp_14"
+            android:background="@mipmap/gongzuo_bg_qgl"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/bt_mail"
+                    android:layout_width="@dimen/dp_53"
+                    android:layout_height="@dimen/dp_53"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/youjian_icon_qgl" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="邮件收发"
+                    android:textColor="#ffffffff"
+                    android:textSize="@dimen/sp_12" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/bt_document"
+                    android:layout_width="@dimen/dp_53"
+                    android:layout_height="@dimen/dp_53"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/gongwen_liuzhuan_icon_qgl" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="公文流转"
+                    android:textColor="#ffffffff"
+                    android:textSize="@dimen/sp_12" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/bt_coop"
+                    android:layout_width="@dimen/dp_53"
+                    android:layout_height="@dimen/dp_53"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/renwu_xietiao_icon_qgl" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="任务协同"
+                    android:textColor="#ffffffff"
+                    android:textSize="@dimen/sp_12" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_14"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_14"
+            android:background="@drawable/liner_border_gb_qgl"
+            android:orientation="vertical">
+            <!--第二行-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_24"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/bt_meeting"
+                        android:layout_width="@dimen/dp_53"
+                        android:layout_height="@dimen/dp_53"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/huiyi_anpai_icon_qgl" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:text="会议安排"
+                        android:textColor="#ff676767"
+                        android:textSize="@dimen/sp_12" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/bt_leave"
+                        android:layout_width="@dimen/dp_53"
+                        android:layout_height="@dimen/dp_53"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/qingjia_icon_qgl" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:text="请假管理"
+                        android:textColor="#ff676767"
+                        android:textSize="@dimen/sp_12" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/bt_notice"
+                        android:layout_width="@dimen/dp_53"
+                        android:layout_height="@dimen/dp_53"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/gonggao_icon_qgl" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:text="通告通知"
+                        android:textColor="#ff676767"
+                        android:textSize="@dimen/sp_12" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <!--第三行-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_24"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/bt_instruct"
+                        android:layout_width="@dimen/dp_53"
+                        android:layout_height="@dimen/dp_53"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/zhiling_icon_qgl" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:text="指令安排"
+                        android:textColor="#ff676767"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:visibility="invisible"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/bt_expense"
+                        android:layout_width="@dimen/dp_53"
+                        android:layout_height="@dimen/dp_53"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/richeng_guanli_icon_qgl" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:text="报销管理"
+                        android:textColor="#ff676767"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:visibility="invisible"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_53"
+                        android:layout_height="@dimen/dp_53"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/richeng_guanli_icon_qgl" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:text="业务驾驶舱"
+                        android:textColor="#ff676767"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <!--第四行-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_24"
+                android:layout_marginBottom="@dimen/dp_23"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+
+                        android:id="@+id/bt_file"
+                        android:layout_width="@dimen/dp_53"
+                        android:layout_height="@dimen/dp_53"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/richeng_guanli_icon_qgl" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:text="文件柜"
+                        android:textColor="#ff676767"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:visibility="invisible"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/bt_work_space"
+                        android:layout_width="@dimen/dp_53"
+                        android:layout_height="@dimen/dp_53"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/richeng_guanli_icon_qgl" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:text="日程管理"
+                        android:textColor="#ff676767"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:visibility="invisible"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_53"
+                        android:layout_height="@dimen/dp_53"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/richeng_guanli_icon_qgl" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:text="考勤管理"
+                        android:textColor="#ff676767"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="@dimen/dp_10"-->
+        <!--android:textSize="@dimen/sp_14"-->
+        <!--android:text="常用应用" />-->
+        <!--<LinearLayout-->
+        <!--android:layout_marginLeft="@dimen/dp_10"-->
+        <!--android:layout_marginRight="@dimen/dp_10"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="#ffffff"-->
+        <!--android:gravity="center"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:padding="@dimen/dp_10">-->
+        <!--<Button-->
+        <!--android:id="@+id/bt_mail"-->
+        <!--android:layout_width="@dimen/dp_72"-->
+        <!--android:layout_marginRight="@dimen/dp_10"-->
+        <!--android:layout_height="@dimen/dp_82"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="@null"-->
+        <!--android:textSize="@dimen/sp_12"-->
+        <!--android:drawableTop="@mipmap/ic_work_mail"-->
+        <!--android:gravity="bottom|center"-->
+        <!--android:text="邮件收发" />-->
+        <!--<Button-->
+        <!--android:id="@+id/bt_leave"-->
+        <!--android:layout_width="@dimen/dp_72"-->
+        <!--android:layout_height="@dimen/dp_82"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="@null"-->
+        <!--android:textSize="@dimen/sp_12"-->
+        <!--android:drawableTop="@mipmap/ic_work_leave"-->
+        <!--android:gravity="bottom|center"-->
+        <!--android:text="请假管理" />-->
+        <!--<Button-->
+        <!--android:layout_marginRight="@dimen/dp_10"-->
+        <!--android:id="@+id/bt_document"-->
+        <!--android:layout_width="@dimen/dp_72"-->
+        <!--android:layout_height="@dimen/dp_82"-->
+        <!--android:layout_marginLeft="@dimen/dp_10"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="@null"-->
+        <!--android:textSize="@dimen/sp_12"-->
+        <!--android:drawableTop="@mipmap/ic_work_document"-->
+        <!--android:gravity="bottom|center"-->
+        <!--android:text="公文流转" />-->
+
+        <!--<Button-->
+        <!--android:id="@+id/bt_coop"-->
+        <!--android:layout_width="@dimen/dp_72"-->
+        <!--android:layout_height="@dimen/dp_82"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="@null"-->
+        <!--android:drawableTop="@mipmap/ic_work_coop"-->
+        <!--android:gravity="bottom|center"-->
+        <!--android:textSize="@dimen/sp_12"-->
+        <!--android:text="任务协同" />-->
+
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="#ffffff"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_marginLeft="@dimen/dp_10"-->
+        <!--android:layout_marginRight="@dimen/dp_10"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:padding="@dimen/dp_10">-->
+        <!--<Button-->
+        <!--android:id="@+id/bt_notice"-->
+        <!--android:layout_width="@dimen/dp_72"-->
+        <!--android:layout_height="@dimen/dp_82"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="@null"-->
+        <!--android:drawableTop="@mipmap/ic_work_notice"-->
+        <!--android:gravity="bottom|center"-->
+        <!--android:textSize="@dimen/sp_12"-->
+        <!--android:text="通知通告" />-->
+
+        <!--<Button-->
+        <!--android:visibility="invisible"-->
+        <!--android:id="@+id/bt_file"-->
+        <!--android:layout_width="@dimen/dp_72"-->
+        <!--android:layout_height="@dimen/dp_82"-->
+        <!--android:layout_marginRight="@dimen/dp_10"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="@null"-->
+        <!--android:drawableTop="@mipmap/ic_work_file"-->
+        <!--android:gravity="bottom|center"-->
+        <!--android:textSize="@dimen/sp_12"-->
+        <!--android:text="文件柜" />-->
+
+        <!--<Button-->
+        <!--android:layout_width="@dimen/dp_72"-->
+        <!--android:layout_height="@dimen/dp_72"-->
+        <!--android:layout_weight="1"-->
+        <!--android:text="指令安排"-->
+        <!--android:visibility="invisible" />-->
+
+        <!--<Button-->
+        <!--android:layout_width="@dimen/dp_72"-->
+        <!--android:layout_height="@dimen/dp_72"-->
+        <!--android:layout_weight="1"-->
+        <!--android:text="指令安排"-->
+        <!--android:visibility="invisible" />-->
+        <!--</LinearLayout>-->
+        <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="@dimen/dp_10"-->
+        <!--android:textSize="@dimen/sp_14"-->
+        <!--android:text="其它应用" />-->
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="#ffffff"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_marginRight="@dimen/dp_10"-->
+        <!--android:layout_marginLeft="@dimen/dp_10"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:padding="@dimen/dp_10">-->
+
+        <!--<Button-->
+        <!--android:id="@+id/bt_meeting"-->
+        <!--android:layout_width="@dimen/dp_72"-->
+        <!--android:layout_height="@dimen/dp_82"-->
+        <!--android:background="@null"-->
+        <!--android:layout_weight="1"-->
+        <!--android:textSize="@dimen/sp_12"-->
+        <!--android:drawableTop="@mipmap/ic_work_meeting"-->
+        <!--android:gravity="bottom|center"-->
+        <!--android:text="会议安排" />-->
+        <!--<Button-->
+        <!--android:layout_marginLeft="@dimen/dp_10"-->
+        <!--android:id="@+id/bt_instruct"-->
+        <!--android:layout_width="@dimen/dp_72"-->
+        <!--android:layout_height="@dimen/dp_82"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="@null"-->
+        <!--android:textSize="@dimen/sp_12"-->
+        <!--android:drawableTop="@mipmap/ic_work_instruct"-->
+        <!--android:gravity="bottom|center"-->
+        <!--android:text="指令安排" />-->
+        <!--<Button-->
+        <!--android:id="@+id/bt_expense"-->
+        <!--android:layout_width="@dimen/dp_72"-->
+        <!--android:layout_height="@dimen/dp_82"-->
+        <!--android:layout_marginLeft="@dimen/dp_10"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="@null"-->
+        <!--android:textSize="@dimen/sp_12"-->
+        <!--android:drawableTop="@mipmap/ic_work_expense"-->
+        <!--android:gravity="bottom|center"-->
+        <!--android:text="报销管理" />-->
+        <!--<Button-->
+        <!--android:layout_width="@dimen/dp_72"-->
+        <!--android:layout_height="@dimen/dp_72"-->
+        <!--android:layout_marginLeft="@dimen/dp_10"-->
+        <!--android:layout_marginRight="@dimen/dp_10"-->
+        <!--android:layout_weight="1"-->
+        <!--android:visibility="invisible" />-->
+        <!--</LinearLayout>-->
+        <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="@dimen/dp_10"-->
+        <!--&gt;-->
+
+        <!--<Button-->
+        <!--android:id="@+id/bt_list"-->
+        <!--android:layout_width="@dimen/dp_60"-->
+        <!--android:layout_height="@dimen/dp_40"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_marginRight="9dp"-->
+        <!--android:background="@drawable/bt_9background"-->
+        <!--android:text="列表"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="@dimen/sp_16" />-->
+        <!--<Button-->
+        <!--android:id="@+id/bt_9"-->
+        <!--android:textSize="@dimen/sp_16"-->
+        <!--android:layout_width="@dimen/dp_60"-->
+        <!--android:text="九宫格"-->
+        <!--android:layout_marginRight="@dimen/dp_10"-->
+        <!--android:background="@drawable/bt_listbackground"-->
+        <!--android:textColor="@color/tab_color_false"-->
+        <!--android:layout_toLeftOf="@id/bt_list"-->
+        <!--android:layout_height="@dimen/dp_40" />-->
+        <!--</RelativeLayout>-->
+    </LinearLayout>
+
+</FrameLayout>

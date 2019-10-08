@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45">
+        <ImageView
+            android:id="@+id/iv_mine"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="@dimen/dp_25"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/ic_work_me" />
+        <TextView
+            android:layout_width="match_parent"
+            android:text="通讯录"
+            android:textColor="#313131"
+            android:gravity="center"
+            android:textSize="@dimen/sp_17"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+    <LinearLayout
+        android:visibility="gone"
+        android:layout_margin="@dimen/dp_20"
+        android:background="#e4e4e4"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45">
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:paddingLeft="@dimen/dp_40"
+            android:gravity="center_vertical"
+            android:textColor="#000000"
+            android:hint="搜索"
+            />
+    </LinearLayout>
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#dddddd" />
+    <ListView
+        android:visibility="gone"
+        android:divider="#ffffff"
+        android:dividerHeight="@dimen/dp_2"
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <ImageView
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <LinearLayout
+        android:id="@+id/contact_fragment"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#ffffff"
+        android:orientation="vertical">
+    </LinearLayout>
+</LinearLayout>
