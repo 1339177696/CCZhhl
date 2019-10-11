@@ -132,7 +132,7 @@
     </LinearLayout>
 
     <ScrollView
-        android:layout_marginTop="@dimen/dp_135"
+        android:layout_marginTop="@dimen/dp_155"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
