@@ -53,7 +53,7 @@ public class WorkFragemt_9 extends Fragment {
     ImageView btInstruct;
     @BindView(R.id.bt_expense)
     ImageView btExpense;
-    int[] images={R.mipmap.demo,R.mipmap.demo1,R.mipmap.demo2,R.mipmap.demo3,R.mipmap.demo4};
+    int[] images = {R.mipmap.demo, R.mipmap.demo1, R.mipmap.demo2, R.mipmap.demo3, R.mipmap.demo4};
     //已经选择图片
     private List<LocalMedia> selectList = new ArrayList<>();
 //    @BindView(R.id.bt_list)
@@ -62,36 +62,36 @@ public class WorkFragemt_9 extends Fragment {
 //    Button bt9;
 
     Unbinder unbinder;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view;
-        if(BuildConfig.IsPad){
-            if(SPUtils.get(getActivity(), "isLead", "").equals("0")) {
+        if (BuildConfig.IsPad) {
+            if (SPUtils.get(getActivity(), "isLead", "").equals("0")) {
                 view = inflater.inflate(R.layout.fragment_work_fragemt_9_pad_lead, container, false);
-            }
-            else{
+            } else {
                 view = inflater.inflate(R.layout.fragment_work_fragemt_9_pad, container, false);
             }
 
-        }
-        else {
-                if(SPUtils.get(getActivity(), "isLead", "").equals("0")) {
-                    view = inflater.inflate(R.layout.fragment_work_fragemt_9_lead, container, false);
-                }
-                else{
-                    view = inflater.inflate(R.layout.fragment_work_fragemt_9, container, false);
-                    }
+        } else {
+            if (SPUtils.get(getActivity(), "isLead", "").equals("0")) {
+                view = inflater.inflate(R.layout.fragment_work_fragemt_9_lead, container, false);
+            } else {
+                view = inflater.inflate(R.layout.fragment_work_fragemt_9, container, false);
+            }
         }
         unbinder = ButterKnife.bind(this, view);
         return view;
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
     }
+
     //    , R.id.bt_list, R.id.bt_9
-    @OnClick({R.id.bt_mail, R.id.bt_leave, R.id.bt_document, R.id.bt_coop, R.id.bt_notice, R.id.bt_meeting, R.id.bt_instruct, R.id.bt_expense,R.id.bt_work_space})
+    @OnClick({R.id.bt_mail, R.id.bt_leave, R.id.bt_document, R.id.bt_coop, R.id.bt_notice, R.id.bt_meeting, R.id.bt_instruct, R.id.bt_expense, R.id.bt_work_space})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_mail:
@@ -105,7 +105,7 @@ public class WorkFragemt_9 extends Fragment {
                     getActivity().startActivity(intent);
                 }
                 else*/
-                    startActivity(new Intent(getActivity(), SecondMailActivity.class));
+                startActivity(new Intent(getActivity(), SecondMailActivity.class));
                 break;
             case R.id.bt_leave:
                 //跳转到请假人申请列表
@@ -131,8 +131,8 @@ public class WorkFragemt_9 extends Fragment {
                 break;
             case R.id.bt_expense:
                 //跳转报销人申请列表
-            //    startActivity(new Intent(getActivity(), SecondExpenseActivity.class));
-                ToastHelper.showToast(getActivity(),"功能正在开发中");
+                //    startActivity(new Intent(getActivity(), SecondExpenseActivity.class));
+                ToastHelper.showToast(getActivity(), "功能正在开发中");
                 break;
 //            case R.id.bt_list:
 //                EventBus.getDefault().post(new WorkFragemt_9());
@@ -141,11 +141,12 @@ public class WorkFragemt_9 extends Fragment {
 //                break;
         }
     }
+
     //初始化图片信息
     private void init(int[] images) {
         for (int i = 0; i < images.length; i++) {
             LocalMedia localMedia = new LocalMedia();
-            localMedia.setPath(images[i]+"");
+            localMedia.setPath(images[i] + "");
             selectList.add(localMedia);
         }
     }
