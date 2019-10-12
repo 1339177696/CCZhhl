@@ -116,6 +116,7 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new NewsViewAdapter(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
+
         getData();
 
     }
@@ -199,10 +200,12 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
         mCount = 1;
     }
 
+    //新加的用户IDqgl
     private void getData() {
         RequestParams params = new RequestParams();
         params.put("pageState", mCount*10-9 + "");
         params.put("pageEnd", mCount * 10 + "");
+        params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
         HttpRequest.postNesListApi(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -246,5 +249,26 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
                     .load((String) path)
                     .into(imageView);
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.e("11111","11111");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("22222","22222");
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        Log.e("33333","333333");
+
     }
 }

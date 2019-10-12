@@ -81,6 +81,8 @@ public class NewsActivityInfo extends BaseActivity {
     NewsCommentdapter mRecyclerViewAdapter;
     private News newsA;
     List<JournalismComments> memberList=new ArrayList<>();
+
+    private String isCollect;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +97,15 @@ public class NewsActivityInfo extends BaseActivity {
         URLImageParser imageGetter = new URLImageParser(tvContent);
         tvContent.setText(Html.fromHtml(newsA.getJournalismContent(), imageGetter, null));
         tvAuthor.setText("责任编辑：" + newsA.getCreateBy());
+        isCollect = newsA.getIsCollect();
+        //新加的qgl
+        if (isCollect.equals("0"))
+        {
+            btStore.setBackgroundResource(R.mipmap.ic_store);
+        }
+        else if (isCollect.equals("1")){
+            btStore.setBackgroundResource(R.mipmap.ic_store_sel);
+        }
         initList();
     }
 

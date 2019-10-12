@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.hulian.oa.BaseActivity;
 import com.hulian.oa.R;
+import com.hulian.oa.bean.AgencyCount;
+import com.hulian.oa.bean.AgencyCountFinish;
 import com.hulian.oa.bean.Fab;
 import com.hulian.oa.bean.Fab2;
 import com.hulian.oa.news.adapter.MyViewPageAdapter;
@@ -22,6 +24,7 @@ import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.work.file.admin.activity.document.LauncherDocumentActivity;
 import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_ApprovedFragment;
+import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_ChaosongmeFragment_qgl;
 import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_PendFragment;
 
 import java.util.ArrayList;
@@ -51,6 +54,13 @@ public class SecondDocumentActivity extends BaseActivity {
     private ArrayList<String> list_title;
     ArrayList<String> titleDatas = new ArrayList<>();
 
+    @BindView(R.id.tv_agencyCount)
+    TextView tvAgencyCount;
+    @BindView(R.id.tv_finishCount)
+    TextView tvFinishCount;
+    @BindView(R.id.my_linerlayout)
+    LinearLayout linearLayout;
+
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,14 +72,18 @@ public class SecondDocumentActivity extends BaseActivity {
         //领导
         if (SPUtils.get(mContext, "isLead", "").equals("0"))
         {
+            linearLayout.setVisibility(View.VISIBLE);
+
             tv_launch.setVisibility(View.GONE);
             titleDatas.add("待审批");
             titleDatas.add("已审批");
         }
         //员工
         else {
-            titleDatas.add("审批中");
-            titleDatas.add("审批完成");
+            linearLayout.setVisibility(View.GONE);
+            titleDatas.add("待审批");
+            titleDatas.add("已审批");
+            titleDatas.add("抄送我的");
             tv_launch.setVisibility(View.VISIBLE);
         }
         init();
@@ -77,12 +91,42 @@ public class SecondDocumentActivity extends BaseActivity {
 
     private void init() {
         ArrayList<Fragment> fragmentList = new ArrayList<Fragment>();
-        fragmentList.add(new L_PendFragment());
-        fragmentList.add(new L_ApprovedFragment());
+        if (SPUtils.get(mContext, "isLead", "").equals("0")){
+            fragmentList.add(new L_PendFragment());
+            fragmentList.add(new L_ApprovedFragment());
+        }else {
+            fragmentList.add(new L_PendFragment());
+            fragmentList.add(new L_ApprovedFragment());
+            fragmentList.add(new L_ChaosongmeFragment_qgl());
+
+        }
+
         MyViewPageAdapter myViewPageAdapter = new MyViewPageAdapter(getSupportFragmentManager(), titleDatas, fragmentList);
 //        myTablayout.setSelectedTabIndicator(0);
         myViewpager.setAdapter(myViewPageAdapter);
         myTablayout.setupWithViewPager(myViewpager);
+        myViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float v, int i1) {
+                if(0 ==position){
+                    tvAgencyCount.setTextColor(SecondDocumentActivity.this.getResources().getColor(R.color.white));
+                    tvFinishCount.setTextColor(SecondDocumentActivity.this.getResources().getColor(R.color.color_xian));
+                }else{
+                    tvFinishCount.setTextColor(SecondDocumentActivity.this.getResources().getColor(R.color.white));
+                    tvAgencyCount.setTextColor(SecondDocumentActivity.this.getResources().getColor(R.color.color_xian));
+                }
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
     }
 
     @OnClick(R.id.tv_launch)
@@ -101,6 +145,7 @@ public class SecondDocumentActivity extends BaseActivity {
         } else {
             tvMengban.setVisibility(View.VISIBLE);
         }
+
     }
 
     @OnClick(R.id.tv_mengban)
@@ -114,4 +159,18 @@ public class SecondDocumentActivity extends BaseActivity {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
+
+    public void onEventMainThread(AgencyCount event) {
+        if(!"".equals(event.getAgencyCount())){
+            tvAgencyCount.setText(event.getAgencyCount());
+        }
+    }
+
+    public void onEventMainThread(AgencyCountFinish event) {
+        if(!"".equals(event.getAgencyCountFinish())){
+            tvFinishCount.setText(event.getAgencyCountFinish());
+        }
+    }
+
+
 }

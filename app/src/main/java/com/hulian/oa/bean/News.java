@@ -10,6 +10,16 @@ public class News implements Serializable {
     private String journalismId;
     private String createTime;
 
+    public String getIsCollect() {
+        return isCollect;
+    }
+
+    public void setIsCollect(String isCollect) {
+        this.isCollect = isCollect;
+    }
+
+    private String isCollect;
+
     public String getCreateTime() {
         return createTime;
     }

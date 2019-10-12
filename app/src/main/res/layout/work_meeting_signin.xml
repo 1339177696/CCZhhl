@@ -348,9 +348,11 @@
                     android:layout_centerVertical="true"
                     />
             </RelativeLayout>
+            <!--修改右对齐qgl-->
             <TextView
+                android:layout_gravity="right"
                 android:id="@+id/et_content"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:gravity="top"
                 android:textSize="@dimen/sp_12"
                 android:padding="@dimen/dp_10"

@@ -85,25 +85,25 @@ public class L_TaskRemindActivity extends BaseActivity {
             case R.id.tv_remind1:
                 if (ischanged) {
                     System.out.println("======2");
-                    tixing = "截止前15分钟";
+                    tixing = "不提醒";
                 }
                 break;
             case R.id.tv_remind2:
                 if (ischanged) {
                     System.out.println("======3");
-                    tixing = "截止前1小时";
+                    tixing = "截止前5分钟";
                 }
                 break;
             case R.id.tv_remind3:
                 if (ischanged) {
                     System.out.println("======4");
-                    tixing = "截止前3小时";
+                    tixing = "截止前30分钟";
                 }
                 break;
             case R.id.tv_remind4:
                 if (ischanged) {
                     System.out.println("=====5");
-                    tixing = "截止前1天";
+                    tixing = "截止前1小时";
                 }
                 break;
         }

@@ -95,66 +95,113 @@
         <!--android:button="@null"-->
         <!--/>-->
 
-    <RadioButton
-        android:id="@+id/tv_remind1"
-        android:text="截止前15分钟"
-        android:layout_marginTop="@dimen/dp_10"
-        android:padding="@dimen/dp_10"
-        android:background="@color/white"
-        android:textSize="@dimen/dp_14"
-        android:textColor="@drawable/selector_task_remind"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:button="@null"
-        />
+    <!--<RadioButton-->
+        <!--android:id="@+id/tv_remind1"-->
+        <!--android:text="截止前15分钟"-->
+        <!--android:layout_marginTop="@dimen/dp_10"-->
+        <!--android:padding="@dimen/dp_10"-->
+        <!--android:background="@color/white"-->
+        <!--android:textSize="@dimen/dp_14"-->
+        <!--android:textColor="@drawable/selector_task_remind"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:button="@null"-->
+        <!--/>-->
+
+        <RadioButton
+            android:checked="true"
+            android:id="@+id/tv_remind1"
+            android:text="不提醒"
+            android:layout_marginTop="@dimen/dp_10"
+            android:padding="@dimen/dp_10"
+            android:background="@color/white"
+            android:textSize="@dimen/dp_14"
+            android:textColor="@drawable/selector_task_remind"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            />
     <View
         android:background="@color/color_b_gray"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"/>
 
-    <RadioButton
-        android:id="@+id/tv_remind2"
-        android:text="截止前1小时"
-        android:padding="@dimen/dp_10"
-        android:background="@color/white"
-        android:textSize="@dimen/dp_14"
-        android:textColor="@drawable/selector_task_remind"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:button="@null"
-        />
+    <!--<RadioButton-->
+        <!--android:id="@+id/tv_remind2"-->
+        <!--android:text="截止前1小时"-->
+        <!--android:padding="@dimen/dp_10"-->
+        <!--android:background="@color/white"-->
+        <!--android:textSize="@dimen/dp_14"-->
+        <!--android:textColor="@drawable/selector_task_remind"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:button="@null"-->
+        <!--/>-->
+        <RadioButton
+            android:id="@+id/tv_remind2"
+            android:text="截止前5分钟"
+            android:padding="@dimen/dp_10"
+            android:background="@color/white"
+            android:textSize="@dimen/dp_14"
+            android:textColor="@drawable/selector_task_remind"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            />
 
     <View
         android:background="@color/color_b_gray"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"/>
 
-    <RadioButton
-        android:id="@+id/tv_remind3"
-        android:text="截止前3小时"
-        android:padding="@dimen/dp_10"
-        android:background="@color/white"
-        android:textSize="@dimen/dp_14"
-        android:textColor="@drawable/selector_task_remind"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:button="@null"
-        />
+    <!--<RadioButton-->
+        <!--android:id="@+id/tv_remind3"-->
+        <!--android:text="截止前3小时"-->
+        <!--android:padding="@dimen/dp_10"-->
+        <!--android:background="@color/white"-->
+        <!--android:textSize="@dimen/dp_14"-->
+        <!--android:textColor="@drawable/selector_task_remind"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:button="@null"-->
+        <!--/>-->
+
+        <RadioButton
+            android:id="@+id/tv_remind3"
+            android:text="截止前30分钟"
+            android:padding="@dimen/dp_10"
+            android:background="@color/white"
+            android:textSize="@dimen/dp_14"
+            android:textColor="@drawable/selector_task_remind"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            />
 
     <View
         android:background="@color/color_b_gray"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"/>
 
-    <RadioButton
-        android:id="@+id/tv_remind4"
-        android:text="截止前1天"
-        android:padding="@dimen/dp_10"
-        android:background="@color/white"
-        android:textSize="@dimen/dp_14"
-        android:textColor="@drawable/selector_task_remind"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:button="@null"/>
+    <!--<RadioButton-->
+        <!--android:id="@+id/tv_remind4"-->
+        <!--android:text="截止前1天"-->
+        <!--android:padding="@dimen/dp_10"-->
+        <!--android:background="@color/white"-->
+        <!--android:textSize="@dimen/dp_14"-->
+        <!--android:textColor="@drawable/selector_task_remind"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:button="@null"/>-->
+        <RadioButton
+            android:id="@+id/tv_remind4"
+            android:text="截止前1小时"
+            android:padding="@dimen/dp_10"
+            android:background="@color/white"
+            android:textSize="@dimen/dp_14"
+            android:textColor="@drawable/selector_task_remind"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="@null"/>
     </RadioGroup>
 </LinearLayout>

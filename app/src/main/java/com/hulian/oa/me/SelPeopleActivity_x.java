@@ -1,9 +1,12 @@
 package com.hulian.oa.me;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +22,7 @@ import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
+import com.hulian.oa.utils.SPUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,8 +40,9 @@ public class SelPeopleActivity_x extends BaseActivity {
     private PeopleAdapter adapter;
     private String partId;
     private TextView tv_title;
-    List<People> memberList=new ArrayList<>();
-    List<People_x> aa=new ArrayList<>();
+    List<People> memberList = new ArrayList<>();
+    List<People_x> aa = new ArrayList<>();
+    private RelativeLayout iv_back;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,14 +50,21 @@ public class SelPeopleActivity_x extends BaseActivity {
         setContentView(R.layout.activity_sel_info);
         //初始化页面对象
         init();
-        partId=getIntent().getStringExtra("partId");
+        partId = getIntent().getStringExtra("partId");
         //将数据显示在页面上
         initDatas();
     }
 
     public void init() {
+        iv_back = findViewById(R.id.iv_back);
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         listView = (ListView) findViewById(R.id.lv_text_view);
-        tv_title=findViewById(R.id.tv_title);
+        tv_title = findViewById(R.id.tv_title);
         tv_title.setText("选择人员");
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -65,7 +77,7 @@ public class SelPeopleActivity_x extends BaseActivity {
 
     private void initDatas() {
         RequestParams params = new RequestParams();
-        params.put("deptId",partId);
+        params.put("deptId", partId);
         HttpRequest.postUserInfoByDeptId(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -78,9 +90,18 @@ public class SelPeopleActivity_x extends BaseActivity {
                             new TypeToken<List<People_x>>() {
                             }.getType());
 
-                     memberList = gson.fromJson(result.getJSONArray("data").toString(),
+                    memberList = gson.fromJson(result.getJSONArray("data").toString(),
                             new TypeToken<List<People>>() {
                             }.getType());
+//                    修改的如果有自己剔除qgl
+                    for (int i = 0;i<=memberList.size()-1;i++)
+                    {
+                        if (memberList.get(i).getUserId().equals(SPUtils.get(mContext, "userId", "").toString()))
+                        {
+                            memberList.remove(memberList.get(i));
+                        }
+                    }
+                    Log.e("memberList",memberList+"");
                     adapter = new PeopleAdapter(memberList, mContext);
                     listView.setAdapter(adapter);
 

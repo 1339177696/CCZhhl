@@ -16,6 +16,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.R;
+import com.hulian.oa.bean.AgencyCount;
+import com.hulian.oa.bean.AgencyCountFinish;
 import com.hulian.oa.bean.Document;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
@@ -150,6 +152,11 @@ public class L_ApprovedFragment extends Fragment implements PullLoadMoreRecycler
                         mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     }
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
+                    //新修改的qgl
+                    AgencyCountFinish mAgencyCount = new AgencyCountFinish();
+                    mAgencyCount.setAgencyCountFinish(memberList.size() + "");
+                    EventBus.getDefault().post(mAgencyCount);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

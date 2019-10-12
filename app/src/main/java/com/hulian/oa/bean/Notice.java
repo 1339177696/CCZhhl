@@ -8,6 +8,17 @@ public class Notice implements Serializable {
     private String noticeContent;
     private String createTime;
     private String createBy;
+    private String isCollect;
+
+
+    public String getIsCollect() {
+        return isCollect;
+    }
+
+    public void setIsCollect(String isCollect) {
+        this.isCollect = isCollect;
+    }
+
 
     public String getNoticeId() {
         return noticeId;

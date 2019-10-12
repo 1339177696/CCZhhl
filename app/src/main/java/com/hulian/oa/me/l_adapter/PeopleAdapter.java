@@ -1,6 +1,7 @@
 package com.hulian.oa.me.l_adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.hulian.oa.R;
 import com.hulian.oa.bean.Department;
 import com.hulian.oa.bean.People;
+import com.hulian.oa.utils.SPUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -52,7 +54,9 @@ public class PeopleAdapter extends BaseAdapter {
         }
         //单选按钮的文字
         TextView radioText = (TextView) view.findViewById(R.id.tv_radio_text);
+
         radioText.setText(listText.get(position).getUserName());
+
         return view;
     }
 }

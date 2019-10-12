@@ -45,6 +45,7 @@ public class NoticeParticularsActivity extends BaseActivity {
     TextView tvAuthor;
 
     String noticeId;
+    String isCollect;
     @BindView(R.id.bt_store)
     ImageView btStore;
 
@@ -53,8 +54,15 @@ public class NoticeParticularsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.work_notice_particulars);
         noticeId = getIntent().getStringExtra("noticeId");
+        isCollect = getIntent().getStringExtra("isCollect");
         EventBus.getDefault().register(this);
         ButterKnife.bind(this);
+        //新改的判断收藏qgl
+        if (isCollect.equals("0")) {
+            btStore.setBackgroundResource(R.mipmap.ic_store);
+        } else if (isCollect.equals("1")) {
+            btStore.setBackgroundResource(R.mipmap.ic_store_sel);
+        }
         getData();
     }
 
@@ -65,15 +73,14 @@ public class NoticeParticularsActivity extends BaseActivity {
             @Override
             public void onSuccess(Object responseObj) {
                 //需要转化为实体对象
-                Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
                     tvTitle.setText(result.getJSONObject("data").getString("noticeTitle"));
 
                     URLImageParser imageGetter = new URLImageParser(tvContent);
                     tvContent.setText(Html.fromHtml(result.getJSONObject("data").getString("noticeContent"), imageGetter, null));
-                    
-                    tvAuthor.setText("发布人: "+result.getJSONObject("data").getString("createBy") + "      " + result.getJSONObject("data").getString("createTime"));
+
+                    tvAuthor.setText("发布人: " + result.getJSONObject("data").getString("createBy") + "      " + result.getJSONObject("data").getString("createTime"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -88,7 +95,7 @@ public class NoticeParticularsActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.iv_back, R.id.bt_store,R.id.rl_title})
+    @OnClick({R.id.iv_back, R.id.bt_store, R.id.rl_title})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -98,28 +105,36 @@ public class NoticeParticularsActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.bt_store:
-                RequestParams params1 = new RequestParams();
-                params1.put("collectTypeId", noticeId);
-                params1.put("collectType","1");
-                params1.put("collectUserId", SPUtils.get(mContext, "userId", "").toString());
-                HttpRequest.postStoreSenCommApi(params1, new ResponseCallback() {
-                    @Override
-                    public void onSuccess(Object responseObj) {
-                        try {
-                            JSONObject result = new JSONObject(responseObj.toString());
-                            ToastHelper.showToast(mContext, result.getString("msg"));
-                            btStore.setBackgroundResource(R.mipmap.ic_store_sel);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                if (isCollect.equals("0"))
+                {
+                    RequestParams params1 = new RequestParams();
+                    params1.put("collectTypeId", noticeId);
+                    params1.put("collectType", "1");
+                    params1.put("collectUserId", SPUtils.get(mContext, "userId", "").toString());
+                    HttpRequest.postStoreSenCommApi(params1, new ResponseCallback() {
+                        @Override
+                        public void onSuccess(Object responseObj) {
+                            try {
+                                JSONObject result = new JSONObject(responseObj.toString());
+                                ToastHelper.showToast(mContext, result.getString("msg"));
+                                btStore.setBackgroundResource(R.mipmap.ic_store_sel);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
-                    @Override
-                    public void onFailure(OkHttpException failuer) {
-                    }
-                });
+
+                        @Override
+                        public void onFailure(OkHttpException failuer) {
+                        }
+                    });
+                }else if (isCollect.equals("1")){
+
+                }
+
                 break;
         }
     }
+
     public void onEventMainThread(Fab event) {
         if (event.getTag().equals("0")) {
             tvMengban.setVisibility(View.GONE);
@@ -127,12 +142,14 @@ public class NoticeParticularsActivity extends BaseActivity {
             tvMengban.setVisibility(View.VISIBLE);
         }
     }
+
     @OnClick(R.id.tv_mengban)
     public void onViewClicked2() {
         Fab2 fab2 = new Fab2();
         fab2.setTag("0");
         EventBus.getDefault().post(fab2);
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

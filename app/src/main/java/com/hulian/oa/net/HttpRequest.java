@@ -522,5 +522,13 @@ public class HttpRequest {
     RequestMode.postRequest(Urls.commUrls+"system/meetingParticipant/signIn", params, callback, null);
   }
 
+    /**
+     * 新加的抄送人
+     * @param params
+     * @param callback
+     */
+    public static void postChaosongren(RequestParams params,  ResponseCallback callback){
+        RequestMode.postRequest(Urls.commUrls+"system/lotus/copierList", params, callback, null);
+    }
 
 }

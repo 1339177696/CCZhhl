@@ -9,6 +9,15 @@ public class People implements Serializable {
     private String isLead;
     private String loginName;
 
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
+
+    private String deptId;
     public String getLoginName() {
         return loginName;
     }

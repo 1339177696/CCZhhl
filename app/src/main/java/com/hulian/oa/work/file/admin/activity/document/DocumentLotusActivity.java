@@ -60,6 +60,9 @@ public class DocumentLotusActivity extends BaseActivity {
     List<DocumentImage> memberList = new ArrayList<>();
     private CustomGalleryAdapter adapter;
 
+    @BindView(R.id.decument_proname)
+    TextView decument_proname;
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -87,7 +90,9 @@ public class DocumentLotusActivity extends BaseActivity {
                     memberList = gson.fromJson(result.getJSONObject("data").getJSONArray("fileList").toString(),
                             new TypeToken<List<DocumentImage>>() {
                             }.getType());
+
                     init(memberList);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

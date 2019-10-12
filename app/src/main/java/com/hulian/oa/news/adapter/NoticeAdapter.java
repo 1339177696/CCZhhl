@@ -74,6 +74,8 @@ public class NoticeAdapter extends RecyclerView.Adapter <NoticeAdapter.ViewHolde
             public void onClick(View view) {
                 Intent intent=new Intent(mContext, NoticeParticularsActivity.class);
                 intent.putExtra("noticeId",dataList.get(position).getNoticeId());
+                //新改的传收藏状态qgl
+                intent.putExtra("isCollect",dataList.get(position).getIsCollect());
                 mContext.startActivity(intent);
             }
         });

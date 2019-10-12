@@ -166,7 +166,15 @@ public class SecondNoticeActivity extends BaseActivity implements PullLoadMoreRe
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
-            onRefresh();
+//            onRefresh();
         }
+    }
+
+//    新改的返回刷新qgl
+
+    @Override
+    protected void onRestart() {
+        onRefresh();
+        super.onRestart();
     }
 }

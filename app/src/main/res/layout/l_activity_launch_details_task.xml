@@ -148,10 +148,19 @@
             android:layout_width="match_parent"
             android:background="#FFFFFF"
             android:layout_height="@dimen/dp_50">
+
+            <Button
+                android:layout_centerVertical="true"
+                android:id="@+id/file_btn"
+                android:layout_alignParentRight="true"
+                android:text="文件"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
             <ImageView
+                android:layout_toLeftOf="@+id/file_btn"
                 android:id="@+id/tv_launch_send"
                 android:src="@mipmap/renwu_upload_image_icon_qgl"
-                android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/dp_20"
                 android:layout_width="@dimen/dp_20"
                 android:layout_centerVertical="true"

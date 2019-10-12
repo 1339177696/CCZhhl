@@ -12,7 +12,6 @@
         <ImageView
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_width="@dimen/dp_15"
-
             android:layout_centerVertical="true"
             android:background="@mipmap/ic_left"
             android:layout_height="@dimen/dp_15" />

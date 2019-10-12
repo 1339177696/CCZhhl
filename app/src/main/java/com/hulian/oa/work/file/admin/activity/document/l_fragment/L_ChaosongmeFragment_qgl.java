@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,23 +35,22 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import de.greenrobot.event.EventBus;
 
-//公文流转-》(领导)待审批 职员（发起的）
-public class L_PendFragment extends Fragment implements PullLoadMoreRecyclerView.PullLoadMoreListener {
+/**
+ * Created by qgl on 2019/10/12 14:34.
+ */
+public class L_ChaosongmeFragment_qgl extends Fragment implements PullLoadMoreRecyclerView.PullLoadMoreListener  {
     @BindView(R.id.lv_notice)
     PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
     @BindView(R.id.emptyBg)
     RelativeLayout emptyBg;
     private int mCount = 1;
     private RecyclerView mRecyclerView;
-    L_PendAdapter mRecyclerViewAdapter;
     Unbinder unbinder;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.l_fra_collection_notice, null);
+        View view = inflater.inflate(R.layout.l_chaosongmefragment_qgl, null);
         unbinder = ButterKnife.bind(this, view);
-        EventBus.getDefault().register(this);
         initList();
         return view;
     }
@@ -80,83 +78,45 @@ public class L_PendFragment extends Fragment implements PullLoadMoreRecyclerView
         mPullLoadMoreRecyclerView.setLinearLayout();
 
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
-        mRecyclerViewAdapter = new L_PendAdapter(getActivity());
-        mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
+//        mRecyclerViewAdapter = new L_PendAdapter(getActivity());
+//        mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
         getData();
     }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        EventBus.getDefault().unregister(this);
-        unbinder.unbind();
-    }
-
 
     @Override
     public void onRefresh() {
-        Log.e("wxl", "onRefresh");
-        setRefresh();
-        getData();
-    }
 
-    public void onEventMainThread(L_PendFragment event) {
-        onRefresh();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 
     @Override
     public void onLoadMore() {
-        Log.e("wxl", "onLoadMore");
-        mCount = mCount + 1;
-        getData();
+
     }
 
-    private void setRefresh() {
-        mRecyclerViewAdapter.clearData();
-        mCount = 1;
+    @Override
+    public void onDestroy()
+    {
+        unbinder.unbind();
+        super.onDestroy();
     }
 
     private void getData() {
         RequestParams params = new RequestParams();
-        params.put("pageStart", mCount * 10 - 9 + "");
-        params.put("pageEnd", mCount * 10 + "");
-        params.put("userId", SPUtils.get(getActivity(), "userId", "").toString());
-        params.put("state", "0");
-        if (SPUtils.get(getActivity(), "isLead", "").equals("0")) {
-            params.put("flag", "1");
-        } else {
-            params.put("flag", "0");
-        }
-        HttpRequest.postDocumentListApi(params, new ResponseCallback() {
+//        params.put("pageStart", mCount * 10 - 9 + "");
+//        params.put("pageEnd", mCount * 10 + "");
+        params.put("copierId", SPUtils.get(getActivity(), "userId", "").toString());
+//        params.put("state", "0");
+        HttpRequest.postChaosongren(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
                 //需要转化为实体对象
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-                    List<Document> memberList = gson.fromJson(result.getJSONArray("data").toString(),
-                            new TypeToken<List<Document>>() {
-                            }.getType());
-                    mRecyclerViewAdapter.addAllData(memberList);
-                    mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
-                    //新修改的qgl
-                    AgencyCount mAgencyCount = new AgencyCount();
-                    mAgencyCount.setAgencyCount(memberList.size() + "");
-                    EventBus.getDefault().post(mAgencyCount);
-                    if(memberList.size()==0&&mCount==1){
-                        emptyBg.setVisibility(View.VISIBLE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
-                    }
-                    else {
-                        emptyBg.setVisibility(View.GONE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
-                    }
+
+//                    mRecyclerViewAdapter.addAllData(memberList);
+//                    mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

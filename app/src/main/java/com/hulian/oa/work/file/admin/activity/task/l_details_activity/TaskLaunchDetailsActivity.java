@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -23,6 +24,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.duke.dfileselector.activity.DefaultSelectorActivity;
+import com.duke.dfileselector.util.FileSelectorUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -72,6 +75,8 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
     TextView laUnStartTime;
     @BindView(R.id.la_un_stop_time)
     TextView laUnStopTime;
+    @BindView(R.id.file_btn)
+    Button file_btn;
 
     private int mCount = 1;
     private RecyclerView mRecyclerView;
@@ -157,7 +162,7 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
 
     }
 
-    @OnClick({R.id.tv_launch_send, R.id.iv_back, R.id.iv_btn})
+    @OnClick({R.id.tv_launch_send, R.id.iv_back, R.id.iv_btn,R.id.file_btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_launch_send:
@@ -168,6 +173,10 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
                 break;
             case R.id.iv_btn:
                 Dialog_qgl();
+                break;
+            case R.id.file_btn:
+                //文件选择器  过滤条件在 DefaultSelectorActivity.onPermissionSuccess 中添加
+                DefaultSelectorActivity.startActivityForResult(this, false, true, 3);
                 break;
         }
     }
@@ -311,8 +320,10 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
                         context = "";
                         gethuifuData();
 
-
                     }
+                    break;
+                case DefaultSelectorActivity.FILE_SELECT_REQUEST_CODE:
+                    printData(DefaultSelectorActivity.getDataFromIntent(data));
                     break;
             }
         }
@@ -393,6 +404,28 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+
+
+    private void printData(ArrayList<String> list) {
+        if (FileSelectorUtils.isEmpty(list)) {
+            return;
+        }
+        int size = list.size();
+        Log.v("EMAIL", "获取到数据-开始 size = " + size);
+        StringBuffer stringBuffer = new StringBuffer("选中的文件：");
+        for (int i = 0; i < size; i++) {
+            int a = list.get(i).length();
+            String ccc = list.get(i).substring(list.get(i).lastIndexOf('/') + 1, a);
+            stringBuffer.append(ccc);
+            stringBuffer.append(",");
+        }
+        String file_name = stringBuffer.toString().substring(0, stringBuffer.toString().length() - 1);
+        Log.e("file_name",file_name);
+//        et_annex.setText(file_name);
+//        selectList = list;
+        Log.v("EMAIL", "获取到数据-结束");
     }
 
 }
