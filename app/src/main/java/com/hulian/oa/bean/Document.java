@@ -7,6 +7,16 @@ public class Document {
     private String create_Time;
     private String approverIdsNames;
 
+    public String getPromoterIdName() {
+        return promoterIdName;
+    }
+
+    public void setPromoterIdName(String promoterIdName) {
+        this.promoterIdName = promoterIdName;
+    }
+
+    private String promoterIdName;
+
     public String getApproverIdsNames() {
         return approverIdsNames;
     }

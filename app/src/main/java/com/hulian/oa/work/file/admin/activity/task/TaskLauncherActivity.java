@@ -123,7 +123,7 @@ public class TaskLauncherActivity extends BaseActivity {
 
 //    @BindView(R.id.recycler2)
 //    RecyclerView recyclerView2;
-    private L_GridRoamAdapter_qgl adapter2;
+//    private L_GridRoamAdapter_qgl adapter2;
     private int maxSelectNum = 9;
 
     @BindView(R.id.iv)
@@ -264,7 +264,7 @@ public class TaskLauncherActivity extends BaseActivity {
     // 执行人
     public void onEventMainThread(  List<People>  event) {
         selectList2 .addAll(event);
-        adapter2.notifyDataSetChanged();
+//        adapter2.notifyDataSetChanged();
         String uids="";
         String uname="";
         for(People params1:selectList2)

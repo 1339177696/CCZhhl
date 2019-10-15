@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_105"
+    android:layout_height="@dimen/dp_110"
     android:layout_marginLeft="@dimen/dp_10"
     android:layout_marginTop="@dimen/dp_10"
     android:layout_marginRight="@dimen/dp_10"
@@ -50,21 +50,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
-        <!--<TextView-->
-            <!--android:id="@+id/tv_roam_person_title"-->
-            <!--android:layout_marginTop="@dimen/dp_20"-->
-            <!--android:text="流转人："-->
-            <!--android:textColor="@color/black"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content" />-->
-        <!--<TextView-->
-            <!--android:id="@+id/tv_roam_person"-->
-            <!--android:textColor="@color/black"-->
-            <!--android:text="留专人、留专人、留专人、留专人、留专人、留专人、留专人、留专人、留专人、留专人、留专人、留专人、"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content" />-->
 
+        <TextView
+            android:id="@+id/qgl_zy_ysp_jieshi"
+            android:text="接口没返回关于审批驳回问题详细解释"
+            android:textSize="@dimen/sp_13"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <!--qgl隐藏的-->
         <LinearLayout
+            android:visibility="gone"
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/dp_10"
             android:layout_width="match_parent"
@@ -84,6 +80,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
+        <TextView
+            android:textColor="@color/white"
+            android:background="@drawable/ggl_ysp_btn_bg1"
+            android:layout_marginTop="@dimen/dp_5"
+            android:gravity="center"
+            android:layout_marginRight="@dimen/dp_14"
+            android:id="@+id/qgl_zy_ysp_status"
+            android:visibility="gone"
+            android:textSize="@dimen/sp_11"
+            android:layout_gravity="right"
+            android:text="已同意"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_21" />
 
     </LinearLayout>
     <ImageView

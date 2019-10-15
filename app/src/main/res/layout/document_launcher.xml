@@ -99,20 +99,29 @@
                         android:text="公文类型"
                         android:textColor="#ff313131"
                         android:textSize="14sp" />
+                    <TextView
+                        android:id="@+id/iv_reason_more"
+                        android:background="@mipmap/qj_selected_icon_qgl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/dp_22"
+                        android:layout_centerVertical="true"
+                        />
 
-
-                    <EditText
-                        android:layout_marginRight="@dimen/dp_27"
-                        android:id="@+id/et_type"
+                    <TextView
+                        android:layout_marginRight="@dimen/dp_13"
+                        android:text="请选择请假类别"
+                        android:id="@+id/tv_reaseon"
+                        android:layout_toLeftOf="@id/iv_reason_more"
+                        android:layout_marginLeft="@dimen/dp_100"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/dp_4"
-                        android:layout_toRightOf="@+id/gw_text11"
-                        android:background="@null"
                         android:gravity="right"
-                        android:hint="请输入标题"
-                        android:textSize="@dimen/dp_14" />
+                        android:layout_centerVertical="true"
+                        android:textColor="#313131"
+                        android:textSize="@dimen/dp_14"
+                        />
 
 
 
@@ -248,11 +257,12 @@
                         android:textSize="14sp" />
 
                     <TextView
-
-                        android:layout_alignParentRight="true"
+                        android:id="@+id/file_btn"
+                        android:gravity="right"
+                        android:layout_toRightOf="@+id/gw_text1111"
                         android:layout_marginRight="@dimen/dp_27"
                         android:layout_centerVertical="true"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="点击选择附件"
                         android:textColor="#085DD6"
@@ -325,7 +335,7 @@
                         android:layout_height="20dp"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="20dp"
-                        android:src="@mipmap/renwu_faqi_icon5" />
+                        android:src="@mipmap/document_approver_icon_qgl" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -333,7 +343,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="9dp"
                         android:layout_toRightOf="@+id/gw_img4"
-                        android:text="流转人"
+                        android:text="审批人"
                         android:textColor="#ff313131"
                         android:textSize="14sp" />
 
@@ -362,6 +372,58 @@
 
                     <com.hulian.oa.views.l_flowview.FlowLayoutScrollView
                         android:id="@+id/flsv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_2"
+                        android:visibility="gone"></com.hulian.oa.views.l_flowview.FlowLayoutScrollView>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <ImageView
+                        android:id="@+id/gw_img5"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:src="@mipmap/renwu_faqi_icon5" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="9dp"
+                        android:layout_toRightOf="@+id/gw_img5"
+                        android:text="抄送人"
+                        android:textColor="#ff313131"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="19dp"
+                        android:src="@mipmap/renwu_faqi_icon4"
+                        android:visibility="invisible" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:minHeight="@dimen/dp_80">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:overScrollMode="never" />
+
+                    <com.hulian.oa.views.l_flowview.FlowLayoutScrollView
+                        android:id="@+id/flsv2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_2"

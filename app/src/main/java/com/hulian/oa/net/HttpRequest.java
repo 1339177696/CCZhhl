@@ -139,17 +139,29 @@ public class HttpRequest {
   public static void postMeetLauncherApi(RequestParams params, ResponseCallback callback) {
     RequestMode.postRequest(Urls.commUrls+"system/meeting/add", params, callback, null);
   }
-  /**
-   * 发布公文
-   * @param params 入参
-   * @param callback 回调接口
-   */
-  public static void postDocumentSendApi(RequestParams params, List<File> files, ResponseCallback callback) {
-  //  RequestMode.postRequest(Urls.commUrls+"system/officialDocument/publish", params, callback, null);
-    RequestMode.postMultipart(Urls.commUrls+"system/officialDocument/publish", params, files, callback, null);
-  }
+//  /**
+//   * 发布公文
+//   * @param params 入参
+//   * @param callback 回调接口
+//   */
+//  public static void postDocumentSendApi(RequestParams params, List<File> files, ResponseCallback callback) {
+//  //  RequestMode.postRequest(Urls.commUrls+"system/officialDocument/publish", params, callback, null);
+//    RequestMode.postMultipart(Urls.commUrls+"system/officialDocument/publish", params, files, callback, null);
+//  }
 
-  /**
+    /**
+     * 发布公文
+     * @param params 入参
+     * @param callback 回调接口
+     */
+    public static void postDocumentSendApi(RequestParams params, List<File> files, ResponseCallback callback) {
+        //  RequestMode.postRequest(Urls.commUrls+"system/officialDocument/publish", params, callback, null);
+        RequestMode.postMultipart(Urls.commUrls+"system/lotus/add", params, files, callback, null);
+    }
+
+
+
+    /**
    * 任务详情（回复）
    * @param params 入参
    * @param callback 回调接口

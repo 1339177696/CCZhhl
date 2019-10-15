@@ -96,6 +96,9 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
     @BindView(R.id.iv_back)
     FrameLayout iv_back;
 
+
+    private List<String> selectList1 = new ArrayList<>();
+
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -163,7 +166,8 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
     }
 
     @OnClick({R.id.tv_launch_send, R.id.iv_back, R.id.iv_btn,R.id.file_btn})
-    public void onViewClicked(View view) {
+    public void onViewClicked(View view)
+    {
         switch (view.getId()) {
             case R.id.tv_launch_send:
                 initSelectImage();
@@ -424,8 +428,43 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
         String file_name = stringBuffer.toString().substring(0, stringBuffer.toString().length() - 1);
         Log.e("file_name",file_name);
 //        et_annex.setText(file_name);
-//        selectList = list;
+        selectList1 = list;
         Log.v("EMAIL", "获取到数据-结束");
+        context = "";
+        gethuifufile();
     }
 
+
+    private void gethuifufile() {
+        RequestParams params = new RequestParams();
+        params.put("proid", id);
+        params.put("content", context);
+        params.put("respondent", SPUtils.get(mContext, "userId", "").toString());
+        List<File> fils = new ArrayList<>();
+        for (String imgurl : selectList1) {
+            fils.add(new File(imgurl));
+        }
+//        qgl注释的
+//        HttpRequest.post_workCoordinationReply_add(params, fils, new ResponseCallback() {
+//            @Override
+//            public void onSuccess(Object responseObj) {
+//
+//                try {
+//                    JSONObject result = new JSONObject(responseObj.toString());
+//                    ToastHelper.showToast(mContext, result.getString("msg"));
+//                    if (result.getString("code").equals("0")) {
+//                        onRefresh();
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(OkHttpException failuer) {
+//                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
+//                Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+    }
 }

@@ -22,6 +22,7 @@ import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
+import com.hulian.oa.work.file.admin.activity.document.l_adapter.L_ChaosongAdapter;
 import com.hulian.oa.work.file.admin.activity.document.l_adapter.L_PendAdapter;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
@@ -45,6 +46,7 @@ public class L_ChaosongmeFragment_qgl extends Fragment implements PullLoadMoreRe
     RelativeLayout emptyBg;
     private int mCount = 1;
     private RecyclerView mRecyclerView;
+    private L_ChaosongAdapter l_chaosongAdapter;
     Unbinder unbinder;
     @Nullable
     @Override
@@ -78,8 +80,8 @@ public class L_ChaosongmeFragment_qgl extends Fragment implements PullLoadMoreRe
         mPullLoadMoreRecyclerView.setLinearLayout();
 
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
-//        mRecyclerViewAdapter = new L_PendAdapter(getActivity());
-//        mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
+        l_chaosongAdapter = new L_ChaosongAdapter(getActivity(),"1");
+        mPullLoadMoreRecyclerView.setAdapter(l_chaosongAdapter);
         getData();
     }
 
@@ -114,8 +116,8 @@ public class L_ChaosongmeFragment_qgl extends Fragment implements PullLoadMoreRe
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
 
-//                    mRecyclerViewAdapter.addAllData(memberList);
-//                    mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
+
+                    mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
 
                 } catch (JSONException e) {
                     e.printStackTrace();

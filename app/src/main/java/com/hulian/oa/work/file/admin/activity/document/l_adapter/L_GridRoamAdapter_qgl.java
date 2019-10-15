@@ -31,10 +31,10 @@ public class L_GridRoamAdapter_qgl extends RecyclerView.Adapter<L_GridRoamAdapte
         void onAddPicClick();
     }
 
-    public L_GridRoamAdapter_qgl(Context context) {
+    public L_GridRoamAdapter_qgl(Context context, onAddPicClickListener mOnAddPicClickListener) {
         this.context = context;
         mInflater = LayoutInflater.from(context);
-
+        this.mOnAddPicClickListener = mOnAddPicClickListener;
     }
 
     public void setSelectMax(int selectMax) {
@@ -51,6 +51,7 @@ public class L_GridRoamAdapter_qgl extends RecyclerView.Adapter<L_GridRoamAdapte
         ImageView iv_arrow;
         LinearLayout ll_del;
         TextView tv_content;
+
         public ViewHolder(View view) {
             super(view);
             mImg = (ImageView) view.findViewById(R.id.fiv);
@@ -82,8 +83,7 @@ public class L_GridRoamAdapter_qgl extends RecyclerView.Adapter<L_GridRoamAdapte
      * 创建ViewHolder
      */
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i)
-    {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = mInflater.inflate(R.layout.gv_roam_person,
                 viewGroup, false);
         final ViewHolder viewHolder = new ViewHolder(view);
@@ -102,13 +102,13 @@ public class L_GridRoamAdapter_qgl extends RecyclerView.Adapter<L_GridRoamAdapte
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
         //少于8张，显示继续添加的图标
         if (getItemViewType(position) == TYPE_CAMERA) {
-//            viewHolder.mImg.setImageResource(R.mipmap.ic_add);
-//            viewHolder.mImg.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    mOnAddPicClickListener.onAddPicClick();
-//                }
-//            });
+            viewHolder.mImg.setImageResource(R.mipmap.renwu_faqi_icon4);
+            viewHolder.mImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnAddPicClickListener.onAddPicClick();
+                }
+            });
             viewHolder.ll_del.setVisibility(View.INVISIBLE);
             viewHolder.tv_content.setVisibility(View.INVISIBLE);
             viewHolder.iv_arrow.setVisibility(View.INVISIBLE);
@@ -131,25 +131,25 @@ public class L_GridRoamAdapter_qgl extends RecyclerView.Adapter<L_GridRoamAdapte
             viewHolder.tv_content.setText(list.get(position).getUserName());
             viewHolder.iv_arrow.setBackgroundResource(R.mipmap.arrow);
             //itemView 的点击事件
-//            if (mItemClickListener != null) {
-//                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        int adapterPosition = viewHolder.getAdapterPosition();
-//                        mItemClickListener.onItemClick(adapterPosition, v);
-//                    }
-//                });
-//            }
+            if (mItemClickListener != null) {
+                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int adapterPosition = viewHolder.getAdapterPosition();
+                        mItemClickListener.onItemClick(adapterPosition, v);
+                    }
+                });
             }
+        }
     }
 
-//    protected OnItemClickListener mItemClickListener;
-//
-//    public interface OnItemClickListener {
-//        void onItemClick(int position, View v);
-//    }
-//
-//    public void setOnItemClickListener(OnItemClickListener listener) {
-//        this.mItemClickListener = listener;
-//    }
+    protected OnItemClickListener mItemClickListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position, View v);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.mItemClickListener = listener;
+    }
 }

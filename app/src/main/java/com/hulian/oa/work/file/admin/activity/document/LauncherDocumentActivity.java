@@ -16,6 +16,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
+import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
+import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.duke.dfileselector.activity.DefaultSelectorActivity;
+import com.duke.dfileselector.util.FileSelectorUtils;
 import com.hulian.oa.BaseActivity;
 import com.hulian.oa.R;
 import com.hulian.oa.bean.People;
@@ -30,6 +35,7 @@ import com.hulian.oa.views.l_flowview.FlowLayoutAdapter;
 import com.hulian.oa.work.file.admin.activity.document.l_adapter.FullyGridLayoutManager;
 import com.hulian.oa.work.file.admin.activity.document.l_adapter.L_GridImageAdapter;
 import com.hulian.oa.work.file.admin.activity.document.l_adapter.L_GridRoamAdapter;
+import com.hulian.oa.work.file.admin.activity.document.l_adapter.L_GridRoamAdapter_qgl;
 import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_PendFragment;
 import com.hulian.oa.work.file.admin.activity.meeting.SelDepartmentActivity_meet_zb_single;
 import com.luck.picture.lib.PictureSelector;
@@ -78,7 +84,25 @@ public class LauncherDocumentActivity extends BaseActivity {
     RecyclerView recyclerView2;
     private int count = 0;
     String offid;
-
+    // 审批人选择最大值
+    private int maxSelectNum2 = 5;
+    // 新加的抄送人qgl
+    @BindView(R.id.recycler3)
+    RecyclerView recyclerView3;
+    private int maxSelectNum3 = 5;
+    private L_GridRoamAdapter_qgl adapter3;
+    private List<People> selectList3 = new ArrayList<>();
+    // 选择文件
+    @BindView(R.id.file_btn)
+    TextView filebtn;
+    private List<String> fileList = new ArrayList<>();
+    @BindView(R.id.tv_reaseon)
+    TextView tv_reaseon;
+    List<String> reasonlist = new ArrayList<>();
+    private OptionsPickerView reasonPicker;//类型;
+    private String gwtype = "会签";
+    @BindView(R.id.et_number)
+    EditText etnumber;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,6 +122,8 @@ public class LauncherDocumentActivity extends BaseActivity {
                 finish();
             }
         });
+        initReason();
+        tv_reaseon.setText("会签");
     }
 
     private void initSelectImage() {
@@ -133,7 +159,7 @@ public class LauncherDocumentActivity extends BaseActivity {
         recyclerView2.setLayoutManager(manager2);
         adapter2 = new L_GridRoamAdapter(LauncherDocumentActivity.this, onAddPicClickListener2);
         adapter2.setList(selectList2);
-        adapter2.setSelectMax(maxSelectNum);
+        adapter2.setSelectMax(maxSelectNum2);
         recyclerView2.setAdapter(adapter2);
         adapter.setOnItemClickListener(new L_GridImageAdapter.OnItemClickListener() {
             @Override
@@ -141,6 +167,14 @@ public class LauncherDocumentActivity extends BaseActivity {
                 PictureSelector.create(LauncherDocumentActivity.this).themeStyle(R.style.picture_default_style).openExternalPreview(position, selectList);
             }
         });
+        // qgl
+        FullyGridLayoutManager manager3 = new FullyGridLayoutManager(LauncherDocumentActivity.this, 4, GridLayoutManager.VERTICAL, false);
+        recyclerView3.setLayoutManager(manager3);
+        adapter3 = new L_GridRoamAdapter_qgl(LauncherDocumentActivity.this,onAddPicClickListener3);
+        adapter3.setList(selectList3);
+        adapter3.setSelectMax(maxSelectNum3);
+        recyclerView3.setAdapter(adapter3);
+
     }
 
 
@@ -164,10 +198,20 @@ public class LauncherDocumentActivity extends BaseActivity {
             startActivityForResult(intent,110);
         }
     };
+    // qgl
+    private L_GridRoamAdapter_qgl.onAddPicClickListener onAddPicClickListener3 = new L_GridRoamAdapter_qgl.onAddPicClickListener() {
+        @Override
+        public void onAddPicClick() {
+            Intent intent = new Intent(LauncherDocumentActivity.this, SelDepartmentActivity_meet_zb_single.class);
+            startActivityForResult(intent,120);
+        }
+    };
 
     public void onEventMainThread(People event) {
         selectList2.add(event);
+        selectList3.add(event);
         adapter2.notifyDataSetChanged();
+        adapter3.notifyDataSetChanged();
     }
 
     @Override
@@ -198,7 +242,17 @@ public class LauncherDocumentActivity extends BaseActivity {
                     selectList2.add(mList.get(0));
                     adapter2.notifyDataSetChanged();
                     break;
+
                 }
+                case 120:
+                    List<People> mList = (List<People>) data.getSerializableExtra("mList");
+                    selectList3.add(mList.get(0));
+                    adapter3.notifyDataSetChanged();
+                    break;
+                case DefaultSelectorActivity.FILE_SELECT_REQUEST_CODE:
+                    printData(DefaultSelectorActivity.getDataFromIntent(data));
+                    break;
+
             }
         }
     }
@@ -251,59 +305,175 @@ public class LauncherDocumentActivity extends BaseActivity {
         EventBus.getDefault().unregister(this);
     }
 
-    @OnClick(R.id.tv_launcher)
-    public void onViewClicked() {
-        if (TextUtils.isEmpty(etTitle.getText().toString().trim())) {
-            ToastHelper.showToast(mContext, "标题不能为空");
-            return;
-        }
-        if (selectList2.size() <= 0) {
-            ToastHelper.showToast(mContext, "流转人不能为空");
-            return;
-        }
-        if (selectList.size() <= 0) {
-            ToastHelper.showToast(mContext, "公文照片不能为空");
-            return;
-        }
-        String uids = "";
-        for (People params1 : selectList2) {
-            uids += params1.getUserId() + ",";
-        }
-        RequestParams params = new RequestParams();
-        if (offid != null) {
-            params.put("offid", offid);
-        }
-        params.put("pid", SPUtils.get(mContext, "userId", "").toString());
-        params.put("offTitle", etTitle.getText().toString());
-        params.put("uids", uids.substring(0, uids.length() - 1));
-        List<File> fils = new ArrayList<>();
-        for (LocalMedia imgurl : selectList) {
-            fils.add(new File(imgurl.getPath()));
-        }
-        showDialogLoading();
-        HttpRequest.postDocumentSendApi(params, fils, new ResponseCallback() {
-            @Override
-            public void onSuccess(Object responseObj) {
-                    dismissDialogLoading();
-                try {
-                    JSONObject result = new JSONObject(responseObj.toString());
-                    ToastHelper.showToast(mContext, result.getString("msg"));
-                    if (result.getString("code").equals("0")) {
-                        EventBus.getDefault().post(new L_PendFragment());
-                        finish();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+    @OnClick({R.id.tv_launcher,R.id.file_btn,R.id.tv_reaseon})
+    public void onViewClicked(View v) {
+        switch (v.getId()){
+            case R.id.tv_launcher:
+                if (TextUtils.isEmpty(etnumber.getText().toString().trim())) {
+                    ToastHelper.showToast(mContext, "公文文号为空");
+                    return;
                 }
-            }
 
-            @Override
-            public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
-                dismissDialogLoading();
-                Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                if (TextUtils.isEmpty(etTitle.getText().toString().trim())) {
+                    ToastHelper.showToast(mContext, "标题不能为空");
+                    return;
+                }
+
+                if (selectList2.size() <= 0) {
+                    ToastHelper.showToast(mContext, "审批人人不能为空");
+                    return;
+                }
+                // 新加的qgl
+                if (selectList3.size() <= 0){
+                    ToastHelper.showToast(mContext, "抄送人不能为空");
+                    return;
+                }
+                if (selectList.size() <= 0) {
+                    ToastHelper.showToast(mContext, "公文照片不能为空");
+                    return;
+                }
+                String uids = "";
+                for (People params1 : selectList2) {
+                    uids += params1.getUserId() + ",";
+                }
+                String uidname = "";
+                for (People params1 : selectList2) {
+                    uidname += params1.getUserName() + ",";
+                }
+                //qgl
+                String csids = "";
+                for (People params : selectList3){
+                    csids += params.getUserId() + ",";
+                }
+                String csidname = "";
+                for (People params : selectList3){
+                    csidname += params.getUserName() + ",";
+                }
+
+                RequestParams params = new RequestParams();
+                if (offid != null) {
+                params.put("spare4", offid);
+                }
+                params.put("initiationType", gwtype);
+                params.put("symbol", etnumber.getText().toString().trim());
+                params.put("offTitle", etTitle.getText().toString());
+                params.put("approverId", uids.substring(0, uids.length() - 1));
+                params.put("approverName", uidname.substring(0, uidname.length() - 1));
+                params.put("createName",SPUtils.get(mContext, "username", "").toString());
+                params.put("copierId",csids.substring(0, csids.length() - 1));
+                params.put("copierName",csidname.substring(0, csidname.length() - 1));
+                params.put("createBy", SPUtils.get(mContext, "userId", "").toString());
+
+                List<File> fils = new ArrayList<>();
+                for (LocalMedia imgurl : selectList) {
+                    fils.add(new File(imgurl.getPath()));
+                }
+                showDialogLoading();
+                HttpRequest.postDocumentSendApi(params, fils, new ResponseCallback() {
+                    @Override
+                    public void onSuccess(Object responseObj) {
+                        dismissDialogLoading();
+                        try {
+                            JSONObject result = new JSONObject(responseObj.toString());
+                            ToastHelper.showToast(mContext, result.getString("msg"));
+                            if (result.getString("code").equals("0")) {
+                                EventBus.getDefault().post(new L_PendFragment());
+                                finish();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(OkHttpException failuer) {
+                        //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
+                        dismissDialogLoading();
+                        Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+                break;
+            case R.id.file_btn:
+                filebtn.setCursorVisible(false);
+                //文件选择器  过滤条件在 DefaultSelectorActivity.onPermissionSuccess 中添加
+                DefaultSelectorActivity.startActivityForResult(this, false, true, 3);
+                break;
+            case R.id.tv_reaseon:
+                reasonPicker.show();
+                break;
+        }
+
     }
 
+
+    private void printData(ArrayList<String> list) {
+        if (FileSelectorUtils.isEmpty(list)) {
+            return;
+        }
+        int size = list.size();
+        Log.v("EMAIL", "获取到数据-开始 size = " + size);
+        StringBuffer stringBuffer = new StringBuffer(" ");
+        for (int i = 0; i < size; i++) {
+            int a = list.get(i).length();
+            String ccc = list.get(i).substring(list.get(i).lastIndexOf('/') + 1, a);
+            stringBuffer.append(ccc);
+            stringBuffer.append(",");
+        }
+        String file_name = stringBuffer.toString().substring(0, stringBuffer.toString().length() - 1);
+        filebtn.setText(file_name);
+        fileList = list;
+        Log.v("EMAIL", "获取到数据-结束");
+    }
+
+    private void initReason()
+    {
+        reasonlist.add("会签");
+        reasonlist.add("签批");
+        reasonPicker = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                tv_reaseon.setText(reasonlist.get(options1));
+                gwtype = tv_reaseon.getText().toString().trim();
+            }
+        }).setTitleText("公文类型").setContentTextSize(22).setTitleSize(22).setSubCalSize(21).build();
+        reasonPicker.setPicker(reasonlist);
+    }
+
+    //qgl注释的
+//    RequestParams params = new RequestParams();
+//                if (offid != null) {
+//        params.put("offid", offid);
+//    }
+//                params.put("pid", SPUtils.get(mContext, "userId", "").toString());
+//                params.put("offTitle", etTitle.getText().toString());
+//                params.put("uids", uids.substring(0, uids.length() - 1));
+//
+//    List<File> fils = new ArrayList<>();
+//                for (LocalMedia imgurl : selectList) {
+//        fils.add(new File(imgurl.getPath()));
+//    }
+//    showDialogLoading();
+//                HttpRequest.postDocumentSendApi(params, fils, new ResponseCallback() {
+//        @Override
+//        public void onSuccess(Object responseObj) {
+//            dismissDialogLoading();
+//            try {
+//                JSONObject result = new JSONObject(responseObj.toString());
+//                ToastHelper.showToast(mContext, result.getString("msg"));
+//                if (result.getString("code").equals("0")) {
+//                    EventBus.getDefault().post(new L_PendFragment());
+//                    finish();
+//                }
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//
+//        @Override
+//        public void onFailure(OkHttpException failuer) {
+//            //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
+//            dismissDialogLoading();
+//            Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
+//        }
+//    });
 }
