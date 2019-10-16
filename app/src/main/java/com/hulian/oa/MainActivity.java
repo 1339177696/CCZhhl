@@ -46,7 +46,7 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener , ReminderManager.UnreadNumChangedCallback{
 //测试
-
+// qgl分支
     private static final int BASIC_PERMISSION_REQUEST_CODE = 100;
     private static final int REQUEST_CODE_ADVANCED = 2;
     private static final int REQUEST_CODE_NORMAL = 1;
