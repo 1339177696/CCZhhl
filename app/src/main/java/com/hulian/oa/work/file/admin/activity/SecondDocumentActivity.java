@@ -26,6 +26,7 @@ import com.hulian.oa.work.file.admin.activity.document.LauncherDocumentActivity;
 import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_ApprovedFragment;
 import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_ChaosongmeFragment_qgl;
 import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_PendFragment;
+import com.hulian.oa.work.file.admin.activity.document.l_fragment.QGLWofaqiFragment;
 
 import java.util.ArrayList;
 
@@ -81,8 +82,11 @@ public class SecondDocumentActivity extends BaseActivity {
         //员工
         else {
             linearLayout.setVisibility(View.GONE);
-            titleDatas.add("待审批");
-            titleDatas.add("已审批");
+
+//            titleDatas.add("待审批");
+            titleDatas.add("我发起的");
+
+//            titleDatas.add("已审批");
             titleDatas.add("抄送我的");
             tv_launch.setVisibility(View.VISIBLE);
         }
@@ -95,8 +99,10 @@ public class SecondDocumentActivity extends BaseActivity {
             fragmentList.add(new L_PendFragment());
             fragmentList.add(new L_ApprovedFragment());
         }else {
-            fragmentList.add(new L_PendFragment());
-            fragmentList.add(new L_ApprovedFragment());
+            //新加的qgl
+            fragmentList.add(new QGLWofaqiFragment());
+//            fragmentList.add(new L_PendFragment());
+//            fragmentList.add(new L_ApprovedFragment());
             fragmentList.add(new L_ChaosongmeFragment_qgl());
 
         }

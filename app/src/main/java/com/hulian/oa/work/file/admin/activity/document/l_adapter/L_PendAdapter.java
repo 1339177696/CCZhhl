@@ -58,6 +58,9 @@ public class L_PendAdapter extends RecyclerView.Adapter<L_PendAdapter.ViewHolder
 //        private ImageView tv_status;
         //qgl
         private TextView ld_stuas;
+        private TextView Leader_tv_title;
+        private TextView Leader_tv_time;
+        private TextView Leader_tv_wenhao;
         private RelativeLayout Workers_data;
         private RelativeLayout Leader_data;
 
@@ -74,6 +77,9 @@ public class L_PendAdapter extends RecyclerView.Adapter<L_PendAdapter.ViewHolder
             ld_stuas = (TextView) itemView.findViewById(R.id.ld_stuas);
             Workers_data = (RelativeLayout) itemView.findViewById(R.id.Workers_data);
             Leader_data = (RelativeLayout) itemView.findViewById(R.id.Leader_data);
+            Leader_tv_title = (TextView) itemView.findViewById(R.id.Leader_tv_title);
+            Leader_tv_time = (TextView) itemView.findViewById(R.id.Leader_tv_time);
+            Leader_tv_wenhao = (TextView) itemView.findViewById(R.id.Leader_tv_wenhao);
         }
     }
 
@@ -87,10 +93,14 @@ public class L_PendAdapter extends RecyclerView.Adapter<L_PendAdapter.ViewHolder
     @Override
     public void onBindViewHolder(L_PendAdapter.ViewHolder holder, final int position) {
         holder.tv_title.setText(dataList.get(position).getOfficialDocumentTitle());
-        //    holder.tv_time.setText(TimeUtils.getDateToString( dataList.get(position).getCreate_Time()));
         holder.tv_time.setText(dataList.get(position).getCreate_Time());
         holder.tv_roam_person.setText(dataList.get(position).getApproverIdsNames());
         holder.faqi_person.setText(dataList.get(position).getPromoterIdName());
+
+        //领导
+        holder.Leader_tv_time.setText(dataList.get(position).getCreate_Time());
+        holder.Leader_tv_title.setText(dataList.get(position).getOfficialDocumentTitle());
+
         if (!SPUtils.get(mContext, "isLead", "").equals("0")) {
             holder.Workers_data.setVisibility(View.VISIBLE);
             holder.Leader_data.setVisibility(View.GONE);

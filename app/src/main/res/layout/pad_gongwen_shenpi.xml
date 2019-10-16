@@ -29,9 +29,66 @@
             android:textSize="@dimen/sp_17" />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_above="@+id/radio_goup"
+    <LinearLayout
+        android:id="@+id/qgl_liner1"
+        android:orientation="vertical"
         android:layout_below="@+id/relayou_my"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/qgl_rela1"
+
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <ImageView
+                android:id="@+id/gw_img11"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:src="@mipmap/renwu_faqi_icon2" />
+
+            <TextView
+                android:id="@+id/gw_text11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="9dp"
+                android:layout_toRightOf="@+id/gw_img11"
+                android:text="公文文号"
+                android:textColor="#ff313131"
+                android:textSize="14sp" />
+
+
+            <TextView
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dp_27"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="智慧互联【2019】0012  "
+                android:textColor="#ff676767"
+                android:textSize="14sp"
+                />
+
+
+
+        </RelativeLayout>
+        <View
+
+            android:layout_below="@+id/qgl_rela1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="22dp"
+            android:background="#E3E3E3" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_above="@+id/qgl_rela2"
+        android:layout_below="@+id/qgl_liner1"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
         <!--没用-->
@@ -470,7 +527,8 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_above="@+id/radio_goup"
+        android:id="@+id/qgl_liner2"
+        android:layout_above="@+id/qgl_rela2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -489,6 +547,49 @@
             android:textSize="16sp" />
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_above="@+id/radio_goup"
+      android:id="@+id/qgl_rela2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/gw_img1111"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/document_annex_icon_qgl" />
+
+        <TextView
+            android:id="@+id/gw_text1111"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9dp"
+            android:layout_toRightOf="@+id/gw_img1111"
+            android:text="公文附件"
+            android:textColor="#ff313131"
+            android:textSize="14sp" />
+
+        <TextView
+
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_27"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="zhangmingjuan8801.doc"
+            android:textColor="#676767"
+            android:textSize="14sp"
+            />
+
+
+
+
+    </RelativeLayout>
+
 
     <RadioGroup
         android:id="@+id/radio_goup"

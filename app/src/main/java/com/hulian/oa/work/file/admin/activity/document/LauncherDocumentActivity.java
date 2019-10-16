@@ -351,12 +351,13 @@ public class LauncherDocumentActivity extends BaseActivity {
                 }
 
                 RequestParams params = new RequestParams();
-                if (offid != null) {
-                params.put("spare4", offid);
-                }
+//                if (offid != null) {
+//                params.put("spare4", offid);
+//                }
+                params.put("spare4", "0");
                 params.put("initiationType", gwtype);
                 params.put("symbol", etnumber.getText().toString().trim());
-                params.put("offTitle", etTitle.getText().toString());
+                params.put("title", etTitle.getText().toString());
                 params.put("approverId", uids.substring(0, uids.length() - 1));
                 params.put("approverName", uidname.substring(0, uidname.length() - 1));
                 params.put("createName",SPUtils.get(mContext, "username", "").toString());

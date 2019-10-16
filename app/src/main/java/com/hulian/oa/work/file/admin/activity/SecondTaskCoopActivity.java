@@ -57,14 +57,14 @@ public class SecondTaskCoopActivity extends BaseActivity {
     }
     private void init() {
         ArrayList<String> titleDatas = new ArrayList<>();
+        titleDatas.add("我发起的");
         titleDatas.add("未完成的");
         titleDatas.add("已完成的");
-        titleDatas.add("我发起的");
         titleDatas.add("抄送我的");
         ArrayList<Fragment> fragmentList = new ArrayList<Fragment>();
+        fragmentList.add(new LaunchTaskFragment());
         fragmentList.add(new UndoneTaskFragment());
         fragmentList.add(new CompletedTaskFragment());
-        fragmentList.add(new LaunchTaskFragment());
         fragmentList.add(new CopymeTaskFragment());
         MyViewPageAdapter myViewPageAdapter = new MyViewPageAdapter(getSupportFragmentManager(), titleDatas, fragmentList);
 //        myTablayout.setSelectedTabIndicator(0);

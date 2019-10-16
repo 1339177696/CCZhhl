@@ -543,4 +543,14 @@ public class HttpRequest {
         RequestMode.postRequest(Urls.commUrls+"system/lotus/copierList", params, callback, null);
     }
 
+    /**
+     * 新加的我发起的
+     * @param params
+     * @param callback
+     */
+    public static void postWoFaqi(RequestParams params,  ResponseCallback callback){
+        RequestMode.postRequest(Urls.commUrls+"system/lotus/list", params, callback, null);
+    }
+
+    //测试12
 }

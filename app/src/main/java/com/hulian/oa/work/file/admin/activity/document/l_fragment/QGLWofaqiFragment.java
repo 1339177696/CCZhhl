@@ -13,33 +13,27 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.R;
-import com.hulian.oa.bean.AgencyCount;
-import com.hulian.oa.bean.Document;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.work.file.admin.activity.document.l_adapter.L_ChaosongAdapter;
-import com.hulian.oa.work.file.admin.activity.document.l_adapter.L_PendAdapter;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import de.greenrobot.event.EventBus;
 
 /**
- * Created by qgl on 2019/10/12 14:34.
+ * Created by qgl on 2019/10/16 9:17.
  */
-public class L_ChaosongmeFragment_qgl extends Fragment implements PullLoadMoreRecyclerView.PullLoadMoreListener  {
+public class QGLWofaqiFragment extends Fragment implements PullLoadMoreRecyclerView.PullLoadMoreListener
+{
     @BindView(R.id.lv_notice)
     PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
     @BindView(R.id.emptyBg)
@@ -51,12 +45,11 @@ public class L_ChaosongmeFragment_qgl extends Fragment implements PullLoadMoreRe
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.l_chaosongmefragment_qgl, null);
+        View view = inflater.inflate(R.layout.qglwofaqifragment, null);
         unbinder = ButterKnife.bind(this, view);
         initList();
         return view;
     }
-
     private void initList() {
 
         //获取mRecyclerView对象
@@ -104,11 +97,8 @@ public class L_ChaosongmeFragment_qgl extends Fragment implements PullLoadMoreRe
 
     private void getData() {
         RequestParams params = new RequestParams();
-//        params.put("pageStart", mCount * 10 - 9 + "");
-//        params.put("pageEnd", mCount * 10 + "");
-        params.put("copierId", SPUtils.get(getActivity(), "userId", "").toString());
-//        params.put("state", "0");
-        HttpRequest.postChaosongren(params, new ResponseCallback() {
+        params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
+        HttpRequest.postWoFaqi(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
                 //需要转化为实体对象
