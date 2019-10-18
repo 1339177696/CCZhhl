@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -50,6 +51,9 @@ public class ExpenseCopymeFragment extends Fragment implements PullLoadMoreRecyc
     private ArrayList<String> list_title;
     Unbinder unbinder;
 
+//    qgl修改的
+    @BindView(R.id.emptyBg)
+    RelativeLayout emptyBg;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -131,6 +135,13 @@ public class ExpenseCopymeFragment extends Fragment implements PullLoadMoreRecyc
                             new TypeToken<List<Expense>>() {
                             }.getType());
                     mRecyclerViewAdapter.addAllData(memberList);
+                    if (mCount == 1 && memberList.size() == 0) {
+                        emptyBg.setVisibility(View.VISIBLE);
+                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
+                    } else {
+                        emptyBg.setVisibility(View.GONE);
+                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
+                    }
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -13,6 +13,7 @@ import com.hulian.oa.R;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.ToastHelper;
 import com.hulian.oa.work.file.admin.activity.SecondDocumentActivity;
+import com.hulian.oa.work.file.admin.activity.SecondExpenseActivity;
 import com.hulian.oa.work.file.admin.activity.SecondInstructActivity;
 import com.hulian.oa.work.file.admin.activity.SecondLeaveActivity;
 import com.hulian.oa.work.file.admin.activity.SecondMailActivity;
@@ -131,8 +132,10 @@ public class WorkFragemt_9 extends Fragment {
                 break;
             case R.id.bt_expense:
                 //跳转报销人申请列表
-                //    startActivity(new Intent(getActivity(), SecondExpenseActivity.class));
-                ToastHelper.showToast(getActivity(), "功能正在开发中");
+//                qgl修改
+
+                    startActivity(new Intent(getActivity(), SecondExpenseActivity.class));
+//                ToastHelper.showToast(getActivity(), "功能正在开发中");
                 break;
 //            case R.id.bt_list:
 //                EventBus.getDefault().post(new WorkFragemt_9());

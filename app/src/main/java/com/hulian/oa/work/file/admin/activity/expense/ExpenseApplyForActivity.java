@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -26,11 +27,14 @@ import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.ToastHelper;
+import com.hulian.oa.work.file.admin.activity.document.LauncherDocumentActivity;
 import com.hulian.oa.work.file.admin.activity.document.l_adapter.FullyGridLayoutManager;
 import com.hulian.oa.work.file.admin.activity.document.l_adapter.L_GridImageAdapter;
+import com.hulian.oa.work.file.admin.activity.document.l_adapter.L_GridRoamAdapter_qgl;
 import com.hulian.oa.work.file.admin.activity.expense.l_fragment.ExpenseCopymeFragment;
 import com.hulian.oa.work.file.admin.activity.expense.l_fragment.ExpenseLaunchFragment;
 import com.hulian.oa.work.file.admin.activity.leave.l_fragment.LeaveLaunchFragment;
+import com.hulian.oa.work.file.admin.activity.meeting.SelDepartmentActivity_meet_zb_single;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
@@ -55,27 +59,22 @@ public class ExpenseApplyForActivity extends BaseActivity {
     @BindView(R.id.tv_opreator)
     TextView tvOpreator;
     String  tvOpreatorCode="";
-    @BindView(R.id.copier)
-    TextView copier;
-    String  copierCode="";
     private List<People> selectList2 = new ArrayList<>();
-    private List<People_x> selectList2_x = new ArrayList<>();
     //报销事由
     @BindView(R.id.rl_expense_reason)
     RelativeLayout rl_expense_reason;
 
     @BindView(R.id.iv_back)
-    ImageView ivBack;
+    RelativeLayout ivBack;
     @BindView(R.id.tv_expense_content)
     EditText tvExpenseContent;
     @BindView(R.id.et_expense_monkey)
     EditText etExpenseMonkey;
     @BindView(R.id.ci_approved_pic)
     RelativeLayout ciApprovedPic;
-    @BindView(R.id.ci_copy_pic)
-    RelativeLayout ciCopyPic;
+
     @BindView(R.id.tv_expense_submit)
-    TextView tvExpenseSubmit;
+    Button tvExpenseSubmit;
 
     private L_GridImageAdapter adapter;
     //已经选择图片
@@ -85,6 +84,11 @@ public class ExpenseApplyForActivity extends BaseActivity {
     @BindView(R.id.recycler)
     RecyclerView recyclerView;
 
+    @BindView(R.id.recycler3)
+    RecyclerView recycler3;
+    private L_GridRoamAdapter_qgl adapter3;
+    private List<People> selectList3 = new ArrayList<>();
+    private int maxSelectNum3 = 5;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,6 +112,14 @@ public class ExpenseApplyForActivity extends BaseActivity {
                 PictureSelector.create(ExpenseApplyForActivity.this).themeStyle(R.style.picture_default_style).openExternalPreview(position, selectList);
             }
         });
+
+        // qgl
+        FullyGridLayoutManager manager3 = new FullyGridLayoutManager(ExpenseApplyForActivity.this, 4, GridLayoutManager.VERTICAL, false);
+        recycler3.setLayoutManager(manager3);
+        adapter3 = new L_GridRoamAdapter_qgl(ExpenseApplyForActivity.this,onAddPicClickListener3);
+        adapter3.setList(selectList3);
+        adapter3.setSelectMax(maxSelectNum3);
+        recycler3.setAdapter(adapter3);
 
     }
 
@@ -164,11 +176,16 @@ public class ExpenseApplyForActivity extends BaseActivity {
                         adapter.notifyDataSetChanged();
                     }
                     break;
+                case 120:
+                    List<People> mList = (List<People>) data.getSerializableExtra("mList");
+                    selectList3.add(mList.get(0));
+                    adapter3.notifyDataSetChanged();
+                    break;
             }
         }
     }
-
-    @OnClick({R.id.iv_back, R.id.tv_expense_submit, R.id.ci_approved_pic, R.id.ci_copy_pic})
+    //, R.id.ci_copy_pic
+    @OnClick({R.id.iv_back, R.id.tv_expense_submit, R.id.ci_approved_pic})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -180,16 +197,16 @@ public class ExpenseApplyForActivity extends BaseActivity {
             case R.id.ci_approved_pic:
                 startActivity(new Intent(mContext, SelDepartmentActivity.class));
                 break;
-            case R.id.ci_copy_pic:
-                startActivity(new Intent(mContext, SelDepartmentActivity_x.class));
-                break;
+//            case R.id.ci_copy_pic:
+//                startActivity(new Intent(mContext, SelDepartmentActivity_x.class));
+//                break;
         }
     }
 
     private void postData() {
 
         if(TextUtils.isEmpty(tvExpenseContent.getText().toString().trim())){
-            ToastHelper.showToast(mContext,"请选择请假事由");
+            ToastHelper.showToast(mContext,"请选择报销事由");
             return;
         }
         if(TextUtils.isEmpty(etExpenseMonkey.getText().toString().trim())){
@@ -204,14 +221,21 @@ public class ExpenseApplyForActivity extends BaseActivity {
             ToastHelper.showToast(mContext,"请选择审批人");
             return;
         }
-        if(TextUtils.isEmpty(copierCode)){
-            ToastHelper.showToast(mContext,"请选择抄送人");
+        // 新加的qgl
+        if (selectList3.size() <= 0){
+            ToastHelper.showToast(mContext, "请选择抄送人");
             return;
+        }
+
+        //qgl
+        String csids = "";
+        for (People params : selectList3){
+            csids += params.getUserId() + ",";
         }
 
         RequestParams params = new RequestParams();
         params.put("createBy", SPUtils.get(mContext, "userId", "").toString());
-        params.put("copier", copierCode);
+        params.put("copier", csids.substring(0, csids.length() - 1));
         params.put("approver", tvOpreatorCode);
         params.put("money", etExpenseMonkey.getText().toString());
         params.put("cause",tvExpenseContent.getText().toString());
@@ -264,18 +288,30 @@ public class ExpenseApplyForActivity extends BaseActivity {
         //     Toast.makeText(this, uids.substring(0,uids.length()-1), Toast.LENGTH_SHORT).show();
     }
 
-    // 抄送人
-    public void onEventMainThread(People_x event_x) {
-        selectList2_x.clear();
-        selectList2_x.add(event_x);
-        String uids = "";
-        String uname = "";
-        for (People_x params_x1 : selectList2_x) {
-            uids += params_x1.getUserId();
-            uname += params_x1.getUserName();
+//    // 抄送人
+//    public void onEventMainThread(People_x event_x) {
+//        selectList2_x.clear();
+//        selectList2_x.add(event_x);
+//        String uids = "";
+//        String uname = "";
+//        for (People_x params_x1 : selectList2_x) {
+//            uids += params_x1.getUserId();
+//            uname += params_x1.getUserName();
+//        }
+////        copier.setText(uname);
+//        copierCode = uids;
+//        //    Toast.makeText(this, uids.substring(0,uids.length()-1), Toast.LENGTH_SHORT).show();
+//    }
+
+
+    // qgl
+    private L_GridRoamAdapter_qgl.onAddPicClickListener onAddPicClickListener3 = new L_GridRoamAdapter_qgl.onAddPicClickListener() {
+        @Override
+        public void onAddPicClick() {
+            Intent intent = new Intent(ExpenseApplyForActivity.this, SelDepartmentActivity_meet_zb_single.class);
+            startActivityForResult(intent,120);
         }
-        copier.setText(uname);
-        copierCode = uids;
-        //    Toast.makeText(this, uids.substring(0,uids.length()-1), Toast.LENGTH_SHORT).show();
-    }
+    };
+
+
 }

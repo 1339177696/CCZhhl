@@ -220,7 +220,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:visibility="invisible"
+                    android:visibility="visible"
                     android:orientation="vertical">
 
                     <ImageView
@@ -229,7 +229,7 @@
                         android:layout_height="@dimen/dp_53"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:src="@mipmap/richeng_guanli_icon_qgl" />
+                        android:src="@mipmap/baoxiao_icon_qgl" />
 
                     <TextView
                         android:layout_width="wrap_content"

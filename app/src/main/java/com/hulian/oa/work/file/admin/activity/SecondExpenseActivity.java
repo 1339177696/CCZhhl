@@ -3,18 +3,22 @@ package com.hulian.oa.work.file.admin.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hulian.oa.BaseActivity;
 import com.hulian.oa.R;
 import com.hulian.oa.news.adapter.MyViewPageAdapter;
 import com.hulian.oa.utils.SPUtils;
+import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.work.file.admin.activity.expense.ExpenseApplyForActivity;
 import com.hulian.oa.work.file.admin.activity.expense.l_fragment.ExpenseApprovedFragment;
 import com.hulian.oa.work.file.admin.activity.expense.l_fragment.ExpenseCopymeFragment;
@@ -43,14 +47,17 @@ public class SecondExpenseActivity extends BaseActivity {
     ViewPager myViewpager;
     Context mContext;
     @BindView(R.id.tv_apply)
-    TextView tv_apply;
+    LinearLayout tv_apply;
     private ArrayList<String> list_path;
     private ArrayList<String> list_title;
     ArrayList<String> titleDatas   = new ArrayList<>();;
     ArrayList<Fragment> fragmentList = new ArrayList<Fragment>();
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StatusBarUtil.statusBarLightMode_white(this);
         setContentView(R.layout.work_expense_list_apply);
         ButterKnife.bind(this);
         mContext = this;

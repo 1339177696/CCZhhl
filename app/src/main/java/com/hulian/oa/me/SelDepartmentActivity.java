@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -38,7 +39,7 @@ public class SelDepartmentActivity extends BaseActivity {
     List<Department> memberList=new ArrayList<>();
     //创建适配器对象
     private DepartmentAdapter adapter;
-    private ImageView iv_back;
+    private RelativeLayout iv_back;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
