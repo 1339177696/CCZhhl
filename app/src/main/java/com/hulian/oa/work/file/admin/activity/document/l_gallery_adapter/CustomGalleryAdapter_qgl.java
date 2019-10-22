@@ -17,7 +17,7 @@ import com.hulian.oa.utils.gallery.DisplayUtils;
 import java.util.List;
 
 public class CustomGalleryAdapter_qgl extends RecyclerView.Adapter<CustomGalleryAdapter_qgl.ViewHolder> {
-    private static final float SCALE = 0.95f;
+    private static final float SCALE = 1.2f;
     private List<String> data;
     private Context context;
 

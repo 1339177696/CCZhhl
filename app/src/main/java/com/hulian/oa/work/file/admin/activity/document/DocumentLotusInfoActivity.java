@@ -1,15 +1,13 @@
 package com.hulian.oa.work.file.admin.activity.document;
 
 import android.annotation.TargetApi;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,18 +18,18 @@ import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.BaseActivity;
 import com.hulian.oa.R;
 import com.hulian.oa.bean.Approve;
+import com.hulian.oa.bean.Approve_qgl;
 import com.hulian.oa.bean.DocumentImage;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
-import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.StatusBarUtil;
-import com.hulian.oa.utils.TimeUtils;
-import com.hulian.oa.views.CircleRelativeLayout;
 import com.hulian.oa.views.MyListView;
 import com.hulian.oa.work.file.admin.activity.document.l_adapter.L_AppProgressAdapter;
+import com.hulian.oa.work.file.admin.activity.document.l_adapter.L_AppProgressAdapter_qgl;
 import com.hulian.oa.work.file.admin.activity.document.l_gallery_adapter.CustomGalleryAdapter;
+import com.hulian.oa.work.file.admin.activity.document.l_gallery_adapter.CustomGalleryAdapter_qgl;
 import com.hulian.oa.work.file.admin.activity.document.l_gallery_adapter.CustomPagerSnapHelper;
 import com.hulian.oa.work.file.admin.activity.document.l_gallery_adapter.GalleryOnScrollListener;
 
@@ -39,6 +37,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -47,7 +46,8 @@ import butterknife.OnClick;
 
 //公文详情-员工端
 public class DocumentLotusInfoActivity extends BaseActivity {
-//    @BindView(R.id.tv_status)
+
+    //    @BindView(R.id.tv_status)
 //    TextView tvStatus;
 //    @BindView(R.id.tv_content)
 //    TextView tvContent;
@@ -58,21 +58,19 @@ public class DocumentLotusInfoActivity extends BaseActivity {
 //    @BindView(R.id.tv_approval)
 //    TextView tvApproval;
     private String offId;
-//    @BindView(R.id.iv_back)
-//    RelativeLayout ivBack;
-//    @BindView(R.id.lv_progress)
-//    MyListView lv_progress;
-//    L_AppProgressAdapter adapter;
+
+    @BindView(R.id.lv_progress)
+    MyListView lv_progress;
+    L_AppProgressAdapter_qgl adapter;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-//    @BindView(R.id.bt_store)
+    //    @BindView(R.id.bt_store)
 //    ImageView bt_store;
 //    @BindView(R.id.cr_collection)
 //    CircleRelativeLayout cr_collection;
-    public CustomGalleryAdapter customAdapter;
-    List<DocumentImage> memberList = new ArrayList<>();
+    public CustomGalleryAdapter_qgl customAdapter;
     List<Object> list = new ArrayList<>();
-    List<Approve> approveContentList = new ArrayList<>();
+    List<Approve_qgl> approveContentList = new ArrayList<>();
     private List<String> networkImages;
     private String create_Time;
     private String app_id;
@@ -82,32 +80,46 @@ public class DocumentLotusInfoActivity extends BaseActivity {
 //    @BindView(R.id.la_un_stop_time)
 //    TextView la_un_stop_time;
 
+    //    qgl
+    @BindView(R.id.iv_back)
+    RelativeLayout ivBack;
+    @BindView(R.id.decument_proname)
+    TextView decument_proname;
+    @BindView(R.id.tv_qgl_number)
+    TextView tvQglNumber;
+    @BindView(R.id.tv_qgl_title)
+    TextView tvQglTitle;
+    @BindView(R.id.tv_shenpi_person)
+    TextView tvShenpiPerson;
+    @BindView(R.id.tv_chaosong_person)
+    TextView tvChaosongPerson;
+    @BindView(R.id.tv_qgl_time)
+    TextView tvQglTime;
+    @BindView(R.id.tv_qgl_file)
+    TextView tvQglFile;
+//    @BindView(R.id.tv_qgl_yijian)
+//    TextView tvQglYijian;
+//    @BindView(R.id.tv_qgl_shijian)
+//    TextView tvQglShijian;
+
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.statusBarLightMode_white(this);
-
         setContentView(R.layout.document_lotus_infor);
         ButterKnife.bind(this);
         offId = getIntent().getStringExtra("offId");
-//        ivBack.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                finish();
-//            }
-//        });
         getNetData();
     }
 
-    private void init(List<DocumentImage> memberList) {
+    private void init(List<String> memberList) {
 //        cr_collection.setColor(getResources().getColor(R.color.color_a_yellow));
 //        cr_collection.setAlhpa(200);
         recyclerView = findViewById(R.id.recyclerView);
         //设置横滑
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         //填充数据
-        customAdapter = new CustomGalleryAdapter(memberList, this);
+        customAdapter = new CustomGalleryAdapter_qgl(memberList, this);
         recyclerView.setAdapter(customAdapter);
         //分页滑动效果
         recyclerView.setOnFlingListener(null);
@@ -120,8 +132,7 @@ public class DocumentLotusInfoActivity extends BaseActivity {
 
     private void getNetData() {
         RequestParams params = new RequestParams();
-        params.put("offId", offId);
-        params.put("uId", SPUtils.get(mContext, "userId", "").toString());
+        params.put("id", offId);
         HttpRequest.postDocumentInfoApi(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -129,42 +140,25 @@ public class DocumentLotusInfoActivity extends BaseActivity {
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-                    create_Time = result.getJSONObject("data").getString("create_Time");
+                    JSONObject data = result.getJSONObject("data");
+                    JSONObject lotus = data.getJSONObject("lotus");
+                    String initiationType = lotus.getString("initiationType");
 
-//                    la_un_start_time.setText(create_Time);
-                    app_id = result.getJSONObject("data").getString("approveringId");
-                    memberList = gson.fromJson(result.getJSONObject("data").getJSONArray("fileList").toString(),
-                            new TypeToken<List<DocumentImage>>() {
-                            }.getType());
-                    init(memberList);
-                    approveContentList = gson.fromJson(result.getJSONObject("data").getJSONArray("approveContentList").toString(),
-                            new TypeToken<List<Approve>>() {
-                            }.getType());
-                    String status = approveContentList.get(approveContentList.size() - 1).getApproveState();
-                    if(result.getJSONObject("data").getString("officialDocumentState").equals("2")){
-//                        tvUpdata.setVisibility(View.VISIBLE);
+                    decument_proname.setText(lotus.getString("createName"));
+                    tvQglNumber.setText(lotus.getString("symbol"));
+                    tvQglTitle.setText(lotus.getString("title"));
+                    tvShenpiPerson.setText(lotus.getString("approverName"));
+                    tvChaosongPerson.setText(lotus.getString("copierName"));
+                    tvQglTime.setText(lotus.getString("createTime"));
+                    String aa = lotus.getString("files");
+                    if (aa!=null&&aa!=""){
+                        List<String> c = Arrays.asList(aa.split(","));
+                        init(c);
                     }
-                    else {
-//                        tvUpdata.setVisibility(View.GONE);
-                    }
-
-
-//                    if (status.equals("1"))
-//                    {
-//                        tvStatus.setText("已通过");
-//                        la_un_stop_time.setText(approveContentList.get(approveContentList.size() - 1).getApptime());
-//                    } else if (status.equals("2")) {
-//                        tvStatus.setText("已拒绝");
-//                        la_un_stop_time.setText(approveContentList.get(approveContentList.size() - 1).getApptime());
-//                    } else {
-//                        tvStatus.setText("进行中");
-//                    }
-//                    if (approveContentList.get(approveContentList.size() - 1).getApproveContent() == null) {
-//                        tvContent.setText("暂无");
-//                    } else {
-//                        tvContent.setText(approveContentList.get(approveContentList.size() - 1).getApproveContent() + "");
-//                    }
-//                    initTimeLine(approveContentList);
+                    approveContentList = gson.fromJson(result.getJSONObject("data").getJSONArray("lotusViceList").toString(),
+                            new TypeToken<List<Approve_qgl>>() {}.getType());
+                    Log.e("11",approveContentList.get(0).getApproverName());
+                    initTimeLine(approveContentList,initiationType);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -179,6 +173,27 @@ public class DocumentLotusInfoActivity extends BaseActivity {
         });
     }
 
+        void initTimeLine(List<Approve_qgl> approveContentList,String initiationType) {
+        //审批进度
+        adapter = new L_AppProgressAdapter_qgl(DocumentLotusInfoActivity.this, approveContentList,initiationType);
+        lv_progress.setAdapter(adapter);
+        lv_progress.setOnTouchListener(new View.OnTouchListener() {
+
+            public boolean onTouch(View v, MotionEvent event) {
+                lv_progress.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+
+
+        lv_progress.setOnTouchListener(new View.OnTouchListener() {
+
+            public boolean onTouch(View v, MotionEvent event) {
+                lv_progress.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+    }
 //    void initTimeLine(List<Approve> approveContentList) {
 //        //审批进度
 //        adapter = new L_AppProgressAdapter(DocumentLotusInfoActivity.this, approveContentList, create_Time, app_id,tvStatus.getText().toString());
@@ -220,4 +235,48 @@ public class DocumentLotusInfoActivity extends BaseActivity {
 //        startActivity(intent);
 //
 //    }
+
+
+//    网络请求里的
+//    create_Time = result.getJSONObject("data").getString("create_Time");
+//
+////                    la_un_start_time.setText(create_Time);
+//    app_id = result.getJSONObject("data").getString("approveringId");
+//    memberList = gson.fromJson(result.getJSONObject("data").getJSONArray("fileList").toString(),
+//                            new TypeToken<List<DocumentImage>>() {
+//    }.getType());
+//    init(memberList);
+//    approveContentList = gson.fromJson(result.getJSONObject("data").getJSONArray("approveContentList").toString(),
+//                            new TypeToken<List<Approve>>() {
+//    }.getType());
+//    String status = approveContentList.get(approveContentList.size() - 1).getApproveState();
+//                    if(result.getJSONObject("data").getString("officialDocumentState").equals("2")){
+////                        tvUpdata.setVisibility(View.VISIBLE);
+//    }
+//                    else {
+////                        tvUpdata.setVisibility(View.GONE);
+//    }
+
+
+//                    if (status.equals("1"))
+//                    {
+//                        tvStatus.setText("已通过");
+//                        la_un_stop_time.setText(approveContentList.get(approveContentList.size() - 1).getApptime());
+//                    } else if (status.equals("2")) {
+//                        tvStatus.setText("已拒绝");
+//                        la_un_stop_time.setText(approveContentList.get(approveContentList.size() - 1).getApptime());
+//                    } else {
+//                        tvStatus.setText("进行中");
+//                    }
+//                    if (approveContentList.get(approveContentList.size() - 1).getApproveContent() == null) {
+//                        tvContent.setText("暂无");
+//                    } else {
+//                        tvContent.setText(approveContentList.get(approveContentList.size() - 1).getApproveContent() + "");
+//                    }
+//                    initTimeLine(approveContentList);
+
+    @OnClick(R.id.iv_back)
+    public void onViewClicked() {
+        finish();
+    }
 }

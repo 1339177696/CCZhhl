@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <!--<ImageView-->
+            <!--android:id="@+id/gw_img33"-->
+            <!--android:layout_width="20dp"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:src="@mipmap/renwu_faqi_icon2" />-->
+        <TextView
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:background="@drawable/l_item_app_progress_qgl_bg"
+            android:id="@+id/gw_img1"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp" />
+
+        <TextView
+            android:id="@+id/tv_qgl_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9dp"
+            android:layout_toRightOf="@+id/gw_img1"
+            android:text="审批时间"
+            android:textColor="#ff313131"
+            android:textSize="14sp" />
+
+
+        <TextView
+            android:id="@+id/tv_qgl_item_stata"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_27"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#CB2121"
+            android:textSize="14sp"
+            />
+
+
+
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/v_xian"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="22dp"
+        android:background="#E3E3E3" />
+    <RelativeLayout
+        android:id="@+id/v_rela"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/gw_img55"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/renwu_faqi_icon2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9dp"
+            android:layout_toRightOf="@+id/gw_img55"
+            android:text="审批意见"
+            android:textColor="#ff313131"
+            android:textSize="14sp" />
+
+
+        <TextView
+            android:id="@+id/tv_qgl_item_yijian"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_27"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#CB2121"
+            android:textSize="14sp"
+            />
+
+
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="22dp"
+        android:background="#E3E3E3" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/gw_img44"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/renwu_faqi_icon2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9dp"
+            android:layout_toRightOf="@+id/gw_img44"
+            android:text="审批时间"
+            android:textColor="#ff313131"
+            android:textSize="14sp" />
+
+
+        <TextView
+            android:id="@+id/tv_qgl_item_time"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_27"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#CB2121"
+            android:textSize="14sp"
+            />
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>
