@@ -60,6 +60,7 @@
 
 
                 <TextView
+                    android:id="@+id/tv_qgl_number"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/dp_27"
                     android:layout_centerVertical="true"
@@ -102,6 +103,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/tv_qgl_title"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/dp_27"
                     android:layout_centerVertical="true"
@@ -143,6 +145,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/tv_shenpi_person"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/dp_27"
                     android:layout_centerVertical="true"
@@ -183,6 +186,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/tv_chaosong_person"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/dp_27"
                     android:layout_centerVertical="true"
@@ -264,6 +268,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/tv_qgl_time"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/dp_27"
                     android:layout_centerVertical="true"
@@ -305,7 +310,7 @@
                     android:textSize="14sp" />
 
                 <TextView
-
+                    android:id="@+id/tv_qgl_file"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/dp_27"
                     android:layout_centerVertical="true"

@@ -29,6 +29,7 @@ import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
+import com.hulian.oa.net.Urls;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.ToastHelper;
 import com.hulian.oa.views.l_flowview.FlowLayoutAdapter;
@@ -49,6 +50,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +60,13 @@ import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 //公文发起
 public class LauncherDocumentActivity extends BaseActivity {
@@ -100,7 +109,7 @@ public class LauncherDocumentActivity extends BaseActivity {
     TextView tv_reaseon;
     List<String> reasonlist = new ArrayList<>();
     private OptionsPickerView reasonPicker;//类型;
-    private String gwtype = "会签";
+    private String gwtype = "1";
     @BindView(R.id.et_number)
     EditText etnumber;
     @Override
@@ -124,6 +133,7 @@ public class LauncherDocumentActivity extends BaseActivity {
         });
         initReason();
         tv_reaseon.setText("会签");
+        getWenHao();
     }
 
     private void initSelectImage() {
@@ -338,7 +348,7 @@ public class LauncherDocumentActivity extends BaseActivity {
                 }
                 String uidname = "";
                 for (People params1 : selectList2) {
-                    uidname += params1.getUserName() + ",";
+                    uidname += params1.getUserName() + "-";
                 }
                 //qgl
                 String csids = "";
@@ -347,7 +357,7 @@ public class LauncherDocumentActivity extends BaseActivity {
                 }
                 String csidname = "";
                 for (People params : selectList3){
-                    csidname += params.getUserName() + ",";
+                    csidname += params.getUserName() + "-";
                 }
 
                 RequestParams params = new RequestParams();
@@ -360,7 +370,7 @@ public class LauncherDocumentActivity extends BaseActivity {
                 params.put("title", etTitle.getText().toString());
                 params.put("approverId", uids.substring(0, uids.length() - 1));
                 params.put("approverName", uidname.substring(0, uidname.length() - 1));
-                params.put("createName",SPUtils.get(mContext, "username", "").toString());
+                params.put("createName",SPUtils.get(mContext, "nickname", "").toString());
                 params.put("copierId",csids.substring(0, csids.length() - 1));
                 params.put("copierName",csidname.substring(0, csidname.length() - 1));
                 params.put("createBy", SPUtils.get(mContext, "userId", "").toString());
@@ -434,7 +444,15 @@ public class LauncherDocumentActivity extends BaseActivity {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 tv_reaseon.setText(reasonlist.get(options1));
-                gwtype = tv_reaseon.getText().toString().trim();
+                if (tv_reaseon.getText().toString().trim().equals("会签"))
+                {
+                    gwtype = "1" ;
+                }
+                else {
+                    gwtype = "0" ;
+
+                }
+
             }
         }).setTitleText("公文类型").setContentTextSize(22).setTitleSize(22).setSubCalSize(21).build();
         reasonPicker.setPicker(reasonlist);
@@ -477,4 +495,41 @@ public class LauncherDocumentActivity extends BaseActivity {
 //            Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
 //        }
 //    });
+
+
+    public void getWenHao()
+    {
+        OkHttpClient okHttpClient=new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .build();
+        Request.Builder builder=new Request.Builder();
+        Request  request=builder.url(Urls.commUrls+"system/lotus/findOffNum").post(body).build();
+        Call call=okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                final String number = response.body().string();
+                new Thread(){
+                    @Override
+                    public void run()
+                    {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                etnumber.setText(number);
+                            }
+                        });
+                        super.run();
+                    }
+                }.start();
+
+            }
+        });
+    }
+
 }

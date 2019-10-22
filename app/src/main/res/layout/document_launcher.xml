@@ -156,6 +156,7 @@
 
 
                     <EditText
+                        android:focusable="false"
                         android:layout_marginRight="@dimen/dp_27"
                         android:id="@+id/et_number"
                         android:layout_width="match_parent"

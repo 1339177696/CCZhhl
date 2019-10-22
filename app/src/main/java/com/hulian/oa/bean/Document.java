@@ -7,6 +7,67 @@ public class Document {
     private String create_Time;
     private String approverIdsNames;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    private String id;
+
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    private String createTime;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    private String title;
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
+    private String symbol;
+
+    public String getInitiationType() {
+        return initiationType;
+    }
+
+    public void setInitiationType(String initiationType) {
+        this.initiationType = initiationType;
+    }
+
+    private String initiationType;
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    private String state;
+
     public String getPromoterIdName() {
         return promoterIdName;
     }

@@ -101,14 +101,11 @@ public class SecondDocumentActivity extends BaseActivity {
         }else {
             //新加的qgl
             fragmentList.add(new QGLWofaqiFragment());
-//            fragmentList.add(new L_PendFragment());
-//            fragmentList.add(new L_ApprovedFragment());
             fragmentList.add(new L_ChaosongmeFragment_qgl());
 
         }
 
         MyViewPageAdapter myViewPageAdapter = new MyViewPageAdapter(getSupportFragmentManager(), titleDatas, fragmentList);
-//        myTablayout.setSelectedTabIndicator(0);
         myViewpager.setAdapter(myViewPageAdapter);
         myTablayout.setupWithViewPager(myViewpager);
         myViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

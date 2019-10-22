@@ -40,14 +40,14 @@ public class L_ChaosongAdapter extends RecyclerView.Adapter <L_ChaosongAdapter.V
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tv_title;
         public TextView tv_time;
-        public TextView tv_roam_person;
-        private ImageView tv_status;
+        public TextView qgl_zy_ysp_jieshi;
+        public TextView qgl_zy_ysp_status;
         public ViewHolder(View itemView) {
             super(itemView);
             tv_title = (TextView) itemView.findViewById(R.id.tv_title);
             tv_time = (TextView) itemView.findViewById(R.id.tv_time);
-            tv_roam_person = (TextView) itemView.findViewById(R.id.tv_roam_person);
-            tv_status=(ImageView) itemView.findViewById(R.id.tv_status);
+            qgl_zy_ysp_jieshi = (TextView) itemView.findViewById(R.id.qgl_zy_ysp_jieshi);
+            qgl_zy_ysp_status = (TextView) itemView.findViewById(R.id.qgl_zy_ysp_status);
         }
     }
 
@@ -60,45 +60,27 @@ public class L_ChaosongAdapter extends RecyclerView.Adapter <L_ChaosongAdapter.V
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(L_ChaosongAdapter.ViewHolder holder, final int position) {
-        holder.tv_title.setText(dataList.get(position).getOfficialDocumentTitle());
-     //   holder.tv_time.setText(TimeUtils.getDateToString(dataList.get(position).getCreate_Time()));
-        holder.tv_time.setText(dataList.get(position).getCreate_Time());
-        holder.tv_roam_person.setText(dataList.get(position).getApproverIdsNames());
+        holder.tv_title.setText(dataList.get(position).getSymbol());
+        holder.tv_time.setText(dataList.get(position).getCreateTime());
+        holder.qgl_zy_ysp_jieshi.setText(dataList.get(position).getTitle());
+        if ("0".equals(dataList.get(position).getState()))
+        {
+            holder.qgl_zy_ysp_status.setText("审批中");
+            holder.qgl_zy_ysp_status.setBackgroundResource(R.drawable.ggl_ysp_btn_bg1);
+        }else if ("1".equals(dataList.get(position).getState())){
+            holder.qgl_zy_ysp_status.setText("已审批");
+            holder.qgl_zy_ysp_status.setBackgroundResource(R.drawable.ggl_ysp_btn_bg1);
 
-        if(!SPUtils.get(mContext,"isLead","").equals("0")){
-            holder.tv_status.setVisibility(View.VISIBLE);
-            if("0".equals(dataList.get(position).getOfficialDocumentState()))
-            {
-//                holder.tv_status.setText("审批中");
-//                holder.tv_status.setTextColor(R.color.bg_yellow);
-                holder.tv_status.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_daishenpi_icon_qgl));
-
-            }
-            else if("1".equals(dataList.get(position).getOfficialDocumentState())) {
-//                holder.tv_status.setText("审批通过");
-//                holder.tv_status.setTextColor(R.color.colorCircle);
-                holder.tv_status.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_shenpi_tongguo_icon_qgl));
-
-            }
-            else if("2".equals(dataList.get(position).getOfficialDocumentState())) {
-//                holder.tv_status.setText("审批不通过");
-//                holder.tv_status.setTextColor(R.color.colorAccent);
-                holder.tv_status.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_bohui_icon_qgl));
-            }
-            else
-            {
-                holder.tv_status.setVisibility(View.GONE);
-            }
-        }
-        else {
-            holder.tv_status.setVisibility(View.GONE);
+        }else if ("2".equals(dataList.get(position).getState())){
+            holder.qgl_zy_ysp_status.setText("已驳回");
+            holder.qgl_zy_ysp_status.setBackgroundResource(R.drawable.ggl_ysp_btn_bg2);
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent();
-                intent.putExtra("offId",dataList.get(position).getOfficialDocumentId());
+                intent.putExtra("offId",dataList.get(position).getId());
 //                if(SPUtils.get(mContext,"isLead","").equals("0")){
 //                    if(!"0".equals(dataList.get(position).getOfficialDocumentState())){
 //                        intent.setClass(mContext, DocumentLotusInfoActivity.class);

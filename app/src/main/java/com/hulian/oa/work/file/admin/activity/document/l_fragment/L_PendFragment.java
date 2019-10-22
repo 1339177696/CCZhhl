@@ -29,6 +29,7 @@ import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -68,7 +69,7 @@ public class L_PendFragment extends Fragment implements PullLoadMoreRecyclerView
         //设置是否可以下拉刷新
         //mPullLoadMoreRecyclerView.setPullRefreshEnable(true);
         //设置是否可以上拉刷新
-        //mPullLoadMoreRecyclerView.setPushRefreshEnable(false);
+        mPullLoadMoreRecyclerView.setPushRefreshEnable(false);
         //显示下拉刷新
         mPullLoadMoreRecyclerView.setRefreshing(true);
         //设置上拉刷新文字
@@ -113,8 +114,8 @@ public class L_PendFragment extends Fragment implements PullLoadMoreRecyclerView
     @Override
     public void onLoadMore() {
         Log.e("wxl", "onLoadMore");
-        mCount = mCount + 1;
-        getData();
+//        mCount = mCount + 1;
+//        getData();
     }
 
     private void setRefresh() {
@@ -124,15 +125,7 @@ public class L_PendFragment extends Fragment implements PullLoadMoreRecyclerView
 
     private void getData() {
         RequestParams params = new RequestParams();
-        params.put("pageStart", mCount * 10 - 9 + "");
-        params.put("pageEnd", mCount * 10 + "");
-        params.put("userId", SPUtils.get(getActivity(), "userId", "").toString());
-        params.put("state", "0");
-        if (SPUtils.get(getActivity(), "isLead", "").equals("0")) {
-            params.put("flag", "1");
-        } else {
-            params.put("flag", "0");
-        }
+        params.put("approverId", SPUtils.get(getActivity(), "userId", "").toString());
         HttpRequest.postDocumentListApi(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -140,16 +133,25 @@ public class L_PendFragment extends Fragment implements PullLoadMoreRecyclerView
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-                    List<Document> memberList = gson.fromJson(result.getJSONArray("data").toString(),
+                    List<Document> memberList = gson.fromJson(result.getJSONArray("rows").toString(),
                             new TypeToken<List<Document>>() {
                             }.getType());
-                    mRecyclerViewAdapter.addAllData(memberList);
+
+                    List<Document> aa = new ArrayList<>();
+                    for (int i = 0;i<=memberList.size()-1;i++){
+                        if (memberList.get(i).getState().equals("0")){
+                            aa.add(memberList.get(i));
+                        }
+                    }
+                    mRecyclerViewAdapter.addAllData(aa);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
+
                     //新修改的qgl
                     AgencyCount mAgencyCount = new AgencyCount();
-                    mAgencyCount.setAgencyCount(memberList.size() + "");
+                    mAgencyCount.setAgencyCount(aa.size() + "");
                     EventBus.getDefault().post(mAgencyCount);
-                    if(memberList.size()==0&&mCount==1){
+
+                    if(aa.size()==0&&mCount==1){
                         emptyBg.setVisibility(View.VISIBLE);
                         mPullLoadMoreRecyclerView.setVisibility(View.GONE);
                     }

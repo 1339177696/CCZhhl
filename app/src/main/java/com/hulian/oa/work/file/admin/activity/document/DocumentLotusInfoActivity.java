@@ -47,28 +47,28 @@ import butterknife.OnClick;
 
 //公文详情-员工端
 public class DocumentLotusInfoActivity extends BaseActivity {
-    @BindView(R.id.tv_status)
-    TextView tvStatus;
-    @BindView(R.id.tv_content)
-    TextView tvContent;
-    @BindView(R.id.tv_updata)
-    TextView tvUpdata;
-    @BindView(R.id.tv_state)
-    TextView tvState;
-    @BindView(R.id.tv_approval)
-    TextView tvApproval;
+//    @BindView(R.id.tv_status)
+//    TextView tvStatus;
+//    @BindView(R.id.tv_content)
+//    TextView tvContent;
+//    @BindView(R.id.tv_updata)
+//    TextView tvUpdata;
+//    @BindView(R.id.tv_state)
+//    TextView tvState;
+//    @BindView(R.id.tv_approval)
+//    TextView tvApproval;
     private String offId;
-    @BindView(R.id.iv_back)
-    RelativeLayout ivBack;
-    @BindView(R.id.lv_progress)
-    MyListView lv_progress;
-    L_AppProgressAdapter adapter;
+//    @BindView(R.id.iv_back)
+//    RelativeLayout ivBack;
+//    @BindView(R.id.lv_progress)
+//    MyListView lv_progress;
+//    L_AppProgressAdapter adapter;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    @BindView(R.id.bt_store)
-    ImageView bt_store;
-    @BindView(R.id.cr_collection)
-    CircleRelativeLayout cr_collection;
+//    @BindView(R.id.bt_store)
+//    ImageView bt_store;
+//    @BindView(R.id.cr_collection)
+//    CircleRelativeLayout cr_collection;
     public CustomGalleryAdapter customAdapter;
     List<DocumentImage> memberList = new ArrayList<>();
     List<Object> list = new ArrayList<>();
@@ -76,11 +76,11 @@ public class DocumentLotusInfoActivity extends BaseActivity {
     private List<String> networkImages;
     private String create_Time;
     private String app_id;
-
-    @BindView(R.id.la_un_start_time)
-    TextView la_un_start_time;
-    @BindView(R.id.la_un_stop_time)
-    TextView la_un_stop_time;
+//
+//    @BindView(R.id.la_un_start_time)
+//    TextView la_un_start_time;
+//    @BindView(R.id.la_un_stop_time)
+//    TextView la_un_stop_time;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -91,18 +91,18 @@ public class DocumentLotusInfoActivity extends BaseActivity {
         setContentView(R.layout.document_lotus_infor);
         ButterKnife.bind(this);
         offId = getIntent().getStringExtra("offId");
-        ivBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+//        ivBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                finish();
+//            }
+//        });
         getNetData();
     }
 
     private void init(List<DocumentImage> memberList) {
-        cr_collection.setColor(getResources().getColor(R.color.color_a_yellow));
-        cr_collection.setAlhpa(200);
+//        cr_collection.setColor(getResources().getColor(R.color.color_a_yellow));
+//        cr_collection.setAlhpa(200);
         recyclerView = findViewById(R.id.recyclerView);
         //设置横滑
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
@@ -131,7 +131,7 @@ public class DocumentLotusInfoActivity extends BaseActivity {
                     JSONObject result = new JSONObject(responseObj.toString());
                     create_Time = result.getJSONObject("data").getString("create_Time");
 
-                    la_un_start_time.setText(create_Time);
+//                    la_un_start_time.setText(create_Time);
                     app_id = result.getJSONObject("data").getString("approveringId");
                     memberList = gson.fromJson(result.getJSONObject("data").getJSONArray("fileList").toString(),
                             new TypeToken<List<DocumentImage>>() {
@@ -142,29 +142,29 @@ public class DocumentLotusInfoActivity extends BaseActivity {
                             }.getType());
                     String status = approveContentList.get(approveContentList.size() - 1).getApproveState();
                     if(result.getJSONObject("data").getString("officialDocumentState").equals("2")){
-                        tvUpdata.setVisibility(View.VISIBLE);
+//                        tvUpdata.setVisibility(View.VISIBLE);
                     }
                     else {
-                        tvUpdata.setVisibility(View.GONE);
+//                        tvUpdata.setVisibility(View.GONE);
                     }
 
 
-                    if (status.equals("1"))
-                    {
-                        tvStatus.setText("已通过");
-                        la_un_stop_time.setText(approveContentList.get(approveContentList.size() - 1).getApptime());
-                    } else if (status.equals("2")) {
-                        tvStatus.setText("已拒绝");
-                        la_un_stop_time.setText(approveContentList.get(approveContentList.size() - 1).getApptime());
-                    } else {
-                        tvStatus.setText("进行中");
-                    }
-                    if (approveContentList.get(approveContentList.size() - 1).getApproveContent() == null) {
-                        tvContent.setText("暂无");
-                    } else {
-                        tvContent.setText(approveContentList.get(approveContentList.size() - 1).getApproveContent() + "");
-                    }
-                    initTimeLine(approveContentList);
+//                    if (status.equals("1"))
+//                    {
+//                        tvStatus.setText("已通过");
+//                        la_un_stop_time.setText(approveContentList.get(approveContentList.size() - 1).getApptime());
+//                    } else if (status.equals("2")) {
+//                        tvStatus.setText("已拒绝");
+//                        la_un_stop_time.setText(approveContentList.get(approveContentList.size() - 1).getApptime());
+//                    } else {
+//                        tvStatus.setText("进行中");
+//                    }
+//                    if (approveContentList.get(approveContentList.size() - 1).getApproveContent() == null) {
+//                        tvContent.setText("暂无");
+//                    } else {
+//                        tvContent.setText(approveContentList.get(approveContentList.size() - 1).getApproveContent() + "");
+//                    }
+//                    initTimeLine(approveContentList);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -179,10 +179,19 @@ public class DocumentLotusInfoActivity extends BaseActivity {
         });
     }
 
-    void initTimeLine(List<Approve> approveContentList) {
-        //审批进度
-        adapter = new L_AppProgressAdapter(DocumentLotusInfoActivity.this, approveContentList, create_Time, app_id,tvStatus.getText().toString());
-        lv_progress.setAdapter(adapter);
+//    void initTimeLine(List<Approve> approveContentList) {
+//        //审批进度
+//        adapter = new L_AppProgressAdapter(DocumentLotusInfoActivity.this, approveContentList, create_Time, app_id,tvStatus.getText().toString());
+//        lv_progress.setAdapter(adapter);
+////        lv_progress.setOnTouchListener(new View.OnTouchListener() {
+////
+////            public boolean onTouch(View v, MotionEvent event) {
+////                lv_progress.getParent().requestDisallowInterceptTouchEvent(true);
+////                return false;
+////            }
+////        });
+//
+//
 //        lv_progress.setOnTouchListener(new View.OnTouchListener() {
 //
 //            public boolean onTouch(View v, MotionEvent event) {
@@ -190,34 +199,25 @@ public class DocumentLotusInfoActivity extends BaseActivity {
 //                return false;
 //            }
 //        });
-
-
-        lv_progress.setOnTouchListener(new View.OnTouchListener() {
-
-            public boolean onTouch(View v, MotionEvent event) {
-                lv_progress.getParent().requestDisallowInterceptTouchEvent(true);
-                return false;
-            }
-        });
-    }
-
-    @OnClick({R.id.cr_collection})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.cr_collection:
-                Toast.makeText(this, "已收藏", Toast.LENGTH_SHORT).show();
-                break;
-        }
-//        startActivity(new Intent(DocumentLotusInfoActivity.this,DocumentLotusActivity.class));
-
-    }
-
-    @OnClick(R.id.tv_updata)
-    public void onViewClicked() {
-      //  startActivity(new Intent(DocumentLotusInfoActivity.this,LauncherDocumentActivity.class));
-        Intent intent=new Intent(DocumentLotusInfoActivity.this,LauncherDocumentActivity.class);
-        intent.putExtra("offid",offId);
-        startActivity(intent);
-
-    }
+//    }
+//
+//    @OnClick({R.id.cr_collection})
+//    public void onViewClicked(View view) {
+//        switch (view.getId()) {
+//            case R.id.cr_collection:
+//                Toast.makeText(this, "已收藏", Toast.LENGTH_SHORT).show();
+//                break;
+//        }
+////        startActivity(new Intent(DocumentLotusInfoActivity.this,DocumentLotusActivity.class));
+//
+//    }
+//
+//    @OnClick(R.id.tv_updata)
+//    public void onViewClicked() {
+//      //  startActivity(new Intent(DocumentLotusInfoActivity.this,LauncherDocumentActivity.class));
+//        Intent intent=new Intent(DocumentLotusInfoActivity.this,LauncherDocumentActivity.class);
+//        intent.putExtra("offid",offId);
+//        startActivity(intent);
+//
+//    }
 }

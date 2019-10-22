@@ -50,33 +50,18 @@ public class L_PendAdapter extends RecyclerView.Adapter<L_PendAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tv_title;
-        public TextView tv_time;
-        public TextView tv_roam_person;
-        public TextView faqi_person;
-        //        qgl注释
-//        private ImageView tv_status;
-        //qgl
+
         private TextView ld_stuas;
         private TextView Leader_tv_title;
         private TextView Leader_tv_time;
         private TextView Leader_tv_wenhao;
-        private RelativeLayout Workers_data;
-        private RelativeLayout Leader_data;
+
 
 
         public ViewHolder(View itemView) {
             super(itemView);
-            tv_title = (TextView) itemView.findViewById(R.id.tv_title);
-            tv_time = (TextView) itemView.findViewById(R.id.tv_time);
-            tv_roam_person = (TextView) itemView.findViewById(R.id.tv_roam_person);
-            faqi_person = (TextView) itemView.findViewById(R.id.faqi_person);
-            //qgl注释
-//            tv_status=(ImageView) itemView.findViewById(R.id.tv_status);
-//            qgl
+
             ld_stuas = (TextView) itemView.findViewById(R.id.ld_stuas);
-            Workers_data = (RelativeLayout) itemView.findViewById(R.id.Workers_data);
-            Leader_data = (RelativeLayout) itemView.findViewById(R.id.Leader_data);
             Leader_tv_title = (TextView) itemView.findViewById(R.id.Leader_tv_title);
             Leader_tv_time = (TextView) itemView.findViewById(R.id.Leader_tv_time);
             Leader_tv_wenhao = (TextView) itemView.findViewById(R.id.Leader_tv_wenhao);
@@ -92,55 +77,25 @@ public class L_PendAdapter extends RecyclerView.Adapter<L_PendAdapter.ViewHolder
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(L_PendAdapter.ViewHolder holder, final int position) {
-        holder.tv_title.setText(dataList.get(position).getOfficialDocumentTitle());
-        holder.tv_time.setText(dataList.get(position).getCreate_Time());
-        holder.tv_roam_person.setText(dataList.get(position).getApproverIdsNames());
-        holder.faqi_person.setText(dataList.get(position).getPromoterIdName());
+        holder.Leader_tv_wenhao.setText(dataList.get(position).getSymbol());
+        holder.Leader_tv_title.setText(dataList.get(position).getTitle());
+        holder.Leader_tv_time.setText(dataList.get(position).getCreateTime());
 
-        //领导
-        holder.Leader_tv_time.setText(dataList.get(position).getCreate_Time());
-        holder.Leader_tv_title.setText(dataList.get(position).getOfficialDocumentTitle());
-
-        if (!SPUtils.get(mContext, "isLead", "").equals("0")) {
-            holder.Workers_data.setVisibility(View.VISIBLE);
-            holder.Leader_data.setVisibility(View.GONE);
-
-
-//            qgl注释的
-//            holder.tv_status.setVisibility(View.VISIBLE);
-            if ("0".equals(dataList.get(position).getOfficialDocumentState())) {
-//                holder.tv_status.setText("审批中");
-//                holder.tv_status.setTextColor(R.color.bg_yellow);
-//                qgl注释的
-//                holder.tv_status.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_daishenpi_icon_qgl));
-
-            } else if ("1".equals(dataList.get(position).getOfficialDocumentState())) {
-//                holder.tv_status.setText("审批通过");
-//                holder.tv_status.setTextColor(R.color.colorCircle);
-//                qgl注释的
-//                holder.tv_status.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_shenpi_tongguo_icon_qgl));
-
-            } else if ("2".equals(dataList.get(position).getOfficialDocumentState())) {
-//                holder.tv_status.setText("审批不通过");
-//                holder.tv_status.setTextColor(R.color.colorAccent);
-//                qgl注释的
-//                holder.tv_status.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_bohui_icon_qgl));
-            } else {
-                //qgl注释
-                //holder.tv_status.setVisibility(View.GONE);
-            }
-        } else {
-            //qgl
-            //holder.tv_status.setVisibility(View.GONE);
-            holder.Workers_data.setVisibility(View.GONE);
-            holder.Leader_data.setVisibility(View.VISIBLE);
+        if ("1".equals(dataList.get(position).getInitiationType())){
+            holder.ld_stuas.setText("会签");
+            holder.ld_stuas.setBackgroundResource(R.drawable.qgl_qp_btn_bg1);
+        }
+        else {
+            holder.ld_stuas.setText("签批");
+            holder.ld_stuas.setBackgroundResource(R.drawable.qgl_qp_btn_bg2);
 
         }
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.putExtra("offId", dataList.get(position).getOfficialDocumentId());
+                intent.putExtra("offId", dataList.get(position).getId());
                 if (SPUtils.get(mContext, "isLead", "").equals("0")) {
                     if (BuildConfig.IsPad) {
                         intent.setClass(mContext, PAD_gongwen_SP.class);

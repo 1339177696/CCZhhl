@@ -170,21 +170,38 @@ public class HttpRequest {
     //  RequestMode.postRequest(Urls.commUrls+"system/officialDocument/publish", params, callback, null);
     RequestMode.postMultipart(Urls.commUrls+"system/workCoordinationReply/add", params, files, callback, null);
   }
-  /**
+//  /**
+//   * 我发起的/我审批的
+//   * @param params 入参
+//   * @param callback 回调接口
+//   */
+//  public static void postDocumentListApi(RequestParams params,  ResponseCallback callback) {
+//     RequestMode.postRequest(Urls.commUrls+"system/officialDocument/getlists", params, callback, null);
+//  }
+  /**qgl
    * 我发起的/我审批的
    * @param params 入参
    * @param callback 回调接口
    */
   public static void postDocumentListApi(RequestParams params,  ResponseCallback callback) {
-     RequestMode.postRequest(Urls.commUrls+"system/officialDocument/getlists", params, callback, null);
+     RequestMode.postRequest(Urls.commUrls+"system/lotus/lotusViceList", params, callback, null);
   }
+//  /**
+//   * 公文详情
+//   * @param params 入参
+//   * @param callback 回调接口
+//   */
+//  public static void postDocumentInfoApi(RequestParams params,  ResponseCallback callback) {
+//    RequestMode.postRequest(Urls.commUrls+"system/officialDocument/getDetail", params, callback, null);
+//  }
   /**
+   * qgl
    * 公文详情
    * @param params 入参
    * @param callback 回调接口
    */
   public static void postDocumentInfoApi(RequestParams params,  ResponseCallback callback) {
-    RequestMode.postRequest(Urls.commUrls+"system/officialDocument/getDetail", params, callback, null);
+    RequestMode.postRequest(Urls.commUrls+"/system/lotus/details", params, callback, null);
   }
   /**
    * 公文审批

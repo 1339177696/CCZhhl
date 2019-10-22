@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +14,22 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.R;
+import com.hulian.oa.bean.Document;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.work.file.admin.activity.document.l_adapter.L_ChaosongAdapter;
+import com.hulian.oa.work.file.admin.activity.document.l_adapter.L_WoFaqiAdapter;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,7 +46,7 @@ public class QGLWofaqiFragment extends Fragment implements PullLoadMoreRecyclerV
     RelativeLayout emptyBg;
     private int mCount = 1;
     private RecyclerView mRecyclerView;
-    private L_ChaosongAdapter l_chaosongAdapter;
+    private L_WoFaqiAdapter l_woFaqiAdapter;
     Unbinder unbinder;
     @Nullable
     @Override
@@ -61,7 +67,7 @@ public class QGLWofaqiFragment extends Fragment implements PullLoadMoreRecyclerV
         //设置是否可以下拉刷新
         //mPullLoadMoreRecyclerView.setPullRefreshEnable(true);
         //设置是否可以上拉刷新
-        //mPullLoadMoreRecyclerView.setPushRefreshEnable(false);
+        mPullLoadMoreRecyclerView.setPushRefreshEnable(false);
         //显示下拉刷新
         mPullLoadMoreRecyclerView.setRefreshing(true);
         //设置上拉刷新文字
@@ -73,16 +79,21 @@ public class QGLWofaqiFragment extends Fragment implements PullLoadMoreRecyclerV
         mPullLoadMoreRecyclerView.setLinearLayout();
 
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
-        l_chaosongAdapter = new L_ChaosongAdapter(getActivity(),"1");
-        mPullLoadMoreRecyclerView.setAdapter(l_chaosongAdapter);
+        l_woFaqiAdapter = new L_WoFaqiAdapter(getActivity(),"1");
+        mPullLoadMoreRecyclerView.setAdapter(l_woFaqiAdapter);
         getData();
     }
 
     @Override
     public void onRefresh() {
-
+        Log.e("wxl", "onRefresh");
+        setRefresh();
+        getData();
     }
-
+    private void setRefresh() {
+        l_woFaqiAdapter.clearData();
+        mCount = 1;
+    }
     @Override
     public void onLoadMore() {
 
@@ -105,8 +116,20 @@ public class QGLWofaqiFragment extends Fragment implements PullLoadMoreRecyclerV
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-
+                    List<Document> memberList = gson.fromJson(result.getJSONArray("rows").toString(),
+                            new TypeToken<List<Document>>() {
+                            }.getType());
+                    l_woFaqiAdapter.addAllData(memberList);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
+
+                    if(memberList.size()==0&&mCount==1){
+                        emptyBg.setVisibility(View.VISIBLE);
+                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
+                    }
+                    else {
+                        emptyBg.setVisibility(View.GONE);
+                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -5,7 +5,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
@@ -14,7 +13,6 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.BaseActivity;
 import com.hulian.oa.R;
 import com.hulian.oa.agency.l_fragment.L_UpcomFragment;
@@ -27,7 +25,7 @@ import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.ToastHelper;
 import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_ApprovedFragment;
 import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_PendFragment;
-import com.hulian.oa.work.file.admin.activity.document.l_gallery_adapter.CustomGalleryAdapter;
+import com.hulian.oa.work.file.admin.activity.document.l_gallery_adapter.CustomGalleryAdapter_qgl;
 import com.hulian.oa.work.file.admin.activity.document.l_gallery_adapter.CustomPagerSnapHelper;
 import com.hulian.oa.work.file.admin.activity.document.l_gallery_adapter.GalleryOnScrollListener;
 
@@ -35,6 +33,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -56,16 +55,27 @@ public class DocumentLotusActivity extends BaseActivity {
     EditText etContent;
     @BindView(R.id.ll_bottom)
     LinearLayout llBottom;
-    private String offId;
-    List<DocumentImage> memberList = new ArrayList<>();
-    private CustomGalleryAdapter adapter;
 
+    private String offId;
+    private CustomGalleryAdapter_qgl adapter;
+//    qgl
     @BindView(R.id.decument_proname)
     TextView decument_proname;
+    @BindView(R.id.tv_qgl_number)
+    TextView tvQglNumber;
+    @BindView(R.id.tv_qgl_title)
+    TextView tvQglTitle;
+    @BindView(R.id.tv_shenpi_person)
+    TextView tvShenpiPerson;
+    @BindView(R.id.tv_chaosong_person)
+    TextView tvChaosongPerson;
+    @BindView(R.id.tv_qgl_time)
+    TextView tvQglTime;
+    @BindView(R.id.tv_qgl_file)
+    TextView tvQglFile;
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.document_lotus);
         ButterKnife.bind(this);
@@ -73,13 +83,9 @@ public class DocumentLotusActivity extends BaseActivity {
         getNetData();
     }
 
-    private void getNetData()
-    {
+    private void getNetData() {
         RequestParams params = new RequestParams();
-        params.put("offId", offId);
-        params.put("uId", SPUtils.get(mContext, "userId", "").toString());
-//        params.put("flag", "1");
-//        params.put("state", "0");
+        params.put("id", offId);
         HttpRequest.postDocumentInfoApi(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -87,11 +93,22 @@ public class DocumentLotusActivity extends BaseActivity {
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-                    memberList = gson.fromJson(result.getJSONObject("data").getJSONArray("fileList").toString(),
-                            new TypeToken<List<DocumentImage>>() {
-                            }.getType());
+                    JSONObject data = result.getJSONObject("data");
+                    JSONObject lotus = data.getJSONObject("lotus");
+                    String aa = lotus.getString("files");
+                    decument_proname.setText(lotus.getString("createName"));
+                    tvQglNumber.setText(lotus.getString("symbol"));
+                    tvQglTitle.setText(lotus.getString("title"));
+                    tvShenpiPerson.setText(lotus.getString("approverName"));
+                    tvChaosongPerson.setText(lotus.getString("copierName"));
+                    tvQglTime.setText(lotus.getString("createTime"));
 
-                    init(memberList);
+
+                    if (aa!=null&&aa!=""){
+                        List<String> c = Arrays.asList(aa.split(","));
+                        init(c);
+                    }
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -111,12 +128,12 @@ public class DocumentLotusActivity extends BaseActivity {
         super.onStart();
     }
 
-    private void init(List<DocumentImage> memberList) {
+    private void init(List<String> memberList) {
         //公文横向滑动
         //设置横滑
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         //填充数据
-        adapter = new CustomGalleryAdapter(memberList, this);
+        adapter = new CustomGalleryAdapter_qgl(memberList, this);
         recyclerView.setAdapter(adapter);
         //分页滑动效果
         recyclerView.setOnFlingListener(null);

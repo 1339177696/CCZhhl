@@ -124,15 +124,7 @@ public class L_ApprovedFragment extends Fragment implements PullLoadMoreRecycler
 
     private void getData() {
         RequestParams params = new RequestParams();
-        params.put("pageStart", mCount * 10 - 9 + "");
-        params.put("pageEnd", mCount * 10 + "");
-        params.put("userId", SPUtils.get(getActivity(), "userId", "").toString());
-        params.put("state", "1");
-        if (SPUtils.get(getActivity(), "isLead", "").equals("0")) {
-            params.put("flag", "1");
-        } else {
-            params.put("flag", "0");
-        }
+        params.put("approverId", SPUtils.get(getActivity(), "userId", "").toString());
         HttpRequest.postDocumentListApi(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -140,23 +132,32 @@ public class L_ApprovedFragment extends Fragment implements PullLoadMoreRecycler
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-                    List<Document> memberList = gson.fromJson(result.getJSONArray("data").toString(),
+                    List<Document> memberList = gson.fromJson(result.getJSONArray("rows").toString(),
                             new TypeToken<List<Document>>() {
                             }.getType());
-                    mRecyclerViewAdapter.addAllData(memberList);
-                    if (memberList.size() == 0 && mCount == 1) {
+
+                    List<Document> aa = new ArrayList<>();
+                    for (int i = 0;i<=memberList.size()-1;i++){
+                        if (!memberList.get(i).getState().equals("0")){
+                            aa.add(memberList.get(i));
+                        }
+                    }
+                    mRecyclerViewAdapter.addAllData(aa);
+                    mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
+
+                    //新修改的qgl
+                    AgencyCountFinish mAgencyCount = new AgencyCountFinish();
+                    mAgencyCount.setAgencyCountFinish(aa.size() + "");
+                    EventBus.getDefault().post(mAgencyCount);
+
+                    if(aa.size()==0&&mCount==1){
                         emptyBg.setVisibility(View.VISIBLE);
                         mPullLoadMoreRecyclerView.setVisibility(View.GONE);
-                    } else {
+                    }
+                    else {
                         emptyBg.setVisibility(View.GONE);
                         mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     }
-                    mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
-                    //新修改的qgl
-                    AgencyCountFinish mAgencyCount = new AgencyCountFinish();
-                    mAgencyCount.setAgencyCountFinish(memberList.size() + "");
-                    EventBus.getDefault().post(mAgencyCount);
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

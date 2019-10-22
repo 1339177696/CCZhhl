@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +69,7 @@ public class L_ChaosongmeFragment_qgl extends Fragment implements PullLoadMoreRe
         //设置是否可以下拉刷新
         //mPullLoadMoreRecyclerView.setPullRefreshEnable(true);
         //设置是否可以上拉刷新
-        //mPullLoadMoreRecyclerView.setPushRefreshEnable(false);
+        mPullLoadMoreRecyclerView.setPushRefreshEnable(false);
         //显示下拉刷新
         mPullLoadMoreRecyclerView.setRefreshing(true);
         //设置上拉刷新文字
@@ -87,12 +88,19 @@ public class L_ChaosongmeFragment_qgl extends Fragment implements PullLoadMoreRe
 
     @Override
     public void onRefresh() {
-
+        Log.e("wxl", "onRefresh");
+        setRefresh();
+        getData();
     }
 
     @Override
     public void onLoadMore() {
 
+    }
+
+    private void setRefresh() {
+        l_chaosongAdapter.clearData();
+        mCount = 1;
     }
 
     @Override
@@ -104,10 +112,7 @@ public class L_ChaosongmeFragment_qgl extends Fragment implements PullLoadMoreRe
 
     private void getData() {
         RequestParams params = new RequestParams();
-//        params.put("pageStart", mCount * 10 - 9 + "");
-//        params.put("pageEnd", mCount * 10 + "");
         params.put("copierId", SPUtils.get(getActivity(), "userId", "").toString());
-//        params.put("state", "0");
         HttpRequest.postChaosongren(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -115,8 +120,20 @@ public class L_ChaosongmeFragment_qgl extends Fragment implements PullLoadMoreRe
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-
+                    List<Document> memberList = gson.fromJson(result.getJSONArray("rows").toString(),
+                            new TypeToken<List<Document>>() {
+                            }.getType());
+                    l_chaosongAdapter.addAllData(memberList);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
+
+                    if(memberList.size()==0&&mCount==1){
+                        emptyBg.setVisibility(View.VISIBLE);
+                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
+                    }
+                    else {
+                        emptyBg.setVisibility(View.GONE);
+                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
