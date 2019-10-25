@@ -38,6 +38,7 @@ import com.hulian.oa.news.adapter.LocalDataAdapter;
 import com.hulian.oa.news.adapter.NewsViewAdapter;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.work.file.admin.activity.PostOrderActivity;
+import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_PendFragment;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -57,6 +58,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import de.greenrobot.event.EventBus;
 
 public class News_1_Fragment extends Fragment implements OnBannerListener, PullLoadMoreRecyclerView.PullLoadMoreListener {
 
@@ -86,7 +88,7 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
         unbinder = ButterKnife.bind(this, rootView);
        // initData();
      //   initView();
-
+        EventBus.getDefault().register(this);
         initList();
         return rootView;
     }
@@ -169,6 +171,8 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        EventBus.getDefault().unregister(this);
+
     }
 
     @OnClick(R.id.banner)
@@ -179,7 +183,6 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
     public void OnBannerClick(int position) {
      //   Toast.makeText(getActivity(), "你点了第" + (position + 1) + "张轮播图", Toast.LENGTH_SHORT).show();
     }
-
 
     @Override
     public void onRefresh() {
@@ -251,24 +254,8 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
         }
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.e("11111","11111");
+    public void onEventMainThread(News_1_Fragment event) {
+        onRefresh();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.e("22222","22222");
-
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-
-        Log.e("33333","333333");
-
-    }
 }

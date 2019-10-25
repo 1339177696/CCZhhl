@@ -45,6 +45,7 @@ public class L_CompletedTaskAdapter extends RecyclerView.Adapter <L_CompletedTas
         public TextView tv_deadline_time;
         public TextView tv_deadline_week;
         public TextView tv_comp_launch_task_person;
+        public TextView qgl_zy_ysp_status;
         public ImageView iv_image;
         public ViewHolder(View itemView) {
             super(itemView);
@@ -53,6 +54,7 @@ public class L_CompletedTaskAdapter extends RecyclerView.Adapter <L_CompletedTas
             tv_deadline_time = (TextView) itemView.findViewById(R.id.tv_comp_deadline_time);
 //            tv_deadline_week = (TextView) itemView.findViewById(R.id.tv_comp_deadline_week);
             tv_comp_launch_task_person = (TextView) itemView.findViewById(R.id.tv_comp_launch_task_person);
+            qgl_zy_ysp_status = (TextView) itemView.findViewById(R.id.qgl_zy_ysp_status);
             iv_image=itemView.findViewById(R.id.iv_image);
         }
     }
@@ -67,11 +69,15 @@ public class L_CompletedTaskAdapter extends RecyclerView.Adapter <L_CompletedTas
     @Override
     public void onBindViewHolder(L_CompletedTaskAdapter.ViewHolder holder, final int position) {
         holder.tv_title.setText(dataList.get(position).getTitle());
+        if (dataList.get(position).getCompletion().equals("2")){
+            holder.qgl_zy_ysp_status.setVisibility(View.VISIBLE);
+        }
         //holder.tv_time.setText(dataList.get(position).getStartTime());
         //        开始时间
         String b = dataList.get(position).getStartTime();
         String c = getDataaa(b);
         holder.tv_time.setText(c);
+
 
         //   截止时间
         String a = dataList.get(position).getEndTime();

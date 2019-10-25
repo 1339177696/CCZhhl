@@ -63,6 +63,7 @@
 
 
             <TextView
+                android:id="@+id/tv_pd_number"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/dp_27"
                 android:layout_centerVertical="true"
@@ -563,6 +564,7 @@
             android:src="@mipmap/document_annex_icon_qgl" />
 
         <TextView
+
             android:id="@+id/gw_text1111"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -575,13 +577,16 @@
 
         <TextView
 
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:maxEms="15"
+            android:id="@+id/tv_pd_filename"
+            android:textColor="#085DD6"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/dp_27"
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="zhangmingjuan8801.doc"
-            android:textColor="#676767"
             android:textSize="14sp"
             />
 

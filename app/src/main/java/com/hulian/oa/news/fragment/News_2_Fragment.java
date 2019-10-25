@@ -44,6 +44,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import de.greenrobot.event.EventBus;
 
 public class News_2_Fragment extends Fragment implements PullLoadMoreRecyclerView.PullLoadMoreListener{
 
@@ -62,6 +63,7 @@ public class News_2_Fragment extends Fragment implements PullLoadMoreRecyclerVie
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fra_news_2, null);
         unbinder = ButterKnife.bind(this, view);
+        EventBus.getDefault().register(this);
         initList();
         return view;
     }
@@ -99,6 +101,7 @@ public class News_2_Fragment extends Fragment implements PullLoadMoreRecyclerVie
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        EventBus.getDefault().unregister(this);
     }
 
 
@@ -149,5 +152,9 @@ public class News_2_Fragment extends Fragment implements PullLoadMoreRecyclerVie
             }
         });
 
+    }
+
+    public void onEventMainThread(News_2_Fragment event) {
+        onRefresh();
     }
 }

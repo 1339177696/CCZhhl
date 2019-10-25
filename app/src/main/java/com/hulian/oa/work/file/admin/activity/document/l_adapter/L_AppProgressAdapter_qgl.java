@@ -50,6 +50,7 @@ public class L_AppProgressAdapter_qgl extends BaseAdapter {
             viewHolder.tv_qgl_item_name = convertView.findViewById(R.id.tv_qgl_item_name);
             viewHolder.tv_qgl_item_stata = convertView.findViewById(R.id.tv_qgl_item_stata);
             viewHolder.tv_qgl_item_time = convertView.findViewById(R.id.tv_qgl_item_time);
+            viewHolder.tv_qgl_item_yijian = convertView.findViewById(R.id.tv_qgl_item_yijian);
             viewHolder.gw_img1 = convertView.findViewById(R.id.gw_img1);
             viewHolder.v_rela = convertView.findViewById(R.id.v_rela);
             viewHolder.v_xian = convertView.findViewById(R.id.v_xian);
@@ -71,6 +72,7 @@ public class L_AppProgressAdapter_qgl extends BaseAdapter {
         viewHolder.tv_qgl_item_name.setText(dataList.get(position).getApproverName());
         viewHolder.gw_img1.setText(dataList.get(position).getApproverName().substring(0,1));
         viewHolder.tv_qgl_item_time.setText(dataList.get(position).getApproverTime());
+        viewHolder.tv_qgl_item_yijian.setText(dataList.get(position).getApproverOpinion());
         if ("0".equals(dataList.get(position).getState())){
             viewHolder.tv_qgl_item_stata.setText("待审批");
         }else if ("1".equals(dataList.get(position).getState())){
@@ -86,6 +88,7 @@ public class L_AppProgressAdapter_qgl extends BaseAdapter {
         public TextView tv_qgl_item_name;
         public TextView tv_qgl_item_stata;
         public TextView tv_qgl_item_time;
+        public TextView tv_qgl_item_yijian;
         public TextView gw_img1;
         public TextView v_xian;
         public RelativeLayout v_rela;

@@ -17,6 +17,8 @@ import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
+import com.hulian.oa.news.fragment.News_1_Fragment;
+import com.hulian.oa.news.fragment.News_2_Fragment;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.ToastHelper;
 import com.hulian.oa.utils.URLImageParser;
@@ -48,6 +50,8 @@ public class NoticeParticularsActivity extends BaseActivity {
     String isCollect;
     @BindView(R.id.bt_store)
     ImageView btStore;
+    private String Type = "";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,9 +62,12 @@ public class NoticeParticularsActivity extends BaseActivity {
         EventBus.getDefault().register(this);
         ButterKnife.bind(this);
         //新改的判断收藏qgl
-        if (isCollect.equals("0")) {
+        if (isCollect.equals("0"))
+        {
             btStore.setBackgroundResource(R.mipmap.ic_store);
-        } else if (isCollect.equals("1")) {
+
+        }
+        else if (isCollect.equals("1")){
             btStore.setBackgroundResource(R.mipmap.ic_store_sel);
         }
         getData();
@@ -99,25 +106,40 @@ public class NoticeParticularsActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
+                EventBus.getDefault().post(new News_2_Fragment());
                 finish();
                 break;
             case R.id.rl_title:
+                EventBus.getDefault().post(new News_2_Fragment());
                 finish();
                 break;
             case R.id.bt_store:
+
                 if (isCollect.equals("0"))
                 {
-                    RequestParams params1 = new RequestParams();
-                    params1.put("collectTypeId", noticeId);
-                    params1.put("collectType", "1");
-                    params1.put("collectUserId", SPUtils.get(mContext, "userId", "").toString());
+                    btStore.setBackgroundResource(R.mipmap.ic_store_sel);
+                    Type = "Y";
+                    isCollect = "1";
+                }
+                else if (isCollect.equals("1")){
+                    btStore.setBackgroundResource(R.mipmap.ic_store);
+                    Type = "N";
+                    isCollect = "0";
+
+                }
+
+                RequestParams params1 = new RequestParams();
+                params1.put("collectType","1");
+                params1.put("collectUserId", SPUtils.get(mContext, "userId", "").toString());
+                params1.put("collectTypeId",noticeId);
+                params1.put("isCollect",Type);
                     HttpRequest.postStoreSenCommApi(params1, new ResponseCallback() {
                         @Override
                         public void onSuccess(Object responseObj) {
                             try {
                                 JSONObject result = new JSONObject(responseObj.toString());
                                 ToastHelper.showToast(mContext, result.getString("msg"));
-                                btStore.setBackgroundResource(R.mipmap.ic_store_sel);
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -127,9 +149,6 @@ public class NoticeParticularsActivity extends BaseActivity {
                         public void onFailure(OkHttpException failuer) {
                         }
                     });
-                }else if (isCollect.equals("1")){
-
-                }
 
                 break;
         }

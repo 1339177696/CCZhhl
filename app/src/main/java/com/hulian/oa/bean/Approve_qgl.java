@@ -33,6 +33,16 @@ public class Approve_qgl {
 
     private String approverTime;
 
+    public String getApproverOpinion() {
+        return approverOpinion;
+    }
+
+    public void setApproverOpinion(String approverOpinion) {
+        this.approverOpinion = approverOpinion;
+    }
+
+    private String approverOpinion;
+
 
 
 }

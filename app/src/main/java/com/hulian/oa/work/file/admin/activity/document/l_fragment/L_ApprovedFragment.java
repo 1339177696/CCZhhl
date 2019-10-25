@@ -78,7 +78,7 @@ public class L_ApprovedFragment extends Fragment implements PullLoadMoreRecycler
         //设置是否可以下拉刷新
         //mPullLoadMoreRecyclerView.setPullRefreshEnable(true);
         //设置是否可以上拉刷新
-        //mPullLoadMoreRecyclerView.setPushRefreshEnable(false);
+        mPullLoadMoreRecyclerView.setPushRefreshEnable(false);
         //显示下拉刷新
         mPullLoadMoreRecyclerView.setRefreshing(true);
         //设置上拉刷新文字
@@ -118,8 +118,8 @@ public class L_ApprovedFragment extends Fragment implements PullLoadMoreRecycler
     }
 
     private void setRefresh() {
-        mRecyclerViewAdapter.clearData();
-        mCount = 1;
+//        mRecyclerViewAdapter.clearData();
+//        mCount = 1;
     }
 
     private void getData() {

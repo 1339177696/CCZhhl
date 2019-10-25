@@ -379,6 +379,11 @@ public class LauncherDocumentActivity extends BaseActivity {
                 for (LocalMedia imgurl : selectList) {
                     fils.add(new File(imgurl.getPath()));
                 }
+                for (String fileurl : fileList) {
+                    fils.add(new File(fileurl));
+
+                }
+
                 showDialogLoading();
                 HttpRequest.postDocumentSendApi(params, fils, new ResponseCallback() {
                     @Override

@@ -43,12 +43,14 @@ public class L_CopymeTaskAdapter extends RecyclerView.Adapter <L_CopymeTaskAdapt
         public TextView tv_time;
         public TextView tv_deadline_time;
         public TextView tv_comp_task_person;
+        public TextView qgl_zy_ysp_status;
         public ViewHolder(View itemView) {
             super(itemView);
             tv_title = (TextView) itemView.findViewById(R.id.tv_compy_title);
             tv_time = (TextView) itemView.findViewById(R.id.tv_comp_time);
             tv_deadline_time = (TextView) itemView.findViewById(R.id.tv_comp_deadline_time);
             tv_comp_task_person = (TextView) itemView.findViewById(R.id.tv_comp_task_person);
+            qgl_zy_ysp_status = (TextView) itemView.findViewById(R.id.qgl_zy_ysp_status);
         }
     }
 
@@ -62,6 +64,9 @@ public class L_CopymeTaskAdapter extends RecyclerView.Adapter <L_CopymeTaskAdapt
     @Override
     public void onBindViewHolder(L_CopymeTaskAdapter.ViewHolder holder, final int position) {
         holder.tv_title.setText(dataList.get(position).getTitle());
+        if (dataList.get(position).getCompletion().equals("2")){
+            holder.qgl_zy_ysp_status.setVisibility(View.VISIBLE);
+        }
 //        开始时间
         String b = dataList.get(position).getStartTime();
         String c = getDataaa(b);

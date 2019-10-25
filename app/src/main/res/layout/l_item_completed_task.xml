@@ -128,6 +128,20 @@
                 android:textSize="@dimen/sp_12" />
         </RelativeLayout>
 
+        <TextView
+            android:textColor="@color/white"
+            android:background="@drawable/ggl_ysp_btn_bg1"
+            android:layout_marginTop="@dimen/dp_5"
+            android:gravity="center"
+            android:layout_marginRight="@dimen/dp_14"
+            android:id="@+id/qgl_zy_ysp_status"
+            android:visibility="gone"
+            android:textSize="@dimen/sp_11"
+            android:layout_gravity="right"
+            android:text="已关闭"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_21" />
+
     </LinearLayout>
 
     <ImageView

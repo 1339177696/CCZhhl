@@ -58,13 +58,21 @@ public class HttpRequest {
   public static void postNesSenCommApi(RequestParams params, ResponseCallback callback) {
     RequestMode.postRequest(Urls.commUrls+"system/journalismComment/commentJournalism", params, callback, null);
   }
+//  /**
+//   * 收藏
+//   * @param params 入参
+//   * @param callback 回调接口
+//   */
+//  public static void postStoreSenCommApi(RequestParams params, ResponseCallback callback) {
+//    RequestMode.postRequest(Urls.commUrls+"system/collectData/saveCollectInfo", params, callback, null);
+//  }
   /**
-   * 收藏
+   * 收藏qgl
    * @param params 入参
    * @param callback 回调接口
    */
   public static void postStoreSenCommApi(RequestParams params, ResponseCallback callback) {
-    RequestMode.postRequest(Urls.commUrls+"system/collectData/saveCollectInfo", params, callback, null);
+    RequestMode.postRequest(Urls.commUrls+"system/collectData/collectXwOrGg", params, callback, null);
   }
   /**
    * 点赞
@@ -168,7 +176,7 @@ public class HttpRequest {
    */
   public static void post_workCoordinationReply_add(RequestParams params, List<File> files, ResponseCallback callback) {
     //  RequestMode.postRequest(Urls.commUrls+"system/officialDocument/publish", params, callback, null);
-    RequestMode.postMultipart(Urls.commUrls+"system/workCoordinationReply/add", params, files, callback, null);
+    RequestMode.postMultipart_qgl(Urls.commUrls+"system/workCoordinationReply/add", params, files, callback, null);
   }
 //  /**
 //   * 我发起的/我审批的
@@ -203,13 +211,21 @@ public class HttpRequest {
   public static void postDocumentInfoApi(RequestParams params,  ResponseCallback callback) {
     RequestMode.postRequest(Urls.commUrls+"/system/lotus/details", params, callback, null);
   }
-  /**
-   * 公文审批
+//  /**
+//   * 公文审批
+//   * @param params 入参
+//   * @param callback 回调接口
+//   */
+//  public static void postDocumentApproveApi(RequestParams params,  ResponseCallback callback) {
+//    RequestMode.postRequest(Urls.commUrls+"system/officialDocument/approve", params, callback, null);
+//  }
+ /**
+   * 公文审批 qgl
    * @param params 入参
    * @param callback 回调接口
    */
   public static void postDocumentApproveApi(RequestParams params,  ResponseCallback callback) {
-    RequestMode.postRequest(Urls.commUrls+"system/officialDocument/approve", params, callback, null);
+    RequestMode.postRequest(Urls.commUrls+"system/lotus/lotusApprove", params, callback, null);
   }
   /**
    * 查询部门人员
@@ -568,6 +584,18 @@ public class HttpRequest {
     public static void postWoFaqi(RequestParams params,  ResponseCallback callback){
         RequestMode.postRequest(Urls.commUrls+"system/lotus/list", params, callback, null);
     }
+
+
+/**
+     * 新加的任务取消
+     * @param params
+     * @param callback
+     */
+    public static void postCancelTask(RequestParams params,  ResponseCallback callback){
+        RequestMode.postRequest(Urls.commUrls+"system/workCoordinationRelease/cancelTask", params, callback, null);
+    }
+
+
 
     //测试12
 }

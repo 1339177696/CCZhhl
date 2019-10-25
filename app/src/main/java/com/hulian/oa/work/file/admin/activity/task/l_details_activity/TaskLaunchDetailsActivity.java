@@ -96,7 +96,8 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
     @BindView(R.id.iv_back)
     FrameLayout iv_back;
 
-
+    @BindView(R.id.tv_off)
+    TextView tv_off;
     private List<String> selectList1 = new ArrayList<>();
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -165,7 +166,7 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
 
     }
 
-    @OnClick({R.id.tv_launch_send, R.id.iv_back, R.id.iv_btn,R.id.file_btn})
+    @OnClick({R.id.tv_launch_send, R.id.iv_back, R.id.iv_btn,R.id.file_btn,R.id.tv_off})
     public void onViewClicked(View view)
     {
         switch (view.getId()) {
@@ -181,6 +182,10 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
             case R.id.file_btn:
                 //文件选择器  过滤条件在 DefaultSelectorActivity.onPermissionSuccess 中添加
                 DefaultSelectorActivity.startActivityForResult(this, false, true, 3);
+                break;
+            case R.id.tv_off:
+                tv_off.setVisibility(View.GONE);
+                getCancelTask();
                 break;
         }
     }
@@ -227,12 +232,20 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
                     laUnStopTime.setText(b.replace("-","/"));
                     String sum = result.getJSONObject("data").getString("sum");
                     huifu_bean_x.setSum(sum);
-                    if (huifu_bean_x.getCompletion().equals("1")) {
+
+                    String A = huifu_bean_x.getCompletion();
+                    if (huifu_bean_x.getCompletion().equals("0")){
+                        iv_btn.setVisibility(View.INVISIBLE);
+                        tv_off.setVisibility(View.VISIBLE);
+                    }else if (huifu_bean_x.getCompletion().equals("1")) {
                         launch_rela_huifu.setVisibility(View.GONE);
-                        iv_btn.setVisibility(View.GONE);
+                        iv_btn.setVisibility(View.INVISIBLE);
+                        tv_off.setVisibility(View.GONE);
                     } else {
                         launch_rela_huifu.setVisibility(View.VISIBLE);
-                        iv_btn.setVisibility(View.GONE);
+                        iv_btn.setVisibility(View.INVISIBLE);
+                        tv_off.setVisibility(View.GONE);
+
                     }
 
                     mRecyclerViewAdapter.addAllData(list, huifu_bean_x);
@@ -411,7 +424,6 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
     }
 
 
-
     private void printData(ArrayList<String> list) {
         if (FileSelectorUtils.isEmpty(list)) {
             return;
@@ -466,5 +478,32 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
 //                Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
 //            }
 //        });
+    }
+
+//    取消任务
+
+    public void getCancelTask(){
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        HttpRequest.postCancelTask(params, new ResponseCallback() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                //需要转化为实体对象
+                try {
+                    JSONObject result = new JSONObject(responseObj.toString());
+                    JSONObject obj = new JSONObject(result.toString());
+                    String msg = obj.getString("msg");
+                    Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(OkHttpException failuer) {
+                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
+                Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

@@ -29,10 +29,12 @@ import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.news.adapter.NewsCommentdapter;
+import com.hulian.oa.news.fragment.News_1_Fragment;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.TimeUtils;
 import com.hulian.oa.utils.ToastHelper;
 import com.hulian.oa.utils.URLImageParser;
+import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_PendFragment;
 import com.hulian.oa.work.file.admin.activity.task.l_details_activity.TaskUndoneDetailsActivity;
 import com.netease.nim.avchatkit.common.util.TimeUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -81,8 +83,8 @@ public class NewsActivityInfo extends BaseActivity {
     NewsCommentdapter mRecyclerViewAdapter;
     private News newsA;
     List<JournalismComments> memberList=new ArrayList<>();
-
     private String isCollect;
+    private String Type = "";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,6 +104,7 @@ public class NewsActivityInfo extends BaseActivity {
         if (isCollect.equals("0"))
         {
             btStore.setBackgroundResource(R.mipmap.ic_store);
+
         }
         else if (isCollect.equals("1")){
             btStore.setBackgroundResource(R.mipmap.ic_store_sel);
@@ -222,9 +225,11 @@ public class NewsActivityInfo extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
+                EventBus.getDefault().post(new News_1_Fragment());
                 finish();
                 break;
             case R.id.rl_title:
+                EventBus.getDefault().post(new News_1_Fragment());
                 finish();
                 break;
             case R.id.bt_comment:
@@ -260,17 +265,30 @@ public class NewsActivityInfo extends BaseActivity {
                 scrollable.scrollTo(0,0);
                 break;
             case R.id.bt_store:
+                if (isCollect.equals("0"))
+                {
+                    btStore.setBackgroundResource(R.mipmap.ic_store_sel);
+                    Type = "Y";
+                    isCollect = "1";
+                }
+                else if (isCollect.equals("1")){
+                    btStore.setBackgroundResource(R.mipmap.ic_store);
+                    Type = "N";
+                    isCollect = "0";
+
+                }
                 RequestParams params1 = new RequestParams();
-                params1.put("collectTypeId", newsA.getJournalismId());
                 params1.put("collectType","0");
                 params1.put("collectUserId", SPUtils.get(mContext, "userId", "").toString());
+                params1.put("collectTypeId", newsA.getJournalismId());
+                params1.put("isCollect",Type);
                 HttpRequest.postStoreSenCommApi(params1, new ResponseCallback() {
                     @Override
                     public void onSuccess(Object responseObj) {
                         try {
                             JSONObject result = new JSONObject(responseObj.toString());
                             ToastHelper.showToast(mContext, result.getString("msg"));
-                            btStore.setBackgroundResource(R.mipmap.ic_store_sel);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

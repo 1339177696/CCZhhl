@@ -51,11 +51,19 @@ public class RequestMode {
   }
 
   /**
-   * 表单和媒体 图文混合
+   * 表单和媒体 图文混合qgl
    */
   public static void postMultipart(String url, RequestParams params,
       List<File> files, ResponseCallback callback, Class<?> clazz) {
     CommonOkHttpClient.post(CommonRequest.createMultipartRequest_qgl(url, params, files),
+        new ResposeDataHandle(callback, clazz));
+  }
+/**
+   * 表单和媒体 图文混合
+   */
+  public static void postMultipart_qgl(String url, RequestParams params,
+      List<File> files, ResponseCallback callback, Class<?> clazz) {
+    CommonOkHttpClient.post(CommonRequest.createMultipartRequest(url, params, files),
         new ResposeDataHandle(callback, clazz));
   }
 
