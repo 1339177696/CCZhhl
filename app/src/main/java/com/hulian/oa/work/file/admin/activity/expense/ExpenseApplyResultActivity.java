@@ -1,7 +1,9 @@
 package com.hulian.oa.work.file.admin.activity.expense;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -18,6 +20,7 @@ import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
+import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.work.file.admin.activity.document.l_adapter.FullyGridLayoutManager;
 import com.hulian.oa.work.file.admin.activity.leave.LeaveHistoryActivity;
 import com.hulian.oa.work.file.admin.activity.leave.l_adapter.LeaveResultAdapter;
@@ -60,8 +63,8 @@ public class ExpenseApplyResultActivity extends BaseActivity {
     @BindView(R.id.tv_expense_money)
     TextView tv_expense_money;
     //报销时间
-    @BindView(R.id.tv_expense_time)
-    TextView tv_expense_time;
+//    @BindView(R.id.tv_expense_time)
+//    TextView tv_expense_time;
     //报销时间
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -74,9 +77,15 @@ public class ExpenseApplyResultActivity extends BaseActivity {
     //图片放大预览测试
     private String[] images = {
     };
+
+    @BindView(R.id.tv_start)
+    TextView tv_start;
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StatusBarUtil.statusBarLightMode_white(this);
         setContentView(R.layout.work_expense_result);
         ButterKnife.bind(this);
         //领导
@@ -102,7 +111,7 @@ public class ExpenseApplyResultActivity extends BaseActivity {
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
                     tv_approved_person.setText(result.getJSONObject("data").getString("approver"));
-                    String status=result.getJSONObject("data").getString("state");
+                    String status = result.getJSONObject("data").getString("state");
                     if (status.equals("1")) {
                         tv_approved_state.setText("已审批");
                     } else if (status.equals("2")) {
@@ -111,16 +120,24 @@ public class ExpenseApplyResultActivity extends BaseActivity {
                         tv_approved_state.setText("待审批");
                     }
 
-                    if(result.getJSONObject("data").getString("approvalTime")!="null"){
+                    if (result.getJSONObject("data").getString("createTime") != "null") {
+                        tv_start.setText(result.getJSONObject("data").getString("createTime").split(" ")[0]);
+                    } else {
+                        tv_start.setText("暂无");
+
+                    }
+
+                    if (result.getJSONObject("data").getString("approvalTime") != "null") {
                         tv_approved_time.setText(result.getJSONObject("data").getString("approvalTime").split(" ")[0]);
+                    } else {
+                        tv_approved_time.setText("暂无");
                     }
-                    else {
-                        tv_approved_time.setText("");
-                    }
+
+
                     tv_expense_title.setText(result.getJSONObject("data").getString("remark"));
                     tv_expense_reason.setText(result.getJSONObject("data").getString("cause"));
                     tv_expense_money.setText(result.getJSONObject("data").getString("money"));
-                    if(!result.getJSONObject("data").getString("picture").equals("null")) {
+                    if (!result.getJSONObject("data").getString("picture").equals("null")) {
                         images = result.getJSONObject("data").getString("picture").split(",");
                         init(images);
                     }
@@ -137,23 +154,24 @@ public class ExpenseApplyResultActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.tv_check_history,R.id.iv_back})
+    @OnClick({R.id.tv_check_history, R.id.iv_back})
     public void onViewClicked(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.tv_check_history:
-                Intent itent=new Intent();
-                itent.putExtra("id",getIntent().getStringExtra("createByid"));
+                Intent itent = new Intent();
+                itent.putExtra("id", getIntent().getStringExtra("createByid"));
                 startActivity(new Intent(mContext, ExpenseHistoryActivity.class));
                 break;
             case R.id.iv_back:
-                 finish();
+                finish();
                 break;
         }
 
     }
+
     //初始化图片信息
     private void init(String[] images) {
-        for (int i=0;i<images.length;i++){
+        for (int i = 0; i < images.length; i++) {
             LocalMedia localMedia = new LocalMedia();
             localMedia.setPath(images[i]);
             selectList.add(localMedia);
@@ -175,7 +193,7 @@ public class ExpenseApplyResultActivity extends BaseActivity {
                 intent.putExtra(PictureConfig.EXTRA_POSITION, position);
                 mContext.startActivity(intent);
             }
-        }) ;
+        });
 
     }
 }

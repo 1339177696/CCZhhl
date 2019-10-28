@@ -17,7 +17,7 @@
             android:layout_width="@dimen/dp_20"
             android:id="@+id/iv_back"
             android:layout_centerVertical="true"
-            android:background="@mipmap/ic_left"
+            android:background="@mipmap/ic_left_white"
             android:layout_height="@dimen/dp_20" />
         <TextView
             android:id="@+id/picture_title"
