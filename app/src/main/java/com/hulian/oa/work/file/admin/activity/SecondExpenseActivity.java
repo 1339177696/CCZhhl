@@ -64,9 +64,13 @@ public class SecondExpenseActivity extends BaseActivity {
         //领导
         if (SPUtils.get(mContext, "isLead", "").equals("0")) {
             tv_apply.setVisibility(View.GONE);
-            titleDatas.add("待审批");
-            titleDatas.add("已审批");
+//            titleDatas.add("待审批");
+//            titleDatas.add("已审批");
+            titleDatas.add("我发起的");
+            titleDatas.add("我审批的");
+            titleDatas.add("抄送我的");
             fragmentList.add(new ExpensePendFragment());
+            fragmentList.add(new ExpenseApprovedFragment());
             fragmentList.add(new ExpenseApprovedFragment());
         }
         //员工
@@ -81,9 +85,10 @@ public class SecondExpenseActivity extends BaseActivity {
     }
     private void init() {
         MyViewPageAdapter myViewPageAdapter = new MyViewPageAdapter(getSupportFragmentManager(), titleDatas, fragmentList);
-        myTablayout.setSelectedTabIndicator(0);
+//        myTablayout.setSelectedTabIndicator(0);
         myViewpager.setAdapter(myViewPageAdapter);
         myTablayout.setupWithViewPager(myViewpager);
+
     }
     @OnClick({R.id.tv_apply,R.id.iv_back})
     public void onViewClicked(View view) {

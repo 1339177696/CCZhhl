@@ -37,8 +37,8 @@
         </RelativeLayout>
 
         <FrameLayout
-            android:paddingLeft="@dimen/dp_80"
-            android:paddingRight="@dimen/dp_80"
+            android:paddingLeft="@dimen/dp_40"
+            android:paddingRight="@dimen/dp_40"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

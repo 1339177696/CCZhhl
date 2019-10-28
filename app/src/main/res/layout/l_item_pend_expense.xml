@@ -5,15 +5,18 @@
     android:layout_marginLeft="@dimen/dp_10"
     android:layout_marginRight="@dimen/dp_10"
     android:layout_marginTop="@dimen/dp_10"
-    android:background="#ffffff"
+    android:background="@drawable/liner_border_gb_qgl"
     android:layout_height="@dimen/dp_105">
     <ImageView
         android:id="@+id/iv_remind"
-        android:layout_width="@dimen/dp_2"
-        android:layout_height="match_parent"
-        android:background="@drawable/l_collection_notice_bg"
-        />
+        android:layout_width="@dimen/dp_9"
+        android:layout_height="@dimen/dp_9"
+        android:layout_marginLeft="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_27"
+        android:background="@drawable/liner_yuan_qgl1" />
     <LinearLayout
+        android:layout_marginLeft="@dimen/dp_18"
+        android:layout_marginTop="@dimen/dp_25"
         android:layout_toRightOf="@id/iv_remind"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -63,25 +66,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/color_a_gray"
-            android:paddingLeft="@dimen/dp_10"
-            android:layout_marginTop="@dimen/dp_5"
-            >
-            <TextView
-                android:id="@+id/tv_pend"
-                android:gravity="center"
-                android:text="待审批"
-                android:textColor="@color/white"
-                android:layout_alignParentRight="true"
-                android:layout_width="@dimen/dp_80"
-                android:layout_height="match_parent"
-                android:background="@color/color_a_blue"
-                />
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@color/color_a_gray"-->
+            <!--android:paddingLeft="@dimen/dp_10"-->
+            <!--android:layout_marginTop="@dimen/dp_5"-->
+            <!--&gt;-->
+            <!--<TextView-->
+                <!--android:id="@+id/tv_pend"-->
+                <!--android:gravity="center"-->
+                <!--android:text="待审批"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_width="@dimen/dp_80"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:background="@color/color_a_blue"-->
+                <!--/>-->
 
-        </RelativeLayout>
+        <!--</RelativeLayout>-->
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/tv_pend"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </RelativeLayout>

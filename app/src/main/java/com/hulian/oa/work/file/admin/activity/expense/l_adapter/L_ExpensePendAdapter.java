@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hulian.oa.R;
@@ -41,13 +42,15 @@ public class L_ExpensePendAdapter extends RecyclerView.Adapter <L_ExpensePendAda
         public TextView tv_time;
         //请假事由
         public TextView tv_expense_monkey;
-        public TextView tv_pend;
+//        public TextView tv_pend;
+        public ImageView tv_pend;
         public ViewHolder(View itemView) {
             super(itemView);
             tv_title = (TextView) itemView.findViewById(R.id.tv_title);
             tv_time = (TextView) itemView.findViewById(R.id.tv_time);
             tv_expense_monkey = (TextView) itemView.findViewById(R.id.tv_expense_monkey);
-            tv_pend = (TextView) itemView.findViewById(R.id.tv_pend);
+//            tv_pend = (TextView) itemView.findViewById(R.id.tv_pend);
+            tv_pend = (ImageView) itemView.findViewById(R.id.tv_pend);
         }
     }
 
@@ -64,16 +67,22 @@ public class L_ExpensePendAdapter extends RecyclerView.Adapter <L_ExpensePendAda
         holder.tv_time.setText(dataList.get(position).getCreateTime().split(" ")[0]);
         holder.tv_expense_monkey.setText(dataList.get(position).getMoney()+"元");
         if(dataList.get(position).getState().equals("0")){
-            holder.tv_pend.setBackgroundColor(mContext.getResources().getColor(R.color.tab_color_true));
-            holder.tv_pend.setText("待审批");
+//            holder.tv_pend.setBackgroundColor(mContext.getResources().getColor(R.color.tab_color_true));
+//            holder.tv_pend.setText("待审批");
+            holder.tv_pend.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_daishenpi_icon_qgl));
+
         }
         else if (dataList.get(position).getState().equals("1")){
-            holder.tv_pend.setText("已审批");
-            holder.tv_pend.setBackgroundColor(mContext.getResources().getColor(R.color.color_a_green));
+//            holder.tv_pend.setText("已审批");
+//            holder.tv_pend.setBackgroundColor(mContext.getResources().getColor(R.color.color_a_green));
+            holder.tv_pend.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_shenpi_tongguo_icon_qgl));
+
         }
         else {
-            holder.tv_pend.setText("驳回");
-            holder.tv_pend.setBackgroundColor(mContext.getResources().getColor(R.color.colorText));
+//            holder.tv_pend.setText("驳回");
+//            holder.tv_pend.setBackgroundColor(mContext.getResources().getColor(R.color.colorText));
+            holder.tv_pend.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_bohui_icon_qgl));
+
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
