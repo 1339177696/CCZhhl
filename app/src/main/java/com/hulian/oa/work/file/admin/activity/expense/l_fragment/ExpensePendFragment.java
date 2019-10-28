@@ -125,7 +125,8 @@ public class ExpensePendFragment extends Fragment implements PullLoadMoreRecycle
         params.put("pageStart", mCount*10-9 + "");
         params.put("pageEnd", mCount * 10 + "");
         params.put("approver", SPUtils.get(getActivity(), "userId", "").toString());
-        params.put("state","0");
+//        params.put("state","0");
+
         HttpRequest.get_listWorkExpense(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {

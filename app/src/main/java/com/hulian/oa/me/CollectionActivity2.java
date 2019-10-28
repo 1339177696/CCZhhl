@@ -68,7 +68,7 @@ public class CollectionActivity2 extends BaseActivity implements PullLoadMoreRec
         //设置是否可以下拉刷新
         //mPullLoadMoreRecyclerView.setPullRefreshEnable(true);
         //设置是否可以上拉刷新
-        //mPullLoadMoreRecyclerView.setPushRefreshEnable(false);
+        mPullLoadMoreRecyclerView.setPushRefreshEnable(false);
         //显示下拉刷新
         mPullLoadMoreRecyclerView.setRefreshing(true);
         //设置上拉刷新文字
@@ -96,8 +96,8 @@ public class CollectionActivity2 extends BaseActivity implements PullLoadMoreRec
     @Override
     public void onLoadMore() {
         Log.e("wxl", "onLoadMore");
-        mCount = mCount + 1;
-        getData();
+//        mCount = mCount + 1;
+//        getData();
     }
 
     private void setRefresh() {
@@ -108,10 +108,9 @@ public class CollectionActivity2 extends BaseActivity implements PullLoadMoreRec
     private void getData() {
         String collectUserId = SPUtils.get(this, "userId", "-1").toString();
         RequestParams params = new RequestParams();
-        params.put("pageState", mCount * 10 - 9 + "");
-        params.put("pageEnd", mCount * 10 + "");
+        params.put("collectUserId", collectUserId);
         Log.d("这是用户ID", SPUtils.get(this, "userId", "-1").toString());
-        HttpRequest.postNesListApi(params, new ResponseCallback() {
+        HttpRequest.postNews_inquiryListApi(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
                 //需要转化为实体对象
