@@ -14,13 +14,16 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.BaseActivity;
 import com.hulian.oa.R;
+import com.hulian.oa.bean.Hufu_bean;
 import com.hulian.oa.bean.News;
+import com.hulian.oa.bean.News_qgl;
 import com.hulian.oa.me.l_adapter.L_CollectionNewsAdapter;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.news.adapter.NewsViewAdapter;
+import com.hulian.oa.news.fragment.News_1_Fragment;
 import com.hulian.oa.utils.SPUtils;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
@@ -33,6 +36,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 
 //我的-》收藏
 public class CollectionActivity2 extends BaseActivity implements PullLoadMoreRecyclerView.PullLoadMoreListener {
@@ -54,6 +58,8 @@ public class CollectionActivity2 extends BaseActivity implements PullLoadMoreRec
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_me_collection);
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
+
         initList();
     }
 
@@ -105,6 +111,12 @@ public class CollectionActivity2 extends BaseActivity implements PullLoadMoreRec
         mCount = 1;
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
     private void getData() {
         String collectUserId = SPUtils.get(this, "userId", "-1").toString();
         RequestParams params = new RequestParams();
@@ -117,8 +129,8 @@ public class CollectionActivity2 extends BaseActivity implements PullLoadMoreRec
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-                    List<News> memberList = gson.fromJson(result.getJSONArray("data").toString(),
-                            new TypeToken<List<News>>() {
+                    List<News_qgl> memberList = gson.fromJson(result.getJSONArray("data").toString(),
+                            new TypeToken<List<News_qgl>>() {
                             }.getType());
                     mRecyclerViewAdapter.addAllData(memberList);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
@@ -145,5 +157,9 @@ public class CollectionActivity2 extends BaseActivity implements PullLoadMoreRec
             case R.id.tv_search:
                 break;
         }
+    }
+
+    public void onEventMainThread(CollectionActivity2 event) {
+        onRefresh();
     }
 }

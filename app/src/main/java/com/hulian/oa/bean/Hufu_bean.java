@@ -234,6 +234,16 @@ public class Hufu_bean implements Serializable
     private String taskReminder;
     private String completion;
 
+    public String getFiles() {
+        return files;
+    }
+
+    public void setFiles(String files) {
+        this.files = files;
+    }
+
+    private String files;
+
     /**
      * searchValue : null
      * createBy : null

@@ -63,7 +63,7 @@ public class RequestMode {
    */
   public static void postMultipart_qgl(String url, RequestParams params,
       List<File> files, ResponseCallback callback, Class<?> clazz) {
-    CommonOkHttpClient.post(CommonRequest.createMultipartRequest(url, params, files),
+    CommonOkHttpClient.post(CommonRequest.createMultipartRequest_qgl(url, params, files),
         new ResposeDataHandle(callback, clazz));
   }
 

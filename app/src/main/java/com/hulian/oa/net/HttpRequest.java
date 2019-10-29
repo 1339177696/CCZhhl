@@ -175,8 +175,7 @@ public class HttpRequest {
    * @param callback 回调接口
    */
   public static void post_workCoordinationReply_add(RequestParams params, List<File> files, ResponseCallback callback) {
-    //  RequestMode.postRequest(Urls.commUrls+"system/officialDocument/publish", params, callback, null);
-    RequestMode.postMultipart_qgl(Urls.commUrls+"system/workCoordinationReply/add", params, files, callback, null);
+    RequestMode.postMultipart(Urls.commUrls+"system/workCoordinationReply/add", params, files, callback, null);
   }
 //  /**
 //   * 我发起的/我审批的
@@ -326,15 +325,25 @@ public class HttpRequest {
     RequestMode.postRequest(Urls.commUrls+"system/workCoordinationRelease/list",params,callback,null);
   }
 
-  /**
-   * 工作协同新增
-   * @param params
-   * @param callback
-   */
-  public static void post_CoordinationRelease_add(RequestParams params,ResponseCallback callback)
-  {
-    RequestMode.postRequest(Urls.commUrls+"system/workCoordinationRelease/add",params,callback,null);
-  }
+//  /**
+//   * 工作协同新增
+//   * @param params
+//   * @param callback
+//   */
+//  public static void post_CoordinationRelease_add(RequestParams params,ResponseCallback callback)
+//  {
+//    RequestMode.postRequest(Urls.commUrls+"system/workCoordinationRelease/add",params,callback,null);
+//  }
+
+    /**
+     * 工作协同新增
+     * @param params
+     * @param callback
+     */
+    public static void post_CoordinationRelease_add(RequestParams params,List<File> file,ResponseCallback callback)
+    {
+        RequestMode.postMultipart_qgl(Urls.commUrls+"system/workCoordinationRelease/add",params,file,callback,null);
+    }
 
   /**
    * 工作完成

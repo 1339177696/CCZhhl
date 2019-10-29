@@ -24,6 +24,7 @@ import com.hulian.oa.bean.Fab;
 import com.hulian.oa.bean.Fab2;
 import com.hulian.oa.bean.JournalismComments;
 import com.hulian.oa.bean.News;
+import com.hulian.oa.me.CollectionActivity2;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
@@ -81,10 +82,15 @@ public class NewsActivityInfo extends BaseActivity {
 
     private int mCount = 1;
     NewsCommentdapter mRecyclerViewAdapter;
-    private News newsA;
+//    private News newsA;
     List<JournalismComments> memberList=new ArrayList<>();
     private String isCollect;
     private String Type = "";
+
+    private String getIsCollect = "";
+    private String getJournalismId = "";
+    private String getJournalismTitle = "";
+    private URLImageParser imageGetter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,13 +99,17 @@ public class NewsActivityInfo extends BaseActivity {
         EventBus.getDefault().register(this);
         ImageLoader imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(this));
-        newsA = (News) getIntent().getSerializableExtra("journalism");
-        tvTitle.setText(newsA.getJournalismTitle());
-        tvDis.setText("来源："+newsA.getCreateBy() + "    " + TimeUtils.getDateToString(newsA.getCreateTime()) );
-        URLImageParser imageGetter = new URLImageParser(tvContent);
-        tvContent.setText(Html.fromHtml(newsA.getJournalismContent(), imageGetter, null));
-        tvAuthor.setText("责任编辑：" + newsA.getCreateBy());
-        isCollect = newsA.getIsCollect();
+        imageGetter = new URLImageParser(tvContent);
+        getJournalismId = getIntent().getStringExtra("getJournalismId");
+        getIsCollect = getIntent().getStringExtra("getIsCollect");
+        isCollect = getIsCollect;
+//        newsA = (News) getIntent().getSerializableExtra("journalism");
+//        tvTitle.setText(newsA.getJournalismTitle());
+//        tvDis.setText("来源："+newsA.getCreateBy() + "    " + TimeUtils.getDateToString(newsA.getCreateTime()) );
+//        imageGetter = new URLImageParser(tvContent);
+//        tvContent.setText(Html.fromHtml(newsA.getJournalismContent(), imageGetter, null));
+//        tvAuthor.setText("责任编辑：" + newsA.getCreateBy());
+
         //新加的qgl
         if (isCollect.equals("0"))
         {
@@ -126,8 +136,6 @@ public class NewsActivityInfo extends BaseActivity {
         mRecyclerView.setHasFixedSize(true);
 //解决数据加载完成后, 没有停留在顶部的问题
         mRecyclerView.setFocusable(false);
-
-
         //代码设置scrollbar无效？未解决！
         mRecyclerView.setVerticalScrollBarEnabled(true);
         //设置下拉刷新是否可见
@@ -148,8 +156,10 @@ public class NewsActivityInfo extends BaseActivity {
                         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                             if (!v.getText().toString().trim().isEmpty()) {
                                 RequestParams params = new RequestParams();
-                                params.put("journalismId", newsA.getJournalismId());
-                                params.put("journalismTitle", newsA.getJournalismTitle());
+//                                params.put("journalismId", newsA.getJournalismId());
+                                params.put("journalismId", getJournalismId);
+//                                params.put("journalismTitle", newsA.getJournalismTitle());
+                                params.put("journalismTitle", getJournalismTitle);
                                 params.put("commentName", SPUtils.get(mContext, "nickname", "").toString());
                                 params.put("commentContent", etContent.getText().toString());
                                 HttpRequest.postNesSenCommApi(params, new ResponseCallback() {
@@ -188,7 +198,8 @@ public class NewsActivityInfo extends BaseActivity {
     private void getData() {
         memberList.removeAll(memberList);
         RequestParams params = new RequestParams();
-        params.put("journalismId", newsA.getJournalismId());
+//        params.put("journalismId", newsA.getJournalismId());
+        params.put("journalismId", getJournalismId);
         //    params.put("commentUserId", "1");
         try {
             params.put("commentUserId", SPUtils.get(mContext, "userId", "").toString());
@@ -202,6 +213,13 @@ public class NewsActivityInfo extends BaseActivity {
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
+                    JSONObject result1 = result.getJSONObject("data").getJSONObject("journalismDetails");
+                    tvTitle.setText(result1.getString("journalismTitle"));
+                    tvDis.setText("来源："+result1.getString("createBy")+ "    " + TimeUtils.getDateToString(result1.getString("createTime")));
+                    tvContent.setText(Html.fromHtml(result1.getString("journalismContent"), imageGetter, null));
+                    tvAuthor.setText("责任编辑：" + result1.getString("createBy"));
+                    getJournalismTitle = result1.getString("journalismTitle");
+
                     memberList = gson.fromJson(result.getJSONObject("data").getJSONArray("journalismComments").toString(),
                             new TypeToken<List<JournalismComments>>() {
                             }.getType());
@@ -226,6 +244,7 @@ public class NewsActivityInfo extends BaseActivity {
         switch (view.getId()) {
             case R.id.iv_back:
                 EventBus.getDefault().post(new News_1_Fragment());
+                EventBus.getDefault().post(new CollectionActivity2());
                 finish();
                 break;
             case R.id.rl_title:
@@ -238,8 +257,10 @@ public class NewsActivityInfo extends BaseActivity {
                     return;
                 }
                 RequestParams params = new RequestParams();
-                params.put("journalismId", newsA.getJournalismId());
-                params.put("journalismTitle", newsA.getJournalismTitle());
+//                params.put("journalismId", newsA.getJournalismId());
+                params.put("journalismId", getJournalismId);
+//                params.put("journalismTitle", newsA.getJournalismTitle());
+                params.put("journalismTitle", getJournalismTitle);
                 params.put("commentName", SPUtils.get(mContext, "nickname", "").toString());
                 params.put("commentContent", etContent.getText().toString());
                 HttpRequest.postNesSenCommApi(params, new ResponseCallback() {
@@ -280,7 +301,8 @@ public class NewsActivityInfo extends BaseActivity {
                 RequestParams params1 = new RequestParams();
                 params1.put("collectType","0");
                 params1.put("collectUserId", SPUtils.get(mContext, "userId", "").toString());
-                params1.put("collectTypeId", newsA.getJournalismId());
+//                params1.put("collectTypeId", newsA.getJournalismId());
+                params1.put("collectTypeId", getJournalismId);
                 params1.put("isCollect",Type);
                 HttpRequest.postStoreSenCommApi(params1, new ResponseCallback() {
                     @Override

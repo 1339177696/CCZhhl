@@ -127,16 +127,37 @@
                 android:textColor="#2B8CFA"
                 android:textSize="@dimen/sp_12" />
 
-            <TextView
-                android:id="@+id/tv_launchi"
-                android:gravity="center"
-                android:text="已完成"
-                android:textColor="@color/color_a_blue"
-                android:layout_alignParentRight="true"
-                android:layout_width="@dimen/dp_80"
-                android:layout_height="wrap_content"
-                />
+
         </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_wancheng_number"
+                android:layout_marginLeft="@dimen/dp_10"
+            android:layout_centerVertical="true"
+                android:text="已完成"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/white"
+                android:background="@drawable/ggl_ysp_btn_bg1"
+                android:gravity="center"
+                android:layout_marginRight="@dimen/dp_14"
+                android:id="@+id/qgl_zy_ysp_status"
+                android:textSize="@dimen/sp_11"
+                android:layout_gravity="right"
+                android:text="已关闭"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_21" />
+
+        </RelativeLayout>
+
 
 
 

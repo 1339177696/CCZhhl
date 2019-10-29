@@ -69,7 +69,8 @@ public class L_DetailsCompletedTaskAdapter extends RecyclerView.Adapter <Recycle
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
-            if (holder instanceof ViewHolder_Top){//设置数据 事件
+            if (holder instanceof ViewHolder_Top){
+                //设置数据 事件
                 ViewHolder_Top viewHolderTop = ((ViewHolder_Top) holder);
 //                viewHolderTop.tv_title.setText(dataList.get(position).getTitle());
                 viewHolderTop.tv_launch_person.setText(dataList.get(position).getCreateBy()+"发起");

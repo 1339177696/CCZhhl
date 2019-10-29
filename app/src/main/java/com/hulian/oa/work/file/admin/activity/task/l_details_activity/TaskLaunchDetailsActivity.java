@@ -76,7 +76,7 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
     @BindView(R.id.la_un_stop_time)
     TextView laUnStopTime;
     @BindView(R.id.file_btn)
-    Button file_btn;
+    TextView file_btn;
 
     private int mCount = 1;
     private RecyclerView mRecyclerView;
@@ -223,6 +223,7 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
                     JSONObject result = new JSONObject(responseObj.toString());
                     list = gson.fromJson(result.getJSONObject("data").getString("list"), new TypeToken<List<Hufu_bean>>() {
                     }.getType());
+
                     huifu_bean_x = gson.fromJson(result.getJSONObject("data").getString("object"), new TypeToken<Hufu_bean>() {
                     }.getType());
                     JSONObject jsonObject = new JSONObject(result.getJSONObject("data").getString("object"));
@@ -233,7 +234,6 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
                     String sum = result.getJSONObject("data").getString("sum");
                     huifu_bean_x.setSum(sum);
 
-                    String A = huifu_bean_x.getCompletion();
                     if (huifu_bean_x.getCompletion().equals("0")){
                         iv_btn.setVisibility(View.INVISIBLE);
                         tv_off.setVisibility(View.VISIBLE);
@@ -242,7 +242,7 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
                         iv_btn.setVisibility(View.INVISIBLE);
                         tv_off.setVisibility(View.GONE);
                     } else {
-                        launch_rela_huifu.setVisibility(View.VISIBLE);
+                        launch_rela_huifu.setVisibility(View.GONE);
                         iv_btn.setVisibility(View.INVISIBLE);
                         tv_off.setVisibility(View.GONE);
 
@@ -250,6 +250,7 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
 
                     mRecyclerViewAdapter.addAllData(list, huifu_bean_x);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -271,6 +272,9 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
         List<File> fils = new ArrayList<>();
         for (LocalMedia imgurl : selectList) {
             fils.add(new File(imgurl.getPath()));
+        }
+        for (String fileurl : selectList1) {
+            fils.add(new File(fileurl));
         }
         HttpRequest.post_workCoordinationReply_add(params, fils, new ResponseCallback() {
             @Override
@@ -336,7 +340,6 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
                         Log.i("压缩图片-----》", new File(media.getCompressPath()).length() + "");
                         context = "";
                         gethuifuData();
-
                     }
                     break;
                 case DefaultSelectorActivity.FILE_SELECT_REQUEST_CODE:
@@ -443,19 +446,21 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
         selectList1 = list;
         Log.v("EMAIL", "获取到数据-结束");
         context = "";
-        gethuifufile();
+        gethuifuData();
     }
 
 
-    private void gethuifufile() {
-        RequestParams params = new RequestParams();
-        params.put("proid", id);
-        params.put("content", context);
-        params.put("respondent", SPUtils.get(mContext, "userId", "").toString());
-        List<File> fils = new ArrayList<>();
-        for (String imgurl : selectList1) {
-            fils.add(new File(imgurl));
-        }
+//    private void gethuifufile() {
+//        RequestParams params = new RequestParams();
+//        params.put("proid", id);
+//        params.put("content", context);
+//        params.put("respondent", SPUtils.get(mContext, "userId", "").toString());
+//        List<File> fils = new ArrayList<>();
+//        for (String imgurl : selectList1) {
+//            fils.add(new File(imgurl));
+//        }
+
+
 //        qgl注释的
 //        HttpRequest.post_workCoordinationReply_add(params, fils, new ResponseCallback() {
 //            @Override
@@ -478,10 +483,9 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
 //                Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
 //            }
 //        });
-    }
+//    }
 
 //    取消任务
-
     public void getCancelTask(){
         RequestParams params = new RequestParams();
         params.put("id", id);

@@ -21,6 +21,7 @@ import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.R;
 import com.hulian.oa.bean.Bean_x;
 import com.hulian.oa.bean.News;
+import com.hulian.oa.bean.News_qgl;
 import com.hulian.oa.me.l_fragment.L_CollectionNewsFragment;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
@@ -33,6 +34,8 @@ import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.TimeUtils;
 import com.hulian.oa.views.AlertDialog;
 import com.hulian.oa.work.file.admin.activity.notice.NoticeParticularsActivity;
+import com.hulian.oa.work.file.admin.activity.task.l_details_adapter.L_DetailsCompletedTaskAdapter;
+import com.luck.picture.lib.entity.LocalMedia;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,13 +43,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class L_CollectionNewsAdapter extends RecyclerView.Adapter <L_CollectionNewsAdapter.ViewHolder> {
+public class L_CollectionNewsAdapter extends RecyclerView.Adapter <RecyclerView.ViewHolder> {
     private Context mContext;
-    private List<News> dataList = new ArrayList<>();
-    private String image_url = "https://abc.cczhhl.cn/";
-    private String collectTypeId;
+    private List<News_qgl> dataList = new ArrayList<>();
     AlertDialog myDialog;
-    public void addAllData(List<News> dataList) {
+    public static final int ITEMONE = 1;
+    public static final int ITEMTWO = 2;
+    public void addAllData(List<News_qgl> dataList) {
         this.dataList.addAll(dataList);
         notifyDataSetChanged();
     }
@@ -59,12 +62,12 @@ public class L_CollectionNewsAdapter extends RecyclerView.Adapter <L_CollectionN
         mContext = context;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder_Top extends RecyclerView.ViewHolder {
         public TextView title;
         public TextView tv_content,tv_time,tv_dianzanCount;
         public SimpleDraweeView iv_head;
         public RelativeLayout l_item_collection_news_delet;
-        public ViewHolder(View itemView) {
+        public ViewHolder_Top(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.tv_name);
             tv_content = (TextView) itemView.findViewById(R.id.tv_content);
@@ -74,55 +77,110 @@ public class L_CollectionNewsAdapter extends RecyclerView.Adapter <L_CollectionN
             l_item_collection_news_delet = (RelativeLayout) itemView.findViewById(R.id.l_item_collection_news_delet);
         }
     }
+    public class ViewHolder_List extends RecyclerView.ViewHolder{
+        public TextView list_tv_time;
+        public TextView list_tv_time2;
+        public TextView list_tv_name;
+        public TextView list_tv_author;
+        public TextView list_tv_content;
+        public RelativeLayout l_item_collection_news_delet;
 
-    @Override
-    public L_CollectionNewsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_collection_1, parent, false);
+        public ViewHolder_List(View itemView){
+            super(itemView);
+            list_tv_time = itemView.findViewById(R.id.tv_time);
+            list_tv_time2 = itemView.findViewById(R.id.tv_time2);
+            list_tv_name = itemView.findViewById(R.id.tv_name);
+            list_tv_author = itemView.findViewById(R.id.tv_author);
+            list_tv_content = itemView.findViewById(R.id.tv_content);
+            l_item_collection_news_delet = itemView.findViewById(R.id.l_item_collection_news_delet);
 
-        return new L_CollectionNewsAdapter.ViewHolder(v);
+        }
     }
 
     @Override
-    public void onBindViewHolder(L_CollectionNewsAdapter.ViewHolder holder, final int position) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View inflate = null;
+        RecyclerView.ViewHolder viewHolder = null;
+
+        switch (viewType){
+            case ITEMONE:
+                inflate = LayoutInflater.from(mContext).inflate(R.layout.item_collection_1, parent, false);
+                viewHolder = new L_CollectionNewsAdapter.ViewHolder_Top(inflate);
+                break;
+            case ITEMTWO:
+                inflate = LayoutInflater.from(mContext).inflate(R.layout.item_collection_2, parent, false);
+                viewHolder = new L_CollectionNewsAdapter.ViewHolder_List(inflate);
+                break;
+        }
+        return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         myDialog = new AlertDialog(mContext).builder();
-//        holder.tv_title.setText(dataList.get(position).getCollectTypeTitle());
-//        holder.tv_time.setText(dataList.get(position).getCreateTime());
-//        holder.tv_from.setText(dataList.get(position).getCollectTypeUserName());
-        String collectId = dataList.get(position).getJournalismId();
-     //   collectTypeId = String.valueOf(dataList.get(position).getCollectTypeId());
-////        Log.d("这是图片地址1",dataList.get(position).getCollectTypeImage());
-//        String a = dataList.get(position).getCollectTypeImage();
-//        String b = a.replaceAll("D:/","");
-////        Log.d("这是图片地址2",b);
-//
-//        Glide.with(mContext).load(a).into(holder.iv_pic_news);
-        holder.title.setText(dataList.get(position).getJournalismTitle());
-        holder.tv_content.setText(Html.fromHtml(dataList.get(position).getJournalismContent()));
-        holder.tv_time.setText(TimeUtils.getDateToString(dataList.get(position).getCreateTime()));
-        holder.iv_head.setImageURI(dataList.get(position).getJournalismImage());
-
-
-        holder.l_item_collection_news_delet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                myDialog.setGone().setTitle("提示").setMsg("确定删除么").setNegativeButton("取消",null).setPositiveButton("确定", new View.OnClickListener() {
+        if (holder instanceof ViewHolder_Top) {
+            //设置新闻
+            ViewHolder_Top viewHolderTop = ((ViewHolder_Top) holder);
+            String collectId = dataList.get(position).getCollectId();
+            viewHolderTop.title.setText(dataList.get(position).getCollectTypeTitle());
+            viewHolderTop.tv_content.setText(Html.fromHtml(dataList.get(position).getCollectTypeDetails()));
+            viewHolderTop.tv_time.setText(TimeUtils.getDateToString(dataList.get(position).getCreateTime()));
+            viewHolderTop.iv_head.setImageURI(dataList.get(position).getCollectTypeImage());
+            viewHolderTop.l_item_collection_news_delet.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v)
+                {
+                    myDialog.setGone().setTitle("提示").setMsg("确定删除么").setNegativeButton("取消",null).setPositiveButton("确定", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            getDelete(collectId,position);
+                        }
+                    }).show();
+                }
+            });
+        }else if (holder instanceof ViewHolder_List){
+            if(dataList.get(position).getCreateTime()!=null) {
+                ViewHolder_List viewHolderlist = ((ViewHolder_List) holder);
+                String collectId = dataList.get(position).getCollectId();
+                viewHolderlist.list_tv_name.setText(dataList.get(position).getCollectTypeTitle());
+                viewHolderlist.list_tv_author.setText(dataList.get(position).getCreateBy());
+                viewHolderlist.list_tv_content.setText(Html.fromHtml(dataList.get(position).getCollectTypeDetails()));
+                if(dataList.get(position).getCreateTime()!=null){
+                    viewHolderlist.list_tv_time.setText(TimeUtils.getDateToString3(dataList.get(position).getCreateTime()));
+                    viewHolderlist.list_tv_time2.setText(TimeUtils.getDateToString4(dataList.get(position).getCreateTime()));
+                }
+                viewHolderlist.l_item_collection_news_delet.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
-                        getDelete(collectId,position);
+                    public void onClick(View v)
+                    {
+                        myDialog.setGone().setTitle("提示").setMsg("确定删除么").setNegativeButton("取消",null).setPositiveButton("确定", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                getDelete(collectId,position);
+                            }
+                        }).show();
                     }
-                }).show();
+                });
             }
-        });
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            //    Log.d("collectTypeId",collectTypeId);
-//                Intent intent= new Intent(mContext, NewsActivityInfo_x.class);
-//                intent.putExtra("journalism",dataList.get(position));
-//                mContext.startActivity(intent);
-                Intent intent= new Intent(mContext, NewsActivityInfo.class);
-                intent.putExtra("journalism",dataList.get(position));
+                Intent intent= new Intent();
+                dataList.get(position).setIsCollect("1");
+
+                if (dataList.get(position).getCollectType().equals("0")){
+                    intent.putExtra("getIsCollect",dataList.get(position).getIsCollect());
+                    intent.putExtra("getJournalismId",dataList.get(position).getCollectTypeId());
+                    intent.setClass(mContext,NewsActivityInfo.class);
+                }else if (dataList.get(position).getCollectType().equals("1")){
+                    intent.putExtra("noticeId",dataList.get(position).getCollectTypeId());
+                    //新改的传收藏状态qgl
+                    intent.putExtra("isCollect",dataList.get(position).getIsCollect());
+                    intent.setClass(mContext,NoticeParticularsActivity.class);
+
+
+                }
                 mContext.startActivity(intent);
             }
         });
@@ -164,5 +222,14 @@ public class L_CollectionNewsAdapter extends RecyclerView.Adapter <L_CollectionN
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (dataList.get(position).getCollectType().equals("0")){
+            return ITEMONE;
+        }else {
+            return ITEMTWO;
+        }
     }
 }

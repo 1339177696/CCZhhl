@@ -4,17 +4,55 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class News implements Serializable {
+public class News_qgl implements Serializable {
     private String createBy;
     private String journalismTitle;
     private String journalismContent;
     private String journalismImage;
+
     private String journalismId;
     private String createTime;
     private String isCollect;
     private String collectType;
     private String collectTypeId;
     private String collectId;
+
+    public String getCollectTypeUserName() {
+        return collectTypeUserName;
+    }
+
+    public void setCollectTypeUserName(String collectTypeUserName) {
+        this.collectTypeUserName = collectTypeUserName;
+    }
+
+    public String getCollectTypeTitle() {
+        return collectTypeTitle;
+    }
+
+    public void setCollectTypeTitle(String collectTypeTitle) {
+        this.collectTypeTitle = collectTypeTitle;
+    }
+
+    public String getCollectTypeDetails() {
+        return collectTypeDetails;
+    }
+
+    public void setCollectTypeDetails(String collectTypeDetails) {
+        this.collectTypeDetails = collectTypeDetails;
+    }
+
+    public String getCollectTypeImage() {
+        return collectTypeImage;
+    }
+
+    public void setCollectTypeImage(String collectTypeImage) {
+        this.collectTypeImage = collectTypeImage;
+    }
+
+    private String collectTypeUserName;
+    private String collectTypeTitle;
+    private String collectTypeDetails;
+    private String collectTypeImage;
 
     public String getCollectId() {
         return collectId;

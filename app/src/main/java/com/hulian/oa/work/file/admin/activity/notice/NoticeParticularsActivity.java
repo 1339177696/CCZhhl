@@ -13,6 +13,7 @@ import com.hulian.oa.BaseActivity;
 import com.hulian.oa.R;
 import com.hulian.oa.bean.Fab;
 import com.hulian.oa.bean.Fab2;
+import com.hulian.oa.me.CollectionActivity2;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
@@ -107,6 +108,7 @@ public class NoticeParticularsActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.iv_back:
                 EventBus.getDefault().post(new News_2_Fragment());
+                EventBus.getDefault().post(new CollectionActivity2());
                 finish();
                 break;
             case R.id.rl_title:

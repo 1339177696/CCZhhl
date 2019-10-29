@@ -132,6 +132,92 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_52">
+
+                <ImageView
+                    android:id="@+id/gw_img1111"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/document_annex_icon_qgl" />
+
+                <TextView
+                    android:id="@+id/gw_text1111"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="9dp"
+                    android:layout_toRightOf="@+id/gw_img1111"
+                    android:text="公文附件"
+                    android:textColor="#ff313131"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/file_btn"
+                    android:gravity="right"
+                    android:layout_toRightOf="@+id/gw_text1111"
+                    android:layout_marginRight="@dimen/dp_27"
+                    android:layout_centerVertical="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="点击选择附件"
+                    android:textColor="#085DD6"
+                    android:textSize="14sp"
+                    />
+
+
+
+
+            </RelativeLayout>
+            <View
+                android:layout_marginLeft="10dp"
+                android:background="@color/color_b_gray"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_52">
+
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:id="@+id/gw_img3"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/renwu_faqi_icon3" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="9dp"
+                    android:layout_toRightOf="@+id/gw_img3"
+                    android:text="公文照片"
+                    android:textColor="#ff313131"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+            <View
+                android:layout_marginLeft="10dp"
+                android:background="@color/color_b_gray"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="22dp"
+                android:layout_marginTop="5dp"
+                android:overScrollMode="never" />
+
+            <View
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_marginLeft="10dp"
+                android:background="@color/color_b_gray"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:id="@+id/rl_opreator"
                 android:layout_marginTop="@dimen/dp_5"

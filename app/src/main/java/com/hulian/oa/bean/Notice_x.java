@@ -35,6 +35,16 @@ public class Notice_x implements Serializable
    private String title;
    private String startTime;
 
+    public String getSum() {
+        return sum;
+    }
+
+    public void setSum(String sum) {
+        this.sum = sum;
+    }
+
+    private String sum;
+
     public String getEndTime() {
         return endTime;
     }

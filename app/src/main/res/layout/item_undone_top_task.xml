@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_marginLeft="@dimen/dp_10"
@@ -151,7 +153,6 @@
                 android:textSize="@dimen/sp_14" />
 
             <TextView
-                android:layout_marginBottom="24dp"
                 android:layout_marginRight="20dp"
                 android:id="@+id/tv_task_details_x"
                 android:layout_marginLeft="10dp"
@@ -162,6 +163,66 @@
                 android:textSize="@dimen/sp_14"
                 />
 
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/gw_text1111"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="公文附件"
+                android:textColor="#ff676767"
+                android:textSize="@dimen/sp_14"
+                />
+
+            <TextView
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:maxEms="10"
+                android:textColor="#085DD6"
+                android:id="@+id/tv_qgl_file"
+                android:layout_marginRight="@dimen/dp_27"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                />
+
+        </RelativeLayout>
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E3E3E3" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            >
+            <RelativeLayout
+                android:layout_below="@id/tv_roam_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/dp_80"
+                >
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:overScrollMode="never" />
+            </RelativeLayout>
         </LinearLayout>
 
 
