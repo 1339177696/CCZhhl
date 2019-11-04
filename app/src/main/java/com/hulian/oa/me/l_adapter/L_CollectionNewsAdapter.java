@@ -144,7 +144,9 @@ public class L_CollectionNewsAdapter extends RecyclerView.Adapter <RecyclerView.
                 String collectId = dataList.get(position).getCollectId();
                 viewHolderlist.list_tv_name.setText(dataList.get(position).getCollectTypeTitle());
                 viewHolderlist.list_tv_author.setText(dataList.get(position).getCreateBy());
-                viewHolderlist.list_tv_content.setText(Html.fromHtml(dataList.get(position).getCollectTypeDetails()));
+                if (dataList.get(position).getCollectTypeDetails()!=null){
+                    viewHolderlist.list_tv_content.setText(Html.fromHtml(dataList.get(position).getCollectTypeDetails()));
+                }
                 if(dataList.get(position).getCreateTime()!=null){
                     viewHolderlist.list_tv_time.setText(TimeUtils.getDateToString3(dataList.get(position).getCreateTime()));
                     viewHolderlist.list_tv_time2.setText(TimeUtils.getDateToString4(dataList.get(position).getCreateTime()));

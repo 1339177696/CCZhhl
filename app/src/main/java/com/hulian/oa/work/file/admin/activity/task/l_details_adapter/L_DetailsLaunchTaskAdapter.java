@@ -123,7 +123,6 @@ public class L_DetailsLaunchTaskAdapter extends RecyclerView.Adapter <RecyclerVi
 //                qgl
                 String aa = dataList.get(position).getFiles();
                 if (aa!=null&&aa!=""){
-
                     List<String> c = Arrays.asList(aa.split(","));
                     for (int i = 0;i<=c.size()-1;i++){
                         if (getMIMEType(c.get(i)).equals("image/jpeg")||getMIMEType(c.get(i)).equals("image/png")||getMIMEType(c.get(i)).equals("image/gif")){

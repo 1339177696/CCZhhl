@@ -39,6 +39,7 @@
         android:label="OA"
         android:largeHeap="true"
         android:supportsRtl="true"
+        android:networkSecurityConfig="@xml/network_config"
         android:theme="@style/AppTheme">
         <activity android:name=".LuncherActivity"
             android:configChanges="screenSize|keyboardHidden|orientation">

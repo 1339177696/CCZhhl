@@ -310,9 +310,9 @@ public class HttpRequest {
      * @param params
      * @param callback
      */
-    public static void postSuggest(RequestParams params,ResponseCallback callback)
+    public static void postSuggest(RequestParams params,List<File> file,ResponseCallback callback)
     {
-        RequestMode.postRequest(Urls.commUrls+"system/opinionManagement/add",params,callback,null);
+        RequestMode.postMultipart_qgl(Urls.commUrls+"system/opinionManagement/add",params,file,callback,null);
     }
 
   /**

@@ -76,7 +76,7 @@ public class LeaveApplyforActivity extends BaseActivity {
     FrameLayout fl_content;
     @BindView(R.id.tv_opreator)
     TextView tvOpreator;
-    String  tvOpreatorCode="121";
+    String tvOpreatorCode = "121";
 
     //抄送人
     @BindView(R.id.title11)
@@ -87,7 +87,7 @@ public class LeaveApplyforActivity extends BaseActivity {
     ImageView iv1;
     @BindView(R.id.copier)
     TextView copier;
-    String  copierCode="121";
+    String copierCode = "121";
 
     private List<People> selectList2 = new ArrayList<>();
     private List<People_x> selectList2_x = new ArrayList<>();
@@ -130,7 +130,7 @@ public class LeaveApplyforActivity extends BaseActivity {
     TextView tvCopyPersonTitle;
     @BindView(R.id.ci_copy_pic)
     RelativeLayout ciCopyPic;
-//    @BindView(R.id.tv_copy_person)
+    //    @BindView(R.id.tv_copy_person)
 //    TextView tvCopyPerson;
     @BindView(R.id.tv_back_instruct)
     TextView tvBackInstruct;
@@ -138,7 +138,7 @@ public class LeaveApplyforActivity extends BaseActivity {
     //已经选择图片
     private List<LocalMedia> selectList = new ArrayList<>();
     //照片选择最大值
-    private int maxSelectNum =1;
+    private int maxSelectNum = 1;
     @BindView(R.id.recycler)
     RecyclerView recyclerView;
 
@@ -154,7 +154,7 @@ public class LeaveApplyforActivity extends BaseActivity {
         tvReaseon.setText("事假");
     }
 
-    private void initReason()  {
+    private void initReason() {
         reasonlist.add("事假");
         reasonlist.add("病假");
         reasonlist.add("年假");
@@ -259,7 +259,7 @@ public class LeaveApplyforActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.iv_back, R.id.rl_leave_reason, R.id.rl_start_time, R.id.rl_end_time, R.id.ci_approved_pic,R.id.ci_copy_pic,R.id.tv_back_instruct,R.id.iv,R.id.iv1})
+    @OnClick({R.id.iv_back, R.id.rl_leave_reason, R.id.rl_start_time, R.id.rl_end_time, R.id.ci_approved_pic, R.id.ci_copy_pic, R.id.tv_back_instruct, R.id.iv, R.id.iv1})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -281,13 +281,13 @@ public class LeaveApplyforActivity extends BaseActivity {
             case R.id.ci_approved_pic:
 //                startActivity(new Intent(mContext, SelDepartmentActivity.class));
                 Intent intent = new Intent(LeaveApplyforActivity.this, SelDepartmentActivity_meet_zb_single.class);
-                startActivityForResult(intent,110);
+                startActivityForResult(intent, 110);
 
                 break;
             case R.id.ci_copy_pic:
 //                startActivity(new Intent(mContext, SelDepartmentActivity_x.class));
                 Intent intent1 = new Intent(LeaveApplyforActivity.this, SelDepartmentActivity_meet_zb_single.class);
-                startActivityForResult(intent1,120);
+                startActivityForResult(intent1, 120);
                 break;
             case R.id.tv_back_instruct:
                 postData();
@@ -305,28 +305,28 @@ public class LeaveApplyforActivity extends BaseActivity {
     }
 
     private void postData() {
-        if("请选择请假类别".equals(tvReaseon.getText().toString().trim())){
-            ToastHelper.showToast(mContext,"请选择请假类别");
+        if ("请选择请假类别".equals(tvReaseon.getText().toString().trim())) {
+            ToastHelper.showToast(mContext, "请选择请假类别");
             return;
         }
-        if("请选择开始时间".equals(tvTimeStart.getText().toString().trim())){
-            ToastHelper.showToast(mContext,"请选择开始时间");
+        if ("请选择开始时间".equals(tvTimeStart.getText().toString().trim())) {
+            ToastHelper.showToast(mContext, "请选择开始时间");
             return;
         }
-        if("请选择结束时间".equals(tvTimeStart.getText().toString().trim())){
-            ToastHelper.showToast(mContext,"请选择结束时间");
+        if ("请选择结束时间".equals(tvTimeStart.getText().toString().trim())) {
+            ToastHelper.showToast(mContext, "请选择结束时间");
             return;
         }
-        if(TextUtils.isEmpty(etContent.getText().toString().trim())){
-            ToastHelper.showToast(mContext,"请填写请假事由");
+        if (TextUtils.isEmpty(etContent.getText().toString().trim())) {
+            ToastHelper.showToast(mContext, "请填写请假事由");
             return;
         }
-        if(TextUtils.isEmpty(tvOpreatorCode)){
-            ToastHelper.showToast(mContext,"请选择审批人");
+        if (TextUtils.isEmpty(tvOpreatorCode)) {
+            ToastHelper.showToast(mContext, "请选择审批人");
             return;
         }
-        if(TextUtils.isEmpty(copierCode)){
-            ToastHelper.showToast(mContext,"请选择抄送人");
+        if (TextUtils.isEmpty(copierCode)) {
+            ToastHelper.showToast(mContext, "请选择抄送人");
             return;
         }
         showDialogLoading();
@@ -336,9 +336,9 @@ public class LeaveApplyforActivity extends BaseActivity {
         params.put("approver", tvOpreatorCode);
         params.put("describe", etContent.getText().toString());
         params.put("duration", tvDay.getText().toString());
-        params.put("startTime",tvTimeStart.getText().toString());
-        params.put("endTime",tvTimeEnd.getText().toString());
-        params.put("cause",tvReaseon.getText().toString());
+        params.put("startTime", tvTimeStart.getText().toString());
+        params.put("endTime", tvTimeEnd.getText().toString());
+        params.put("cause", tvReaseon.getText().toString());
         List<File> fils = new ArrayList<>();
         for (LocalMedia imgurl : selectList) {
             fils.add(new File(imgurl.getPath()));
@@ -346,7 +346,7 @@ public class LeaveApplyforActivity extends BaseActivity {
         HttpRequest.post_sendLeave(params, fils, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
-dismissDialogLoading();
+                dismissDialogLoading();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
                     ToastHelper.showToast(mContext, result.getString("msg"));
@@ -380,11 +380,11 @@ dismissDialogLoading();
 //                       tvDay.setText("");
 //                   }
 //                   else
-                    if (TimeUtils.differentDaysByMillisecond(tvTimeStart.getText().toString().trim(), tvTimeEnd.getText().toString().trim()) <0) {
+                    if (TimeUtils.differentDaysByMillisecond(tvTimeStart.getText().toString().trim(), tvTimeEnd.getText().toString().trim()) < 0) {
                         ToastHelper.showToast(mContext, "请选择不小于开始时间的结束时间");
                         tvDay.setText("");
                     } else
-                        tvDay.setText((1 + TimeUtils.differentDaysByMillisecond(tvTimeStart.getText().toString().trim(), tvTimeEnd.getText().toString().trim()))+"");
+                        tvDay.setText((1 + TimeUtils.differentDaysByMillisecond(tvTimeStart.getText().toString().trim(), tvTimeEnd.getText().toString().trim())) + "");
                 }
             }
         }).setType(new boolean[]{true, true, true, false, false, false})
@@ -404,7 +404,7 @@ dismissDialogLoading();
         EventBus.getDefault().unregister(this);
     }
 
-//    // 执行人
+    //    // 执行人
     public void onEventMainThread(People event) {
         selectList2.clear();
         selectList2.add(event);
@@ -419,7 +419,8 @@ dismissDialogLoading();
 //        tvOpreatorCode = uids.substring(0, uids.length() - 1);
         //     Toast.makeText(this, uids.substring(0,uids.length()-1), Toast.LENGTH_SHORT).show();
     }
-//
+
+    //
 //    // 抄送人
     public void onEventMainThread(People_x event_x) {
         selectList2_x.clear();

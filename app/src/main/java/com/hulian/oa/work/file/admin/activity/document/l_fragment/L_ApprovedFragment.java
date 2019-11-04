@@ -118,8 +118,8 @@ public class L_ApprovedFragment extends Fragment implements PullLoadMoreRecycler
     }
 
     private void setRefresh() {
-//        mRecyclerViewAdapter.clearData();
-//        mCount = 1;
+        mRecyclerViewAdapter.clearData();
+        mCount = 1;
     }
 
     private void getData() {

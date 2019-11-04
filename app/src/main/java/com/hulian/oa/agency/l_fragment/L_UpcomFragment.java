@@ -65,15 +65,14 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
     }
 
     private void initList() {
-
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
         mRecyclerView.setVerticalScrollBarEnabled(true);
         //设置下拉刷新是否可见
-        //mPullLoadMoreRecyclerView.setRefreshing(true);
+        mPullLoadMoreRecyclerView.setRefreshing(true);
         //设置是否可以下拉刷新
-        //mPullLoadMoreRecyclerView.setPullRefreshEnable(true);
+        mPullLoadMoreRecyclerView.setPullRefreshEnable(true);
         //设置是否可以上拉刷新
         mPullLoadMoreRecyclerView.setPushRefreshEnable(false);
         //显示下拉刷新
@@ -233,11 +232,13 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
         EventBus.getDefault().post(mAgencyCount);
         if(agencyNewslist.size()==0){
             emptyBg.setVisibility(View.VISIBLE);
-            mPullLoadMoreRecyclerView.setVisibility(View.GONE);
+//            qgl改的
+//            mPullLoadMoreRecyclerView.setVisibility(View.GONE);
         }
         else {
+            //            qgl改的
             emptyBg.setVisibility(View.GONE);
-            mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
+//            mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
         }
         return agencyNewslist;
     }

@@ -148,7 +148,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="9dp"
                     android:layout_toRightOf="@+id/gw_img1111"
-                    android:text="公文附件"
+                    android:text="任务附件"
                     android:textColor="#ff313131"
                     android:textSize="14sp" />
 
@@ -191,7 +191,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="9dp"
                     android:layout_toRightOf="@+id/gw_img3"
-                    android:text="公文照片"
+                    android:text="任务照片"
                     android:textColor="#ff313131"
                     android:textSize="14sp" />
             </RelativeLayout>
