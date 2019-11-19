@@ -164,7 +164,7 @@ public class HttpRequest {
      */
     public static void postDocumentSendApi(RequestParams params, List<File> files, ResponseCallback callback) {
         //  RequestMode.postRequest(Urls.commUrls+"system/officialDocument/publish", params, callback, null);
-        RequestMode.postMultipart(Urls.commUrls+"system/lotus/add", params, files, callback, null);
+        RequestMode.postMultipart_qgl(Urls.commUrls+"system/lotus/add", params, files, callback, null);
     }
 
 

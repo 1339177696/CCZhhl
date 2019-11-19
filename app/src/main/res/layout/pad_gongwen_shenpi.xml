@@ -192,6 +192,23 @@
             android:layout_height="fill_parent"
             android:layout_below="@id/doodle_title_bar">
 
+
+            <Button
+
+                android:layout_centerVertical="true"
+                android:id="@+id/lift"
+                android:text="左"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:id="@+id/riht"
+                android:text="右"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

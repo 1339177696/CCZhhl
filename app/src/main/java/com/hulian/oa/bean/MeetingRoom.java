@@ -7,6 +7,16 @@ public class MeetingRoom  {
     private String photoPath;
     private String isCheck;
 
+    public String getMeetingRoomName() {
+        return meetingRoomName;
+    }
+
+    public void setMeetingRoomName(String meetingRoomName) {
+        this.meetingRoomName = meetingRoomName;
+    }
+
+    private String meetingRoomName;
+
     public String getIsCheck() {
         return isCheck;
     }

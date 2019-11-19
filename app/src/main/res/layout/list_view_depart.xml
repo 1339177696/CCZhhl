@@ -5,12 +5,13 @@
     android:layout_margin="16dp"
     android:orientation="horizontal">
     <TextView
+        android:layout_marginLeft="@dimen/dp_10"
         android:id="@+id/tv_radio_text"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dp_45"
         android:text="名称"
         android:gravity="center_vertical"
         android:textColor="#ff323232"
-        android:textSize="@dimen/sp_20"
+        android:textSize="17sp"
         android:typeface="monospace" />
 </LinearLayout>

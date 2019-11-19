@@ -51,7 +51,6 @@ public class LeaveHistoryActivity extends BaseActivity implements PullLoadMoreRe
     }
 
     private void initList() {
-
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
@@ -102,7 +101,7 @@ public class LeaveHistoryActivity extends BaseActivity implements PullLoadMoreRe
         RequestParams params = new RequestParams();
         params.put("pageStart", mCount * 10 - 9 + "");
         params.put("pageEnd", mCount * 10 + "");
-        params.put("createBy", getIntent().getStringExtra("id"));
+        params.put("createBy",getIntent().getStringExtra("id"));
         HttpRequest.get_listWorkLeave(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {

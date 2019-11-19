@@ -55,7 +55,7 @@ public class MeetRoomAdapter extends BaseAdapter {
         TextView tv_meet_count=view.findViewById(R.id.tv_meet_count);
         TextView tv_sel_room=view.findViewById(R.id.tv_sel_room);
 //        Glide.with(mContext).load(list.get(position).getPhotoPath()).into(imageView);
-        tv_meet_room_num.setText(list.get(position).getMeetingRoomLocation());
+        tv_meet_room_num.setText(list.get(position).getMeetingRoomLocation()+list.get(position).getMeetingRoomName());
         tv_meet_count.setText("容纳人数："+list.get(position).getGalleryful());
         if(list.get(position).getIsCheck().equals("0")){
             tv_sel_room.setText("选择");

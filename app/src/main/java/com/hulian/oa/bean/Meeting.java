@@ -16,6 +16,17 @@ public class Meeting {
     private String meetingTimeBegin;
     private String meetingTimeEnd;
     private String signType;
+    private String meetingRoomName; // 会议室名称
+
+
+    public String getMeetingRoomName() {
+        return meetingRoomName;
+    }
+
+    public void setMeetingRoomName(String meetingRoomName) {
+        this.meetingRoomName = meetingRoomName;
+    }
+
 
     public String getSignType() {
         return signType;

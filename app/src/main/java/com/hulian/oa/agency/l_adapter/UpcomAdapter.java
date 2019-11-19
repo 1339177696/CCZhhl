@@ -183,10 +183,10 @@ public class UpcomAdapter extends RecyclerView.Adapter <UpcomAdapter.ViewHolder>
                     public void onClick(View view) {
                         String content = "";
                         RequestParams params = new RequestParams();
-                        params.put("offid", dataList.get(position).getId());
-                        params.put("uid", SPUtils.get(mContext, "userId", "").toString());
-                        params.put("content", content);
-                        params.put("result", "1");
+                        params.put("proid", dataList.get(position).getId());
+                        params.put("aaproverId", SPUtils.get(mContext, "userId", "").toString());
+                        params.put("approverOpinion", content);
+                        params.put("state", "1");
                         HttpRequest.postDocumentApproveApi(params, new ResponseCallback() {
                             @Override
                             public void onSuccess(Object responseObj) {
@@ -215,10 +215,10 @@ public class UpcomAdapter extends RecyclerView.Adapter <UpcomAdapter.ViewHolder>
                     public void onClick(View view) {
                         String content2 = "";
                         RequestParams params1 = new RequestParams();
-                        params1.put("offid", dataList.get(position).getId());
-                        params1.put("uid", SPUtils.get(mContext, "userId", "").toString());
-                        params1.put("content", content2);
-                        params1.put("result", "2");
+                        params1.put("proid", dataList.get(position).getId());
+                        params1.put("aaproverId", SPUtils.get(mContext, "userId", "").toString());
+                        params1.put("approverOpinion", content2);
+                        params1.put("state", "2");
                         HttpRequest.postDocumentApproveApi(params1, new ResponseCallback() {
                             @Override
                             public void onSuccess(Object responseObj) {

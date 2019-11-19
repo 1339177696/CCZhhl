@@ -140,9 +140,9 @@ public class LeaveExamineActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()){
             case R.id.tv_check_history://查看历史记录
-                Intent itent=new Intent();
+                Intent itent=new Intent(LeaveExamineActivity.this,LeaveHistoryActivity.class);
                 itent.putExtra("id",getIntent().getStringExtra("createByid"));
-                startActivity(new Intent(mContext, LeaveHistoryActivity.class));
+                startActivity(itent);
                 break;
             case R.id.tv_disagree://驳回
                 postData("2","");

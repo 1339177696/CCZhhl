@@ -361,9 +361,6 @@ public class LauncherDocumentActivity extends BaseActivity {
                 }
 
                 RequestParams params = new RequestParams();
-//                if (offid != null) {
-//                params.put("spare4", offid);
-//                }
                 params.put("spare4", "0");
                 params.put("initiationType", gwtype);
                 params.put("symbol", etnumber.getText().toString().trim());

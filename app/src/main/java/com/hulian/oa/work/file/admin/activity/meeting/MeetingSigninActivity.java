@@ -1,10 +1,13 @@
 package com.hulian.oa.work.file.admin.activity.meeting;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,10 +22,12 @@ import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.TimeUtils;
 import com.hulian.oa.utils.ToastHelper;
+import com.netease.nim.uikit.business.contact.core.viewholder.TextHolder;
 import com.yzq.zxinglibrary.android.CaptureActivity;
 import com.yzq.zxinglibrary.bean.ZxingConfig;
 import com.yzq.zxinglibrary.common.Constant;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import butterknife.BindView;
@@ -84,6 +89,7 @@ public class MeetingSigninActivity extends BaseActivity {
 
         switch (view.getId()) {
             case R.id.tv_back_instruct:
+                if (TextUtils.equals(tvBackInstruct.getText(), "签到")){
                 // sendData();
                 Intent intent = new Intent(MeetingSigninActivity.this, CaptureActivity.class);
                 /*ZxingConfig是配置类  可以设置是否显示底部布局，闪光灯，相册，是否播放提示音  震动等动能
@@ -99,6 +105,9 @@ public class MeetingSigninActivity extends BaseActivity {
                 //config.setShowFlashLight(true);//是否显示闪光灯
                 intent.putExtra(Constant.INTENT_ZXING_CONFIG, config);
                 startActivityForResult(intent, REQUEST_CODE_SCAN);
+            }else {
+                    Toast.makeText(MeetingSigninActivity.this,"已经签到了",Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.iv_back:
                 finish();
@@ -113,7 +122,6 @@ public class MeetingSigninActivity extends BaseActivity {
 
         RequestParams params = new RequestParams();
         params.put("meetingId", getIntent().getStringExtra("id"));
-
         HttpRequest.postMeeting(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -128,7 +136,8 @@ public class MeetingSigninActivity extends BaseActivity {
                         etSignType.setText("签到");
                     } else {
                         etSignType.setText("非签到");
-                        tvBackInstruct.setVisibility(View.INVISIBLE);
+                        tvBackInstruct.setText("已签到");
+                        tvBackInstruct.setBackgroundResource(R.drawable.edit_background_order1);
                     }
 
                     et_title.setText(meeting.getMeetingTheme());
@@ -147,7 +156,9 @@ public class MeetingSigninActivity extends BaseActivity {
                         }
                         if (meeting.getParticipants().get(i).getParticipantId().equals(SPUtils.get(mContext, "userId", "-1").toString())) {
                             if (meeting.getParticipants().get(i).getSignStatus().equals("1")) {
-                                tvBackInstruct.setVisibility(View.GONE);
+//                                tvBackInstruct.setVisibility(View.GONE);
+                                tvBackInstruct.setText("已签到");
+                                tvBackInstruct.setBackgroundResource(R.drawable.edit_background_order1);
                             }
                         }
                     }
@@ -167,12 +178,12 @@ public class MeetingSigninActivity extends BaseActivity {
 
     }
 
-    private void sendData() {
+    private void sendData(String meetingId) {
         String userid = SPUtils.get(this, "userId", "-1").toString();
         RequestParams params = new RequestParams();
         params.put("participantId", userid);
         params.put("meetingId", getIntent().getStringExtra("id"));
-
+        params.put("meetingRoomId", meetingId);
         HttpRequest.postMeetingsignIn(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -180,6 +191,9 @@ public class MeetingSigninActivity extends BaseActivity {
                     JSONObject result = new JSONObject(responseObj.toString());
                     if (TextUtils.equals(result.getString("code"), "0")) {
                         finish();
+
+                    }else {
+                        Toast.makeText(MeetingSigninActivity.this,"签到失败",Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -201,8 +215,15 @@ public class MeetingSigninActivity extends BaseActivity {
         if (requestCode == REQUEST_CODE_SCAN && resultCode == RESULT_OK) {
             if (data != null) {
                 String content = data.getStringExtra(Constant.CODED_CONTENT);
-                //  result.setText("扫描结果为：" + content);
-                ToastHelper.showToast(mContext, content);
+                try {
+                    JSONObject result = new JSONObject(content);
+                    Log.e("context",result.getString("id"));
+                    sendData(result.getString("id"));
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
                 //  sendData();
             }
         }

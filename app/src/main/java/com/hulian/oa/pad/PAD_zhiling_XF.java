@@ -89,6 +89,7 @@ import de.greenrobot.event.EventBus;
  */
 public class PAD_zhiling_XF extends BaseActivity implements View.OnClickListener
 {
+//
     private FrameLayout mFrameLayout;
     private DoodleView mDoodleView;
     private IDoodle mDoodle;

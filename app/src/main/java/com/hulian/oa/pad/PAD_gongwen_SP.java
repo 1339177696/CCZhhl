@@ -20,6 +20,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.util.Log;
@@ -27,6 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -36,6 +38,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.Target;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -52,24 +57,31 @@ import com.hulian.oa.utils.ToastHelper;
 import com.hulian.oa.work.file.admin.activity.document.DocumentLotusActivity;
 import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_ApprovedFragment;
 import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_PendFragment;
+import com.luck.picture.lib.entity.LocalMedia;
+import com.luck.picture.lib.tools.Constant;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import cn.forward.androids.utils.ImageUtils;
 import cn.forward.androids.utils.Util;
@@ -104,11 +116,12 @@ import okio.BufferedSink;
 import okio.Okio;
 import okio.Sink;
 
+import static com.netease.nim.uikit.common.util.media.BitmapUtil.calculateInSampleSize;
+
 /**
  * Created by qgl on 2019/8/31 9:11.
  */
-public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
-{
+public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener {
     private FrameLayout mFrameLayout;
     private DoodleView mDoodleView;
     private IDoodle mDoodle;
@@ -189,9 +202,7 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
     private ImageView iv_back;
     private String offId;
     List<DocumentImage> memberList = new ArrayList<>();
-    private String mImagePath = "";
 
-    private static Bitmap bitmap;
 
     private RadioButton tv_disagree;
     private RadioButton tv_agree;
@@ -202,19 +213,63 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private static final OkHttpClient client = new OkHttpClient();
+
+
+    private Button lift;
+    private Button riht;
+    private int page = 0;
+    private List<String> akes = new ArrayList<>();
+    private static Bitmap bitmap;
+
+    // 保存签字的图片
+    List<File> fiels = new ArrayList<>();
+
+    private Padbean padbean;
+    private List<Padbean>padbeans = new ArrayList<>();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pad_gongwen_shenpi);
+        lift = findViewById(R.id.lift);
+        riht = findViewById(R.id.riht);
+        lift.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (page >1) {
+                    page--;
+                    startData();
+                } else {
+                    Toast.makeText(PAD_gongwen_SP.this, "第一张图片", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+        riht.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDoodle.save();
+                if (page < akes.size() - 1) {
+                    page++;
+                    Log.e("页数", page + "");
+                    startData();
+                } else {
+                    Log.e("页数没了", page + "");
+                    Toast.makeText(PAD_gongwen_SP.this, "没图了", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
         offId = getIntent().getStringExtra("offId");
-        mFrameLayout = (FrameLayout)findViewById(R.id.doodle_container);
+        mFrameLayout = (FrameLayout) findViewById(R.id.doodle_container);
         tv_pd_filename = (TextView) findViewById(R.id.tv_pd_filename);
         tv_pd_number = (TextView) findViewById(R.id.tv_pd_number);
         tv_pd_filename.setOnClickListener(this);
 
         doodle_btn_back = (MaskImageView) findViewById(R.id.doodle_btn_back);  /*返回箭头*/
         doodle_txt_title = (STextView) findViewById(R.id.doodle_txt_title);
-        doodle_btn_rotate = (MaskImageView)findViewById(R.id.doodle_btn_rotate);
+        doodle_btn_rotate = (MaskImageView) findViewById(R.id.doodle_btn_rotate);
         mBtnHidePanel = (MaskImageView) findViewById(R.id.doodle_btn_hide_panel);
         doodle_btn_finish = (MaskImageView) findViewById(R.id.doodle_btn_finish);
         mSettingsPanel = (RelativeLayout) findViewById(R.id.doodle_panel);
@@ -229,7 +284,7 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
         bar_shape_mode = (LinearLayout) findViewById(R.id.bar_shape_mode);
         btn_hand_write = (ImageView) findViewById(R.id.btn_hand_write);
         btn_arrow = (ImageView) findViewById(R.id.btn_arrow);
-        btn_line = (ImageView)findViewById(R.id.btn_line);
+        btn_line = (ImageView) findViewById(R.id.btn_line);
         btn_holl_circle = (ImageView) findViewById(R.id.btn_holl_circle);
         btn_fill_circle = (ImageView) findViewById(R.id.btn_fill_circle);
         btn_holl_rect = (ImageView) findViewById(R.id.btn_holl_rect);
@@ -241,8 +296,8 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
         mEditSizeSeekBar = (SeekBar) findViewById(R.id.doodle_seekbar_size);
 //        mEditSizeSeekBar.setProgress(1);
 //        mEditSizeSeekBar.setMax(1);
-        mPaintSizeView = (TextView)findViewById(R.id.paint_size_text);
-        mPaintSizeView.setText( mEditSizeSeekBar.getProgress()+1+"");
+        mPaintSizeView = (TextView) findViewById(R.id.paint_size_text);
+        mPaintSizeView.setText(mEditSizeSeekBar.getProgress() + 1 + "");
         mSelectedTextEditContainer = (LinearLayout) findViewById(R.id.doodle_selectable_edit_container);
         doodle_selectable_edit = (TextView) findViewById(R.id.doodle_selectable_edit);
         doodle_selectable_bottom = (TextView) findViewById(R.id.doodle_selectable_bottom);
@@ -283,26 +338,25 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
                 return true;
             }
         });
-        mEditSizeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
-        {
+        mEditSizeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (progress <= 0)
-                {
+                if (progress <= 0) {
                     mEditSizeSeekBar.setProgress(0);
-               //     return;
+                    //     return;
                 }
 //                if ((int) mDoodle.getSize() == progress)
 //                {
 //                //    return;
 //                }
-                if(mDoodle!=null) {
+                if (mDoodle != null) {
                     mDoodle.setSize(progress);
                     if (mTouchGestureListener.getSelectedItem() != null) {
                         mTouchGestureListener.getSelectedItem().setSize(progress);
                     }
                 }
             }
+
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
             }
@@ -311,23 +365,16 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
-
         iv_back = findViewById(R.id.iv_back);
         iv_back.setOnClickListener(this);
-
         tv_disagree = findViewById(R.id.tv_disagree);
         tv_agree = findViewById(R.id.tv_agree);
         tv_disagree.setOnClickListener(this);
         tv_agree.setOnClickListener(this);
         getNetData();
-
-
     }
 
-
-
-    private void getNetData()
-    {
+    private void getNetData() {
         RequestParams params = new RequestParams();
         params.put("id", offId);
         HttpRequest.postDocumentInfoApi(params, new ResponseCallback() {
@@ -341,18 +388,17 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
                     JSONObject lotus = data.getJSONObject("lotus");
                     String aa = lotus.getString("files");
                     tv_pd_number.setText(lotus.getString("symbol"));
-                    tv_pd_filename.setText(lotus.getString("filesName"));
-                    if (aa!=null&&aa!=""){
+                    if (aa != null && aa != "") {
                         List<String> c = Arrays.asList(aa.split(","));
-                        List<String> d = new ArrayList<>();
-                        for (int i = 0;i<=c.size()-1;i++){
-                            if (getMIMEType(c.get(i)).equals("image/jpeg")||getMIMEType(c.get(i)).equals("image/png")||getMIMEType(c.get(i)).equals("image/gif")){
-                                d.add(c.get(i));
-                                mImagePath = d.get(0).toString();
-                            }
-                            else {
+                        padbean = new Padbean();
+                        for (int i = 0; i < c.size(); i++) {
+                            if (getMIMEType(c.get(i)).equals("image/jpeg") || getMIMEType(c.get(i)).equals("image/png") || getMIMEType(c.get(i)).equals("image/gif")) {
+                                akes.add(c.get(i));
+                                padbean.setUrl(c.get(i));
+                                padbeans.add(padbean);
+                            } else {
                                 path_x = c.get(i);
-
+                                tv_pd_filename.setText(lotus.getString("filesName"));
                             }
                         }
 
@@ -362,7 +408,7 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
 //                            }.getType());
 //                    mImagePath = memberList.get(0).getFilePath().toString();
 
-                    Log.e("1111",mImagePath);
+//                    Log.e("1111",mImagePath);
                     startData();
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -381,18 +427,16 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
         mDoodleParams = new DoodleParams();
         mDoodleParams.mIsFullScreen = true;
         // 图片路径
-//       mDoodleParams.mImagePath = mImagePath;
+//        mDoodleParams.mImagePath = akes.get(page);
+        mDoodleParams.mImagePath = padbeans.get(page).getUrl();
         // 初始画笔大小
         mDoodleParams.mPaintUnitSize = DoodleView.DEFAULT_SIZE;
-//        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), flag);  //获得图片
-//        Bitmap bitmap = BitmapFactory.decodeFile(bundle.getString("data"));
+        returnBitMap(akes.get(page));
 
-        // 替换了
-//        Bitmap bitmap = getBitmap(bundle.getString("flag"));
-        Log.e("222",mImagePath);
-//        Bitmap bitmap = getBitmap(mImagePath);
-        Bitmap bitmap2 =  returnBitMap(mImagePath);
-        mDoodle = mDoodleView = new DoodelViewWrapper(this, bitmap2, new IDoodleListener() {
+    }
+
+    private void setViewWrapper() {
+        mDoodle = mDoodleView = new DoodelViewWrapper(this, bitmap, new IDoodleListener() {
             @Override
             public void onSaved(IDoodle doodle, Bitmap bitmap, Runnable callback) { // 保存图片为jpg格式
                 File doodleFile = null;
@@ -406,6 +450,7 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
                     doodleFile = new File(dcimFile, "Doodle");
                     //　保存的路径
                     file = new File(doodleFile, System.currentTimeMillis() + ".jpg");
+                    Log.e("地址",System.currentTimeMillis() + ".jpg");
                 } else {
                     if (isDir) {
                         doodleFile = new File(savePath);
@@ -417,29 +462,35 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
                     }
                 }
                 doodleFile.mkdirs();
-
                 FileOutputStream outputStream = null;
                 try {
                     outputStream = new FileOutputStream(file);
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 95, outputStream);
                     ImageUtils.addImage(PAD_gongwen_SP.this.getContentResolver(), file.getAbsolutePath());
-                    Intent intent = new Intent();
-                    intent.putExtra(KEY_IMAGE_PATH, file.getAbsolutePath());
-                    Log.e("图片路径", file.getAbsolutePath());
-                    urlStr = file.getAbsolutePath();
-                    intent.putExtra("flag", approveflag);
-                    intent.putExtra("message", rejectedText);
-                    //intent.putExtra("position",bundle.getInt("position"));
-                    //intent.putExtra("whichTab",bundle.getInt("whichTab"));
-                    intent.putExtra("filepath",file.getAbsolutePath());
-                    PAD_gongwen_SP.this.setResult(Activity.RESULT_OK, intent);
-                    PAD_gongwen_SP.this.finish();
+//                    Intent intent = new Intent();
+//                    intent.putExtra(KEY_IMAGE_PATH, file.getAbsolutePath());
+                    Log.e("图片路径11111", file.getAbsolutePath());
+
+                    fiels.add(file);
+                    padbean.setFile(file);
+
+
+
+//                    urlStr = file.getAbsolutePath();
+//                    intent.putExtra("flag", approveflag);
+//                    intent.putExtra("message", rejectedText);
+//                    intent.putExtra("position",bundle.getInt("position"));
+//                    intent.putExtra("whichTab",bundle.getInt("whichTab"));
+//                    intent.putExtra("filepath", file.getAbsolutePath());
+//                    PAD_gongwen_SP.this.setResult(Activity.RESULT_OK, intent);
+//                    PAD_gongwen_SP.this.finish();
                 } catch (Exception e) {
                     e.printStackTrace();
                     onError(DoodleView.ERROR_SAVE, e.getMessage());
                 } finally {
                     Util.closeQuietly(outputStream);
                 }
+
             }
 
             public void onError(int i, String msg) {
@@ -519,7 +570,7 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
         super.onPause();
     }
 
-//    添加文字
+    //    添加文字
     private void createDoodleText(final DoodleText doodleText, final float x, final float y) {
         if (PAD_gongwen_SP.this.isFinishing()) {
             return;
@@ -575,10 +626,8 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
     boolean flagClick;
 
     @Override
-    public void onClick(final View v)
-    {
-        if (v.getId() == R.id.btn_pen_hand)
-        {
+    public void onClick(final View v) {
+        if (v.getId() == R.id.btn_pen_hand) {
             mEditSizeSeekBar.setProgress(0);
             mEditSizeSeekBar.setMax(4);
             mEditSizeSeekBar.invalidate();
@@ -594,8 +643,7 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
             }
         } else if (v.getId() == R.id.btn_pen_copy) {
             mDoodle.setPen(DoodlePen.COPY);
-        } else if (v.getId() == R.id.btn_pen_eraser)
-        {
+        } else if (v.getId() == R.id.btn_pen_eraser) {
             mEditSizeSeekBar.setProgress(50);
             mEditSizeSeekBar.setMax(100);
             mEditSizeSeekBar.invalidate();
@@ -605,7 +653,7 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
             mEditSizeSeekBar.invalidate();
             mDoodle.setPen(DoodlePen.ERASER);
             mDoodle.setSize(mEditSizeSeekBar.getProgress());
-            mPaintSizeView.setText( mEditSizeSeekBar.getProgress()+1+"");
+            mPaintSizeView.setText(mEditSizeSeekBar.getProgress() + 1 + "");
             if (mTouchGestureListener.getSelectedItem() != null) {
                 mTouchGestureListener.getSelectedItem().setSize(mEditSizeSeekBar.getProgress());
             }
@@ -748,15 +796,10 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
             mDoodle.setShape(DoodleShape.HOLLOW_RECT);
         } else if (v.getId() == R.id.btn_fill_rect) {
             mDoodle.setShape(DoodleShape.FILL_RECT);
-        }
-
-        else if (v.getId() == R.id.iv_back)
-        {
+        } else if (v.getId() == R.id.iv_back) {
             // 返回键
             finish();
-        }
-        else if (v.getId() == R.id.tv_disagree)
-        {
+        } else if (v.getId() == R.id.tv_disagree) {
             // 驳回
             RequestParams params1 = new RequestParams();
             params1.put("proid", offId);
@@ -786,47 +829,54 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
                     Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
                 }
             });
-        }
-        else if (v.getId() == R.id.tv_agree)
-        {
+        } else if (v.getId() == R.id.tv_agree) {
+            List<File> fils = new ArrayList<>();
+            for (File media : fiels){
+                fils.add(new File(media.getPath()));
+                Log.e("图片",media.getPath());
+            }
             // 同意
-            RequestParams params = new RequestParams();
-            params.put("proid", offId);
-            params.put("aaproverId", SPUtils.get(mContext, "userId", "").toString());
-            params.put("approverOpinion", "");
-            params.put("state", "1");
-            HttpRequest.postDocumentApproveApi(params, new ResponseCallback() {
-                @Override
-                public void onSuccess(Object responseObj) {
-                    try {
-                        JSONObject result = new JSONObject(responseObj.toString());
-                        ToastHelper.showToast(mContext, result.getString("msg"));
-                        if (result.getString("code").equals("0")) {
-                            EventBus.getDefault().post(new L_PendFragment());
-                            EventBus.getDefault().post(new L_ApprovedFragment());
-                            EventBus.getDefault().post(new L_UpcomFragment());
-                            finish();
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onFailure(OkHttpException failuer) {
-                    //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
-                    Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
-                }
-            });
-        }else if (v.getId() == R.id.tv_pd_filename){
-            if (path_x!=""){
+//            RequestParams params = new RequestParams();
+//            params.put("proid", offId);
+//            params.put("aaproverId", SPUtils.get(mContext, "userId", "").toString());
+//            params.put("approverOpinion", "");
+//            params.put("state", "1");
+//
+//            List<File> fils = new ArrayList<>();
+//            for (File media : fiels){
+//                fils.add(new File(media.getPath()));
+//            }
+//            HttpRequest.postDocumentApproveApi(params,new ResponseCallback() {
+//                @Override
+//                public void onSuccess(Object responseObj) {
+//                    try {
+//                        JSONObject result = new JSONObject(responseObj.toString());
+//                        ToastHelper.showToast(mContext, result.getString("msg"));
+//                        if (result.getString("code").equals("0")) {
+//                            EventBus.getDefault().post(new L_PendFragment());
+//                            EventBus.getDefault().post(new L_ApprovedFragment());
+//                            EventBus.getDefault().post(new L_UpcomFragment());
+//                            finish();
+//                        }
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(OkHttpException failuer) {
+//                    //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
+//                    Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
+//                }
+//            });
+        } else if (v.getId() == R.id.tv_pd_filename) {
+            if (path_x != "") {
                 //            文件名字
                 // 這裏加打開文件
                 loadDialog.show();
                 downloadFilea(path_x);
-            }
-            else {
-                Toast.makeText(PAD_gongwen_SP.this,"没有文件",Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(PAD_gongwen_SP.this, "没有文件", Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -841,6 +891,7 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
         view.startAnimation(mViewShowAnimation);
         view.setVisibility(View.VISIBLE);
     }
+
     private void hideView(View view) {
         if (view.getVisibility() != View.VISIBLE) {
             return;
@@ -912,6 +963,7 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
         }
 
         private Map<IDoodleShape, Integer> mBtnShapeIds = new HashMap<>();
+
         {
             mBtnShapeIds.put(DoodleShape.HAND_WRITE, R.id.btn_hand_write);
             mBtnShapeIds.put(DoodleShape.ARROW, R.id.btn_arrow);
@@ -934,7 +986,7 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
         public void setSize(float paintSize) {
             super.setSize(paintSize);
             mEditSizeSeekBar.setProgress((int) paintSize);
-            mPaintSizeView.setText((int) paintSize+1+"");
+            mPaintSizeView.setText((int) paintSize + 1 + "");
         }
 
         @Override
@@ -996,8 +1048,7 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
         }
 
         private void setSingleSelected(Collection<Integer> ids, int selectedId) {
-            for (int id : ids)
-            {
+            for (int id : ids) {
                 if (id == selectedId) {
                     PAD_gongwen_SP.this.findViewById(id).setSelected(true);
                 } else {
@@ -1010,42 +1061,24 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
     }
 
 
-    private Bitmap getBitmap(String content)
-    {
-//        switch (content){
-//            case "1":
-//                return ((BitmapDrawable)getResources().getDrawable(R.drawable.img1)).getBitmap();
-//            default:
-//                return null;
-//        }
-        if (content!=null)
-        {
-            return ((BitmapDrawable)getResources().getDrawable(R.drawable.img1)).getBitmap();
-
-        }
-        return null;
-    }
-
-
-    public static Bitmap returnBitMap(final String url){
-
+    public void returnBitMap(final String url) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 URL imageurl = null;
-
                 try {
                     imageurl = new URL(url);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }
                 try {
-                    HttpURLConnection conn = (HttpURLConnection)imageurl.openConnection();
+                    HttpURLConnection conn = (HttpURLConnection) imageurl.openConnection();
                     conn.setDoInput(true);
                     conn.connect();
                     InputStream is = conn.getInputStream();
                     bitmap = BitmapFactory.decodeStream(is);
                     is.close();
+                    handler.sendMessage( new Message());
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -1053,8 +1086,16 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
             }
         }).start();
 
-        return bitmap;
     }
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            setViewWrapper();
+        }
+
+    };
 
 
     //调用方法。先请求权限
@@ -1153,6 +1194,7 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
         intent.setDataAndType(uri, "*/*");
         return intent;
     }
+
     /**
      * 转换 content:// uri
      *
