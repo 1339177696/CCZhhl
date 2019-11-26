@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Path;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -65,6 +66,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -218,25 +220,21 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
     private Button lift;
     private Button riht;
     private int page = 0;
-    private List<String> akes = new ArrayList<>();
     private static Bitmap bitmap;
 
-    // 保存签字的图片
-    List<File> fiels = new ArrayList<>();
-
-    private Padbean padbean;
     private List<Padbean>padbeans = new ArrayList<>();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pad_gongwen_shenpi);
+        loadDialog.show();
         lift = findViewById(R.id.lift);
         riht = findViewById(R.id.riht);
         lift.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (page >1) {
+                mDoodle.save();
+                if (page >0) {
                     page--;
                     startData();
                 } else {
@@ -249,7 +247,7 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
             @Override
             public void onClick(View v) {
                 mDoodle.save();
-                if (page < akes.size() - 1) {
+                if (page < padbeans.size() - 1) {
                     page++;
                     Log.e("页数", page + "");
                     startData();
@@ -388,12 +386,13 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
                     JSONObject lotus = data.getJSONObject("lotus");
                     String aa = lotus.getString("files");
                     tv_pd_number.setText(lotus.getString("symbol"));
+                    padbeans.clear();
                     if (aa != null && aa != "") {
                         List<String> c = Arrays.asList(aa.split(","));
-                        padbean = new Padbean();
+                       Padbean padbean;
                         for (int i = 0; i < c.size(); i++) {
                             if (getMIMEType(c.get(i)).equals("image/jpeg") || getMIMEType(c.get(i)).equals("image/png") || getMIMEType(c.get(i)).equals("image/gif")) {
-                                akes.add(c.get(i));
+                                padbean = new Padbean();
                                 padbean.setUrl(c.get(i));
                                 padbeans.add(padbean);
                             } else {
@@ -403,13 +402,9 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
                         }
 
                     }
-//                    memberList = gson.fromJson(result.getJSONObject("data").getJSONArray("fileList").toString(),
-//                            new TypeToken<List<DocumentImage>>() {
-//                            }.getType());
-//                    mImagePath = memberList.get(0).getFilePath().toString();
 
-//                    Log.e("1111",mImagePath);
                     startData();
+                    getfile();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -422,16 +417,35 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
             }
         });
     }
+//    转File
+    private void getfile(){
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                for (int j = 0;j<padbeans.size();j++){
+                    padbeans.get(j).setFile(getFile(getBitmap(padbeans.get(j).getUrl())));
+                }
+                Message message = new Message();
+                message.what = 1000;
+                handler.sendMessage(message);
+            }
+        }.start();
+
+    }
 
     private void startData() {
         mDoodleParams = new DoodleParams();
         mDoodleParams.mIsFullScreen = true;
-        // 图片路径
-//        mDoodleParams.mImagePath = akes.get(page);
-        mDoodleParams.mImagePath = padbeans.get(page).getUrl();
         // 初始画笔大小
         mDoodleParams.mPaintUnitSize = DoodleView.DEFAULT_SIZE;
-        returnBitMap(akes.get(page));
+        if (padbeans.get(page).getBitmap()==null){
+            returnBitMap(padbeans.get(page).getUrl());
+        }else {
+            bitmap = padbeans.get(page).getBitmap();
+            handler.sendMessage(new Message());
+        }
+
 
     }
 
@@ -450,7 +464,6 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
                     doodleFile = new File(dcimFile, "Doodle");
                     //　保存的路径
                     file = new File(doodleFile, System.currentTimeMillis() + ".jpg");
-                    Log.e("地址",System.currentTimeMillis() + ".jpg");
                 } else {
                     if (isDir) {
                         doodleFile = new File(savePath);
@@ -467,23 +480,8 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
                     outputStream = new FileOutputStream(file);
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 95, outputStream);
                     ImageUtils.addImage(PAD_gongwen_SP.this.getContentResolver(), file.getAbsolutePath());
-//                    Intent intent = new Intent();
-//                    intent.putExtra(KEY_IMAGE_PATH, file.getAbsolutePath());
-                    Log.e("图片路径11111", file.getAbsolutePath());
-
-                    fiels.add(file);
-                    padbean.setFile(file);
-
-
-
-//                    urlStr = file.getAbsolutePath();
-//                    intent.putExtra("flag", approveflag);
-//                    intent.putExtra("message", rejectedText);
-//                    intent.putExtra("position",bundle.getInt("position"));
-//                    intent.putExtra("whichTab",bundle.getInt("whichTab"));
-//                    intent.putExtra("filepath", file.getAbsolutePath());
-//                    PAD_gongwen_SP.this.setResult(Activity.RESULT_OK, intent);
-//                    PAD_gongwen_SP.this.finish();
+                    padbeans.get(page).setFile(file);
+                    padbeans.get(page).setBitmap(bitmap);
                 } catch (Exception e) {
                     e.printStackTrace();
                     onError(DoodleView.ERROR_SAVE, e.getMessage());
@@ -622,8 +620,6 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
     }
 
     private ValueAnimator mRotateAnimator;
-
-    boolean flagClick;
 
     @Override
     public void onClick(final View v) {
@@ -830,45 +826,42 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
                 }
             });
         } else if (v.getId() == R.id.tv_agree) {
+            mDoodle.save();
+            startData();
+
+//            // 同意
+            RequestParams params = new RequestParams();
+            params.put("proid", offId);
+            params.put("aaproverId", SPUtils.get(mContext, "userId", "").toString());
+            params.put("approverOpinion", "");
+            params.put("state", "1");
             List<File> fils = new ArrayList<>();
-            for (File media : fiels){
-                fils.add(new File(media.getPath()));
-                Log.e("图片",media.getPath());
+            for (Padbean media : padbeans){
+                fils.add(media.getFile());
             }
-            // 同意
-//            RequestParams params = new RequestParams();
-//            params.put("proid", offId);
-//            params.put("aaproverId", SPUtils.get(mContext, "userId", "").toString());
-//            params.put("approverOpinion", "");
-//            params.put("state", "1");
-//
-//            List<File> fils = new ArrayList<>();
-//            for (File media : fiels){
-//                fils.add(new File(media.getPath()));
-//            }
-//            HttpRequest.postDocumentApproveApi(params,new ResponseCallback() {
-//                @Override
-//                public void onSuccess(Object responseObj) {
-//                    try {
-//                        JSONObject result = new JSONObject(responseObj.toString());
-//                        ToastHelper.showToast(mContext, result.getString("msg"));
-//                        if (result.getString("code").equals("0")) {
-//                            EventBus.getDefault().post(new L_PendFragment());
-//                            EventBus.getDefault().post(new L_ApprovedFragment());
-//                            EventBus.getDefault().post(new L_UpcomFragment());
-//                            finish();
-//                        }
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(OkHttpException failuer) {
-//                    //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
-//                    Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
-//                }
-//            });
+            HttpRequest.postDocumentApproveApi_PAD(params,fils,new ResponseCallback() {
+                @Override
+                public void onSuccess(Object responseObj) {
+                    try {
+                        JSONObject result = new JSONObject(responseObj.toString());
+                        ToastHelper.showToast(mContext, result.getString("msg"));
+                        if (result.getString("code").equals("0")) {
+                            EventBus.getDefault().post(new L_PendFragment());
+                            EventBus.getDefault().post(new L_ApprovedFragment());
+                            EventBus.getDefault().post(new L_UpcomFragment());
+                            finish();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(OkHttpException failuer) {
+                    //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
+                    Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
+                }
+            });
         } else if (v.getId() == R.id.tv_pd_filename) {
             if (path_x != "") {
                 //            文件名字
@@ -1060,29 +1053,35 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
         }
     }
 
+    private Bitmap getBitmap(String url){
+        Bitmap bitmap = null;
+        URL imageurl = null;
+        try {
+            imageurl = new URL(url);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        try {
+            HttpURLConnection conn = (HttpURLConnection) imageurl.openConnection();
+            conn.setDoInput(true);
+            conn.connect();
+            InputStream is = conn.getInputStream();
+            bitmap = BitmapFactory.decodeStream(is);
+            is.close();
+            return bitmap;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
+    }
 
     public void returnBitMap(final String url) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                URL imageurl = null;
-                try {
-                    imageurl = new URL(url);
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    HttpURLConnection conn = (HttpURLConnection) imageurl.openConnection();
-                    conn.setDoInput(true);
-                    conn.connect();
-                    InputStream is = conn.getInputStream();
-                    bitmap = BitmapFactory.decodeStream(is);
-                    is.close();
-                    handler.sendMessage( new Message());
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                bitmap = getBitmap(url);
+                handler.sendMessage( new Message());
             }
         }).start();
 
@@ -1092,11 +1091,35 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            setViewWrapper();
+            if (msg.what == 1000){
+                loadDialog.dismiss();
+            }else {
+                setViewWrapper();
+            }
         }
 
     };
 
+    //在这里抽取了一个方法   可以封装到自己的工具类中...
+    public File getFile(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+        File file = new File(Environment.getExternalStorageDirectory()+"/"+System.currentTimeMillis() + ".jpg");
+        try {
+            file.createNewFile();
+            FileOutputStream fos = new FileOutputStream(file);
+            InputStream is = new ByteArrayInputStream(baos.toByteArray());
+            int x = 0;
+            byte[] b = new byte[1024 * 100];
+            while ((x = is.read(b)) != -1) {
+                fos.write(b, 0, x);
+            }
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return file;
+    }
 
     //调用方法。先请求权限
     public void downloadFilea(String a) {

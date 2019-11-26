@@ -226,6 +226,15 @@ public class HttpRequest {
   public static void postDocumentApproveApi(RequestParams params,  ResponseCallback callback) {
     RequestMode.postRequest(Urls.commUrls+"system/lotus/lotusApprove", params, callback, null);
   }
+
+    /**
+     * 公文审批 PAD
+     * @param params 入参
+     * @param callback 回调接口
+     */
+    public static void postDocumentApproveApi_PAD(RequestParams params, List<File> file, ResponseCallback callback) {
+        RequestMode.postMultipart_qgl(Urls.commUrls+"system/lotus/lotusApprove", params, file,callback, null);
+    }
   /**
    * 查询部门人员
    * @param params 入参
