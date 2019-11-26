@@ -59,6 +59,11 @@ public class TimeUtil {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         return (formatter.format(new Date()));
     }
+//    qgl
+    public static String getNowDatetime1() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        return (formatter.format(new Date()));
+    }
 
     public static int getNow() {
         return (int) ((new Date()).getTime() / 1000);
@@ -72,7 +77,7 @@ public class TimeUtil {
     }
 
     public static String getDateString(long milliseconds) {
-        return getDateTimeString(milliseconds, "yyyyMMdd");
+        return getDateTimeString(milliseconds, "yyyy-MM-dd");
     }
 
     public static String getTimeString(long milliseconds) {

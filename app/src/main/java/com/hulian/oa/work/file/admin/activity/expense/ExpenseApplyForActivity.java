@@ -5,16 +5,23 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.util.TimeUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
+import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
+import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.hulian.oa.BaseActivity;
 import com.hulian.oa.R;
 import com.hulian.oa.bean.People;
@@ -25,6 +32,7 @@ import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
+import com.hulian.oa.utils.PriceUtil;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.ToastHelper;
 import com.hulian.oa.work.file.admin.activity.document.LauncherDocumentActivity;
@@ -39,6 +47,7 @@ import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
+import com.netease.nim.avchatkit.common.util.TimeUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -58,7 +67,7 @@ import de.greenrobot.event.EventBus;
 public class ExpenseApplyForActivity extends BaseActivity {
     @BindView(R.id.tv_opreator)
     TextView tvOpreator;
-    String  tvOpreatorCode="";
+    String tvOpreatorCode = "";
     private List<People> selectList2 = new ArrayList<>();
     //报销事由
     @BindView(R.id.rl_expense_reason)
@@ -66,8 +75,22 @@ public class ExpenseApplyForActivity extends BaseActivity {
 
     @BindView(R.id.iv_back)
     RelativeLayout ivBack;
-    @BindView(R.id.tv_expense_content)
-    EditText tvExpenseContent;
+    //    20191126
+//    @BindView(R.id.tv_expense_content)
+//    EditText tvExpenseContent;
+    @BindView(R.id.tv_reaseon)
+    TextView tv_reaseon;
+    @BindView(R.id.tv_me)
+    TextView tv_me;
+    @BindView(R.id.tv_bx_time)
+    TextView tv_bx_time;
+    @BindView(R.id.et_expense_dx_monkey)
+    TextView et_expense_dx_monkey;
+    @BindView(R.id.tv_me_bumen)
+    TextView tv_me_bumen;
+    @BindView(R.id.tv_dj_number)
+    TextView tv_dj_number;
+
     @BindView(R.id.et_expense_monkey)
     EditText etExpenseMonkey;
     @BindView(R.id.ci_approved_pic)
@@ -89,6 +112,10 @@ public class ExpenseApplyForActivity extends BaseActivity {
     private L_GridRoamAdapter_qgl adapter3;
     private List<People> selectList3 = new ArrayList<>();
     private int maxSelectNum3 = 5;
+
+    List<String> reasonlist = new ArrayList<>();
+    private OptionsPickerView reasonPicker;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +123,31 @@ public class ExpenseApplyForActivity extends BaseActivity {
         EventBus.getDefault().register(this);
         ButterKnife.bind(this);
         init();
+        initReason();
+        tv_reaseon.setText("办公费");
+        tv_bx_time.setText(TimeUtil.getNowDatetime1());
+        tv_me.setText(SPUtils.get(ExpenseApplyForActivity.this, "nickname", "").toString());
+        tv_me_bumen.setText(SPUtils.get(ExpenseApplyForActivity.this, "deptname", "").toString());
+        etExpenseMonkey.addTextChangedListener(textWatcher);
+    }
+
+
+    private void initReason() {
+        reasonlist.add("办公费");
+        reasonlist.add("差旅费");
+        reasonlist.add("通讯网络");
+        reasonlist.add("会务费用");
+        reasonlist.add("业务招待费");
+        reasonlist.add("市内交通费");
+        reasonlist.add("车辆使用费");
+        reasonlist.add("其他费用");
+        reasonPicker = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                tv_reaseon.setText(reasonlist.get(options1));
+            }
+        }).setTitleText("请假类别").setContentTextSize(22).setTitleSize(22).setSubCalSize(21).build();
+        reasonPicker.setPicker(reasonlist);
     }
 
     private void init() {
@@ -116,7 +168,7 @@ public class ExpenseApplyForActivity extends BaseActivity {
         // qgl
         FullyGridLayoutManager manager3 = new FullyGridLayoutManager(ExpenseApplyForActivity.this, 4, GridLayoutManager.VERTICAL, false);
         recycler3.setLayoutManager(manager3);
-        adapter3 = new L_GridRoamAdapter_qgl(ExpenseApplyForActivity.this,onAddPicClickListener3);
+        adapter3 = new L_GridRoamAdapter_qgl(ExpenseApplyForActivity.this, onAddPicClickListener3);
         adapter3.setList(selectList3);
         adapter3.setSelectMax(maxSelectNum3);
         recycler3.setAdapter(adapter3);
@@ -174,6 +226,7 @@ public class ExpenseApplyForActivity extends BaseActivity {
 //                        iv_document.setImageBitmap(bitmap);
                         adapter.setList(selectList);
                         adapter.notifyDataSetChanged();
+                        tv_dj_number.setText(""+selectList.size());
                     }
                     break;
                 case 120:
@@ -184,8 +237,9 @@ public class ExpenseApplyForActivity extends BaseActivity {
             }
         }
     }
+
     //, R.id.ci_copy_pic
-    @OnClick({R.id.iv_back, R.id.tv_expense_submit, R.id.ci_approved_pic})
+    @OnClick({R.id.iv_back, R.id.tv_expense_submit, R.id.ci_approved_pic, R.id.rl_expense_reason})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -200,36 +254,39 @@ public class ExpenseApplyForActivity extends BaseActivity {
 //            case R.id.ci_copy_pic:
 //                startActivity(new Intent(mContext, SelDepartmentActivity_x.class));
 //                break;
+            case R.id.rl_expense_reason:
+                reasonPicker.show();
+                break;
         }
     }
 
     private void postData() {
 
-        if(TextUtils.isEmpty(tvExpenseContent.getText().toString().trim())){
-            ToastHelper.showToast(mContext,"请选择报销事由");
+        if (TextUtils.isEmpty(tv_reaseon.getText().toString().trim())) {
+            ToastHelper.showToast(mContext, "请选择报销事由");
             return;
         }
-        if(TextUtils.isEmpty(etExpenseMonkey.getText().toString().trim())){
-            ToastHelper.showToast(mContext,"请添加报销金额");
+        if (TextUtils.isEmpty(etExpenseMonkey.getText().toString().trim())) {
+            ToastHelper.showToast(mContext, "请添加报销金额");
             return;
         }
-        if(selectList.size()<=0){
-            ToastHelper.showToast(mContext,"请填写报销发票");
+        if (selectList.size() <= 0) {
+            ToastHelper.showToast(mContext, "请填写报销发票");
             return;
         }
-        if(TextUtils.isEmpty(tvOpreatorCode)){
-            ToastHelper.showToast(mContext,"请选择审批人");
+        if (TextUtils.isEmpty(tvOpreatorCode)) {
+            ToastHelper.showToast(mContext, "请选择审批人");
             return;
         }
         // 新加的qgl
-        if (selectList3.size() <= 0){
+        if (selectList3.size() <= 0) {
             ToastHelper.showToast(mContext, "请选择抄送人");
             return;
         }
 
         //qgl
         String csids = "";
-        for (People params : selectList3){
+        for (People params : selectList3) {
             csids += params.getUserId() + ",";
         }
 
@@ -238,7 +295,7 @@ public class ExpenseApplyForActivity extends BaseActivity {
         params.put("copier", csids.substring(0, csids.length() - 1));
         params.put("approver", tvOpreatorCode);
         params.put("money", etExpenseMonkey.getText().toString());
-        params.put("cause",tvExpenseContent.getText().toString());
+        params.put("cause", tv_reaseon.getText().toString());
         List<File> fils = new ArrayList<>();
         for (LocalMedia imgurl : selectList) {
             fils.add(new File(imgurl.getPath()));
@@ -267,6 +324,7 @@ public class ExpenseApplyForActivity extends BaseActivity {
             }
         });
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -303,13 +361,39 @@ public class ExpenseApplyForActivity extends BaseActivity {
 //        //    Toast.makeText(this, uids.substring(0,uids.length()-1), Toast.LENGTH_SHORT).show();
 //    }
 
-
     // qgl
     private L_GridRoamAdapter_qgl.onAddPicClickListener onAddPicClickListener3 = new L_GridRoamAdapter_qgl.onAddPicClickListener() {
         @Override
         public void onAddPicClick() {
             Intent intent = new Intent(ExpenseApplyForActivity.this, SelDepartmentActivity_meet_zb_single.class);
-            startActivityForResult(intent,120);
+            startActivityForResult(intent, 120);
+        }
+    };
+
+
+    private TextWatcher textWatcher = new TextWatcher() {
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            System.out.println("-1-onTextChanged-->" + et_expense_dx_monkey.getText().toString() + "<--");
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            System.out.println("-2-beforeTextChanged-->" + et_expense_dx_monkey.getText().toString() + "<--");
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            System.out.println("-3-afterTextChanged-->" + et_expense_dx_monkey.getText().toString() + "<--");
+            if (!TextUtils.isEmpty(etExpenseMonkey.getText().toString().trim())){
+                String a = PriceUtil.capitalization(etExpenseMonkey.getText().toString().trim());
+                et_expense_dx_monkey.setText(a+"圆");
+            }else {
+                et_expense_dx_monkey.setText("");
+
+            }
         }
     };
 
