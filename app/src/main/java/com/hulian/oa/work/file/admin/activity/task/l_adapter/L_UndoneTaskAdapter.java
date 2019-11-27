@@ -104,7 +104,7 @@ public class L_UndoneTaskAdapter extends RecyclerView.Adapter <L_UndoneTaskAdapt
 
 //        开始时间
         String b = dataList.get(position).getStartTime();
-        holder.tv_time.setText(TimeUtils.getDateToString(b));
+        holder.tv_time.setText(b.substring(0,b.length()-5));
 
 //        截止时间
         String a = dataList.get(position).getEndTime();

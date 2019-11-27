@@ -20,7 +20,7 @@
         android:id="@+id/lv_liner_my"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/dp_18"
+        android:layout_marginLeft="@dimen/dp_15"
         android:layout_marginTop="@dimen/dp_20"
         android:layout_toRightOf="@+id/iv_remind"
         android:orientation="vertical">
@@ -31,6 +31,10 @@
             android:layout_marginLeft="@dimen/dp_10">
 
             <TextView
+                android:layout_marginRight="@dimen/dp_5"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_toLeftOf="@+id/tv_laun_time"
                 android:id="@+id/tv_laun_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

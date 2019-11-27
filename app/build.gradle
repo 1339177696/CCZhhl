@@ -122,4 +122,6 @@ dependencies {
 
     implementation project(path: ':doodle')
 
+    implementation "org.java-websocket:Java-WebSocket:1.4.0"
+
 }

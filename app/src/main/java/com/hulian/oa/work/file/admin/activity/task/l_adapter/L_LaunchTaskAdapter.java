@@ -69,14 +69,11 @@ public class L_LaunchTaskAdapter extends RecyclerView.Adapter <L_LaunchTaskAdapt
 
         //        开始时间
         String b = dataList.get(position).getStartTime();
-//        String c = getDataaa(b);
-//        holder.tv_time.setText(c);
-        holder.tv_time.setText(dataList.get(position).getStartTime());
+        holder.tv_time.setText(b.substring(0,b.length()-5));
 
         //        截止时间
         String a = dataList.get(position).getEndTime();
         holder.tv_deadline_time.setText(a);
-//        holder.tv_deadline_time.setText(dataList.get(position).getEndTime());
 
         holder.tv_launch_task_person.setText(dataList.get(position).getCreateBy());
         if (dataList.get(position).getCompletion().equals("0"))

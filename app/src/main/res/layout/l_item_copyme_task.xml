@@ -31,6 +31,10 @@
             android:layout_marginLeft="@dimen/dp_10">
 
             <TextView
+                android:layout_marginRight="@dimen/dp_5"
+                android:layout_toLeftOf="@+id/tv_comp_time"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:id="@+id/tv_compy_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
