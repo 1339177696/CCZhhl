@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.PowerManager;
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -22,6 +23,9 @@ import com.hulian.oa.R;
 import com.hulian.oa.socket.util.Util;
 
 import org.java_websocket.handshake.ServerHandshake;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.net.URI;
 
 public class JWebSocketClientService extends Service {
@@ -32,7 +36,6 @@ public class JWebSocketClientService extends Service {
 
     //灰色保活
     public class GrayInnerService extends Service {
-
         @Override
         public int onStartCommand(Intent intent, int flags, int startId) {
             startForeground(GRAY_SERVICE_ID, getNotification());
@@ -268,36 +271,47 @@ public class JWebSocketClientService extends Service {
      * @param content
      */
     private void sendNotification(String content) {
-        Intent intent = new Intent();
-        intent.setClass(this, MainActivity.class);
-        intent.putExtra("message",content);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        NotificationManager notifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        @SuppressLint("WrongConstant")
-        Notification.Builder builder = new Notification.Builder(this.getApplicationContext())
-                .setAutoCancel(true)
-                .setSmallIcon(R.mipmap.icon)
-                .setContentTitle("服务器")
-                .setContentText(content)
-                .setWhen(System.currentTimeMillis())
-                // 向通知添加声音、闪灯和振动效果
-                .setDefaults(Notification.DEFAULT_VIBRATE | Notification.DEFAULT_ALL | Notification.DEFAULT_SOUND)
-                .setContentIntent(pendingIntent);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            //修改安卓8.1以上系统报错
-            NotificationChannel notificationChannel = new NotificationChannel("oa_msg", "oa_msg_name", NotificationManager.IMPORTANCE_MIN);
-            notificationChannel.enableLights(false);//如果使用中的设备支持通知灯，则说明此通知通道是否应显示灯
-            notificationChannel.setShowBadge(false);//是否显示角标
-            notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_SECRET);
-            NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            manager.createNotificationChannel(notificationChannel);
-            builder.setChannelId("oa_msg");
+        try {
+            JSONObject result = new JSONObject(content);
+            String msourceId = result.getString("sourceId");
+            String mtype = result.getString("type");
+            String mtitle = result.getString("title");
+            String mcontext = result.getString("content");
+            Intent intent = new Intent();
+            intent.setClass(this, MainActivity.class);
+            intent.putExtra("message",content);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            NotificationManager notifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            @SuppressLint("WrongConstant")
+            Notification.Builder builder = new Notification.Builder(this.getApplicationContext())
+                    .setAutoCancel(true)
+                    .setSmallIcon(R.mipmap.icon)
+                    .setContentTitle(mtitle)
+                    .setContentText(mcontext)
+                    .setWhen(System.currentTimeMillis())
+                    // 向通知添加声音、闪灯和振动效果
+                    .setDefaults(Notification.DEFAULT_VIBRATE | Notification.DEFAULT_ALL | Notification.DEFAULT_SOUND)
+                    .setContentIntent(pendingIntent);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                //修改安卓8.1以上系统报错
+                NotificationChannel notificationChannel = new NotificationChannel("oa_msg", "oa_msg_name", NotificationManager.IMPORTANCE_MIN);
+                notificationChannel.enableLights(false);//如果使用中的设备支持通知灯，则说明此通知通道是否应显示灯
+                notificationChannel.setShowBadge(false);//是否显示角标
+                notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_SECRET);
+                NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                manager.createNotificationChannel(notificationChannel);
+                builder.setChannelId("oa_msg");
+            }
+
+
+            Notification notification = builder.build(); // 获取构建好的Notification
+            notification.defaults = Notification.DEFAULT_SOUND; //设置为默认的声音
+            notifyManager.notify(1, notification);//id要保证唯一
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
-
-        Notification notification = builder.build(); // 获取构建好的Notification
-        notification.defaults = Notification.DEFAULT_SOUND; //设置为默认的声音
-        notifyManager.notify(1, notification);//id要保证唯一
     }
 
     private boolean isStop = false;
