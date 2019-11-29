@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.hulian.oa.BuildConfig;
 import com.hulian.oa.R;
+import com.hulian.oa.qglactivity.MessagenotificationActivity;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.ToastHelper;
 import com.hulian.oa.work.file.admin.activity.SecondDocumentActivity;
@@ -128,7 +129,10 @@ public class WorkFragemt_9 extends Fragment {
                 startActivity(new Intent(getActivity(), SecondInstructActivity.class));
                 break;
             case R.id.bt_work_space:
-                startActivity(new Intent(getActivity(), WorkSpaceActivity.class));
+                //20191129
+//                startActivity(new Intent(getActivity(), WorkSpaceActivity.class));
+                startActivity(new Intent(getActivity(), MessagenotificationActivity.class));
+
                 break;
             case R.id.bt_expense:
                 //跳转报销人申请列表

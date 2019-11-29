@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/iv_back"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_53"
+        android:background="#FFFFFF"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="@dimen/dp_15"
+            android:layout_height="@dimen/dp_15"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:background="@mipmap/ic_left" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="消息通知"
+            android:textColor="#ff313131"
+            android:textSize="@dimen/sp_17" />
+
+    </RelativeLayout>
+   <android.support.v4.widget.SwipeRefreshLayout
+       android:id="@+id/swipe_ly"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+       <LinearLayout
+           android:orientation="vertical"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+           <RelativeLayout
+               android:id="@+id/yj_rela"
+               android:layout_marginTop="@dimen/dp_15"
+               android:background="@color/colorwhite"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/dp_60">
+
+               <ImageView
+                   android:layout_marginLeft="@dimen/dp_10"
+                   android:id="@+id/yj_qgl_icon"
+                   android:layout_width="@dimen/dp_53"
+                   android:layout_height="@dimen/dp_53"
+                   android:layout_centerVertical="true"
+                   android:src="@mipmap/gonggao_icon_qgl" />
+
+               <TextView
+                   android:id="@+id/yj_qgl_time"
+                   android:layout_alignTop="@+id/yj_qgl_title"
+                   android:layout_marginRight="@dimen/dp_15"
+                   android:layout_alignParentRight="true"
+                   android:text="2019-11-29 16:57:33"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+               <TextView
+                   android:layout_marginLeft="@dimen/dp_8"
+                   android:id="@+id/yj_qgl_title"
+                   android:textSize="@dimen/sp_15"
+                   android:layout_marginTop="@dimen/dp_10"
+                   android:layout_toRightOf="@+id/yj_qgl_icon"
+                   android:text="邮件通知"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+               <TextView
+                   android:id="@+id/yj_qgl_content"
+                   android:layout_marginBottom="@dimen/dp_10"
+                   android:layout_alignParentBottom="true"
+                   android:layout_marginRight="@dimen/dp_15"
+                   android:maxLines="1"
+                   android:ellipsize="end"
+                   android:textSize="@dimen/sp_12"
+                   android:layout_alignLeft="@+id/yj_qgl_title"
+                   android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+           </RelativeLayout>
+           <View
+               android:layout_marginLeft="@dimen/dp_8"
+               android:layout_marginRight="@dimen/dp_8"
+               android:background="#E3E3E3"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/dp_1"/>
+           <RelativeLayout
+               android:id="@+id/tg_rela"
+               android:background="@color/colorwhite"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/dp_60">
+
+               <ImageView
+                   android:layout_marginLeft="@dimen/dp_10"
+                   android:id="@+id/tz_qgl_icon"
+                   android:layout_width="@dimen/dp_53"
+                   android:layout_height="@dimen/dp_53"
+                   android:layout_centerVertical="true"
+                   android:src="@mipmap/gonggao_icon_qgl" />
+
+               <TextView
+                   android:id="@+id/tz_qgl_time"
+                   android:layout_alignTop="@+id/tz_qgl_title"
+                   android:layout_marginRight="@dimen/dp_15"
+                   android:layout_alignParentRight="true"
+                   android:text="2019-11-29 16:57:33"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+
+               <TextView
+                   android:layout_marginLeft="@dimen/dp_8"
+                   android:id="@+id/tz_qgl_title"
+                   android:textSize="@dimen/sp_15"
+                   android:layout_marginTop="@dimen/dp_10"
+                   android:layout_toRightOf="@+id/tz_qgl_icon"
+                   android:text="通告通知"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+               <TextView
+                   android:id="@+id/tz_qgl_content"
+                   android:layout_marginBottom="@dimen/dp_10"
+                   android:layout_alignParentBottom="true"
+                   android:layout_marginRight="@dimen/dp_15"
+                   android:maxLines="1"
+                   android:ellipsize="end"
+                   android:textSize="@dimen/sp_12"
+                   android:layout_alignLeft="@+id/tz_qgl_title"
+                   android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+           </RelativeLayout>
+           <View
+               android:layout_marginLeft="@dimen/dp_8"
+               android:layout_marginRight="@dimen/dp_8"
+               android:background="#E3E3E3"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/dp_1"/>
+           <RelativeLayout
+               android:id="@+id/rc_rela"
+               android:background="@color/colorwhite"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/dp_60">
+
+               <ImageView
+                   android:layout_marginLeft="@dimen/dp_10"
+                   android:id="@+id/rc_qgl_icon"
+                   android:layout_width="@dimen/dp_53"
+                   android:layout_height="@dimen/dp_53"
+                   android:layout_centerVertical="true"
+                   android:src="@mipmap/gonggao_icon_qgl" />
+
+               <TextView
+                   android:id="@+id/rc_qgl_time"
+                   android:layout_alignTop="@+id/rc_qgl_title"
+                   android:layout_marginRight="@dimen/dp_15"
+                   android:layout_alignParentRight="true"
+                   android:text="2019-11-29 16:57:33"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+
+               <TextView
+                   android:layout_marginLeft="@dimen/dp_8"
+                   android:id="@+id/rc_qgl_title"
+                   android:textSize="@dimen/sp_15"
+                   android:layout_marginTop="@dimen/dp_10"
+                   android:layout_toRightOf="@+id/rc_qgl_icon"
+                   android:text="日程通知"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+               <TextView
+                   android:id="@+id/rc_qgl_content"
+                   android:layout_marginBottom="@dimen/dp_10"
+                   android:layout_alignParentBottom="true"
+                   android:layout_marginRight="@dimen/dp_15"
+                   android:maxLines="1"
+                   android:ellipsize="end"
+                   android:textSize="@dimen/sp_12"
+                   android:layout_alignLeft="@+id/rc_qgl_title"
+                   android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+           </RelativeLayout>
+           <View
+               android:layout_marginLeft="@dimen/dp_8"
+               android:layout_marginRight="@dimen/dp_8"
+               android:background="#E3E3E3"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/dp_1"/>
+           <RelativeLayout
+               android:id="@+id/hy_rela"
+               android:background="@color/colorwhite"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/dp_60">
+
+               <ImageView
+                   android:layout_marginLeft="@dimen/dp_10"
+                   android:id="@+id/hy_qgl_icon"
+                   android:layout_width="@dimen/dp_53"
+                   android:layout_height="@dimen/dp_53"
+                   android:layout_centerVertical="true"
+                   android:src="@mipmap/gonggao_icon_qgl" />
+
+               <TextView
+                   android:id="@+id/hy_qgl_time"
+                   android:layout_alignTop="@+id/hy_qgl_title"
+                   android:layout_marginRight="@dimen/dp_15"
+                   android:layout_alignParentRight="true"
+                   android:text="2019-11-29 16:57:33"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+               <TextView
+                   android:layout_marginLeft="@dimen/dp_8"
+                   android:id="@+id/hy_qgl_title"
+                   android:textSize="@dimen/sp_15"
+                   android:layout_marginTop="@dimen/dp_10"
+                   android:layout_toRightOf="@+id/hy_qgl_icon"
+                   android:text="会议通知"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+               <TextView
+                   android:id="@+id/hy_qgl_content"
+                   android:layout_marginBottom="@dimen/dp_10"
+                   android:layout_alignParentBottom="true"
+                   android:layout_marginRight="@dimen/dp_15"
+                   android:maxLines="1"
+                   android:ellipsize="end"
+                   android:textSize="@dimen/sp_12"
+                   android:layout_alignLeft="@+id/hy_qgl_title"
+                   android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+           </RelativeLayout>
+           <View
+               android:layout_marginLeft="@dimen/dp_8"
+               android:layout_marginRight="@dimen/dp_8"
+               android:background="#E3E3E3"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/dp_1"/>
+           <RelativeLayout
+               android:id="@+id/qj_rela"
+               android:background="@color/colorwhite"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/dp_60">
+
+               <ImageView
+                   android:layout_marginLeft="@dimen/dp_10"
+                   android:id="@+id/qj_qgl_icon"
+                   android:layout_width="@dimen/dp_53"
+                   android:layout_height="@dimen/dp_53"
+                   android:layout_centerVertical="true"
+                   android:src="@mipmap/gonggao_icon_qgl" />
+
+               <TextView
+                   android:id="@+id/qj_qgl_time"
+                   android:layout_alignTop="@+id/qj_qgl_title"
+                   android:layout_marginRight="@dimen/dp_15"
+                   android:layout_alignParentRight="true"
+                   android:text="2019-11-29 16:57:33"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+               <TextView
+                   android:layout_marginLeft="@dimen/dp_8"
+                   android:id="@+id/qj_qgl_title"
+                   android:textSize="@dimen/sp_15"
+                   android:layout_marginTop="@dimen/dp_10"
+                   android:layout_toRightOf="@+id/qj_qgl_icon"
+                   android:text="请假通知"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+               <TextView
+                   android:id="@+id/qj_qgl_content"
+                   android:layout_marginBottom="@dimen/dp_10"
+                   android:layout_alignParentBottom="true"
+                   android:layout_marginRight="@dimen/dp_15"
+                   android:maxLines="1"
+                   android:ellipsize="end"
+                   android:textSize="@dimen/sp_12"
+                   android:layout_alignLeft="@+id/qj_qgl_title"
+                   android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+           </RelativeLayout>
+           <View
+               android:layout_marginLeft="@dimen/dp_8"
+               android:layout_marginRight="@dimen/dp_8"
+               android:background="#E3E3E3"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/dp_1"/>
+           <RelativeLayout
+               android:id="@+id/bx_rela"
+               android:background="@color/colorwhite"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/dp_60">
+
+               <ImageView
+                   android:layout_marginLeft="@dimen/dp_10"
+                   android:id="@+id/bx_qgl_icon"
+                   android:layout_width="@dimen/dp_53"
+                   android:layout_height="@dimen/dp_53"
+                   android:layout_centerVertical="true"
+                   android:src="@mipmap/gonggao_icon_qgl" />
+
+               <TextView
+                   android:id="@+id/bx_qgl_time"
+                   android:layout_alignTop="@+id/bx_qgl_icon"
+                   android:layout_marginRight="@dimen/dp_15"
+                   android:layout_alignParentRight="true"
+                   android:text="2019-11-29 16:57:33"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+               <TextView
+                   android:layout_marginLeft="@dimen/dp_8"
+                   android:id="@+id/bx_qgl_title"
+                   android:textSize="@dimen/sp_15"
+                   android:layout_marginTop="@dimen/dp_10"
+                   android:layout_toRightOf="@+id/bx_qgl_icon"
+                   android:text="报销通知"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+               <TextView
+                   android:id="@+id/bx_qgl_content"
+                   android:layout_marginBottom="@dimen/dp_10"
+                   android:layout_alignParentBottom="true"
+                   android:layout_marginRight="@dimen/dp_15"
+                   android:maxLines="1"
+                   android:ellipsize="end"
+                   android:textSize="@dimen/sp_12"
+                   android:layout_alignLeft="@+id/bx_qgl_title"
+                   android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+           </RelativeLayout>
+           <View
+               android:layout_marginLeft="@dimen/dp_8"
+               android:layout_marginRight="@dimen/dp_8"
+               android:background="#E3E3E3"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/dp_1"/>
+           <RelativeLayout
+               android:id="@+id/rw_rela"
+               android:background="@color/colorwhite"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/dp_60">
+
+               <ImageView
+                   android:layout_marginLeft="@dimen/dp_10"
+                   android:id="@+id/rw_qgl_icon"
+                   android:layout_width="@dimen/dp_53"
+                   android:layout_height="@dimen/dp_53"
+                   android:layout_centerVertical="true"
+                   android:src="@mipmap/gonggao_icon_qgl" />
+
+               <TextView
+                   android:id="@+id/rw_qgl_time"
+                   android:layout_alignTop="@+id/rw_qgl_title"
+                   android:layout_marginRight="@dimen/dp_15"
+                   android:layout_alignParentRight="true"
+                   android:text="2019-11-29 16:57:33"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+               <TextView
+                   android:layout_marginLeft="@dimen/dp_8"
+                   android:id="@+id/rw_qgl_title"
+                   android:textSize="@dimen/sp_15"
+                   android:layout_marginTop="@dimen/dp_10"
+                   android:layout_toRightOf="@+id/rw_qgl_icon"
+                   android:text="任务通知"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+               <TextView
+                   android:id="@+id/rw_qgl_content"
+                   android:layout_marginBottom="@dimen/dp_10"
+                   android:layout_alignParentBottom="true"
+                   android:layout_marginRight="@dimen/dp_15"
+                   android:maxLines="1"
+                   android:ellipsize="end"
+                   android:textSize="@dimen/sp_12"
+                   android:layout_alignLeft="@+id/rw_qgl_title"
+                   android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+           </RelativeLayout>
+           <View
+               android:layout_marginLeft="@dimen/dp_8"
+               android:layout_marginRight="@dimen/dp_8"
+               android:background="#E3E3E3"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/dp_1"/>
+           <RelativeLayout
+               android:id="@+id/gw_rela"
+               android:background="@color/colorwhite"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/dp_60">
+
+               <ImageView
+                   android:layout_marginLeft="@dimen/dp_10"
+                   android:id="@+id/gw_qgl_icon"
+                   android:layout_width="@dimen/dp_53"
+                   android:layout_height="@dimen/dp_53"
+                   android:layout_centerVertical="true"
+                   android:src="@mipmap/gonggao_icon_qgl" />
+
+               <TextView
+                   android:layout_marginTop="@dimen/dp_5"
+                   android:id="@+id/gw_qgl_number"
+                   android:textColor="@color/white"
+                   android:gravity="center"
+                   android:textSize="@dimen/sp_10"
+                   android:layout_marginRight="@dimen/dp_15"
+                   android:layout_alignParentRight="true"
+                   android:background="@drawable/qgl_tv_bg"
+                   android:text="1"
+                   android:layout_width="@dimen/dp_16"
+                   android:layout_height="@dimen/dp_16" />
+
+               <TextView
+                   android:id="@+id/gw_qgl_time"
+                   android:layout_alignTop="@+id/gw_qgl_title"
+                   android:layout_marginRight="@dimen/dp_15"
+                   android:layout_alignParentRight="true"
+                   android:text="2019-11-29 16:57:33"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+
+               <TextView
+                   android:layout_marginLeft="@dimen/dp_8"
+                   android:id="@+id/gw_qgl_title"
+                   android:textSize="@dimen/sp_15"
+                   android:layout_marginTop="@dimen/dp_10"
+                   android:layout_toRightOf="@+id/gw_qgl_icon"
+                   android:text="公文通知"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+               <TextView
+                   android:id="@+id/gw_qgl_content"
+                   android:layout_marginBottom="@dimen/dp_10"
+                   android:layout_alignParentBottom="true"
+                   android:layout_marginRight="@dimen/dp_15"
+                   android:maxLines="1"
+                   android:ellipsize="end"
+                   android:textSize="@dimen/sp_12"
+                   android:layout_alignLeft="@+id/gw_qgl_title"
+                   android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+           </RelativeLayout>
+           <View
+               android:layout_marginLeft="@dimen/dp_8"
+               android:layout_marginRight="@dimen/dp_8"
+               android:background="#E3E3E3"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/dp_1"/>
+       </LinearLayout>
+
+   </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

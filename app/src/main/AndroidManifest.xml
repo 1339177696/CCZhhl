@@ -358,6 +358,10 @@
             android:configChanges="screenSize|keyboardHidden|orientation"/>
         <activity android:name=".pad.PAD_gongwen_SP"/>
         <activity android:name=".pad.PAD_zhiling_XF"/>
+        <activity android:name=".qglactivity.MessagenotificationActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity android:name=".qglactivity.MessagenotificationDeteilsActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
     </application>
 
 </manifest>
