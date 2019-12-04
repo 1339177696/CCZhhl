@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.hulian.oa.BaseActivity;
 import com.hulian.oa.R;
+import com.hulian.oa.socket.JWebSocketClientService;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.StatusBarUtil;
 import com.netease.nimlib.sdk.NIMClient;
@@ -47,6 +48,7 @@ public class MeActivity extends BaseActivity {
     @BindView(R.id.tv_dept)
     TextView tvDept;
 
+    private JWebSocketClientService jWebSClientService;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,7 +83,10 @@ public class MeActivity extends BaseActivity {
             case R.id.mine_out_login:
                 NIMClient.getService(AuthService.class).logout();
                 SPUtils.clear(mContext);
+                /**关闭Socket**/
+                jWebSClientService.stopWebSocket();
                 exitApp(mContext);
+
                 break;
         }
     }

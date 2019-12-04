@@ -65,6 +65,8 @@ public class qglTuisongadapter extends RecyclerView.Adapter <qglTuisongadapter.V
         private TextView tv_title;
         private TextView tv_time;
         private TextView tv_context;
+        private TextView tv_qgl_zhuangtai;
+        private TextView tv_qgl_bumen;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -72,6 +74,8 @@ public class qglTuisongadapter extends RecyclerView.Adapter <qglTuisongadapter.V
             tv_title = itemView.findViewById(R.id.tv_title);
             tv_time = itemView.findViewById(R.id.tv_time);
             tv_context = itemView.findViewById(R.id.tv_context);
+            tv_qgl_zhuangtai = itemView.findViewById(R.id.tv_qgl_zhuangtai);
+            tv_qgl_bumen = itemView.findViewById(R.id.tv_qgl_bumen);
         }
     }
 
@@ -90,9 +94,60 @@ public class qglTuisongadapter extends RecyclerView.Adapter <qglTuisongadapter.V
         }else {
             holder.iv_remind.setVisibility(View.GONE);
         }
-        holder.tv_title.setText(dataList.get(position).getTitle());
         holder.tv_time.setText(dataList.get(position).getCreateTime());
-        holder.tv_context.setText(dataList.get(position).getContent());
+        if (dataList.get(position).getType().equals("1")){
+//            邮件
+            holder.tv_title.setText("发件人:"+"   "+dataList.get(position).getSendPerson());
+            holder.tv_context.setText("邮件主题:"+"   "+dataList.get(position).getTitle());
+            holder.tv_qgl_zhuangtai.setVisibility(View.GONE);
+            holder.tv_qgl_bumen.setVisibility(View.GONE);
+        }else if (dataList.get(position).getType().equals("2")){
+//            公文
+            holder.tv_title.setText("公文标题:");
+            holder.tv_context.setText("公文类型:");
+            holder.tv_qgl_bumen.setText("发起人:");
+            holder.tv_qgl_zhuangtai.setVisibility(View.VISIBLE);
+            holder.tv_qgl_bumen.setVisibility(View.VISIBLE);
+        }else if (dataList.get(position).getType().equals("3")){
+//            请假
+            holder.tv_title.setText("请假事由:");
+            holder.tv_context.setText("开始时间:");
+            holder.tv_qgl_bumen.setText("开始时间:");
+            holder.tv_qgl_zhuangtai.setVisibility(View.VISIBLE);
+            holder.tv_qgl_bumen.setVisibility(View.VISIBLE);
+        }else if (dataList.get(position).getType().equals("4")){
+//            会议
+            holder.tv_title.setText("会议标题:"+"   "+dataList.get(position).getTitle());
+            holder.tv_context.setText("会议地点:"+"   "+dataList.get(position).getMeetingLocation());
+            holder.tv_qgl_bumen.setText("会议开始时间:"+"   "+dataList.get(position).getStartDate());
+            holder.tv_qgl_zhuangtai.setVisibility(View.GONE);
+            holder.tv_qgl_bumen.setVisibility(View.VISIBLE);
+        }else if (dataList.get(position).getType().equals("5")){
+//            公告
+            holder.tv_title.setText("公告标题:"+"   "+dataList.get(position).getTitle());
+            holder.tv_context.setText("公告内容:"+"   "+dataList.get(position).getContent());
+            holder.tv_qgl_bumen.setText("发布部门:"+"   "+dataList.get(position).getReleaseDept());
+            holder.tv_qgl_zhuangtai.setVisibility(View.GONE);
+            holder.tv_qgl_bumen.setVisibility(View.VISIBLE);
+        }else if (dataList.get(position).getType().equals("6")){
+//            日程
+            holder.tv_title.setText("日程内容:"+"   ");
+            holder.tv_context.setText("开始时间:"+"   ");
+            holder.tv_qgl_bumen.setText("结束时间:"+"   ");
+            holder.tv_qgl_zhuangtai.setVisibility(View.GONE);
+            holder.tv_qgl_bumen.setVisibility(View.VISIBLE);
+        }else if (dataList.get(position).getType().equals("7")){
+//            任务
+            holder.tv_title.setText("任务标题:");
+            holder.tv_context.setText("截止时间:");
+            holder.tv_qgl_bumen.setText("发起人:");
+            holder.tv_qgl_zhuangtai.setVisibility(View.VISIBLE);
+            holder.tv_qgl_bumen.setVisibility(View.VISIBLE);
+        }else if (dataList.get(position).getType().equals("8")){
+            holder.tv_qgl_zhuangtai.setVisibility(View.VISIBLE);
+            holder.tv_qgl_bumen.setVisibility(View.VISIBLE);
+        }
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,6 +158,7 @@ public class qglTuisongadapter extends RecyclerView.Adapter <qglTuisongadapter.V
                 }else if (dataList.get(position).getType().equals("2")){
 //                    公文
 
+
                 }else if (dataList.get(position).getType().equals("3")){
 //                    请假
 
@@ -112,6 +168,7 @@ public class qglTuisongadapter extends RecyclerView.Adapter <qglTuisongadapter.V
                     intent.putExtra("id",dataList.get(position).getRelationId());
                     mContext.startActivity(intent);
                 }else if (dataList.get(position).getType().equals("5")){
+
 //                    公告
                     Intent intent=new Intent(mContext, NoticeParticularsActivity.class);
                     intent.putExtra("noticeId",dataList.get(position).getRelationId());
@@ -202,14 +259,22 @@ public class qglTuisongadapter extends RecyclerView.Adapter <qglTuisongadapter.V
                         mind_setup_jvabean.setCCP("");
 
                     }
-                    String jo = jsonObject.getString("attachment");
-                    jsonObject.put("attachment",jo);
-                    JSONArray j = new JSONArray(jo);
-                    List<SecondMail_bean_x.AttachBean> memberList = gson.fromJson(j.toString(), new TypeToken<List<SecondMail_bean_x.AttachBean>>() {}.getType());
-                    mind_setup_jvabean.setAttach(memberList);
-                    Intent intent=new Intent(mContext, MailParticularsActivity.class);
-                    intent.putExtra("key",mind_setup_jvabean);
-                    mContext.startActivity(intent);
+                    if (jsonObject.getString("attachment")!=null&&!jsonObject.getString("attachment").equals("null")){
+                        String jo = jsonObject.getString("attachment");
+                        jsonObject.put("attachment",jo);
+                        JSONArray j = new JSONArray(jo);
+                        List<SecondMail_bean_x.AttachBean> memberList = gson.fromJson(j.toString(), new TypeToken<List<SecondMail_bean_x.AttachBean>>() {}.getType());
+                        mind_setup_jvabean.setAttach(memberList);
+                        Intent intent=new Intent(mContext, MailParticularsActivity.class);
+                        intent.putExtra("key",mind_setup_jvabean);
+                        mContext.startActivity(intent);
+                    }else {
+                        mind_setup_jvabean.setAttach(null);
+                        Intent intent=new Intent(mContext, MailParticularsActivity.class);
+                        intent.putExtra("key",mind_setup_jvabean);
+                        mContext.startActivity(intent);
+                    }
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();

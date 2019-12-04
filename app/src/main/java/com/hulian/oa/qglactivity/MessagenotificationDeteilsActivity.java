@@ -128,6 +128,7 @@ public class MessagenotificationDeteilsActivity extends BaseActivity implements 
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
                     List<MeBean> memberList = gson.fromJson(result.getJSONArray("data").toString(), new TypeToken<List<MeBean>>() {}.getType());
+
                     qglTuisongadapter.addAllData(memberList);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                 } catch (JSONException e) {
