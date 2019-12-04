@@ -20,6 +20,7 @@ import android.util.Log;
 
 import com.hulian.oa.MainActivity;
 import com.hulian.oa.R;
+import com.hulian.oa.qglactivity.MessagenotificationActivity;
 import com.hulian.oa.socket.util.Util;
 
 import org.java_websocket.handshake.ServerHandshake;
@@ -278,7 +279,7 @@ public class JWebSocketClientService extends Service {
             String mtitle = result.getString("title");
             String mcontext = result.getString("content");
             Intent intent = new Intent();
-            intent.setClass(this, MainActivity.class);
+            intent.setClass(this, MessagenotificationActivity.class);
             intent.putExtra("message",content);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             NotificationManager notifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -356,4 +357,7 @@ public class JWebSocketClientService extends Service {
             }
         }.start();
     }
+
+
+    
 }

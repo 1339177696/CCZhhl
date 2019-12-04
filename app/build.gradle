@@ -52,6 +52,7 @@ android {
         exclude 'META-INF/NOTICE.txt'
         doNotStrip '*/mips/*.so'
         doNotStrip '*/mips64/*.so'
+
     }
     compileOptions {
         sourceCompatibility = '1.8'

@@ -613,7 +613,41 @@ public class HttpRequest {
         RequestMode.postRequest(Urls.commUrls+"system/workCoordinationRelease/cancelTask", params, callback, null);
     }
 
+    /**
+     * 消息中心
+     * @param params
+     * @param callback
+     */
+    public static void postNotice(RequestParams params,  ResponseCallback callback){
+        RequestMode.postRequest(Urls.commUrls+"system/viewMsg/android/list", params, callback, null);
+    }
+
+    /**
+     * 消息中心详情
+     * @param params
+     * @param callback
+     */
+    public static void postNotice_List(RequestParams params,  ResponseCallback callback){
+        RequestMode.postRequest(Urls.commUrls+"system/viewMsg/android/getListByTypeAndUserId", params, callback, null);
+    }
+
+    /**
+     * 修改已读
+     * @param params
+     * @param callback
+     */
+     public static void postNotice_staus(RequestParams params,  ResponseCallback callback){
+        RequestMode.postRequest(Urls.commUrls+"system/viewMsg/android/updatesUnreadMsgByType", params, callback, null);
+    }
+
+     /**
+     * 邮件详情
+     * @param params
+     * @param callback
+     */
+    public static void youjian_detelis(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls+"system/mailInfo/android/findMail", params, callback, null);
+    }
 
 
-    //测试12
 }

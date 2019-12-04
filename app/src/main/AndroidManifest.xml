@@ -59,6 +59,7 @@
             android:enabled="true"
             android:exported="false"
             android:process=":gray" />
+
         <!--qgl-->
         <activity android:name=".LuncherActivity"
             android:configChanges="screenSize|keyboardHidden|orientation">

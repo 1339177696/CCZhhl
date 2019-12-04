@@ -200,15 +200,17 @@ public class MailParticularsActivity extends BaseActivity {
         tv_time.setText(TimeUtils.getDateToString(account.getSendDate()));
         URLImageParser imageGetter = new URLImageParser( tv_mail_details);
         tv_mail_details.setText(Html.fromHtml(account.getContent(), imageGetter, null));
-        tv_receive_person.setText(account.getRecipients().split("<")[0] + "");
-        tvReceivePerson2.setText("<" + (account.getRecipients().split("<")[1]+"").split(">")[0]+">");
+        tv_receive_person.setText(account.getRecipients()+ "");
+//        tv_receive_person.setText(account.getRecipients().split("<")[0] + "");
+//        tvReceivePerson2.setText("<" + (account.getRecipients().split("<")[1]+"").split(">")[0]+">");
 
         if(account.getCCP()==null||account.getCCP().equals("")){
             rlChaosong.setVisibility(View.GONE);
         }
         else {
-            tvChaosongPerson.setText(account.getCCP().split("<")[0] + "");
-            tvChaosongPerson2.setText("<" + account.getCCP().split("<")[1] + "".split("<")[0]);
+            tvChaosongPerson.setText(account.getCCP()+ "");
+//            tvChaosongPerson.setText(account.getCCP().split("<")[0] + "");
+//            tvChaosongPerson2.setText("<" + account.getCCP().split("<")[1] + "".split("<")[0]);
         }
     }
 

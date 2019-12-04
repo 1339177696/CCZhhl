@@ -7,6 +7,7 @@ package com.hulian.oa.net;
   //   public static String commUrls="http://192.168.0.105/";
 //   public static String commUrls= "https://abc.cczhhl.cn/";
 
-   public static String commUrls= "http://47.92.151.250:18888/";
-//   public static String commUrls= "http://192.168.0.129:80/";
+//   public static String commUrls= "http://47.92.151.250:18888/";
+   public static String commUrls= "http://192.168.0.129:80/";
+
 }

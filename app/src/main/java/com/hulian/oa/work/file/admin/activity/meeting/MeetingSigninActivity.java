@@ -70,11 +70,8 @@ public class MeetingSigninActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.work_meeting_signin);
         ButterKnife.bind(this);
-
         getData();
 
     }

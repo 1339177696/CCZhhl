@@ -50,11 +50,20 @@
                    android:src="@mipmap/gonggao_icon_qgl" />
 
                <TextView
+                   android:visibility="gone"
+                   android:layout_marginTop="@dimen/dp_3"
+                   android:layout_marginLeft="@dimen/dp_40"
+                   android:id="@+id/yj_qgl_number"
+                   android:layout_marginRight="@dimen/dp_15"
+                   android:background="@drawable/qgl_tv_bg"
+                   android:layout_width="@dimen/dp_10"
+                   android:layout_height="@dimen/dp_10" />
+
+               <TextView
                    android:id="@+id/yj_qgl_time"
                    android:layout_alignTop="@+id/yj_qgl_title"
                    android:layout_marginRight="@dimen/dp_15"
                    android:layout_alignParentRight="true"
-                   android:text="2019-11-29 16:57:33"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content" />
 
@@ -77,7 +86,6 @@
                    android:ellipsize="end"
                    android:textSize="@dimen/sp_12"
                    android:layout_alignLeft="@+id/yj_qgl_title"
-                   android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content" />
 
@@ -103,11 +111,20 @@
                    android:src="@mipmap/gonggao_icon_qgl" />
 
                <TextView
+                   android:visibility="gone"
+                   android:layout_marginTop="@dimen/dp_3"
+                   android:layout_marginLeft="@dimen/dp_40"
+                   android:id="@+id/tg_qgl_number"
+                   android:layout_marginRight="@dimen/dp_15"
+                   android:background="@drawable/qgl_tv_bg"
+                   android:layout_width="@dimen/dp_10"
+                   android:layout_height="@dimen/dp_10" />
+
+               <TextView
                    android:id="@+id/tz_qgl_time"
                    android:layout_alignTop="@+id/tz_qgl_title"
                    android:layout_marginRight="@dimen/dp_15"
                    android:layout_alignParentRight="true"
-                   android:text="2019-11-29 16:57:33"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content" />
 
@@ -131,7 +148,6 @@
                    android:ellipsize="end"
                    android:textSize="@dimen/sp_12"
                    android:layout_alignLeft="@+id/tz_qgl_title"
-                   android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content" />
 
@@ -157,11 +173,20 @@
                    android:src="@mipmap/gonggao_icon_qgl" />
 
                <TextView
+                   android:visibility="gone"
+                   android:layout_marginTop="@dimen/dp_3"
+                   android:layout_marginLeft="@dimen/dp_40"
+                   android:id="@+id/rc_qgl_number"
+                   android:layout_marginRight="@dimen/dp_15"
+                   android:background="@drawable/qgl_tv_bg"
+                   android:layout_width="@dimen/dp_10"
+                   android:layout_height="@dimen/dp_10" />
+
+               <TextView
                    android:id="@+id/rc_qgl_time"
                    android:layout_alignTop="@+id/rc_qgl_title"
                    android:layout_marginRight="@dimen/dp_15"
                    android:layout_alignParentRight="true"
-                   android:text="2019-11-29 16:57:33"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content" />
 
@@ -185,7 +210,6 @@
                    android:ellipsize="end"
                    android:textSize="@dimen/sp_12"
                    android:layout_alignLeft="@+id/rc_qgl_title"
-                   android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content" />
 
@@ -211,11 +235,20 @@
                    android:src="@mipmap/gonggao_icon_qgl" />
 
                <TextView
+                   android:visibility="gone"
+                   android:layout_marginTop="@dimen/dp_3"
+                   android:layout_marginLeft="@dimen/dp_40"
+                   android:id="@+id/hy_qgl_number"
+                   android:layout_marginRight="@dimen/dp_15"
+                   android:background="@drawable/qgl_tv_bg"
+                   android:layout_width="@dimen/dp_10"
+                   android:layout_height="@dimen/dp_10" />
+
+               <TextView
                    android:id="@+id/hy_qgl_time"
                    android:layout_alignTop="@+id/hy_qgl_title"
                    android:layout_marginRight="@dimen/dp_15"
                    android:layout_alignParentRight="true"
-                   android:text="2019-11-29 16:57:33"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content" />
 
@@ -238,7 +271,6 @@
                    android:ellipsize="end"
                    android:textSize="@dimen/sp_12"
                    android:layout_alignLeft="@+id/hy_qgl_title"
-                   android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content" />
 
@@ -264,11 +296,20 @@
                    android:src="@mipmap/gonggao_icon_qgl" />
 
                <TextView
+                   android:visibility="gone"
+                   android:layout_marginTop="@dimen/dp_3"
+                   android:layout_marginLeft="@dimen/dp_40"
+                   android:id="@+id/qj_qgl_number"
+                   android:layout_marginRight="@dimen/dp_15"
+                   android:background="@drawable/qgl_tv_bg"
+                   android:layout_width="@dimen/dp_10"
+                   android:layout_height="@dimen/dp_10" />
+
+               <TextView
                    android:id="@+id/qj_qgl_time"
                    android:layout_alignTop="@+id/qj_qgl_title"
                    android:layout_marginRight="@dimen/dp_15"
                    android:layout_alignParentRight="true"
-                   android:text="2019-11-29 16:57:33"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content" />
 
@@ -291,7 +332,6 @@
                    android:ellipsize="end"
                    android:textSize="@dimen/sp_12"
                    android:layout_alignLeft="@+id/qj_qgl_title"
-                   android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content" />
 
@@ -317,11 +357,20 @@
                    android:src="@mipmap/gonggao_icon_qgl" />
 
                <TextView
+                   android:visibility="gone"
+                   android:layout_marginTop="@dimen/dp_3"
+                   android:layout_marginLeft="@dimen/dp_40"
+                   android:id="@+id/bx_qgl_number"
+                   android:layout_marginRight="@dimen/dp_15"
+                   android:background="@drawable/qgl_tv_bg"
+                   android:layout_width="@dimen/dp_10"
+                   android:layout_height="@dimen/dp_10" />
+
+               <TextView
                    android:id="@+id/bx_qgl_time"
                    android:layout_alignTop="@+id/bx_qgl_icon"
                    android:layout_marginRight="@dimen/dp_15"
                    android:layout_alignParentRight="true"
-                   android:text="2019-11-29 16:57:33"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content" />
 
@@ -344,7 +393,6 @@
                    android:ellipsize="end"
                    android:textSize="@dimen/sp_12"
                    android:layout_alignLeft="@+id/bx_qgl_title"
-                   android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content" />
 
@@ -370,11 +418,20 @@
                    android:src="@mipmap/gonggao_icon_qgl" />
 
                <TextView
+                   android:visibility="gone"
+                   android:layout_marginTop="@dimen/dp_3"
+                   android:layout_marginLeft="@dimen/dp_40"
+                   android:id="@+id/rw_qgl_number"
+                   android:layout_marginRight="@dimen/dp_15"
+                   android:background="@drawable/qgl_tv_bg"
+                   android:layout_width="@dimen/dp_10"
+                   android:layout_height="@dimen/dp_10" />
+
+               <TextView
                    android:id="@+id/rw_qgl_time"
                    android:layout_alignTop="@+id/rw_qgl_title"
                    android:layout_marginRight="@dimen/dp_15"
                    android:layout_alignParentRight="true"
-                   android:text="2019-11-29 16:57:33"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content" />
 
@@ -397,7 +454,6 @@
                    android:ellipsize="end"
                    android:textSize="@dimen/sp_12"
                    android:layout_alignLeft="@+id/rw_qgl_title"
-                   android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content" />
 
@@ -423,24 +479,20 @@
                    android:src="@mipmap/gonggao_icon_qgl" />
 
                <TextView
-                   android:layout_marginTop="@dimen/dp_5"
+                   android:visibility="gone"
+                   android:layout_marginTop="@dimen/dp_3"
+                   android:layout_marginLeft="@dimen/dp_40"
                    android:id="@+id/gw_qgl_number"
-                   android:textColor="@color/white"
-                   android:gravity="center"
-                   android:textSize="@dimen/sp_10"
                    android:layout_marginRight="@dimen/dp_15"
-                   android:layout_alignParentRight="true"
                    android:background="@drawable/qgl_tv_bg"
-                   android:text="1"
-                   android:layout_width="@dimen/dp_16"
-                   android:layout_height="@dimen/dp_16" />
+                   android:layout_width="@dimen/dp_10"
+                   android:layout_height="@dimen/dp_10" />
 
                <TextView
                    android:id="@+id/gw_qgl_time"
                    android:layout_alignTop="@+id/gw_qgl_title"
                    android:layout_marginRight="@dimen/dp_15"
                    android:layout_alignParentRight="true"
-                   android:text="2019-11-29 16:57:33"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content" />
 
@@ -464,7 +516,6 @@
                    android:ellipsize="end"
                    android:textSize="@dimen/sp_12"
                    android:layout_alignLeft="@+id/gw_qgl_title"
-                   android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content" />
 
