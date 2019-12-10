@@ -133,37 +133,34 @@ public class LeaveApplyResultActivity extends BaseActivity {
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-                    tv_approved_person.setText(result.getJSONObject("data").getString("approver"));
-                    String status = result.getJSONObject("data").getString("state");
+                    tv_approved_person.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("approverName"));
+                    String status = result.getJSONObject("data").getJSONObject("workLeave").getString("state");
                     if (status.equals("1")) {
                         liucheng_img_my.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.liucheng_icon_qgl2));
-                        tv_shenqing_time_qgl.setText(result.getJSONObject("data").getString("startTime"));
-                        tv_shenqingren_qgl.setText(result.getJSONObject("data").getString("approver"));
+                        tv_shenqing_time_qgl.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("startTime"));
+                        tv_shenqingren_qgl.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("nowApproveName"));
                         tv_wancheng_qgl.setTextColor(Color.parseColor("#ff313131"));
                         tv_wanzcheng_time_qgl.setVisibility(View.VISIBLE);
-                        String a = result.getJSONObject("data").getString("approvalTime");
+                        String a = result.getJSONObject("data").getJSONObject("workLeave").getString("approvalTime");
                         String b = a.substring(0, a.length() - 8);
                         tv_wanzcheng_time_qgl.setText(b);
                     } else if (status.equals("2")) {
                         liucheng_img_my.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.liucheng_icon_qgl2));
-                        tv_shenqing_time_qgl.setText(result.getJSONObject("data").getString("startTime"));
-                        tv_shenqingren_qgl.setText(result.getJSONObject("data").getString("approver"));
+                        tv_shenqing_time_qgl.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("startTime"));
+                        tv_shenqingren_qgl.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("approverName"));
 
                         tv_wancheng_qgl.setText("驳回");
                         tv_wancheng_qgl.setTextColor(Color.parseColor("#ff313131"));
-
                         tv_wanzcheng_time_qgl.setVisibility(View.VISIBLE);
-
-                        String a = result.getJSONObject("data").getString("approvalTime");
+                        String a = result.getJSONObject("data").getJSONObject("workLeave").getString("approvalTime");
                         String b = a.substring(0, a.length() - 8);
                         tv_wanzcheng_time_qgl.setText(b);
-                        tv_wanzcheng_time_qgl.setText(result.getJSONObject("data").getString("approvalTime"));
+                        tv_wanzcheng_time_qgl.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("approvalTime"));
 
                     } else {
                         liucheng_img_my.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.liucheng_icon_qgl1));
-                        tv_shenqing_time_qgl.setText(result.getJSONObject("data").getString("startTime"));
-                        tv_shenqingren_qgl.setText(result.getJSONObject("data").getString("approver"));
-
+                        tv_shenqing_time_qgl.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("startTime"));
+                        tv_shenqingren_qgl.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("nowApproveName"));
                         tv_wancheng_qgl.setText("完成");
                         tv_wancheng_qgl.setTextColor(Color.parseColor("#DBDBDB"));
 
@@ -178,21 +175,21 @@ public class LeaveApplyResultActivity extends BaseActivity {
 //                        tv_approved_time.setText("");
 //                    }
 //                    tv_leave_title.setText(result.getJSONObject("data").getString("remark"));
-                    tv_leave_reason.setText(result.getJSONObject("data").getString("cause"));
-                    tv_duration.setText(result.getJSONObject("data").getString("duration"));
+                    tv_leave_reason.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("cause"));
+                    tv_duration.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("duration"));
 
 //                    String a = TimeUtils.getDateToString(result.getJSONObject("data").getString("startTime"));
 //                    tv_start.setText(a);
 //                    String b = TimeUtils.getDateToString(result.getJSONObject("data").getString("endTime"));
 //                    tv_end.setText(b);
-                    tv_start.setText(result.getJSONObject("data").getString("startTime"));
-                    tv_end.setText(result.getJSONObject("data").getString("endTime"));
-                    tv_miaoshu.setText(result.getJSONObject("data").getString("describe"));
-                    tv_leave_shenqingren.setText(result.getJSONObject("data").getString("createBy"));
-                    tvChaosongPersonQgl.setText(result.getJSONObject("data").getString("copier"));
+                    tv_start.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("startTime"));
+                    tv_end.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("endTime"));
+                    tv_miaoshu.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("describe"));
+                    tv_leave_shenqingren.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("remark").substring(0,result.getJSONObject("data").getJSONObject("workLeave").getString("remark").length()-3));
+                    tvChaosongPersonQgl.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("copier"));
 //                    tv_leave_reason_content.setText(result.getJSONObject("data").getString("describe"));
-                    if (!result.getJSONObject("data").getString("picture").equals("null")) {
-                        images = result.getJSONObject("data").getString("picture").split(",");
+                    if (!result.getJSONObject("data").getJSONObject("workLeave").getString("picture").equals("null")) {
+                        images = result.getJSONObject("data").getJSONObject("workLeave").getString("picture").split(",");
                         init(images);
                     }
                 } catch (JSONException e) {

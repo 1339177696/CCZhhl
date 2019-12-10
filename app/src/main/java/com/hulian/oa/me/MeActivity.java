@@ -49,6 +49,7 @@ public class MeActivity extends BaseActivity {
     TextView tvDept;
 
     private JWebSocketClientService jWebSClientService;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,8 +84,6 @@ public class MeActivity extends BaseActivity {
             case R.id.mine_out_login:
                 NIMClient.getService(AuthService.class).logout();
                 SPUtils.clear(mContext);
-                /**关闭Socket**/
-                jWebSClientService.stopWebSocket();
                 exitApp(mContext);
 
                 break;

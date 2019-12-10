@@ -59,15 +59,15 @@
             android:enabled="true"
             android:exported="false"
             android:process=":gray" />
-
         <!--qgl-->
         <activity android:name=".LuncherActivity"
             android:configChanges="screenSize|keyboardHidden|orientation">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".message.activity.MessageInfoAcitivity"
             android:configChanges="screenSize|keyboardHidden|orientation"/>
         <activity android:name=".message.activity.MeaaageAdressActivity"
@@ -363,6 +363,9 @@
             android:configChanges="screenSize|keyboardHidden|orientation"/>
         <activity android:name=".qglactivity.MessagenotificationDeteilsActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity android:name=".qglactivity.PersonqglActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+
     </application>
 
 </manifest>

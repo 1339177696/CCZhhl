@@ -22,16 +22,22 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.BaseActivity;
 import com.hulian.oa.R;
+import com.hulian.oa.bean.Department;
 import com.hulian.oa.bean.People;
 import com.hulian.oa.bean.People_x;
+import com.hulian.oa.bean.Userqglbean;
 import com.hulian.oa.me.SelDepartmentActivity;
 import com.hulian.oa.me.SelDepartmentActivity_x;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
+import com.hulian.oa.qglactivity.PersonqglActivity;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.TimeUtils;
 import com.hulian.oa.utils.ToastHelper;
@@ -48,6 +54,7 @@ import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -68,15 +75,15 @@ import de.greenrobot.event.EventBus;
 public class LeaveApplyforActivity extends BaseActivity {
 
     // 审批人
-    @BindView(R.id.titleView)
-    ImageView titleView;
+//    @BindView(R.id.titleView)
+//    ImageView titleView;
     @BindView(R.id.iv)
     ImageView iv;
     @BindView(R.id.fl_content)
     FrameLayout fl_content;
     @BindView(R.id.tv_opreator)
     TextView tvOpreator;
-    String tvOpreatorCode = "121";
+    String tvOpreatorCode = "";
 
     //抄送人
     @BindView(R.id.title11)
@@ -87,7 +94,8 @@ public class LeaveApplyforActivity extends BaseActivity {
     ImageView iv1;
     @BindView(R.id.copier)
     TextView copier;
-    String copierCode = "121";
+    String copierCode = "";
+    String approverName = "";
 
     private List<People> selectList2 = new ArrayList<>();
     private List<People_x> selectList2_x = new ArrayList<>();
@@ -141,6 +149,17 @@ public class LeaveApplyforActivity extends BaseActivity {
     private int maxSelectNum = 1;
     @BindView(R.id.recycler)
     RecyclerView recyclerView;
+    //新加的交接人
+    @BindView(R.id.ci_jiaojie_pic)
+    RelativeLayout ci_jiaojie_pic;
+    @BindView(R.id.jiaojie_person)
+    TextView jiaojie_person;
+    private String jiaojiecode = "";
+    @BindView(R.id.fl_content2)
+    FrameLayout fl_content2;
+
+    private List<Userqglbean>userqgllist = new ArrayList<>();
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -248,6 +267,7 @@ public class LeaveApplyforActivity extends BaseActivity {
                     fl_content.setVisibility(View.VISIBLE);
                     tvOpreator.setText(mList.get(0).getUserName());
                     tvOpreatorCode = mList.get(0).getUserId();
+                    approverName = mList.get(0).getUserName();
                     break;
                 case 120:
                     List<People> mList1 = (List<People>) data.getSerializableExtra("mList");
@@ -255,11 +275,17 @@ public class LeaveApplyforActivity extends BaseActivity {
                     copier.setText(mList1.get(0).getUserName());
                     copierCode = mList1.get(0).getUserId();
                     break;
+                case 520:
+                    fl_content2.setVisibility(View.VISIBLE);
+                    jiaojie_person.setText(data.getStringExtra("userName"));
+                    jiaojiecode = data.getStringExtra("userId");
+
+                    break;
             }
         }
     }
-
-    @OnClick({R.id.iv_back, R.id.rl_leave_reason, R.id.rl_start_time, R.id.rl_end_time, R.id.ci_approved_pic, R.id.ci_copy_pic, R.id.tv_back_instruct, R.id.iv, R.id.iv1})
+//    R.id.iv, R.id.iv1,R.id.ci_approved_pic, R.id.ci_copy_pic,
+    @OnClick({R.id.iv_back, R.id.rl_leave_reason, R.id.rl_start_time, R.id.rl_end_time, R.id.tv_back_instruct, R.id.ci_jiaojie_pic,R.id.iv2})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -278,28 +304,36 @@ public class LeaveApplyforActivity extends BaseActivity {
                 }
                 selectTime(tvTimeEnd);
                 break;
-            case R.id.ci_approved_pic:
-//                startActivity(new Intent(mContext, SelDepartmentActivity.class));
-                Intent intent = new Intent(LeaveApplyforActivity.this, SelDepartmentActivity_meet_zb_single.class);
-                startActivityForResult(intent, 110);
-
-                break;
-            case R.id.ci_copy_pic:
-//                startActivity(new Intent(mContext, SelDepartmentActivity_x.class));
-                Intent intent1 = new Intent(LeaveApplyforActivity.this, SelDepartmentActivity_meet_zb_single.class);
-                startActivityForResult(intent1, 120);
+//            case R.id.ci_approved_pic:
+//                Intent intent = new Intent(LeaveApplyforActivity.this, SelDepartmentActivity_meet_zb_single.class);
+//                startActivityForResult(intent, 110);
+//                break;
+//            case R.id.ci_copy_pic:
+//                Intent intent1 = new Intent(LeaveApplyforActivity.this, SelDepartmentActivity_meet_zb_single.class);
+//                startActivityForResult(intent1, 120);
+//                break;
+                // 交接人
+            case R.id.ci_jiaojie_pic:
+                Intent intent = new Intent(LeaveApplyforActivity.this, PersonqglActivity.class);
+                startActivityForResult(intent, 520);
                 break;
             case R.id.tv_back_instruct:
                 postData();
                 break;
-            case R.id.iv:
-                fl_content.setVisibility(View.GONE);
-                tvOpreatorCode = "";
+
+//            case R.id.iv:
+//                fl_content.setVisibility(View.GONE);
+//                tvOpreatorCode = "";
+//                break;
+//            case R.id.iv1:
+//                fl_content1.setVisibility(View.GONE);
+//                copierCode = "";
+//                break;
+            case R.id.iv2:
+                fl_content2.setVisibility(View.GONE);
+                jiaojiecode = "";
                 break;
-            case R.id.iv1:
-                fl_content1.setVisibility(View.GONE);
-                copierCode = "";
-                break;
+
         }
 
     }
@@ -334,11 +368,13 @@ public class LeaveApplyforActivity extends BaseActivity {
         params.put("createBy", SPUtils.get(mContext, "userId", "").toString());
         params.put("copier", copierCode);
         params.put("approver", tvOpreatorCode);
+        params.put("approverName", approverName);
         params.put("describe", etContent.getText().toString());
         params.put("duration", tvDay.getText().toString());
         params.put("startTime", tvTimeStart.getText().toString());
         params.put("endTime", tvTimeEnd.getText().toString());
         params.put("cause", tvReaseon.getText().toString());
+        params.put("jobHandover", jiaojiecode);
         List<File> fils = new ArrayList<>();
         for (LocalMedia imgurl : selectList) {
             fils.add(new File(imgurl.getPath()));
@@ -361,7 +397,6 @@ public class LeaveApplyforActivity extends BaseActivity {
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 dismissDialogLoading();
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
@@ -385,6 +420,8 @@ public class LeaveApplyforActivity extends BaseActivity {
                         tvDay.setText("");
                     } else
                         tvDay.setText((1 + TimeUtils.differentDaysByMillisecond(tvTimeStart.getText().toString().trim(), tvTimeEnd.getText().toString().trim())) + "");
+                        // 天数换算成功之后请求接口
+                        getPerson((1 + TimeUtils.differentDaysByMillisecond(tvTimeStart.getText().toString().trim(), tvTimeEnd.getText().toString().trim())) + "",SPUtils.get(mContext, "userId", "").toString(),SPUtils.get(mContext, "deptId", "").toString());
                 }
             }
         }).setType(new boolean[]{true, true, true, false, false, false})
@@ -404,38 +441,55 @@ public class LeaveApplyforActivity extends BaseActivity {
         EventBus.getDefault().unregister(this);
     }
 
-    //    // 执行人
+    // 执行人
     public void onEventMainThread(People event) {
         selectList2.clear();
         selectList2.add(event);
-        String uids = "";
-        String uname = "";
-        for (People params1 : selectList2) {
-            uids += params1.getUserId() + ",";
-            uname += params1.getUserName() + ",";
-        }
-//        fl_content.setVisibility(View.VISIBLE);
-//        tvOpreator.setText(uname.substring(0, uname.length() - 1));
-//        tvOpreatorCode = uids.substring(0, uids.length() - 1);
-        //     Toast.makeText(this, uids.substring(0,uids.length()-1), Toast.LENGTH_SHORT).show();
     }
 
-    //
-//    // 抄送人
+    // 抄送人
     public void onEventMainThread(People_x event_x) {
         selectList2_x.clear();
         selectList2_x.add(event_x);
-        String uids = "";
-        String uname = "";
-        for (People_x params_x1 : selectList2_x) {
-            uids += params_x1.getUserId();
-            uname += params_x1.getUserName();
-        }
-//        fl_content1.setVisibility(View.VISIBLE);
-//        copier.setText(uname);
-//        copierCode = uids;
-        //    Toast.makeText(this, uids.substring(0,uids.length()-1), Toast.LENGTH_SHORT).show();
     }
 
+
+    // 请求审批人,抄送人
+    public void getPerson(String day,String id,String bid){
+        RequestParams params = new RequestParams();
+        params.put("deptId",bid);
+        params.put("userId",id);
+        params.put("num",day);
+        HttpRequest.getPerson(params, new ResponseCallback() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                String username = "";
+                String userid = "";
+                try {
+                    JSONObject result = new JSONObject(responseObj.toString());
+                    JSONObject data = result.getJSONObject("data");
+                    JSONArray jsonArray = data.getJSONArray("synthesizeEmpUser");
+                    for (int i = 0;i<jsonArray.length();i++){
+                        JSONObject value = jsonArray.getJSONObject(i);
+                        username += value.getString("userName") + ",";
+                        userid += value.getString("userId") + ",";
+                    }
+                    tvOpreator.setText(data.getString("leaveApproveName"));
+                    copier.setText(username.substring(0, username.length() - 1));
+                    approverName = data.getString("leaveApproveName");
+                    tvOpreatorCode = data.getString("leaveApproveId");
+                    copierCode =userid.substring(0, userid.length() - 1);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(OkHttpException failuer) {
+
+            }
+        });
+
+    }
 
 }

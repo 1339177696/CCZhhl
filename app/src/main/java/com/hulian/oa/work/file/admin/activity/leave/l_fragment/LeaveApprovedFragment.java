@@ -125,7 +125,6 @@ public class LeaveApprovedFragment extends Fragment implements PullLoadMoreRecyc
         params.put("pageStart", mCount * 10 - 9 + "");
         params.put("pageEnd", mCount * 10 + "");
         params.put("approver", SPUtils.get(getActivity(), "userId", "").toString());
-        params.put("state", "1");
         HttpRequest.get_listWorkLeave(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {

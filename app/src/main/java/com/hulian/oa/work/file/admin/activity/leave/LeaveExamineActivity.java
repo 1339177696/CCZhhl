@@ -21,6 +21,7 @@ import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
+import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.utils.ToastHelper;
 import com.hulian.oa.views.AlertDialog;
@@ -113,14 +114,13 @@ public class LeaveExamineActivity extends BaseActivity {
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-//                    tv_leave_title.setText(result.getJSONObject("data").getString("remark"));
-                    tv_leave_reason.setText(result.getJSONObject("data").getString("createBy"));
-                    tv_duration.setText(result.getJSONObject("data").getString("duration"));
-                    tv_start.setText(result.getJSONObject("data").getString("startTime"));
-                    tv_end.setText(result.getJSONObject("data").getString("endTime"));
-                    tv_chaosong_person_qgl.setText(result.getJSONObject("data").getString("describe"));
-                    if(!result.getJSONObject("data").getString("picture").equals("null")) {
-                        images = result.getJSONObject("data").getString("picture").split(",");
+                    tv_leave_reason.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("remark").substring(0,result.getJSONObject("data").getJSONObject("workLeave").getString("remark").length()-3));
+                    tv_duration.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("duration"));
+                    tv_start.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("startTime"));
+                    tv_end.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("endTime"));
+                    tv_chaosong_person_qgl.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("describe"));
+                    if(!result.getJSONObject("data").getJSONObject("workLeave").getString("picture").equals("null")) {
+                        images = result.getJSONObject("data").getJSONObject("workLeave").getString("picture").split(",");
                         init(images);
                     }
                 } catch (JSONException e) {
@@ -130,7 +130,6 @@ public class LeaveExamineActivity extends BaseActivity {
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -145,7 +144,7 @@ public class LeaveExamineActivity extends BaseActivity {
                 startActivity(itent);
                 break;
             case R.id.tv_disagree://驳回
-                postData("2","");
+                postData("2","驳回");
                 break;
             case R.id.tv_agree://同意
                 postData("1","");
@@ -161,12 +160,14 @@ public class LeaveExamineActivity extends BaseActivity {
 
     private void postData(String state,String approver) {
         RequestParams params = new RequestParams();
-        params.put("id", getIntent().getStringExtra("id"));
+        params.put("ids", getIntent().getStringExtra("id"));
+        params.put("nowApprove", SPUtils.get(LeaveExamineActivity.this, "userId", "").toString());
+        params.put("nowApproveName", SPUtils.get(LeaveExamineActivity.this, "nickname", "").toString());
         if(!state.equals("")){
             params.put("state", state);
         }
         if(!"".equals(approver)){
-            params.put("approver", approver);
+            params.put("approvalOpinions", approver);
         }
         HttpRequest.get_Work_edit(params, new ResponseCallback() {
             @Override

@@ -115,7 +115,6 @@ public class MessagenotificationActivity extends BaseActivity {
                 getData();
             }
         });
-        getData();
     }
 
     @OnClick({R.id.iv_back, R.id.yj_rela, R.id.tg_rela, R.id.rc_rela, R.id.hy_rela, R.id.qj_rela, R.id.bx_rela, R.id.rw_rela, R.id.gw_rela})
@@ -197,16 +196,18 @@ public class MessagenotificationActivity extends BaseActivity {
                     JSONArray data = result.getJSONArray("data");
                     for (int i = 0; i < data.length(); i++) {
                         JSONObject value = data.getJSONObject(i);
+                        JSONObject msg = data.getJSONObject(i).getJSONObject("msg");
                         //获取到title值
                         String type = value.getString("type");
                         String createTime = "";
                         String content = "";
-                        if (value.has("content")){
-                             content = value.getString("content");
+                        if (msg.has("content")){
+                             content = msg.getString("content")=="null"?"":msg.getString("content");
                         }
-                        if (value.has("createTime")){
-                            createTime = value.getString("createTime");
+                        if (msg.has("createTime")){
+                            createTime = msg.getString("createTime")=="null"?"":msg.getString("createTime");
                         }
+
                         Log.e("通知返回值", type);
                         /** 1:邮件 2：公文 3：请假 4会议 5：公告 6：日程 7:任务 8：报销*/
                         if (type.equals("1")) {
@@ -295,5 +296,12 @@ public class MessagenotificationActivity extends BaseActivity {
             }
         });
 
+    }
+
+    //Activity创建或者从被覆盖、后台重新回到前台时被调用
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        getData();
     }
 }

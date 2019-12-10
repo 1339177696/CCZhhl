@@ -339,7 +339,82 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:background="#FFFFFF"
+                    android:id="@+id/ci_jiaojie_pic"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_45">
 
+                    <ImageView
+                        android:layout_marginLeft="@dimen/dp_21"
+                        android:id="@+id/wl_img_my9"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/qj_chaosongren_icon_qgl"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp" />
+
+                    <TextView
+                        android:layout_marginLeft="@dimen/dp_9"
+                        android:layout_toRightOf="@+id/wl_img_my9"
+                        android:layout_centerVertical="true"
+                        android:text="交接人"
+                        android:textSize="@dimen/dp_14"
+                        android:textColor="#313131"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <ImageView
+                        android:layout_marginRight="@dimen/dp_22"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/title12"
+                        android:src="@mipmap/qj_zuzhi_jigou_icon_qgl"
+                        android:layout_width="@dimen/dp_19"
+                        android:layout_height="@dimen/dp_19" />
+
+                    <FrameLayout
+                        android:visibility="visible"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:layout_toLeftOf="@+id/title12"
+                        android:id="@+id/fl_content2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/jiaojie_person"
+                            android:text=""
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/l_bg_shape"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp_6"
+                            android:layout_marginRight="@dimen/dp_6"
+                            android:layout_marginBottom="@dimen/dp_6"
+                            android:layout_marginLeft="@dimen/dp_2"
+                            android:padding="@dimen/dp_6"
+                            android:gravity="center"
+                            android:textSize="@dimen/sp_12" />
+                        <LinearLayout
+                            android:id="@+id/ll_del2"
+                            android:layout_width="@dimen/dp_30"
+                            android:layout_height="@dimen/dp_35"
+                            android:layout_alignParentRight="true"
+                            android:layout_gravity="right|top"
+                            android:orientation="vertical">
+                            <ImageView
+                                android:id="@+id/iv2"
+                                android:layout_width="@dimen/dp_15"
+                                android:layout_marginRight="@dimen/dp_1"
+                                android:layout_height="@dimen/dp_15"
+                                android:scaleType="centerCrop"
+                                android:layout_gravity="right|top"
+                                android:src="@mipmap/ic_cha" />
+                        </LinearLayout>
+                    </FrameLayout>
+                </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="@dimen/dp_21"
+                    android:layout_height="@dimen/dp_1"/>
                 <RelativeLayout
                     android:background="#FFFFFF"
                     android:id="@+id/ci_approved_pic"
@@ -367,6 +442,7 @@
                         android:layout_height="wrap_content" />
 
                     <ImageView
+                        android:visibility="invisible"
                         android:layout_marginRight="@dimen/dp_22"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
@@ -405,10 +481,9 @@
                         android:layout_height="wrap_content">
                         <TextView
                             android:id="@+id/tv_opreator"
-                            android:text="黄文龙"
+                            android:text=""
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/l_bg_shape"
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/dp_6"
                             android:layout_marginRight="@dimen/dp_6"
@@ -418,6 +493,7 @@
                             android:gravity="center"
                             android:textSize="@dimen/sp_12" />
                         <LinearLayout
+                            android:visibility="gone"
                             android:id="@+id/ll_del"
                             android:layout_width="@dimen/dp_30"
                             android:layout_height="@dimen/dp_35"
@@ -444,7 +520,6 @@
                     android:layout_width="match_parent"
                     android:layout_marginLeft="@dimen/dp_21"
                     android:layout_height="@dimen/dp_1"/>
-
                 <RelativeLayout
                     android:background="#FFFFFF"
                     android:id="@+id/ci_copy_pic"
@@ -471,6 +546,7 @@
                         android:layout_height="wrap_content" />
 
                     <ImageView
+                        android:visibility="invisible"
                         android:layout_marginRight="@dimen/dp_22"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
@@ -509,10 +585,9 @@
                         android:layout_height="wrap_content">
                         <TextView
                             android:id="@+id/copier"
-                            android:text="黄文龙"
+                            android:text=""
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/l_bg_shape"
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/dp_6"
                             android:layout_marginRight="@dimen/dp_6"
@@ -522,6 +597,7 @@
                             android:gravity="center"
                             android:textSize="@dimen/sp_12" />
                         <LinearLayout
+                            android:visibility="gone"
                             android:id="@+id/ll_del1"
                             android:layout_width="@dimen/dp_30"
                             android:layout_height="@dimen/dp_35"

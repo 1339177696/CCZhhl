@@ -47,7 +47,7 @@
                    android:layout_width="@dimen/dp_53"
                    android:layout_height="@dimen/dp_53"
                    android:layout_centerVertical="true"
-                   android:src="@mipmap/gonggao_icon_qgl" />
+                   android:src="@mipmap/xiaoxi_icon1" />
 
                <TextView
                    android:visibility="gone"
@@ -108,7 +108,7 @@
                    android:layout_width="@dimen/dp_53"
                    android:layout_height="@dimen/dp_53"
                    android:layout_centerVertical="true"
-                   android:src="@mipmap/gonggao_icon_qgl" />
+                   android:src="@mipmap/xiaoxi_icon2" />
 
                <TextView
                    android:visibility="gone"
@@ -170,7 +170,7 @@
                    android:layout_width="@dimen/dp_53"
                    android:layout_height="@dimen/dp_53"
                    android:layout_centerVertical="true"
-                   android:src="@mipmap/gonggao_icon_qgl" />
+                   android:src="@mipmap/xiaoxi_icon3" />
 
                <TextView
                    android:visibility="gone"
@@ -232,7 +232,7 @@
                    android:layout_width="@dimen/dp_53"
                    android:layout_height="@dimen/dp_53"
                    android:layout_centerVertical="true"
-                   android:src="@mipmap/gonggao_icon_qgl" />
+                   android:src="@mipmap/xiaoxi_icon4" />
 
                <TextView
                    android:visibility="gone"
@@ -293,7 +293,7 @@
                    android:layout_width="@dimen/dp_53"
                    android:layout_height="@dimen/dp_53"
                    android:layout_centerVertical="true"
-                   android:src="@mipmap/gonggao_icon_qgl" />
+                   android:src="@mipmap/xiaoxi_icon5" />
 
                <TextView
                    android:visibility="gone"
@@ -354,7 +354,7 @@
                    android:layout_width="@dimen/dp_53"
                    android:layout_height="@dimen/dp_53"
                    android:layout_centerVertical="true"
-                   android:src="@mipmap/gonggao_icon_qgl" />
+                   android:src="@mipmap/xiaoxi_icon6" />
 
                <TextView
                    android:visibility="gone"
@@ -415,7 +415,7 @@
                    android:layout_width="@dimen/dp_53"
                    android:layout_height="@dimen/dp_53"
                    android:layout_centerVertical="true"
-                   android:src="@mipmap/gonggao_icon_qgl" />
+                   android:src="@mipmap/xiaoxi_icon6" />
 
                <TextView
                    android:visibility="gone"
@@ -476,7 +476,7 @@
                    android:layout_width="@dimen/dp_53"
                    android:layout_height="@dimen/dp_53"
                    android:layout_centerVertical="true"
-                   android:src="@mipmap/gonggao_icon_qgl" />
+                   android:src="@mipmap/xiaoxi_icon8" />
 
                <TextView
                    android:visibility="gone"

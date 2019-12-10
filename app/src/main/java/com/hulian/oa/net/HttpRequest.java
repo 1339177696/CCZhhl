@@ -446,7 +446,7 @@ public class HttpRequest {
      */
     public static void get_Work_edit(RequestParams params,ResponseCallback callback)
     {
-        RequestMode.postRequest(Urls.commUrls+"system/workLeave/edit",params,callback,null);
+        RequestMode.postRequest(Urls.commUrls+"system/workLeave/passOrRejection",params,callback,null);
     }
     /**
      * 申请报销
@@ -649,5 +649,17 @@ public class HttpRequest {
         RequestMode.postRequest(Urls.commUrls+"system/mailInfo/android/findMail", params, callback, null);
     }
 
+    /**
+     * 请假审批人，抄送人
+     * @param params
+     * @param callback
+     */
+    public static void getPerson(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls+"system/workLeave/getUserInfo", params, callback, null);
+    }
+
+    public static void getrcYiDu(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls+"system/viewMsg/clearMsgByType", params, callback, null);
+    }
 
 }

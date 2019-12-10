@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -11,13 +12,11 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.BaseActivity;
 import com.hulian.oa.R;
-import com.hulian.oa.bean.Leave;
-import com.hulian.oa.bean.SecondMail_bean_x;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
-import com.hulian.oa.qglactivity.qgladpter.qglTuisongadapter;
+import com.hulian.oa.qglactivity.qgladpter.QglTuisongadapter;
 import com.hulian.oa.qglactivity.qglbean.MeBean;
 import com.hulian.oa.utils.SPUtils;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
@@ -30,6 +29,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by qgl on 2019/11/29 11:14.
@@ -41,9 +41,11 @@ public class MessagenotificationDeteilsActivity extends BaseActivity implements 
     @BindView(R.id.listview)
     PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
     private RecyclerView mRecyclerView;
-    private qglTuisongadapter qglTuisongadapter;
+    private QglTuisongadapter qglTuisongadapter;
     private int mCount = 1;
     private String ty = "";
+    @BindView(R.id.emptyBg)
+    RelativeLayout im_empty;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,11 +56,13 @@ public class MessagenotificationDeteilsActivity extends BaseActivity implements 
         ty = getIntent().getStringExtra("ty");
         initview();
         initList();
-        getDatalist();
     }
 
     private void initview() {
         message_title.setText(Type);
+        if (ty.equals("6")){
+            getrcStatus();
+        }
     }
 
     private void initList() {
@@ -82,10 +86,11 @@ public class MessagenotificationDeteilsActivity extends BaseActivity implements 
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
-        qglTuisongadapter = new qglTuisongadapter(MessagenotificationDeteilsActivity.this);
+        qglTuisongadapter = new QglTuisongadapter(MessagenotificationDeteilsActivity.this);
         mPullLoadMoreRecyclerView.setAdapter(qglTuisongadapter);
         mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
 
+        getDatalist();
     }
 
 
@@ -93,7 +98,6 @@ public class MessagenotificationDeteilsActivity extends BaseActivity implements 
     public void onRefresh() {
         Log.e("wxl", "onRefresh");
         setRefresh();
-        getDatalist();
     }
 
     @Override
@@ -104,6 +108,7 @@ public class MessagenotificationDeteilsActivity extends BaseActivity implements 
     private void setRefresh() {
         qglTuisongadapter.clearData();
         mCount = 1;
+        getDatalist();
     }
 
     @OnClick({R.id.iv_back})
@@ -130,10 +135,35 @@ public class MessagenotificationDeteilsActivity extends BaseActivity implements 
                     List<MeBean> memberList = gson.fromJson(result.getJSONArray("data").toString(), new TypeToken<List<MeBean>>() {}.getType());
 
                     qglTuisongadapter.addAllData(memberList);
+
+                    //判断是否有数据
+                    if (mCount == 1 && memberList.size() == 0) {
+                        im_empty.setVisibility(View.VISIBLE);
+                    } else {
+                        im_empty.setVisibility(View.GONE);
+                    }
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+            }
+
+            @Override
+            public void onFailure(OkHttpException failuer) {
+
+            }
+        });
+    }
+
+    //修改已读状态
+    private void getrcStatus(){
+        RequestParams params = new RequestParams();
+        params.put("type",ty);
+        params.put("userId", SPUtils.get(mContext, "userId", "").toString());
+        HttpRequest.getrcYiDu(params, new ResponseCallback(){
+            @Override
+            public void onSuccess(Object responseObj) {
+                Log.e("成功",responseObj.toString());
             }
 
             @Override

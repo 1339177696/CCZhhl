@@ -47,6 +47,8 @@ public class L_LeaveApprovedAdapter extends RecyclerView.Adapter <L_LeaveApprove
         public TextView tv_duration;
         //已审批
         public ImageView tv_approved;
+//        时间
+        public TextView leave_item_time;
         public ViewHolder(View itemView) {
             super(itemView);
             tv_title = (TextView) itemView.findViewById(R.id.tv_title);
@@ -54,6 +56,7 @@ public class L_LeaveApprovedAdapter extends RecyclerView.Adapter <L_LeaveApprove
             tv_leave_reason = (TextView) itemView.findViewById(R.id.tv_leave_reason);
             tv_duration = (TextView) itemView.findViewById(R.id.tv_duration);
             tv_approved = (ImageView) itemView.findViewById(R.id.tv_approved);
+            leave_item_time = itemView.findViewById(R.id.leave_item_time);
         }
     }
 
@@ -70,6 +73,8 @@ public class L_LeaveApprovedAdapter extends RecyclerView.Adapter <L_LeaveApprove
         holder.tv_time.setText(TimeUtils.getDateToString(dataList.get(position).getCreateTime()));
         holder.tv_leave_reason.setText(dataList.get(position).getCause());
         holder.tv_duration.setText(dataList.get(position).getDuration()+"天");
+        holder.leave_item_time.setText(dataList.get(position).getStartTime()+"--"+dataList.get(position).getEndTime());
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,29 +84,20 @@ public class L_LeaveApprovedAdapter extends RecyclerView.Adapter <L_LeaveApprove
                 mContext.startActivity(intent);
             }
         });
+
         if(dataList.get(position).getState().equals("0")){
-//            holder.tv_approved.setBackgroundColor(mContext.getResources().getColor(R.color.tab_color_true));
-//            holder.tv_approved.setBackground(mContext.getResources().getDrawable(R.drawable.test_yuan_qgl));
-                holder.tv_approved.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_daishenpi_icon_qgl));
-
-
-//            holder.tv_approved.setText("待审批");
+            holder.tv_approved.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_daishenpi_icon_qgl));
         }
         else if (dataList.get(position).getState().equals("1")){
-             holder.tv_approved.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_shenpi_tongguo_icon_qgl));
-
-//            holder.tv_approved.setText("已审批");
-////            holder.tv_approved.setBackgroundColor(mContext.getResources().getColor(R.color.color_a_green));
-//            holder.tv_approved.setBackground(mContext.getResources().getDrawable(R.drawable.test_yuan_qgl2));
-
+            holder.tv_approved.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_shenpi_tongguo_icon_qgl));
         }
-        else {
-                holder.tv_approved.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_bohui_icon_qgl));
+        else if (dataList.get(position).getState().equals("2")){
+            holder.tv_approved.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_bohui_icon_qgl));
+        }
+        else if (dataList.get(position).getState().equals("3")){
 
-//            holder.tv_approved.setText("驳回");
-//            holder.tv_approved.setBackground(mContext.getResources().getDrawable(R.drawable.test_yuan_qgl3));
-
-//            holder.tv_approved.setBackgroundColor(mContext.getResources().getColor(R.color.colorText));
+        }else if (dataList.get(position).getState().equals("4")){
+            holder.tv_approved.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_shenpizhong_icon_qgl));
         }
     }
 

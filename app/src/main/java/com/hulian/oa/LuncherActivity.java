@@ -176,13 +176,13 @@ public class LuncherActivity extends BaseActivity {
                 initNotificationConfig();
                 Intent intent=new Intent(LuncherActivity.this,MainActivity.class);
                 startActivity(intent);
-                /**新加的开启Socket**/
+                /*******************************新加的开启Socket**/
+
                 //启动服务
                 startJWebSClientService();
-
                 //检测通知是否开启
                 checkNotification(mContext);
-                jWebSClientService.startWebSocket(SPUtils.get(mContext,"userId","-1").toString());
+                jWebSClientService.startWebSocket(user.getUserId());
                 finish();
             }
             @Override

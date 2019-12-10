@@ -75,24 +75,18 @@ public class L_LeavePendAdapter extends RecyclerView.Adapter <L_LeavePendAdapter
         holder.tv_duration.setText(dataList.get(position).getDuration()+"天");
         holder.lv_img_my.setText("请假时间  "+dataList.get(position).getStartTime().replace("-","/")+"-"+dataList.get(position).getEndTime().replace("-","/"));
         if(dataList.get(position).getState().equals("0")){
-//            holder.tv_pend.setBackgroundColor(mContext.getResources().getColor(R.color.tab_color_true));
-            //holder.tv_pend.setBackground(mContext.getResources().getDrawable(R.drawable.test_yuan_qgl));
               holder.tv_pend.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_daishenpi_icon_qgl));
-//            holder.tv_pend.setText("待审批");
         }
         else if (dataList.get(position).getState().equals("1")){
-//            holder.tv_pend.setText("已审批");
-//            holder.tv_pend.setBackgroundColor(mContext.getResources().getColor(R.color.color_a_green));
-//            holder.tv_pend.setBackground(mContext.getResources().getDrawable(R.drawable.test_yuan_qgl2));
             holder.tv_pend.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_shenpi_tongguo_icon_qgl));
         }
-        else {
-//            holder.tv_pend.setText("驳回");
-//            holder.tv_pend.setBackgroundColor(mContext.getResources().getColor(R.color.colorText));
-//            holder.tv_pend.setBackground(mContext.getResources().getDrawable(R.drawable.test_yuan_qgl3));
+        else if (dataList.get(position).getState().equals("2")){
             holder.tv_pend.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_bohui_icon_qgl));
+        }
+        else if (dataList.get(position).getState().equals("3")){
 
-
+        }else if (dataList.get(position).getState().equals("4")){
+            holder.tv_pend.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_shenpizhong_icon_qgl));
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -27,11 +27,45 @@
             android:textSize="@dimen/sp_17" />
 
     </RelativeLayout>
-
-    <com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView
-        android:id="@+id/listview"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+        <com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+        <RelativeLayout
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            android:id="@+id/emptyBg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            >
+            <ImageView
+                android:id="@+id/emptyBg1"
+                android:layout_width="@dimen/dp_260"
+                android:layout_height="@dimen/dp_150"
+                android:layout_centerInParent="true"
+                android:contentDescription="@string/empty"
+                android:src="@mipmap/ic_bg_empty"/>
+
+            <TextView
+                android:id="@+id/message_list_empty_hint"
+                android:layout_width="fill_parent"
+                android:text="暂无数据"
+                android:textSize="@dimen/sp_15"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/emptyBg1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dip"
+                android:gravity="center"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
 
 
 </LinearLayout>

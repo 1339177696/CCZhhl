@@ -4,6 +4,66 @@ package com.hulian.oa.qglactivity.qglbean;
  * Created by qgl on 2019/12/2 16:48.
  */
 public class MeBean {
+
+    private String createTime;
+    private String relationId;
+    private String title;
+    private String content;
+    private String status; // 0未查看，1以查看
+    private String type; //
+    private String id; // 0未收藏，1以收藏
+    private String endDate; // 结束时间
+    private String approvalStatus; // 审核状态
+    private String releaseDept; // 部门
+    private String collectionStatus; // 0未收藏，1以收藏
+    private String sendPerson; // 发件人
+    private String startDate; // 会议开始时间
+    private String cause; // 请假事由
+    private String approvalPerson; // 请假审批人
+    private int msgType; // 审批类型
+    private String meetingLocation; // 会议地点
+    private String createPerson; // 请假发起人
+    private String documentType; // 公文类型
+    public int getMsgType() {
+        return msgType;
+    }
+
+    public void setMsgType(int msgType) {
+        this.msgType = msgType;
+    }
+
+
+
+    public String getDocumentType() {
+        return documentType;
+    }
+
+    public void setDocumentType(String documentType) {
+        this.documentType = documentType;
+    }
+
+
+
+    public String getCreatePerson() {
+        return createPerson;
+    }
+
+    public void setCreatePerson(String createPerson) {
+        this.createPerson = createPerson;
+    }
+
+
+    public String getApprovalPerson() {
+        return approvalPerson;
+    }
+
+    public void setApprovalPerson(String approvalPerson) {
+        this.approvalPerson = approvalPerson;
+    }
+
+
+
+
     public String getCreateTime() {
         return createTime;
     }
@@ -44,12 +104,6 @@ public class MeBean {
         this.status = status;
     }
 
-    private String createTime;
-    private String relationId;
-    private String title;
-    private String content;
-    private String status; // 0未查看，1以查看
-
     public String getType() {
         return type;
     }
@@ -57,8 +111,6 @@ public class MeBean {
     public void setType(String type) {
         this.type = type;
     }
-
-    private String type; //
 
 
     public String getCollectionStatus() {
@@ -69,7 +121,6 @@ public class MeBean {
         this.collectionStatus = collectionStatus;
     }
 
-    private String collectionStatus; // 0未收藏，1以收藏
 
     public String getId() {
         return id;
@@ -79,7 +130,6 @@ public class MeBean {
         this.id = id;
     }
 
-    private String id; // 0未收藏，1以收藏
 
     public String getReleaseDept() {
         return releaseDept;
@@ -89,7 +139,6 @@ public class MeBean {
         this.releaseDept = releaseDept;
     }
 
-    private String releaseDept; // 部门
 
     public String getSendPerson() {
         return sendPerson;
@@ -99,7 +148,6 @@ public class MeBean {
         this.sendPerson = sendPerson;
     }
 
-    private String sendPerson; // 发件人
 
     public String getStartDate() {
         return startDate;
@@ -109,7 +157,6 @@ public class MeBean {
         this.startDate = startDate;
     }
 
-    private String startDate; // 会议开始时间
 
     public String getMeetingLocation() {
         return meetingLocation;
@@ -119,6 +166,32 @@ public class MeBean {
         this.meetingLocation = meetingLocation;
     }
 
-    private String meetingLocation; // 会议地点
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+
+    public String getCause() {
+        return cause;
+    }
+
+    public void setCause(String cause) {
+        this.cause = cause;
+    }
+
+
+    public String getApprovalStatus() {
+        return approvalStatus;
+    }
+
+    public void setApprovalStatus(String approvalStatus) {
+        this.approvalStatus = approvalStatus;
+    }
+
 
 }

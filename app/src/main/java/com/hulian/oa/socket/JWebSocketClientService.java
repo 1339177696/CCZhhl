@@ -17,6 +17,7 @@ import android.os.PowerManager;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.hulian.oa.MainActivity;
 import com.hulian.oa.R;
@@ -276,7 +277,12 @@ public class JWebSocketClientService extends Service {
             JSONObject result = new JSONObject(content);
             String msourceId = result.getString("sourceId");
             String mtype = result.getString("type");
-            String mtitle = result.getString("title");
+            String mtitle = "";
+            if (result.getString("title").equals("null")&&result.getString("title") == null){
+                 mtitle = "";
+            }else {
+                 mtitle = result.getString("title");
+            }
             String mcontext = result.getString("content");
             Intent intent = new Intent();
             intent.setClass(this, MessagenotificationActivity.class);
@@ -289,7 +295,7 @@ public class JWebSocketClientService extends Service {
                     .setSmallIcon(R.mipmap.icon)
                     .setContentTitle(mtitle)
                     .setContentText(mcontext)
-                    .setWhen(System.currentTimeMillis())
+                    .setStyle(new Notification.BigPictureStyle())
                     // 向通知添加声音、闪灯和振动效果
                     .setDefaults(Notification.DEFAULT_VIBRATE | Notification.DEFAULT_ALL | Notification.DEFAULT_SOUND)
                     .setContentIntent(pendingIntent);

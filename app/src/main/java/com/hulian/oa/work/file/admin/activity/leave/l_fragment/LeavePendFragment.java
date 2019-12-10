@@ -123,7 +123,8 @@ public class LeavePendFragment extends Fragment implements PullLoadMoreRecyclerV
         RequestParams params = new RequestParams();
         params.put("pageStart", mCount*10-9 + "");
         params.put("pageEnd", mCount * 10 + "");
-        params.put("approver", SPUtils.get(getActivity(), "userId", "").toString());
+//        params.put("approver", SPUtils.get(getActivity(), "userId", "").toString());
+        params.put("nowApprove", SPUtils.get(getActivity(), "userId", "").toString());
         params.put("state","0");
         HttpRequest.get_listWorkLeave(params, new ResponseCallback() {
             @Override
