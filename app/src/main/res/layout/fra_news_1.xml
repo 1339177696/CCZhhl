@@ -2,8 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#092043C9"
-
     android:orientation="vertical">
 
     <com.youth.banner.Banner
@@ -17,10 +15,6 @@
         android:id="@+id/recycler_banner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_15"
-        android:layout_marginTop="@dimen/dp_13"
-        android:layout_marginRight="@dimen/dp_15"
-        android:layout_marginBottom="@dimen/dp_10"
         android:baselineAligned="false" />
 
     <TextView
@@ -57,9 +51,12 @@
         android:layout_height="wrap_content">
 
         <com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView
+            android:divider="@color/black"
+            android:dividerPadding="@dimen/dp_10"
             android:id="@+id/listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white" />
     </FrameLayout>
+
 </LinearLayout>

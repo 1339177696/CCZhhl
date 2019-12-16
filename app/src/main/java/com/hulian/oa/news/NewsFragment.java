@@ -74,8 +74,7 @@ public class NewsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fra_news, container, false);
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
@@ -112,9 +111,10 @@ public class NewsFragment extends Fragment {
             tvMengban.setVisibility(View.VISIBLE);
         }
     }
-    @OnClick(R.id.iv_gomine)
-    public void onViewClicked() {
-        startActivity(new Intent(getActivity(), MeActivity.class));
-    }
+    //qgl 暂时不用了
+//    @OnClick(R.id.iv_gomine)
+//    public void onViewClicked() {
+//        startActivity(new Intent(getActivity(), MeActivity.class));
+//    }
 
 }

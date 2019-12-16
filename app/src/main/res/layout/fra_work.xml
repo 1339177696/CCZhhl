@@ -3,18 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
     >
-<LinearLayout
-    android:orientation="vertical"
+<RelativeLayout
     android:background="#EBEBEB"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:background="#FFFFFF"
+        android:background="@mipmap/qglfra_news_bg_icon"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_45">
+        android:layout_height="@dimen/dp_170">
 
         <!--<ImageView-->
         <!--android:id="@+id/iv_news"-->
@@ -22,24 +20,34 @@
         <!--android:layout_height="@dimen/dp_150"-->
         <!--android:background="@mipmap/ic_work_head" />-->
 
-        <ImageView
-            android:id="@+id/iv_mine"
-            android:layout_marginLeft="@dimen/dp_20"
-            android:layout_width="@dimen/dp_25"
-            android:layout_height="@dimen/dp_25"
-            android:layout_centerVertical="true"
-            android:background="@mipmap/ic_work_me" />
+        <RelativeLayout
+            android:layout_marginTop="@dimen/dp_25"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_45">
+            <ImageView
+                android:id="@+id/iv_mine"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_width="@dimen/dp_22"
+                android:layout_height="@dimen/dp_22"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/fragment_work_logo1" />
 
-        <TextView
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="工作中心"
-            android:textColor="#ff313131"
-            android:textSize="@dimen/sp_17" />
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="工作中心"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/sp_17" />
+        </RelativeLayout>
+
     </RelativeLayout>
     <ScrollView
+        android:scrollbars="none"
+        android:layout_marginLeft="@dimen/dp_13"
+        android:layout_marginRight="@dimen/dp_13"
+        android:layout_marginTop="@dimen/dp_110"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
@@ -48,6 +56,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </ScrollView>
-</LinearLayout>
+</RelativeLayout>
 
 </LinearLayout>

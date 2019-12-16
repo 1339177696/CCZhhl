@@ -15,6 +15,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.hulian.oa.XinMod.XFragment.XFBusfragment;
 import com.hulian.oa.address.AddressFragment;
 import com.hulian.oa.address.pad.Address_Pad_Fragment;
 import com.hulian.oa.agency.AgencyFragment;
@@ -85,6 +86,9 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     RadioButton rb_work;
     @BindView(R.id.rb_news)
     RadioButton rbNews;
+//    业务驾驶舱
+    @BindView(R.id.rb_bus)
+    RadioButton rb_bus;
     @BindView(R.id.rg_footer)
     RadioGroup rgFooter;
 
@@ -95,13 +99,14 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     private NewsFragment newsFragment;
     private WorkFragment workFragment;
     private AgencyFragment agencyFragment;
+    private XFBusfragment xfBusfragment;
 
     private MailFragment mailFragment;
     private Address_Pad_Fragment address_Pad_Fragment;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main2);
         ButterKnife.bind(this);
 
 //        if(BuildConfig.IsPad){
@@ -204,7 +209,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
              //   }
                 break;
             case R.id.rb_news:
-                StatusBarUtil.statusBarLightMode(this);
+                StatusBarUtil.statusBarLightMode_white(this);
                 if (newsFragment == null) {
                     newsFragment = new NewsFragment().newInstance("");
                     transaction.add(R.id.content,newsFragment);
@@ -248,13 +253,23 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 }
                 break;
             case R.id.rb_work:
-                StatusBarUtil.statusBarLightMode(this);
+                StatusBarUtil.statusBarLightMode_white(this);
+
                 if (workFragment == null) {
                     workFragment = new WorkFragment().newInstance("");
                     transaction.add(R.id.content, workFragment);
                 } else {
                     transaction.show(workFragment);
                 }
+                break;
+            case R.id.rb_bus:
+//                StatusBarUtil.statusBarLightMode(this);
+//                if (xfBusfragment == null) {
+//                    xfBusfragment = new XFBusfragment().newInstance("");
+//                    transaction.add(R.id.content, xfBusfragment);
+//                } else {
+//                    transaction.show(xfBusfragment);
+//                }
                 break;
         }
         transaction.commit();

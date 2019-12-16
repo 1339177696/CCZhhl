@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_49"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_0_5"
+                android:background="#dddddd" />
+
+            <RadioGroup
+                android:id="@+id/rg_footer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/rb_message"
+                    style="@style/footer_radioButton_style"
+                    android:drawableTop="@drawable/main_low_tab3"
+                    android:text="消息" />
+
+                <RadioButton
+                    android:id="@+id/rb_address"
+                    style="@style/footer_radioButton_style"
+                    android:drawableTop="@drawable/main_low_tab4"
+                    android:text="通讯录" />
+
+                <RadioButton
+                    android:id="@+id/rb_agency"
+                    style="@style/footer_radioButton_style"
+                    android:drawableTop="@drawable/main_low_tab5"
+                    android:text="待办" />
+                <RadioButton
+                    android:id="@+id/rb_work"
+                    style="@style/footer_radioButton_style"
+                    android:drawableTop="@drawable/main_low_tab1"
+                    android:text="工作" />
+                <RadioButton
+                    android:id="@+id/rb_bus"
+                    style="@style/footer_radioButton_style"
+                    android:drawableTop="@drawable/main_low_tab1"
+                    android:text="驾驶舱" />
+                <RadioButton
+                    android:id="@+id/rb_news"
+                    style="@style/footer_radioButton_style"
+                    android:drawableTop="@drawable/main_low_tab2"
+                    android:text="资讯" />
+            </RadioGroup>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_gravity="start"
+        android:orientation="vertical"
+        android:layout_width="@dimen/dp_200"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_100">
+            <ImageView
+                android:id="@+id/main2_img"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_17"
+                android:src="@mipmap/user_img_qgl"
+                android:layout_width="@dimen/dp_66"
+                android:layout_height="@dimen/dp_66" />
+
+            <TextView
+                android:id="@+id/main2_name"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_27"
+                android:layout_toRightOf="@+id/main2_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="王俊杰"
+                android:textColor="#ff313131"
+                android:textSize="@dimen/sp_14"
+                />
+
+            <TextView
+                android:layout_marginLeft="@dimen/dp_7"
+                android:layout_marginTop="@dimen/dp_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/main2_name"
+                android:layout_toEndOf="@+id/main2_name"
+                android:text="信息科局长"
+                android:textColor="#ff313131"
+                android:textSize="@dimen/sp_11" />
+
+            <TextView
+                android:layout_marginTop="@dimen/dp_6"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_toRightOf="@+id/main2_img"
+                android:layout_below="@+id/main2_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="13756036991"
+                android:textColor="#ff313131"
+                android:textSize="@dimen/sp_12"
+                />
+
+            <ImageView
+                android:layout_marginTop="@dimen/dp_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/main2_name"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="17dp"
+                android:src="@mipmap/main2_edit" />
+        </RelativeLayout>
+
+        <View
+            android:background="#E1E1E1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"/>
+
+    </LinearLayout>
+
+
+
+
+</android.support.v4.widget.DrawerLayout>

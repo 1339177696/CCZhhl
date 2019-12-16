@@ -79,7 +79,8 @@ public class WorkFragment extends Fragment {
         EventBus.getDefault().register(this);
         workFragemt_9=new WorkFragemt_9();
         workFragemt_list=new WorkFragemt_list();
-        init9fragment();
+//        init9fragment();
+        initListfragment();
         return view;
     }
 

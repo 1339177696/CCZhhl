@@ -5,69 +5,99 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical">
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/dp_100"
-                    android:paddingRight="@dimen/dp_100">
-
-                    <android.support.design.widget.TabLayout
-                        android:id="@+id/my_tablayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_45"
-                        android:layout_gravity="center_horizontal"
-                        app:tabIndicatorColor="@color/colorTheme"
-                        app:tabIndicatorFullWidth="false"
-                        app:tabMaxWidth="0dp"
-                        app:tabMode="fixed"
-                        app:tabSelectedTextColor="@color/colorTheme"
-                        app:tabTextAppearance="@style/TabLayoutTextSize"
-                        app:tabTextColor="@color/black" />
-                </FrameLayout>
-
-                <ImageView
-                    android:id="@+id/iv_gomine"
-                    android:layout_marginLeft="@dimen/dp_20"
-                    android:layout_width="@dimen/dp_25"
-                    android:layout_height="@dimen/dp_25"
-                    android:layout_centerVertical="true"
-                    android:background="@mipmap/ic_work_me" />
-            </RelativeLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="@mipmap/qglfra_news_bg_icon"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_170">
 
             <TextView
+                android:layout_marginTop="@dimen/dp_25"
+                android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_0_5"
-                android:layout_marginTop="12dp"
-                android:background="#dddddd" />
+                android:layout_height="@dimen/dp_45"
+                android:text="资讯"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/sp_17" />
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/my_viewpager"
+            <android.support.design.widget.TabLayout
+                android:id="@+id/my_tablayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white" />
+                android:layout_height="@dimen/dp_45"
+                android:layout_gravity="center_horizontal"
+                app:tabIndicatorColor="@color/colorTheme"
+                app:tabIndicatorFullWidth="false"
+                app:tabMaxWidth="0dp"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/colorTheme"
+                app:tabTextAppearance="@style/TabLayoutTextSize"
+                app:tabTextColor="@color/black" />
+
         </LinearLayout>
 
+
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+
+                <!--<FrameLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:paddingLeft="@dimen/dp_100"-->
+                    <!--android:paddingRight="@dimen/dp_100">-->
+
+                    <!--<android.support.design.widget.TabLayout-->
+                        <!--android:id="@+id/my_tablayout"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="@dimen/dp_45"-->
+                        <!--android:layout_gravity="center_horizontal"-->
+                        <!--app:tabIndicatorColor="@color/colorTheme"-->
+                        <!--app:tabIndicatorFullWidth="false"-->
+                        <!--app:tabMaxWidth="0dp"-->
+                        <!--app:tabMode="fixed"-->
+                        <!--app:tabSelectedTextColor="@color/colorTheme"-->
+                        <!--app:tabTextAppearance="@style/TabLayoutTextSize"-->
+                        <!--app:tabTextColor="@color/black" />-->
+                <!--</FrameLayout>-->
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/iv_gomine"-->
+                    <!--android:layout_marginLeft="@dimen/dp_20"-->
+                    <!--android:layout_width="@dimen/dp_25"-->
+                    <!--android:layout_height="@dimen/dp_25"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:background="@mipmap/ic_work_me" />-->
+            <!--</RelativeLayout>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/dp_0_5"-->
+                <!--android:layout_marginTop="12dp"-->
+                <!--android:background="#dddddd" />-->
+
+            <android.support.v4.view.ViewPager
+                android:layout_marginLeft="@dimen/dp_15"
+                android:layout_marginRight="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_120"
+                android:id="@+id/my_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
         <TextView
             android:id="@+id/tv_mengban"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#99ffffff"
             android:visibility="gone" />
-
         <fragment
             android:id="@+id/fg_order"
             android:name="com.hulian.oa.work.file.admin.activity.instruct.fragment.Fra_post_order"
