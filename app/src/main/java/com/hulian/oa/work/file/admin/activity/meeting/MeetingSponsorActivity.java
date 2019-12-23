@@ -1,9 +1,12 @@
 package com.hulian.oa.work.file.admin.activity.meeting;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -41,6 +44,7 @@ import com.hulian.oa.work.file.admin.activity.meeting.l_fragment.MeetReceiverFra
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -89,19 +93,32 @@ public class MeetingSponsorActivity extends BaseActivity {
     private String meetingTimeEnd = "";
     private String roomid = "";
     private String numberOfPeople = "";
-    private String signType = "0";
+    private String signType = "1";
     MeetGridViewAdapter adapter;
     AlertDialog myDialog;
+
+
 
     private String meetingContacts = "";
     private String meetingContactsPhone = "";
 
+    // 会议名称
+    private String meetingRoomName = "";
+    // 会议地点
+    private String meetingRoomLocation = "";
+
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.work_meeting_sponsor);
         myDialog = new AlertDialog(this).builder();
         ButterKnife.bind(this);
+        tvLianxPerson.setText(SPUtils.get(MeetingSponsorActivity.this,"nickname","").toString());
+        meetingContacts = SPUtils.get(MeetingSponsorActivity.this,"nickname","").toString();
+        meetingContactsPhone = SPUtils.get(MeetingSponsorActivity.this,"username","").toString();
+        etTitle9.setText( SPUtils.get(MeetingSponsorActivity.this,"username","").toString());
         rdGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -170,7 +187,7 @@ public class MeetingSponsorActivity extends BaseActivity {
                     ToastHelper.showToast(mContext, "请填写会议内容");
                     return;
                 }
-
+                loadDialog.show();
                 RequestParams params = new RequestParams();
                 params.put("signType", signType);
                 params.put("meetingTheme", etTitle.getText().toString());
@@ -183,10 +200,12 @@ public class MeetingSponsorActivity extends BaseActivity {
                 params.put("createBy", SPUtils.get(mContext, "userId", "").toString());
                 params.put("meetingContacts", meetingContacts);
                 params.put("meetingContactsPhone", meetingContactsPhone);
+                params.put("meetingLocation", meetingRoomLocation+meetingRoomName);
                 HttpRequest.postMeetLauncherApi(params, new ResponseCallback() {
                     @Override
                     public void onSuccess(Object responseObj) {
                         try {
+                            loadDialog.dismiss();
                             JSONObject result = new JSONObject(responseObj.toString());
                             ToastHelper.showToast(mContext, result.getString("msg"));
                             if (result.getString("code").equals("0")) {
@@ -231,6 +250,9 @@ public class MeetingSponsorActivity extends BaseActivity {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                             roomid = memberList.get(i).getId();
+                            meetingRoomLocation = memberList.get(i).getMeetingRoomLocation();
+                            meetingRoomName = memberList.get(i).getMeetingRoomName();
+
                             for (int j = 0; j < memberList.size(); j++) {
                                 if (i == j) {
                                     memberList.get(j).setIsCheck("1");
@@ -266,10 +288,13 @@ public class MeetingSponsorActivity extends BaseActivity {
                 //设置时间
                 if(!meetingTimeEnd.equals(""))
                 {
-                    if(TimeUtils.differentDaysByMillisecond(getTime(date),meetingTimeEnd)<0){
-                        ToastHelper.showToast(mContext, "请选择不小于开始时间的结束时间");
-                        return;
-                    }
+//                    if(TimeUtils.differentDaysByMillisecond2(getTime(date),meetingTimeEnd)<0){
+//
+//                        ToastHelper.showToast(mContext, "请选择不小于开始时间的结束时间");
+//
+//                        return;
+//                    }
+
                 }
 
                 tvPartTime.setText(getTime(date));
@@ -286,17 +311,33 @@ public class MeetingSponsorActivity extends BaseActivity {
         TimePickerView pvTime = new TimePickerBuilder(mContext, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
-                if(!meetingTime.equals(""))
-                {
-                    if(TimeUtils.differentDaysByMillisecond(meetingTime,getTime(date))<0){
-                        ToastHelper.showToast(mContext, "请选择不小于开始时间的结束时间");
-                        return;
-                    }
-                }
+
                 //设置时间
                 tvPartTime2.setText(getTime(date));
                 //    meetingTime = getTime(date);
                 meetingTimeEnd = tvPartTime2.getText().toString();
+                if(!meetingTime.equals(""))
+                {
+//                    if(TimeUtils.differentDaysByMillisecond3(meetingTime,getTime(date))<0){
+//                        ToastHelper.showToast(mContext, "请选择不小于开始时间的结束时间");
+//                        return;
+//                    }
+
+                    try {
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                        Date date1 = dateFormat.parse(meetingTime);//开始时间
+                        Date date2 = dateFormat.parse(meetingTimeEnd);//结束时间
+                        if (date1.getTime()>date2.getTime()){
+                            ToastHelper.showToast(mContext, "请选择不小于开始时间的结束时间");
+                            return;
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+
+
+                }
 
             }
         }).setType(new boolean[]{true, true, true, true, true, false})
@@ -336,7 +377,9 @@ public class MeetingSponsorActivity extends BaseActivity {
 
 
                 adapter = new MeetGridViewAdapter(MeetingSponsorActivity.this, mList);
+
                 gvTest.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
                 List<People> finalMList = mList;
                 gvTest.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

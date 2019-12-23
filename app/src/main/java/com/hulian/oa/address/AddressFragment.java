@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.hulian.oa.MainActivity;
 import com.hulian.oa.R;
 import com.hulian.oa.address.adapter.PersonAdapter;
 import com.hulian.oa.address.bean.People;
@@ -31,6 +32,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 
 public class AddressFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -74,25 +76,29 @@ public class AddressFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
 //            gid = getArguments().getString("gid");
 //            idno=getArguments().getString("idno");
         }
+
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fra_address, container, false);
         ButterKnife.bind(this, view);
 
         FragmentManager fragment1 = getFragmentManager();
         //2,碎片的显示需要使用FragmentTransaction类操作
         FragmentTransaction transacction = fragment1.beginTransaction();
-
-
         fragment = new ContactsFragment();
 //        fragment.setContainerId(R.id.contact_fragment);
         transacction.replace(R.id.contact_fragment, fragment);
@@ -115,7 +121,6 @@ public class AddressFragment extends Fragment {
                 FuncViewHolder.FuncItem.handle(getActivity(), item);
             }
         });
-
 
 //
         mListAdapter = new PersonAdapter(getActivity(), initData());
@@ -188,6 +193,10 @@ public class AddressFragment extends Fragment {
 
     @OnClick(R.id.iv_mine)
     public void onViewClicked() {
-        startActivity(new Intent(getActivity(), MeActivity.class));
+//        startActivity(new Intent(getActivity(), MeActivity.class));
+        EventBus.getDefault().post(new MainActivity());
+
     }
+
+
 }

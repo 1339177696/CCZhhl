@@ -1,6 +1,8 @@
 package com.hulian.oa.me;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -41,6 +43,7 @@ public class SelPeopleActivity extends BaseActivity {
     private TextView tv_title;
     List<People> memberList=new ArrayList<>();
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

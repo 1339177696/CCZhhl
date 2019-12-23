@@ -220,6 +220,7 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 //需要转化为实体对象
                 try {
+
                     JSONObject result = new JSONObject(responseObj.toString());
                     list = gson.fromJson(result.getJSONObject("data").getString("list"), new TypeToken<List<Hufu_bean>>() {
                     }.getType());
@@ -250,6 +251,7 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
 
                     mRecyclerViewAdapter.addAllData(list, huifu_bean_x);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -396,6 +398,8 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
     private void get_com_Data(String id) {
         RequestParams params = new RequestParams();
         params.put("id", id);
+        params.put("userId",SPUtils.get(mContext,"userId","").toString());
+        params.put("completion","1");
         HttpRequest.post_CoordinationRelease_deit(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {

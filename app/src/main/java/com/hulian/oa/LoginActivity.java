@@ -62,8 +62,8 @@ public class LoginActivity extends BaseActivity {
     Button btLogin;
     private AbortableFuture<LoginInfo> loginRequest;
 
-    private JWebSocketClientService.JWebSocketClientBinder binder;
-    private JWebSocketClientService jWebSClientService;
+//    private JWebSocketClientService.JWebSocketClientBinder binder;
+//    private JWebSocketClientService jWebSClientService;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -76,7 +76,7 @@ public class LoginActivity extends BaseActivity {
             doLogin(SPUtils.get(mContext,"username","-1").toString(),SPUtils.get(mContext,"password","-1").toString());
         }
         //绑定服务
-        bindService();
+//        bindService();
     }
 
     @OnClick(R.id.bt_login)
@@ -208,11 +208,11 @@ public class LoginActivity extends BaseActivity {
                 startActivity(intent);
                 /**开启Socket连接*****************************************************/
 
-                //启动服务
-                startJWebSClientService();
-                //检测通知是否开启
-                checkNotification(mContext);
-                jWebSClientService.startWebSocket(user.getUserId());
+//                //启动服务
+//                startJWebSClientService();
+//                //检测通知是否开启
+//                checkNotification(mContext);
+//                jWebSClientService.startWebSocket(user.getUserId());
                 finish();
             }
             @Override
@@ -241,8 +241,8 @@ public class LoginActivity extends BaseActivity {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             Log.e("MainActivity", "服务与活动成功绑定");
-            binder = (JWebSocketClientService.JWebSocketClientBinder) iBinder;
-            jWebSClientService = binder.getService();
+//            binder = (JWebSocketClientService.JWebSocketClientBinder) iBinder;
+//            jWebSClientService = binder.getService();
         }
 
         @Override
@@ -346,7 +346,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unbindService(serviceConnection);
+//        unbindService(serviceConnection);
     }
 
 

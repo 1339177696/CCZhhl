@@ -14,12 +14,16 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.R;
 import com.hulian.oa.agency.l_adapter.UpcomAdapter;
+import com.hulian.oa.agency.l_adapter.UpcomAdapter_qgl;
 import com.hulian.oa.bean.Agency;
 import com.hulian.oa.bean.AgencyCount;
 import com.hulian.oa.bean.AgencyNew;
+import com.hulian.oa.bean.Daiban_xin_qgl1;
 import com.hulian.oa.bean.InstructionsList;
+import com.hulian.oa.bean.Leave;
 import com.hulian.oa.bean.MeetingList;
 import com.hulian.oa.bean.OfficialDocumentList;
 import com.hulian.oa.bean.WorkCoordinationReleaseList;
@@ -29,6 +33,7 @@ import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
+import com.hulian.oa.qglactivity.qglbean.StringBean1;
 import com.hulian.oa.utils.SPUtils;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
@@ -51,8 +56,13 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
     RelativeLayout emptyBg;
     private int mCount = 1;
     private RecyclerView mRecyclerView;
-    UpcomAdapter mRecyclerViewAdapter;
+//    UpcomAdapter mRecyclerViewAdapter;
+    UpcomAdapter_qgl mRecyclerViewAdapter;
     Unbinder unbinder;
+
+   private List<Daiban_xin_qgl1.DataBean> memberList = new ArrayList<>();
+
+   private List<Daiban_xin_qgl1.DataBean> dataBean  = new ArrayList<>();
 
     @Nullable
     @Override
@@ -86,7 +96,8 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
         mPullLoadMoreRecyclerView.setLinearLayout();
 
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
-        mRecyclerViewAdapter = new UpcomAdapter(getActivity());
+//        mRecyclerViewAdapter = new UpcomAdapter(getActivity());
+        mRecyclerViewAdapter = new UpcomAdapter_qgl(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
         getData();
     }
@@ -123,10 +134,8 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
 
     private void getData() {
         RequestParams params = new RequestParams();
-        params.put("userId", SPUtils.get(getActivity(), "userId", "").toString());
-        params.put("type", SPUtils.get(getActivity(), "isLead", "").toString());
-//        params.put("pageState", mCount*10-9 + "");
-//        params.put("pageEnd", mCount * 10 + "");
+        params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
+//        params.put("type", SPUtils.get(getActivity(), "isLead", "").toString());
         HttpRequest.postAgencyListApi(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -134,9 +143,40 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-                    Agency agency = gson.fromJson(result.getJSONObject("data").toString(), Agency.class);
-                    mRecyclerViewAdapter.addAllData(newData(agency));
+                    memberList = gson.fromJson(result.getJSONArray("data").toString(), new TypeToken<List<Daiban_xin_qgl1.DataBean>>() {}.getType());
+//                    List<AgencyNew> agencyNewslist = new ArrayList<>();
+//                    for (int i = 0;i<memberList.size();i++){
+//                        if (memberList.get(i).getType().equals("1")){
+//                            //公文
+//
+//
+//                        }else if (memberList.get(i).getType().equals("2")){
+//                            //请假
+//
+//
+//                        }else if (memberList.get(i).getType().equals("3")){
+//                            //会议
+//
+//
+//                        }else {
+//                            //任务
+//                        }
+//                    }
+                    mRecyclerViewAdapter.addAllData(memberList);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
+                    AgencyCount mAgencyCount = new AgencyCount();
+                    mAgencyCount.setAgencyCount(memberList.size() + "");
+                    EventBus.getDefault().post(mAgencyCount);
+
+
+
+//                    Agency agency = gson.fromJson(result.getJSONObject("data").toString(), Agency.class);
+//                    mRecyclerViewAdapter.addAllData(newData(agency));
+//                    mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
+
+
+
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -144,7 +184,6 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -242,4 +281,70 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
         }
         return agencyNewslist;
     }
+
+
+
+    //接受点击事件
+    public void onEventMainThread(StringBean1 event) {
+        Log.e("待办点击的",event.getDaiban());
+        if (event.getDaiban().equals("公文审批")){
+            dataBean.clear();
+            for (int i = 0;i<memberList.size();i++) {
+
+                if (memberList.get(i).getType().equals("1")) {
+                    //公文
+                    dataBean.add(memberList.get(i));
+                }
+            }
+            mRecyclerViewAdapter.clearData();
+            mRecyclerViewAdapter.addAllData(dataBean);
+            AgencyCount mAgencyCount = new AgencyCount();
+            mAgencyCount.setAgencyCount(dataBean.size() + "");
+            EventBus.getDefault().post(mAgencyCount);
+
+        }else if (event.getDaiban().equals("会议安排")){
+            dataBean.clear();
+            for (int i = 0;i<memberList.size();i++) {
+                if (memberList.get(i).getType().equals("3")) {
+                    //公文
+                    dataBean.add(memberList.get(i));
+                }
+            }
+            mRecyclerViewAdapter.clearData();
+            mRecyclerViewAdapter.addAllData(dataBean);
+            AgencyCount mAgencyCount = new AgencyCount();
+            mAgencyCount.setAgencyCount(dataBean.size() + "");
+            EventBus.getDefault().post(mAgencyCount);
+
+        }else if (event.getDaiban().equals("任务协同")){
+            dataBean.clear();
+            for (int i = 0;i<memberList.size();i++) {
+                if (memberList.get(i).getType().equals("4")) {
+                    //公文
+                    dataBean.add(memberList.get(i));
+                }
+            }
+            mRecyclerViewAdapter.clearData();
+            mRecyclerViewAdapter.addAllData(dataBean);
+            AgencyCount mAgencyCount = new AgencyCount();
+            mAgencyCount.setAgencyCount(dataBean.size() + "");
+            EventBus.getDefault().post(mAgencyCount);
+
+        }else if (event.getDaiban().equals("请假审批")){
+            dataBean.clear();
+            for (int i = 0;i<memberList.size();i++) {
+
+                if (memberList.get(i).getType().equals("2")) {
+                    //公文
+                    dataBean.add(memberList.get(i));
+                }
+            }
+            mRecyclerViewAdapter.clearData();
+            mRecyclerViewAdapter.addAllData(dataBean);
+            AgencyCount mAgencyCount = new AgencyCount();
+            mAgencyCount.setAgencyCount(dataBean.size() + "");
+            EventBus.getDefault().post(mAgencyCount);
+        }
+    }
+
 }

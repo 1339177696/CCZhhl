@@ -1,97 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="#ffffff"
-    android:paddingLeft="10dp"
-    android:paddingTop="@dimen/dp_10"
-    android:paddingRight="@dimen/dp_10"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_height="wrap_content">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:orientation="horizontal"
-    android:layout_height="wrap_content">
+    android:layout_marginLeft="@dimen/dp_10"
+    android:layout_marginRight="@dimen/dp_10"
+    android:layout_marginTop="@dimen/dp_13"
+    android:padding="@dimen/dp_5"
+    android:background="@drawable/edit_background3">
+
     <LinearLayout
-        android:background="@drawable/edit_notice_qgl"
-        android:orientation="vertical"
-        android:layout_marginLeft="@dimen/dp_4"
-        android:layout_marginRight="@dimen/dp_14"
-        android:gravity="center"
-        android:layout_width="@dimen/dp_66"
-        android:layout_height="@dimen/dp_66"
-        >
-    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/tv_time"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:text="2019/09"
-        android:textColor="#F25542"
-        android:textSize="@dimen/sp_12" />
-        <TextView
-            android:layout_marginTop="-8dp"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/tv_time2"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="12"
-            android:textColor="#F25542"
-            android:textSize="@dimen/sp_21" />
-    </LinearLayout>
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_4"
+            android:layout_marginRight="@dimen/dp_14"
+            android:background="@drawable/edit_notice_qgl"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="2019/09"
+                android:textColor="#F25542"
+                android:textSize="@dimen/sp_12" />
+
+            <TextView
+                android:id="@+id/tv_time2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="12"
+                android:textColor="#F25542"
+                android:textSize="@dimen/sp_21" />
+        </LinearLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <TextView
                 android:id="@+id/tv_name"
-                android:layout_toLeftOf="@+id/iv_head"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/dp_10"
-                android:maxLines="1"
-                android:textColor="#313131"
+                android:layout_toLeftOf="@+id/iv_head"
                 android:ellipsize="end"
-                android:textSize="@dimen/sp_14"
+                android:maxLines="1"
                 android:text="省厅大的说法都是理发卡进来看大家发进来看"
-                />
+                android:textColor="#313131"
+                android:textSize="@dimen/sp_11" />
 
             <TextView
-                android:layout_below="@id/tv_name"
                 android:id="@+id/tv_content"
-                android:layout_marginTop="@dimen/dp_10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:textColor="#676767"
-                android:ellipsize="end"
-                android:textSize="@dimen/sp_12"
-                android:text="省厅大的说法都是理发卡进来看大家发进来看省厅大的说法都是理发卡进来看大家发进来看省厅大的说法都是理发卡进来看大家发进来看"
-                />
-
-            <TextView
-                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_below="@id/tv_name"
                 android:layout_marginTop="@dimen/dp_5"
-                android:id="@+id/tv_author"
-                android:layout_below="@id/tv_content"
-                android:layout_toLeftOf="@+id/iv_head"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="省厅大的说法都是理发卡进来看大家发进来看省厅大的说法都是理发卡进来看大家发进来看省厅大的说法都是理发卡进来看大家发进来看"
+                android:textColor="#676767"
+                android:textSize="@dimen/sp_9" />
+
+            <ImageView
+                android:id="@+id/zx_person_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
+                android:layout_below="@id/tv_content"
+                android:layout_marginTop="@dimen/dp_6"
+                android:src="@mipmap/zx_tongzhi_person_icon" />
+
+            <TextView
+                android:id="@+id/tv_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_content"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:layout_marginTop="@dimen/dp_4"
+                android:layout_toLeftOf="@+id/iv_head"
+                android:layout_toRightOf="@+id/zx_person_icon"
                 android:ellipsize="end"
-                android:textColor="#858585"
-                android:textSize="@dimen/sp_12"
-                android:layout_alignParentRight="true"
+                android:maxLines="1"
                 android:text="王俊杰"
-                />
+                android:textColor="#858585"
+                android:textSize="@dimen/sp_9" />
         </RelativeLayout>
-</LinearLayout>
-    <TextView
-        android:layout_marginRight="-10dp"
-        android:background="#D9D9D9"
-        android:layout_marginTop="@dimen/dp_10"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_0_5" />
+    </LinearLayout>
+
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/dp_0_5"-->
+        <!--android:layout_marginTop="@dimen/dp_10"-->
+        <!--android:layout_marginRight="-10dp"-->
+        <!--android:background="#D9D9D9" />-->
 </LinearLayout>

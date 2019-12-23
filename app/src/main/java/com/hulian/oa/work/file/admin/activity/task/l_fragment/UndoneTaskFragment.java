@@ -119,6 +119,10 @@ public class UndoneTaskFragment extends Fragment implements PullLoadMoreRecycler
         mCount = 1;
     }
 
+    public void onEventMainThread(UndoneTaskFragment event) {
+        onRefresh();
+    }
+
     private void getData() {
         RequestParams params = new RequestParams();
         params.put("type", type);

@@ -2,9 +2,11 @@ package com.hulian.oa.work.file.admin.activity.document;
 
 import android.Manifest;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -37,7 +39,9 @@ import com.hulian.oa.work.file.admin.activity.document.l_adapter.FullyGridLayout
 import com.hulian.oa.work.file.admin.activity.document.l_adapter.L_GridImageAdapter;
 import com.hulian.oa.work.file.admin.activity.document.l_adapter.L_GridRoamAdapter;
 import com.hulian.oa.work.file.admin.activity.document.l_adapter.L_GridRoamAdapter_qgl;
+import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_ChaosongmeFragment_qgl;
 import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_PendFragment;
+import com.hulian.oa.work.file.admin.activity.document.l_fragment.QGLWofaqiFragment;
 import com.hulian.oa.work.file.admin.activity.meeting.SelDepartmentActivity_meet_zb_single;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
@@ -109,9 +113,18 @@ public class LauncherDocumentActivity extends BaseActivity {
     TextView tv_reaseon;
     List<String> reasonlist = new ArrayList<>();
     private OptionsPickerView reasonPicker;//类型;
-    private String gwtype = "1";
+    private String gwtype = "0";
     @BindView(R.id.et_number)
     EditText etnumber;
+    //新加的紧急程度
+    @BindView(R.id.jinji_leibie)
+    TextView jinji_leibie;
+    List<String> Jinji = new ArrayList<>();
+    private OptionsPickerView jinjiPicker;//类型;
+    private String gwjinji = "1";
+
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,7 +145,9 @@ public class LauncherDocumentActivity extends BaseActivity {
             }
         });
         initReason();
-        tv_reaseon.setText("会签");
+        initJinji();
+        tv_reaseon.setText("签批");
+        jinji_leibie.setText("紧急且重要");
         getWenHao();
     }
 
@@ -315,7 +330,7 @@ public class LauncherDocumentActivity extends BaseActivity {
         EventBus.getDefault().unregister(this);
     }
 
-    @OnClick({R.id.tv_launcher,R.id.file_btn,R.id.tv_reaseon})
+    @OnClick({R.id.tv_launcher,R.id.file_btn,R.id.tv_reaseon,R.id.jinji_leibie})
     public void onViewClicked(View v) {
         switch (v.getId()){
             case R.id.tv_launcher:
@@ -359,7 +374,6 @@ public class LauncherDocumentActivity extends BaseActivity {
                 for (People params : selectList3){
                     csidname += params.getUserName() + "-";
                 }
-
                 RequestParams params = new RequestParams();
                 params.put("spare4", "0");
                 params.put("initiationType", gwtype);
@@ -371,6 +385,7 @@ public class LauncherDocumentActivity extends BaseActivity {
                 params.put("copierId",csids.substring(0, csids.length() - 1));
                 params.put("copierName",csidname.substring(0, csidname.length() - 1));
                 params.put("createBy", SPUtils.get(mContext, "userId", "").toString());
+                params.put("status", gwjinji);
 
                 List<File> fils = new ArrayList<>();
                 for (LocalMedia imgurl : selectList) {
@@ -391,6 +406,8 @@ public class LauncherDocumentActivity extends BaseActivity {
                             ToastHelper.showToast(mContext, result.getString("msg"));
                             if (result.getString("code").equals("0")) {
                                 EventBus.getDefault().post(new L_PendFragment());
+                                EventBus.getDefault().post(new QGLWofaqiFragment());
+                                EventBus.getDefault().post(new L_ChaosongmeFragment_qgl());
                                 finish();
                             }
                         } catch (JSONException e) {
@@ -413,6 +430,9 @@ public class LauncherDocumentActivity extends BaseActivity {
                 break;
             case R.id.tv_reaseon:
                 reasonPicker.show();
+                break;
+            case R.id.jinji_leibie:
+                jinjiPicker.show();
                 break;
         }
 
@@ -438,6 +458,7 @@ public class LauncherDocumentActivity extends BaseActivity {
         Log.v("EMAIL", "获取到数据-结束");
     }
 
+    // 公文类型
     private void initReason()
     {
         reasonlist.add("会签");
@@ -458,6 +479,31 @@ public class LauncherDocumentActivity extends BaseActivity {
             }
         }).setTitleText("公文类型").setContentTextSize(22).setTitleSize(22).setSubCalSize(21).build();
         reasonPicker.setPicker(reasonlist);
+    }
+    // 紧急程度
+    private void initJinji()
+    {
+        Jinji.add("紧急且重要");
+        Jinji.add("重要不紧急");
+        Jinji.add("紧急不重要");
+        Jinji.add("不紧急且不重要");
+        jinjiPicker = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                jinji_leibie.setText(Jinji.get(options1));
+                if (jinji_leibie.getText().toString().trim().equals("紧急且重要")) {
+                    gwjinji = "1" ;
+                } else if(jinji_leibie.getText().toString().trim().equals("重要不紧急")){
+                    gwjinji = "2" ;
+                }else if (jinji_leibie.getText().toString().trim().equals("紧急不重要")){
+                    gwjinji = "3" ;
+                }else {
+                    gwjinji = "4" ;
+                }
+
+            }
+        }).setTitleText("公文类型").setContentTextSize(22).setTitleSize(22).setSubCalSize(21).build();
+        jinjiPicker.setPicker(Jinji);
     }
 
     //qgl注释的

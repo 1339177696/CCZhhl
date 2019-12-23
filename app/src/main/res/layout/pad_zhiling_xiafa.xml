@@ -3,30 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#fff"
-    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/relayou_my"
         android:layout_width="match_parent"
-        android:background="#FFFFFF"
+        android:background="#2D4BCA"
         android:gravity="center_vertical"
-        android:layout_height="@dimen/dp_53">
+        android:layout_height="@dimen/dp_45">
         <ImageView
             android:layout_marginLeft="@dimen/dp_10"
-            android:layout_width="@dimen/dp_20"
+            android:layout_width="@dimen/dp_12"
             android:id="@+id/iv_back"
             android:layout_centerVertical="true"
-            android:background="@mipmap/ic_left"
-            android:layout_height="@dimen/dp_20" />
+            android:background="@mipmap/ic_left_white"
+            android:layout_height="@dimen/dp_12" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="指令下发"
-            android:textColor="#ff313131"
-            android:textSize="@dimen/sp_17" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_11" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -156,6 +154,7 @@
                         android:layout_weight="1"
                         android:minWidth="10dp" />
                     <SeekBar
+                        android:visibility="gone"
                         android:id="@+id/doodle_seekbar_size"
                         android:layout_width="180dp"
                         android:layout_height="33dp"
@@ -169,6 +168,7 @@
                         android:thumbOffset="0dp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/paint_size_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -486,7 +486,7 @@
             android:paddingBottom="10dp"
             android:text="文件区域可随意签名"
             android:textColor="#182744"
-            android:textSize="16sp" />
+            android:textSize="@dimen/sp_10" />
     </LinearLayout>
 
     <LinearLayout
@@ -526,13 +526,15 @@
             <!--android:background="#CCCCD5"-->
             <!--android:layout_height="@dimen/dp_0_5" />-->
         <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/rl_sel_people"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+
                 android:layout_width="match_parent"
                 android:text="接收人"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp_10"
                 android:drawableLeft="@mipmap/qj_chaosongren_icon_qgl"
                 android:textColor="#313131"
                 android:drawablePadding="@dimen/dp_5"
@@ -553,10 +555,10 @@
                 android:layout_alignParentRight="true"
                 android:layout_gravity="right"
                 android:layout_centerVertical="true"
-                android:layout_width="@dimen/dp_25"
+                android:layout_width="@dimen/dp_12"
                 android:layout_marginRight="@dimen/dp_10"
                 android:background="@mipmap/qj_zuzhi_jigou_icon_qgl"
-                android:layout_height="@dimen/dp_25" />
+                android:layout_height="@dimen/dp_12" />
         </RelativeLayout>
         <TextView
             android:layout_marginBottom="@dimen/dp_4"
@@ -564,17 +566,43 @@
             android:text=""
             android:background="#CCCCD5"
             android:layout_height="@dimen/dp_0_5" />
-        <Button
-            android:layout_marginTop="@dimen/dp_10"
-            android:id="@+id/bt_post"
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:background="@drawable/edit_background_login_bt"
-            android:textColor="#ffffff"
-            android:text="发布指令"
-            android:textSize="@dimen/sp_18"
-            android:layout_marginRight="@dimen/dp_70"
-            android:layout_marginLeft="@dimen/dp_70"
-            android:layout_height="@dimen/dp_47" />
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/dp_10"
+                android:id="@+id/bt_post"
+                android:layout_width="match_parent"
+                android:background="@drawable/edit_background_login_bt"
+                android:textColor="#ffffff"
+                android:text="发布"
+                android:textSize="@dimen/sp_11"
+                android:layout_marginRight="@dimen/dp_90"
+                android:layout_marginLeft="@dimen/dp_90"
+                android:layout_height="@dimen/dp_30" />
+
+            <LinearLayout
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="16dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:id="@+id/tv_apply"
+                android:layout_width="@dimen/dp_40"
+                android:layout_height="@dimen/dp_40">
+
+                <ImageView
+                    android:src="@mipmap/receiver"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
     </LinearLayout>
 
 

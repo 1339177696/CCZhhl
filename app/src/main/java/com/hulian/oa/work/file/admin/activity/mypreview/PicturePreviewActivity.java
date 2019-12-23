@@ -62,10 +62,10 @@ public class PicturePreviewActivity extends PictureBaseActivity implements View.
 
     private void initViewPageAdapterData() {
         if(images.size()==1){
-            tv_title.setText("1");
+            tv_title.setText("1张");
         }
         else
-        tv_title.setText(position + 1 + "/" + images.size());
+        tv_title.setText(position + 1 + "/" + images.size()+"张");
         adapter = new PicturePreviewActivity.SimpleFragmentAdapter();
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(position);
@@ -77,7 +77,7 @@ public class PicturePreviewActivity extends PictureBaseActivity implements View.
 
             @Override
             public void onPageSelected(int position) {
-                tv_title.setText(position + 1 + "/" + images.size());
+                tv_title.setText(position + 1 + "/" + images.size()+"张");
             }
 
             @Override

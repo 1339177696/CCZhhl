@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.hulian.oa.MainActivity;
+import com.hulian.oa.R;
 import com.hulian.oa.me.MeActivity;
 import com.hulian.oa.message.session.search.GlobalSearchActivity;
 import com.hulian.oa.views.PopWindow;
@@ -59,6 +61,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import de.greenrobot.event.EventBus;
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 public class Wechat extends TFragment {
@@ -131,11 +134,14 @@ public class Wechat extends TFragment {
         registerObservers(true);
         registerDropCompletedListener(true);
         registerOnlineStateChangeListener(true);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(com.netease.nim.uikit.R.layout.nim_recent_contacts, container, false);
+
+
     }
 
     private void notifyDataSetChanged() {
@@ -176,7 +182,10 @@ public class Wechat extends TFragment {
         findView(com.netease.nim.uikit.R.id.iv_gomine).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), MeActivity.class));
+
+//                startActivity(new Intent(getActivity(), MeActivity.class));
+                EventBus.getDefault().post(new MainActivity());
+
             }
         });
         tv_search.setOnClickListener(new View.OnClickListener() {

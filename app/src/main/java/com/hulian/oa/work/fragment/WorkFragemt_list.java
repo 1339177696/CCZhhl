@@ -7,8 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.hulian.oa.R;
+import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.work.file.admin.activity.SecondDocumentActivity;
 import com.hulian.oa.work.file.admin.activity.SecondExpenseActivity;
 import com.hulian.oa.work.file.admin.activity.SecondInstructActivity;
@@ -45,12 +47,19 @@ public class WorkFragemt_list extends Fragment {
     RelativeLayout relaQingjia;
     @BindView(R.id.rela_baoxiao)
     RelativeLayout relaBaoxiao;
+    @BindView(R.id.rela_zhiling)
+    RelativeLayout rela_zhiling;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_work_fragment_list_qgl, container, false);
         unbinder = ButterKnife.bind(this, view);
+        if (SPUtils.get(getActivity(), "isLead", "").equals("0")) {
+            rela_zhiling.setVisibility(View.GONE);
+        }else {
+            rela_zhiling.setVisibility(View.VISIBLE);
+        }
         return view;
     }
 
@@ -103,7 +112,7 @@ public class WorkFragemt_list extends Fragment {
 //        }
 //    }
 
-    @OnClick({R.id.rela_gongwen, R.id.rela_youjian, R.id.rela_huiyi, R.id.rela_renwu, R.id.rela_qingjia, R.id.rela_baoxiao})
+    @OnClick({R.id.rela_gongwen, R.id.rela_youjian, R.id.rela_huiyi, R.id.rela_renwu, R.id.rela_qingjia, R.id.rela_baoxiao,R.id.rela_zhiling})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rela_gongwen:
@@ -122,7 +131,11 @@ public class WorkFragemt_list extends Fragment {
                 startActivity(new Intent(getActivity(), SecondLeaveActivity.class));
                 break;
             case R.id.rela_baoxiao:
-                startActivity(new Intent(getActivity(), SecondExpenseActivity.class));
+                Toast.makeText(getActivity(),"功能开发者...",Toast.LENGTH_SHORT).show();
+//                startActivity(new Intent(getActivity(), SecondExpenseActivity.class));
+                break;
+            case R.id.rela_zhiling:
+                startActivity(new Intent(getActivity(), SecondInstructActivity.class));
                 break;
         }
     }

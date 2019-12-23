@@ -7,23 +7,23 @@
     <RelativeLayout
         android:id="@+id/rl_title"
         android:layout_width="match_parent"
-        android:background="#ffffff"
+        android:background="#2D4BCA"
         android:gravity="center_vertical"
         android:layout_height="@dimen/dp_45">
         <ImageView
             android:layout_marginLeft="@dimen/dp_15"
-            android:layout_width="@dimen/dp_15"
+            android:layout_width="@dimen/dp_12"
             android:id="@+id/iv_back"
             android:layout_centerVertical="true"
-            android:background="@mipmap/ic_left"
-            android:layout_height="@dimen/dp_15" />
+            android:background="@mipmap/ic_left_white"
+            android:layout_height="@dimen/dp_12" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="会议发起"
-            android:textColor="#313131"
-            android:textSize="@dimen/sp_17" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_11" />
     </RelativeLayout>
 
     <ScrollView
@@ -59,7 +59,7 @@
                     android:textColor="#313131"
                     android:drawablePadding="@dimen/dp_5"
                     android:drawableLeft="@mipmap/meeting_check_icon"
-                    android:textSize="@dimen/dp_14"
+                    android:textSize="@dimen/sp_11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -74,25 +74,28 @@
                     android:gravity="center_vertical|right"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <RadioButton
-                        android:gravity="center"
-                        android:id="@+id/rd_news"
-                        android:text="签到"
-                        android:button="@null"
-                        android:layout_height="@dimen/dp_20"
-                        android:layout_marginRight="@dimen/dp_10"
                         android:checked="true"
-                        android:tag="0"
-                        style="@style/button_tag_style"
-                      />
-                    <RadioButton
                         android:tag="1"
-                        android:layout_marginLeft="@dimen/dp_10"
                         android:id="@+id/rd_weather"
                         android:text="非签到"
                         android:button="@null"
                         style="@style/button_tag_style"
-                        android:layout_height="@dimen/dp_20"/>
+                        android:layout_height="@dimen/dp_18"/>
+
+                    <RadioButton
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:gravity="center"
+                        android:id="@+id/rd_news"
+                        android:text="签到"
+                        android:button="@null"
+                        android:layout_height="@dimen/dp_18"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:tag="0"
+                        style="@style/button_tag_style"
+                      />
+
                 </RadioGroup>
             </RelativeLayout>
             <View
@@ -117,7 +120,7 @@
                     android:textColor="#313131"
                     android:drawablePadding="@dimen/dp_3"
                     android:drawableLeft="@mipmap/qj_leibie_icon_qgl"
-                    android:textSize="@dimen/dp_14"
+                    android:textSize="@dimen/sp_11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -157,7 +160,7 @@
                     android:id="@+id/tv_part_time_title"
                     android:text="开始时间"
                     android:textColor="#313131"
-                    android:textSize="@dimen/dp_14"
+                    android:textSize="@dimen/sp_11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -194,7 +197,7 @@
                     android:id="@+id/tv_part_time_title2"
                     android:text="结束时间"
                     android:textColor="#313131"
-                    android:textSize="@dimen/dp_14"
+                    android:textSize="@dimen/sp_11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -236,7 +239,7 @@
                         android:id="@+id/tv_lianx_person"
                         android:drawablePadding="@dimen/dp_5"
                         android:text="会议联系人"
-                        android:textSize="@dimen/dp_14"
+                        android:textSize="@dimen/sp_11"
                         android:textColor="#313131"
                         android:drawableLeft="@mipmap/meeting_contact_icon"
                         android:layout_width="wrap_content"
@@ -269,13 +272,13 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:textColor="#313131"
-                        android:textSize="@dimen/dp_14"
+                        android:textSize="@dimen/sp_11"
                         />
                     <!--<TextView-->
                     <!--android:layout_width="wrap_content"-->
                     <!--android:layout_height="wrap_content"-->
                     <!--android:textColor="@color/black"-->
-                    <!--android:textSize="@dimen/dp_14" />-->
+                    <!--android:textSize="@dimen/sp_11" />-->
                 </RelativeLayout>
 
             </LinearLayout>
@@ -299,7 +302,7 @@
                     android:textColor="#313131"
                     android:drawablePadding="@dimen/dp_5"
                     android:drawableLeft="@mipmap/meeting_tel_icon"
-                    android:textSize="@dimen/dp_14"
+                    android:textSize="@dimen/sp_11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -343,7 +346,7 @@
                         android:text="参会人"
                         android:drawablePadding="@dimen/dp_5"
                         android:drawableLeft="@mipmap/qj_shenpi_icon_qgl"
-                        android:textSize="@dimen/dp_14"
+                        android:textSize="@dimen/sp_11"
                         android:textColor="#313131"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -375,13 +378,13 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:textColor="#313131"
-                        android:textSize="@dimen/dp_14"
+                        android:textSize="@dimen/sp_11"
                         />
                     <!--<TextView-->
                     <!--android:layout_width="wrap_content"-->
                     <!--android:layout_height="wrap_content"-->
                     <!--android:textColor="@color/black"-->
-                    <!--android:textSize="@dimen/dp_14" />-->
+                    <!--android:textSize="@dimen/sp_11" />-->
                 </RelativeLayout>
 
             </LinearLayout>
@@ -410,7 +413,7 @@
                     android:text="参会人数"
                     android:gravity="center_vertical"
                     android:textColor="#313131"
-                    android:textSize="@dimen/dp_14"
+                    android:textSize="@dimen/sp_11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
@@ -451,7 +454,7 @@
                     android:text="参会地点"
                     android:gravity="center_vertical"
                     android:textColor="#313131"
-                    android:textSize="@dimen/dp_14"
+                    android:textSize="@dimen/sp_11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </RelativeLayout>
@@ -478,7 +481,7 @@
                     android:drawableLeft="@mipmap/meeting_cont_icon"
                     android:text="会议内容"
                     android:textColor="#313131"
-                    android:textSize="@dimen/dp_14"
+                    android:textSize="@dimen/sp_11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -507,7 +510,7 @@
            >
             <Button
                 android:id="@+id/tv_back_instruct"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp_11"
                 android:text="发起"
                 android:layout_width="@dimen/dp_220"
                 android:layout_height="@dimen/dp_36"

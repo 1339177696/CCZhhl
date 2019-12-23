@@ -68,7 +68,8 @@ public class NoticeAdapter extends RecyclerView.Adapter <NoticeAdapter.ViewHolde
             holder.tv_time.setText(TimeUtils.getDateToString3(dataList.get(position).getCreateTime()));
             holder.tv_time2.setText(TimeUtils.getDateToString4(dataList.get(position).getCreateTime()));
         }
-        holder.tv_author.setText("发布人："+dataList.get(position).getCreateBy());
+//        "发布人："+
+        holder.tv_author.setText(dataList.get(position).getCreateBy());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

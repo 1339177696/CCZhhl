@@ -24,6 +24,7 @@ import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.work.file.admin.activity.document.l_adapter.L_ChaosongAdapter;
 import com.hulian.oa.work.file.admin.activity.document.l_adapter.L_WoFaqiAdapter;
+import com.hulian.oa.work.file.admin.activity.meeting.l_fragment.MeetLaunchFragment;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
 import org.json.JSONException;
@@ -142,6 +143,11 @@ public class QGLWofaqiFragment extends Fragment implements PullLoadMoreRecyclerV
                 Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    // 刷新
+    public void onEventMainThread(QGLWofaqiFragment event) {
+        onRefresh();
     }
 
 }

@@ -148,4 +148,10 @@ public class L_ChaosongmeFragment_qgl extends Fragment implements PullLoadMoreRe
         });
     }
 
+    // 刷新
+    public void onEventMainThread(L_ChaosongmeFragment_qgl event) {
+        onRefresh();
+    }
+
+
 }

@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/iv_remind"
-        android:layout_width="@dimen/dp_9"
-        android:layout_height="@dimen/dp_9"
+        android:layout_width="@dimen/dp_6"
+        android:layout_height="@dimen/dp_6"
         android:layout_marginLeft="@dimen/dp_16"
         android:layout_marginTop="@dimen/dp_22"
         android:background="@drawable/liner_yuan_qgl1" />
@@ -41,7 +41,7 @@
                 android:layout_alignParentLeft="true"
                 android:text="公文流转标题"
                 android:textColor="#ff313131"
-                android:textSize="@dimen/dp_15" />
+                android:textSize="@dimen/sp_11" />
 
             <TextView
                 android:id="@+id/tv_comp_time"
@@ -68,7 +68,7 @@
                 android:layout_marginTop="@dimen/dp_5"
                 android:text="截至"
                 android:textColor="#ff676767"
-                android:textSize="@dimen/sp_12" />
+                android:textSize="@dimen/sp_11" />
 
             <TextView
                 android:id="@+id/tv_comp_deadline_time"
@@ -79,7 +79,7 @@
                 android:layout_toRightOf="@id/tv_duration_title"
                 android:text="7月12日"
                 android:textColor="#2B8CFA"
-                android:textSize="@dimen/sp_12" />
+                android:textSize="@dimen/sp_11" />
 
             <!--<TextView-->
                 <!--android:id="@+id/tv_comp_deadline_week"-->
@@ -118,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:text="发起"
                 android:textColor="#ff676767"
-                android:textSize="@dimen/sp_12" />
+                android:textSize="@dimen/sp_11" />
 
             <TextView
                 android:id="@+id/tv_comp_task_person"
@@ -128,7 +128,7 @@
                 android:layout_toRightOf="@id/tv_leave_reason_title"
                 android:text="王俊杰"
                 android:textColor="#2B8CFA"
-                android:textSize="@dimen/sp_12" />
+                android:textSize="@dimen/sp_11" />
         </RelativeLayout>
         <TextView
             android:textColor="@color/white"

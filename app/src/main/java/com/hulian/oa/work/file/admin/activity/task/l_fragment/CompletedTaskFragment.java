@@ -122,6 +122,8 @@ public class CompletedTaskFragment extends Fragment implements PullLoadMoreRecyc
         mCount = 1;
     }
 
+
+
     private void getData() {
         RequestParams params = new RequestParams();
         params.put("type", type);

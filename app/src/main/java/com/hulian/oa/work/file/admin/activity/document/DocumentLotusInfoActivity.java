@@ -20,6 +20,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -130,6 +131,11 @@ public class DocumentLotusInfoActivity extends BaseActivity {
     private static String[] PERMISSIONS_STORAGE = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private static final OkHttpClient client = new OkHttpClient();
 
+    @BindView(R.id.tv_msg)
+    TextView number;
+    @BindView(R.id.qgl_liner2)
+    LinearLayout qgl_liner2;
+
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -182,6 +188,7 @@ public class DocumentLotusInfoActivity extends BaseActivity {
 
                     String aa = lotus.getString("files");
 
+
                     if (aa!=null&&aa!=""){
                         List<String> c = Arrays.asList(aa.split(","));
                         List<String> d = new ArrayList<>();
@@ -194,8 +201,14 @@ public class DocumentLotusInfoActivity extends BaseActivity {
                                 }
                             init(d);
                         }
-
+                        if (d.size()>1){
+                            qgl_liner2.setVisibility(View.VISIBLE);
+                            number.setText("图片共"+d.size()+"请左滑");
+                        }else {
+                            qgl_liner2.setVisibility(View.GONE);
+                        }
                     }
+
                     approveContentList = gson.fromJson(result.getJSONObject("data").getJSONArray("lotusViceList").toString(),
                             new TypeToken<List<Approve_qgl>>() {}.getType());
                     Log.e("11",approveContentList.get(0).getApproverName());
@@ -321,8 +334,8 @@ public class DocumentLotusInfoActivity extends BaseActivity {
         switch (view.getId()){
             case R.id.tv_qgl_file:
                 // 這裏加打開文件
-                loadDialog.show();
-                downloadFilea(path_x);
+//                loadDialog.show();
+//                downloadFilea(path_x);
                 break;
             case R.id.iv_back:
 

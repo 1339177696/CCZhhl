@@ -23,10 +23,10 @@
         <ImageView
             android:layout_gravity="center"
             android:layout_margin="@dimen/dp_10"
-            android:layout_width="@dimen/dp_15"
+            android:layout_width="@dimen/dp_12"
 
             android:background="@mipmap/ic_left_white"
-            android:layout_height="@dimen/dp_15" />
+            android:layout_height="@dimen/dp_12" />
             </FrameLayout>
         <TextView
             android:layout_marginTop="@dimen/dp_10"
@@ -35,7 +35,7 @@
             android:layout_height="match_parent"
             android:text="邮件详情"
             android:textColor="#ffffff"
-            android:textSize="@dimen/sp_17" />
+            android:textSize="@dimen/sp_11" />
 
             <LinearLayout
                 android:layout_marginTop="@dimen/dp_70"
@@ -50,7 +50,7 @@
                     android:drawablePadding="@dimen/dp_5"
                     android:drawableTop="@mipmap/mail_collect_icon"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/sp_12"
+                    android:textSize="@dimen/sp_10"
                     android:layout_height="wrap_content" />
                 <TextView
                     android:layout_weight="1"
@@ -60,7 +60,7 @@
                     android:drawableTop="@mipmap/mail_delet_icon"
                     android:text="删除"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/sp_12"
+                    android:textSize="@dimen/sp_10"
                     android:layout_height="wrap_content" />
                 <TextView
                     android:id="@+id/tv_reply"
@@ -71,7 +71,7 @@
                     android:layout_width="wrap_content"
                     android:text="回复"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/sp_12"
+                    android:textSize="@dimen/sp_10"
                     android:layout_height="wrap_content" />
                 <TextView
                     android:layout_weight="1"
@@ -81,7 +81,7 @@
                     android:gravity="center"
                     android:text="转发"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/sp_12"
+                    android:textSize="@dimen/sp_10"
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </RelativeLayout>
@@ -124,7 +124,7 @@
                     android:layout_marginRight="@dimen/dp_20"
                     android:maxLines="1"
                     android:textColor="#313131"
-                    android:textSize="@dimen/sp_16"
+                    android:textSize="@dimen/sp_10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     />
@@ -142,13 +142,13 @@
                             android:id="@+id/tv_receive_title2"
                             android:text="发件人"
                             android:textColor="#676767"
-                            android:textSize="@dimen/dp_14"
+                            android:textSize="@dimen/dp_10"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <TextView
                             android:id="@+id/tv_send_person"
                             android:textColor="#313131"
-                            android:textSize="@dimen/dp_14"
+                            android:textSize="@dimen/sp_10"
                             android:text="张三"
                             android:layout_marginLeft="@dimen/dp_20"
                             android:layout_toRightOf="@id/tv_receive_title2"
@@ -158,7 +158,7 @@
                             android:id="@+id/tv_send_person2"
                             android:textColor="#858585"
                             android:layout_below="@id/tv_send_person"
-                            android:textSize="@dimen/dp_14"
+                            android:textSize="@dimen/sp_10"
                             android:text="张三"
                             android:layout_marginLeft="@dimen/dp_20"
                             android:layout_toRightOf="@id/tv_receive_title2"
@@ -173,13 +173,13 @@
                                 android:id="@+id/tv_receive_title"
                                 android:text="收件人"
                                 android:textColor="#676767"
-                                android:textSize="@dimen/dp_14"
+                                android:textSize="@dimen/sp_10"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
                             <TextView
                                 android:id="@+id/tv_receive_person"
                                 android:textColor="#313131"
-                                android:textSize="@dimen/dp_14"
+                                android:textSize="@dimen/sp_10"
                                 android:text="张三"
                                 android:layout_marginLeft="@dimen/dp_20"
                                 android:layout_toRightOf="@id/tv_receive_title"
@@ -206,13 +206,13 @@
                             android:id="@+id/tv_receive_title3"
                             android:text="抄送人"
                             android:textColor="#676767"
-                            android:textSize="@dimen/dp_14"
+                            android:textSize="@dimen/sp_10"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <TextView
                             android:id="@+id/tv_chaosong_person"
                             android:textColor="#313131"
-                            android:textSize="@dimen/dp_14"
+                            android:textSize="@dimen/sp_10"
                             android:text="----"
                             android:layout_marginLeft="@dimen/dp_20"
                             android:layout_toRightOf="@id/tv_receive_title3"
@@ -222,7 +222,7 @@
                             android:layout_below="@id/tv_chaosong_person"
                             android:id="@+id/tv_chaosong_person2"
                             android:textColor="#858585"
-                            android:textSize="@dimen/dp_14"
+                            android:textSize="@dimen/sp_10"
                             android:text="----"
                             android:layout_marginLeft="@dimen/dp_20"
                             android:layout_toRightOf="@id/tv_receive_title3"
@@ -238,7 +238,7 @@
                             android:id="@+id/tv_receive_title4"
                             android:text="   时间"
                             android:textColor="#676767"
-                            android:textSize="@dimen/dp_14"
+                            android:textSize="@dimen/sp_10"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <TextView
@@ -246,7 +246,7 @@
                             android:layout_marginLeft="@dimen/dp_20"
                             android:text="07-09  9:00"
                             android:textColor="#858585"
-                            android:textSize="@dimen/dp_14"
+                            android:textSize="@dimen/sp_10"
                             android:layout_toRightOf="@id/tv_receive_title4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
@@ -272,7 +272,7 @@
                     android:paddingTop="@dimen/dp_15"
                     android:minLines="10"
                     android:textColor="#313131"
-                    android:textSize="@dimen/dp_14"
+                    android:textSize="@dimen/sp_10"
                     />
                 <TextView
                     android:layout_marginTop="@dimen/dp_10"

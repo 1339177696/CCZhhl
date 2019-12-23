@@ -2,26 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <View
+        android:background="#2D4BCA"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_10"/>
     <RelativeLayout
         android:id="@+id/rl_title"
         android:layout_width="match_parent"
-        android:background="#ffffff"
+        android:background="#2D4BCA"
         android:gravity="center_vertical"
         android:layout_height="@dimen/dp_45">
         <ImageView
             android:layout_marginLeft="@dimen/dp_10"
-            android:layout_width="@dimen/dp_15"
+            android:layout_width="@dimen/dp_12"
             android:id="@+id/iv_back_x"
             android:layout_centerVertical="true"
-            android:background="@mipmap/ic_left"
-            android:layout_height="@dimen/dp_15" />
+            android:background="@mipmap/ic_left_white"
+            android:layout_height="@dimen/dp_12" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="写邮件"
-            android:textColor="#313131"
-            android:textSize="@dimen/sp_17" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_11" />
     </RelativeLayout>
     <TextView
         android:layout_width="match_parent"
@@ -55,7 +59,7 @@
                 android:layout_marginLeft="@dimen/dp_10"
                 android:text="发件人"
                 android:textColor="#313131"
-                android:textSize="@dimen/dp_14"
+                android:textSize="@dimen/sp_11"
                 android:layout_centerVertical="true"
                 android:layout_width="@dimen/dp_50"
                 android:layout_height="wrap_content" />
@@ -63,7 +67,7 @@
                 android:id="@+id/tv_user"
                 android:layout_centerVertical="true"
                 android:textColor="#676767"
-                android:textSize="@dimen/dp_14"
+                android:textSize="@dimen/sp_11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -90,7 +94,7 @@
                 android:layout_marginLeft="@dimen/dp_10"
                 android:textColor="@color/black"
                 android:layout_alignParentRight="true"
-                android:textSize="@dimen/dp_14"
+                android:textSize="@dimen/sp_11"
                 android:layout_centerVertical="true"
                 android:layout_width="@dimen/dp_50"
                 android:layout_height="wrap_content" />
@@ -100,7 +104,7 @@
                 android:layout_toLeftOf="@+id/my_img1"
                 android:id="@+id/work_mail_shoujianren"
                 android:textColor="@color/black"
-                android:textSize="@dimen/dp_14"
+                android:textSize="@dimen/sp_11"
                 android:layout_toRightOf="@id/tv_receive_person"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
@@ -109,8 +113,8 @@
                 android:id="@+id/my_img1"
                 android:background="@mipmap/qj_zuzhi_jigou_icon_qgl"
                 android:layout_centerVertical="true"
-                android:layout_width="@dimen/dp_20"
-                android:layout_height="@dimen/dp_20" />
+                android:layout_width="@dimen/dp_15"
+                android:layout_height="@dimen/dp_15" />
         </LinearLayout>
         <com.hulian.oa.views.MyGridView
             android:id="@+id/gv_test"
@@ -140,7 +144,7 @@
                 android:text="抄送人"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:textColor="@color/black"
-                android:textSize="@dimen/dp_14"
+                android:textSize="@dimen/sp_11"
                 android:layout_centerVertical="true"
                 android:layout_width="@dimen/dp_50"
                 android:layout_height="wrap_content" />
@@ -150,7 +154,7 @@
                 android:layout_toLeftOf="@+id/my_img1"
                 android:id="@+id/work_mail_shoujianren2"
                 android:textColor="@color/black"
-                android:textSize="@dimen/dp_14"
+                android:textSize="@dimen/sp_11"
                 android:layout_toRightOf="@id/tv_receive_person"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
@@ -159,8 +163,8 @@
                 android:id="@+id/my_img2"
                 android:background="@mipmap/qj_zuzhi_jigou_icon_qgl"
                 android:layout_centerVertical="true"
-                android:layout_width="@dimen/dp_20"
-                android:layout_height="@dimen/dp_20" />
+                android:layout_width="@dimen/dp_15"
+                android:layout_height="@dimen/dp_15" />
         </LinearLayout>
         <com.hulian.oa.views.MyGridView
             android:id="@+id/gv_test2"
@@ -192,7 +196,7 @@
                 android:id="@+id/tv_theme_title"
                 android:text="主题"
                 android:textColor="@color/black"
-                android:textSize="@dimen/dp_14"
+                android:textSize="@dimen/sp_11"
                 android:layout_centerVertical="true"
                 android:layout_width="@dimen/dp_50"
                 android:layout_height="wrap_content" />
@@ -200,7 +204,7 @@
                 android:background="@null"
                 android:id="@+id/tv_theme"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp_11"
                 android:maxLength="20"
                 android:maxLines="2"
                 android:hint="请输入邮件主题"
@@ -230,14 +234,14 @@
                 android:layout_marginLeft="@dimen/dp_10"
                 android:text="内容"
                 android:textColor="#313131"
-                android:textSize="@dimen/dp_14"
+                android:textSize="@dimen/sp_11"
                 android:layout_centerVertical="true"
                 android:layout_width="@dimen/dp_50"
                 android:layout_height="wrap_content" />
             <TextView
                 android:layout_centerVertical="true"
                 android:textColor="#676767"
-                android:textSize="@dimen/dp_14"
+                android:textSize="@dimen/sp_11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -259,7 +263,7 @@
             android:padding="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
             android:textColor="@color/black"
-            android:textSize="@dimen/dp_14" />
+            android:textSize="@dimen/sp_11" />
     </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -278,7 +282,7 @@
                 android:text="附件:"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:textColor="@color/black"
-                android:textSize="@dimen/dp_14"
+                android:textSize="@dimen/sp_11"
                 android:layout_centerVertical="true"
                 android:layout_width="@dimen/dp_50"
                 android:layout_height="wrap_content" />
@@ -289,7 +293,7 @@
                 android:focusableInTouchMode="false"
                 android:enabled="true"
                 android:textColor="@color/color_a_blue"
-                android:textSize="@dimen/dp_14"
+                android:textSize="@dimen/sp_11"
                 android:id="@+id/et_annex"
                 android:layout_toRightOf="@id/tv_annex_title"
                 android:layout_width="match_parent"

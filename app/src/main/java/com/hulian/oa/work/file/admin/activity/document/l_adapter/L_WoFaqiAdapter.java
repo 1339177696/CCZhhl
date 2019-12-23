@@ -63,7 +63,7 @@ public class L_WoFaqiAdapter extends RecyclerView.Adapter <L_WoFaqiAdapter.ViewH
     @Override
     public void onBindViewHolder(L_WoFaqiAdapter.ViewHolder holder, final int position) {
         holder.tv_title.setText(dataList.get(position).getSymbol());
-        holder.tv_time.setText(dataList.get(position).getCreateTime());
+        holder.tv_time.setText(dataList.get(position).getCreateTime().substring(0,dataList.get(position).getCreateTime().length()-3));
         holder.qgl_zy_ysp_jieshi.setText(dataList.get(position).getTitle());
         if ("1".equals(dataList.get(position).getInitiationType())){
             holder.ld_stuas.setText("会签");

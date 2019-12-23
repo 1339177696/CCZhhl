@@ -1,20 +1,21 @@
 package com.hulian.oa.news;
 
-import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hulian.oa.R;
 import com.hulian.oa.bean.Fab;
 import com.hulian.oa.bean.Fab2;
-import com.hulian.oa.me.MeActivity;
 import com.hulian.oa.news.adapter.MyViewPageAdapter;
 import com.hulian.oa.news.fragment.News_1_Fragment;
 import com.hulian.oa.news.fragment.News_2_Fragment;
@@ -35,14 +36,28 @@ public class NewsFragment extends Fragment {
     Unbinder unbinder;
     @BindView(R.id.tv_mengban)
     TextView tvMengban;
-    @BindView(R.id.my_tablayout)
-    TabLayout myTablayout;
-    @BindView(R.id.my_viewpager)
-    ViewPager myViewpager;
+//    @BindView(R.id.my_tablayout)
+//    TabLayout myTablayout;
+//    @BindView(R.id.my_viewpager)
+//    ViewPager myViewpager;
+//    @BindView(R.id.my_viewpager)
+//    FrameLayout myViewpager;
+    @BindView(R.id.zx_img1)
+    ImageView zxImg1;
+    @BindView(R.id.zx_txt1)
+    TextView zxTxt1;
+    @BindView(R.id.btn1)
+    LinearLayout btn1;
+    @BindView(R.id.zx_img2)
+    ImageView zxImg2;
+    @BindView(R.id.zx_txt2)
+    TextView zxTxt2;
+    @BindView(R.id.btn2)
+    LinearLayout btn2;
 
-    private ArrayList<String> list_path;
-    private ArrayList<String> list_title;
-
+    private News_1_Fragment news_1_fragment;
+    private News_2_Fragment news_2_fragment;
+    private FragmentManager fManager;
     public NewsFragment() {
         // Required empty public constructor
     }
@@ -57,9 +72,6 @@ public class NewsFragment extends Fragment {
     public static NewsFragment newInstance(String requestJson) {
         NewsFragment fragment = new NewsFragment();
         Bundle args = new Bundle();
-//        args.putString("requestJson", requestJson);
-//        args.putString("gid", gid);
-//        args.putString("idno", idno);
         fragment.setArguments(args);
         return fragment;
     }
@@ -68,8 +80,6 @@ public class NewsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-//            gid = getArguments().getString("gid");
-//            idno=getArguments().getString("idno");
         }
     }
 
@@ -78,16 +88,8 @@ public class NewsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fra_news, container, false);
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
-        ArrayList<String> titleDatas = new ArrayList<>();
-        titleDatas.add("新闻");
-        titleDatas.add("通告");
-        ArrayList<Fragment> fragmentList = new ArrayList<Fragment>();
-        fragmentList.add(new News_1_Fragment());
-        fragmentList.add(new News_2_Fragment());
-        MyViewPageAdapter myViewPageAdapter = new MyViewPageAdapter(getChildFragmentManager(), titleDatas, fragmentList);
-        myViewpager.setAdapter(myViewPageAdapter);
-        myTablayout.setupWithViewPager(myViewpager);
-        myTablayout.setTabsFromPagerAdapter(myViewPageAdapter);
+        fManager = getFragmentManager();
+        btn1.performClick();//模拟一次点击，既进去后选择第一项
         return view;
     }
 
@@ -98,12 +100,14 @@ public class NewsFragment extends Fragment {
         unbinder.unbind();
         EventBus.getDefault().unregister(this);
     }
+
     @OnClick(R.id.tv_mengban)
     public void onViewClicked2() {
         Fab2 fab2 = new Fab2();
         fab2.setTag("0");
         EventBus.getDefault().post(fab2);
     }
+
     public void onEventMainThread(Fab event) {
         if (event.getTag().equals("0")) {
             tvMengban.setVisibility(View.GONE);
@@ -111,10 +115,47 @@ public class NewsFragment extends Fragment {
             tvMengban.setVisibility(View.VISIBLE);
         }
     }
-    //qgl 暂时不用了
-//    @OnClick(R.id.iv_gomine)
-//    public void onViewClicked() {
-//        startActivity(new Intent(getActivity(), MeActivity.class));
-//    }
+
+    @OnClick({R.id.btn1, R.id.btn2})
+    public void onViewClicked(View view) {
+        FragmentTransaction fTransaction = fManager.beginTransaction();
+        hideAllFragment(fTransaction);
+        switch (view.getId()) {
+            case R.id.btn1:
+                zxTxt1.setTextColor(Color.parseColor("#FFFFFF"));
+                zxImg1.setImageResource(R.mipmap.zx_xinwen_yes);
+                zxTxt2.setTextColor(Color.parseColor("#ccccd5"));
+                zxImg2.setImageResource(R.mipmap.zx_tongzhi_no);
+                if(news_1_fragment == null){
+                    news_1_fragment = new News_1_Fragment();
+                    fTransaction.add(R.id.qgl_fragment,news_1_fragment);
+                }else{
+                    fTransaction.show(news_1_fragment);
+                }
+                break;
+            case R.id.btn2:
+                zxTxt1.setTextColor(Color.parseColor("#ccccd5"));
+                zxImg1.setImageResource(R.mipmap.zx_xinwen_no);
+                zxTxt2.setTextColor(Color.parseColor("#FFFFFF"));
+                zxImg2.setImageResource(R.mipmap.zx_tongzhi_yes);
+                if(news_2_fragment == null){
+                    news_2_fragment = new News_2_Fragment();
+                    fTransaction.add(R.id.qgl_fragment,news_2_fragment);
+                }else{
+                    fTransaction.show(news_2_fragment);
+                }
+                break;
+        }
+        fTransaction.commit();
+
+    }
+
+    //隐藏所有Fragment
+    private void hideAllFragment(FragmentTransaction fragmentTransaction){
+        if(news_1_fragment != null)fragmentTransaction.hide(news_1_fragment);
+        if(news_2_fragment != null)fragmentTransaction.hide(news_2_fragment);
+
+    }
+
 
 }

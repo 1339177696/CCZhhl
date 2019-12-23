@@ -8,23 +8,23 @@
     <RelativeLayout
         android:id="@+id/rl_title"
         android:layout_width="match_parent"
-        android:background="#ffffff"
+        android:background="#2D4BCA"
         android:gravity="center_vertical"
         android:layout_height="@dimen/dp_45">
         <ImageView
             android:layout_marginLeft="@dimen/dp_15"
-            android:layout_width="@dimen/dp_15"
+            android:layout_width="@dimen/dp_12"
             android:id="@+id/iv_back"
             android:layout_centerVertical="true"
-            android:background="@mipmap/ic_left"
-            android:layout_height="@dimen/dp_15" />
+            android:background="@mipmap/ic_left_white"
+            android:layout_height="@dimen/dp_12" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="指令反馈"
-            android:textColor="#313131"
-            android:textSize="@dimen/sp_17" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_11" />
     </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
@@ -61,7 +61,7 @@
                 android:id="@+id/tv_content1"
                 android:layout_marginTop="@dimen/dp_10"
                 android:drawableLeft="@mipmap/qj_leibie_icon_qgl"
-                android:textSize="@dimen/dp_16"
+                android:textSize="@dimen/dp_11"
                 android:textColor="#313131"
                 android:drawablePadding="@dimen/dp_2"
                 android:text="指令内容"
@@ -73,7 +73,7 @@
                 android:layout_marginLeft="@dimen/dp_32"
                 android:id="@+id/create_coontent"
                 android:layout_marginTop="@dimen/dp_15"
-                android:textSize="@dimen/dp_13"
+                android:textSize="@dimen/sp_9"
                 android:textColor="#313131"
                 android:drawablePadding="@dimen/dp_5"
                 android:text="1111111"
@@ -114,7 +114,7 @@
         <TextView
             android:id="@+id/tv_back_instruct"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_47"
+            android:layout_height="@dimen/dp_37"
             android:layout_marginLeft="@dimen/dp_70"
             android:layout_marginTop="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_70"
@@ -123,6 +123,6 @@
             android:gravity="center"
             android:text="反馈"
             android:textColor="#ffffff"
-            android:textSize="@dimen/sp_18" />
+            android:textSize="@dimen/sp_11" />
     </LinearLayout>
 </LinearLayout>

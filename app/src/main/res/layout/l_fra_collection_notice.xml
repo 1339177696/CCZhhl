@@ -30,7 +30,7 @@
             android:id="@+id/message_list_empty_hint"
             android:layout_width="fill_parent"
             android:text="暂无数据"
-            android:textSize="@dimen/sp_15"
+            android:textSize="@dimen/sp_9"
             android:layout_height="wrap_content"
             android:layout_below="@id/emptyBg1"
             android:layout_centerHorizontal="true"

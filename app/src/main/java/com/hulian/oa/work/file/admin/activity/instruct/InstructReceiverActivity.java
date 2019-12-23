@@ -1,6 +1,8 @@
 package com.hulian.oa.work.file.admin.activity.instruct;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -39,6 +41,7 @@ public class InstructReceiverActivity extends BaseActivity {
     @BindView(R.id.tv_time)
     TextView tvTime;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

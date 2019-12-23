@@ -6,16 +6,21 @@
     android:background="#ffffff"
     android:orientation="vertical"
     >
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_10"
+        android:background="#2D4BCA" />
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="@color/white"
+        android:background="#2D4BCA"
         android:layout_height="@dimen/dp_45">
         <TextView
             android:layout_width="match_parent"
             android:text="消息"
             android:gravity="center"
-            android:textSize="@dimen/sp_17"
-            android:textColor="#313131"
+            android:textSize="@dimen/sp_11"
+            android:textColor="#FFFFFF"
             android:layout_height="match_parent" />
         <ImageView
             android:id="@+id/iv_more"
@@ -45,15 +50,15 @@
             android:textColor="#ffffff"
             android:layout_marginRight="@dimen/dp_size_25"
             android:layout_height="@dimen/dp_size_35" />
+
         <ImageView
-            android:id="@+id/iv_gomine"
-            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
+            android:id="@+id/iv_gomine"
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="@dimen/dp_16"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp_20"
-            android:layout_width="@dimen/dp_25"
-            android:layout_height="@dimen/dp_25"
-            android:background="@drawable/ic_work_me"
-        />
+            android:background="@mipmap/fragment_work_logo1" />
     </RelativeLayout>
     <TextView
         android:layout_marginTop="5dp"
@@ -111,7 +116,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/emptyBg1"
-            android:textSize="@dimen/sp_15"
+            android:textSize="@dimen/sp_9"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dip"
             android:gravity="center"/>

@@ -9,11 +9,13 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -39,6 +41,7 @@ import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
+import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.utils.ToastHelper;
 import com.hulian.oa.work.file.admin.activity.PostOrderActivity;
 
@@ -175,6 +178,9 @@ public class PAD_zhiling_XF extends BaseActivity implements View.OnClickListener
     private RelativeLayout rl_sel_people;
     private Button bt_post;
 
+    private LinearLayout tv_apply;
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -292,6 +298,9 @@ public class PAD_zhiling_XF extends BaseActivity implements View.OnClickListener
         tvSelPeo = findViewById(R.id.tv_sel_peo);
         rl_sel_people = findViewById(R.id.rl_sel_people);
         rl_sel_people.setOnClickListener(this);
+
+        tv_apply = findViewById(R.id.tv_apply);
+        tv_apply.setOnClickListener(this);
         bt_post = findViewById(R.id.bt_post);
         bt_post.setOnClickListener(this);
         if (filePath!="")
@@ -387,7 +396,7 @@ public class PAD_zhiling_XF extends BaseActivity implements View.OnClickListener
                     size = mDoodleParams.mPaintPixelSize > 0 ? mDoodleParams.mPaintPixelSize : mDoodle.getSize();
                 }*/
                 // 设置初始值
-                mDoodle.setSize(0);  /*画笔的初试值*/
+                mDoodle.setSize(1);  /*画笔的初试值*/
                 // 选择画笔
                 mDoodle.setPen(DoodlePen.BRUSH);  //画笔
                 mDoodle.setShape(DoodleShape.HAND_WRITE); //手绘
@@ -510,6 +519,7 @@ public class PAD_zhiling_XF extends BaseActivity implements View.OnClickListener
     {
         if (v.getId() == R.id.btn_pen_hand)
         {
+            // 0改成3
             mEditSizeSeekBar.setProgress(0);
             mEditSizeSeekBar.setMax(4);
             mEditSizeSeekBar.invalidate();
@@ -689,6 +699,11 @@ public class PAD_zhiling_XF extends BaseActivity implements View.OnClickListener
 
         else if (v.getId() == R.id.rl_sel_people)
         {
+            Intent intent=new Intent(PAD_zhiling_XF.this, SelPeopleActivity_x.class);
+            intent.putExtra("partId", SPUtils.get(mContext, "deptId", "").toString());
+            startActivity(intent);
+        }
+        else if (v.getId() == R.id.tv_apply){
             Intent intent=new Intent(PAD_zhiling_XF.this, SelPeopleActivity_x.class);
             intent.putExtra("partId", SPUtils.get(mContext, "deptId", "").toString());
             startActivity(intent);
@@ -910,6 +925,8 @@ public class PAD_zhiling_XF extends BaseActivity implements View.OnClickListener
     public void onEventMainThread(People_x event) {
         tvSelPeo.setText(event.getUserName());
         tvSelPeo.setTag(event.getUserId()+"");
+
+        bt_post.setText("发布给"+event.getUserName());
 
     }
     @Override

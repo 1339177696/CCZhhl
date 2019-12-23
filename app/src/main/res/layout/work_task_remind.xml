@@ -5,9 +5,9 @@
     android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="#FFFFFF"
+        android:background="#2D4BCA"
         android:gravity="center_vertical"
-        android:layout_height="@dimen/dp_53">
+        android:layout_height="@dimen/dp_45">
         <FrameLayout
             android:id="@+id/iv_back"
             android:layout_centerVertical="true"
@@ -16,11 +16,11 @@
         <ImageView
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/dp_15"
-            android:layout_width="@dimen/dp_15"
+            android:layout_width="@dimen/dp_12"
 
             android:layout_centerVertical="true"
             android:background="@mipmap/ic_left"
-            android:layout_height="@dimen/dp_15" />
+            android:layout_height="@dimen/dp_12" />
         </FrameLayout>
         <TextView
             android:id="@+id/tv_top"
@@ -30,13 +30,13 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="提醒"
-            android:textColor="#ff313131"
-            android:textSize="17sp" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_11" />
 
             <TextView
             android:id="@+id/tv_save"
             android:layout_width="wrap_content"
-            android:textColor="#ff313131"
+            android:textColor="@color/white"
             android:layout_centerVertical="true"
             android:gravity="center"
             android:layout_marginRight="@dimen/dp_20"
@@ -115,7 +115,7 @@
             android:layout_marginTop="@dimen/dp_10"
             android:padding="@dimen/dp_10"
             android:background="@color/white"
-            android:textSize="@dimen/dp_14"
+            android:textSize="@dimen/sp_11"
             android:textColor="@drawable/selector_task_remind"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -131,7 +131,7 @@
         <!--android:text="截止前1小时"-->
         <!--android:padding="@dimen/dp_10"-->
         <!--android:background="@color/white"-->
-        <!--android:textSize="@dimen/dp_14"-->
+        <!--android:textSize="@dimen/sp_11"-->
         <!--android:textColor="@drawable/selector_task_remind"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"-->
@@ -142,7 +142,7 @@
             android:text="截止前5分钟"
             android:padding="@dimen/dp_10"
             android:background="@color/white"
-            android:textSize="@dimen/dp_14"
+            android:textSize="@dimen/sp_11"
             android:textColor="@drawable/selector_task_remind"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -159,7 +159,7 @@
         <!--android:text="截止前3小时"-->
         <!--android:padding="@dimen/dp_10"-->
         <!--android:background="@color/white"-->
-        <!--android:textSize="@dimen/dp_14"-->
+        <!--android:textSize="@dimen/sp_11"-->
         <!--android:textColor="@drawable/selector_task_remind"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"-->
@@ -171,7 +171,7 @@
             android:text="截止前30分钟"
             android:padding="@dimen/dp_10"
             android:background="@color/white"
-            android:textSize="@dimen/dp_14"
+            android:textSize="@dimen/sp_11"
             android:textColor="@drawable/selector_task_remind"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -188,7 +188,7 @@
         <!--android:text="截止前1天"-->
         <!--android:padding="@dimen/dp_10"-->
         <!--android:background="@color/white"-->
-        <!--android:textSize="@dimen/dp_14"-->
+        <!--android:textSize="@dimen/sp_11"-->
         <!--android:textColor="@drawable/selector_task_remind"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"-->
@@ -198,7 +198,7 @@
             android:text="截止前1小时"
             android:padding="@dimen/dp_10"
             android:background="@color/white"
-            android:textSize="@dimen/dp_14"
+            android:textSize="@dimen/sp_11"
             android:textColor="@drawable/selector_task_remind"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

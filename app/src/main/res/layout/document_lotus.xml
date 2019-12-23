@@ -8,22 +8,22 @@
     <RelativeLayout
         android:id="@+id/iv_back"
         android:layout_width="match_parent"
-        android:background="#FFFFFF"
+        android:background="#2D4BCA"
         android:gravity="center_vertical"
-        android:layout_height="@dimen/dp_53">
+        android:layout_height="@dimen/dp_45">
         <ImageView
             android:layout_marginLeft="@dimen/dp_15"
-            android:layout_width="@dimen/dp_20"
+            android:layout_width="@dimen/dp_12"
             android:layout_centerVertical="true"
-            android:background="@mipmap/ic_left"
-            android:layout_height="@dimen/dp_20" />
+            android:background="@mipmap/ic_left_white"
+            android:layout_height="@dimen/dp_12" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="审批详情"
-            android:textColor="#ff313131"
-            android:textSize="@dimen/sp_17" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_11" />
     </RelativeLayout>
 
     <ScrollView
@@ -334,7 +334,7 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_350"
+                    android:layout_height="wrap_content"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     />

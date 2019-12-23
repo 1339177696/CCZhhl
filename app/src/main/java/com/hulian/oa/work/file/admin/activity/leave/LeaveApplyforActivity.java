@@ -1,8 +1,10 @@
 package com.hulian.oa.work.file.admin.activity.leave;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -161,6 +163,7 @@ public class LeaveApplyforActivity extends BaseActivity {
     private List<Userqglbean>userqgllist = new ArrayList<>();
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -277,6 +280,7 @@ public class LeaveApplyforActivity extends BaseActivity {
                     break;
                 case 520:
                     fl_content2.setVisibility(View.VISIBLE);
+                    jiaojie_person.setVisibility(View.VISIBLE);
                     jiaojie_person.setText(data.getStringExtra("userName"));
                     jiaojiecode = data.getStringExtra("userId");
 
@@ -364,6 +368,7 @@ public class LeaveApplyforActivity extends BaseActivity {
             return;
         }
         showDialogLoading();
+        loadDialog.show();
         RequestParams params = new RequestParams();
         params.put("createBy", SPUtils.get(mContext, "userId", "").toString());
         params.put("copier", copierCode);
@@ -384,6 +389,7 @@ public class LeaveApplyforActivity extends BaseActivity {
             public void onSuccess(Object responseObj) {
                 dismissDialogLoading();
                 try {
+                    loadDialog.dismiss();
                     JSONObject result = new JSONObject(responseObj.toString());
                     ToastHelper.showToast(mContext, result.getString("msg"));
                     if (result.getString("code").equals("0")) {

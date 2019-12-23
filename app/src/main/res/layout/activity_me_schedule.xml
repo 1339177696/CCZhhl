@@ -17,11 +17,10 @@
         android:layout_height="@dimen/dp_45">
         <ImageView
             android:layout_marginLeft="@dimen/dp_15"
-            android:layout_width="@dimen/dp_15"
-
+            android:layout_width="@dimen/dp_12"
             android:layout_centerVertical="true"
             android:background="@mipmap/ic_left_white"
-            android:layout_height="@dimen/dp_15" />
+            android:layout_height="@dimen/dp_12" />
         <TextView
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
@@ -29,7 +28,7 @@
             android:layout_height="wrap_content"
             android:text="日程安排"
             android:textColor="@color/colorwhite"
-            android:textSize="@dimen/sp_17" />
+            android:textSize="@dimen/sp_11" />
     </RelativeLayout>
     </RelativeLayout>
     <!--<RelativeLayout-->
@@ -103,7 +102,7 @@
                     android:maxLines="1"
                     android:text="月"
                     android:textColor="#ff25adff"
-                    android:textSize="@dimen/sp_20" />
+                    android:textSize="@dimen/sp_16" />
                 <TextView
                     android:id="@+id/show_year_view"
                     android:layout_width="wrap_content"
@@ -111,7 +110,7 @@
                     android:gravity="bottom"
                     android:text="2014年"
                     android:textColor="#ff25adff"
-                    android:textSize="@dimen/sp_13" />
+                    android:textSize="@dimen/sp_11" />
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -185,8 +184,8 @@
                 android:background="@drawable/liner_yuan_qgl8"
                 android:orientation="vertical"
                 android:id="@+id/tv_add_schedule"
-                android:layout_width="@dimen/dp_50"
-                android:layout_height="@dimen/dp_50">
+                android:layout_width="@dimen/dp_40"
+                android:layout_height="@dimen/dp_40">
 
                 <ImageView
                     android:src="@mipmap/shenqing_qgl"

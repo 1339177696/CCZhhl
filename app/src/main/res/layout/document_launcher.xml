@@ -10,16 +10,16 @@
     <RelativeLayout
         android:id="@+id/iv_back"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_53"
-        android:background="#FFFFFF"
+        android:layout_height="@dimen/dp_45"
+        android:background="#2D4BCA"
         android:gravity="center_vertical">
 
         <ImageView
-            android:layout_width="@dimen/dp_15"
-            android:layout_height="@dimen/dp_15"
+            android:layout_width="@dimen/dp_12"
+            android:layout_height="@dimen/dp_12"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp_15"
-            android:background="@mipmap/ic_left" />
+            android:background="@mipmap/ic_left_white" />
 
         <TextView
             android:id="@+id/tv_top"
@@ -29,8 +29,8 @@
             android:layout_centerVertical="true"
             android:gravity="center"
             android:text="公文发起"
-            android:textColor="#ff313131"
-            android:textSize="@dimen/sp_17" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_11" />
     </RelativeLayout>
 
     <View
@@ -98,7 +98,7 @@
                         android:layout_toRightOf="@+id/gw_img11"
                         android:text="公文类型"
                         android:textColor="#ff313131"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/sp_11" />
                     <TextView
                         android:id="@+id/iv_reason_more"
                         android:background="@mipmap/qj_selected_icon_qgl"
@@ -120,7 +120,7 @@
                         android:gravity="right"
                         android:layout_centerVertical="true"
                         android:textColor="#313131"
-                        android:textSize="@dimen/dp_14"
+                        android:textSize="@dimen/sp_10"
                         />
 
 
@@ -152,7 +152,7 @@
                         android:layout_toRightOf="@+id/gw_img111"
                         android:text="公文文号"
                         android:textColor="#ff313131"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/sp_11" />
 
 
                     <EditText
@@ -167,7 +167,7 @@
                         android:background="@null"
                         android:gravity="right"
                         android:hint="请输入公文文号"
-                        android:textSize="@dimen/dp_14" />
+                        android:textSize="@dimen/sp_10" />
 
 
 
@@ -199,7 +199,7 @@
                         android:layout_toRightOf="@+id/gw_img1"
                         android:text="公文标题"
                         android:textColor="#ff313131"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/sp_11" />
 
                     <!--<TextView-->
                     <!--android:layout_marginRight="10dp"-->
@@ -209,7 +209,7 @@
                     <!--android:layout_height="wrap_content"-->
                     <!--android:text="请输入公文标题"-->
                     <!--android:textColor="#ff676767"-->
-                    <!--android:textSize="14sp"-->
+                    <!--android:textSize="@dimen/sp_11"-->
                     <!--/>-->
 
                     <EditText
@@ -223,7 +223,7 @@
                         android:background="@null"
                         android:gravity="right"
                         android:hint="请输入公文标题"
-                        android:textSize="@dimen/dp_14" />
+                        android:textSize="@dimen/sp_10" />
 
 
 
@@ -233,7 +233,62 @@
                     android:layout_height="1dp"
                     android:layout_marginLeft="22dp"
                     android:background="#E3E3E3" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
 
+                    <ImageView
+                        android:id="@+id/gw_img122"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:src="@mipmap/renwu_faqi_icon2" />
+
+                    <TextView
+                        android:id="@+id/gw_text121"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="9dp"
+                        android:layout_toRightOf="@+id/gw_img122"
+                        android:text="紧急类型"
+                        android:textColor="#ff313131"
+                        android:textSize="@dimen/sp_11" />
+                    <TextView
+                        android:id="@+id/iv_jinji_chengdu"
+                        android:background="@mipmap/qj_selected_icon_qgl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/dp_22"
+                        android:layout_centerVertical="true"
+                        />
+
+                    <TextView
+                        android:layout_marginRight="@dimen/dp_13"
+                        android:text="请选择请假类别"
+                        android:id="@+id/jinji_leibie"
+                        android:layout_toLeftOf="@id/iv_jinji_chengdu"
+                        android:layout_marginLeft="@dimen/dp_100"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:layout_centerVertical="true"
+                        android:textColor="#313131"
+                        android:textSize="@dimen/sp_10"
+                        />
+
+
+
+                </RelativeLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="22dp"
+                    android:background="#E3E3E3" />
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp">
@@ -255,7 +310,7 @@
                         android:layout_toRightOf="@+id/gw_img1111"
                         android:text="公文附件"
                         android:textColor="#ff313131"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/sp_11" />
 
                     <TextView
                         android:id="@+id/file_btn"
@@ -267,7 +322,7 @@
                         android:layout_height="wrap_content"
                         android:text="点击选择附件"
                         android:textColor="#085DD6"
-                        android:textSize="14sp"
+                        android:textSize="@dimen/sp_10"
                     />
 
 
@@ -302,7 +357,7 @@
                         android:layout_toRightOf="@+id/gw_img3"
                         android:text="公文照片"
                         android:textColor="#ff313131"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/sp_11" />
                 </RelativeLayout>
 
                 <View
@@ -346,7 +401,7 @@
                         android:layout_toRightOf="@+id/gw_img4"
                         android:text="审批人"
                         android:textColor="#ff313131"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/sp_11" />
 
                     <ImageView
                         android:layout_width="20dp"
@@ -399,7 +454,7 @@
                         android:layout_toRightOf="@+id/gw_img5"
                         android:text="抄送人"
                         android:textColor="#ff313131"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/sp_11" />
 
                     <ImageView
                         android:layout_width="20dp"
@@ -528,7 +583,7 @@
                 android:gravity="center"
                 android:text="发起"
                 android:textColor="#ffffffff"
-                android:textSize="14sp" />
+                android:textSize="@dimen/sp_11" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

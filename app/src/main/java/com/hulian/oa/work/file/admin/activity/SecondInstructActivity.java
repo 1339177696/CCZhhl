@@ -1,8 +1,10 @@
 package com.hulian.oa.work.file.admin.activity;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -48,6 +50,7 @@ public class SecondInstructActivity extends BaseActivity implements PullLoadMore
     private Context mContext;
     private int mCount = 1;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

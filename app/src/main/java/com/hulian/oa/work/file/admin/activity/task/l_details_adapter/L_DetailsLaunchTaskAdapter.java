@@ -124,7 +124,9 @@ public class L_DetailsLaunchTaskAdapter extends RecyclerView.Adapter <RecyclerVi
                 String aa = dataList.get(position).getFiles();
                 if (aa!=null&&aa!=""){
                     List<String> c = Arrays.asList(aa.split(","));
+
                     for (int i = 0;i<=c.size()-1;i++){
+                        selectList = new ArrayList<>();
                         if (getMIMEType(c.get(i)).equals("image/jpeg")||getMIMEType(c.get(i)).equals("image/png")||getMIMEType(c.get(i)).equals("image/gif")){
                             LocalMedia localMedia = new LocalMedia();
                             localMedia.setPath(c.get(i));

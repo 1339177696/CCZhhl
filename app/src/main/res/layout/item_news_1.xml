@@ -2,33 +2,30 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_height="@dimen/dp_100">
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dp_10"
+    android:layout_marginRight="@dimen/dp_10"
+    android:layout_marginTop="@dimen/dp_5"
+    android:padding="@dimen/dp_5"
+    android:background="@drawable/edit_background3"
+>
 
     <RelativeLayout
-            android:background="@drawable/fragment_work_fragment_liner_qgl_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <!--<ImageView-->
-                <!--android:scaleType="fitXY"-->
-                <!--android:layout_alignParentLeft="true"-->
-                <!--android:layout_centerVertical="true"-->
-                <!--android:id="@+id/iv_head"-->
-                <!--android:layout_width="@dimen/dp_85"-->
-                <!--android:layout_height="@dimen/dp_65"-->
-                <!--/>-->
+
             <com.facebook.drawee.view.SimpleDraweeView
                 fresco:roundedCornerRadius="5dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:id="@+id/iv_head"
-                android:layout_width="@dimen/dp_85"
-                android:layout_height="@dimen/dp_65" />
+                android:layout_width="@dimen/dp_65"
+                android:layout_height="@dimen/dp_45" />
             <TextView
                 android:id="@+id/tv_name"
-                android:layout_marginTop="@dimen/dp_18"
+                android:layout_marginTop="@dimen/dp_3"
                 android:layout_toRightOf="@+id/iv_head"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -37,7 +34,7 @@
                 android:maxLines="1"
                 android:textColor="#313131"
                 android:ellipsize="end"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp_11"
                 android:text="省厅大的说法都是理发卡进来看大家发进来看"
                 />
 
@@ -54,7 +51,7 @@
                 android:maxLines="1"
                 android:text="省厅大的说法都是"
                 android:textColor="#676767"
-                android:textSize="@dimen/sp_12" />
+                android:textSize="@dimen/sp_10" />
             <TextView
                 android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
@@ -66,7 +63,7 @@
                 android:maxLines="1"
                 android:text="省厅大的说法都是"
                 android:textColor="#858585"
-                android:textSize="@dimen/sp_11" />
+                android:textSize="@dimen/sp_9" />
             <TextView
                 android:gravity="center"
                 android:drawableLeft="@mipmap/news_icon"
@@ -80,7 +77,7 @@
                 android:drawablePadding="-3dp"
                 android:text="12"
                 android:textColor="#858585"
-                android:textSize="@dimen/sp_12" />
+                android:textSize="@dimen/sp_9" />
 
         </RelativeLayout>
 

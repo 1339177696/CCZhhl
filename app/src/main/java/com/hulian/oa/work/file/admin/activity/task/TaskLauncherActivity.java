@@ -3,8 +3,10 @@ package com.hulian.oa.work.file.admin.activity.task;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -55,6 +57,12 @@ import com.hulian.oa.work.file.admin.activity.meeting.MeetingSponsorActivity;
 import com.hulian.oa.work.file.admin.activity.meeting.SelDepartmentActivity_meet_zb;
 import com.hulian.oa.work.file.admin.activity.meeting.SelDepartmentActivity_meet_zb_single;
 import com.hulian.oa.work.file.admin.activity.meeting.l_adapter.MeetGridViewAdapter;
+import com.hulian.oa.work.file.admin.activity.meeting.l_fragment.MeetLaunchFragment;
+import com.hulian.oa.work.file.admin.activity.meeting.l_fragment.MeetReceiverFragment;
+import com.hulian.oa.work.file.admin.activity.task.l_fragment.CompletedTaskFragment;
+import com.hulian.oa.work.file.admin.activity.task.l_fragment.CopymeTaskFragment;
+import com.hulian.oa.work.file.admin.activity.task.l_fragment.LaunchTaskFragment;
+import com.hulian.oa.work.file.admin.activity.task.l_fragment.UndoneTaskFragment;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
@@ -157,6 +165,7 @@ public class TaskLauncherActivity extends BaseActivity {
     private List<LocalMedia> selectList = new ArrayList<>();
     private L_GridImageAdapter adapter_grid;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -231,7 +240,7 @@ public class TaskLauncherActivity extends BaseActivity {
 
                 }
                 else if (selectList.size() <= 0) {
-                    ToastHelper.showToast(mContext, "公文照片不能为空");
+                    ToastHelper.showToast(mContext, "照片不能为空");
                     return;
                 }
                 else
@@ -333,6 +342,7 @@ public class TaskLauncherActivity extends BaseActivity {
 
     private void getData()
     {
+        loadDialog.show();
         RequestParams params = new RequestParams();
         params.put("title",title);
         params.put("details",context);
@@ -353,6 +363,7 @@ public class TaskLauncherActivity extends BaseActivity {
             @Override
             public void onSuccess(Object responseObj) {
                 try {
+                    loadDialog.dismiss();
                     JSONObject result = new JSONObject(responseObj.toString());
                     JSONObject obj = new JSONObject(result.toString());
                     String code = obj.getString("code");
@@ -361,6 +372,10 @@ public class TaskLauncherActivity extends BaseActivity {
                     {
                         Toast.makeText(TaskLauncherActivity.this,msg,Toast.LENGTH_SHORT).show();
                         setResult(1);
+                        EventBus.getDefault().post(new LaunchTaskFragment());
+                        EventBus.getDefault().post(new UndoneTaskFragment());
+                        EventBus.getDefault().post(new CompletedTaskFragment());
+                        EventBus.getDefault().post(new CopymeTaskFragment());
                         finish();
                     }
                     else

@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -47,11 +48,13 @@ public class BaseActivity extends FragmentActivity  {
     /**加载对话框上显示的文字*/
     private TextView txt_msg;
     public Gson gson;
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        StatusBarUtil.statusBarLightMode(this);
+//        StatusBarUtil.statusBarLightMode(this);
+        StatusBarUtil.statusBarLightMode_white(this);
         if (activitys == null) {
             activitys = new ArrayList<Activity>();
         }

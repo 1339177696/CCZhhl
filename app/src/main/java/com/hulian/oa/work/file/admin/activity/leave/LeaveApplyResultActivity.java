@@ -104,6 +104,8 @@ public class LeaveApplyResultActivity extends BaseActivity {
     //图片放大预览测试
     private String[] images = {};
 
+    @BindView(R.id.tv_shenqing)
+    TextView tv_shenqing;
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -135,23 +137,27 @@ public class LeaveApplyResultActivity extends BaseActivity {
                     JSONObject result = new JSONObject(responseObj.toString());
                     tv_approved_person.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("approverName"));
                     String status = result.getJSONObject("data").getJSONObject("workLeave").getString("state");
+
                     if (status.equals("1")) {
                         liucheng_img_my.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.liucheng_icon_qgl2));
                         tv_shenqing_time_qgl.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("startTime"));
                         tv_shenqingren_qgl.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("nowApproveName"));
+                        String yijian = result.getJSONObject("data").getJSONObject("workLeave").getString("approvalOpinions");
                         tv_wancheng_qgl.setTextColor(Color.parseColor("#ff313131"));
-                        tv_wanzcheng_time_qgl.setVisibility(View.VISIBLE);
+                        tv_wancheng_qgl.setText("同意"+"("+yijian+")");
+                        tv_wanzcheng_time_qgl.setVisibility(View.GONE);
                         String a = result.getJSONObject("data").getJSONObject("workLeave").getString("approvalTime");
                         String b = a.substring(0, a.length() - 8);
                         tv_wanzcheng_time_qgl.setText(b);
+
                     } else if (status.equals("2")) {
                         liucheng_img_my.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.liucheng_icon_qgl2));
                         tv_shenqing_time_qgl.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("startTime"));
                         tv_shenqingren_qgl.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("approverName"));
-
-                        tv_wancheng_qgl.setText("驳回");
+                        String yijian = result.getJSONObject("data").getJSONObject("workLeave").getString("approvalOpinions");
+                        tv_wancheng_qgl.setText("驳回"+"("+yijian+")");
                         tv_wancheng_qgl.setTextColor(Color.parseColor("#ff313131"));
-                        tv_wanzcheng_time_qgl.setVisibility(View.VISIBLE);
+                        tv_wanzcheng_time_qgl.setVisibility(View.GONE);
                         String a = result.getJSONObject("data").getJSONObject("workLeave").getString("approvalTime");
                         String b = a.substring(0, a.length() - 8);
                         tv_wanzcheng_time_qgl.setText(b);
@@ -163,7 +169,6 @@ public class LeaveApplyResultActivity extends BaseActivity {
                         tv_shenqingren_qgl.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("nowApproveName"));
                         tv_wancheng_qgl.setText("完成");
                         tv_wancheng_qgl.setTextColor(Color.parseColor("#DBDBDB"));
-
                         tv_wanzcheng_time_qgl.setVisibility(View.GONE);
 
                     }
@@ -176,6 +181,8 @@ public class LeaveApplyResultActivity extends BaseActivity {
 //                    }
 //                    tv_leave_title.setText(result.getJSONObject("data").getString("remark"));
                     tv_leave_reason.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("cause"));
+                    tv_shenqing.setText("提出"+result.getJSONObject("data").getJSONObject("workLeave").getString("cause")+"申请");
+
                     tv_duration.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("duration"));
 
 //                    String a = TimeUtils.getDateToString(result.getJSONObject("data").getString("startTime"));

@@ -2,7 +2,9 @@ package com.hulian.oa.work.file.admin.activity.instruct;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -46,6 +48,7 @@ public class InstructBackActivity extends BaseActivity {
     @BindView(R.id.details_img)
     ImageView details_img;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

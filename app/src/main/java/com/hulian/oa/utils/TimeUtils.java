@@ -202,6 +202,19 @@ public class TimeUtils {
         }
         return days;
     }
+
+    public static int differentDaysByMillisecond3(String date1,String date2)
+    {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        int days = 0;
+        try {
+            days = (int) (( dateFormat.parse(date2).getTime() - dateFormat.parse(date1).getTime()) / (1000*3600*24));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return days;
+    }
     /**
      * 计算相差的小时(返回小时)
      *

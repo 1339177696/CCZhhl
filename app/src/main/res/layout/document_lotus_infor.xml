@@ -9,23 +9,22 @@
     <RelativeLayout
         android:id="@+id/iv_back"
         android:layout_width="match_parent"
-        android:background="#FFFFFF"
+        android:background="#2D4BCA"
         android:gravity="center_vertical"
         android:layout_height="@dimen/dp_53">
         <ImageView
             android:layout_marginLeft="@dimen/dp_15"
-            android:layout_width="@dimen/dp_20"
-
+            android:layout_width="@dimen/dp_12"
             android:layout_centerVertical="true"
-            android:background="@mipmap/ic_left"
-            android:layout_height="@dimen/dp_20" />
+            android:background="@mipmap/ic_left_white"
+            android:layout_height="@dimen/dp_12" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="审批详情"
-            android:textColor="#ff313131"
-            android:textSize="@dimen/sp_17" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_11" />
     </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
@@ -336,12 +335,34 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_350"
+                    android:layout_height="wrap_content"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     />
 
             </FrameLayout>
+            <LinearLayout
+
+                android:id="@+id/qgl_liner2"
+                android:layout_above="@+id/qgl_rela2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_msg"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="#ededed"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="文件区域可随意签名"
+                    android:textColor="#182744"
+                    android:textSize="@dimen/sp_11" />
+
+            </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"

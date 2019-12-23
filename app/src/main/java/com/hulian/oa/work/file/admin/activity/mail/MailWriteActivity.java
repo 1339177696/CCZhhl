@@ -2,8 +2,10 @@ package com.hulian.oa.work.file.admin.activity.mail;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -79,6 +81,7 @@ public class MailWriteActivity extends BaseActivity {
 
     private String receiveMailCcName="";
     private String receiveMailCc="";
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,6 +105,7 @@ public class MailWriteActivity extends BaseActivity {
                 } else if (neirong.equals("")) {
                     Toast.makeText(MailWriteActivity.this, "请输入内容", Toast.LENGTH_SHORT).show();
                 } else {
+
                     getData();
                 }
                 break;
@@ -147,6 +151,7 @@ public class MailWriteActivity extends BaseActivity {
 
     // 发送邮件
     private void getData() {
+        loadDialog.show();
         RequestParams params = new RequestParams();
         params.put("title", zhuti);
         params.put("content", neirong);
@@ -167,6 +172,8 @@ public class MailWriteActivity extends BaseActivity {
             @Override
             public void onSuccess(Object responseObj) {
                 try {
+                    loadDialog.dismiss();
+
                     JSONObject obj = new JSONObject(responseObj.toString());
                     String msg = obj.getString("msg");
                     Toast.makeText(MailWriteActivity.this, msg, Toast.LENGTH_SHORT).show();

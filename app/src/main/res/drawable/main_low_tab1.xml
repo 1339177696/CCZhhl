@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@mipmap/file_selected" android:state_checked="true" />
-    <item android:drawable="@mipmap/file"/>
+    <item android:drawable="@mipmap/main5_icon_select" android:state_checked="true" />
+    <item android:drawable="@mipmap/main5_icon"/>
 </selector>

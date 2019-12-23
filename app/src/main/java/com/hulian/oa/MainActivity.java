@@ -3,23 +3,28 @@ package com.hulian.oa;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.location.Address;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.hulian.oa.XinMod.XFragment.XFBusfragment;
 import com.hulian.oa.address.AddressFragment;
 import com.hulian.oa.address.pad.Address_Pad_Fragment;
 import com.hulian.oa.agency.AgencyFragment;
-import com.hulian.oa.message.MessageFragment;
+import com.hulian.oa.me.CollectionActivity2;
+import com.hulian.oa.me.ScheduleActivity;
 import com.hulian.oa.message.Wechat;
 import com.hulian.oa.message.helper.SystemMessageUnreadManager;
 import com.hulian.oa.message.reminder.ReminderItem;
@@ -27,15 +32,18 @@ import com.hulian.oa.message.reminder.ReminderManager;
 import com.hulian.oa.message.session.SessionHelper;
 import com.hulian.oa.news.NewsFragment;
 import com.hulian.oa.team.TeamCreateHelper;
+import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.work.WorkFragment;
 import com.hulian.oa.work.file.admin.activity.mail.pad.MailFragment;
+import com.luck.picture.lib.rxbus2.Subscribe;
 import com.netease.nim.uikit.business.contact.selector.activity.ContactSelectActivity;
 import com.netease.nim.uikit.common.ToastHelper;
 import com.netease.nim.uikit.support.permission.MPermission;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.NimIntent;
 import com.netease.nimlib.sdk.Observer;
+import com.netease.nimlib.sdk.auth.AuthService;
 import com.netease.nimlib.sdk.msg.SystemMessageObserver;
 import com.netease.nimlib.sdk.msg.SystemMessageService;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
@@ -44,23 +52,26 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 
-public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener , ReminderManager.UnreadNumChangedCallback{
+public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener, ReminderManager.UnreadNumChangedCallback {
 //测试
 
-//    新版OA
+    //    新版OA
     private static final int BASIC_PERMISSION_REQUEST_CODE = 100;
     private static final int REQUEST_CODE_ADVANCED = 2;
     private static final int REQUEST_CODE_NORMAL = 1;
     private static final String[] BASIC_PERMISSIONS = new String[]{
-            android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            android.Manifest.permission.READ_EXTERNAL_STORAGE,
-            android.Manifest.permission.CAMERA,
-            android.Manifest.permission.READ_PHONE_STATE,
-            android.Manifest.permission.RECORD_AUDIO,
-            android.Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA,
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION
     };
+
     private boolean isFirstIn;
     private Observer<Integer> sysMsgUnreadCountChangedObserver = new Observer<Integer>() {
         @Override
@@ -71,9 +82,9 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     };
 
 
-    boolean isgowork=false;
-    boolean isgoaddress=false;
-    boolean isgoagency=false;
+    boolean isgowork = false;
+    boolean isgoaddress = false;
+    boolean isgoagency = false;
     @BindView(R.id.content)
     FrameLayout content;
     @BindView(R.id.rb_message)
@@ -86,28 +97,51 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     RadioButton rb_work;
     @BindView(R.id.rb_news)
     RadioButton rbNews;
-//    业务驾驶舱
+    //    业务驾驶舱
     @BindView(R.id.rb_bus)
     RadioButton rb_bus;
     @BindView(R.id.rg_footer)
     RadioGroup rgFooter;
+    // 新加的我的页面
+//    姓名
+    @BindView(R.id.main2_tv_name)
+    TextView main2_tv_name;
+    //    部门
+    @BindView(R.id.main2_tv_dept)
+    TextView main2_tv_dept;
+    //    电话
+    @BindView(R.id.main2_tv_phone)
+    TextView main2_tv_phone;
+//    我的日程
+    @BindView(R.id.main2_rela_program)
+    RelativeLayout main2RelaProgram;
+//    我的收藏
+    @BindView(R.id.main2_rela_collection)
+    RelativeLayout main2RelaCollection;
+    //退出登录
+    @BindView(R.id.main2_outlogin)
+    Button main2_outlogin;
+    @BindView(R.id.menu_drawer)
+    DrawerLayout menu_drawer;
 
     private FragmentTransaction transaction;
-
     private AddressFragment addressFragment;
     private Wechat messageFragment;
     private NewsFragment newsFragment;
     private WorkFragment workFragment;
     private AgencyFragment agencyFragment;
     private XFBusfragment xfBusfragment;
-
     private MailFragment mailFragment;
     private Address_Pad_Fragment address_Pad_Fragment;
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
+
 
 //        if(BuildConfig.IsPad){
 //        //    ToastHelper.showToast(mContext,"111111111111");
@@ -125,26 +159,31 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         //       initUnreadCover();
         requestBasicPermission();
 
+        // 就收值
+        main2_tv_name.setText(SPUtils.get(mContext, "nickname", "").toString());
+        main2_tv_dept.setText(SPUtils.get(mContext, "deptname", "").toString());
+        main2_tv_phone.setText(SPUtils.get(mContext, "username", "").toString());
+
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        isgowork=intent.getBooleanExtra("isgowork", false);
-        isgoaddress=intent.getBooleanExtra("isgoaddress", false);
-        if(isgowork){
+        isgowork = intent.getBooleanExtra("isgowork", false);
+        isgoaddress = intent.getBooleanExtra("isgoaddress", false);
+        if (isgowork) {
             rb_work.performClick();
         }
-        if(isgoaddress){
+        if (isgoaddress) {
             rbAddress.performClick();
         }
-        if(isgoagency){
+        if (isgoagency) {
             rbAgency.performClick();
-        }
-        else{
+        } else {
             rbMessage.performClick();
         }
     }
+
     private boolean parseIntent() {
 
         Intent intent = getIntent();
@@ -181,6 +220,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
         return false;
     }
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -189,7 +229,9 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         hideAllFragment(transaction);
         switch (i) {
             case R.id.rb_message:
-                StatusBarUtil.statusBarLightMode(this);
+//                StatusBarUtil.statusBarLightMode(this);
+                StatusBarUtil.statusBarLightMode_white(this);
+
 //                if(BuildConfig.IsPad){
 //                    if(mailFragment==null){
 //                        mailFragment = new MailFragment().newInstance("");
@@ -200,19 +242,19 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 //                    }
 //                }
 //                else {
-                    if (messageFragment == null) {
-                        messageFragment = new Wechat().newInstance("");
-                        transaction.add(R.id.content, messageFragment);
-                    } else {
-                        transaction.show(messageFragment);
-                    }
-             //   }
+                if (messageFragment == null) {
+                    messageFragment = new Wechat().newInstance("");
+                    transaction.add(R.id.content, messageFragment);
+                } else {
+                    transaction.show(messageFragment);
+                }
+                //   }
                 break;
             case R.id.rb_news:
                 StatusBarUtil.statusBarLightMode_white(this);
                 if (newsFragment == null) {
                     newsFragment = new NewsFragment().newInstance("");
-                    transaction.add(R.id.content,newsFragment);
+                    transaction.add(R.id.content, newsFragment);
                 } else {
                     transaction.show(newsFragment);
                 }
@@ -221,15 +263,15 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 StatusBarUtil.statusBarLightMode_white(this);
                 if (agencyFragment == null) {
                     agencyFragment = new AgencyFragment().newInstance("");
-                    transaction.add(R.id.content,agencyFragment);
+                    transaction.add(R.id.content, agencyFragment);
                 } else {
                     transaction.show(agencyFragment);
                 }
                 break;
             case R.id.rb_address:
-                StatusBarUtil.statusBarLightMode(this);
-
-                if(BuildConfig.IsPad){
+//                StatusBarUtil.statusBarLightMode(this);
+                StatusBarUtil.statusBarLightMode_white(this);
+                if (BuildConfig.IsPad) {
                     /*if (address_Pad_Fragment == null) {
                         address_Pad_Fragment = new Address_Pad_Fragment().newInstance("");
                         transaction.add(R.id.content, address_Pad_Fragment);
@@ -242,8 +284,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                     } else {
                         transaction.show(addressFragment);
                     }
-                }
-                else {
+                } else {
                     if (addressFragment == null) {
                         addressFragment = new AddressFragment().newInstance("");
                         transaction.add(R.id.content, addressFragment);
@@ -264,25 +305,28 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 break;
             case R.id.rb_bus:
 //                StatusBarUtil.statusBarLightMode(this);
-//                if (xfBusfragment == null) {
-//                    xfBusfragment = new XFBusfragment().newInstance("");
-//                    transaction.add(R.id.content, xfBusfragment);
-//                } else {
-//                    transaction.show(xfBusfragment);
-//                }
+                StatusBarUtil.statusBarLightMode_white(this);
+                if (xfBusfragment == null) {
+                    xfBusfragment = new XFBusfragment().newInstance("");
+                    transaction.add(R.id.content, xfBusfragment);
+                } else {
+                    transaction.show(xfBusfragment);
+                }
                 break;
         }
         transaction.commit();
     }
+
     private void hideAllFragment(FragmentTransaction transaction) {
 
         if (newsFragment != null) this.transaction.hide(newsFragment);
-        if (messageFragment!=null) this.transaction.hide(messageFragment);
-        if (mailFragment!=null) this.transaction.hide(mailFragment);
-        if (workFragment !=null) this.transaction.hide(workFragment);
+        if (messageFragment != null) this.transaction.hide(messageFragment);
+        if (mailFragment != null) this.transaction.hide(mailFragment);
+        if (workFragment != null) this.transaction.hide(workFragment);
         if (addressFragment != null) this.transaction.hide(addressFragment);
         if (agencyFragment != null) this.transaction.hide(agencyFragment);
         if (address_Pad_Fragment != null) this.transaction.hide(address_Pad_Fragment);
+        if (xfBusfragment != null) this.transaction.hide(xfBusfragment);
     }
 
     /**
@@ -346,6 +390,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 .permissions(BASIC_PERMISSIONS)
                 .request();
     }
+
     //未读消息数量观察者实现
     @Override
     public void onUnreadNumChanged(ReminderItem item) {
@@ -354,10 +399,11 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 //            tabs.updateTab(tab.tabIndex, item);
 //        }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-     //   Toast.makeText(this,"11"+requestCode,Toast.LENGTH_SHORT).show();
+        //   Toast.makeText(this,"11"+requestCode,Toast.LENGTH_SHORT).show();
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) {
             return;
@@ -373,5 +419,35 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             final ArrayList<String> selected = data.getStringArrayListExtra(ContactSelectActivity.RESULT_DATA);
             TeamCreateHelper.createAdvancedTeam(this, selected);
         }
+    }
+
+    // 点击事件
+    @OnClick({R.id.main2_rela_program, R.id.main2_rela_collection,R.id.main2_outlogin})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.main2_rela_program:
+                startActivity(new Intent(mContext, ScheduleActivity.class));
+                break;
+            case R.id.main2_rela_collection:
+                startActivity(new Intent(mContext, CollectionActivity2.class));
+                break;
+            case R.id.main2_outlogin:
+                NIMClient.getService(AuthService.class).logout();
+                SPUtils.clear(mContext);
+                exitApp(mContext);
+                break;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    //接受值
+    @Subscribe
+    public void onEventMainThread(MainActivity event) {
+        menu_drawer.openDrawer(Gravity.START);
     }
 }

@@ -5,26 +5,60 @@
     android:layout_marginLeft="@dimen/dp_15"
     android:layout_marginRight="@dimen/dp_15"
     android:layout_marginTop="@dimen/dp_10"
-    android:layout_width="match_parent" android:layout_height="@dimen/dp_126">
-    <FrameLayout
-        android:layout_marginTop="@dimen/dp_10"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_100">
+    <!--<FrameLayout-->
+        <!--android:layout_marginTop="@dimen/dp_10"-->
+        <!--android:id="@+id/iv_image"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content">-->
+<!--<ImageView-->
+    <!--android:layout_width="@dimen/dp_46"-->
+    <!--android:background="@mipmap/bg_agency_head"-->
+    <!--android:layout_height="@dimen/dp_46" />-->
+        <!--<TextView-->
+            <!--android:id="@+id/tv_type"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:textColor="#0054CC"-->
+            <!--android:text="报"-->
+            <!--android:textSize="@dimen/sp_19"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_height="match_parent" />-->
+    <!--</FrameLayout>-->
+
+    <LinearLayout
+        android:layout_centerVertical="true"
         android:id="@+id/iv_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-<ImageView
-    android:layout_width="@dimen/dp_46"
-    android:background="@mipmap/bg_agency_head"
-    android:layout_height="@dimen/dp_46" />
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="@dimen/dp_50"
+        android:background="@drawable/edit_notice_qgl"
+        android:gravity="center"
+        android:orientation="vertical">
+
         <TextView
-            android:id="@+id/tv_type"
-            android:layout_width="match_parent"
-            android:layout_gravity="center"
-            android:textColor="#0054CC"
-            android:text="报"
-            android:textSize="@dimen/sp_19"
-            android:gravity="center"
-            android:layout_height="match_parent" />
-    </FrameLayout>
+            android:id="@+id/tv_time_qgl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="2019/09"
+            android:textColor="#F25542"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/tv_time_qgl2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="12"
+            android:textColor="#F25542"
+            android:textSize="@dimen/sp_21" />
+    </LinearLayout>
+
+
     <TextView
         android:id="@+id/tv_title"
         android:layout_toRightOf="@id/iv_image"
@@ -36,7 +70,7 @@
         android:maxLines="1"
         android:layout_marginTop="@dimen/dp_15"
         android:layout_marginLeft="@dimen/dp_10"
-        android:textSize="@dimen/sp_15"
+        android:textSize="@dimen/sp_11"
         android:layout_height="wrap_content" />
     <TextView
         android:layout_marginTop="@dimen/dp_10"
@@ -58,15 +92,45 @@
         android:layout_toRightOf="@id/iv_image"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_height="wrap_content" />
-    <TextView
-        android:layout_marginTop="@dimen/dp_15"
-        android:textSize="@dimen/sp_12"
-        android:id="@+id/tv_time"
-        android:textColor="#A7A7A7"
-        android:layout_width="wrap_content"
-        android:text="------"
+
+    <LinearLayout
+        android:id="@+id/lv_jinji"
+        android:layout_marginRight="@dimen/dp_5"
         android:layout_alignParentRight="true"
-        android:layout_height="wrap_content" />
+        android:layout_alignTop="@+id/tv_des"
+        android:background="@drawable/edit_notice_qgl"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_marginLeft="@dimen/dp_3"
+            android:id="@+id/lv_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/renwu_jinji_icon" />
+        <TextView
+            android:layout_marginRight="@dimen/dp_3"
+            android:id="@+id/lv_txt"
+            android:layout_marginLeft="@dimen/dp_3"
+            android:layout_marginBottom="@dimen/dp_3"
+            android:layout_marginTop="@dimen/dp_3"
+            android:textSize="@dimen/sp_6"
+            android:text="重要紧急"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <!--<TextView-->
+        <!--android:layout_marginTop="@dimen/dp_15"-->
+        <!--android:textSize="@dimen/sp_12"-->
+        <!--android:id="@+id/tv_time"-->
+        <!--android:textColor="#A7A7A7"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:text="&#45;&#45;&#45;&#45;&#45;&#45;"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_height="wrap_content" />-->
     <LinearLayout
         android:id="@+id/liner_mt1"
         android:layout_marginTop="@dimen/dp_5"
@@ -77,13 +141,14 @@
         android:layout_alignParentRight="true"
         android:layout_height="wrap_content">
         <TextView
+            android:layout_gravity="center"
             android:layout_marginRight="@dimen/dp_20"
             android:id="@+id/bt_1"
-            android:textSize="@dimen/sp_12"
+            android:textSize="@dimen/sp_9"
             android:textColor="#ffffff"
             android:paddingTop="@dimen/dp_3"
             android:paddingBottom="@dimen/dp_3"
-            android:paddingLeft="@dimen/dp_10"
+            android:paddingLeft="@dimen/dp_13"
             android:paddingRight="@dimen/dp_10"
             android:gravity="center"
             android:layout_width="@dimen/dp_45"
@@ -91,10 +156,10 @@
         <TextView
             android:id="@+id/bt_2"
             android:textColor="#ffffff"
-            android:textSize="@dimen/sp_12"
+            android:textSize="@dimen/sp_9"
             android:paddingTop="@dimen/dp_3"
             android:paddingBottom="@dimen/dp_3"
-            android:paddingLeft="@dimen/dp_10"
+            android:paddingLeft="@dimen/dp_13"
             android:paddingRight="@dimen/dp_10"
             android:layout_width="@dimen/dp_45"
             android:layout_height="wrap_content"/>

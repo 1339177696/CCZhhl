@@ -1,101 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<FrameLayout
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
+    android:layout_height="match_parent"
+    android:background="#F4F9FF"
+    android:orientation="vertical">
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
-    <LinearLayout
-        android:orientation="vertical"
-        android:background="@mipmap/agency_bannerbg"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_170">
-        <TextView
-            android:layout_marginTop="@dimen/dp_25"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_45"
-            android:text="待办工作"
-            android:textColor="#ffffff"
-            android:textSize="@dimen/sp_17" />
+        android:layout_height="match_parent">
+
         <LinearLayout
-            android:layout_marginTop="@dimen/dp_20"
-            android:paddingLeft="@dimen/dp_55"
-            android:paddingRight="@dimen/dp_55"
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_10"
+                android:background="#2D4BCA" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_45"
+                android:background="#2D4BCA">
+
+                <ImageView
+                    android:id="@+id/iv_mine"
+                    android:layout_width="@dimen/dp_15"
+                    android:layout_height="@dimen/dp_15"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:background="@mipmap/fragment_work_logo1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="待办"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/sp_11" />
+            </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/tv_agencyCount"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:textSize="31sp"
-                    android:text=""
-                    android:gravity="center"
-                    android:textColor="#ffffff"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:background="@color/white"
-                    android:layout_width="@dimen/dp_0_5"
-                    android:layout_gravity="center_vertical"
-                    android:layout_height="25dp" />
-                <TextView
-                    android:id="@+id/tv_finishCount"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:textSize="31sp"
-                    android:text=""
-                    android:textColor="#ffffff"
-                    android:layout_height="wrap_content" />
+                android:layout_height="@dimen/dp_110"
+                android:layout_marginLeft="@dimen/dp_13"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_13"
+                android:background="@mipmap/daiban_bg_qgl"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/daiban_img1"
+                            android:padding="@dimen/dp_7"
+                            android:background="@drawable/daiban_text_bg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/daiban_qgl_icon" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/daiban_img2"
+                            android:padding="@dimen/dp_7"
+                            android:background="@drawable/daiban_text_bg"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/daiban_qgl_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/my_tablayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_30"
+                    android:layout_gravity="center_horizontal"
+                    app:tabBackground="@color/transparent"
+                    app:tabGravity="fill"
+                    app:tabIndicatorColor="#ffffff"
+                    app:tabIndicatorFullWidth="false"
+                    app:tabMaxWidth="0dp"
+                    app:tabMode="fixed"
+                    app:tabRippleColor="@color/transparent"
+                    app:tabSelectedTextColor="@color/white"
+                    app:tabTextAppearance="@style/TabLayoutTextSize2"
+                    app:tabTextColor="@color/color_xian" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_agencyCount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/sp_11" />
+
+                    <!--<TextView-->
+                        <!--android:layout_width="@dimen/dp_0_5"-->
+                        <!--android:layout_height="25dp"-->
+                        <!--android:layout_gravity="center_vertical"-->
+                        <!--android:background="@color/white" />-->
+
+                    <TextView
+                        android:id="@+id/tv_finishCount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/sp_11" />
+                </LinearLayout>
+
             </LinearLayout>
-            <android.support.design.widget.TabLayout
-                android:layout_marginTop="-15dp"
-                android:layout_gravity="center_horizontal"
-                android:id="@+id/my_tablayout"
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/my_viewpager"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_40"
-                app:tabIndicatorFullWidth="false"
-                app:tabMaxWidth="0dp"
-                app:tabGravity="fill"
-                app:tabBackground="@color/transparent"
-                app:tabRippleColor="@color/transparent"
-                app:tabMode="fixed"
-                app:tabIndicatorColor="#ffffff"
-                app:tabTextAppearance="@style/TabLayoutTextSize2"
-                app:tabSelectedTextColor="@color/white"
-                app:tabTextColor="@color/color_xian" />
+                android:layout_height="match_parent" />
         </LinearLayout>
-    </LinearLayout>
-        <android.support.v4.view.ViewPager
-            android:layout_marginTop="-25dp"
-            android:id="@+id/my_viewpager"
+
+        <TextView
+            android:id="@+id/tv_mengban"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
-    <TextView
-        android:id="@+id/tv_mengban"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:background="#99ffffff"
-        android:layout_height="match_parent" />
-    <fragment
-        android:layout_marginRight="@dimen/dp_20"
-        android:layout_gravity="right|bottom"
-        android:id="@+id/fg_order"
-        android:layout_marginBottom="@dimen/dp_20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:name="com.hulian.oa.work.file.admin.activity.instruct.fragment.Fra_post_order"
-        />
-</FrameLayout>
+            android:layout_height="match_parent"
+            android:background="#99ffffff"
+            android:visibility="gone" />
+
+        <fragment
+            android:id="@+id/fg_order"
+            android:name="com.hulian.oa.work.file.admin.activity.instruct.fragment.Fra_post_order_qgl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginRight="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_20"
+            tools:layout="@layout/fra_order_post_qgl" />
+    </FrameLayout>
 </LinearLayout>

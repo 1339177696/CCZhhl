@@ -4,13 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.hulian.oa.MainActivity;
 import com.hulian.oa.R;
+import com.hulian.oa.me.CollectionActivity2;
 import com.hulian.oa.me.MeActivity;
 import com.hulian.oa.work.file.admin.activity.task.l_fragment.CompletedTaskFragment;
 import com.hulian.oa.work.fragment.WorkFragemt_9;
@@ -41,6 +45,7 @@ public class WorkFragment extends Fragment {
     private ArrayList<String> list_title;
     WorkFragemt_9 workFragemt_9;
     WorkFragemt_list workFragemt_list;
+
     public WorkFragment() {
         // Required empty public constructor
     }
@@ -72,8 +77,7 @@ public class WorkFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fra_work, container, false);
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
@@ -112,7 +116,9 @@ public class WorkFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_mine:
-                startActivity(new Intent(getActivity(), MeActivity.class));
+//                startActivity(new Intent(getActivity(), MeActivity.class));
+                EventBus.getDefault().post(new MainActivity());
+
                 break;
             default:
                 break;

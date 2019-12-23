@@ -1,7 +1,9 @@
 package com.hulian.oa.work.file.admin.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -60,6 +62,7 @@ public class PostOrderActivity extends BaseActivity {
     String filePath;
     private AbortableFuture<LoginInfo> loginRequest;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

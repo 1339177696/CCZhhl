@@ -8,14 +8,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:orientation="vertical">
 
+        <View
+            android:background="#2D4BCA"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_10"/>
         <RelativeLayout
+
             android:id="@+id/rl_title"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_45"
-            android:background="#ffffff"
+            android:background="#2D4BCA"
             android:gravity="center_vertical">
             <FrameLayout
                 android:id="@+id/iv_back_x"
@@ -23,21 +27,22 @@
                 android:layout_height="@dimen/dp_45">
             <ImageView
                 android:layout_gravity="center_vertical|left"
-                android:layout_marginLeft="@dimen/dp_15"
-                android:layout_width="@dimen/dp_15"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_width="@dimen/dp_12"
                 android:layout_centerVertical="true"
-                android:background="@mipmap/ic_left"
-                android:layout_height="@dimen/dp_15" />
+                android:background="@mipmap/ic_left_white"
+                android:layout_height="@dimen/dp_12" />
             </FrameLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="收件箱"
-                android:textColor="#313131"
-                android:textSize="@dimen/sp_17" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_11" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/tv_write_mail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -132,8 +137,8 @@
                         android:background="@drawable/liner_yuan_qgl8"
                         android:orientation="vertical"
                         android:id="@+id/tv_apply"
-                        android:layout_width="@dimen/dp_50"
-                        android:layout_height="@dimen/dp_50">
+                        android:layout_width="@dimen/dp_40"
+                        android:layout_height="@dimen/dp_40">
 
                         <ImageView
                             android:src="@mipmap/shenqing_qgl"
@@ -144,7 +149,7 @@
                             android:layout_marginTop="@dimen/dp_2"
                             android:text="写邮件"
                             android:textColor="#ffffffff"
-                            android:textSize="8sp"
+                            android:textSize="@dimen/sp_8"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 

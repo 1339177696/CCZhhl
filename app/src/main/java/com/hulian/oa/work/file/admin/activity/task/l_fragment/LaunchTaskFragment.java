@@ -23,6 +23,7 @@ import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.ToastHelper;
+import com.hulian.oa.work.file.admin.activity.meeting.l_fragment.MeetLaunchFragment;
 import com.hulian.oa.work.file.admin.activity.task.l_adapter.L_LaunchTaskAdapter;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
@@ -107,6 +108,10 @@ public class LaunchTaskFragment extends Fragment implements PullLoadMoreRecycler
     private void setRefresh() {
         mRecyclerViewAdapter.clearData();
         mCount = 1;
+    }
+
+    public void onEventMainThread(LaunchTaskFragment event) {
+        onRefresh();
     }
 
     private void getData() {

@@ -151,9 +151,9 @@
             android:src="@mipmap/qq_icon_qgl"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/dp_20"
-            android:layout_width="@dimen/dp_25"
+            android:layout_width="@dimen/dp_15"
             android:layout_centerVertical="true"
-            android:layout_height="@dimen/dp_25"
+            android:layout_height="@dimen/dp_15"
             />
         <EditText
             android:layout_marginLeft="@dimen/dp_16"

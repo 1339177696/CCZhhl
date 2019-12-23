@@ -1,7 +1,9 @@
 package com.hulian.oa.news.activity;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -91,6 +93,7 @@ public class NewsActivityInfo extends BaseActivity {
     private String getJournalismId = "";
     private String getJournalismTitle = "";
     private URLImageParser imageGetter;
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

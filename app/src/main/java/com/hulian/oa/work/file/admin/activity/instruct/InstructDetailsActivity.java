@@ -1,7 +1,9 @@
 package com.hulian.oa.work.file.admin.activity.instruct;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -41,6 +43,7 @@ public class InstructDetailsActivity extends BaseActivity {
     @BindView(R.id.ll_bottom)
     LinearLayout llBottom;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +85,7 @@ public class InstructDetailsActivity extends BaseActivity {
 //                    tv_time2.setText(result.getString("feedbackTime"));
 //                    tv_name.setText(result.getString("receiver"));
 //                    tv_name2.setText(result.getString("receiver"));
-                    create_time.setText(TimeUtils.getDateToString(result.getString("createTime")));
+                    create_time.setText(result.getString("createTime").substring(0,result.getString("createTime").length()-3));
                     createCoontent.setText(getIntent().getStringExtra("content"));
                     tv_name2.setText(result.getString("receiver"));
                     if(result.getString("feedback")!=null&&!result.getString("feedback").equals("null"))

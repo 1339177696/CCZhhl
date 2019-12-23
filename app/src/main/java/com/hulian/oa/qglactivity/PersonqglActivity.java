@@ -1,7 +1,9 @@
 package com.hulian.oa.qglactivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -48,6 +50,7 @@ public class PersonqglActivity extends BaseActivity {
     private QglPersonadapter adapter;
     List <PersonBean> list = new ArrayList<>();
     PersonBean personBean;
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

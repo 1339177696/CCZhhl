@@ -2,8 +2,11 @@ package com.hulian.oa.work.file.admin.activity.meeting;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -67,11 +70,14 @@ public class MeetingSigninActivity extends BaseActivity {
     TextView et_content;
     private int REQUEST_CODE_SCAN = 991;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.work_meeting_signin);
         ButterKnife.bind(this);
+        tv_part_person.setMovementMethod(ScrollingMovementMethod.getInstance());
+
         getData();
 
     }
@@ -130,16 +136,19 @@ public class MeetingSigninActivity extends BaseActivity {
                             }.getType());
                     if ("0".equals(meeting.getSignType())) {
                         tvBackInstruct.setVisibility(View.VISIBLE);
+                        tvBackInstruct.setVisibility(View.VISIBLE);
                         etSignType.setText("签到");
                     } else {
+
                         etSignType.setText("非签到");
                         tvBackInstruct.setText("已签到");
                         tvBackInstruct.setBackgroundResource(R.drawable.edit_background_order1);
+                        tvBackInstruct.setVisibility(View.GONE);
                     }
 
                     et_title.setText(meeting.getMeetingTheme());
-                    tv_part_time.setText(TimeUtils.getDateToString(meeting.getMeetingTimeBegin()));
-                    tvPartTime2.setText(TimeUtils.getDateToString(meeting.getMeetingTimeEnd()));
+                    tv_part_time.setText(meeting.getMeetingTimeBegin().substring(0,meeting.getMeetingTimeBegin().length()-3));
+                    tvPartTime2.setText(meeting.getMeetingTimeEnd().substring(0,meeting.getMeetingTimeEnd().length()-3));
                     tvPartLianx.setText(result.getJSONObject("data").getString("meetingContacts"));
                     tvPartLianxPhone.setText(result.getJSONObject("data").getString("meetingContactsPhone"));
                     et_content.setText(result.getJSONObject("data").getString("meetingContent"));
@@ -156,6 +165,8 @@ public class MeetingSigninActivity extends BaseActivity {
 //                                tvBackInstruct.setVisibility(View.GONE);
                                 tvBackInstruct.setText("已签到");
                                 tvBackInstruct.setBackgroundResource(R.drawable.edit_background_order1);
+                                tvBackInstruct.setVisibility(View.VISIBLE);
+
                             }
                         }
                     }

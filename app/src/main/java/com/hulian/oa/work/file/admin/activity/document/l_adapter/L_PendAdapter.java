@@ -79,7 +79,7 @@ public class L_PendAdapter extends RecyclerView.Adapter<L_PendAdapter.ViewHolder
     public void onBindViewHolder(L_PendAdapter.ViewHolder holder, final int position) {
         holder.Leader_tv_wenhao.setText(dataList.get(position).getSymbol());
         holder.Leader_tv_title.setText(dataList.get(position).getTitle());
-        holder.Leader_tv_time.setText(dataList.get(position).getCreateTime());
+        holder.Leader_tv_time.setText(dataList.get(position).getCreateTime().substring(0,dataList.get(position).getCreateTime().length()-3));
 
         if ("1".equals(dataList.get(position).getInitiationType())){
             holder.ld_stuas.setText("会签");

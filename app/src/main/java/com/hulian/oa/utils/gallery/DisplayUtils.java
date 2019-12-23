@@ -26,7 +26,7 @@ public final class DisplayUtils {
 //        return (int) (getItemWidth(context) * 0.56);
 //    }
     public static int getItemHeight(Context context) {
-        return dip2px(context,350);
+        return dip2px(context,800);
     }
 
     /**

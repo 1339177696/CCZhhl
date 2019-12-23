@@ -83,6 +83,11 @@ public class LeaveExamineActivity extends BaseActivity {
     //同意
     @BindView(R.id.tv_agree)
     RadioButton tv_agree;
+
+//    审批意见
+    @BindView(R.id.tv_bohui)
+    TextView tv_bohui;
+    private String bohui = "";
     //转交
 //    @BindView(R.id.tv_transfer)
 //    TextView tv_transfer;
@@ -101,7 +106,9 @@ public class LeaveExamineActivity extends BaseActivity {
         EventBus.getDefault().register(this);
         ButterKnife.bind(this);
         myDialog = new AlertDialog(this).builder();
+        bohui = tv_bohui.getText().toString().trim();
         getData();
+
 
     }
     private void getData() {
@@ -144,10 +151,10 @@ public class LeaveExamineActivity extends BaseActivity {
                 startActivity(itent);
                 break;
             case R.id.tv_disagree://驳回
-                postData("2","驳回");
+                postData("2",bohui);
                 break;
             case R.id.tv_agree://同意
-                postData("1","");
+                postData("1",bohui);
                 break;
             case R.id.iv_back://返回
                 finish();

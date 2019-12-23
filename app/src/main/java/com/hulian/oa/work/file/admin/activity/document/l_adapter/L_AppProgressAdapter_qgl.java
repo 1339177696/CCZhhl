@@ -66,12 +66,18 @@ public class L_AppProgressAdapter_qgl extends BaseAdapter {
             viewHolder.v_xian.setVisibility(View.GONE);
         }
         else if (initiationType1.equals("0")){
-            viewHolder.v_rela.setVisibility(View.VISIBLE);
-            viewHolder.v_xian.setVisibility(View.VISIBLE);
+//            viewHolder.v_rela.setVisibility(View.VISIBLE);
+//            viewHolder.v_xian.setVisibility(View.VISIBLE);
+            viewHolder.v_rela.setVisibility(View.GONE);
+            viewHolder.v_xian.setVisibility(View.GONE);
         }
         viewHolder.tv_qgl_item_name.setText(dataList.get(position).getApproverName());
         viewHolder.gw_img1.setText(dataList.get(position).getApproverName().substring(0,1));
-        viewHolder.tv_qgl_item_time.setText(dataList.get(position).getApproverTime());
+        if (dataList.get(position).getApproverTime() == null){
+            viewHolder.tv_qgl_item_time.setText("");
+        }else {
+            viewHolder.tv_qgl_item_time.setText(dataList.get(position).getApproverTime().substring(0,dataList.get(position).getApproverTime().length()-3));
+        }
         viewHolder.tv_qgl_item_yijian.setText(dataList.get(position).getApproverOpinion());
         if ("0".equals(dataList.get(position).getState())){
             viewHolder.tv_qgl_item_stata.setText("待审批");

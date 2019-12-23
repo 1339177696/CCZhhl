@@ -1,6 +1,8 @@
 package com.hulian.oa.work.file.admin.activity.leave;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ImageView;
@@ -41,6 +43,7 @@ public class LeaveHistoryActivity extends BaseActivity implements PullLoadMoreRe
     private RecyclerView mRecyclerView;
     L_LeaveHistoryAdapter mRecyclerViewAdapter;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

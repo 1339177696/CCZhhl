@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/iv_remind"
-        android:layout_width="@dimen/dp_9"
-        android:layout_height="@dimen/dp_9"
+        android:layout_width="@dimen/dp_6"
+        android:layout_height="@dimen/dp_6"
         android:layout_marginLeft="@dimen/dp_16"
         android:layout_marginTop="@dimen/dp_22"
         android:background="@drawable/liner_yuan_qgl1" />
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/tv_title"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp_11"
                 android:text="公文流转标题"
                 android:textColor="@color/black"
                 android:layout_alignParentLeft="true"
@@ -48,7 +48,7 @@
         <TextView
             android:id="@+id/qgl_zy_ysp_jieshi"
             android:text="接口没返回关于审批驳回问题详细解释"
-            android:textSize="@dimen/sp_13"
+            android:textSize="@dimen/sp_10"
             android:layout_marginTop="@dimen/dp_10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

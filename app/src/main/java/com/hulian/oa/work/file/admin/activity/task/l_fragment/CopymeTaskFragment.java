@@ -115,6 +115,11 @@ public class CopymeTaskFragment extends Fragment implements PullLoadMoreRecycler
         mRecyclerViewAdapter.clearData();
         mCount = 1;
     }
+
+    public void onEventMainThread(CopymeTaskFragment ev) {
+        onRefresh();
+    }
+
 //    private void getData() {
 //        new Handler().postDelayed(new Runnable() {
 //            @Override

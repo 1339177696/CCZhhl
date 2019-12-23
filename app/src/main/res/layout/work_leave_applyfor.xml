@@ -8,25 +8,24 @@
     android:focusableInTouchMode="true">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="#FFFFFF"
+        android:background="#2D4BCA"
         android:id="@+id/iv_back"
         android:gravity="center_vertical"
-        android:layout_height="@dimen/dp_53">
+        android:layout_height="@dimen/dp_45">
         <ImageView
             android:layout_marginLeft="@dimen/dp_15"
-            android:layout_width="@dimen/dp_15"
-
+            android:layout_width="@dimen/dp_12"
             android:layout_centerVertical="true"
-            android:background="@mipmap/ic_left"
-            android:layout_height="@dimen/dp_15" />
+            android:background="@mipmap/ic_left_white"
+            android:layout_height="@dimen/dp_12" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="请假申请"
-            android:textColor="#ff313131"
-            android:textSize="@dimen/sp_17" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_11" />
 
     </RelativeLayout>
     <ScrollView
@@ -61,7 +60,7 @@
                         android:layout_toRightOf="@+id/wl_img_my1"
                         android:textColor="#313131"
                         android:text="请假类别"
-                        android:textSize="@dimen/dp_14"
+                        android:textSize="@dimen/sp_11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_9"
@@ -87,7 +86,7 @@
                         android:gravity="right"
                         android:layout_centerVertical="true"
                         android:textColor="#313131"
-                        android:textSize="@dimen/dp_14"
+                        android:textSize="@dimen/sp_11"
                         />
                 </RelativeLayout>
                 <View
@@ -112,7 +111,7 @@
 
                     <TextView
                         android:text="开始时间"
-                        android:textSize="@dimen/dp_14"
+                        android:textSize="@dimen/sp_11"
                         android:textColor="#313131"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -140,7 +139,7 @@
                         android:gravity="right"
                         android:layout_centerVertical="true"
                         android:textColor="#313131"
-                        android:textSize="@dimen/dp_14"
+                        android:textSize="@dimen/sp_11"
                         />
                 </RelativeLayout>
                 <View
@@ -164,7 +163,7 @@
                     <TextView
                         android:layout_toRightOf="@+id/wl_img_my3"
                         android:text="结束时间"
-                        android:textSize="@dimen/dp_14"
+                        android:textSize="@dimen/sp_11"
                         android:textColor="#313131"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -191,7 +190,7 @@
                         android:gravity="right"
                         android:layout_centerVertical="true"
                         android:textColor="#313131"
-                        android:textSize="@dimen/dp_14"
+                        android:textSize="@dimen/sp_11"
                         />
                 </RelativeLayout>
                 <View
@@ -216,7 +215,7 @@
                     <TextView
                         android:layout_toRightOf="@+id/wl_img_my4"
                         android:text="时长 (天)"
-                        android:textSize="@dimen/dp_14"
+                        android:textSize="@dimen/sp_11"
                         android:textColor="#313131"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -224,6 +223,7 @@
                         android:layout_centerVertical="true"
                         />
                     <EditText
+                        android:editable="false"
                         android:hint="自动换算时长"
                         android:id="@+id/tv_day"
                         android:layout_alignParentRight="true"
@@ -235,7 +235,7 @@
                         android:layout_centerVertical="true"
                         android:background="@null"
                         android:textColor="#313131"
-                        android:textSize="@dimen/dp_14"
+                        android:textSize="@dimen/sp_11"
                         android:paddingRight="@dimen/dp_20"
                         />
                 </RelativeLayout>
@@ -270,7 +270,7 @@
                         <TextView
                             android:layout_gravity="center"
                             android:text="请假事由"
-                            android:textSize="@dimen/dp_14"
+                            android:textSize="@dimen/sp_11"
                             android:textColor="#313131"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -293,7 +293,7 @@
                         android:layout_centerVertical="true"
                         android:background="@drawable/edit_background"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/dp_14"
+                        android:textSize="@dimen/sp_11"
                         />
                 </LinearLayout>
                 <!--上传图片-->
@@ -318,7 +318,7 @@
                         android:layout_toRightOf="@+id/wl_img_my6"
                         android:id="@+id/tv_document_image"
                         android:text="上传图片"
-                        android:textSize="@dimen/dp_14"
+                        android:textSize="@dimen/sp_11"
                         android:textColor="#313131"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -358,7 +358,7 @@
                         android:layout_toRightOf="@+id/wl_img_my9"
                         android:layout_centerVertical="true"
                         android:text="交接人"
-                        android:textSize="@dimen/dp_14"
+                        android:textSize="@dimen/sp_11"
                         android:textColor="#313131"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -380,6 +380,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
                         <TextView
+                            android:visibility="gone"
                             android:id="@+id/jiaojie_person"
                             android:text=""
                             android:layout_width="match_parent"
@@ -394,6 +395,7 @@
                             android:gravity="center"
                             android:textSize="@dimen/sp_12" />
                         <LinearLayout
+                            android:visibility="gone"
                             android:id="@+id/ll_del2"
                             android:layout_width="@dimen/dp_30"
                             android:layout_height="@dimen/dp_35"
@@ -436,7 +438,7 @@
                         android:layout_toRightOf="@+id/wl_img_my7"
                         android:id="@+id/tv_approved_person"
                         android:text="审批人"
-                        android:textSize="@dimen/dp_14"
+                        android:textSize="@dimen/sp_11"
                         android:textColor="#313131"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -470,7 +472,7 @@
                         <!--android:layout_height="wrap_content"-->
                         <!--android:layout_centerVertical="true"-->
                         <!--android:textColor="#313131"-->
-                        <!--android:textSize="@dimen/dp_14"-->
+                        <!--android:textSize="@dimen/sp_11"-->
                         <!--/>-->
                     <FrameLayout
                         android:visibility="visible"
@@ -514,7 +516,7 @@
                         <!--android:layout_width="wrap_content"-->
                         <!--android:layout_height="wrap_content"-->
                         <!--android:textColor="@color/black"-->
-                        <!--android:textSize="@dimen/dp_14" />-->
+                        <!--android:textSize="@dimen/sp_11" />-->
                 </RelativeLayout>
                 <View
                     android:layout_width="match_parent"
@@ -540,7 +542,7 @@
                         android:layout_centerVertical="true"
                         android:id="@+id/tv_copy_person_title"
                         android:text="抄送人"
-                        android:textSize="@dimen/dp_14"
+                        android:textSize="@dimen/sp_11"
                         android:textColor="#313131"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -573,7 +575,7 @@
                         <!--android:layout_height="wrap_content"-->
                         <!--android:layout_centerVertical="true"-->
                         <!--android:textColor="#313131"-->
-                        <!--android:textSize="@dimen/dp_14"-->
+                        <!--android:textSize="@dimen/sp_11"-->
                         <!--/>-->
 
                     <FrameLayout
@@ -619,7 +621,7 @@
                         <!--android:layout_width="wrap_content"-->
                         <!--android:layout_height="wrap_content"-->
                         <!--android:textColor="@color/black"-->
-                        <!--android:textSize="@dimen/dp_14" />-->
+                        <!--android:textSize="@dimen/sp_11" />-->
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -629,7 +631,7 @@
                     android:layout_marginTop="@dimen/dp_20">
                     <Button
                         android:id="@+id/tv_back_instruct"
-                        android:textSize="@dimen/sp_14"
+                        android:textSize="@dimen/sp_11"
                         android:text="提交申请"
                         android:layout_width="@dimen/dp_220"
                         android:layout_height="@dimen/dp_36"

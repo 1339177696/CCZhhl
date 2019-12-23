@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Looper;
 import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -102,6 +104,7 @@ public class DocumentLotusActivity extends BaseActivity {
     private static String[] PERMISSIONS_STORAGE = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private static final OkHttpClient client = new OkHttpClient();
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -188,7 +191,6 @@ public class DocumentLotusActivity extends BaseActivity {
         new CustomPagerSnapHelper().attachToRecyclerView(recyclerView);
         //滑动动画
         recyclerView.addOnScrollListener(new GalleryOnScrollListener());
-
     }
 
     @OnClick({R.id.tv_agree, R.id.tv_disagree,R.id.iv_back,R.id.tv_qgl_file})
@@ -259,8 +261,8 @@ public class DocumentLotusActivity extends BaseActivity {
                 break;
             case R.id.tv_qgl_file:
                 // 這裏加打開文件
-                loadDialog.show();
-                downloadFilea(path_x);
+//                loadDialog.show();
+//                downloadFilea(path_x);
                 break;
             case R.id.iv_back:
                 finish();

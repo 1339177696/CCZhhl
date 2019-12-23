@@ -1,7 +1,9 @@
 package com.hulian.oa.work.file.admin.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -60,6 +62,7 @@ public class SecondMailActivity extends BaseActivity implements PullLoadMoreRecy
      * 邮件收发
      */
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -165,6 +168,7 @@ public class SecondMailActivity extends BaseActivity implements PullLoadMoreRecy
         RequestParams params = new RequestParams();
         params.put("username", SPUtils.get(SecondMailActivity.this, "email", "").toString());
         params.put("password", "123456");
+        params.put("userId", SPUtils.get(SecondMailActivity.this, "userId", "").toString());
         HttpRequest.post_FindInboxInfo(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {

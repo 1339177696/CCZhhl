@@ -15,6 +15,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -22,6 +23,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.util.Log;
@@ -217,12 +219,13 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
     private static final OkHttpClient client = new OkHttpClient();
 
 
-    private Button lift;
-    private Button riht;
+    private ImageView lift;
+    private ImageView riht;
     private int page = 0;
     private static Bitmap bitmap;
 
     private List<Padbean>padbeans = new ArrayList<>();
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -292,8 +295,8 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
         btn_set_color_container = (FrameLayout) findViewById(R.id.btn_set_color_container);
         mBtnColor = (ImageView) findViewById(R.id.btn_set_color);
         mEditSizeSeekBar = (SeekBar) findViewById(R.id.doodle_seekbar_size);
-//        mEditSizeSeekBar.setProgress(1);
-//        mEditSizeSeekBar.setMax(1);
+//        mEditSizeSeekBar.setProgress(4);
+//        mEditSizeSeekBar.setMax(4);
         mPaintSizeView = (TextView) findViewById(R.id.paint_size_text);
         mPaintSizeView.setText(mEditSizeSeekBar.getProgress() + 1 + "");
         mSelectedTextEditContainer = (LinearLayout) findViewById(R.id.doodle_selectable_edit_container);
@@ -505,7 +508,7 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
                     size = mDoodleParams.mPaintPixelSize > 0 ? mDoodleParams.mPaintPixelSize : mDoodle.getSize();
                 }
                 // 设置初始值
-                mDoodle.setSize(0);  /*画笔的初试值*/
+                mDoodle.setSize(1);  /*画笔的初试值*/
                 // 选择画笔
                 mDoodle.setPen(DoodlePen.BRUSH);  //画笔
                 mDoodle.setShape(DoodleShape.HAND_WRITE); //手绘
