@@ -18,13 +18,13 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_170"
+                android:layout_height="@dimen/dp_120"
                 android:background="@mipmap/qglfra_news_bg_icon"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_45"
+                    android:layout_height="@dimen/dp_40"
                     android:layout_marginTop="@dimen/dp_10"
                     android:gravity="center"
                     android:text="资讯"
@@ -57,7 +57,7 @@
                             android:layout_height="wrap_content"
                             android:text="新闻动态"
                             android:textColor="#FFFFFF"
-                            android:textSize="@dimen/sp_10"
+                            android:textSize="@dimen/sp_9"
                             />
 
                     </LinearLayout>
@@ -83,7 +83,7 @@
                             android:layout_height="wrap_content"
                             android:text="通知通告"
                             android:textColor="#ccccd5"
-                            android:textSize="@dimen/sp_10"
+                            android:textSize="@dimen/sp_9"
                             />
 
                     </LinearLayout>
@@ -96,7 +96,7 @@
                 android:id="@+id/qgl_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/dp_100"/>
+                android:layout_marginTop="@dimen/dp_85"/>
 
 
         </RelativeLayout>

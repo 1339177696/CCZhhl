@@ -4,12 +4,16 @@
 android:orientation="vertical" android:layout_width="match_parent"
     android:background="@color/bg_all"
 android:layout_height="match_parent">
+    <View
+        android:background="#2D4BCA"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_10"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:background="#2D4BCA"
         android:id="@+id/ama_iv_back"
         android:gravity="center_vertical"
-        android:layout_height="@dimen/dp_45">
+        android:layout_height="@dimen/dp_40">
         <ImageView
             android:layout_marginLeft="@dimen/dp_15"
             android:layout_width="@dimen/dp_12"
@@ -60,13 +64,13 @@ android:layout_height="match_parent">
         <RelativeLayout
             android:id="@+id/my_r1_x"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_45">
+            android:layout_height="@dimen/dp_25">
             <TextView
                 android:drawableLeft="@mipmap/qj_leibie_icon_qgl"
                 android:text="全天"
                 android:drawablePadding="@dimen/dp_5"
                 android:gravity="center"
-                android:textSize="@dimen/dp_13"
+                android:textSize="@dimen/sp_9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -91,13 +95,13 @@ android:layout_height="match_parent">
             android:layout_height="@dimen/dp_0_5"/>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_45"
+        android:layout_height="@dimen/dp_25"
         >
         <TextView
             android:id="@+id/tv_select_time_title"
             android:text="开始时间"
             android:drawablePadding="@dimen/dp_5"
-            android:textSize="@dimen/dp_13"
+            android:textSize="@dimen/sp_9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -108,7 +112,7 @@ android:layout_height="match_parent">
         <TextView
             android:layout_toRightOf="@id/tv_select_time_title"
             android:id="@+id/tv_select_time"
-            android:textSize="@dimen/dp_14"
+            android:textSize="@dimen/sp_9"
             android:gravity="right|center_vertical"
             android:hint="请选择开始时间"
             android:drawableRight="@mipmap/ic_right"
@@ -124,13 +128,13 @@ android:layout_height="match_parent">
             android:layout_height="@dimen/dp_0_5"/>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_45"
+            android:layout_height="@dimen/dp_25"
             >
             <TextView
                 android:id="@+id/tv_select_time_title2"
                 android:text="结束时间"
                 android:drawablePadding="@dimen/dp_5"
-                android:textSize="@dimen/dp_13"
+                android:textSize="@dimen/sp_9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -141,7 +145,7 @@ android:layout_height="match_parent">
             <TextView
                 android:layout_toRightOf="@id/tv_select_time_title2"
                 android:id="@+id/tv_select_time2"
-                android:textSize="@dimen/dp_14"
+                android:textSize="@dimen/sp_9"
                 android:gravity="right|center_vertical"
                 android:hint="请选择结束时间"
                 android:drawableRight="@mipmap/ic_right"
@@ -167,7 +171,7 @@ android:layout_height="match_parent">
                 android:text="内容"
                 android:drawablePadding="@dimen/dp_5"
                 android:gravity="center"
-                android:textSize="@dimen/dp_13"
+                android:textSize="@dimen/sp_9"
                 android:textColor="#313131"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -179,7 +183,7 @@ android:layout_height="match_parent">
                 android:gravity="start|top"
                 android:textColor="@color/black"
                 android:maxLength="100"
-                android:textSize="@dimen/dp_13"
+                android:textSize="@dimen/sp_9"
                 android:layout_marginTop="@dimen/dp_15"
                 android:padding="@dimen/dp_10"
                 android:background="@drawable/edit_background"
@@ -202,7 +206,7 @@ android:layout_height="match_parent">
     <RelativeLayout
         android:id="@+id/rl_remind"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_45"
+        android:layout_height="@dimen/dp_25"
         android:background="@color/white"
         android:paddingLeft="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_10"
@@ -211,7 +215,7 @@ android:layout_height="match_parent">
             android:id="@+id/tv_select_time_title3"
             android:text="提醒"
             android:drawablePadding="@dimen/dp_5"
-            android:textSize="@dimen/dp_13"
+            android:textSize="@dimen/sp_9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -222,7 +226,7 @@ android:layout_height="match_parent">
         <TextView
             android:id="@+id/tv_remind"
             android:layout_toRightOf="@id/tv_select_time_title3"
-            android:textSize="@dimen/dp_14"
+            android:textSize="@dimen/sp_9"
             android:text="不提醒"
             android:gravity="right|center_vertical"
             android:drawableRight="@mipmap/ic_right"
@@ -237,10 +241,10 @@ android:layout_height="match_parent">
     <Button
         android:layout_marginTop="@dimen/dp_50"
         android:id="@+id/btn_select_complete"
-        android:textSize="@dimen/sp_14"
+        android:textSize="@dimen/sp_9"
         android:text="创建日程"
-        android:layout_width="@dimen/dp_220"
-        android:layout_height="@dimen/dp_36"
+        android:layout_width="@dimen/dp_160"
+        android:layout_height="@dimen/dp_30"
         android:gravity="center"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/l_leave_submit_bg"

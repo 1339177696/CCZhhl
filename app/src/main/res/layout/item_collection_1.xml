@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/dp_13"
     android:orientation="vertical"
     android:background="#ffffff"
-    android:layout_height="@dimen/dp_110">
+    android:layout_height="@dimen/dp_70">
 
         <RelativeLayout
             android:paddingLeft="@dimen/dp_16"
@@ -26,12 +26,12 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:id="@+id/iv_head"
-                android:layout_width="@dimen/dp_85"
-                android:layout_height="@dimen/dp_65" />
+                android:layout_width="@dimen/dp_65"
+                android:layout_height="@dimen/dp_45" />
             <TextView
                 android:layout_toLeftOf="@+id/tv_tag"
                 android:id="@+id/tv_name"
-                android:layout_marginTop="@dimen/dp_18"
+                android:layout_marginTop="@dimen/dp_12"
                 android:layout_toRightOf="@+id/iv_head"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
                 android:maxLines="1"
                 android:textColor="#313131"
                 android:ellipsize="end"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp_9"
                 android:text="省厅大的说法都是理发卡进来看大家发进来看"
                 />
 
@@ -57,7 +57,7 @@
                 android:maxLines="1"
                 android:text="省厅大的说法都是"
                 android:textColor="#676767"
-                android:textSize="@dimen/sp_12" />
+                android:textSize="@dimen/sp_8" />
             <TextView
                 android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
@@ -69,9 +69,9 @@
                 android:maxLines="1"
                 android:text="省厅大的说法都是"
                 android:textColor="#858585"
-                android:textSize="@dimen/sp_11" />
+                android:textSize="@dimen/sp_7" />
             <RelativeLayout
-                android:layout_marginTop="@dimen/dp_10"
+
                 android:id="@+id/l_item_collection_news_delet"
                 android:layout_below="@id/tv_content"
                 android:layout_width="wrap_content"
@@ -81,19 +81,19 @@
             <ImageView
                 android:textColor="#F85555"
                 android:textSize="@dimen/dp_10"
-                android:layout_width="@dimen/dp_15"
+                android:layout_width="@dimen/dp_10"
                 android:background="@mipmap/icon_delete_pressed"
-                android:layout_height="@dimen/dp_18" />
+                android:layout_height="@dimen/dp_13" />
             </RelativeLayout>
             <TextView
                 android:id="@+id/tv_tag"
-                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_12"
                 android:layout_alignParentRight="true"
                 android:text="新闻"
                 android:background="@drawable/bt_8background"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:textColor="@color/white"
-                android:textSize="@dimen/dp_10"
+                android:textSize="@dimen/sp_7"
                 android:paddingLeft="@dimen/dp_5"
                 android:paddingRight="@dimen/dp_5"
                 android:layout_width="wrap_content"

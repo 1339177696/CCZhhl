@@ -5,15 +5,15 @@
     android:layout_marginLeft="@dimen/dp_10"
     android:layout_marginRight="@dimen/dp_10"
     android:layout_marginTop="@dimen/dp_10"
-    android:layout_height="@dimen/dp_135"
+    android:layout_height="@dimen/dp_70"
     android:background="@drawable/liner_border_gb_qgl">
 
     <ImageView
         android:id="@+id/iv_remind"
-        android:layout_width="@dimen/dp_6"
-        android:layout_height="@dimen/dp_6"
+        android:layout_width="@dimen/dp_7"
+        android:layout_height="@dimen/dp_7"
         android:layout_marginLeft="@dimen/dp_16"
-        android:layout_marginTop="@dimen/dp_22"
+        android:layout_marginTop="@dimen/dp_8"
         android:background="@drawable/liner_yuan_qgl1" />
 
     <LinearLayout
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/dp_18"
-        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_8"
         android:layout_toRightOf="@+id/iv_remind"
         android:orientation="vertical">
 
@@ -37,7 +37,7 @@
                 android:layout_alignParentLeft="true"
                 android:text="公文流转标题"
                 android:textColor="#ff313131"
-                android:textSize="@dimen/sp_11" />
+                android:textSize="@dimen/sp_9" />
 
             <TextView
                 android:id="@+id/tv_time"
@@ -48,7 +48,7 @@
                 android:layout_marginRight="@dimen/dp_20"
                 android:text="2019-17-01"
                 android:textColor="#ff676767"
-                android:textSize="@dimen/sp_10" />
+                android:textSize="@dimen/sp_8" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -61,28 +61,26 @@
                 android:id="@+id/tv_duration_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_5"
                 android:text="时长"
                 android:textColor="#ff676767"
-                android:textSize="@dimen/sp_11" />
+                android:textSize="@dimen/sp_9" />
 
             <TextView
                 android:id="@+id/tv_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_8"
-                android:layout_marginTop="@dimen/dp_5"
                 android:layout_toRightOf="@id/tv_duration_title"
                 android:text="2天"
                 android:textColor="#2B8CFA"
-                android:textSize="@dimen/sp_11" />
+                android:textSize="@dimen/sp_9" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_10"
-            android:layout_marginTop="@dimen/dp_10">
+            android:layout_marginTop="@dimen/dp_5">
 
             <TextView
                 android:id="@+id/tv_leave_reason_title"
@@ -90,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:text="事由"
                 android:textColor="#ff676767"
-                android:textSize="@dimen/sp_11" />
+                android:textSize="@dimen/sp_9" />
 
             <TextView
                 android:id="@+id/tv_leave_reason"
@@ -100,59 +98,91 @@
                 android:layout_toRightOf="@id/tv_leave_reason_title"
                 android:text="事假"
                 android:textColor="#2B8CFA"
-                android:textSize="@dimen/sp_11" />
-        </RelativeLayout>
+                android:textSize="@dimen/sp_9" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_22"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginBottom="16dp">
-
-
-            <RelativeLayout
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_marginLeft="@dimen/dp_40"
+                android:layout_toRightOf="@+id/tv_leave_reason"
+                android:layout_alignParentRight="true"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginRight="@dimen/dp_70"
+                android:layout_height="@dimen/dp_20"
                 android:background="@drawable/liner_border_gb_qgl1">
 
                 <ImageView
+
+                    android:layout_gravity="center"
                     android:id="@+id/lv_img_my"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/dp_5"
                     android:src="@mipmap/time_qgl" />
 
                 <TextView
+                    android:layout_gravity="center"
                     android:id="@+id/tv_qingjiariqi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/dp_4"
-                    android:layout_toRightOf="@+id/lv_img_my"
                     android:text="请假时间  2019/8/8 - 2019/8/9"
                     android:textColor="#ff676767"
                     android:textSize="@dimen/sp_9" />
 
-            </RelativeLayout>
-
-            <!--<TextView-->
-
-                <!--android:id="@+id/tv_pend"-->
-                <!--android:layout_width="@dimen/dp_50"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_alignParentRight="true"-->
-                <!--android:layout_marginRight="@dimen/dp_10"-->
-                <!--android:background="@drawable/test_yuan_qgl"-->
-                <!--android:gravity="center"-->
-                <!--android:text="待审批"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:textSize="@dimen/dp_11" />-->
-
+            </LinearLayout>
 
         </RelativeLayout>
+
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/dp_22"-->
+            <!--android:layout_marginLeft="@dimen/dp_10"-->
+            <!--android:layout_marginTop="@dimen/dp_5"-->
+            <!--android:layout_marginBottom="16dp">-->
+
+
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginRight="@dimen/dp_70"-->
+                <!--android:background="@drawable/liner_border_gb_qgl1">-->
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/lv_img_my"-->
+                    <!--android:layout_width="20dp"-->
+                    <!--android:layout_height="20dp"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginLeft="@dimen/dp_5"-->
+                    <!--android:src="@mipmap/time_qgl" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_qingjiariqi"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginLeft="@dimen/dp_4"-->
+                    <!--android:layout_toRightOf="@+id/lv_img_my"-->
+                    <!--android:text="请假时间  2019/8/8 - 2019/8/9"-->
+                    <!--android:textColor="#ff676767"-->
+                    <!--android:textSize="@dimen/sp_9" />-->
+
+            <!--</RelativeLayout>-->
+
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+
+                <!--&lt;!&ndash;android:id="@+id/tv_pend"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="@dimen/dp_50"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_alignParentRight="true"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginRight="@dimen/dp_10"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:background="@drawable/test_yuan_qgl"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:gravity="center"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:text="待审批"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textColor="@color/white"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textSize="@dimen/dp_11" />&ndash;&gt;-->
+
+
+        <!--</RelativeLayout>-->
 
     </LinearLayout>
 

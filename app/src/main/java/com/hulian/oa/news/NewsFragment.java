@@ -147,7 +147,6 @@ public class NewsFragment extends Fragment {
                 break;
         }
         fTransaction.commit();
-
     }
 
     //隐藏所有Fragment

@@ -18,13 +18,13 @@
 
             android:id="@+id/rl_title"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_45"
+            android:layout_height="@dimen/dp_40"
             android:background="#2D4BCA"
             android:gravity="center_vertical">
             <FrameLayout
                 android:id="@+id/iv_back_x"
-                android:layout_width="@dimen/dp_45"
-                android:layout_height="@dimen/dp_45">
+                android:layout_width="@dimen/dp_40"
+                android:layout_height="@dimen/dp_40">
             <ImageView
                 android:layout_gravity="center_vertical|left"
                 android:layout_marginLeft="@dimen/dp_10"
@@ -74,7 +74,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_size_35"
-                    android:layout_margin="@dimen/dp_14"
+                    android:layout_margin="@dimen/dp_10"
                     android:background="@drawable/edit_background2">
 
                     <EditText
@@ -97,7 +97,7 @@
 
                     <com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView
                         android:id="@+id/lv_mail"
-                        android:layout_marginTop="-10dp"
+                        android:layout_marginTop="-15dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="@dimen/dp_10" />

@@ -104,7 +104,7 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
         //设置是否可以下拉刷新
         //mPullLoadMoreRecyclerView.setPullRefreshEnable(true);
         //设置是否可以上拉刷新
-        //mPullLoadMoreRecyclerView.setPushRefreshEnable(false);
+        mPullLoadMoreRecyclerView.setPushRefreshEnable(false);
         //显示下拉刷新
         mPullLoadMoreRecyclerView.setRefreshing(true);
         //设置上拉刷新文字
@@ -194,8 +194,8 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
     @Override
     public void onLoadMore() {
         Log.e("wxl", "onLoadMore");
-        mCount = mCount + 1;
-        getData();
+//        mCount = mCount + 1;
+//        getData();
     }
 
     private void setRefresh() {

@@ -6,12 +6,18 @@
     android:background="#fff"
     android:orientation="vertical">
 
+    <View
+        android:id="@+id/title"
+        android:background="#2D4BCA"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_10"/>
     <RelativeLayout
+        android:layout_below="@+id/title"
         android:id="@+id/relayou_my"
         android:layout_width="match_parent"
         android:background="#2D4BCA"
         android:gravity="center_vertical"
-        android:layout_height="@dimen/dp_45">
+        android:layout_height="@dimen/dp_40">
         <ImageView
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_width="@dimen/dp_12"
@@ -557,7 +563,7 @@
             android:paddingBottom="10dp"
             android:text="文件区域可随意签名"
             android:textColor="#182744"
-            android:textSize="@dimen/sp_11" />
+            android:textSize="@dimen/sp_9" />
 
     </LinearLayout>
 

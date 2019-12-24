@@ -36,6 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <LinearLayout
+        android:layout_marginTop="@dimen/dp_10"
         android:background="@color/colorwhite"
         android:layout_marginBottom="@dimen/dp_20"
         android:paddingLeft="@dimen/dp_10"
@@ -44,8 +45,9 @@
         android:orientation="vertical">
 
         <LinearLayout
+
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_52"
+            android:layout_height="@dimen/dp_25"
             android:paddingLeft="@dimen/dp_10"
             android:gravity="center_vertical"
             android:paddingRight="@dimen/dp_10">
@@ -53,13 +55,13 @@
                 android:background="@mipmap/mail_sender_icon"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:layout_width="@dimen/dp_18"
-                android:layout_height="@dimen/dp_18" />
+                android:layout_width="@dimen/dp_14"
+                android:layout_height="@dimen/dp_14" />
             <TextView
                 android:layout_marginLeft="@dimen/dp_10"
                 android:text="发件人"
                 android:textColor="#313131"
-                android:textSize="@dimen/sp_11"
+                android:textSize="@dimen/sp_9"
                 android:layout_centerVertical="true"
                 android:layout_width="@dimen/dp_50"
                 android:layout_height="wrap_content" />
@@ -67,7 +69,7 @@
                 android:id="@+id/tv_user"
                 android:layout_centerVertical="true"
                 android:textColor="#676767"
-                android:textSize="@dimen/sp_11"
+                android:textSize="@dimen/sp_9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -78,41 +80,40 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_52"
-            android:gravity="center_vertical"
+            android:layout_height="@dimen/dp_25"
+            android:gravity="center"
             android:paddingLeft="@dimen/dp_10"
             android:paddingRight="@dimen/dp_10">
             <ImageView
+                android:layout_marginTop="@dimen/dp_2"
+                android:layout_gravity="center"
                 android:background="@mipmap/renwu_faqi_icon5"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_width="@dimen/dp_18"
-                android:layout_height="@dimen/dp_18" />
+                android:layout_width="@dimen/dp_14"
+                android:layout_height="@dimen/dp_14" />
             <TextView
+                android:layout_marginTop="@dimen/dp_2"
                 android:id="@+id/tv_receive_person"
                 android:text="收件人"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:textColor="@color/black"
-                android:layout_alignParentRight="true"
-                android:textSize="@dimen/sp_11"
-                android:layout_centerVertical="true"
+                android:textSize="@dimen/sp_9"
                 android:layout_width="@dimen/dp_50"
                 android:layout_height="wrap_content" />
             <TextView
+
+                android:layout_marginTop="@dimen/dp_2"
+
                 android:visibility="invisible"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/my_img1"
                 android:id="@+id/work_mail_shoujianren"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_11"
-                android:layout_toRightOf="@id/tv_receive_person"
+                android:textSize="@dimen/sp_9"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:layout_height="wrap_content" />
             <ImageView
+                android:layout_marginTop="@dimen/dp_2"
                 android:id="@+id/my_img1"
                 android:background="@mipmap/qj_zuzhi_jigou_icon_qgl"
-                android:layout_centerVertical="true"
                 android:layout_width="@dimen/dp_15"
                 android:layout_height="@dimen/dp_15" />
         </LinearLayout>
@@ -129,37 +130,45 @@
             android:layout_height="@dimen/dp_0_5" />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_52"
+            android:layout_height="@dimen/dp_25"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/dp_10"
             android:paddingRight="@dimen/dp_10">
             <ImageView
+                android:layout_marginTop="@dimen/dp_2"
+
                 android:background="@mipmap/mail_make_icon"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:layout_width="@dimen/dp_18"
-                android:layout_height="@dimen/dp_18" />
+                android:layout_width="@dimen/dp_14"
+                android:layout_height="@dimen/dp_14" />
             <TextView
+                android:layout_marginTop="@dimen/dp_2"
+
                 android:id="@+id/tv_chaosong_person"
                 android:text="抄送人"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_11"
+                android:textSize="@dimen/sp_9"
                 android:layout_centerVertical="true"
                 android:layout_width="@dimen/dp_50"
                 android:layout_height="wrap_content" />
             <TextView
+                android:layout_marginTop="@dimen/dp_2"
+
                 android:visibility="invisible"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/my_img1"
                 android:id="@+id/work_mail_shoujianren2"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_11"
+                android:textSize="@dimen/sp_9"
                 android:layout_toRightOf="@id/tv_receive_person"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:layout_height="wrap_content" />
             <ImageView
+                android:layout_marginTop="@dimen/dp_2"
+
                 android:id="@+id/my_img2"
                 android:background="@mipmap/qj_zuzhi_jigou_icon_qgl"
                 android:layout_centerVertical="true"
@@ -179,7 +188,7 @@
             android:layout_height="@dimen/dp_0_5" />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_52"
+            android:layout_height="@dimen/dp_30"
             android:gravity="center_vertical"
             android:focusable="true"
             android:focusableInTouchMode="true"
@@ -189,14 +198,14 @@
                 android:background="@mipmap/mail_title_icon"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:layout_width="@dimen/dp_18"
-                android:layout_height="@dimen/dp_18" />
+                android:layout_width="@dimen/dp_14"
+                android:layout_height="@dimen/dp_14" />
             <TextView
                 android:layout_marginLeft="@dimen/dp_10"
                 android:id="@+id/tv_theme_title"
                 android:text="主题"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_11"
+                android:textSize="@dimen/sp_9"
                 android:layout_centerVertical="true"
                 android:layout_width="@dimen/dp_50"
                 android:layout_height="wrap_content" />
@@ -204,7 +213,7 @@
                 android:background="@null"
                 android:id="@+id/tv_theme"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_11"
+                android:textSize="@dimen/sp_9"
                 android:maxLength="20"
                 android:maxLines="2"
                 android:hint="请输入邮件主题"
@@ -220,7 +229,7 @@
             android:layout_height="@dimen/dp_0_5"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_52"
+            android:layout_height="@dimen/dp_25"
             android:paddingLeft="@dimen/dp_10"
             android:gravity="center_vertical"
             android:paddingRight="@dimen/dp_10">
@@ -228,20 +237,20 @@
                 android:background="@mipmap/mail_cont_icon"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:layout_width="@dimen/dp_18"
-                android:layout_height="@dimen/dp_18" />
+                android:layout_width="@dimen/dp_14"
+                android:layout_height="@dimen/dp_14" />
             <TextView
                 android:layout_marginLeft="@dimen/dp_10"
                 android:text="内容"
                 android:textColor="#313131"
-                android:textSize="@dimen/sp_11"
+                android:textSize="@dimen/sp_9"
                 android:layout_centerVertical="true"
                 android:layout_width="@dimen/dp_50"
                 android:layout_height="wrap_content" />
             <TextView
                 android:layout_centerVertical="true"
                 android:textColor="#676767"
-                android:textSize="@dimen/sp_11"
+                android:textSize="@dimen/sp_9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -259,11 +268,11 @@
             android:background="@drawable/l_write_mail_content_bg"
             android:layout_width="match_parent"
             android:gravity="start|top"
-            android:layout_height="@dimen/dp_200"
+            android:layout_height="@dimen/dp_100"
             android:padding="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
             android:textColor="@color/black"
-            android:textSize="@dimen/sp_11" />
+            android:textSize="@dimen/sp_9" />
     </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -275,25 +284,28 @@
                 android:background="@mipmap/mail_cont_icon"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
-                android:layout_width="@dimen/dp_20"
-                android:layout_height="@dimen/dp_20" />
+                android:layout_width="@dimen/dp_14"
+                android:layout_height="@dimen/dp_14" />
             <TextView
+                android:layout_gravity="center"
                 android:id="@+id/tv_annex_title"
                 android:text="附件:"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_11"
+                android:textSize="@dimen/sp_9"
                 android:layout_centerVertical="true"
                 android:layout_width="@dimen/dp_50"
                 android:layout_height="wrap_content" />
             <EditText
+                android:layout_gravity="center"
+
                 android:background="@null"
                 android:text="点击选择文件"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:enabled="true"
                 android:textColor="@color/color_a_blue"
-                android:textSize="@dimen/sp_11"
+                android:textSize="@dimen/sp_9"
                 android:id="@+id/et_annex"
                 android:layout_toRightOf="@id/tv_annex_title"
                 android:layout_width="match_parent"
@@ -310,10 +322,10 @@
             android:layout_marginBottom="@dimen/dp_30"
             android:layout_marginTop="@dimen/dp_25"
             android:id="@+id/tv_send"
-            android:textSize="@dimen/sp_14"
+            android:textSize="@dimen/sp_9"
             android:text="发起"
-            android:layout_width="@dimen/dp_220"
-            android:layout_height="@dimen/dp_36"
+            android:layout_width="@dimen/dp_180"
+            android:layout_height="@dimen/dp_30"
             android:gravity="center"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/l_leave_submit_bg"

@@ -33,7 +33,7 @@
                 android:maxLines="1"
                 android:text="省厅"
                 android:textColor="#313131"
-                android:textSize="@dimen/sp_13" />
+                android:textSize="@dimen/sp_9" />
             <TextView
                 android:layout_alignLeft="@id/tv_name"
                 android:layout_marginTop="@dimen/dp_2"
@@ -45,7 +45,7 @@
                 android:maxLines="2"
                 android:ellipsize="end"
                 android:textColor="#000000"
-                android:textSize="@dimen/sp_11"
+                android:textSize="@dimen/sp_8"
                 android:layout_marginRight="@dimen/dp_50"
                 android:text="省厅大的说法都是"
                 />
@@ -60,7 +60,7 @@
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:textColor="@color/colorText"
-                android:textSize="@dimen/sp_9"
+                android:textSize="@dimen/sp_7"
                 android:text="9小时评论"
                 />
            <LinearLayout

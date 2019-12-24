@@ -1,19 +1,16 @@
 package com.hulian.oa.agency;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Build;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.util.Log;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hulian.oa.MainActivity;
@@ -24,15 +21,9 @@ import com.hulian.oa.bean.AgencyCount;
 import com.hulian.oa.bean.AgencyCountFinish;
 import com.hulian.oa.bean.Fab;
 import com.hulian.oa.bean.Fab2;
-import com.hulian.oa.bean.People;
-import com.hulian.oa.news.adapter.MyViewPageAdapter;
 import com.hulian.oa.qglactivity.qglbean.StringBean1;
 import com.hulian.oa.qglactivity.qglbean.StringBean2;
-import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.work.file.admin.activity.expense.ExpenseExamineActivity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,31 +34,33 @@ import de.greenrobot.event.EventBus;
 public class AgencyFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    @BindView(R.id.my_tablayout)
-    TabLayout myTablayout;
-    @BindView(R.id.my_viewpager)
-    ViewPager myViewpager;
+
     Unbinder unbinder;
     @BindView(R.id.tv_mengban)
     TextView tvMengban;
-    @BindView(R.id.tv_agencyCount)
-    TextView tvAgencyCount;
-    @BindView(R.id.tv_finishCount)
-    TextView tvFinishCount;
     @BindView(R.id.iv_mine)
     ImageView iv_mine;
-    // 新加的
-    @BindView(R.id.daiban_img1)
-    ImageView daiban_img1;
-    @BindView(R.id.daiban_img2)
-    ImageView daiban_img2;
+    @BindView(R.id.zx_qgl_img1)
+    ImageView zxQglImg1;
+    @BindView(R.id.zx_qgl_txt1)
+    TextView zxQglTxt1;
+    @BindView(R.id.daiban_number)
+    TextView daibanNumber;
+    @BindView(R.id.lr_qgl_btn1)
+    LinearLayout lrQglBtn1;
+    @BindView(R.id.zx_qgl_img2)
+    ImageView zxQglImg2;
+    @BindView(R.id.zx_qgl_txt2)
+    TextView zxQglTxt2;
+    @BindView(R.id.yiban_number)
+    TextView yibanNumber;
+    @BindView(R.id.lr_qgl_btn2)
+    LinearLayout lrQglBtn2;
+    private int pos = 0;
+    private L_UpcomFragment l_upcomFragment;
+    private L_HascomFragment l_hascomFragment;
+    private FragmentManager fManager;
 
-    private ArrayList<String> list_path;
-    private ArrayList<String> list_title;
-    int  mViewPagerIndex;
-    private int pos;
     public AgencyFragment() {
         // Required empty public constructor
     }
@@ -103,53 +96,52 @@ public class AgencyFragment extends Fragment {
         View view = inflater.inflate(R.layout.fra_agency, container, false);
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
-        init();
-
+        fManager = getFragmentManager();
+        lrQglBtn1.performClick();//模拟一次点击，既进去后选择第一项
+//        init();
         return view;
     }
 
-    private void init() {
-        ArrayList<String> titleDatas = new ArrayList<>();
-        titleDatas.add("待办");
-        titleDatas.add("已办");
-        ArrayList<Fragment> fragmentList = new ArrayList<Fragment>();
-        fragmentList.add(new L_UpcomFragment());
-        fragmentList.add(new L_HascomFragment());
-        MyViewPageAdapter myViewPageAdapter = new MyViewPageAdapter(getActivity().getSupportFragmentManager(), titleDatas, fragmentList);
-//           myTablayout.setSelectedTabIndicator(0);
-        myViewpager.setAdapter(myViewPageAdapter);
-        myTablayout.setupWithViewPager(myViewpager);
-        //        myTablayout.setTabsFromPagerAdapter(myViewPageAdapter);
-        myViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener(){
-            @Override
-            public void onPageScrolled(int position, float positionOffset,int positionOffsetPixels) {
-                if(0 ==position){
-                    tvAgencyCount.setTextColor(getActivity().getResources().getColor(R.color.white));
-                    tvFinishCount.setTextColor(getActivity().getResources().getColor(R.color.color_xian));
-                    // 新加的
-                    daiban_img1.setBackgroundResource(R.drawable.daiban_text_bg);
-                    daiban_img2.setBackgroundResource(R.drawable.daiban_text_bg1);
-                    pos = position;
-                }else{
-                    tvFinishCount.setTextColor(getActivity().getResources().getColor(R.color.white));
-                    tvAgencyCount.setTextColor(getActivity().getResources().getColor(R.color.color_xian));
-                    // 新加的
-                    daiban_img1.setBackgroundResource(R.drawable.daiban_text_bg1);
-                    daiban_img2.setBackgroundResource(R.drawable.daiban_text_bg);
-                    pos = position;
-                }
-            }
-            @Override
-            public void onPageSelected(int position) {
-            }
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                if(state==2){//state有三种状态下文会将，当手指刚触碰屏幕时state的值为1，我们就在这个时候给mViewPagerIndex 赋值。
-             //       mViewPagerIndex = myViewpager.getCurrentItem();
-                }
-            }
-        });
-    }
+//    private void init() {
+//        ArrayList<String> titleDatas = new ArrayList<>();
+//        titleDatas.add("待办");
+//        titleDatas.add("已办");
+//        ArrayList<Fragment> fragmentList = new ArrayList<Fragment>();
+//        fragmentList.add(new L_UpcomFragment());
+//        fragmentList.add(new L_HascomFragment());
+//        MyViewPageAdapter myViewPageAdapter = new MyViewPageAdapter(getActivity().getSupportFragmentManager(), titleDatas, fragmentList);
+////           myTablayout.setSelectedTabIndicator(0);
+//        myViewpager.setAdapter(myViewPageAdapter);
+//        myTablayout.setupWithViewPager(myViewpager);
+//        //        myTablayout.setTabsFromPagerAdapter(myViewPageAdapter);
+//        myViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//                if (0 == position) {
+//                    tvAgencyCount.setTextColor(getActivity().getResources().getColor(R.color.white));
+//                    tvFinishCount.setTextColor(getActivity().getResources().getColor(R.color.color_xian));
+//
+//                    pos = position;
+//                } else {
+//                    tvFinishCount.setTextColor(getActivity().getResources().getColor(R.color.white));
+//                    tvAgencyCount.setTextColor(getActivity().getResources().getColor(R.color.color_xian));
+//
+//                    pos = position;
+//                }
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//                if (state == 2) {//state有三种状态下文会将，当手指刚触碰屏幕时state的值为1，我们就在这个时候给mViewPagerIndex 赋值。
+//                    //       mViewPagerIndex = myViewpager.getCurrentItem();
+//                }
+//            }
+//        });
+//    }
 
     @Override
     public void onDestroyView() {
@@ -165,25 +157,22 @@ public class AgencyFragment extends Fragment {
             tvMengban.setVisibility(View.VISIBLE);
         }
     }
+
     public void onEventMainThread(AgencyCount event) {
-        if(!"".equals(event.getAgencyCount())){
-            tvAgencyCount.setText(event.getAgencyCount());
+        if (!"".equals(event.getAgencyCount())) {
+//            tvAgencyCount.setText(event.getAgencyCount());
+            daibanNumber.setText(event.getAgencyCount());
         }
     }
+
     public void onEventMainThread(AgencyCountFinish event) {
-        if(!"".equals(event.getAgencyCountFinish())){
-            tvFinishCount.setText(event.getAgencyCountFinish());
+        if (!"".equals(event.getAgencyCountFinish())) {
+//            tvFinishCount.setText(event.getAgencyCountFinish());
+            yibanNumber.setText(event.getAgencyCountFinish());
         }
     }
 
 
-
-
-    //
-//    @OnClick(R.id.iv_news)
-//    public void onViewClicked() {
-//        startActivity(new Intent(getActivity(), NewsActivityInfo.class));
-//    }
     public void onViewClicked() {
         Intent intent = new Intent(getActivity(), ExpenseExamineActivity.class);
         intent.putExtra("type", "agency");
@@ -199,27 +188,67 @@ public class AgencyFragment extends Fragment {
     }
 
     @OnClick(R.id.iv_mine)
-    public void ononViewClicked(){
+    public void ononViewClicked() {
         EventBus.getDefault().post(new MainActivity());
 
     }
 
     //接受点击事件,发送给fragment
     public void onEventMainThread(String event) {
-        if (!"".equals(event)){
-            if (pos == 0){
+        if (!"".equals(event)) {
+            if (pos == 0) {
                 //待办
-                StringBean1 resultmemberList=new StringBean1();
+                StringBean1 resultmemberList = new StringBean1();
                 resultmemberList.setDaiban(event);
                 EventBus.getDefault().post(resultmemberList);
-            }else {
+            } else {
                 // 已办
-                StringBean2 stringBean2=new StringBean2();
+                StringBean2 stringBean2 = new StringBean2();
                 stringBean2.setDaiban(event);
                 EventBus.getDefault().post(stringBean2);
             }
         }
     }
 
+    //隐藏所有Fragment
+    private void hideAllFragment(FragmentTransaction fragmentTransaction) {
+        if (l_upcomFragment != null) fragmentTransaction.hide(l_upcomFragment);
+        if (l_hascomFragment != null) fragmentTransaction.hide(l_hascomFragment);
 
+    }
+
+    @OnClick({R.id.lr_qgl_btn1, R.id.lr_qgl_btn2})
+    public void onViewClicked(View view) {
+        FragmentTransaction fTransaction = fManager.beginTransaction();
+        hideAllFragment(fTransaction);
+        switch (view.getId()) {
+            case R.id.lr_qgl_btn1:
+                pos = 0;
+                zxQglTxt1.setTextColor(Color.parseColor("#FFFFFF"));
+                zxQglImg1.setImageResource(R.mipmap.zx_xinwen_yes);
+                zxQglTxt2.setTextColor(Color.parseColor("#ccccd5"));
+                zxQglImg2.setImageResource(R.mipmap.zx_tongzhi_no);
+                if (l_upcomFragment == null) {
+                    l_upcomFragment = new L_UpcomFragment();
+                    fTransaction.add(R.id.qgl_fragment_daiban, l_upcomFragment);
+                } else {
+                    fTransaction.show(l_upcomFragment);
+                }
+                break;
+            case R.id.lr_qgl_btn2:
+                pos = 1;
+                zxQglTxt1.setTextColor(Color.parseColor("#ccccd5"));
+                zxQglImg1.setImageResource(R.mipmap.zx_xinwen_no);
+                zxQglTxt2.setTextColor(Color.parseColor("#FFFFFF"));
+                zxQglImg2.setImageResource(R.mipmap.zx_tongzhi_yes);
+                if (l_hascomFragment == null) {
+                    l_hascomFragment = new L_HascomFragment();
+                    fTransaction.add(R.id.qgl_fragment_daiban, l_hascomFragment);
+                } else {
+                    fTransaction.show(l_hascomFragment);
+                }
+                break;
+        }
+        fTransaction.commit();
+    }
 }

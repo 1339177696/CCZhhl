@@ -12,8 +12,8 @@
 
     <ImageView
         android:id="@+id/iv_remind"
-        android:layout_width="@dimen/dp_9"
-        android:layout_height="@dimen/dp_9"
+        android:layout_width="@dimen/dp_7"
+        android:layout_height="@dimen/dp_7"
         android:layout_marginLeft="@dimen/dp_16"
         android:layout_marginTop="@dimen/dp_22"
         android:background="@drawable/liner_yuan_qgl1" />
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:text="召集人"
                 android:textColor="#ff676767"
-                android:textSize="@dimen/sp_14" />
+                android:textSize="@dimen/sp_9" />
 
             <TextView
                 android:id="@+id/tv_launch_person_x"
@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:text="冯金龙"
                 android:textColor="#ff313131"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp_9"
                 />
 
         </LinearLayout>
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:text="执行人"
                 android:textColor="#ff676767"
-                android:textSize="@dimen/sp_14" />
+                android:textSize="@dimen/sp_9" />
 
             <TextView
                 android:layout_marginRight="@dimen/dp_5"
@@ -98,7 +98,7 @@
                 android:layout_marginLeft="24dp"
                 android:layout_toRightOf="@id/qgl_txt1"
                 android:textColor="#ff313131"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp_9"
                 android:text="执行人"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -108,7 +108,7 @@
                 android:textColor="#676767"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/dp_5"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp_9"
                 android:text="3/3完成"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -126,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:text="抄送人"
                 android:textColor="#ff676767"
-                android:textSize="@dimen/sp_14" />
+                android:textSize="@dimen/sp_9" />
 
             <TextView
                 android:id="@+id/tv_chaosong"
@@ -135,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:text="冯金龙"
                 android:textColor="#ff313131"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp_9"
                 />
 
         </LinearLayout>
@@ -150,7 +150,7 @@
                 android:layout_height="wrap_content"
                 android:text="任务详情"
                 android:textColor="#ff676767"
-                android:textSize="@dimen/sp_14" />
+                android:textSize="@dimen/sp_9" />
 
             <TextView
                 android:layout_marginRight="20dp"
@@ -160,7 +160,7 @@
                 android:layout_height="wrap_content"
                 android:text="冯金龙"
                 android:textColor="#ff313131"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp_9"
                 />
 
 
@@ -179,7 +179,7 @@
                 android:layout_height="wrap_content"
                 android:text="公文附件"
                 android:textColor="#ff676767"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp_9"
                 />
 
             <TextView

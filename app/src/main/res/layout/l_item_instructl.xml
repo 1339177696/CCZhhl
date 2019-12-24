@@ -8,12 +8,12 @@
     android:layout_marginRight="@dimen/dp_15"
     android:layout_marginBottom="@dimen/dp_10"
     android:orientation="vertical"
-    android:layout_height="wrap_content">
+    android:layout_height="@dimen/dp_70">
     <LinearLayout
         android:paddingLeft="10dp"
-        android:paddingTop="@dimen/dp_15"
+        android:paddingTop="@dimen/dp_10"
         android:paddingRight="@dimen/dp_10"
-        android:paddingBottom="@dimen/dp_15"
+        android:paddingBottom="@dimen/dp_10"
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:layout_height="wrap_content">
@@ -23,8 +23,8 @@
             android:layout_marginLeft="@dimen/dp_4"
             android:layout_marginRight="@dimen/dp_14"
             android:gravity="center"
-            android:layout_width="@dimen/dp_66"
-            android:layout_height="@dimen/dp_66"
+            android:layout_width="@dimen/dp_46"
+            android:layout_height="@dimen/dp_46"
             >
             <TextView
                 android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
                 android:maxLines="1"
                 android:text="2019/09"
                 android:textColor="@color/white"
-                android:textSize="@dimen/sp_12" />
+                android:textSize="@dimen/sp_11" />
             <TextView
                 android:layout_marginTop="-8dp"
                 android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
                 android:maxLines="1"
                 android:text="12"
                 android:textColor="@color/white"
-                android:textSize="@dimen/sp_21" />
+                android:textSize="@dimen/sp_18" />
         </LinearLayout>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -58,7 +58,7 @@
                 android:maxLines="2"
                 android:textColor="#313131"
                 android:ellipsize="end"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp_9"
                 android:text=""
                 />
 
@@ -73,14 +73,14 @@
                 android:maxLines="1"
                 android:textColor="#676767"
                 android:ellipsize="end"
-                android:textSize="@dimen/sp_12"
+                android:textSize="@dimen/sp_8"
                 android:text="王俊杰"
                 />
             <ImageView
-                android:layout_marginTop="@dimen/dp_5"
+                android:layout_marginTop="@dimen/dp_9"
                 android:id="@+id/iv_image"
                 android:layout_marginLeft="@dimen/dp_5"
-                android:layout_marginBottom="@dimen/dp_5"
+                android:layout_marginBottom="@dimen/dp_3"
                 android:background="@mipmap/jiaohu_icon"
                 android:layout_toRightOf="@id/tv_posert"
                 android:layout_alignParentBottom="true"
@@ -98,7 +98,7 @@
                 android:maxLines="1"
                 android:textColor="#085DD6"
                 android:ellipsize="end"
-                android:textSize="@dimen/sp_12"
+                android:textSize="@dimen/sp_8"
                 android:text="黄龙"
                 />
         </RelativeLayout>
@@ -106,6 +106,6 @@
     <ImageView
         android:id="@+id/tv_operate"
         android:layout_gravity="right"
-        android:layout_width="@dimen/dp_47"
-        android:layout_height="@dimen/dp_47" />
+        android:layout_width="@dimen/dp_27"
+        android:layout_height="@dimen/dp_27" />
 </FrameLayout>

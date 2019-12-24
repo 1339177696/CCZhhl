@@ -54,7 +54,7 @@
         <item name="android:gravity">center</item>
         <item name="android:paddingTop">@dimen/dp_6</item>
         <item name="android:textColor">@drawable/rbtn_main_txt</item>
-        <item name="android:textSize">@dimen/sp_9</item>
+        <item name="android:textSize">@dimen/sp_10</item>
     </style>
     <style name="MytabStyle" parent="android:Widget">
         <!--<item name="tabBackground">@drawable/tab_background</item>-->
@@ -166,7 +166,7 @@
     </style>
     <!--设置Tablayout字体大小-->
     <style name="TabLayoutTextSize2">
-        <item name="android:textSize">@dimen/sp_11</item>
+        <item name="android:textSize">@dimen/sp_9</item>
     </style>
     <!--设置Tablayout字体大小-->
     <style name="TabLayoutTextSize3">

@@ -636,7 +636,7 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
             mEditSizeSeekBar.invalidate();
             mDoodle.setPen(DoodlePen.BRUSH);
             mPaintSizeView.setText("" + mEditSizeSeekBar.getProgress());
-            mDoodle.setSize(mEditSizeSeekBar.getProgress());
+            mDoodle.setSize(1+mEditSizeSeekBar.getProgress());
             if (mTouchGestureListener.getSelectedItem() != null) {
                 mTouchGestureListener.getSelectedItem().setSize(mEditSizeSeekBar.getProgress());
             }

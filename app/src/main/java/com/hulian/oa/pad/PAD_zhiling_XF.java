@@ -219,8 +219,6 @@ public class PAD_zhiling_XF extends BaseActivity implements View.OnClickListener
         btn_set_color_container = (FrameLayout) findViewById(R.id.btn_set_color_container);
         mBtnColor = (ImageView) findViewById(R.id.btn_set_color);
         mEditSizeSeekBar = (SeekBar) findViewById(R.id.doodle_seekbar_size);
-//        mEditSizeSeekBar.setProgress(1);
-//        mEditSizeSeekBar.setMax(1);
         mPaintSizeView = (TextView)findViewById(R.id.paint_size_text);
         mPaintSizeView.setText( mEditSizeSeekBar.getProgress()+1+"");
         mSelectedTextEditContainer = (LinearLayout) findViewById(R.id.doodle_selectable_edit_container);
@@ -396,7 +394,7 @@ public class PAD_zhiling_XF extends BaseActivity implements View.OnClickListener
                     size = mDoodleParams.mPaintPixelSize > 0 ? mDoodleParams.mPaintPixelSize : mDoodle.getSize();
                 }*/
                 // 设置初始值
-                mDoodle.setSize(1);  /*画笔的初试值*/
+                mDoodle.setSize(2);  /*画笔的初试值*/
                 // 选择画笔
                 mDoodle.setPen(DoodlePen.BRUSH);  //画笔
                 mDoodle.setShape(DoodleShape.HAND_WRITE); //手绘
@@ -529,7 +527,7 @@ public class PAD_zhiling_XF extends BaseActivity implements View.OnClickListener
             mEditSizeSeekBar.invalidate();
             mDoodle.setPen(DoodlePen.BRUSH);
             mPaintSizeView.setText(1+ mEditSizeSeekBar.getProgress()+"");
-            mDoodle.setSize(mEditSizeSeekBar.getProgress());
+            mDoodle.setSize(2+mEditSizeSeekBar.getProgress());
             if (mTouchGestureListener.getSelectedItem() != null) {
                 mTouchGestureListener.getSelectedItem().setSize(mEditSizeSeekBar.getProgress());
             }

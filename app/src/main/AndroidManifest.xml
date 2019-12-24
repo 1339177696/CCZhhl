@@ -41,6 +41,7 @@
     <uses-permission android:name="com.hulian.oa.permission.RECEIVE_MSG" />
 
     <application
+        android:windowSoftInputMode="adjustResize"
         android:name=".APP"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_me"

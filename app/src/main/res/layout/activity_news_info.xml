@@ -10,12 +10,16 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent">
+        <View
+            android:background="#2D4BCA"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_10"/>
     <RelativeLayout
         android:id="@+id/rl_title"
         android:layout_width="match_parent"
         android:background="#2D4BCA"
         android:gravity="center_vertical"
-        android:layout_height="@dimen/dp_45">
+        android:layout_height="@dimen/dp_40">
         <ImageView
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_width="@dimen/dp_12"
@@ -115,18 +119,18 @@
         android:focusableInTouchMode="true"
         android:layout_height="@dimen/dp_40">
         <EditText
+            android:imeOptions="actionSend"
             android:layout_marginLeft="@dimen/dp_15"
             android:background="@drawable/edit_background2"
             android:id="@+id/et_content"
             android:inputType="text"
-            android:imeOptions="actionSend"
             android:paddingLeft="@dimen/dp_10"
             android:hint="写评论"
             android:textSize="@dimen/sp_10"
             android:singleLine="true"
             android:layout_weight="5"
             android:layout_width="0dp"
-            android:layout_height="@dimen/dp_35" />
+            android:layout_height="@dimen/dp_25" />
         <Button
             android:visibility="gone"
             android:id="@+id/bt_comment"
@@ -142,16 +146,16 @@
             android:text="置顶"
             android:layout_marginLeft="@dimen/dp_20"
             android:background="@mipmap/ic_news_top"
-            android:layout_width="@dimen/dp_15"
+            android:layout_width="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
-            android:layout_height="@dimen/dp_15" />
+            android:layout_height="@dimen/dp_10" />
         <ImageView
             android:padding="@dimen/dp_4"
             android:layout_marginRight="@dimen/dp_10"
             android:id="@+id/bt_store"
             android:background="@mipmap/ic_store"
-            android:layout_width="@dimen/dp_15"
-            android:layout_height="@dimen/dp_15" />
+            android:layout_width="@dimen/dp_10"
+            android:layout_height="@dimen/dp_10" />
     </LinearLayout>
 </LinearLayout>
         <TextView

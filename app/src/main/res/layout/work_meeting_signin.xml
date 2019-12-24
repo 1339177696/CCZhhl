@@ -2,12 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <View
+        android:background="#2D4BCA"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_10"/>
     <RelativeLayout
         android:id="@+id/rl_title"
         android:layout_width="match_parent"
         android:background="#2D4BCA"
         android:gravity="center_vertical"
-        android:layout_height="@dimen/dp_45">
+        android:layout_height="@dimen/dp_40">
         <ImageView
             android:layout_marginLeft="@dimen/dp_15"
             android:layout_width="@dimen/dp_12"
@@ -36,7 +40,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_10"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginRight="@dimen/dp_10"
         android:paddingBottom="@dimen/dp_20"
@@ -51,7 +55,7 @@
             >
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_35"
+                android:layout_height="@dimen/dp_25"
                 android:layout_marginTop="@dimen/dp_5"
                 android:layout_marginBottom="@dimen/dp_5"
                 >
@@ -62,7 +66,7 @@
                     android:textColor="#313131"
                     android:drawablePadding="@dimen/dp_3"
                     android:drawableLeft="@mipmap/qj_leibie_icon_qgl"
-                    android:textSize="@dimen/sp_11"
+                    android:textSize="@dimen/sp_9"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_centerVertical="true"
@@ -71,7 +75,7 @@
                     android:id="@+id/et_title"
                     android:layout_marginLeft="@dimen/dp_10"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_11"
+                    android:textSize="@dimen/sp_9"
                     android:background="@null"
                     android:gravity="center_vertical"
                     android:layout_toRightOf="@id/tv_title"
@@ -86,7 +90,7 @@
                 android:layout_height="@dimen/dp_0_5"/>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_35"
+                android:layout_height="@dimen/dp_25"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:layout_marginTop="@dimen/dp_5"
@@ -98,7 +102,7 @@
                     android:textColor="#313131"
                     android:drawablePadding="@dimen/dp_5"
                     android:drawableLeft="@mipmap/meeting_check_icon"
-                    android:textSize="@dimen/sp_11"
+                    android:textSize="@dimen/sp_9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -107,7 +111,7 @@
                     android:id="@+id/et_signType"
                     android:layout_marginLeft="@dimen/dp_10"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_11"
+                    android:textSize="@dimen/sp_9"
                     android:background="@null"
                     android:gravity="center_vertical"
                     android:layout_toRightOf="@id/tv_title0"
@@ -122,7 +126,7 @@
                 android:layout_height="@dimen/dp_0_5"/>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_35"
+                android:layout_height="@dimen/dp_25"
                 android:layout_marginTop="@dimen/dp_5"
                 android:layout_marginBottom="@dimen/dp_5"
                 >
@@ -131,7 +135,7 @@
                     android:id="@+id/tv_part_time_title"
                     android:text="开始时间"
                     android:textColor="#313131"
-                    android:textSize="@dimen/sp_11"
+                    android:textSize="@dimen/sp_9"
                     android:layout_width="wrap_content"
                     android:drawablePadding="@dimen/dp_3"
                     android:drawableLeft="@mipmap/qj_kaishi_time_icon"
@@ -143,7 +147,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/dp_10"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_11"
+                    android:textSize="@dimen/sp_9"
                     android:background="@null"
                     android:gravity="center_vertical"
                     android:layout_toRightOf="@id/tv_part_time_title"
@@ -157,7 +161,7 @@
                 android:layout_height="@dimen/dp_0_5"/>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_35"
+                android:layout_height="@dimen/dp_25"
                 android:layout_marginTop="@dimen/dp_5"
                 android:layout_marginBottom="@dimen/dp_5"
                 >
@@ -166,7 +170,7 @@
                     android:id="@+id/tv_part_time_title2"
                     android:text="结束时间"
                     android:textColor="#313131"
-                    android:textSize="@dimen/sp_11"
+                    android:textSize="@dimen/sp_9"
                     android:layout_width="wrap_content"
                     android:drawablePadding="@dimen/dp_3"
                     android:drawableLeft="@mipmap/qj_jieshu_time_icon"
@@ -178,7 +182,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/dp_10"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_11"
+                    android:textSize="@dimen/sp_9"
                     android:background="@null"
                     android:gravity="center_vertical"
                     android:layout_toRightOf="@id/tv_part_time_title2"
@@ -193,7 +197,7 @@
                 android:layout_height="@dimen/dp_0_5"/>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_35"
+                android:layout_height="@dimen/dp_25"
                 android:layout_marginTop="@dimen/dp_5"
                 android:layout_marginBottom="@dimen/dp_5"
                 >
@@ -202,7 +206,7 @@
                     android:id="@+id/tv_part_time_title3"
                     android:text="会议联系人"
                     android:textColor="#313131"
-                    android:textSize="@dimen/sp_11"
+                    android:textSize="@dimen/sp_9"
                     android:layout_width="wrap_content"
                     android:drawablePadding="@dimen/dp_3"
                     android:drawableLeft="@mipmap/meeting_contact_icon"
@@ -214,7 +218,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/dp_10"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_11"
+                    android:textSize="@dimen/sp_9"
                     android:background="@null"
                     android:gravity="center_vertical"
                     android:layout_toRightOf="@id/tv_part_time_title3"
@@ -229,7 +233,7 @@
                 android:layout_height="@dimen/dp_0_5"/>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_35"
+                android:layout_height="@dimen/dp_25"
                 android:layout_marginTop="@dimen/dp_5"
                 android:layout_marginBottom="@dimen/dp_5"
                 >
@@ -238,7 +242,7 @@
                     android:id="@+id/tv_part_time_title4"
                     android:text="联系人电话"
                     android:textColor="#313131"
-                    android:textSize="@dimen/sp_11"
+                    android:textSize="@dimen/sp_9"
                     android:layout_width="wrap_content"
                     android:drawablePadding="@dimen/dp_3"
                     android:drawableLeft="@mipmap/meeting_tel_icon"
@@ -250,7 +254,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/dp_10"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_11"
+                    android:textSize="@dimen/sp_9"
                     android:background="@null"
                     android:gravity="center_vertical"
                     android:layout_toRightOf="@id/tv_part_time_title4"
@@ -276,7 +280,7 @@
                     android:drawablePadding="@dimen/dp_3"
                     android:textColor="#313131"
                     android:drawableLeft="@mipmap/qj_shenpi_icon_qgl"
-                    android:textSize="@dimen/sp_11"
+                    android:textSize="@dimen/sp_9"
                     android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
@@ -285,7 +289,7 @@
                     android:id="@+id/tv_part_person"
                     android:layout_marginLeft="@dimen/dp_10"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_11"
+                    android:textSize="@dimen/sp_9"
                     android:layout_centerVertical="true"
                     android:background="@null"
                     android:gravity="center_vertical"
@@ -301,7 +305,7 @@
                 android:layout_height="@dimen/dp_0_5"/>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_35"
+                android:layout_height="@dimen/dp_25"
                 android:layout_marginTop="@dimen/dp_5"
                 android:layout_marginBottom="@dimen/dp_5"
                 >
@@ -311,7 +315,7 @@
                     android:text="参会人数"
                     android:layout_centerVertical="true"
                     android:drawableLeft="@mipmap/qj_chaosongren_icon_qgl"
-                    android:textSize="@dimen/sp_11"
+                    android:textSize="@dimen/sp_9"
                     android:drawablePadding="@dimen/dp_3"
                     android:textColor="#313131"
                     android:layout_width="wrap_content"
@@ -320,7 +324,7 @@
                     android:id="@+id/tv_part_count"
                     android:layout_marginLeft="@dimen/dp_10"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_11"
+                    android:textSize="@dimen/sp_9"
                     android:layout_centerVertical="true"
                     android:editable="false"
                     android:background="@null"
@@ -336,14 +340,14 @@
                 android:layout_height="@dimen/dp_0_5"/>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_35"
+                android:layout_height="@dimen/dp_25"
                 >
                 <TextView
                     android:drawablePadding="@dimen/dp_3"
                     android:drawableLeft="@mipmap/meeting_cont_icon"
                     android:text="会议内容"
                     android:textColor="#313131"
-                    android:textSize="@dimen/sp_11"
+                    android:textSize="@dimen/sp_9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -355,7 +359,7 @@
                 android:id="@+id/et_content"
                 android:layout_width="wrap_content"
                 android:gravity="top"
-                android:textSize="@dimen/sp_12"
+                android:textSize="@dimen/sp_9"
                 android:padding="@dimen/dp_10"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -368,8 +372,8 @@
             <ImageView
                 android:layout_centerVertical="true"
                 android:id="@+id/iv_meet_room"
-                android:layout_width="@dimen/dp_50"
-                android:layout_height="@dimen/dp_50"
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
                 android:background="@mipmap/ic_room"
                 />
             <RelativeLayout
@@ -387,14 +391,14 @@
                         android:id="@+id/tv_meet_room_num"
                         android:text="14号楼1号会议室"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_11"
+                        android:textSize="@dimen/sp_9"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:layout_marginTop="@dimen/dp_10"
                         android:layout_below="@id/tv_meet_room_num"
                         android:id="@+id/tv_meet_count"
-                        android:textSize="@dimen/sp_12"
+                        android:textSize="@dimen/sp_9"
                         android:text="容纳人数：100"
                         android:textColor="#676767"
                         android:layout_width="wrap_content"
@@ -406,11 +410,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
+                android:paddingRight="@dimen/dp_65"
                 android:id="@+id/tv_back_instruct"
-                android:textSize="@dimen/dp_11"
+                android:textSize="@dimen/sp_9"
                 android:text="签到"
-                android:layout_width="@dimen/dp_260"
-                android:layout_height="@dimen/dp_40"
+                android:layout_width="@dimen/dp_180"
+                android:layout_height="@dimen/dp_30"
                 android:gravity="center"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/edit_background_order"
@@ -421,15 +426,14 @@
                 />
 
             <TextView
-                android:layout_marginTop="@dimen/dp_35"
-                android:layout_marginRight="@dimen/dp_80"
+                android:layout_marginTop="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_125"
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:text="(请扫描会议室二维码)"
                 android:textColor="@color/white"
-                android:textSize="@dimen/sp_8" />
+                android:textSize="@dimen/sp_7" />
         </RelativeLayout>
     </LinearLayout>
     </ScrollView>

@@ -60,7 +60,7 @@
                 android:maxLines="1"
                 android:text="省厅大的说法都是理发卡进来看大家发进来看"
                 android:textColor="#313131"
-                android:textSize="@dimen/sp_11" />
+                android:textSize="@dimen/sp_9" />
 
             <TextView
                 android:id="@+id/tv_content"
@@ -72,7 +72,7 @@
                 android:maxLines="1"
                 android:text="省厅大的说法都是理发卡进来看大家发进来看省厅大的说法都是理发卡进来看大家发进来看省厅大的说法都是理发卡进来看大家发进来看"
                 android:textColor="#676767"
-                android:textSize="@dimen/sp_9" />
+                android:textSize="@dimen/sp_7" />
 
             <ImageView
                 android:id="@+id/zx_person_icon"
@@ -95,7 +95,7 @@
                 android:maxLines="1"
                 android:text="王俊杰"
                 android:textColor="#858585"
-                android:textSize="@dimen/sp_9" />
+                android:textSize="@dimen/sp_7" />
         </RelativeLayout>
     </LinearLayout>
 

@@ -1,6 +1,8 @@
 package com.hulian.oa.me;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -53,6 +55,7 @@ public class CollectionActivity2 extends BaseActivity implements PullLoadMoreRec
     private ArrayList<String> list_path;
     private ArrayList<String> list_title;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

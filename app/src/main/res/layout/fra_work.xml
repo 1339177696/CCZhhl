@@ -12,7 +12,7 @@
     <RelativeLayout
         android:background="@mipmap/qglfra_news_bg_icon"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_160">
+        android:layout_height="@dimen/dp_120">
 
         <!--<ImageView-->
         <!--android:id="@+id/iv_news"-->
@@ -47,7 +47,7 @@
         android:scrollbars="none"
         android:layout_marginLeft="@dimen/dp_13"
         android:layout_marginRight="@dimen/dp_13"
-        android:layout_marginTop="@dimen/dp_110"
+        android:layout_marginTop="@dimen/dp_70"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout

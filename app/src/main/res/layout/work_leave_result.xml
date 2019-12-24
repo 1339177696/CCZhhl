@@ -13,11 +13,11 @@
         android:layout_height="@dimen/dp_170">
 
         <RelativeLayout
-            android:layout_marginTop="@dimen/dp_25"
+            android:layout_marginTop="@dimen/dp_10"
             android:layout_width="match_parent"
             android:id="@+id/iv_back"
         android:gravity="center_vertical"
-        android:layout_height="@dimen/dp_53">
+        android:layout_height="@dimen/dp_40">
             <ImageView
                 android:layout_marginLeft="@dimen/dp_15"
                 android:layout_width="@dimen/dp_12"
@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:text="2019/8/8"
                     android:textColor="#ffffffff"
-                    android:textSize="@dimen/sp_11"
+                    android:textSize="@dimen/sp_10"
                     />
 
                 <TextView
@@ -64,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:text="开始时间"
                     android:textColor="#ffffffff"
-                    android:textSize="@dimen/sp_10"
+                    android:textSize="@dimen/sp_9"
                     />
 
 
@@ -83,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:text="1天"
                     android:textColor="#ffffffff"
-                    android:textSize="@dimen/sp_11"
+                    android:textSize="@dimen/sp_10"
                     />
 
                 <TextView
@@ -92,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:text="请假时长"
                     android:textColor="#ffffffff"
-                    android:textSize="@dimen/sp_10"
+                    android:textSize="@dimen/sp_9"
                     />
 
 
@@ -111,7 +111,7 @@
                     android:layout_height="wrap_content"
                     android:text="2019/8/8"
                     android:textColor="#ffffffff"
-                    android:textSize="@dimen/sp_11"
+                    android:textSize="@dimen/sp_10"
                     />
 
                 <TextView
@@ -120,7 +120,7 @@
                     android:layout_height="wrap_content"
                     android:text="结束时间"
                     android:textColor="#ffffffff"
-                    android:textSize="@dimen/sp_10"
+                    android:textSize="@dimen/sp_9"
                     />
 
 
@@ -131,7 +131,7 @@
     </LinearLayout>
 
     <ScrollView
-        android:layout_marginTop="@dimen/dp_155"
+        android:layout_marginTop="@dimen/dp_125"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <LinearLayout
@@ -173,14 +173,14 @@
                         android:id="@+id/tv_reason_title1"
                         android:text="申请人"
                         android:textColor="#676767"
-                        android:textSize="@dimen/sp_11"
+                        android:textSize="@dimen/sp_9"
                         android:layout_width="@dimen/dp_80"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:id="@+id/tv_leave_shenqingren"
                         android:text="王俊杰"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_11"
+                        android:textSize="@dimen/sp_9"
                         android:layout_toRightOf="@id/tv_reason_title1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -195,14 +195,14 @@
                 android:id="@+id/tv_reason_title"
                 android:text="请假事由"
                 android:textColor="#676767"
-                android:textSize="@dimen/sp_11"
+                android:textSize="@dimen/sp_9"
                 android:layout_width="@dimen/dp_80"
                 android:layout_height="wrap_content" />
                 <TextView
                 android:id="@+id/tv_leave_reason"
                 android:text="请假事由"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_11"
+                android:textSize="@dimen/sp_9"
                 android:layout_toRightOf="@id/tv_reason_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -214,7 +214,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                 android:text="审批人"
-                android:textSize="@dimen/sp_11"
+                android:textSize="@dimen/sp_9"
                 android:textColor="#676767"
                 android:id="@+id/tv_person_title"
                 android:layout_width="@dimen/dp_80"
@@ -223,7 +223,7 @@
                     android:text="张XX"
                 android:id="@+id/tv_approved_person"
                 android:layout_toRightOf="@id/tv_person_title"
-                android:textSize="@dimen/sp_11"
+                android:textSize="@dimen/sp_9"
                 android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -236,7 +236,7 @@
                     android:layout_height="wrap_content">
                     <TextView
                         android:text="抄送人"
-                        android:textSize="@dimen/sp_11"
+                        android:textSize="@dimen/sp_9"
                         android:textColor="#676767"
                         android:id="@+id/tv_person_title1"
                         android:layout_width="@dimen/dp_80"
@@ -244,7 +244,7 @@
                     <TextView
                         android:id="@+id/tv_chaosong_person_qgl"
                         android:layout_toRightOf="@id/tv_person_title1"
-                        android:textSize="@dimen/sp_11"
+                        android:textSize="@dimen/sp_9"
                         android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -256,7 +256,7 @@
                     android:layout_height="wrap_content">
                     <TextView
                         android:text="请假描述"
-                        android:textSize="@dimen/sp_11"
+                        android:textSize="@dimen/sp_9"
                         android:textColor="#676767"
                         android:id="@+id/tv_person_title11"
                         android:layout_width="@dimen/dp_80"
@@ -265,7 +265,7 @@
                         android:text="南老家探亲"
                         android:id="@+id/tv_miaoshu"
                         android:layout_toRightOf="@id/tv_person_title11"
-                        android:textSize="@dimen/sp_11"
+                        android:textSize="@dimen/sp_9"
                         android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -324,7 +324,7 @@
                     android:layout_height="wrap_content"
                     android:text="提交外出申请"
                     android:textColor="#ff313131"
-                    android:textSize="@dimen/sp_11"
+                    android:textSize="@dimen/sp_9"
                     />
 
                 <TextView
@@ -333,7 +333,7 @@
                     android:layout_height="wrap_content"
                     android:text="2019/8/9 08:00:00"
                     android:textColor="#676767"
-                    android:textSize="@dimen/sp_10"
+                    android:textSize="@dimen/sp_9"
                     />
 
 
@@ -352,14 +352,14 @@
                     android:layout_height="wrap_content"
                     android:text="[张XX] "
                     android:textColor="#0054CC"
-                    android:textSize="@dimen/sp_11"
+                    android:textSize="@dimen/sp_9"
                     />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="正在审批中"
                     android:textColor="#ff313131"
-                    android:textSize="@dimen/sp_11"
+                    android:textSize="@dimen/sp_9"
                     />
 
             </LinearLayout>
@@ -379,7 +379,7 @@
                     android:layout_height="wrap_content"
                     android:text="完成"
                     android:textColor="#DBDBDB"
-                    android:textSize="@dimen/sp_11"
+                    android:textSize="@dimen/sp_9"
                     />
 
                 <TextView
@@ -389,7 +389,7 @@
                     android:layout_height="wrap_content"
                     android:text="2019/8/9 08:00:00"
                     android:textColor="#676767"
-                    android:textSize="@dimen/sp_13"
+                    android:textSize="@dimen/sp_9"
                     />
 
 

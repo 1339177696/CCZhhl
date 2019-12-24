@@ -6,14 +6,14 @@
     android:layout_marginRight="@dimen/dp_10"
     android:layout_marginTop="@dimen/dp_10"
     android:background="@drawable/liner_border_gb_qgl"
-    android:layout_height="@dimen/dp_135">
+    android:layout_height="@dimen/dp_80">
 
     <ImageView
         android:id="@+id/iv_remind"
-        android:layout_width="@dimen/dp_6"
-        android:layout_height="@dimen/dp_6"
+        android:layout_width="@dimen/dp_7"
+        android:layout_height="@dimen/dp_7"
         android:layout_marginLeft="@dimen/dp_16"
-        android:layout_marginTop="@dimen/dp_22"
+        android:layout_marginTop="@dimen/dp_5"
         android:background="@drawable/liner_yuan_qgl1" />
 
     <LinearLayout
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/dp_15"
-        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_7"
         android:layout_toRightOf="@+id/iv_remind"
         android:orientation="vertical">
 
@@ -41,7 +41,7 @@
                 android:layout_alignParentLeft="true"
                 android:text="公文流转标题"
                 android:textColor="#ff313131"
-                android:textSize="@dimen/sp_11" />
+                android:textSize="@dimen/sp_9" />
 
             <TextView
                 android:id="@+id/tv_laun_time"
@@ -52,7 +52,7 @@
                 android:layout_marginRight="@dimen/dp_20"
                 android:text="2019-17-01"
                 android:textColor="#ff676767"
-                android:textSize="@dimen/sp_12" />
+                android:textSize="@dimen/sp_8" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -65,21 +65,19 @@
                 android:id="@+id/tv_duration_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_5"
                 android:text="截至"
                 android:textColor="#ff676767"
-                android:textSize="@dimen/sp_11" />
+                android:textSize="@dimen/sp_9" />
 
             <TextView
                 android:id="@+id/tv_laun_deadline_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_8"
-                android:layout_marginTop="@dimen/dp_5"
                 android:layout_toRightOf="@id/tv_duration_title"
                 android:text="7月12日"
                 android:textColor="#2B8CFA"
-                android:textSize="@dimen/sp_11" />
+                android:textSize="@dimen/sp_9" />
 
             <!--<TextView-->
                 <!--android:id="@+id/tv_comp_deadline_week"-->
@@ -111,7 +109,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_10"
-            android:layout_marginTop="@dimen/dp_10">
+            android:layout_marginTop="@dimen/dp_5">
 
             <TextView
                 android:id="@+id/tv_leave_reason_title"
@@ -119,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:text="发起"
                 android:textColor="#ff676767"
-                android:textSize="@dimen/sp_11" />
+                android:textSize="@dimen/sp_9" />
 
             <TextView
                 android:id="@+id/tv_launch_task_person"
@@ -129,19 +127,20 @@
                 android:layout_toRightOf="@id/tv_leave_reason_title"
                 android:text="王俊杰"
                 android:textColor="#2B8CFA"
-                android:textSize="@dimen/sp_11" />
+                android:textSize="@dimen/sp_9" />
 
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:textSize="@dimen/sp_9"
                 android:id="@+id/tv_wancheng_number"
                 android:layout_marginLeft="@dimen/dp_10"
-            android:layout_centerVertical="true"
+                android:layout_centerVertical="true"
                 android:text="已完成"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -154,11 +153,11 @@
                 android:gravity="center"
                 android:layout_marginRight="@dimen/dp_14"
                 android:id="@+id/qgl_zy_ysp_status"
-                android:textSize="@dimen/sp_11"
+                android:textSize="@dimen/sp_7"
                 android:layout_gravity="right"
                 android:text="已关闭"
-                android:layout_width="@dimen/dp_50"
-                android:layout_height="@dimen/dp_21" />
+                android:layout_width="@dimen/dp_40"
+                android:layout_height="@dimen/dp_15" />
 
         </RelativeLayout>
 

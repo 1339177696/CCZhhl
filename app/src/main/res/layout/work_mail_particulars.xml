@@ -13,18 +13,17 @@
             android:id="@+id/work_mail_rela_my1"
             android:background="@mipmap/agency_bannerbg"
             android:layout_width="match_parent"
-            android:paddingTop="@dimen/dp_20"
+            android:paddingTop="@dimen/dp_10"
             android:layout_height="@dimen/dp_170"
  >
             <FrameLayout
                 android:id="@+id/iv_back"
-                android:layout_width="@dimen/dp_45"
-                android:layout_height="@dimen/dp_45">
+                android:layout_width="@dimen/dp_40"
+                android:layout_height="@dimen/dp_40">
         <ImageView
             android:layout_gravity="center"
             android:layout_margin="@dimen/dp_10"
             android:layout_width="@dimen/dp_12"
-
             android:background="@mipmap/ic_left_white"
             android:layout_height="@dimen/dp_12" />
             </FrameLayout>
@@ -38,7 +37,7 @@
             android:textSize="@dimen/sp_11" />
 
             <LinearLayout
-                android:layout_marginTop="@dimen/dp_70"
+                android:layout_marginTop="@dimen/dp_60"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
@@ -87,7 +86,7 @@
         </RelativeLayout>
 
         <ScrollView
-            android:layout_marginTop="-20dp"
+            android:layout_marginTop="-60dp"
             android:layout_below="@+id/work_mail_rela_my1"
             android:layout_width="match_parent"
             android:layout_height="match_parent">

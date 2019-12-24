@@ -24,15 +24,15 @@
                 android:id="@+id/img_1"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:background="@mipmap/fragment_work_fragment_list_qgl_img1"
-                android:layout_width="@dimen/dp_25"
-                android:layout_height="@dimen/dp_25" />
+                android:layout_width="@dimen/dp_24"
+                android:layout_height="@dimen/dp_24" />
 
             <TextView
                 android:textColor="#313131"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/img_1"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:textSize="@dimen/sp_11"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:textSize="@dimen/sp_9"
                 android:layout_width="wrap_content"
                 android:text="公文流转"
                 android:layout_height="wrap_content" />
@@ -60,15 +60,15 @@
                 android:id="@+id/img_2"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:background="@mipmap/fragment_work_fragment_list_qgl_img2"
-                android:layout_width="@dimen/dp_25"
-                android:layout_height="@dimen/dp_25" />
+                android:layout_width="@dimen/dp_24"
+                android:layout_height="@dimen/dp_24" />
 
             <TextView
                 android:textColor="#313131"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/img_2"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:textSize="@dimen/sp_11"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:textSize="@dimen/sp_9"
                 android:layout_width="wrap_content"
                 android:text="邮件收发"
                 android:layout_height="wrap_content" />
@@ -94,15 +94,15 @@
                 android:id="@+id/img_3"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:background="@mipmap/fragment_work_fragment_list_qgl_img3"
-                android:layout_width="@dimen/dp_25"
-                android:layout_height="@dimen/dp_25" />
+                android:layout_width="@dimen/dp_24"
+                android:layout_height="@dimen/dp_24" />
 
             <TextView
                 android:textColor="#313131"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/img_3"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:textSize="@dimen/sp_11"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:textSize="@dimen/sp_9"
                 android:layout_width="wrap_content"
                 android:text="会议安排"
                 android:layout_height="wrap_content" />
@@ -130,15 +130,15 @@
                 android:id="@+id/img_4"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:background="@mipmap/fragment_work_fragment_list_qgl_img4"
-                android:layout_width="@dimen/dp_25"
-                android:layout_height="@dimen/dp_25" />
+                android:layout_width="@dimen/dp_24"
+                android:layout_height="@dimen/dp_24" />
 
             <TextView
                 android:textColor="#313131"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/img_4"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:textSize="@dimen/sp_11"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:textSize="@dimen/sp_9"
                 android:layout_width="wrap_content"
                 android:text="任务协同"
                 android:layout_height="wrap_content" />
@@ -164,15 +164,15 @@
                 android:id="@+id/img_5"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:background="@mipmap/fragment_work_fragment_list_qgl_img5"
-                android:layout_width="@dimen/dp_25"
-                android:layout_height="@dimen/dp_25" />
+                android:layout_width="@dimen/dp_24"
+                android:layout_height="@dimen/dp_24" />
 
             <TextView
                 android:textColor="#313131"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/img_5"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:textSize="@dimen/sp_11"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:textSize="@dimen/sp_9"
                 android:layout_width="wrap_content"
                 android:text="请假管理"
                 android:layout_height="wrap_content" />
@@ -197,15 +197,15 @@
                 android:id="@+id/img_7"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:background="@mipmap/fragment_work_fragment_list_qgl_img5"
-                android:layout_width="@dimen/dp_25"
-                android:layout_height="@dimen/dp_25" />
+                android:layout_width="@dimen/dp_24"
+                android:layout_height="@dimen/dp_24" />
 
             <TextView
                 android:textColor="#313131"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/img_7"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:textSize="@dimen/sp_11"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:textSize="@dimen/sp_9"
                 android:layout_width="wrap_content"
                 android:text="指令安排"
                 android:layout_height="wrap_content" />
@@ -232,14 +232,14 @@
                 android:id="@+id/img_6"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:background="@mipmap/fragment_work_fragment_list_qgl_img6"
-                android:layout_width="@dimen/dp_25"
-                android:layout_height="@dimen/dp_25" />
+                android:layout_width="@dimen/dp_24"
+                android:layout_height="@dimen/dp_24" />
 
             <TextView
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/img_6"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:textSize="@dimen/sp_11"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:textSize="@dimen/sp_9"
                 android:layout_width="wrap_content"
                 android:text="报销管理"
                 android:layout_height="wrap_content" />

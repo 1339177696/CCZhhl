@@ -11,7 +11,7 @@
                 android:radius="5dip"
                 />
             <stroke
-                android:width="0.5px"
+
                 android:color="@color/bg_all"/>
         </shape>
     </item>

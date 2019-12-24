@@ -34,7 +34,7 @@
                 android:maxLines="1"
                 android:textColor="#313131"
                 android:ellipsize="end"
-                android:textSize="@dimen/sp_11"
+                android:textSize="@dimen/sp_9"
                 android:text="省厅大的说法都是理发卡进来看大家发进来看"
                 />
 
@@ -51,7 +51,7 @@
                 android:maxLines="1"
                 android:text="省厅大的说法都是"
                 android:textColor="#676767"
-                android:textSize="@dimen/sp_10" />
+                android:textSize="@dimen/sp_7" />
             <TextView
                 android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
@@ -63,7 +63,7 @@
                 android:maxLines="1"
                 android:text="省厅大的说法都是"
                 android:textColor="#858585"
-                android:textSize="@dimen/sp_9" />
+                android:textSize="@dimen/sp_7" />
             <TextView
                 android:gravity="center"
                 android:drawableLeft="@mipmap/news_icon"

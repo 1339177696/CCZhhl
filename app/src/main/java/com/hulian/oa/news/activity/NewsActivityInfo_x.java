@@ -1,6 +1,8 @@
 package com.hulian.oa.news.activity;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -73,6 +75,7 @@ public class NewsActivityInfo_x extends BaseActivity {
     NewsCommentdapter mRecyclerViewAdapter;
     private Bean_x newsA;
     List<JournalismComments> memberList=new ArrayList<>();
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
