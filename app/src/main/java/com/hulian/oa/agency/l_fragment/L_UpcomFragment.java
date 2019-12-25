@@ -128,6 +128,9 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
     }
 
     private void setRefresh() {
+        if (mRecyclerViewAdapter!=null){
+            mRecyclerViewAdapter.notifyDataSetChanged();
+        }
         mRecyclerViewAdapter.clearData();
         mCount = 1;
     }

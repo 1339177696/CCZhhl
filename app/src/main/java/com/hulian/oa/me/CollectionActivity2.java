@@ -110,6 +110,9 @@ public class CollectionActivity2 extends BaseActivity implements PullLoadMoreRec
     }
 
     private void setRefresh() {
+        if (mRecyclerViewAdapter!=null){
+            mRecyclerViewAdapter.notifyDataSetChanged();
+        }
         mRecyclerViewAdapter.clearData();
         mCount = 1;
     }

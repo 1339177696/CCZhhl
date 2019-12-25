@@ -148,7 +148,7 @@
             android:id="@+id/bt_1"
             android:textSize="@dimen/sp_7"
             android:textColor="#ffffff"
-            android:paddingTop="@dimen/dp_2"
+            android:paddingTop="@dimen/dp_1"
             android:paddingBottom="@dimen/dp_2"
             android:paddingLeft="@dimen/dp_13"
             android:paddingRight="@dimen/dp_10"
@@ -156,6 +156,7 @@
             android:layout_width="@dimen/dp_45"
             android:layout_height="wrap_content" />
         <TextView
+            android:layout_gravity="center"
             android:id="@+id/bt_2"
             android:textColor="#ffffff"
             android:textSize="@dimen/sp_7"

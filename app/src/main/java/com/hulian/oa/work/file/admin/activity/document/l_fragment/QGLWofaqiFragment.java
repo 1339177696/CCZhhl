@@ -92,6 +92,9 @@ public class QGLWofaqiFragment extends Fragment implements PullLoadMoreRecyclerV
         getData();
     }
     private void setRefresh() {
+        if (l_woFaqiAdapter!=null){
+            l_woFaqiAdapter.notifyDataSetChanged();
+        }
         l_woFaqiAdapter.clearData();
         mCount = 1;
     }

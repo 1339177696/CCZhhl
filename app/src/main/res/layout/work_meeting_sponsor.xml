@@ -504,6 +504,7 @@
             </RelativeLayout>
 
             <EditText
+                android:imeOptions="actionSend"
                 android:id="@+id/et_content"
                 android:layout_marginRight="@dimen/dp_15"
                 android:layout_marginLeft="@dimen/dp_10"

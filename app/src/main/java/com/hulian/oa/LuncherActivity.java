@@ -257,7 +257,7 @@ public class LuncherActivity extends BaseActivity {
     /**
      * 如果没有开启通知，跳转至设置界面
      *
-     * @param context
+//     * @param context
      */
 //    private void setNotification(Context context) {
 //        Intent localIntent = new Intent();

@@ -1,5 +1,6 @@
 package com.hulian.oa.work.file.admin.activity.meeting;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -7,7 +8,9 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -40,6 +43,7 @@ import com.hulian.oa.work.file.admin.activity.meeting.l_adapter.MeetGridViewAdap
 import com.hulian.oa.work.file.admin.activity.meeting.l_adapter.MeetRoomAdapter;
 import com.hulian.oa.work.file.admin.activity.meeting.l_fragment.MeetLaunchFragment;
 import com.hulian.oa.work.file.admin.activity.meeting.l_fragment.MeetReceiverFragment;
+import com.hulian.oa.work.file.admin.activity.task.l_details_activity.TaskLaunchDetailsActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -415,4 +419,6 @@ public class MeetingSponsorActivity extends BaseActivity {
     public void onViewClicked3() {
         startActivityForResult(new Intent(MeetingSponsorActivity.this, SelDepartmentActivity_meet_zb_single.class), 110);
     }
+
+
 }

@@ -1,7 +1,9 @@
 package com.hulian.oa.me;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -36,6 +38,7 @@ public class CollectionActivity extends BaseActivity {
     ImageView iv_back;
     private ArrayList<String> list_path;
     private ArrayList<String> list_title;
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

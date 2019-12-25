@@ -70,10 +70,10 @@ public class NewsViewAdapter extends RecyclerView.Adapter <NewsViewAdapter.ViewH
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Intent intent= new Intent(mContext, NewsActivityInfo.class);
-               intent.putExtra("getIsCollect",dataList.get(position).getIsCollect());
-               intent.putExtra("getJournalismId",dataList.get(position).getJournalismId());
-               mContext.startActivity(intent);
+                    Intent intent = new Intent(mContext, NewsActivityInfo.class);
+                    intent.putExtra("getIsCollect", dataList.get(position).getIsCollect());
+                    intent.putExtra("getJournalismId", dataList.get(position).getJournalismId());
+                    mContext.startActivity(intent);
             }
         });
     }

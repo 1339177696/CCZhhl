@@ -37,6 +37,7 @@ import com.hulian.oa.net.Urls;
 import com.hulian.oa.news.adapter.LocalDataAdapter;
 import com.hulian.oa.news.adapter.NewsViewAdapter;
 import com.hulian.oa.utils.SPUtils;
+import com.hulian.oa.views.LoadingDialog;
 import com.hulian.oa.work.file.admin.activity.PostOrderActivity;
 import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_PendFragment;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
@@ -81,6 +82,7 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
     RecyclerView recycler_banner;
     Unbinder unbinder;
     View rootView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -94,19 +96,19 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
     }
 
     private void initList() {
-
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
         mRecyclerView.setVerticalScrollBarEnabled(true);
+        mPullLoadMoreRecyclerView.setRefreshing(true);
         //设置下拉刷新是否可见
-        //mPullLoadMoreRecyclerView.setRefreshing(true);
+        mPullLoadMoreRecyclerView.setRefreshing(false);
         //设置是否可以下拉刷新
         //mPullLoadMoreRecyclerView.setPullRefreshEnable(true);
         //设置是否可以上拉刷新
         mPullLoadMoreRecyclerView.setPushRefreshEnable(false);
         //显示下拉刷新
-        mPullLoadMoreRecyclerView.setRefreshing(true);
+        mPullLoadMoreRecyclerView.setRefreshing(false);
         //设置上拉刷新文字
         mPullLoadMoreRecyclerView.setFooterViewText("loading");
         //设置上拉刷新文字颜色
@@ -114,33 +116,17 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new NewsViewAdapter(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
-
         getData();
 
     }
 
     private void initView() {
-//        //  banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
-//        banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
-//        banner.setImageLoader(new MyLoader());
-//        banner.setBannerAnimation(Transformer.Default);
-//    //    banner.setBannerTitles(list_title);
-//        banner.setDelayTime(3000);
-//        banner.isAutoPlay(true);
-//        banner.setIndicatorGravity(BannerConfig.CENTER);
-//        banner.setBannerAnimation(Transformer.DepthPage);
-//        banner.setImages(list_path)
-//                .setOnBannerListener(this)
-//                .start();
         mOverFlyingLayoutManager = new OverFlyingLayoutManager(0.75f, 385, OverFlyingLayoutManager.HORIZONTAL);
-
         recycler_banner.setAdapter(new LocalDataAdapter(getActivity(),list_path));
         recycler_banner.setLayoutManager(mOverFlyingLayoutManager);
-
         recycler_banner.addOnScrollListener(new CenterScrollListener());
         mOverFlyingLayoutManager.setOnPageChangeListener(new OverFlyingLayoutManager.OnPageChangeListener() {
             @Override
@@ -194,11 +180,14 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
     @Override
     public void onLoadMore() {
         Log.e("wxl", "onLoadMore");
-//        mCount = mCount + 1;
-//        getData();
+        mCount = mCount + 1;
+        getData();
     }
 
     private void setRefresh() {
+        if (mRecyclerViewAdapter!=null){
+            mRecyclerViewAdapter.notifyDataSetChanged();
+        }
         mRecyclerViewAdapter.clearData();
         mCount = 1;
     }
@@ -219,7 +208,9 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
                     List<News> memberList = gson.fromJson(result.getJSONArray("data").toString(),
                             new TypeToken<List<News>>() {
                             }.getType());
+
                     mRecyclerViewAdapter.addAllData(memberList);
+
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                     if(mCount==1){
                         list_path.removeAll(list_path);

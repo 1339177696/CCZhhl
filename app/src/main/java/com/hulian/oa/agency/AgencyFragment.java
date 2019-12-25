@@ -225,9 +225,9 @@ public class AgencyFragment extends Fragment {
             case R.id.lr_qgl_btn1:
                 pos = 0;
                 zxQglTxt1.setTextColor(Color.parseColor("#FFFFFF"));
-                zxQglImg1.setImageResource(R.mipmap.zx_xinwen_yes);
+                zxQglImg1.setImageResource(R.mipmap.done);
                 zxQglTxt2.setTextColor(Color.parseColor("#ccccd5"));
-                zxQglImg2.setImageResource(R.mipmap.zx_tongzhi_no);
+                zxQglImg2.setImageResource(R.mipmap.done_default);
                 if (l_upcomFragment == null) {
                     l_upcomFragment = new L_UpcomFragment();
                     fTransaction.add(R.id.qgl_fragment_daiban, l_upcomFragment);
@@ -238,9 +238,9 @@ public class AgencyFragment extends Fragment {
             case R.id.lr_qgl_btn2:
                 pos = 1;
                 zxQglTxt1.setTextColor(Color.parseColor("#ccccd5"));
-                zxQglImg1.setImageResource(R.mipmap.zx_xinwen_no);
+                zxQglImg1.setImageResource(R.mipmap.done_default);
                 zxQglTxt2.setTextColor(Color.parseColor("#FFFFFF"));
-                zxQglImg2.setImageResource(R.mipmap.zx_tongzhi_yes);
+                zxQglImg2.setImageResource(R.mipmap.done);
                 if (l_hascomFragment == null) {
                     l_hascomFragment = new L_HascomFragment();
                     fTransaction.add(R.id.qgl_fragment_daiban, l_hascomFragment);

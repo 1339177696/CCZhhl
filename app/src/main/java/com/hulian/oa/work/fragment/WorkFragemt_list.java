@@ -131,7 +131,7 @@ public class WorkFragemt_list extends Fragment {
                 startActivity(new Intent(getActivity(), SecondLeaveActivity.class));
                 break;
             case R.id.rela_baoxiao:
-                Toast.makeText(getActivity(),"功能开发者...",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"功能暂未开放",Toast.LENGTH_SHORT).show();
 //                startActivity(new Intent(getActivity(), SecondExpenseActivity.class));
                 break;
             case R.id.rela_zhiling:

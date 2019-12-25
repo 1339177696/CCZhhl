@@ -119,6 +119,9 @@ public class L_PendFragment extends Fragment implements PullLoadMoreRecyclerView
     }
 
     private void setRefresh() {
+        if (mRecyclerViewAdapter!=null){
+            mRecyclerViewAdapter.notifyDataSetChanged();
+        }
         mRecyclerViewAdapter.clearData();
         mCount = 1;
     }

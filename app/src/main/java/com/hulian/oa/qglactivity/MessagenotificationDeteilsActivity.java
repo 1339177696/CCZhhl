@@ -1,6 +1,8 @@
 package com.hulian.oa.qglactivity;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -47,6 +49,7 @@ public class MessagenotificationDeteilsActivity extends BaseActivity implements 
     @BindView(R.id.emptyBg)
     RelativeLayout im_empty;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,6 +109,9 @@ public class MessagenotificationDeteilsActivity extends BaseActivity implements 
     }
 
     private void setRefresh() {
+        if (qglTuisongadapter!=null){
+            qglTuisongadapter.notifyDataSetChanged();
+        }
         qglTuisongadapter.clearData();
         mCount = 1;
         getDatalist();

@@ -2,8 +2,10 @@ package com.hulian.oa.me;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +34,7 @@ public class FileBoxActivity extends BaseActivity implements PullLoadMoreRecycle
     private RecyclerView mRecyclerView;
     L_FileBoxAdapter mRecyclerViewAdapter;
     private int mCount = 1;
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +86,9 @@ public class FileBoxActivity extends BaseActivity implements PullLoadMoreRecycle
     }
 
     private void setRefresh() {
+        if (mRecyclerViewAdapter!=null){
+            mRecyclerViewAdapter.notifyDataSetChanged();
+        }
         mRecyclerViewAdapter.clearData();
         mCount = 1;
     }

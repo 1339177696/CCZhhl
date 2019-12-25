@@ -21,7 +21,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_49"
+            android:layout_height="@dimen/dp_45"
             android:orientation="vertical">
 
             <TextView
@@ -79,6 +79,7 @@
     </LinearLayout>
     <!--抽屉式页面-->
     <RelativeLayout
+        android:clickable="true"
         android:layout_width="@dimen/dp_230"
         android:layout_height="match_parent"
         android:layout_gravity="start"

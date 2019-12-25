@@ -116,6 +116,9 @@ public class LeavePendFragment extends Fragment implements PullLoadMoreRecyclerV
         getData();
     }
     private void setRefresh() {
+        if (mRecyclerViewAdapter!=null){
+            mRecyclerViewAdapter.notifyDataSetChanged();
+        }
         mRecyclerViewAdapter.clearData();
         mCount = 1;
     }

@@ -112,6 +112,9 @@ public class MeetReceiverFragment extends Fragment implements PullLoadMoreRecycl
     }
 
     private void setRefresh() {
+        if (mRecyclerViewAdapter!=null){
+            mRecyclerViewAdapter.notifyDataSetChanged();
+        }
         mRecyclerViewAdapter.clearData();
         mCount = 1;
     }

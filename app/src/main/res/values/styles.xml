@@ -52,9 +52,9 @@
         <item name="android:layout_weight">1</item>
         <item name="android:button">@null</item>
         <item name="android:gravity">center</item>
-        <item name="android:paddingTop">@dimen/dp_6</item>
+        <item name="android:paddingTop">@dimen/dp_8</item>
         <item name="android:textColor">@drawable/rbtn_main_txt</item>
-        <item name="android:textSize">@dimen/sp_10</item>
+        <item name="android:textSize">@dimen/sp_9</item>
     </style>
     <style name="MytabStyle" parent="android:Widget">
         <!--<item name="tabBackground">@drawable/tab_background</item>-->

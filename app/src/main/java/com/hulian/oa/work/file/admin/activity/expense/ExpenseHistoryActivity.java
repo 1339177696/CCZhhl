@@ -1,6 +1,8 @@
 package com.hulian.oa.work.file.admin.activity.expense;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ImageView;
@@ -40,6 +42,7 @@ public class ExpenseHistoryActivity extends BaseActivity implements PullLoadMore
     private RecyclerView mRecyclerView;
     L_ExpenseHistoryAdapter mRecyclerViewAdapter;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +96,9 @@ public class ExpenseHistoryActivity extends BaseActivity implements PullLoadMore
     }
 
     private void setRefresh() {
+        if (mRecyclerViewAdapter!=null){
+            mRecyclerViewAdapter.notifyDataSetChanged();
+        }
         mRecyclerViewAdapter.clearData();
         mCount = 1;
     }

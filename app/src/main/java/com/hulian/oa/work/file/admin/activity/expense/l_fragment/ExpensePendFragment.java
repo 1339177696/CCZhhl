@@ -117,6 +117,9 @@ public class ExpensePendFragment extends Fragment implements PullLoadMoreRecycle
         getData();
     }
     private void setRefresh() {
+        if (mRecyclerViewAdapter!=null){
+            mRecyclerViewAdapter.notifyDataSetChanged();
+        }
         mRecyclerViewAdapter.clearData();
         mCount = 1;
     }

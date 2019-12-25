@@ -1,6 +1,8 @@
 package com.hulian.oa.work.file.admin.activity.notice;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
@@ -54,6 +56,7 @@ public class NoticeParticularsActivity extends BaseActivity {
     private String Type = "";
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

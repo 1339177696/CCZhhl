@@ -107,6 +107,9 @@ public class L_CollectionNoticeFragment extends Fragment implements PullLoadMore
         getData();
     }
     private void setRefresh() {
+        if (mRecyclerViewAdapter!=null){
+            mRecyclerViewAdapter.notifyDataSetChanged();
+        }
         mRecyclerViewAdapter.clearData();
         mCount = 1;
     }

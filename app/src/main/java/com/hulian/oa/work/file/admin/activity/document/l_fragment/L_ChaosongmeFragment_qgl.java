@@ -99,6 +99,9 @@ public class L_ChaosongmeFragment_qgl extends Fragment implements PullLoadMoreRe
     }
 
     private void setRefresh() {
+        if (l_chaosongAdapter!=null){
+            l_chaosongAdapter.notifyDataSetChanged();
+        }
         l_chaosongAdapter.clearData();
         mCount = 1;
     }

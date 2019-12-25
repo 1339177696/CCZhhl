@@ -129,6 +129,9 @@ public class L_HascomFragment extends Fragment implements PullLoadMoreRecyclerVi
     }
 
     private void setRefresh() {
+        if (mRecyclerViewAdapter!=null){
+            mRecyclerViewAdapter.notifyDataSetChanged();
+        }
         mRecyclerViewAdapter.clearData();
         mCount = 1;
     }

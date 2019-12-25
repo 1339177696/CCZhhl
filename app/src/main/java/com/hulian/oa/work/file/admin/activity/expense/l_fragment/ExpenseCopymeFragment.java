@@ -116,6 +116,9 @@ public class ExpenseCopymeFragment extends Fragment implements PullLoadMoreRecyc
         getData();
     }
     private void setRefresh() {
+        if (mRecyclerViewAdapter!=null){
+            mRecyclerViewAdapter.notifyDataSetChanged();
+        }
         mRecyclerViewAdapter.clearData();
         mCount = 1;
     }

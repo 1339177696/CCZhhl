@@ -205,6 +205,9 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
     }
 
     private void setRefresh() {
+        if (mRecyclerViewAdapter!=null){
+            mRecyclerViewAdapter.notifyDataSetChanged();
+        }
         mRecyclerViewAdapter.clearData();
         mCount = 1;
     }

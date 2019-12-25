@@ -116,6 +116,9 @@ public class ExpenseApprovedFragment extends Fragment implements PullLoadMoreRec
         getData();
     }
     private void setRefresh() {
+        if (mRecyclerViewAdapter!=null){
+            mRecyclerViewAdapter.notifyDataSetChanged();
+        }
         mRecyclerViewAdapter.clearData();
         mCount = 1;
     }

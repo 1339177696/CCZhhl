@@ -119,6 +119,9 @@ public class News_2_Fragment extends Fragment implements PullLoadMoreRecyclerVie
         getData();
     }
     private void setRefresh() {
+        if (mRecyclerViewAdapter!=null){
+            mRecyclerViewAdapter.notifyDataSetChanged();
+        }
         mRecyclerViewAdapter.clearData();
         mCount = 1;
     }

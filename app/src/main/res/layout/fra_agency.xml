@@ -191,7 +191,7 @@
                     android:background="@drawable/zx_xinwen_bg">
                     <ImageView
                         android:id="@+id/zx_qgl_img1"
-                        android:src="@mipmap/zx_xinwen_yes"
+                        android:src="@mipmap/done"
                         android:layout_width="@dimen/dp_10"
                         android:layout_height="@dimen/dp_11" />
                     <TextView
@@ -225,7 +225,7 @@
 
                     <ImageView
                         android:id="@+id/zx_qgl_img2"
-                        android:src="@mipmap/zx_tongzhi_no"
+                        android:src="@mipmap/done_default"
                         android:layout_width="@dimen/dp_10"
                         android:layout_height="@dimen/dp_11" />
                     <TextView

@@ -118,6 +118,9 @@ public class CompletedTaskFragment extends Fragment implements PullLoadMoreRecyc
     }
 
     private void setRefresh() {
+        if (mRecyclerViewAdapter!=null){
+            mRecyclerViewAdapter.notifyDataSetChanged();
+        }
         mRecyclerViewAdapter.clearData();
         mCount = 1;
     }

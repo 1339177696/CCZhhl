@@ -156,6 +156,9 @@ public class SecondInstructActivity extends BaseActivity implements PullLoadMore
     }
 
     private void setRefresh() {
+        if (mRecyclerViewAdapter!=null){
+            mRecyclerViewAdapter.notifyDataSetChanged();
+        }
         mRecyclerViewAdapter.clearData();
         mCount = 1;
     }

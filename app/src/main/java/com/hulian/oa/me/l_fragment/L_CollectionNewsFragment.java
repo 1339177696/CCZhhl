@@ -112,6 +112,9 @@ public class L_CollectionNewsFragment extends Fragment implements PullLoadMoreRe
         getData();
     }
     private void setRefresh() {
+        if (mRecyclerViewAdapter!=null){
+            mRecyclerViewAdapter.notifyDataSetChanged();
+        }
         mRecyclerViewAdapter.clearData();
         mCount = 1;
     }
