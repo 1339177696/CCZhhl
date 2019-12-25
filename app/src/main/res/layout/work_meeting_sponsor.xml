@@ -4,6 +4,10 @@
     android:background="@color/bg_all"
     android:layout_height="match_parent">
 
+    <View
+        android:background="#2D4BCA"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_10"/>
     <RelativeLayout
         android:id="@+id/rl_title"
         android:layout_width="match_parent"
@@ -504,7 +508,6 @@
             </RelativeLayout>
 
             <EditText
-                android:imeOptions="actionSend"
                 android:id="@+id/et_content"
                 android:layout_marginRight="@dimen/dp_15"
                 android:layout_marginLeft="@dimen/dp_10"

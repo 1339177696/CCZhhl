@@ -77,7 +77,8 @@
         <activity android:name=".message.activity.MessageRemindActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"/>
         <activity android:name=".news.activity.NewsActivityInfo"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity android:name=".address.activity.PeopleaddressActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"/>
         <activity android:name=".address.activity.PeopleaddressInforActivity"
@@ -265,7 +266,8 @@
         <activity android:name=".work.file.admin.activity.meeting.MeetingAmendActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"/>
         <activity android:name=".work.file.admin.activity.meeting.MeetingSponsorActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity android:name=".work.file.admin.activity.expense.ExpenseApplyForActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"/>
         <activity android:name=".work.file.admin.activity.expense.ExpenseExamineActivity"

@@ -100,15 +100,14 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
         mRecyclerView.setVerticalScrollBarEnabled(true);
-        mPullLoadMoreRecyclerView.setRefreshing(true);
         //设置下拉刷新是否可见
-        mPullLoadMoreRecyclerView.setRefreshing(false);
+        mPullLoadMoreRecyclerView.setRefreshing(true);
         //设置是否可以下拉刷新
-        //mPullLoadMoreRecyclerView.setPullRefreshEnable(true);
+        mPullLoadMoreRecyclerView.setPullRefreshEnable(true);
         //设置是否可以上拉刷新
         mPullLoadMoreRecyclerView.setPushRefreshEnable(false);
         //显示下拉刷新
-        mPullLoadMoreRecyclerView.setRefreshing(false);
+        mPullLoadMoreRecyclerView.setRefreshing(true);
         //设置上拉刷新文字
         mPullLoadMoreRecyclerView.setFooterViewText("loading");
         //设置上拉刷新文字颜色
