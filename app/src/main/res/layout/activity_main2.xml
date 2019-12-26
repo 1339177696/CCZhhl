@@ -239,6 +239,8 @@
             android:textColor="@color/white"
             android:textSize="@dimen/sp_11" />
 
+        <!--是的撒大苏打大-->
+
     </RelativeLayout>
 
 </android.support.v4.widget.DrawerLayout>
