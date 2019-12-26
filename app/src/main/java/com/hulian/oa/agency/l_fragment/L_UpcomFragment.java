@@ -1,5 +1,6 @@
 package com.hulian.oa.agency.l_fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -35,6 +36,8 @@ import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.qglactivity.qglbean.StringBean1;
 import com.hulian.oa.utils.SPUtils;
+import com.hulian.oa.work.file.admin.activity.meeting.MeetingSponsorActivity;
+import com.hulian.oa.work.file.admin.activity.task.TaskLauncherActivity;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
 import org.json.JSONException;
@@ -288,65 +291,73 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
 
 
     //接受点击事件
-    public void onEventMainThread(StringBean1 event) {
-        Log.e("待办点击的",event.getDaiban());
-        if (event.getDaiban().equals("公文审批")){
-            dataBean.clear();
-            for (int i = 0;i<memberList.size();i++) {
+//    public void onEventMainThread(StringBean1 event) {
+//        Log.e("待办点击的",event.getDaiban());
+//        if (event.getDaiban().equals("公文审批")){
+//            dataBean.clear();
+//            for (int i = 0;i<memberList.size();i++) {
+//
+//                if (memberList.get(i).getType().equals("1")) {
+//                    //公文
+//                    dataBean.add(memberList.get(i));
+//                }
+//            }
+//            mRecyclerViewAdapter.clearData();
+//            mRecyclerViewAdapter.addAllData(dataBean);
+//            AgencyCount mAgencyCount = new AgencyCount();
+//            mAgencyCount.setAgencyCount(dataBean.size() + "");
+//            EventBus.getDefault().post(mAgencyCount);
+//
+//        }else if (event.getDaiban().equals("会议安排")){
+//            dataBean.clear();
+//            for (int i = 0;i<memberList.size();i++) {
+//                if (memberList.get(i).getType().equals("3")) {
+//                    //公文
+//                    dataBean.add(memberList.get(i));
+//                }
+//            }
+//            mRecyclerViewAdapter.clearData();
+//            mRecyclerViewAdapter.addAllData(dataBean);
+//            AgencyCount mAgencyCount = new AgencyCount();
+//            mAgencyCount.setAgencyCount(dataBean.size() + "");
+//            EventBus.getDefault().post(mAgencyCount);
+//
+//        }else if (event.getDaiban().equals("任务协同")){
+//            dataBean.clear();
+//            for (int i = 0;i<memberList.size();i++) {
+//                if (memberList.get(i).getType().equals("4")) {
+//                    //公文
+//                    dataBean.add(memberList.get(i));
+//                }
+//            }
+//            mRecyclerViewAdapter.clearData();
+//            mRecyclerViewAdapter.addAllData(dataBean);
+//            AgencyCount mAgencyCount = new AgencyCount();
+//            mAgencyCount.setAgencyCount(dataBean.size() + "");
+//            EventBus.getDefault().post(mAgencyCount);
+//
+//        }else if (event.getDaiban().equals("请假审批")){
+//            dataBean.clear();
+//            for (int i = 0;i<memberList.size();i++) {
+//
+//                if (memberList.get(i).getType().equals("2")) {
+//                    //公文
+//                    dataBean.add(memberList.get(i));
+//                }
+//            }
+//            mRecyclerViewAdapter.clearData();
+//            mRecyclerViewAdapter.addAllData(dataBean);
+//            AgencyCount mAgencyCount = new AgencyCount();
+//            mAgencyCount.setAgencyCount(dataBean.size() + "");
+//            EventBus.getDefault().post(mAgencyCount);
+//        }
+//    }
 
-                if (memberList.get(i).getType().equals("1")) {
-                    //公文
-                    dataBean.add(memberList.get(i));
-                }
-            }
-            mRecyclerViewAdapter.clearData();
-            mRecyclerViewAdapter.addAllData(dataBean);
-            AgencyCount mAgencyCount = new AgencyCount();
-            mAgencyCount.setAgencyCount(dataBean.size() + "");
-            EventBus.getDefault().post(mAgencyCount);
-
-        }else if (event.getDaiban().equals("会议安排")){
-            dataBean.clear();
-            for (int i = 0;i<memberList.size();i++) {
-                if (memberList.get(i).getType().equals("3")) {
-                    //公文
-                    dataBean.add(memberList.get(i));
-                }
-            }
-            mRecyclerViewAdapter.clearData();
-            mRecyclerViewAdapter.addAllData(dataBean);
-            AgencyCount mAgencyCount = new AgencyCount();
-            mAgencyCount.setAgencyCount(dataBean.size() + "");
-            EventBus.getDefault().post(mAgencyCount);
-
+    public void onEventMainThread(StringBean1 event){
+        if (event.getDaiban().equals("会议安排")){
+            startActivity(new Intent(getActivity(), MeetingSponsorActivity.class));
         }else if (event.getDaiban().equals("任务协同")){
-            dataBean.clear();
-            for (int i = 0;i<memberList.size();i++) {
-                if (memberList.get(i).getType().equals("4")) {
-                    //公文
-                    dataBean.add(memberList.get(i));
-                }
-            }
-            mRecyclerViewAdapter.clearData();
-            mRecyclerViewAdapter.addAllData(dataBean);
-            AgencyCount mAgencyCount = new AgencyCount();
-            mAgencyCount.setAgencyCount(dataBean.size() + "");
-            EventBus.getDefault().post(mAgencyCount);
-
-        }else if (event.getDaiban().equals("请假审批")){
-            dataBean.clear();
-            for (int i = 0;i<memberList.size();i++) {
-
-                if (memberList.get(i).getType().equals("2")) {
-                    //公文
-                    dataBean.add(memberList.get(i));
-                }
-            }
-            mRecyclerViewAdapter.clearData();
-            mRecyclerViewAdapter.addAllData(dataBean);
-            AgencyCount mAgencyCount = new AgencyCount();
-            mAgencyCount.setAgencyCount(dataBean.size() + "");
-            EventBus.getDefault().post(mAgencyCount);
+            startActivity(new Intent(getActivity(), TaskLauncherActivity.class));
         }
     }
 

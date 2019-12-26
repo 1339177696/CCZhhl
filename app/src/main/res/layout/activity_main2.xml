@@ -49,17 +49,19 @@
                     android:drawableTop="@drawable/main_low_tab4"
                     android:text="通讯录" />
 
-                <RadioButton
-                    android:id="@+id/rb_agency"
-                    style="@style/footer_radioButton_style"
-                    android:drawableTop="@drawable/main_low_tab5"
-                    android:text="待办" />
+
 
                 <RadioButton
                     android:id="@+id/rb_work"
                     style="@style/footer_radioButton_style"
                     android:drawableTop="@drawable/main_low_tab6"
-                    android:text="工作" />
+                    android:text="日程" />
+<!--大苏打实打实打算-->
+                <RadioButton
+                    android:id="@+id/rb_agency"
+                    style="@style/footer_radioButton_style"
+                    android:drawableTop="@drawable/main_low_tab5"
+                    android:text="待办" />
 
                 <RadioButton
                     android:id="@+id/rb_bus"
@@ -189,6 +191,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/main2_rela_collection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

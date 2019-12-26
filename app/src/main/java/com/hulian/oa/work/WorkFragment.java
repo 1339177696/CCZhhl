@@ -19,6 +19,7 @@ import com.hulian.oa.me.MeActivity;
 import com.hulian.oa.work.file.admin.activity.task.l_fragment.CompletedTaskFragment;
 import com.hulian.oa.work.fragment.WorkFragemt_9;
 import com.hulian.oa.work.fragment.WorkFragemt_list;
+import com.hulian.oa.work.fragment.WorkFragemt_richeng;
 
 import java.util.ArrayList;
 
@@ -45,6 +46,7 @@ public class WorkFragment extends Fragment {
     private ArrayList<String> list_title;
     WorkFragemt_9 workFragemt_9;
     WorkFragemt_list workFragemt_list;
+    WorkFragemt_richeng workFragemt_richeng;
 
     public WorkFragment() {
         // Required empty public constructor
@@ -83,8 +85,10 @@ public class WorkFragment extends Fragment {
         EventBus.getDefault().register(this);
         workFragemt_9=new WorkFragemt_9();
         workFragemt_list=new WorkFragemt_list();
+        workFragemt_richeng=new WorkFragemt_richeng();
 //        init9fragment();
-        initListfragment();
+//        initListfragment();
+        initrichengfragment();
         return view;
     }
 
@@ -99,11 +103,20 @@ public class WorkFragment extends Fragment {
         fragmentTransaction.commit();
     }
 
+    private void initrichengfragment() {
+        FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fg_content,workFragemt_richeng);
+        fragmentTransaction.commit();
+    }
+
     public void onEventMainThread(WorkFragemt_9 ev) {
         initListfragment();
     }
     public void onEventMainThread(WorkFragemt_list ev) {
         init9fragment();
+    }
+    public void onEventMainThread(WorkFragemt_richeng ev) {
+        initrichengfragment();
     }
     @Override
     public void onDestroyView() {

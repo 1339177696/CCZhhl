@@ -19,6 +19,7 @@ import com.hulian.oa.bean.Fab2;
 import com.hulian.oa.news.adapter.MyViewPageAdapter;
 import com.hulian.oa.news.fragment.News_1_Fragment;
 import com.hulian.oa.news.fragment.News_2_Fragment;
+import com.hulian.oa.news.fragment.News_3_Fragment;
 
 import java.util.ArrayList;
 
@@ -54,9 +55,17 @@ public class NewsFragment extends Fragment {
     TextView zxTxt2;
     @BindView(R.id.btn2)
     LinearLayout btn2;
+    @BindView(R.id.zx_img3)
+    ImageView zxImg3;
+    @BindView(R.id.zx_txt3)
+    TextView zxTxt3;
+    @BindView(R.id.btn3)
+    LinearLayout btn3;
 
     private News_1_Fragment news_1_fragment;
     private News_2_Fragment news_2_fragment;
+    //文件柜
+    private News_3_Fragment news_3_fragment;
     private FragmentManager fManager;
     public NewsFragment() {
         // Required empty public constructor
@@ -116,7 +125,7 @@ public class NewsFragment extends Fragment {
         }
     }
 
-    @OnClick({R.id.btn1, R.id.btn2})
+    @OnClick({R.id.btn1, R.id.btn2,R.id.btn3})
     public void onViewClicked(View view) {
         FragmentTransaction fTransaction = fManager.beginTransaction();
         hideAllFragment(fTransaction);
@@ -126,6 +135,8 @@ public class NewsFragment extends Fragment {
                 zxImg1.setImageResource(R.mipmap.zx_xinwen_yes);
                 zxTxt2.setTextColor(Color.parseColor("#ccccd5"));
                 zxImg2.setImageResource(R.mipmap.zx_tongzhi_no);
+                zxTxt3.setTextColor(Color.parseColor("#ccccd5"));
+                zxImg3.setImageResource(R.mipmap.zx_tongzhi_no);
                 if(news_1_fragment == null){
                     news_1_fragment = new News_1_Fragment();
                     fTransaction.add(R.id.qgl_fragment,news_1_fragment);
@@ -138,11 +149,27 @@ public class NewsFragment extends Fragment {
                 zxImg1.setImageResource(R.mipmap.zx_xinwen_no);
                 zxTxt2.setTextColor(Color.parseColor("#FFFFFF"));
                 zxImg2.setImageResource(R.mipmap.zx_tongzhi_yes);
+                zxTxt3.setTextColor(Color.parseColor("#ccccd5"));
+                zxImg3.setImageResource(R.mipmap.zx_tongzhi_no);
                 if(news_2_fragment == null){
                     news_2_fragment = new News_2_Fragment();
                     fTransaction.add(R.id.qgl_fragment,news_2_fragment);
                 }else{
                     fTransaction.show(news_2_fragment);
+                }
+                break;
+            case R.id.btn3:
+                zxTxt1.setTextColor(Color.parseColor("#ccccd5"));
+                zxImg1.setImageResource(R.mipmap.zx_xinwen_no);
+                zxTxt2.setTextColor(Color.parseColor("#ccccd5"));
+                zxImg2.setImageResource(R.mipmap.zx_tongzhi_no);
+                zxTxt3.setTextColor(Color.parseColor("#FFFFFF"));
+                zxImg3.setImageResource(R.mipmap.zx_tongzhi_yes);
+                if(news_3_fragment == null){
+                    news_3_fragment = new News_3_Fragment();
+                    fTransaction.add(R.id.qgl_fragment,news_3_fragment);
+                }else{
+                    fTransaction.show(news_3_fragment);
                 }
                 break;
         }
@@ -153,6 +180,7 @@ public class NewsFragment extends Fragment {
     private void hideAllFragment(FragmentTransaction fragmentTransaction){
         if(news_1_fragment != null)fragmentTransaction.hide(news_1_fragment);
         if(news_2_fragment != null)fragmentTransaction.hide(news_2_fragment);
+        if(news_3_fragment != null)fragmentTransaction.hide(news_3_fragment);
 
     }
 
