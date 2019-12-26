@@ -148,10 +148,10 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 //            rbMessage.setText("邮件");
 //        }
         rgFooter.setOnCheckedChangeListener(this);
-
-        rgFooter.check(R.id.rb_message);
         rgFooter.check(R.id.rb_agency);
         rgFooter.check(R.id.rb_work);
+        rgFooter.check(R.id.rb_message);
+
 
         registerMsgUnreadInfoObserver(true);
         registerSystemMessageObservers(true);

@@ -56,7 +56,7 @@
                     style="@style/footer_radioButton_style"
                     android:drawableTop="@drawable/main_low_tab6"
                     android:text="日程" />
-<!--大苏打实打实打算-->
+
                 <RadioButton
                     android:id="@+id/rb_agency"
                     style="@style/footer_radioButton_style"

@@ -1,34 +1,23 @@
 package com.hulian.oa.work.file.admin.activity.instruct.fragment;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.hulian.oa.BuildConfig;
 import com.hulian.oa.R;
 import com.hulian.oa.bean.Fab2;
-import com.hulian.oa.pad.PAD_zhiling_XF;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.views.fabVIew.FabAttributes;
 import com.hulian.oa.views.fabVIew.OnFabClickListener;
 import com.hulian.oa.views.fabVIew.SuspensionFab_qgl;
-import com.hulian.oa.work.file.admin.activity.PostOrderActivity;
-import com.hulian.oa.work.file.admin.activity.SecondInstructActivity;
-
-import java.io.File;
-import java.io.FileOutputStream;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,7 +27,7 @@ import de.greenrobot.event.EventBus;
 /**
  * Created by qgl on 2019/12/17 14:15.
  */
-public class Fra_post_order_qgl extends Fragment {
+public class Fra_post_order_qgl2 extends Fragment {
     @BindView(R.id.ll_order)
     LinearLayout llOrder;
     Unbinder unbinder;
@@ -60,8 +49,8 @@ public class Fra_post_order_qgl extends Fragment {
         fabTop = (SuspensionFab_qgl) view.findViewById(R.id.fab_top);
 //构建展开按钮属性
         FabAttributes collection = new FabAttributes.Builder()
-                .setBackgroundTint(Color.parseColor("#FFAD4A"))
-                .setSrc(getResources().getDrawable(R.mipmap.db_youjian_icon))
+                .setBackgroundTint(Color.parseColor("#FF6F3D"))
+                .setSrc(getResources().getDrawable(R.mipmap.daiban_gongwen_icon))
                 .setFabSize(FloatingActionButton.SIZE_NORMAL)
                 .setPressedTranslationZ(10)
                 .setTag(1)

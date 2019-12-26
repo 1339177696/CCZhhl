@@ -71,7 +71,7 @@ public class L_HascomFragment extends Fragment implements PullLoadMoreRecyclerVi
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.l_fra_collection_notice, null);
+        View view = inflater.inflate(R.layout.l_fra_collection_notice_qgl, null);
         unbinder = ButterKnife.bind(this, view);
         initList();
         EventBus.getDefault().register(this);

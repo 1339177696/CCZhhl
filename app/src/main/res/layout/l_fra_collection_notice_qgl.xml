@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView
             android:id="@+id/lv_notice"
             android:layout_width="match_parent"
@@ -42,7 +40,6 @@
                 android:layout_marginTop="5dip"
                 android:gravity="center"/>
         </RelativeLayout>
-
         <TextView
             android:id="@+id/tv_mengban"
             android:layout_width="match_parent"
@@ -52,15 +49,13 @@
 
         <fragment
             android:id="@+id/fg_order"
-            android:name="com.hulian.oa.work.file.admin.activity.instruct.fragment.Fra_post_order_qgl"
+            android:name="com.hulian.oa.work.file.admin.activity.instruct.fragment.Fra_post_order_qgl2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right|bottom"
             android:layout_marginRight="@dimen/dp_20"
             android:layout_marginBottom="@dimen/dp_20"
-            tools:layout="@layout/fra_order_post_qgl" />
+            />
     </FrameLayout>
-
-
 
 </RelativeLayout>

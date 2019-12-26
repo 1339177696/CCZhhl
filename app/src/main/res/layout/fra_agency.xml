@@ -266,21 +266,21 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_mengban"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#99ffffff"
-            android:visibility="gone" />
+        <!--<TextView-->
+            <!--android:id="@+id/tv_mengban"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="#99ffffff"-->
+            <!--android:visibility="gone" />-->
 
-        <fragment
-            android:id="@+id/fg_order"
-            android:name="com.hulian.oa.work.file.admin.activity.instruct.fragment.Fra_post_order_qgl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|bottom"
-            android:layout_marginRight="@dimen/dp_20"
-            android:layout_marginBottom="@dimen/dp_20"
-            tools:layout="@layout/fra_order_post_qgl" />
+        <!--<fragment-->
+            <!--android:id="@+id/fg_order"-->
+            <!--android:name="com.hulian.oa.work.file.admin.activity.instruct.fragment.Fra_post_order_qgl"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="right|bottom"-->
+            <!--android:layout_marginRight="@dimen/dp_20"-->
+            <!--android:layout_marginBottom="@dimen/dp_20"-->
+            <!--tools:layout="@layout/fra_order_post_qgl" />-->
     </FrameLayout>
 </LinearLayout>

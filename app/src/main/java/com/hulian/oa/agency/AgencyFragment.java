@@ -36,8 +36,8 @@ public class AgencyFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
     Unbinder unbinder;
-    @BindView(R.id.tv_mengban)
-    TextView tvMengban;
+//    @BindView(R.id.tv_mengban)
+//    TextView tvMengban;
     @BindView(R.id.iv_mine)
     ImageView iv_mine;
     @BindView(R.id.zx_qgl_img1)
@@ -150,13 +150,13 @@ public class AgencyFragment extends Fragment {
         EventBus.getDefault().unregister(this);
     }
 
-    public void onEventMainThread(Fab event) {
-        if (event.getTag().equals("0")) {
-            tvMengban.setVisibility(View.GONE);
-        } else {
-            tvMengban.setVisibility(View.VISIBLE);
-        }
-    }
+//    public void onEventMainThread(Fab event) {
+//        if (event.getTag().equals("0")) {
+//            tvMengban.setVisibility(View.GONE);
+//        } else {
+//            tvMengban.setVisibility(View.VISIBLE);
+//        }
+//    }
 
     public void onEventMainThread(AgencyCount event) {
         if (!"".equals(event.getAgencyCount())) {
@@ -180,12 +180,12 @@ public class AgencyFragment extends Fragment {
     }
 
 
-    @OnClick(R.id.tv_mengban)
-    public void onViewClicked2() {
-        Fab2 fab2 = new Fab2();
-        fab2.setTag("0");
-        EventBus.getDefault().post(fab2);
-    }
+//    @OnClick(R.id.tv_mengban)
+//    public void onViewClicked2() {
+//        Fab2 fab2 = new Fab2();
+//        fab2.setTag("0");
+//        EventBus.getDefault().post(fab2);
+//    }
 
     @OnClick(R.id.iv_mine)
     public void ononViewClicked() {
@@ -247,6 +247,8 @@ public class AgencyFragment extends Fragment {
                 } else {
                     fTransaction.show(l_hascomFragment);
                 }
+
+
                 break;
         }
         fTransaction.commit();

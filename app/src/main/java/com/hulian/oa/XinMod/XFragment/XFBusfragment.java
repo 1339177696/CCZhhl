@@ -14,15 +14,18 @@ import com.hulian.oa.bean.Fab;
 import com.hulian.oa.bean.Fab2;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 import de.greenrobot.event.EventBus;
 
 /**
  * Created by qgl on 2019/12/16 10:41.
  */
 public class XFBusfragment extends Fragment {
-    @BindView(R.id.tv_mengban)
+    @BindView(R.id.tv_mengban_qgl)
     TextView tvMengban;
+    Unbinder unbinder;
     // TODO: Rename and change types and number of parameters
     public static XFBusfragment newInstance(String requestJson) {
         XFBusfragment fragment = new XFBusfragment();
@@ -34,6 +37,7 @@ public class XFBusfragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_work_space, container, false);
+        unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
         return view;
     }
@@ -49,9 +53,10 @@ public class XFBusfragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        unbinder.unbind();
         EventBus.getDefault().unregister(this);
     }
-    @OnClick(R.id.tv_mengban)
+    @OnClick(R.id.tv_mengban_qgl)
     public void onViewClicked2() {
         Fab2 fab2 = new Fab2();
         fab2.setTag("0");
