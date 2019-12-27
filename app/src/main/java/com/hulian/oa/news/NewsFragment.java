@@ -136,7 +136,7 @@ public class NewsFragment extends Fragment {
                 zxTxt2.setTextColor(Color.parseColor("#ccccd5"));
                 zxImg2.setImageResource(R.mipmap.zx_tongzhi_no);
                 zxTxt3.setTextColor(Color.parseColor("#ccccd5"));
-                zxImg3.setImageResource(R.mipmap.zx_tongzhi_no);
+                zxImg3.setImageResource(R.mipmap.zx_file_icon_no);
                 if(news_1_fragment == null){
                     news_1_fragment = new News_1_Fragment();
                     fTransaction.add(R.id.qgl_fragment,news_1_fragment);
@@ -150,7 +150,7 @@ public class NewsFragment extends Fragment {
                 zxTxt2.setTextColor(Color.parseColor("#FFFFFF"));
                 zxImg2.setImageResource(R.mipmap.zx_tongzhi_yes);
                 zxTxt3.setTextColor(Color.parseColor("#ccccd5"));
-                zxImg3.setImageResource(R.mipmap.zx_tongzhi_no);
+                zxImg3.setImageResource(R.mipmap.zx_file_icon_no);
                 if(news_2_fragment == null){
                     news_2_fragment = new News_2_Fragment();
                     fTransaction.add(R.id.qgl_fragment,news_2_fragment);
@@ -164,7 +164,7 @@ public class NewsFragment extends Fragment {
                 zxTxt2.setTextColor(Color.parseColor("#ccccd5"));
                 zxImg2.setImageResource(R.mipmap.zx_tongzhi_no);
                 zxTxt3.setTextColor(Color.parseColor("#FFFFFF"));
-                zxImg3.setImageResource(R.mipmap.zx_tongzhi_yes);
+                zxImg3.setImageResource(R.mipmap.zx_file_icon_yes);
                 if(news_3_fragment == null){
                     news_3_fragment = new News_3_Fragment();
                     fTransaction.add(R.id.qgl_fragment,news_3_fragment);

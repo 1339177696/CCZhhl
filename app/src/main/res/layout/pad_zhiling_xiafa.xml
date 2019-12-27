@@ -5,12 +5,18 @@
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
+    <View
+        android:id="@+id/view_xian"
+        android:background="#2D4BCA"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_10"/>
     <RelativeLayout
+        android:layout_below="@+id/view_xian"
         android:id="@+id/relayou_my"
         android:layout_width="match_parent"
         android:background="#2D4BCA"
         android:gravity="center_vertical"
-        android:layout_height="@dimen/dp_45">
+        android:layout_height="@dimen/dp_40">
         <ImageView
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_width="@dimen/dp_12"

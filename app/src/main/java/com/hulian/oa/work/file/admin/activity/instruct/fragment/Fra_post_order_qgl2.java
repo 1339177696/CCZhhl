@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.views.fabVIew.FabAttributes;
 import com.hulian.oa.views.fabVIew.OnFabClickListener;
 import com.hulian.oa.views.fabVIew.SuspensionFab_qgl;
+import com.hulian.oa.views.fabVIew.SuspensionFab_qgl2;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,13 +33,13 @@ public class Fra_post_order_qgl2 extends Fragment {
     @BindView(R.id.ll_order)
     LinearLayout llOrder;
     Unbinder unbinder;
-    SuspensionFab_qgl fabTop;
+    SuspensionFab_qgl2 fabTop;
 
     @SuppressLint("ResourceAsColor")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fra_order_post_qgl, container, false);
+        View view = inflater.inflate(R.layout.fra_order_post_qgl2, container, false);
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
         if (SPUtils.get(getActivity(), "isLead", "").equals("0")) {
@@ -46,7 +48,7 @@ public class Fra_post_order_qgl2 extends Fragment {
             llOrder.setVisibility(View.GONE);
         }
 
-        fabTop = (SuspensionFab_qgl) view.findViewById(R.id.fab_top);
+        fabTop = (SuspensionFab_qgl2) view.findViewById(R.id.fab_top);
 //构建展开按钮属性
         FabAttributes collection = new FabAttributes.Builder()
                 .setBackgroundTint(Color.parseColor("#FF6F3D"))
@@ -76,13 +78,21 @@ public class Fra_post_order_qgl2 extends Fragment {
                 .setPressedTranslationZ(10)
                 .setTag(4)
                 .build();
+        FabAttributes youjian = new FabAttributes.Builder()
+                .setBackgroundTint(Color.parseColor("#FFAD4A"))
+                .setSrc(getResources().getDrawable(R.mipmap.db_youjian_icon))
+                .setFabSize(FloatingActionButton.SIZE_NORMAL)
+                .setPressedTranslationZ(10)
+                .setTag(5)
+                .build();
 //添加菜单
-        fabTop.addFab(collection, email, renwu, qingjia);
+        fabTop.addFab(collection, email, renwu, qingjia,youjian);
         //    fabTop.setAnimationManager(new FabAlphaAnimate(fabTop));
 //设置菜单点击事件
         fabTop.setFabClickListener(new OnFabClickListener() {
             @Override
             public void onFabClick(FloatingActionButton fab, Object tag) {
+                Log.e("TAG",Integer.parseInt(tag + "")+"");
                 if (Integer.parseInt(tag + "") == 1) {
                     fabTop.closeAnimate();
                     EventBus.getDefault().post("公文审批");
@@ -92,9 +102,12 @@ public class Fra_post_order_qgl2 extends Fragment {
                 } else if (Integer.parseInt(tag + "") == 3) {
                     fabTop.closeAnimate();
                     EventBus.getDefault().post("任务协同");
-                } else {
+                } else if (Integer.parseInt(tag+"") == 4){
                     fabTop.closeAnimate();
                     EventBus.getDefault().post("请假审批");
+                }else {
+                    fabTop.closeAnimate();
+                    EventBus.getDefault().post("邮件列表");
                 }
             }
         });

@@ -30,7 +30,7 @@ import de.greenrobot.event.EventBus;
  * 创建时间:  2017/6/28 on 16:43
  * 描述:     TODO 展示所有的FloatActionButton
  */
-public class SuspensionFab extends RelativeLayout implements View.OnClickListener {
+public class SuspensionFab_qgl2 extends RelativeLayout implements View.OnClickListener {
     private String mengban;
 
     public String getMengban() {
@@ -81,17 +81,17 @@ public class SuspensionFab extends RelativeLayout implements View.OnClickListene
     public  void  SuspensionFab() {
 
     }
-    public SuspensionFab(Context context) {
+    public SuspensionFab_qgl2(Context context) {
         super(context);
     }
 
-    public SuspensionFab(Context context, AttributeSet attrs) {
+    public SuspensionFab_qgl2(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
         loadAttrs(context, attrs);
     }
 
-    public SuspensionFab(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SuspensionFab_qgl2(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         loadAttrs(context, attrs);
     }
@@ -118,10 +118,10 @@ public class SuspensionFab extends RelativeLayout implements View.OnClickListene
         setBackground(null);
         //添加默认显示的一个按钮
         FabAttributes build = new FabAttributes.Builder()
-                .setSrc(context.getResources().getDrawable(R.mipmap.add_icon))
+                .setSrc(context.getResources().getDrawable(R.mipmap.db_chaxun_icon))
                 .setFabSize(FloatingActionButton.SIZE_AUTO)
              //   .setPressedTranslationZ(10)
-                .setBackgroundTint(Color.parseColor("#4768F3"))
+                .setBackgroundTint(Color.parseColor("#FF6F3D"))
                 .setElevation(15)
                 .setTag(defaultTag)
                 .build();
@@ -155,7 +155,7 @@ public class SuspensionFab extends RelativeLayout implements View.OnClickListene
 
     @Override
     public void addView(View child, int index) {
-        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         if (orientation == ExpandOrientation.FAB_TOP.getValue()) {
             lp.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
         } else if (orientation == ExpandOrientation.FAB_BOTTOM.getValue()) {

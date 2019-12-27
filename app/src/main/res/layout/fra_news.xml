@@ -98,7 +98,7 @@
 
                         <ImageView
                             android:id="@+id/zx_img3"
-                            android:src="@mipmap/zx_tongzhi_no"
+                            android:src="@mipmap/zx_file_icon_no"
                             android:layout_width="@dimen/dp_10"
                             android:layout_height="@dimen/dp_11" />
                         <TextView

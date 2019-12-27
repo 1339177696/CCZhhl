@@ -376,12 +376,5 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
 //        }
 //    }
 
-    public void onEventMainThread(StringBean1 event){
-        if (event.getDaiban().equals("会议安排")){
-            startActivity(new Intent(getActivity(), MeetingSponsorActivity.class));
-        }else if (event.getDaiban().equals("任务协同")){
-            startActivity(new Intent(getActivity(), TaskLauncherActivity.class));
-        }
-    }
 
 }

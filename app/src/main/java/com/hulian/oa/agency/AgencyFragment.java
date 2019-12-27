@@ -56,7 +56,6 @@ public class AgencyFragment extends Fragment {
     TextView yibanNumber;
     @BindView(R.id.lr_qgl_btn2)
     LinearLayout lrQglBtn2;
-    private int pos = 0;
     private L_UpcomFragment l_upcomFragment;
     private L_HascomFragment l_hascomFragment;
     private FragmentManager fManager;
@@ -196,17 +195,11 @@ public class AgencyFragment extends Fragment {
     //接受点击事件,发送给fragment
     public void onEventMainThread(String event) {
         if (!"".equals(event)) {
-            if (pos == 0) {
-                //待办
-                StringBean1 resultmemberList = new StringBean1();
-                resultmemberList.setDaiban(event);
-                EventBus.getDefault().post(resultmemberList);
-            } else {
                 // 已办
                 StringBean2 stringBean2 = new StringBean2();
                 stringBean2.setDaiban(event);
                 EventBus.getDefault().post(stringBean2);
-            }
+
         }
     }
 
@@ -223,7 +216,7 @@ public class AgencyFragment extends Fragment {
         hideAllFragment(fTransaction);
         switch (view.getId()) {
             case R.id.lr_qgl_btn1:
-                pos = 0;
+
                 zxQglTxt1.setTextColor(Color.parseColor("#FFFFFF"));
                 zxQglImg1.setImageResource(R.mipmap.done);
                 zxQglTxt2.setTextColor(Color.parseColor("#ccccd5"));
@@ -236,7 +229,7 @@ public class AgencyFragment extends Fragment {
                 }
                 break;
             case R.id.lr_qgl_btn2:
-                pos = 1;
+
                 zxQglTxt1.setTextColor(Color.parseColor("#ccccd5"));
                 zxQglImg1.setImageResource(R.mipmap.done_default);
                 zxQglTxt2.setTextColor(Color.parseColor("#FFFFFF"));
@@ -247,7 +240,6 @@ public class AgencyFragment extends Fragment {
                 } else {
                     fTransaction.show(l_hascomFragment);
                 }
-
 
                 break;
         }
