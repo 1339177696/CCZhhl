@@ -127,8 +127,8 @@
                 android:background="@drawable/liner_yuan_qgl8"
                 android:orientation="vertical"
                 android:id="@+id/tv_add_schedule"
-                android:layout_width="@dimen/dp_30"
-                android:layout_height="@dimen/dp_30">
+                android:layout_width="@dimen/dp_35"
+                android:layout_height="@dimen/dp_35">
 
                 <ImageView
                     android:src="@mipmap/shenqing_qgl"
