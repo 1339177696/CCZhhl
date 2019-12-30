@@ -1,6 +1,7 @@
 package com.hulian.oa.me.l_adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,16 +25,7 @@ import com.hulian.oa.R;
 import com.hulian.oa.bean.Bean_x;
 import com.hulian.oa.bean.Sche_Bean_x;
 import com.hulian.oa.bean.ScheduleBean3;
-import com.hulian.oa.me.L_SetActivity;
-import com.hulian.oa.me.ScheduleActivity;
-import com.hulian.oa.net.HttpRequest;
-import com.hulian.oa.net.OkHttpException;
-import com.hulian.oa.net.RequestParams;
-import com.hulian.oa.net.ResponseCallback;
-import com.hulian.oa.utils.TimeUtils;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,86 +36,135 @@ import java.util.List;
  * 我的日程列表
  */
 
-public class L_ScheduleAdapter extends RecyclerView.Adapter <L_ScheduleAdapter.ViewHolder>{
+public class L_ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final LayoutInflater layoutInflater;
-    private  Context context;
+    private Context context;
     private String[] titles;
     private List<ScheduleBean3> dataList = new ArrayList<>();
     private String timee;
-
+    public static final int ITEMONE = 1;
+    public static final int ITEMTWO = 2;
 
     public void addAllData(List<ScheduleBean3> dataList, String time) {
-        this.dataList=dataList;
+        this.dataList = dataList;
         timee = time;
         notifyDataSetChanged();
     }
 
     public L_ScheduleAdapter(Context context) {
-    //    titles = context.getResources().getStringArray(R.array.titles);
+        //    titles = context.getResources().getStringArray(R.array.titles);
         this.context = context;
         layoutInflater = LayoutInflater.from(context);
     }
 
-    @Override
-    public L_ScheduleAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-     //   return new ViewHolder(layoutInflater.inflate(R.layout.l_item_schedule, null));
-        return new ViewHolder(layoutInflater.inflate(R.layout.l_item_schedule,  parent,false));
-    }
-////
-    @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
-
-      /*  String aa = dataList.get(position).getScheduleDate();
-        holder.tv_time.setText( com.hulian.oa.utils.TimeUtils.getDateToString2(aa));
-        holder.tv_title.setText(dataList.get(position).getScheduleContent());
-        holder.fl_content.setVisibility(View.GONE);*/
-        holder.tv_time.setText(dataList.get(position).getTimeTitle());
-        if(dataList.get(position).getScheduleContent()!=null)
-        holder.tv_title.setText(dataList.get(position).getScheduleContent());
-        else {
-            holder.tv_title.setText("");
-        }
-        if(dataList.get(position).isHasContent()){
-            holder.fl_content.setVisibility(View.VISIBLE);
-        }else {
-            holder.fl_content.setVisibility(View.GONE);
-        }
-        if(dataList.get(position).isNow()){
-            holder.tv_now.setVisibility(View.VISIBLE);
-           /* RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)   holder.tv_now_xian.getLayoutParams();
-
-            lp.setMargins(int left, int top, int right, int bottom)*/
-
-            holder.tv_now_xian.setVisibility(View.VISIBLE);
-            holder.tv_now.setText(dataList.get(position).getTimeNow());
-        }
-        else {
-            holder.tv_now.setVisibility(View.GONE);
-            holder.tv_now_xian.setVisibility(View.GONE);
-        }
-    }
 
     @Override
     public int getItemCount() {
         return dataList.size();
     }
+
     private String getTime(Date date) {//可根据需要自行截取数据显示
         SimpleDateFormat format = new SimpleDateFormat("HH:mm");
         return format.format(date);
     }
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        View inflate = null;
+        RecyclerView.ViewHolder viewHolder = null;
+
+        //根据i返回不同布局
+        switch (viewType) {
+            case ITEMONE:
+                inflate = LayoutInflater.from(context).inflate(R.layout.l_item_schedule_qgl, parent, false);
+                viewHolder = new ViewHolder_Top(inflate);
+                break;
+            case ITEMTWO:
+                inflate = LayoutInflater.from(context).inflate(R.layout.l_item_schedule, parent, false);
+                viewHolder = new ViewHolder_List(inflate);
+                break;
+        }
+        return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+         /*  String aa = dataList.get(position).getScheduleDate();
+        holder.tv_time.setText( com.hulian.oa.utils.TimeUtils.getDateToString2(aa));
+        holder.tv_title.setText(dataList.get(position).getScheduleContent());
+        holder.fl_content.setVisibility(View.GONE);*/
+
+        if (holder instanceof ViewHolder_Top) {//设置数据 事件
+
+        } else if (holder instanceof ViewHolder_List) {
+            ViewHolder_List viewHolderList = ((ViewHolder_List) holder);
+            viewHolderList.tv_time.setText(dataList.get(position).getTimeTitle());
+            if (dataList.get(position).getScheduleContent() != null)
+                viewHolderList.tv_title.setText(dataList.get(position).getScheduleContent());
+            else {
+                viewHolderList.tv_title.setText("");
+            }
+            if (dataList.get(position).isHasContent()) {
+                viewHolderList.fl_content.setVisibility(View.VISIBLE);
+            } else {
+                viewHolderList.fl_content.setVisibility(View.GONE);
+            }
+            if (dataList.get(position).isNow()) {
+                viewHolderList.tv_now.setVisibility(View.VISIBLE);
+           /* RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)   holder.tv_now_xian.getLayoutParams();
+            lp.setMargins(int left, int top, int right, int bottom)*/
+
+                viewHolderList.tv_now_xian.setVisibility(View.VISIBLE);
+                viewHolderList.tv_now.setText(dataList.get(position).getTimeNow());
+            } else {
+                viewHolderList.tv_now.setVisibility(View.GONE);
+                viewHolderList.tv_now_xian.setVisibility(View.GONE);
+            }
+        }
+
+    }
+
+
+    public static class ViewHolder_Top extends RecyclerView.ViewHolder {
         TextView tv_time;
         TextView tv_title;
-        TextView tv_now,tv_now_xian;
+        TextView tv_now, tv_now_xian;
         FrameLayout fl_content;
-        ViewHolder(View view) {
+
+        ViewHolder_Top(View view) {
             super(view);
             tv_time = (TextView) view.findViewById(R.id.tv_time);
             tv_title = (TextView) view.findViewById(R.id.tv_title);
-            fl_content=view.findViewById(R.id.fl_content);
-            tv_now=view.findViewById(R.id.tv_now);
-            tv_now_xian=view.findViewById(R.id.tv_now_xian);
+            fl_content = view.findViewById(R.id.fl_content);
+            tv_now = view.findViewById(R.id.tv_now);
+            tv_now_xian = view.findViewById(R.id.tv_now_xian);
+        }
+    }
+
+    public static class ViewHolder_List extends RecyclerView.ViewHolder {
+        TextView tv_time;
+        TextView tv_title;
+        TextView tv_now, tv_now_xian;
+        FrameLayout fl_content;
+
+        ViewHolder_List(View view) {
+            super(view);
+            tv_time = (TextView) view.findViewById(R.id.tv_time);
+            tv_title = (TextView) view.findViewById(R.id.tv_title);
+            fl_content = view.findViewById(R.id.fl_content);
+            tv_now = view.findViewById(R.id.tv_now);
+            tv_now_xian = view.findViewById(R.id.tv_now_xian);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position==0){
+            return ITEMONE;
+        }else{
+            return ITEMTWO;
         }
     }
 }

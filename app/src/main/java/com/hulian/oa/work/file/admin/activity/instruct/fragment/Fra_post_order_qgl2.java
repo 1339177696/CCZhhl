@@ -86,7 +86,7 @@ public class Fra_post_order_qgl2 extends Fragment {
                 .setTag(5)
                 .build();
 //添加菜单
-        fabTop.addFab(collection, email, renwu, qingjia,youjian);
+        fabTop.addFab(qingjia,renwu,email,youjian,collection);
         //    fabTop.setAnimationManager(new FabAlphaAnimate(fabTop));
 //设置菜单点击事件
         fabTop.setFabClickListener(new OnFabClickListener() {

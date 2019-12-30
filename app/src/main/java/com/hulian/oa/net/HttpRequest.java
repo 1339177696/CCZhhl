@@ -149,14 +149,26 @@ public class HttpRequest {
   }
 
 
-  /**
+//  /**
+//   * 查询会议室
+//   * @param params 入参
+//   * @param callback 回调接口
+//   */
+//  public static void postMeetRoomeApi(RequestParams params, ResponseCallback callback) {
+//    RequestMode.postRequest(Urls.commUrls+"system/meetingRoom/queryMeetingRoom", params, callback, null);
+//  }
+
+   /**
    * 查询会议室
    * @param params 入参
    * @param callback 回调接口
    */
   public static void postMeetRoomeApi(RequestParams params, ResponseCallback callback) {
-    RequestMode.postRequest(Urls.commUrls+"system/meetingRoom/queryMeetingRoom", params, callback, null);
+    RequestMode.postRequest(Urls.commUrls+"system/meetingRoom/androidQueryMeetingRoom", params, callback, null);
   }
+
+
+
   /**
    * 发布会议
    * @param params 入参

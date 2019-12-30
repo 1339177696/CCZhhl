@@ -2,8 +2,10 @@ package com.hulian.oa.me;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +34,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import butterknife.BindView;
@@ -62,6 +65,7 @@ public class AddScheduleActivity extends BaseActivity {
     RelativeLayout rlRemind;
     @BindView(R.id.sw_select)
     Switch swSelect;
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,8 +136,6 @@ public class AddScheduleActivity extends BaseActivity {
                         return;
                     }
                 }
-
-
                 tv_select_time.setText(getTime(date));
                 time2 = getTime(date);
                 if(!time2.equals("00:00")){

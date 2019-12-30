@@ -156,6 +156,7 @@
             android:background="#E1E1E1" />
 
         <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/main2_rela_program"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

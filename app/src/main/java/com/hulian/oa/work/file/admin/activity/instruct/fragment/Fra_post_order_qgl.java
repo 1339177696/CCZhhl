@@ -70,12 +70,12 @@ public class Fra_post_order_qgl extends Fragment {
                 .setPressedTranslationZ(10)
                 .setTag(1)
                 .build();
-        FabAttributes email = new FabAttributes.Builder()
-                .setBackgroundTint(Color.parseColor("#00B5B9"))
-                .setSrc(getResources().getDrawable(R.mipmap.daiban_huiyi_icon))
+        FabAttributes qingjia = new FabAttributes.Builder()
+                .setBackgroundTint(Color.parseColor("#F64250"))
+                .setSrc(getResources().getDrawable(R.mipmap.daiban_qingjia_icon))
                 .setFabSize(FloatingActionButton.SIZE_NORMAL)
                 .setPressedTranslationZ(10)
-                .setTag(2)
+                .setTag(4)
                 .build();
         FabAttributes renwu = new FabAttributes.Builder()
                 .setBackgroundTint(Color.parseColor("#4768F3"))
@@ -84,15 +84,16 @@ public class Fra_post_order_qgl extends Fragment {
                 .setPressedTranslationZ(10)
                 .setTag(3)
                 .build();
-        FabAttributes qingjia = new FabAttributes.Builder()
-                .setBackgroundTint(Color.parseColor("#F64250"))
-                .setSrc(getResources().getDrawable(R.mipmap.daiban_qingjia_icon))
+        FabAttributes email = new FabAttributes.Builder()
+                .setBackgroundTint(Color.parseColor("#00B5B9"))
+                .setSrc(getResources().getDrawable(R.mipmap.daiban_huiyi_icon))
                 .setFabSize(FloatingActionButton.SIZE_NORMAL)
                 .setPressedTranslationZ(10)
-                .setTag(4)
+                .setTag(2)
                 .build();
+
 //添加菜单
-        fabTop.addFab(collection, email, renwu, qingjia);
+        fabTop.addFab(qingjia,renwu,email,collection);
         //    fabTop.setAnimationManager(new FabAlphaAnimate(fabTop));
 //设置菜单点击事件
         fabTop.setFabClickListener(new OnFabClickListener() {
