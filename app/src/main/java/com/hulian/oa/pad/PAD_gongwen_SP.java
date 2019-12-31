@@ -427,7 +427,9 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
             public void run() {
                 super.run();
                 for (int j = 0;j<padbeans.size();j++){
+
                     padbeans.get(j).setFile(getFile(getBitmap(padbeans.get(j).getUrl())));
+
                 }
                 Message message = new Message();
                 message.what = 1000;

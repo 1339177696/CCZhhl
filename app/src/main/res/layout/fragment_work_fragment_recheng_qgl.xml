@@ -5,7 +5,8 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#EBEBEB">
+    android:background="#EBEBEB"
+    android:paddingTop="@dimen/dp_10">
     <LinearLayout
         android:id="@+id/ll_top"
         android:layout_width="match_parent"
@@ -88,7 +89,7 @@
         <FrameLayout
             android:background="@drawable/l_ade_bg_bottom"
             android:layout_width="match_parent"
-            android:layout_marginBottom="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_10"
             android:layout_height="match_parent">
 
             <android.support.design.widget.CoordinatorLayout
@@ -96,26 +97,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <com.ldf.calendar.view.MonthPager
-                    android:id="@+id/calendar_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="270dp"
-                    android:background="#fff">
-                </com.ldf.calendar.view.MonthPager>
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/list"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#ffffff"
-                    app:layout_behavior="com.ldf.calendar.behavior.RecyclerViewBehavior"
-                    android:layout_gravity="bottom"
-                    android:clipToPadding="false"
-                    android:clipChildren="false"
-                    android:layout_marginBottom="@dimen/dp_45"/>
-                <!--paddingBottom或者magin距离必须是MonthPager高度的1/6-->
-                <!--RecyclerView的高度必须是MatchParent-->
-                <!--RecyclerView的background必须是非透明-->
+
+
+                    <com.ldf.calendar.view.MonthPager
+                        android:id="@+id/calendar_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="270dp"
+                        android:background="#fff">
+                    </com.ldf.calendar.view.MonthPager>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/list"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#ffffff"
+                        app:layout_behavior="com.ldf.calendar.behavior.RecyclerViewBehavior"
+                        android:layout_gravity="bottom"
+                        android:clipToPadding="false"
+                        android:clipChildren="false"
+                        android:layout_marginBottom="@dimen/dp_5"/>
+                        <!--paddingBottom或者magin距离必须是MonthPager高度的1/6-->
+                        <!--RecyclerView的高度必须是MatchParent-->
+                        <!--RecyclerView的background必须是非透明-->
+
             </android.support.design.widget.CoordinatorLayout>
 
 

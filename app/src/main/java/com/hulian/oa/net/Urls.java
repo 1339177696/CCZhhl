@@ -10,7 +10,7 @@ package com.hulian.oa.net;
 //   public static String commUrls= "http://47.92.151.250:18888/";
 
 //   public static String commUrls= "http://47.92.151.250:8081/";
-   public static String commUrls= "http://192.168.0.112:80/";
+   public static String commUrls= "http://192.168.0.121:80/";
 
 //   public static String commUrls= "http://192.168.0.131:80/";
 //   public static String commUrls= "http://192.168.0.116:80/";

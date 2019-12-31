@@ -332,7 +332,7 @@ public class ScheduleActivity extends BaseActivity {
                                     memberList.get(j).setScheduleContent(memberList2.get(i).getScheduleContent());
                             }
                         }
-                        l_scheduleAdapter.addAllData(memberList, time);
+                        l_scheduleAdapter.addAllData(memberList,null, time);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

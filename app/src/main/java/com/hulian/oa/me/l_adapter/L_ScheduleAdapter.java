@@ -3,6 +3,7 @@ package com.hulian.oa.me.l_adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,12 +43,15 @@ public class L_ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private Context context;
     private String[] titles;
     private List<ScheduleBean3> dataList = new ArrayList<>();
+    private List<ScheduleBean3> dataList2 = new ArrayList<>();
     private String timee;
     public static final int ITEMONE = 1;
     public static final int ITEMTWO = 2;
 
-    public void addAllData(List<ScheduleBean3> dataList, String time) {
-        this.dataList = dataList;
+    public void addAllData(List<ScheduleBean3> dataList,List<ScheduleBean3> dataList2,String time) {
+        this.dataList2=dataList2;
+        this.dataList2.addAll(dataList);
+        this.dataList = this.dataList2;
         timee = time;
         notifyDataSetChanged();
     }
@@ -63,6 +67,7 @@ public class L_ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public int getItemCount() {
         return dataList.size();
     }
+
 
     private String getTime(Date date) {//可根据需要自行截取数据显示
         SimpleDateFormat format = new SimpleDateFormat("HH:mm");
@@ -96,7 +101,14 @@ public class L_ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         holder.tv_title.setText(dataList.get(position).getScheduleContent());
         holder.fl_content.setVisibility(View.GONE);*/
 
-        if (holder instanceof ViewHolder_Top) {//设置数据 事件
+        if (holder instanceof ViewHolder_Top) {
+            //设置数据 事件
+            ViewHolder_Top viewHolder_top = ((ViewHolder_Top) holder);
+            if (dataList.get(position).getScheduleContent() != null) {
+                viewHolder_top.tv_bw_content.setText(dataList.get(position).getScheduleContent());
+            } else {
+                viewHolder_top.tv_bw_content.setText("");
+                }
 
         } else if (holder instanceof ViewHolder_List) {
             ViewHolder_List viewHolderList = ((ViewHolder_List) holder);
@@ -113,8 +125,8 @@ public class L_ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             }
             if (dataList.get(position).isNow()) {
                 viewHolderList.tv_now.setVisibility(View.VISIBLE);
-           /* RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)   holder.tv_now_xian.getLayoutParams();
-            lp.setMargins(int left, int top, int right, int bottom)*/
+               /* RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)   holder.tv_now_xian.getLayoutParams();
+                lp.setMargins(int left, int top, int right, int bottom)*/
 
                 viewHolderList.tv_now_xian.setVisibility(View.VISIBLE);
                 viewHolderList.tv_now.setText(dataList.get(position).getTimeNow());
@@ -128,18 +140,11 @@ public class L_ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
 
     public static class ViewHolder_Top extends RecyclerView.ViewHolder {
-        TextView tv_time;
-        TextView tv_title;
-        TextView tv_now, tv_now_xian;
-        FrameLayout fl_content;
+        TextView tv_bw_content;
 
         ViewHolder_Top(View view) {
             super(view);
-            tv_time = (TextView) view.findViewById(R.id.tv_time);
-            tv_title = (TextView) view.findViewById(R.id.tv_title);
-            fl_content = view.findViewById(R.id.fl_content);
-            tv_now = view.findViewById(R.id.tv_now);
-            tv_now_xian = view.findViewById(R.id.tv_now_xian);
+            tv_bw_content = (TextView) view.findViewById(R.id.tv_bw_content);
         }
     }
 
@@ -161,10 +166,11 @@ public class L_ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemViewType(int position) {
-        if (position==0){
-            return ITEMONE;
-        }else{
-            return ITEMTWO;
-        }
+            if (("Y").equals(dataList.get(position).getQufen())){
+                return ITEMONE;
+            }else {
+                return ITEMTWO;
+            }
+
     }
 }

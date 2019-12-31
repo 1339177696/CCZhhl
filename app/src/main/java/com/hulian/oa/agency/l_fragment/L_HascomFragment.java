@@ -143,6 +143,8 @@ public class L_HascomFragment extends Fragment implements PullLoadMoreRecyclerVi
     private void getData() {
         RequestParams params = new RequestParams();
         params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
+        params.put("mail", SPUtils.get(getActivity(), "email", "").toString());
+
 //        params.put("type", SPUtils.get(getActivity(), "isLead", "").toString());
         HttpRequest.postAgencyFinishListApi(params, new ResponseCallback() {
             @Override
@@ -351,6 +353,19 @@ public class L_HascomFragment extends Fragment implements PullLoadMoreRecyclerVi
             EventBus.getDefault().post(mAgencyCount);
         }else if (event.getDaiban().equals("邮件列表")){
             Log.e("点击了","邮件列表");
+            dataBean.clear();
+            for (int i = 0;i<memberList.size();i++) {
+
+                if (memberList.get(i).getType().equals("5")) {
+                    //公文
+                    dataBean.add(memberList.get(i));
+                }
+            }
+            mRecyclerViewAdapter.clearData();
+            mRecyclerViewAdapter.addAllData(dataBean);
+            AgencyCountFinish mAgencyCount = new AgencyCountFinish();
+            mAgencyCount.setAgencyCountFinish(dataBean.size() + "");
+            EventBus.getDefault().post(mAgencyCount);
         }
     }
 

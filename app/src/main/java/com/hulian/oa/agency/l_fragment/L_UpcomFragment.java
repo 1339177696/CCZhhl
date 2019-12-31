@@ -164,6 +164,7 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
     private void getData() {
         RequestParams params = new RequestParams();
         params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
+        params.put("mail", SPUtils.get(getActivity(), "email", "").toString());
 //        params.put("type", SPUtils.get(getActivity(), "isLead", "").toString());
         HttpRequest.postAgencyListApi(params, new ResponseCallback() {
             @Override

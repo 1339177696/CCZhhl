@@ -92,6 +92,7 @@ public class WorkFragemt_richeng extends Fragment {
     private CalendarDate currentDate;
     private boolean initiated = false;
     private L_ScheduleAdapter l_scheduleAdapter;
+    private    String timeNow;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_work_fragment_recheng_qgl, container, false);
@@ -271,8 +272,7 @@ public class WorkFragemt_richeng extends Fragment {
                 //需要转化为实体对象
                 Date date = new Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");//只有时分秒
-                String timeNow = sdf.format(date);
-
+                timeNow = sdf.format(date);
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
@@ -283,15 +283,25 @@ public class WorkFragemt_richeng extends Fragment {
                     l_scheduleAdapter = new L_ScheduleAdapter(getActivity());
                     rvToDoList.setAdapter(l_scheduleAdapter);
                     List<ScheduleBean3> memberList = new ArrayList<>();
-                    if (memberList2.size() > 0) {
-                        for (int i = 0; i < 24; i++) {
+                    List<ScheduleBean3> memberList3 = new ArrayList<>();
+                    // 没有数据也显示时间
+//                    if (memberList2.size() > 0) {
+                    //时间这是为8点----17点
+//                        for (int i = 0; i < 24; i++) {
+                        for (int i = 8; i < 18; i++) {
                             ScheduleBean3 bean3 = new ScheduleBean3();
                             String str = String.format("%02d", i);
                             bean3.setTimeTitle("" + str + ":00");
                             bean3.setHasContent(false);
                             bean3.setNow(false);
                             if (timeNow.split(":")[0].toString().equals(str)) {
+                            if (TimeUtils.differentDaysByMillisecond2(timeNow,"17:00")<0)
+                            {
+                                bean3.setNow(false);
+                            }else {
                                 bean3.setNow(true);
+                            }
+
                                 if (timeNow.split(":")[1].equals("00")) {
                                     bean3.setTimeNow(timeNow.split(":")[0] + ":01");
                                 } else
@@ -299,17 +309,26 @@ public class WorkFragemt_richeng extends Fragment {
                             }
                             memberList.add(bean3);
                         }
+
                         for (int i = 0; i < memberList2.size(); i++) {
-                            String startTime = TimeUtils.getDateToString5(memberList2.get(i).getScheduleTimeBegin());
-                            String endTime = TimeUtils.getDateToString5(memberList2.get(i).getScheduleTimeEnd());
-                            for (int j = Integer.parseInt(startTime); j < Integer.parseInt(endTime); j++) {
-                                memberList.get(j).setHasContent(true);
-                                if (j == Integer.parseInt(startTime))
-                                    memberList.get(j).setScheduleContent(memberList2.get(i).getScheduleContent());
+                            if (memberList2.get(i).getIsToday().equals("Y")) {
+                                ScheduleBean3 memberList4 = new ScheduleBean3();
+                                memberList4.setQufen("Y");
+                                memberList4.setScheduleContent(memberList2.get(i).getScheduleContent());
+                                memberList3.add(memberList4);
+                            }else {
+                                String startTime = TimeUtils.getDateToString5(memberList2.get(i).getScheduleTimeBegin());
+                                String endTime = TimeUtils.getDateToString5(memberList2.get(i).getScheduleTimeEnd());
+                                for (int j = Integer.parseInt(startTime)-8; j < Integer.parseInt(endTime)-8; j++) {
+                                    //如果是全天就不显示在列表上，设置为备忘录
+                                    memberList.get(j).setHasContent(true);
+                                    if (j == Integer.parseInt(startTime)-8)
+                                        memberList.get(j).setScheduleContent(memberList2.get(i).getScheduleContent());
+                                }
                             }
-                        }
-                        l_scheduleAdapter.addAllData(memberList, time);
+
                     }
+                        l_scheduleAdapter.addAllData(memberList, memberList3,time);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

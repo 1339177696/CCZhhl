@@ -9,6 +9,26 @@ public class ScheduleBean3 {
     private boolean hasContent;
     private boolean isNow;
     private String  timeNow;
+    private String isToday;
+
+    public String getQufen() {
+        return qufen;
+    }
+
+    public void setQufen(String qufen) {
+        this.qufen = qufen;
+    }
+
+    private String qufen;
+
+    public String getIsToday() {
+        return isToday;
+    }
+
+    public void setIsToday(String isToday) {
+        this.isToday = isToday;
+    }
+
 
     public String getTimeNow() {
         return timeNow;

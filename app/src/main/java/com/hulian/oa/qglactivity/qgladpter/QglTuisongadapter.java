@@ -304,7 +304,9 @@ public class QglTuisongadapter extends RecyclerView.Adapter <QglTuisongadapter.V
     // 邮件详情数据
     private void MailPart(String id,int p){
         RequestParams params = new RequestParams();
-        params.put("messageId",id);
+        params.put("id",id);
+        params.put("createBy", SPUtils.get(mContext, "userId", "").toString());
+        params.put("email", SPUtils.get(mContext, "email", "").toString());
         HttpRequest.youjian_detelis(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
