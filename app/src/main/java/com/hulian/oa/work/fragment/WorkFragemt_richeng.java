@@ -93,6 +93,8 @@ public class WorkFragemt_richeng extends Fragment {
     private boolean initiated = false;
     private L_ScheduleAdapter l_scheduleAdapter;
     private    String timeNow;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_work_fragment_recheng_qgl, container, false);

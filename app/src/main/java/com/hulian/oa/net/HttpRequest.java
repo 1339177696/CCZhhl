@@ -423,6 +423,29 @@ public class HttpRequest {
         RequestMode.postRequest(Urls.commUrls+"system/mail/findInboxInfo",params,callback,null);
     }
 
+/**
+     * 发件箱
+     * @param params
+     * @param callback
+     */
+    public static void post_Outbox(RequestParams params,ResponseCallback callback)
+    {
+        RequestMode.postRequest(Urls.commUrls+"system/mail/findSentMailList",params,callback,null);
+    }
+
+    /**
+     * 发件箱详情
+     * @param params
+     * @param callback
+     */
+    public static void post_Outbox_Detelis(RequestParams params,ResponseCallback callback)
+    {
+        RequestMode.postRequest(Urls.commUrls+"system/mail/findSentOrDraftInfoById",params,callback,null);
+    }
+
+
+
+
     /**
      * 邮箱回复
      * @param params

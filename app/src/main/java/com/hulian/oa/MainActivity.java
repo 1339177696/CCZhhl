@@ -19,6 +19,10 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.hulian.oa.L_launched.L_Activity.L_leaveActivity;
+import com.hulian.oa.L_launched.L_Activity.L_mailActivity;
+import com.hulian.oa.L_launched.L_Activity.L_meetingActivity;
+import com.hulian.oa.L_launched.L_Activity.L_taskActivity;
 import com.hulian.oa.XinMod.XFragment.XFBusfragment;
 import com.hulian.oa.address.AddressFragment;
 import com.hulian.oa.address.pad.Address_Pad_Fragment;
@@ -123,6 +127,10 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     Button main2_outlogin;
     @BindView(R.id.menu_drawer)
     DrawerLayout menu_drawer;
+
+    //我的邮件
+    @BindView(R.id.main2_rela_my_mail)
+    RelativeLayout main2_rela_my_mail;
 
     private FragmentTransaction transaction;
     private AddressFragment addressFragment;
@@ -422,7 +430,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     }
 
     // 点击事件
-    @OnClick({R.id.main2_rela_program, R.id.main2_rela_collection,R.id.main2_outlogin})
+    @OnClick({R.id.main2_rela_program, R.id.main2_rela_collection,R.id.main2_outlogin,R.id.main2_rela_my_mail,R.id.main2_rela_my_meeting,R.id.main2_rela_my_task,R.id.main2_rela_my_leave})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.main2_rela_program:
@@ -435,6 +443,18 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 NIMClient.getService(AuthService.class).logout();
                 SPUtils.clear(mContext);
                 exitApp(mContext);
+                break;
+            case R.id.main2_rela_my_mail:
+                startActivity(new Intent(mContext, L_mailActivity.class));
+                break;
+            case R.id.main2_rela_my_meeting:
+                startActivity(new Intent(mContext, L_meetingActivity.class));
+                break;
+            case R.id.main2_rela_my_task:
+                startActivity(new Intent(mContext, L_taskActivity.class));
+                break;
+            case R.id.main2_rela_my_leave:
+                startActivity(new Intent(mContext, L_leaveActivity.class));
                 break;
         }
     }

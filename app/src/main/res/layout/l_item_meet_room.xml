@@ -89,7 +89,7 @@
                 android:layout_marginTop="@dimen/dp_15"
                 android:layout_below="@+id/tv_sel_room"
                 android:layout_marginRight="@dimen/dp_10"
-                android:src="@mipmap/phone_linshi"
+                android:src="@mipmap/dh_icon"
                 android:layout_width="@dimen/dp_18"
                 android:layout_height="@dimen/dp_18" />
         </RelativeLayout>

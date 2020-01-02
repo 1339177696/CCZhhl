@@ -104,11 +104,19 @@ public class L_ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         if (holder instanceof ViewHolder_Top) {
             //设置数据 事件
             ViewHolder_Top viewHolder_top = ((ViewHolder_Top) holder);
+
+            if (position == 0){
+                viewHolder_top.tv_my.setVisibility(View.VISIBLE);
+            }else {
+                viewHolder_top.tv_my.setVisibility(View.INVISIBLE);
+            }
             if (dataList.get(position).getScheduleContent() != null) {
+
                 viewHolder_top.tv_bw_content.setText(dataList.get(position).getScheduleContent());
             } else {
                 viewHolder_top.tv_bw_content.setText("");
                 }
+
 
         } else if (holder instanceof ViewHolder_List) {
             ViewHolder_List viewHolderList = ((ViewHolder_List) holder);
@@ -141,9 +149,11 @@ public class L_ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public static class ViewHolder_Top extends RecyclerView.ViewHolder {
         TextView tv_bw_content;
+        TextView tv_my;
 
         ViewHolder_Top(View view) {
             super(view);
+            tv_my = (TextView) view.findViewById(R.id.tv_my);
             tv_bw_content = (TextView) view.findViewById(R.id.tv_bw_content);
         }
     }

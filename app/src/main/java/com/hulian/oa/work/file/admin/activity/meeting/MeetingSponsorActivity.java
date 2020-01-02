@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -108,7 +109,11 @@ public class MeetingSponsorActivity extends BaseActivity {
     // 会议地点
     private String meetingRoomLocation = "";
 
+    private String cd = "";
 
+    //刷新
+    @BindView(R.id.sw_refres)
+    SwipeRefreshLayout sw_refres;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -129,6 +134,7 @@ public class MeetingSponsorActivity extends BaseActivity {
             }
         });
         init();
+
     }
 
     private void init() {
@@ -139,6 +145,17 @@ public class MeetingSponsorActivity extends BaseActivity {
                 selectTime();
             }
         });
+
+        // 刷新
+        sw_refres.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
+        {
+            @Override
+            public void onRefresh() {
+                getData(cd);
+
+            }
+        });
+
     }
 
     public void onViewClicked() {
@@ -235,6 +252,7 @@ public class MeetingSponsorActivity extends BaseActivity {
         HttpRequest.postMeetRoomeApi(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
+                sw_refres.setRefreshing(false);
                 //需要转化为实体对象
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
@@ -276,6 +294,8 @@ public class MeetingSponsorActivity extends BaseActivity {
 
             @Override
             public void onFailure(OkHttpException failuer) {
+                sw_refres.setRefreshing(false);
+
                 //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
@@ -371,7 +391,10 @@ public class MeetingSponsorActivity extends BaseActivity {
 
             numberOfPeople = mList.size() + "";
             if (mList.size() > 0) {
-                getData(mList.size() + "");
+                // 替换了
+                cd = mList.size() + "";
+//                getData(mList.size() + "");
+                getData(cd);
                 String name = "";
                 participantId = "";
                 for (People params1 : mList) {
