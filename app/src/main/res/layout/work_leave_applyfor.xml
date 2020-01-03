@@ -373,7 +373,7 @@
                         android:layout_height="@dimen/dp_19" />
 
                     <FrameLayout
-                        android:visibility="visible"
+                        android:visibility="gone"
                         android:layout_marginTop="@dimen/dp_5"
                         android:layout_toLeftOf="@+id/title12"
                         android:id="@+id/fl_content2"
@@ -394,6 +394,7 @@
                             android:gravity="center"
                             android:textSize="@dimen/sp_12" />
                         <LinearLayout
+
                             android:id="@+id/ll_del2"
                             android:layout_width="@dimen/dp_30"
                             android:layout_height="@dimen/dp_35"

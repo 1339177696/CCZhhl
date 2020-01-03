@@ -149,7 +149,6 @@ public class SecondMailActivity extends BaseActivity implements PullLoadMoreRecy
         setRefresh();
         getData();
     }
-
     @Override
     public void onLoadMore() {
         Log.e("wxl", "onLoadMore");
@@ -165,6 +164,7 @@ public class SecondMailActivity extends BaseActivity implements PullLoadMoreRecy
         RequestParams params = new RequestParams();
         params.put("username", SPUtils.get(SecondMailActivity.this, "email", "").toString());
         params.put("password", "123456");
+        params.put("userId", SPUtils.get(SecondMailActivity.this, "userId", "").toString());
         HttpRequest.post_FindInboxInfo(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {

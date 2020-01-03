@@ -214,7 +214,7 @@ public class MailParticularsActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.iv_back, R.id.tv_reply})
+    @OnClick({R.id.iv_back, R.id.tv_reply,R.id.tv_collection})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -226,7 +226,14 @@ public class MailParticularsActivity extends BaseActivity {
                 //显示窗口
                 menuWindow.showAtLocation(MailParticularsActivity.this.findViewById(R.id.work_mail_main), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0); //设置layout在PopupWindow中显示的位置
                 break;
+            case R.id.tv_collection:
+                getCollection(account.getId(),"0");
+                break;
         }
+    }
+
+    public void getCollection(String messageId,String isCollect){
+
     }
 
     // 弹出框
