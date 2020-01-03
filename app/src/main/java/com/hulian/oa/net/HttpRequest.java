@@ -412,6 +412,17 @@ public class HttpRequest {
     {
         RequestMode.postMultipart(Urls.commUrls+"system/mail/sendMail",params, files,callback,null);
     }
+      /**
+     * 邮箱收件箱收藏
+     * @param params
+     * @param callback
+     */
+    public static void post_mailCollect(RequestParams params,ResponseCallback callback)
+    {
+        RequestMode.postRequest(Urls.commUrls+"system/mail/mailCollect",params,callback,null);
+    }
+
+
     /**
      * 请假申请
      * @param params

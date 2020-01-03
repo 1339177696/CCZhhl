@@ -33,6 +33,16 @@ public class SecondMail_bean_x implements Serializable
         private String title;
         private boolean isSeen;
         private String content;
+
+    public String getCollectState() {
+        return collectState;
+    }
+
+    public void setCollectState(String collectState) {
+        this.collectState = collectState;
+    }
+
+    private String collectState;
         private List<AttachBean> attach;
 
         public String getCCP() {

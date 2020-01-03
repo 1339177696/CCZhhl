@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -45,6 +46,7 @@ import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.utils.TimeUtils;
 import com.hulian.oa.utils.URLImageParser;
 import com.hulian.oa.views.MyListView;
+import com.hulian.oa.work.file.admin.activity.SecondMailActivity;
 import com.hulian.oa.work.file.admin.activity.mail.l_adapter.L_MailReciveAdapter_item_x;
 
 import org.json.JSONException;
@@ -113,6 +115,10 @@ public class MailParticularsActivity extends BaseActivity {
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
+    //收藏
+    @BindView(R.id.tv_collection)
+    TextView tv_collection;
+    private String state = "0";
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -137,6 +143,14 @@ public class MailParticularsActivity extends BaseActivity {
                 }
             });
         } else {
+        }
+        state = account.getCollectState();
+        if (state.equals("0")){
+            Drawable top = getResources().getDrawable(R.mipmap.mail_collect_icon);
+            tv_collection.setCompoundDrawablesWithIntrinsicBounds(null, top , null, null);
+        }else {
+            Drawable top = getResources().getDrawable(R.mipmap.ic_store_sel);
+            tv_collection.setCompoundDrawablesWithIntrinsicBounds(null, top , null, null);
         }
     }
 
@@ -227,13 +241,36 @@ public class MailParticularsActivity extends BaseActivity {
                 menuWindow.showAtLocation(MailParticularsActivity.this.findViewById(R.id.work_mail_main), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0); //设置layout在PopupWindow中显示的位置
                 break;
             case R.id.tv_collection:
-                getCollection(account.getId(),"0");
+                if (state.equals("0")){
+                    state = "1";
+                    Drawable top = getResources().getDrawable(R.mipmap.ic_store_sel);
+                    tv_collection.setCompoundDrawablesWithIntrinsicBounds(null, top , null, null);
+                }else {
+                    state = "0";
+                    Drawable top = getResources().getDrawable(R.mipmap.mail_collect_icon);
+                    tv_collection.setCompoundDrawablesWithIntrinsicBounds(null, top , null, null);
+                }
+                getCollection(account.getId(),state);
                 break;
         }
     }
 
-    public void getCollection(String messageId,String isCollect){
+    public void getCollection(String collectTypeId,String isCollect){
+        RequestParams params = new RequestParams();
+        params.put("collectUserId", SPUtils.get(MailParticularsActivity.this, "userId", "").toString());
+        params.put("collectTypeId", collectTypeId);
+        params.put("type", isCollect);
+        HttpRequest.post_mailCollect(params, new ResponseCallback() {
+            @Override
+            public void onSuccess(Object responseObj) {
 
+            }
+
+            @Override
+            public void onFailure(OkHttpException failuer) {
+
+            }
+        });
     }
 
     // 弹出框
