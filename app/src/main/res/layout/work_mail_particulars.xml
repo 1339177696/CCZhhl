@@ -37,6 +37,7 @@
             android:textSize="@dimen/sp_11" />
 
             <LinearLayout
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/dp_60"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
@@ -84,9 +85,9 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </RelativeLayout>
-
+        <!--android:layout_marginTop="-60dp"-->
         <ScrollView
-            android:layout_marginTop="-60dp"
+            android:layout_marginTop="-130dp"
             android:layout_below="@+id/work_mail_rela_my1"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
