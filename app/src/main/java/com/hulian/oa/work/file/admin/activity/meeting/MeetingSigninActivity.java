@@ -135,6 +135,7 @@ public class MeetingSigninActivity extends BaseActivity {
                         etSignType.setText("非签到");
                         tvBackInstruct.setText("已签到");
                         tvBackInstruct.setBackgroundResource(R.drawable.edit_background_order1);
+                        tvBackInstruct.setVisibility(View.GONE);
                     }
 
                     et_title.setText(meeting.getMeetingTheme());

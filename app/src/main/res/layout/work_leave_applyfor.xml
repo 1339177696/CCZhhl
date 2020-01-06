@@ -224,6 +224,7 @@
                         android:layout_centerVertical="true"
                         />
                     <EditText
+                        android:editable="false"
                         android:hint="自动换算时长"
                         android:id="@+id/tv_day"
                         android:layout_alignParentRight="true"
