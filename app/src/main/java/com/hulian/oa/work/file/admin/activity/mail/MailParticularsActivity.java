@@ -255,6 +255,7 @@ public class MailParticularsActivity extends BaseActivity {
         }
     }
 
+    // 收藏
     public void getCollection(String collectTypeId,String isCollect){
         RequestParams params = new RequestParams();
         params.put("collectUserId", SPUtils.get(MailParticularsActivity.this, "userId", "").toString());
@@ -273,6 +274,25 @@ public class MailParticularsActivity extends BaseActivity {
         });
     }
 
+    //删除
+
+    public void getDeleteCollection(String collectTypeId){
+        RequestParams params = new RequestParams();
+        params.put("ids", collectTypeId);
+        params.put("userId", SPUtils.get(MailParticularsActivity.this, "userId", "").toString());
+        HttpRequest.post_DeleteCollect(params, new ResponseCallback() {
+            @Override
+            public void onSuccess(Object responseObj) {
+
+            }
+
+            @Override
+            public void onFailure(OkHttpException failuer) {
+
+            }
+        });
+
+    }
     // 弹出框
     public class Dialog_x extends PopupWindow {
         private EditText work_mail_alert_edit;

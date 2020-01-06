@@ -421,6 +421,16 @@ public class HttpRequest {
     {
         RequestMode.postRequest(Urls.commUrls+"system/mail/mailCollect",params,callback,null);
     }
+    /**
+     * 收件箱邮件删除
+     * @param params
+     * @param callback
+     */
+    public static void post_DeleteCollect(RequestParams params,ResponseCallback callback)
+    {
+        RequestMode.postRequest(Urls.commUrls+"system/mailInfo/remove",params,callback,null);
+    }
+
 
 
     /**
