@@ -138,10 +138,10 @@ public class LeaveLaunchFragment extends Fragment implements PullLoadMoreRecycle
                     mRecyclerViewAdapter.addAllData(memberList);
                     if (mCount == 1 && memberList.size() == 0) {
                         emptyBg.setVisibility(View.VISIBLE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
                     } else {
                         emptyBg.setVisibility(View.GONE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     }
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                 } catch (JSONException e) {

@@ -89,7 +89,7 @@ public class MeetingSponsorActivity extends BaseActivity {
     private String meetingTimeEnd = "";
     private String roomid = "";
     private String numberOfPeople = "";
-    private String signType = "0";
+    private String signType = "1";
     MeetGridViewAdapter adapter;
     AlertDialog myDialog;
 

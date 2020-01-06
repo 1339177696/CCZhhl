@@ -83,6 +83,7 @@ public class UndoneTaskFragment extends Fragment implements PullLoadMoreRecycler
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new L_UndoneTaskAdapter(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
+        getData();
         mRecyclerViewAdapter.setOnclick(new L_UndoneTaskAdapter.ClickInterface() {
             @Override
             public void onButtonClick(View view, int position) {
@@ -139,11 +140,11 @@ public class UndoneTaskFragment extends Fragment implements PullLoadMoreRecycler
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                     if (mCount == 1 && memberList.size() == 0) {
                         emptyBg.setVisibility(View.VISIBLE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
                     }
                     else {
                         emptyBg.setVisibility(View.GONE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -160,7 +161,11 @@ public class UndoneTaskFragment extends Fragment implements PullLoadMoreRecycler
 
     @Override
     public void onResume() {
-        onRefresh();
         super.onResume();
+    }
+
+    //    返回刷新
+    public void onEventMainThread(UndoneTaskFragment event) {
+        onRefresh();
     }
 }

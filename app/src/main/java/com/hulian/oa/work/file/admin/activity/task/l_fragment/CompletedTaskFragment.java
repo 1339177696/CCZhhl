@@ -97,7 +97,7 @@ public class CompletedTaskFragment extends Fragment implements PullLoadMoreRecyc
         unbinder.unbind();
         EventBus.getDefault().unregister(this);
     }
-
+    //    返回刷新
     public void onEventMainThread(CompletedTaskFragment ev) {
         onRefresh();
     }
@@ -142,10 +142,10 @@ public class CompletedTaskFragment extends Fragment implements PullLoadMoreRecyc
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                     if (mCount == 1 && memberList.size() == 0) {
                         emptyBg.setVisibility(View.VISIBLE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
                     } else {
                         emptyBg.setVisibility(View.GONE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -159,6 +159,4 @@ public class CompletedTaskFragment extends Fragment implements PullLoadMoreRecyc
             }
         });
     }
-
-
 }

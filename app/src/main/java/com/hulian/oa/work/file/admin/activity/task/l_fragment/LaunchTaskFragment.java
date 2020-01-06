@@ -23,6 +23,7 @@ import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.ToastHelper;
+import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_PendFragment;
 import com.hulian.oa.work.file.admin.activity.task.l_adapter.L_LaunchTaskAdapter;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
@@ -45,15 +46,12 @@ public class LaunchTaskFragment extends Fragment implements PullLoadMoreRecycler
     private int mCount = 1;
     private RecyclerView mRecyclerView;
     L_LaunchTaskAdapter mRecyclerViewAdapter;
-    private ArrayList<String> list_path;
-    private ArrayList<String> list_title;
     Unbinder unbinder;
     private String typee = "0"; // 0发起的任务；1执行的任务；2抄送的任务
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.l_fra_collection_notice, null);
         unbinder = ButterKnife.bind(this, view);
         initList();
@@ -76,7 +74,6 @@ public class LaunchTaskFragment extends Fragment implements PullLoadMoreRecycler
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new L_LaunchTaskAdapter(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
@@ -128,11 +125,11 @@ public class LaunchTaskFragment extends Fragment implements PullLoadMoreRecycler
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                     if (mCount == 1 && memberList.size() == 0) {
                         emptyBg.setVisibility(View.VISIBLE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
                     }
                     else {
                         emptyBg.setVisibility(View.GONE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -145,6 +142,11 @@ public class LaunchTaskFragment extends Fragment implements PullLoadMoreRecycler
                 Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+//    返回刷新
+    public void onEventMainThread(LaunchTaskFragment event) {
+        onRefresh();
     }
 
 }

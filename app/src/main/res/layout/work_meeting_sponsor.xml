@@ -75,24 +75,25 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <RadioButton
-                        android:gravity="center"
-                        android:id="@+id/rd_news"
-                        android:text="签到"
-                        android:button="@null"
-                        android:layout_height="@dimen/dp_20"
                         android:layout_marginRight="@dimen/dp_10"
-                        android:checked="true"
-                        android:tag="0"
-                        style="@style/button_tag_style"
-                      />
-                    <RadioButton
                         android:tag="1"
-                        android:layout_marginLeft="@dimen/dp_10"
+                        android:checked="true"
                         android:id="@+id/rd_weather"
                         android:text="非签到"
                         android:button="@null"
                         style="@style/button_tag_style"
                         android:layout_height="@dimen/dp_20"/>
+                    <RadioButton
+                        android:gravity="center"
+                        android:id="@+id/rd_news"
+                        android:text="签到"
+                        android:button="@null"
+                        android:layout_height="@dimen/dp_20"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:tag="0"
+                        style="@style/button_tag_style"
+                      />
+
                 </RadioGroup>
             </RelativeLayout>
             <View

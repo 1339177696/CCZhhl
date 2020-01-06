@@ -16,7 +16,7 @@
         android:layout_marginTop="@dimen/dp_22"
         android:background="@drawable/liner_yuan_qgl1" />
     <LinearLayout
-        android:layout_marginLeft="@dimen/dp_18"
+        android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_20"
         android:id="@+id/ll_content"
         android:layout_toRightOf="@id/iv_remind"

@@ -54,12 +54,12 @@ public class L_ChaosongmeFragment_qgl extends Fragment implements PullLoadMoreRe
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.l_chaosongmefragment_qgl, null);
         unbinder = ButterKnife.bind(this, view);
+        EventBus.getDefault().register(this);
         initList();
         return view;
     }
 
     private void initList() {
-
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
@@ -79,7 +79,6 @@ public class L_ChaosongmeFragment_qgl extends Fragment implements PullLoadMoreRe
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         l_chaosongAdapter = new L_ChaosongAdapter(getActivity(),"1");
         mPullLoadMoreRecyclerView.setAdapter(l_chaosongAdapter);
@@ -103,11 +102,23 @@ public class L_ChaosongmeFragment_qgl extends Fragment implements PullLoadMoreRe
         mCount = 1;
     }
 
+//    @Override
+//    public void onDestroy()
+//    {
+//        unbinder.unbind();
+//        super.onDestroy();
+//    }
+
     @Override
-    public void onDestroy()
-    {
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
         unbinder.unbind();
-        super.onDestroy();
+    }
+
+    // 返回刷新
+    public void onEventMainThread(L_ChaosongmeFragment_qgl event) {
+        onRefresh();
     }
 
     private void getData() {
@@ -128,11 +139,11 @@ public class L_ChaosongmeFragment_qgl extends Fragment implements PullLoadMoreRe
 
                     if(memberList.size()==0&&mCount==1){
                         emptyBg.setVisibility(View.VISIBLE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
                     }
                     else {
                         emptyBg.setVisibility(View.GONE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     }
 
                 } catch (JSONException e) {

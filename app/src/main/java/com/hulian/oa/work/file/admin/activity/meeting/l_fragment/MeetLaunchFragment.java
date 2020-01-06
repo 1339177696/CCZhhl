@@ -50,17 +50,14 @@ public class MeetLaunchFragment extends Fragment implements PullLoadMoreRecycler
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.l_fra_collection_notice, null);
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
         initList();
-
         return view;
     }
 
     private void initList() {
-
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
@@ -80,7 +77,6 @@ public class MeetLaunchFragment extends Fragment implements PullLoadMoreRecycler
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new MeetLaunchAdapter(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
@@ -119,13 +115,11 @@ public class MeetLaunchFragment extends Fragment implements PullLoadMoreRecycler
     }
 
     private void getData() {
-
         String userid = SPUtils.get(getActivity(), "userId", "-1").toString();
         RequestParams params = new RequestParams();
         params.put("createBy", userid);
         params.put("page1", mCount * 10 - 9 + "");
         params.put("page2", mCount * 10 + "");
-
         HttpRequest.postMyCreateMeeting(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -137,10 +131,10 @@ public class MeetLaunchFragment extends Fragment implements PullLoadMoreRecycler
                             }.getType());
                     if (mCount == 1 && memberList.size() == 0) {
                         emptyBg.setVisibility(View.VISIBLE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
                     } else {
                         emptyBg.setVisibility(View.GONE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     }
                     mRecyclerViewAdapter.addAllData(memberList);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();

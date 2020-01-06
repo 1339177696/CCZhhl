@@ -50,11 +50,16 @@ import com.hulian.oa.work.file.admin.activity.document.l_adapter.FullyGridLayout
 import com.hulian.oa.work.file.admin.activity.document.l_adapter.L_GridImageAdapter;
 import com.hulian.oa.work.file.admin.activity.document.l_adapter.L_GridRoamAdapter;
 import com.hulian.oa.work.file.admin.activity.document.l_adapter.L_GridRoamAdapter_qgl;
+import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_PendFragment;
 import com.hulian.oa.work.file.admin.activity.mail.MailWriteActivity;
 import com.hulian.oa.work.file.admin.activity.meeting.MeetingSponsorActivity;
 import com.hulian.oa.work.file.admin.activity.meeting.SelDepartmentActivity_meet_zb;
 import com.hulian.oa.work.file.admin.activity.meeting.SelDepartmentActivity_meet_zb_single;
 import com.hulian.oa.work.file.admin.activity.meeting.l_adapter.MeetGridViewAdapter;
+import com.hulian.oa.work.file.admin.activity.task.l_fragment.CompletedTaskFragment;
+import com.hulian.oa.work.file.admin.activity.task.l_fragment.CopymeTaskFragment;
+import com.hulian.oa.work.file.admin.activity.task.l_fragment.LaunchTaskFragment;
+import com.hulian.oa.work.file.admin.activity.task.l_fragment.UndoneTaskFragment;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
@@ -360,7 +365,11 @@ public class TaskLauncherActivity extends BaseActivity {
                     if (code.equals("0"))
                     {
                         Toast.makeText(TaskLauncherActivity.this,msg,Toast.LENGTH_SHORT).show();
-                        setResult(1);
+                        EventBus.getDefault().post(new LaunchTaskFragment());
+                        EventBus.getDefault().post(new UndoneTaskFragment());
+                        EventBus.getDefault().post(new CompletedTaskFragment());
+                        EventBus.getDefault().post(new CopymeTaskFragment());
+//                        setResult(1);
                         finish();
                     }
                     else

@@ -256,7 +256,7 @@
                         android:layout_toRightOf="@+id/gw_img122"
                         android:text="紧急类型"
                         android:textColor="#ff313131"
-                        android:textSize="@dimen/sp_11" />
+                        android:textSize="14sp" />
                     <TextView
                         android:id="@+id/iv_jinji_chengdu"
                         android:background="@mipmap/qj_selected_icon_qgl"
@@ -278,7 +278,7 @@
                         android:gravity="right"
                         android:layout_centerVertical="true"
                         android:textColor="#313131"
-                        android:textSize="@dimen/sp_10"
+                        android:textSize="14sp"
                         />
                 </RelativeLayout>
                 <View

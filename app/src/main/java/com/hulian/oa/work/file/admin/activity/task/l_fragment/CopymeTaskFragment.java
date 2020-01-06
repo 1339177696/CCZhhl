@@ -51,11 +51,9 @@ public class CopymeTaskFragment extends Fragment implements PullLoadMoreRecycler
 
     private String type = "2"; // 0发起的任务；1执行的任务；2抄送的任务
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.l_fra_collection_notice, null);
         unbinder = ButterKnife.bind(this, view);
         initList();
@@ -63,7 +61,6 @@ public class CopymeTaskFragment extends Fragment implements PullLoadMoreRecycler
     }
 
     private void initList() {
-
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
@@ -83,7 +80,6 @@ public class CopymeTaskFragment extends Fragment implements PullLoadMoreRecycler
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new L_CopymeTaskAdapter(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
@@ -95,7 +91,6 @@ public class CopymeTaskFragment extends Fragment implements PullLoadMoreRecycler
         super.onDestroyView();
         unbinder.unbind();
     }
-
 
     @Override
     public void onRefresh() {
@@ -151,11 +146,11 @@ public class CopymeTaskFragment extends Fragment implements PullLoadMoreRecycler
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                     if (mCount == 1 && memberList.size() == 0) {
                         emptyBg.setVisibility(View.VISIBLE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
                     }
                     else {
                         emptyBg.setVisibility(View.GONE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -178,6 +173,11 @@ public class CopymeTaskFragment extends Fragment implements PullLoadMoreRecycler
         }
         return dataList;
 
+    }
+
+    //    返回刷新
+    public void onEventMainThread(CopymeTaskFragment ev) {
+        onRefresh();
     }
 
 }

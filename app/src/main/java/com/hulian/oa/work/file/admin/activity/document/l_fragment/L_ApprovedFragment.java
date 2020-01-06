@@ -61,12 +61,6 @@ public class L_ApprovedFragment extends Fragment implements PullLoadMoreRecycler
         initList();
         return view;
     }
-
-    public void onEventMainThread(L_ApprovedFragment event) {
-
-        onRefresh();
-    }
-
     private void initList() {
 
         //获取mRecyclerView对象
@@ -122,6 +116,11 @@ public class L_ApprovedFragment extends Fragment implements PullLoadMoreRecycler
         mCount = 1;
     }
 
+    // 返回刷新
+    public void onEventMainThread(L_ApprovedFragment event) {
+        onRefresh();
+    }
+
     private void getData() {
         RequestParams params = new RequestParams();
         params.put("approverId", SPUtils.get(getActivity(), "userId", "").toString());
@@ -152,11 +151,11 @@ public class L_ApprovedFragment extends Fragment implements PullLoadMoreRecycler
 
                     if(aa.size()==0&&mCount==1){
                         emptyBg.setVisibility(View.VISIBLE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
                     }
                     else {
                         emptyBg.setVisibility(View.GONE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

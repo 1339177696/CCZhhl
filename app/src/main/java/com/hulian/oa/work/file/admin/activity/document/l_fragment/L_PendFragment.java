@@ -101,6 +101,7 @@ public class L_PendFragment extends Fragment implements PullLoadMoreRecyclerView
         getData();
     }
 
+    // 返回刷新
     public void onEventMainThread(L_PendFragment event) {
         onRefresh();
     }
@@ -145,7 +146,6 @@ public class L_PendFragment extends Fragment implements PullLoadMoreRecyclerView
                     }
                     mRecyclerViewAdapter.addAllData(aa);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
-
                     //新修改的qgl
                     AgencyCount mAgencyCount = new AgencyCount();
                     mAgencyCount.setAgencyCount(aa.size() + "");
@@ -153,11 +153,11 @@ public class L_PendFragment extends Fragment implements PullLoadMoreRecyclerView
 
                     if(aa.size()==0&&mCount==1){
                         emptyBg.setVisibility(View.VISIBLE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
                     }
                     else {
                         emptyBg.setVisibility(View.GONE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

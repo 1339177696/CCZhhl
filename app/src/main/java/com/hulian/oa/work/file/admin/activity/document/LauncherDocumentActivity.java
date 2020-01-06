@@ -37,7 +37,10 @@ import com.hulian.oa.work.file.admin.activity.document.l_adapter.FullyGridLayout
 import com.hulian.oa.work.file.admin.activity.document.l_adapter.L_GridImageAdapter;
 import com.hulian.oa.work.file.admin.activity.document.l_adapter.L_GridRoamAdapter;
 import com.hulian.oa.work.file.admin.activity.document.l_adapter.L_GridRoamAdapter_qgl;
+import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_ApprovedFragment;
+import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_ChaosongmeFragment_qgl;
 import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_PendFragment;
+import com.hulian.oa.work.file.admin.activity.document.l_fragment.QGLWofaqiFragment;
 import com.hulian.oa.work.file.admin.activity.meeting.SelDepartmentActivity_meet_zb_single;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
@@ -115,6 +118,10 @@ public class LauncherDocumentActivity extends BaseActivity {
 //    紧急类型
     @BindView(R.id.jinji_leibie)
     TextView jinji_leibie;
+    private OptionsPickerView jinjiPicker;//类型;
+    private String gwjinji = "1";
+    List<String> Jinji = new ArrayList<>();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,7 +142,9 @@ public class LauncherDocumentActivity extends BaseActivity {
             }
         });
         initReason();
+        initJinji();
         tv_reaseon.setText("会签");
+        jinji_leibie.setText("紧急且重要");
         getWenHao();
     }
 
@@ -318,7 +327,7 @@ public class LauncherDocumentActivity extends BaseActivity {
         EventBus.getDefault().unregister(this);
     }
 
-    @OnClick({R.id.tv_launcher,R.id.file_btn,R.id.tv_reaseon})
+    @OnClick({R.id.tv_launcher,R.id.file_btn,R.id.tv_reaseon,R.id.jinji_leibie})
     public void onViewClicked(View v) {
         switch (v.getId()){
             case R.id.tv_launcher:
@@ -374,7 +383,7 @@ public class LauncherDocumentActivity extends BaseActivity {
                 params.put("copierId",csids.substring(0, csids.length() - 1));
                 params.put("copierName",csidname.substring(0, csidname.length() - 1));
                 params.put("createBy", SPUtils.get(mContext, "userId", "").toString());
-
+                params.put("status", gwjinji);
                 List<File> fils = new ArrayList<>();
                 for (LocalMedia imgurl : selectList) {
                     fils.add(new File(imgurl.getPath()));
@@ -393,7 +402,15 @@ public class LauncherDocumentActivity extends BaseActivity {
                             JSONObject result = new JSONObject(responseObj.toString());
                             ToastHelper.showToast(mContext, result.getString("msg"));
                             if (result.getString("code").equals("0")) {
-                                EventBus.getDefault().post(new L_PendFragment());
+                                //领导
+                                if (SPUtils.get(mContext, "isLead", "").equals("0")){
+                                    EventBus.getDefault().post(new L_PendFragment());
+                                    EventBus.getDefault().post(new L_ApprovedFragment());
+                                }else {
+                                    //员工
+                                    EventBus.getDefault().post(new QGLWofaqiFragment());
+                                    EventBus.getDefault().post(new L_ChaosongmeFragment_qgl());
+                                }
                                 finish();
                             }
                         } catch (JSONException e) {
@@ -417,10 +434,37 @@ public class LauncherDocumentActivity extends BaseActivity {
             case R.id.tv_reaseon:
                 reasonPicker.show();
                 break;
+            case R.id.jinji_leibie:
+                jinjiPicker.show();
+                break;
         }
 
     }
 
+    private void initJinji()
+    {
+        Jinji.add("紧急且重要");
+        Jinji.add("重要不紧急");
+        Jinji.add("紧急不重要");
+        Jinji.add("不紧急且不重要");
+        jinjiPicker = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                jinji_leibie.setText(Jinji.get(options1));
+                if (jinji_leibie.getText().toString().trim().equals("紧急且重要")) {
+                    gwjinji = "1" ;
+                } else if(jinji_leibie.getText().toString().trim().equals("重要不紧急")){
+                    gwjinji = "2" ;
+                }else if (jinji_leibie.getText().toString().trim().equals("紧急不重要")){
+                    gwjinji = "3" ;
+                }else {
+                    gwjinji = "4" ;
+                }
+
+            }
+        }).setTitleText("公文类型").setContentTextSize(14).setTitleSize(14).setSubCalSize(14).build();
+        jinjiPicker.setPicker(Jinji);
+    }
 
     private void printData(ArrayList<String> list) {
         if (FileSelectorUtils.isEmpty(list)) {
@@ -500,7 +544,6 @@ public class LauncherDocumentActivity extends BaseActivity {
 //            Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
 //        }
 //    });
-
 
     public void getWenHao()
     {

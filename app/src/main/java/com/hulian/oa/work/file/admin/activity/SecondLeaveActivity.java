@@ -74,7 +74,6 @@ public class SecondLeaveActivity extends BaseActivity {
         init();
     }
     private void init() {
-
         MyViewPageAdapter myViewPageAdapter = new MyViewPageAdapter(getSupportFragmentManager(), titleDatas, fragmentList);
         myViewpager.setAdapter(myViewPageAdapter);
         myTablayout.setupWithViewPager(myViewpager);

@@ -34,6 +34,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by qgl on 2019/10/16 9:17.
@@ -53,11 +54,11 @@ public class QGLWofaqiFragment extends Fragment implements PullLoadMoreRecyclerV
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.qglwofaqifragment, null);
         unbinder = ButterKnife.bind(this, view);
+        EventBus.getDefault().register(this);
         initList();
         return view;
     }
     private void initList() {
-
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
@@ -99,13 +100,23 @@ public class QGLWofaqiFragment extends Fragment implements PullLoadMoreRecyclerV
 
     }
 
+//    @Override
+//    public void onDestroy()
+//    {
+//        unbinder.unbind();
+//        super.onDestroy();
+//    }
     @Override
-    public void onDestroy()
-    {
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
         unbinder.unbind();
-        super.onDestroy();
     }
 
+    // 返回刷新
+    public void onEventMainThread(QGLWofaqiFragment event) {
+        onRefresh();
+    }
     private void getData() {
         RequestParams params = new RequestParams();
         params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
@@ -124,11 +135,11 @@ public class QGLWofaqiFragment extends Fragment implements PullLoadMoreRecyclerV
 
                     if(memberList.size()==0&&mCount==1){
                         emptyBg.setVisibility(View.VISIBLE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
                     }
                     else {
                         emptyBg.setVisibility(View.GONE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     }
 
                 } catch (JSONException e) {
