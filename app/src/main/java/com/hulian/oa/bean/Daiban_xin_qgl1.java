@@ -79,7 +79,16 @@ public class Daiban_xin_qgl1 {
         private String field2;
         private Object field3;
         private Object field4;
-        private Object field5;
+
+        public String getField5() {
+            return field5;
+        }
+
+        public void setField5(String field5) {
+            this.field5 = field5;
+        }
+
+        private String field5;
 
         public String getName() {
             return name;
@@ -227,14 +236,6 @@ public class Daiban_xin_qgl1 {
 
         public void setField4(Object field4) {
             this.field4 = field4;
-        }
-
-        public Object getField5() {
-            return field5;
-        }
-
-        public void setField5(Object field5) {
-            this.field5 = field5;
         }
 
         public static class ParamsBean {

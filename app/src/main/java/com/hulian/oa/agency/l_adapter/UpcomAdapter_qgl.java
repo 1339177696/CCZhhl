@@ -400,7 +400,7 @@ public class UpcomAdapter_qgl extends RecyclerView.Adapter <UpcomAdapter_qgl.Vie
                 //              holder.tv_type.setText("会");
                 holder.bt_1.setVisibility(View.GONE);
                 holder.bt_2.setVisibility(View.VISIBLE);
-                holder.bt_2.setText("签到");
+                holder.bt_2.setText(dataList.get(position).getField5());
                 holder.bt_2.setBackgroundResource(R.drawable.bt_6background);
                 holder.bt_1.setBackgroundResource(0);
                 holder.bt_2.setOnClickListener(new View.OnClickListener() {
