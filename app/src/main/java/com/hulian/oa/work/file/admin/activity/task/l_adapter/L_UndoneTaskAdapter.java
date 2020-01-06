@@ -24,6 +24,7 @@ import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
+import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.TimeUtils;
 import com.hulian.oa.work.file.admin.activity.task.TaskLauncherActivity;
 import com.hulian.oa.work.file.admin.activity.task.l_details_activity.TaskUndoneDetailsActivity;
@@ -159,6 +160,8 @@ public class L_UndoneTaskAdapter extends RecyclerView.Adapter <L_UndoneTaskAdapt
     {
         RequestParams params = new RequestParams();
         params.put("id",id);
+        params.put("userId", SPUtils.get(mContext,"userId","").toString());
+        params.put("completion","1");
         HttpRequest.post_CoordinationRelease_deit(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
