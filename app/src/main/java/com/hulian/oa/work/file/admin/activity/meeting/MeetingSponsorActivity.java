@@ -102,6 +102,11 @@ public class MeetingSponsorActivity extends BaseActivity {
         setContentView(R.layout.work_meeting_sponsor);
         myDialog = new AlertDialog(this).builder();
         ButterKnife.bind(this);
+        //默认会议联系人，会议电话
+        tvLianxPerson.setText(SPUtils.get(MeetingSponsorActivity.this,"nickname","").toString());
+        etTitle9.setText( SPUtils.get(MeetingSponsorActivity.this,"username","").toString());
+        meetingContacts = SPUtils.get(MeetingSponsorActivity.this,"nickname","").toString();
+        meetingContactsPhone = SPUtils.get(MeetingSponsorActivity.this,"username","").toString();
         rdGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {

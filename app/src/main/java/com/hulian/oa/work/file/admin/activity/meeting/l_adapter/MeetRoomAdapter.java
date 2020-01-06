@@ -49,21 +49,46 @@ public class MeetRoomAdapter extends BaseAdapter {
     @SuppressLint("ResourceAsColor")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.l_item_meet_room,null);
-       ImageView imageView= view.findViewById(R.id.iv_meet_room);
-        TextView tv_meet_room_num=view.findViewById(R.id.tv_meet_room_num);
-        TextView tv_meet_count=view.findViewById(R.id.tv_meet_count);
-        TextView tv_sel_room=view.findViewById(R.id.tv_sel_room);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.l_item_meet_room, null);
+        ImageView imageView = view.findViewById(R.id.iv_meet_room);
+        TextView tv_meet_room_num = view.findViewById(R.id.tv_meet_room_num);
+        TextView tv_meet_count = view.findViewById(R.id.tv_meet_count);
+        TextView tv_sel_room = view.findViewById(R.id.tv_sel_room);
+        TextView meetingContacts = view.findViewById(R.id.meetingContacts);
+        TextView meetingPhone = view.findViewById(R.id.meetingPhone);
+        ImageView phone_ls = view.findViewById(R.id.phone_ls);
+
 //        Glide.with(mContext).load(list.get(position).getPhotoPath()).into(imageView);
-        tv_meet_room_num.setText(list.get(position).getMeetingRoomLocation()+list.get(position).getMeetingRoomName());
-        tv_meet_count.setText("容纳人数："+list.get(position).getGalleryful());
-        if(list.get(position).getIsCheck().equals("0")){
+        tv_meet_room_num.setText(list.get(position).getMeetingRoomLocation() + list.get(position).getMeetingRoomName());
+        tv_meet_count.setText("容纳人数：" + list.get(position).getGalleryful());
+        if (list.get(position).getIsCheck().equals("0")) {
             tv_sel_room.setText("选择");
-         //   tv_sel_room.setBackgroundColor(R.color.color_a_blue);
-        }
-        else {
+//            tv_sel_room.setBackgroundResource(R.drawable.bt_7background_qgl2);
+            //   tv_sel_room.setBackgroundColor(R.color.color_a_blue);
+        } else {
             tv_sel_room.setText("已选");
-        //    tv_sel_room.setBackgroundColor(R.color.bg_yellow);
+//            tv_sel_room.setBackgroundResource(R.drawable.bt_7background_qgl1);
+            //    tv_sel_room.setBackgroundColor(R.color.bg_yellow);
+        }
+
+        if (list.get(position).getMeetingContacts() != null && list.get(position).getMeetingContacts() != "") {
+            meetingContacts.setVisibility(View.VISIBLE);
+            meetingContacts.setText("会议联系人：" + list.get(position).getMeetingContacts());
+            tv_sel_room.setText("已占用");
+            tv_sel_room.setBackgroundResource(R.drawable.bt_7background_meet);
+            phone_ls.setVisibility(View.VISIBLE);
+
+        } else {
+            meetingContacts.setVisibility(View.GONE);
+            phone_ls.setVisibility(View.GONE);
+
+        }
+
+        if (list.get(position).getMeetingContactsPhone() != null && list.get(position).getMeetingContactsPhone() != "") {
+            meetingPhone.setVisibility(View.VISIBLE);
+            meetingPhone.setText("联系电话：" + list.get(position).getMeetingContactsPhone());
+        } else {
+            meetingPhone.setVisibility(View.GONE);
         }
         return view;
     }
