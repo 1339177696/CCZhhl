@@ -1,6 +1,7 @@
 package com.hulian.oa.work.file.admin.activity.meeting;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -232,17 +233,40 @@ public class MeetingSponsorActivity extends BaseActivity {
                     }
                     meetRoomAdapter = new MeetRoomAdapter(mContext, memberList);
                     lv_meet.setAdapter(meetRoomAdapter);
+//                    lv_meet.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                        @Override
+//                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//
+//                            roomid = memberList.get(i).getId();
+//                            for (int j = 0; j < memberList.size(); j++) {
+//                                if (i == j) {
+//                                    memberList.get(j).setIsCheck("1");
+//                                } else
+//                                    memberList.get(j).setIsCheck("0");
+//                            }
+//                            meetRoomAdapter.notifyDataSetChanged();
+//                        }
+//                    });
                     lv_meet.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            roomid = memberList.get(i).getId();
-                            for (int j = 0; j < memberList.size(); j++) {
-                                if (i == j) {
-                                    memberList.get(j).setIsCheck("1");
-                                } else
-                                    memberList.get(j).setIsCheck("0");
+                            if (memberList.get(i).getMeetingContacts()!=null&&memberList.get(i).getMeetingContacts()!=""){
+//                                Toast.makeText(MeetingSponsorActivity.this,"会议室以占用",Toast.LENGTH_SHORT).show();
+                                // 拨打电话
+                                callPhone(memberList.get(i).getMeetingContactsPhone());
+                            }else {
+                                roomid = memberList.get(i).getId();
+//                                meetingRoomLocation = memberList.get(i).getMeetingRoomLocation();
+//                                meetingRoomName = memberList.get(i).getMeetingRoomName();
+                                for (int j = 0; j < memberList.size(); j++) {
+                                    if (i == j) {
+                                        memberList.get(j).setIsCheck("1");
+                                    } else
+                                        memberList.get(j).setIsCheck("0");
+                                }
+                                meetRoomAdapter.notifyDataSetChanged();
                             }
-                            meetRoomAdapter.notifyDataSetChanged();
+
                         }
                     });
                 } catch (JSONException e) {
@@ -377,4 +401,17 @@ public class MeetingSponsorActivity extends BaseActivity {
     public void onViewClicked3() {
         startActivityForResult(new Intent(MeetingSponsorActivity.this, SelDepartmentActivity_meet_zb_single.class), 110);
     }
+
+    /**
+     * 拨打电话（跳转到拨号界面，用户手动点击拨打）
+     *
+     * @param phoneNum 电话号码
+     */
+    public void callPhone(String phoneNum) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        Uri data = Uri.parse("tel:" + phoneNum);
+        intent.setData(data);
+        startActivity(intent);
+    }
+
 }
