@@ -112,6 +112,9 @@ public class LauncherDocumentActivity extends BaseActivity {
     private String gwtype = "1";
     @BindView(R.id.et_number)
     EditText etnumber;
+//    紧急类型
+    @BindView(R.id.jinji_leibie)
+    TextView jinji_leibie;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

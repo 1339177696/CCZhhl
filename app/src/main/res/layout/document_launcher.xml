@@ -234,6 +234,59 @@
                     android:layout_marginLeft="22dp"
                     android:background="#E3E3E3" />
 
+                <!--新加的公文紧急类型-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <ImageView
+                        android:id="@+id/gw_img122"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:src="@mipmap/renwu_faqi_icon2" />
+
+                    <TextView
+                        android:id="@+id/gw_text121"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="9dp"
+                        android:layout_toRightOf="@+id/gw_img122"
+                        android:text="紧急类型"
+                        android:textColor="#ff313131"
+                        android:textSize="@dimen/sp_11" />
+                    <TextView
+                        android:id="@+id/iv_jinji_chengdu"
+                        android:background="@mipmap/qj_selected_icon_qgl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/dp_22"
+                        android:layout_centerVertical="true"
+                        />
+
+                    <TextView
+                        android:layout_marginRight="@dimen/dp_13"
+                        android:text="请选择紧急类型"
+                        android:id="@+id/jinji_leibie"
+                        android:layout_toLeftOf="@id/iv_jinji_chengdu"
+                        android:layout_marginLeft="@dimen/dp_100"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:layout_centerVertical="true"
+                        android:textColor="#313131"
+                        android:textSize="@dimen/sp_10"
+                        />
+                </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="22dp"
+                    android:background="#E3E3E3" />
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp">
