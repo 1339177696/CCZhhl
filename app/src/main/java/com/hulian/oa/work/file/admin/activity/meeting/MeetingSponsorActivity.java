@@ -97,6 +97,11 @@ public class MeetingSponsorActivity extends BaseActivity {
     private String meetingContacts = "";
     private String meetingContactsPhone = "";
 
+    // 会议名称
+    private String meetingRoomName = "";
+    // 会议地点
+    private String meetingRoomLocation = "";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -189,6 +194,7 @@ public class MeetingSponsorActivity extends BaseActivity {
                 params.put("createBy", SPUtils.get(mContext, "userId", "").toString());
                 params.put("meetingContacts", meetingContacts);
                 params.put("meetingContactsPhone", meetingContactsPhone);
+                params.put("meetingLocation", meetingRoomLocation+meetingRoomName);
                 HttpRequest.postMeetLauncherApi(params, new ResponseCallback() {
                     @Override
                     public void onSuccess(Object responseObj) {
@@ -233,20 +239,6 @@ public class MeetingSponsorActivity extends BaseActivity {
                     }
                     meetRoomAdapter = new MeetRoomAdapter(mContext, memberList);
                     lv_meet.setAdapter(meetRoomAdapter);
-//                    lv_meet.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                        @Override
-//                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//
-//                            roomid = memberList.get(i).getId();
-//                            for (int j = 0; j < memberList.size(); j++) {
-//                                if (i == j) {
-//                                    memberList.get(j).setIsCheck("1");
-//                                } else
-//                                    memberList.get(j).setIsCheck("0");
-//                            }
-//                            meetRoomAdapter.notifyDataSetChanged();
-//                        }
-//                    });
                     lv_meet.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -256,8 +248,8 @@ public class MeetingSponsorActivity extends BaseActivity {
                                 callPhone(memberList.get(i).getMeetingContactsPhone());
                             }else {
                                 roomid = memberList.get(i).getId();
-//                                meetingRoomLocation = memberList.get(i).getMeetingRoomLocation();
-//                                meetingRoomName = memberList.get(i).getMeetingRoomName();
+                                meetingRoomLocation = memberList.get(i).getMeetingRoomLocation();
+                                meetingRoomName = memberList.get(i).getMeetingRoomName();
                                 for (int j = 0; j < memberList.size(); j++) {
                                     if (i == j) {
                                         memberList.get(j).setIsCheck("1");
