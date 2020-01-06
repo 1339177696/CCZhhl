@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,6 +23,7 @@ import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
+import com.hulian.oa.utils.URLImageParser;
 import com.hulian.oa.views.AlertDialog;
 import com.hulian.oa.views.MyGridView;
 import com.hulian.oa.work.file.admin.activity.meeting.SelDepartmentActivity_meet_x;
@@ -87,6 +89,11 @@ public class MailWriteActivity extends BaseActivity {
         myDialog = new AlertDialog(this).builder();
         EventBus.getDefault().register(this);
         tvUser.setText(SPUtils.get(MailWriteActivity.this, "email", "").toString());
+        if (getIntent().getStringExtra("type").equals("1")){
+            tv_theme.setText("转发："+getIntent().getStringExtra("zhuti"));
+            URLImageParser imageGetter = new URLImageParser( et_content);
+            et_content.setText(Html.fromHtml(getIntent().getStringExtra("neirong"), imageGetter, null));
+        }
     }
 
     @OnClick({R.id.tv_send, R.id.et_annex, R.id.work_mail_shoujianren, R.id.my_img1, R.id.my_img2, R.id.rl_title})

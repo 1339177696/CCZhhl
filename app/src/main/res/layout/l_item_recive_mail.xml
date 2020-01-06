@@ -81,6 +81,7 @@
         android:layout_alignParentRight="true"
         android:layout_height="wrap_content" />
         <ImageView
+            android:visibility="gone"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:background="@mipmap/mail_delete_icon"

@@ -23,6 +23,7 @@ import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
+import com.hulian.oa.work.file.admin.activity.mail.MailParticularsActivity;
 import com.hulian.oa.work.file.admin.activity.mail.MailWriteActivity;
 import com.hulian.oa.work.file.admin.activity.mail.l_adapter.L_MailReciveAdapter;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
@@ -101,7 +102,9 @@ public class SecondMailActivity extends BaseActivity implements PullLoadMoreRecy
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_apply:
-                startActivity(new Intent(SecondMailActivity.this, MailWriteActivity.class));
+                Intent intent = new Intent(SecondMailActivity.this,MailWriteActivity.class);
+                intent.putExtra("type","0");
+                startActivity(intent);
                 break;
             case R.id.tv_write_mail:
                 //     startActivity(new Intent(SecondMailActivity.this, MailWriteActivity.class));

@@ -45,8 +45,10 @@ import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.utils.TimeUtils;
 import com.hulian.oa.utils.URLImageParser;
+import com.hulian.oa.views.AlertDialog;
 import com.hulian.oa.views.MyListView;
 import com.hulian.oa.work.file.admin.activity.SecondMailActivity;
+import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_PendFragment;
 import com.hulian.oa.work.file.admin.activity.mail.l_adapter.L_MailReciveAdapter_item_x;
 
 import org.json.JSONException;
@@ -60,6 +62,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -119,6 +122,8 @@ public class MailParticularsActivity extends BaseActivity {
     @BindView(R.id.tv_collection)
     TextView tv_collection;
     private String state = "0";
+    // 删除
+    AlertDialog myDialog;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -126,6 +131,7 @@ public class MailParticularsActivity extends BaseActivity {
         setContentView(R.layout.work_mail_particulars);
         StatusBarUtil.statusBarLightMode_white(this);
         ButterKnife.bind(this);
+        myDialog = new AlertDialog(mContext).builder();
         account = (SecondMail_bean_x) getIntent().getSerializableExtra("key");
         iniTview();
         list = account.getAttach();
@@ -228,7 +234,7 @@ public class MailParticularsActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.iv_back, R.id.tv_reply,R.id.tv_collection})
+    @OnClick({R.id.iv_back, R.id.tv_reply,R.id.tv_collection,R.id.tv_deletecolltion,R.id.tv_forward})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -251,6 +257,21 @@ public class MailParticularsActivity extends BaseActivity {
                     tv_collection.setCompoundDrawablesWithIntrinsicBounds(null, top , null, null);
                 }
                 getCollection(account.getId(),state);
+                break;
+            case R.id.tv_deletecolltion:
+                myDialog.setGone().setTitle("提示").setMsg("确定删除么").setNegativeButton("取消",null).setPositiveButton("确定", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        getDeleteCollection(account.getId());
+                    }
+                }).show();
+                break;
+            case R.id.tv_forward:
+                Intent intent = new Intent(MailParticularsActivity.this,MailWriteActivity.class);
+                intent.putExtra("type","1");
+                intent.putExtra("zhuti",account.getTitle());
+                intent.putExtra("neirong",account.getContent());
+                startActivity(intent);
                 break;
         }
     }
@@ -275,7 +296,6 @@ public class MailParticularsActivity extends BaseActivity {
     }
 
     //删除
-
     public void getDeleteCollection(String collectTypeId){
         RequestParams params = new RequestParams();
         params.put("ids", collectTypeId);
@@ -283,7 +303,7 @@ public class MailParticularsActivity extends BaseActivity {
         HttpRequest.post_DeleteCollect(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
-
+             finish();
             }
 
             @Override

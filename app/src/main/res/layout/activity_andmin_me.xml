@@ -300,7 +300,9 @@
             android:background="#E3E3E3"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_1"/>
+        <!--隐藏了-->
         <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/rl_mine_set"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_56">
