@@ -179,6 +179,7 @@
                 android:layout_height="@dimen/dp_18"
                 />
             <EditText
+                android:layout_toLeftOf="@+id/tv_launch_send"
                 android:layout_marginLeft="@dimen/dp_16"
                 android:id="@+id/launch_minput"
                 android:inputType="text"
@@ -187,7 +188,6 @@
                 android:hint="请输入回复内容"
                 android:textSize="@dimen/sp_12"
                 android:singleLine="true"
-                android:layout_toLeftOf="@id/tv_launch_send"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_35"
                 android:layout_centerVertical="true"
@@ -195,52 +195,4 @@
                 android:background="@drawable/edit_background2"/>
         </RelativeLayout>
     </LinearLayout>
-
-    <!--<LinearLayout-->
-        <!--android:layout_marginTop="@dimen/dp_15"-->
-        <!--android:layout_marginLeft="@dimen/dp_10"-->
-        <!--android:layout_marginRight="@dimen/dp_10"-->
-        <!--android:layout_marginBottom="@dimen/dp_20"-->
-        <!--android:background="@color/colorwhite"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:orientation="vertical"-->
-        <!--&gt;-->
-    <!--<com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView-->
-        <!--android:id="@+id/listview"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="1"/>-->
-        <!--&lt;!&ndash;回复&ndash;&gt;-->
-    <!--<RelativeLayout-->
-        <!--android:id="@+id/launch_rela_huifu"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="60dp"-->
-        <!--&gt;-->
-        <!--<TextView-->
-            <!--android:id="@+id/tv_launch_send"-->
-            <!--android:text="发图"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_marginRight="@dimen/dp_20"-->
-            <!--android:padding="@dimen/dp_10"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--/>-->
-        <!--<EditText-->
-            <!--android:id="@+id/launch_minput"-->
-            <!--android:inputType="text"-->
-            <!--android:imeOptions="actionSend"-->
-            <!--android:paddingLeft="@dimen/dp_10"-->
-            <!--android:hint="写评论"-->
-            <!--android:textSize="@dimen/sp_12"-->
-            <!--android:singleLine="true"-->
-            <!--android:layout_toLeftOf="@id/tv_launch_send"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/dp_35"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:layout_marginRight="@dimen/dp_10"-->
-            <!--android:background="@drawable/edit_background2"/>-->
-    <!--</RelativeLayout>-->
-    <!--</LinearLayout>-->
 </RelativeLayout>
