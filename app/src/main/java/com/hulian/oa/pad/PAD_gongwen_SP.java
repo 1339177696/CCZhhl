@@ -430,6 +430,7 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
                 message.what = 1000;
                 handler.sendMessage(message);
 
+
             }
         }.start();
 
