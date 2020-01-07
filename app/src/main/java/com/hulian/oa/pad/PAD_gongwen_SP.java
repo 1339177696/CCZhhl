@@ -409,7 +409,6 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
                     e.printStackTrace();
                 }
             }
-
             @Override
             public void onFailure(OkHttpException failuer) {
                 //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
