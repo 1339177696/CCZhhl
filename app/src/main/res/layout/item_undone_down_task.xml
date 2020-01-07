@@ -63,7 +63,7 @@
             android:layout_alignLeft="@+id/tv_name"
             android:layout_below="@+id/tv_reply_time"
             android:id="@+id/tv_file"
-            android:text="回复内容"
+            android:text=""
             android:textSize="@dimen/sp_14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

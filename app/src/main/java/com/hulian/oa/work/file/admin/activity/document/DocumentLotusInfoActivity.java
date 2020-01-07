@@ -178,7 +178,7 @@ public class DocumentLotusInfoActivity extends BaseActivity {
                     tvShenpiPerson.setText(lotus.getString("approverName"));
                     tvChaosongPerson.setText(lotus.getString("copierName"));
                     tvQglTime.setText(lotus.getString("createTime"));
-                    tvQglFile.setText(lotus.getString("filesName"));
+//                    tvQglFile.setText(lotus.getString("filesName"));
 
                     String aa = lotus.getString("files");
 
@@ -191,9 +191,12 @@ public class DocumentLotusInfoActivity extends BaseActivity {
                                 }
                                 else {
                                     path_x = c.get(i);
+
+
                                 }
                             init(d);
                         }
+                        tvQglFile.setText(path_x);
 
                     }
                     approveContentList = gson.fromJson(result.getJSONObject("data").getJSONArray("lotusViceList").toString(),
