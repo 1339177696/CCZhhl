@@ -221,11 +221,8 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
                 //需要转化为实体对象
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-                    list = gson.fromJson(result.getJSONObject("data").getString("list"), new TypeToken<List<Hufu_bean>>() {
-                    }.getType());
-
-                    huifu_bean_x = gson.fromJson(result.getJSONObject("data").getString("object"), new TypeToken<Hufu_bean>() {
-                    }.getType());
+                    list = gson.fromJson(result.getJSONObject("data").getString("list"), new TypeToken<List<Hufu_bean>>() {}.getType());
+                    huifu_bean_x = gson.fromJson(result.getJSONObject("data").getString("object"), new TypeToken<Hufu_bean>() {}.getType());
                     JSONObject jsonObject = new JSONObject(result.getJSONObject("data").getString("object"));
                     String a = jsonObject.getString("startTime");
                     laUnStartTime.setText(a.substring(0,a.length()-3).replace("-","/"));

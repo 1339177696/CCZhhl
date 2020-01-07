@@ -165,7 +165,6 @@ public class L_DetailsLaunchTaskAdapter extends RecyclerView.Adapter <RecyclerVi
             }else if (holder instanceof ViewHolder_List){
                 ViewHolder_List viewHolderList = ((ViewHolder_List) holder);
                 viewHolderList.tv_name.setText(dataList.get(position).getRespondent());
-
                 String a = dataList.get(position).getCreateTime();
                 String b =  getDataaa(a);
                 viewHolderList.tv_reply_time.setText(b);
