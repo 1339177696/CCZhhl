@@ -217,8 +217,8 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
     private static final OkHttpClient client = new OkHttpClient();
 
 
-    private Button lift;
-    private Button riht;
+    private ImageView lift;
+    private ImageView riht;
     private int page = 0;
     private static Bitmap bitmap;
 
@@ -504,7 +504,7 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
                     size = mDoodleParams.mPaintPixelSize > 0 ? mDoodleParams.mPaintPixelSize : mDoodle.getSize();
                 }
                 // 设置初始值
-                mDoodle.setSize(0);  /*画笔的初试值*/
+                mDoodle.setSize(1);  /*画笔的初试值*/
                 // 选择画笔
                 mDoodle.setPen(DoodlePen.BRUSH);  //画笔
                 mDoodle.setShape(DoodleShape.HAND_WRITE); //手绘
