@@ -43,8 +43,8 @@ import static java.lang.Thread.sleep;
 
 public class LuncherActivity extends BaseActivity {
     private AbortableFuture<LoginInfo> loginRequest;
-    private JWebSocketClientService.JWebSocketClientBinder binder;
-    private JWebSocketClientService jWebSClientService;
+//    private JWebSocketClientService.JWebSocketClientBinder binder;
+//    private JWebSocketClientService jWebSClientService;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +88,7 @@ public class LuncherActivity extends BaseActivity {
         }, 2000);
 
         //绑定服务
-        bindService();
+//        bindService();
     }
     private void doLogin(String account1,String token1) {
         //   onLoginDone();
@@ -179,10 +179,10 @@ public class LuncherActivity extends BaseActivity {
                 /*******************************新加的开启Socket**/
 
                 //启动服务
-                startJWebSClientService();
-                //检测通知是否开启
-                checkNotification(mContext);
-                jWebSClientService.startWebSocket(user.getUserId());
+//                startJWebSClientService();
+//                //检测通知是否开启
+//                checkNotification(mContext);
+//                jWebSClientService.startWebSocket(user.getUserId());
                 finish();
             }
             @Override
@@ -207,27 +207,27 @@ public class LuncherActivity extends BaseActivity {
         }
     }
 
-    private ServiceConnection serviceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-            Log.e("MainActivity", "服务与活动成功绑定");
-            binder = (JWebSocketClientService.JWebSocketClientBinder) iBinder;
-            jWebSClientService = binder.getService();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName componentName) {
-            Log.e("MainActivity", "服务与活动成功断开");
-        }
-    };
+//    private ServiceConnection serviceConnection = new ServiceConnection() {
+//        @Override
+//        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+//            Log.e("MainActivity", "服务与活动成功绑定");
+//            binder = (JWebSocketClientService.JWebSocketClientBinder) iBinder;
+//            jWebSClientService = binder.getService();
+//        }
+//
+//        @Override
+//        public void onServiceDisconnected(ComponentName componentName) {
+//            Log.e("MainActivity", "服务与活动成功断开");
+//        }
+//    };
 
     /**
      * 绑定服务
      */
-    private void bindService() {
-        Intent bindIntent = new Intent(mContext, JWebSocketClientService.class);
-        bindService(bindIntent, serviceConnection, BIND_AUTO_CREATE);
-    }
+//    private void bindService() {
+//        Intent bindIntent = new Intent(mContext, JWebSocketClientService.class);
+//        bindService(bindIntent, serviceConnection, BIND_AUTO_CREATE);
+//    }
 
     /**
      * 检测是否开启通知
@@ -318,7 +318,7 @@ public class LuncherActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unbindService(serviceConnection);
+//        unbindService(serviceConnection);
     }
 
 }

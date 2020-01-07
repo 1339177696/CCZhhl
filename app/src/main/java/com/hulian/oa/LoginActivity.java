@@ -61,9 +61,9 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.bt_login)
     Button btLogin;
     private AbortableFuture<LoginInfo> loginRequest;
-
-    private JWebSocketClientService.JWebSocketClientBinder binder;
-    private JWebSocketClientService jWebSClientService;
+    //socket
+//    private JWebSocketClientService.JWebSocketClientBinder binder;
+//    private JWebSocketClientService jWebSClientService;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -76,7 +76,7 @@ public class LoginActivity extends BaseActivity {
             doLogin(SPUtils.get(mContext,"username","-1").toString(),SPUtils.get(mContext,"password","-1").toString());
         }
         //绑定服务
-        bindService();
+//        bindService();
     }
 
     @OnClick(R.id.bt_login)
@@ -157,8 +157,6 @@ public class LoginActivity extends BaseActivity {
         NIMClient.updateStatusBarNotificationConfig(statusBarNotificationConfig);
     }
 
-
-
     /**
      * GET请求
      * @param view
@@ -209,10 +207,10 @@ public class LoginActivity extends BaseActivity {
                 /**开启Socket连接*****************************************************/
 
                 //启动服务
-                startJWebSClientService();
-                //检测通知是否开启
-                checkNotification(mContext);
-                jWebSClientService.startWebSocket(user.getUserId());
+//                startJWebSClientService();
+//                //检测通知是否开启
+//                checkNotification(mContext);
+//                jWebSClientService.startWebSocket(user.getUserId());
                 finish();
             }
             @Override
@@ -237,27 +235,27 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
-    private ServiceConnection serviceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-            Log.e("MainActivity", "服务与活动成功绑定");
-            binder = (JWebSocketClientService.JWebSocketClientBinder) iBinder;
-            jWebSClientService = binder.getService();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName componentName) {
-            Log.e("MainActivity", "服务与活动成功断开");
-        }
-    };
+//    private ServiceConnection serviceConnection = new ServiceConnection() {
+//        @Override
+//        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+//            Log.e("MainActivity", "服务与活动成功绑定");
+//            binder = (JWebSocketClientService.JWebSocketClientBinder) iBinder;
+//            jWebSClientService = binder.getService();
+//        }
+//
+//        @Override
+//        public void onServiceDisconnected(ComponentName componentName) {
+//            Log.e("MainActivity", "服务与活动成功断开");
+//        }
+//    };
 
     /**
      * 绑定服务
      */
-    private void bindService() {
-        Intent bindIntent = new Intent(mContext, JWebSocketClientService.class);
-        bindService(bindIntent, serviceConnection, BIND_AUTO_CREATE);
-    }
+//    private void bindService() {
+//        Intent bindIntent = new Intent(mContext, JWebSocketClientService.class);
+//        bindService(bindIntent, serviceConnection, BIND_AUTO_CREATE);
+//    }
 
     /**
      * 检测是否开启通知
@@ -346,7 +344,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unbindService(serviceConnection);
+//        unbindService(serviceConnection);
     }
 
 

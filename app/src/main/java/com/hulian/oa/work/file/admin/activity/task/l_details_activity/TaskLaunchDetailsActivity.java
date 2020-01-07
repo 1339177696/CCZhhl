@@ -76,7 +76,7 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
     @BindView(R.id.la_un_stop_time)
     TextView laUnStopTime;
     @BindView(R.id.file_btn)
-    TextView file_btn;
+    ImageView file_btn;
 
     private int mCount = 1;
     private RecyclerView mRecyclerView;
