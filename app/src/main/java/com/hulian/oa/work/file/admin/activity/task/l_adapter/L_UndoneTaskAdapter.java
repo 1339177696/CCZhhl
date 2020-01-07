@@ -95,7 +95,6 @@ public class L_UndoneTaskAdapter extends RecyclerView.Adapter <L_UndoneTaskAdapt
     @Override
     public L_UndoneTaskAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.l_item_undone_task, parent, false);
-
         return new L_UndoneTaskAdapter.ViewHolder(v);
     }
 

@@ -237,7 +237,7 @@
                         android:layout_marginTop="@dimen/dp_8"
                         android:text="报销管理"
                         android:textColor="#ff676767"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/sp_12" />
                 </LinearLayout>
 
                 <!--<LinearLayout-->
@@ -262,7 +262,7 @@
                         <!--android:layout_marginTop="@dimen/dp_8"-->
                         <!--android:text="业务驾驶舱"-->
                         <!--android:textColor="#ff676767"-->
-                        <!--android:textSize="12sp" />-->
+                        <!--android:textSize="@dimen/sp_12" />-->
                 <!--</LinearLayout>-->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -285,7 +285,7 @@
                         android:layout_marginTop="@dimen/dp_8"
                         android:text="消息中心"
                         android:textColor="#ff676767"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/sp_12" />
                 </LinearLayout>
 
 
@@ -320,7 +320,7 @@
                         android:layout_marginTop="@dimen/dp_8"
                         android:text="文件柜"
                         android:textColor="#ff676767"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/sp_12" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -344,7 +344,7 @@
                         android:layout_marginTop="@dimen/dp_8"
                         android:text="日程管理"
                         android:textColor="#ff676767"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/sp_12" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -368,7 +368,7 @@
                         android:layout_marginTop="@dimen/dp_8"
                         android:text="考勤管理"
                         android:textColor="#ff676767"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/sp_12" />
                 </LinearLayout>
 
 
