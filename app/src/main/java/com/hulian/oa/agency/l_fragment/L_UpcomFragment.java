@@ -17,6 +17,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.R;
 import com.hulian.oa.agency.l_adapter.UpcomAdapter;
+import com.hulian.oa.agency.l_adapter.UpcomAdapter_qgl;
 import com.hulian.oa.bean.Agency;
 import com.hulian.oa.bean.AgencyCount;
 import com.hulian.oa.bean.AgencyCountFinish;
@@ -55,10 +56,11 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
     RelativeLayout emptyBg;
     private int mCount = 1;
     private RecyclerView mRecyclerView;
-    UpcomAdapter mRecyclerViewAdapter;
+//    UpcomAdapter mRecyclerViewAdapter;
     Unbinder unbinder;
     private List<Daiban_xin_qgl1.DataBean> memberList = new ArrayList<>();
     private List<Daiban_xin_qgl1.DataBean> dataBean  = new ArrayList<>();
+    private UpcomAdapter_qgl mRecyclerViewAdapter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -91,7 +93,8 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
         mPullLoadMoreRecyclerView.setLinearLayout();
 
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
-        mRecyclerViewAdapter = new UpcomAdapter(getActivity());
+//        mRecyclerViewAdapter = new UpcomAdapter(getActivity());
+        mRecyclerViewAdapter = new UpcomAdapter_qgl(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
         getData();
     }
@@ -118,7 +121,7 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
                 }
             }
             mRecyclerViewAdapter.clearData();
-//            mRecyclerViewAdapter.addAllData(dataBean);
+            mRecyclerViewAdapter.addAllData(dataBean);
             AgencyCountFinish mAgencyCount = new AgencyCountFinish();
             mAgencyCount.setAgencyCountFinish(dataBean.size() + "");
             EventBus.getDefault().post(mAgencyCount);
@@ -131,7 +134,7 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
                 }
             }
             mRecyclerViewAdapter.clearData();
-//            mRecyclerViewAdapter.addAllData(dataBean);
+            mRecyclerViewAdapter.addAllData(dataBean);
             AgencyCountFinish mAgencyCount = new AgencyCountFinish();
             mAgencyCount.setAgencyCountFinish(dataBean.size() + "");
             EventBus.getDefault().post(mAgencyCount);
@@ -144,7 +147,7 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
                 }
             }
             mRecyclerViewAdapter.clearData();
-//            mRecyclerViewAdapter.addAllData(dataBean);
+            mRecyclerViewAdapter.addAllData(dataBean);
             AgencyCountFinish mAgencyCount = new AgencyCountFinish();
             mAgencyCount.setAgencyCountFinish(dataBean.size() + "");
             EventBus.getDefault().post(mAgencyCount);
@@ -159,7 +162,7 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
                 }
             }
             mRecyclerViewAdapter.clearData();
-//            mRecyclerViewAdapter.addAllData(dataBean);
+            mRecyclerViewAdapter.addAllData(dataBean);
             AgencyCountFinish mAgencyCount = new AgencyCountFinish();
             mAgencyCount.setAgencyCountFinish(dataBean.size() + "");
             EventBus.getDefault().post(mAgencyCount);
@@ -200,7 +203,7 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
 //                    Agency agency = gson.fromJson(result.getJSONObject("data").toString(), Agency.class);
                     memberList = gson.fromJson(result.getJSONArray("data").toString(), new TypeToken<List<Daiban_xin_qgl1.DataBean>>() {
                     }.getType());
-//                    mRecyclerViewAdapter.addAllData(memberList);
+                    mRecyclerViewAdapter.addAllData(memberList);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                     AgencyCountFinish mAgencyCount = new AgencyCountFinish();
                     mAgencyCount.setAgencyCountFinish(memberList.size() + "");
