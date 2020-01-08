@@ -22,6 +22,8 @@ import com.hulian.oa.bean.AgencyCount;
 import com.hulian.oa.bean.AgencyCountFinish;
 import com.hulian.oa.bean.Fab;
 import com.hulian.oa.bean.Fab2;
+import com.hulian.oa.bean.StringBean1;
+import com.hulian.oa.bean.StringBean2;
 import com.hulian.oa.news.adapter.MyViewPageAdapter;
 import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.work.file.admin.activity.expense.ExpenseExamineActivity;
@@ -52,7 +54,8 @@ public class AgencyFragment extends Fragment {
     TextView tvFinishCount;
     private ArrayList<String> list_path;
     private ArrayList<String> list_title;
-int  mViewPagerIndex;
+    private int  mViewPagerIndex;
+    private int pos = 0;
     public AgencyFragment() {
         // Required empty public constructor
     }
@@ -109,6 +112,7 @@ int  mViewPagerIndex;
         myViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener(){
             @Override
             public void onPageScrolled(int position, float positionOffset,int positionOffsetPixels) {
+                pos = position;
                 if(0 ==position){
                     tvAgencyCount.setTextColor(getActivity().getResources().getColor(R.color.white));
                     tvFinishCount.setTextColor(getActivity().getResources().getColor(R.color.color_xian));
@@ -134,6 +138,23 @@ int  mViewPagerIndex;
         super.onDestroyView();
         unbinder.unbind();
         EventBus.getDefault().unregister(this);
+    }
+
+    //接受点击事件,发送给fragment
+    public void onEventMainThread(String event) {
+
+        if (pos == 0) {
+            Log.e("已办------->",event);
+            // 待办
+//            StringBean2 stringBean2 = new StringBean2();
+//            stringBean2.setDaiban(event);
+//            EventBus.getDefault().post(stringBean2);
+        }else {
+            Log.e("待办------->",event);
+//            StringBean1 stringBean1 = new StringBean1();
+//            stringBean1.setDaiban(event);
+//            EventBus.getDefault().post(stringBean1);
+        }
     }
 
     public void onEventMainThread(Fab event) {
