@@ -14,12 +14,14 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.R;
 import com.hulian.oa.agency.l_adapter.UpcomAdapter;
 import com.hulian.oa.bean.Agency;
 import com.hulian.oa.bean.AgencyCount;
 import com.hulian.oa.bean.AgencyCountFinish;
 import com.hulian.oa.bean.AgencyNew;
+import com.hulian.oa.bean.Daiban_xin_qgl1;
 import com.hulian.oa.bean.InstructionsList;
 import com.hulian.oa.bean.MeetingList;
 import com.hulian.oa.bean.OfficialDocumentList;
@@ -55,7 +57,8 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
     private RecyclerView mRecyclerView;
     UpcomAdapter mRecyclerViewAdapter;
     Unbinder unbinder;
-
+    private List<Daiban_xin_qgl1.DataBean> memberList = new ArrayList<>();
+    private List<Daiban_xin_qgl1.DataBean> dataBean  = new ArrayList<>();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -106,25 +109,60 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
 
     public void onEventMainThread(StringBean1 stringBean1){
         if (stringBean1.getDaiban().equals("1")){
-//            dataBean.clear();
-//            for (int i = 0;i<memberList.size();i++) {
-//
-//                if (memberList.get(i).getType().equals("1")) {
-//                    //公文
-//                    dataBean.add(memberList.get(i));
-//                }
-//            }
-//            mRecyclerViewAdapter.clearData();
-//            mRecyclerViewAdapter.addAllData(dataBean);
-//            AgencyCountFinish mAgencyCount = new AgencyCountFinish();
-//            mAgencyCount.setAgencyCountFinish(dataBean.size() + "");
-//            EventBus.getDefault().post(mAgencyCount);
-        }else if (stringBean1.getDaiban().equals("2")){
+            dataBean.clear();
+            for (int i = 0;i<memberList.size();i++) {
 
+                if (memberList.get(i).getType().equals("1")) {
+                    //公文
+                    dataBean.add(memberList.get(i));
+                }
+            }
+            mRecyclerViewAdapter.clearData();
+//            mRecyclerViewAdapter.addAllData(dataBean);
+            AgencyCountFinish mAgencyCount = new AgencyCountFinish();
+            mAgencyCount.setAgencyCountFinish(dataBean.size() + "");
+            EventBus.getDefault().post(mAgencyCount);
+        }else if (stringBean1.getDaiban().equals("2")){
+            dataBean.clear();
+            for (int i = 0;i<memberList.size();i++) {
+                if (memberList.get(i).getType().equals("3")) {
+                    //公文
+                    dataBean.add(memberList.get(i));
+                }
+            }
+            mRecyclerViewAdapter.clearData();
+//            mRecyclerViewAdapter.addAllData(dataBean);
+            AgencyCountFinish mAgencyCount = new AgencyCountFinish();
+            mAgencyCount.setAgencyCountFinish(dataBean.size() + "");
+            EventBus.getDefault().post(mAgencyCount);
         }else if (stringBean1.getDaiban().equals("3")){
+            dataBean.clear();
+            for (int i = 0;i<memberList.size();i++) {
+                if (memberList.get(i).getType().equals("4")) {
+                    //公文
+                    dataBean.add(memberList.get(i));
+                }
+            }
+            mRecyclerViewAdapter.clearData();
+//            mRecyclerViewAdapter.addAllData(dataBean);
+            AgencyCountFinish mAgencyCount = new AgencyCountFinish();
+            mAgencyCount.setAgencyCountFinish(dataBean.size() + "");
+            EventBus.getDefault().post(mAgencyCount);
 
         }else if (stringBean1.getDaiban().equals("4")){
+            dataBean.clear();
+            for (int i = 0;i<memberList.size();i++) {
 
+                if (memberList.get(i).getType().equals("2")) {
+                    //公文
+                    dataBean.add(memberList.get(i));
+                }
+            }
+            mRecyclerViewAdapter.clearData();
+//            mRecyclerViewAdapter.addAllData(dataBean);
+            AgencyCountFinish mAgencyCount = new AgencyCountFinish();
+            mAgencyCount.setAgencyCountFinish(dataBean.size() + "");
+            EventBus.getDefault().post(mAgencyCount);
         }
     }
 
@@ -150,7 +188,8 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
     private void getData() {
         RequestParams params = new RequestParams();
         params.put("userId", SPUtils.get(getActivity(), "userId", "").toString());
-        params.put("type", SPUtils.get(getActivity(), "isLead", "").toString());
+        params.put("mail", SPUtils.get(getActivity(), "email", "").toString());
+//        params.put("type", SPUtils.get(getActivity(), "isLead", "").toString());
         HttpRequest.postAgencyListApi(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -158,13 +197,32 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-                    Agency agency = gson.fromJson(result.getJSONObject("data").toString(), Agency.class);
-                    mRecyclerViewAdapter.addAllData(newData(agency));
+//                    Agency agency = gson.fromJson(result.getJSONObject("data").toString(), Agency.class);
+                    memberList = gson.fromJson(result.getJSONArray("data").toString(), new TypeToken<List<Daiban_xin_qgl1.DataBean>>() {
+                    }.getType());
+//                    mRecyclerViewAdapter.addAllData(memberList);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
+                    AgencyCountFinish mAgencyCount = new AgencyCountFinish();
+                    mAgencyCount.setAgencyCountFinish(memberList.size() + "");
+                    EventBus.getDefault().post(mAgencyCount);
+//                    mRecyclerViewAdapter.addAllData(newData(agency));
+//                    mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
+//            public void onSuccess(Object responseObj) {
+//                //需要转化为实体对象
+//                Gson gson = new GsonBuilder().serializeNulls().create();
+//                try {
+//                    JSONObject result = new JSONObject(responseObj.toString());
+//                    Agency agency = gson.fromJson(result.getJSONObject("data").toString(), Agency.class);
+//                    mRecyclerViewAdapter.addAllData(newData(agency));
+//                    mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
 
             @Override
             public void onFailure(OkHttpException failuer) {
