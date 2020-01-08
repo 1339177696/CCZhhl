@@ -143,6 +143,8 @@ int  mViewPagerIndex;
             tvMengban.setVisibility(View.VISIBLE);
         }
     }
+
+
     public void onEventMainThread(AgencyCount event) {
         if(!"".equals(event.getAgencyCount())){
             tvAgencyCount.setText(event.getAgencyCount());
