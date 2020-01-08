@@ -26,9 +26,9 @@
             <!--android:gravity="center"-->
             <!--android:layout_height="match_parent" />-->
     <!--</FrameLayout>-->
-    <!--android:background="@drawable/edit_notice_qgl"-->
 
     <LinearLayout
+        android:background="@drawable/edit_notice_qgl"
         android:layout_centerVertical="true"
         android:id="@+id/iv_image"
         android:layout_width="@dimen/dp_45"
@@ -94,9 +94,9 @@
         android:layout_toRightOf="@id/iv_image"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_height="wrap_content" />
-    <!--android:background="@drawable/edit_notice_qgl"-->
 
     <LinearLayout
+        android:background="@drawable/edit_notice_qgl"
         android:id="@+id/lv_jinji"
         android:layout_marginRight="@dimen/dp_5"
         android:layout_alignParentRight="true"

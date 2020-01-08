@@ -95,7 +95,7 @@ public class L_HascomFragment extends Fragment implements PullLoadMoreRecyclerVi
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new HascomAdapter(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
-        getData();
+//        getData();
     }
 
     @Override
