@@ -87,13 +87,11 @@ public class AgencyFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fra_agency, container, false);
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
         init();
-
         return view;
     }
 
@@ -142,18 +140,17 @@ public class AgencyFragment extends Fragment {
 
     //接受点击事件,发送给fragment
     public void onEventMainThread(String event) {
-
         if (pos == 0) {
             Log.e("已办------->",event);
-            // 待办
-//            StringBean2 stringBean2 = new StringBean2();
-//            stringBean2.setDaiban(event);
-//            EventBus.getDefault().post(stringBean2);
+            StringBean1 stringBean1 = new StringBean1();
+            stringBean1.setDaiban(event);
+            EventBus.getDefault().post(stringBean1);
+
         }else {
             Log.e("待办------->",event);
-//            StringBean1 stringBean1 = new StringBean1();
-//            stringBean1.setDaiban(event);
-//            EventBus.getDefault().post(stringBean1);
+            StringBean2 stringBean2 = new StringBean2();
+            stringBean2.setDaiban(event);
+            EventBus.getDefault().post(stringBean2);
         }
     }
 

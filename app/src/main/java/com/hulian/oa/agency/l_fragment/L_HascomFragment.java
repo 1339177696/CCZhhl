@@ -22,6 +22,8 @@ import com.hulian.oa.bean.AgencyNew;
 import com.hulian.oa.bean.InstructionsList;
 import com.hulian.oa.bean.MeetingList;
 import com.hulian.oa.bean.OfficialDocumentList;
+import com.hulian.oa.bean.StringBean1;
+import com.hulian.oa.bean.StringBean2;
 import com.hulian.oa.bean.WorkCoordinationReleaseList;
 import com.hulian.oa.bean.WorkLeaveList;
 import com.hulian.oa.bean.WorkReimbursementList;
@@ -100,6 +102,19 @@ public class L_HascomFragment extends Fragment implements PullLoadMoreRecyclerVi
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        EventBus.getDefault().unregister(this);
+    }
+    //接受点击按钮事件
+    public void onEventMainThread(StringBean2 stringBean2){
+        if (stringBean2.getDaiban().equals("1")){
+
+        }else if (stringBean2.getDaiban().equals("2")){
+
+        }else if (stringBean2.getDaiban().equals("3")){
+
+        }else if (stringBean2.getDaiban().equals("4")){
+
+        }
     }
 
 

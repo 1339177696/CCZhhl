@@ -18,10 +18,12 @@ import com.hulian.oa.R;
 import com.hulian.oa.agency.l_adapter.UpcomAdapter;
 import com.hulian.oa.bean.Agency;
 import com.hulian.oa.bean.AgencyCount;
+import com.hulian.oa.bean.AgencyCountFinish;
 import com.hulian.oa.bean.AgencyNew;
 import com.hulian.oa.bean.InstructionsList;
 import com.hulian.oa.bean.MeetingList;
 import com.hulian.oa.bean.OfficialDocumentList;
+import com.hulian.oa.bean.StringBean1;
 import com.hulian.oa.bean.WorkCoordinationReleaseList;
 import com.hulian.oa.bean.WorkLeaveList;
 import com.hulian.oa.bean.WorkReimbursementList;
@@ -102,6 +104,30 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
         onRefresh();
     }
 
+    public void onEventMainThread(StringBean1 stringBean1){
+        if (stringBean1.getDaiban().equals("1")){
+//            dataBean.clear();
+//            for (int i = 0;i<memberList.size();i++) {
+//
+//                if (memberList.get(i).getType().equals("1")) {
+//                    //公文
+//                    dataBean.add(memberList.get(i));
+//                }
+//            }
+//            mRecyclerViewAdapter.clearData();
+//            mRecyclerViewAdapter.addAllData(dataBean);
+//            AgencyCountFinish mAgencyCount = new AgencyCountFinish();
+//            mAgencyCount.setAgencyCountFinish(dataBean.size() + "");
+//            EventBus.getDefault().post(mAgencyCount);
+        }else if (stringBean1.getDaiban().equals("2")){
+
+        }else if (stringBean1.getDaiban().equals("3")){
+
+        }else if (stringBean1.getDaiban().equals("4")){
+
+        }
+    }
+
     @Override
     public void onRefresh() {
         Log.e("wxl", "onRefresh");
@@ -125,8 +151,6 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
         RequestParams params = new RequestParams();
         params.put("userId", SPUtils.get(getActivity(), "userId", "").toString());
         params.put("type", SPUtils.get(getActivity(), "isLead", "").toString());
-//        params.put("pageState", mCount*10-9 + "");
-//        params.put("pageEnd", mCount * 10 + "");
         HttpRequest.postAgencyListApi(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {

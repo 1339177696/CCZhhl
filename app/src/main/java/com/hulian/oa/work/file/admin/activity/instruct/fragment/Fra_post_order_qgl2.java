@@ -77,15 +77,16 @@ public class Fra_post_order_qgl2 extends Fragment {
                 .setPressedTranslationZ(10)
                 .setTag(4)
                 .build();
-        FabAttributes youjian = new FabAttributes.Builder()
-                .setBackgroundTint(Color.parseColor("#FFAD4A"))
-                .setSrc(getResources().getDrawable(R.mipmap.db_youjian_icon))
-                .setFabSize(FloatingActionButton.SIZE_NORMAL)
-                .setPressedTranslationZ(10)
-                .setTag(5)
-                .build();
+//        FabAttributes youjian = new FabAttributes.Builder()
+//                .setBackgroundTint(Color.parseColor("#FFAD4A"))
+//                .setSrc(getResources().getDrawable(R.mipmap.db_youjian_icon))
+//                .setFabSize(FloatingActionButton.SIZE_NORMAL)
+//                .setPressedTranslationZ(10)
+//                .setTag(5)
+//                .build();
 //添加菜单
-        fabTop.addFab(qingjia,renwu,email,youjian,collection);
+//        youjian,
+        fabTop.addFab(qingjia,renwu,email,collection);
         //    fabTop.setAnimationManager(new FabAlphaAnimate(fabTop));
 //设置菜单点击事件
         fabTop.setFabClickListener(new OnFabClickListener() {
@@ -94,20 +95,26 @@ public class Fra_post_order_qgl2 extends Fragment {
                 Log.e("TAG",Integer.parseInt(tag + "")+"");
                 if (Integer.parseInt(tag + "") == 1) {
                     fabTop.closeAnimate();
-                    EventBus.getDefault().post("公文审批");
+                    EventBus.getDefault().post("1");
+//                    EventBus.getDefault().post("公文审批");
                 } else if (Integer.parseInt(tag + "") == 2) {
                     fabTop.closeAnimate();
-                    EventBus.getDefault().post("会议安排");
+                    EventBus.getDefault().post("2");
+//                    EventBus.getDefault().post("会议安排");
                 } else if (Integer.parseInt(tag + "") == 3) {
                     fabTop.closeAnimate();
-                    EventBus.getDefault().post("任务协同");
+                    EventBus.getDefault().post("3");
+//                    EventBus.getDefault().post("任务协同");
                 } else if (Integer.parseInt(tag+"") == 4){
                     fabTop.closeAnimate();
-                    EventBus.getDefault().post("请假审批");
-                }else {
-                    fabTop.closeAnimate();
-                    EventBus.getDefault().post("邮件列表");
+                    EventBus.getDefault().post("4");
+//                    EventBus.getDefault().post("请假审批");
                 }
+//                else {
+//                    fabTop.closeAnimate();
+//                    EventBus.getDefault().post("5");
+//                    EventBus.getDefault().post("邮件列表");
+//                }
             }
         });
 
