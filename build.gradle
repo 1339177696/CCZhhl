@@ -28,5 +28,5 @@ task clean(type: Delete) {
 }
 ext{
 
-    isPad = false
+    isPad = true
 }

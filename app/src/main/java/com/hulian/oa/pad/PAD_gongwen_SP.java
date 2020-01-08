@@ -801,7 +801,11 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
             params1.put("aaproverId", SPUtils.get(mContext, "userId", "").toString());
             params1.put("approverOpinion", "");
             params1.put("state", "2");
-            HttpRequest.postDocumentApproveApi(params1, new ResponseCallback() {
+            List<File> fils = new ArrayList<>();
+            for (Padbean media : padbeans){
+                fils.add(media.getFile());
+            }
+            HttpRequest.postDocumentApproveApi_two(params1,fils, new ResponseCallback() {
                 @Override
                 public void onSuccess(Object responseObj) {
                     try {

@@ -228,6 +228,15 @@ public class HttpRequest {
   }
 
     /**
+     * 公文审批 qgl2
+     * @param params 入参
+     * @param callback 回调接口
+     */
+    public static void postDocumentApproveApi_two(RequestParams params, List<File> file ,ResponseCallback callback) {
+        RequestMode.postMultipart_qgl(Urls.commUrls+"system/lotus/lotusApprove", params,file, callback, null);
+    }
+
+    /**
      * 公文审批 PAD
      * @param params 入参
      * @param callback 回调接口

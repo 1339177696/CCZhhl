@@ -350,7 +350,7 @@
             </RelativeLayout>
             <!--修改右对齐qgl-->
             <TextView
-                android:layout_gravity="right"
+                android:layout_gravity="left"
                 android:id="@+id/et_content"
                 android:layout_width="wrap_content"
                 android:gravity="top"
