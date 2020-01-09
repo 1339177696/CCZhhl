@@ -97,29 +97,6 @@ public class HascomAdapter_qgl extends RecyclerView.Adapter <HascomAdapter_qgl.V
             holder.tv_time2.setText(TimeUtils.getDateToString4(dataList.get(position).getCreateTime()));
         }
 
-//        holder.tv_content.setText(dataList.get(position).getContent());
-//        holder.tv_time.setText(dataList.get(position).getTime());
-//        holder.tv_des.setText(dataList.get(position).getDes());
-//        if (dataList.get(position).getContent().equals("")) {
-//            holder.tv_content.setText("");
-//        } else {
-//            String text_content = dataList.get(position).getContent().split(" ")[0] + "  <font color='#2B8CFA'>" + dataList.get(position).getContent().split(" ")[1] + "</font>";
-//
-//            holder.tv_content.setText(Html.fromHtml(text_content));
-//        }
-//        if (dataList.get(position).getContent().equals("")) {
-//            holder.tv_content.setText("");
-//        } else {
-//            String text_content = dataList.get(position).getContent().split(" ")[0] + "  <font color='#2B8CFA'>" + dataList.get(position).getContent().split(" ")[1] + "</font>";
-//            holder.tv_content.setText(Html.fromHtml(text_content));
-//        }
-//        if (dataList.get(position).getDes().equals("")) {
-//            holder.tv_des.setText("");
-//        } else {
-//            String text_content = dataList.get(position).getDes().split(" ")[0] + "  <font color='#2B8CFA'>" + dataList.get(position).getDes().split(" ")[1] + "</font>";
-//            holder.tv_des.setText(Html.fromHtml(text_content));
-//        }
-
         //0任务协同，1：公文流转2:指令安排3:会议安排 4 报销 5 请假
         switch (dataList.get(position).getType()) {
             case "0":

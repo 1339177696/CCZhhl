@@ -122,15 +122,25 @@ public class HttpRequest {
 
   }
 
-  /**
-   * 已办列表
-   * @param params 入参
-   * @param callback 回调接口
-   */
-  public static void postAgencyFinishListApi(RequestParams params, ResponseCallback callback) {
-    RequestMode.postRequest(Urls.commUrls+"system/pendingCore/findFinishedListInfo", params, callback, null);
+//  /**
+//   * 已办列表
+//   * @param params 入参
+//   * @param callback 回调接口
+//   */
+//  public static void postAgencyFinishListApi(RequestParams params, ResponseCallback callback) {
+//    RequestMode.postRequest(Urls.commUrls+"system/pendingCore/findFinishedListInfo", params, callback, null);
+//
+//  }
 
-  }
+    /**
+     * 已办列表
+     * @param params 入参
+     * @param callback 回调接口
+     */
+    public static void postAgencyFinishListApi(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls+"system/pendingCore/selectFinishedWork", params, callback, null);
+
+    }
   /**
    * 发布通知
    * @param params 入参
