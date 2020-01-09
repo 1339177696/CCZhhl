@@ -145,7 +145,6 @@ public class AgencyFragment extends Fragment {
             StringBean1 stringBean1 = new StringBean1();
             stringBean1.setDaiban(event);
             EventBus.getDefault().post(stringBean1);
-
         }else {
             Log.e("待办------->",event);
             StringBean2 stringBean2 = new StringBean2();

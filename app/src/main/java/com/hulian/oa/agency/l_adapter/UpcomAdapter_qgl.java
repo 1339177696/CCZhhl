@@ -71,13 +71,9 @@ public class UpcomAdapter_qgl extends RecyclerView.Adapter <UpcomAdapter_qgl.Vie
         mContext = context;
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
-      //  public ImageView iv_image;
         public TextView tv_title;
-//        public TextView tv_time;
         public TextView tv_content;
         public TextView tv_des;
-
-//        public TextView tv_type;
         public TextView bt_1,bt_2;
         // qgl
         public TextView tv_time_qgl;
@@ -87,12 +83,9 @@ public class UpcomAdapter_qgl extends RecyclerView.Adapter <UpcomAdapter_qgl.Vie
         public TextView lv_txt;
         public ViewHolder(View itemView) {
             super(itemView);
-      //      iv_image=itemView.findViewById(R.id.iv_image);
             tv_title = (TextView) itemView.findViewById(R.id.tv_title);
-//            tv_time= (TextView) itemView.findViewById(R.id.tv_time);
             tv_content = (TextView) itemView.findViewById(R.id.tv_content);
             tv_des= (TextView) itemView.findViewById(R.id.tv_des);
-//            tv_type=(TextView) itemView.findViewById(R.id.tv_type);
             bt_1=itemView.findViewById(R.id.bt_1);
             bt_2=itemView.findViewById(R.id.bt_2);
             //qgl
@@ -113,24 +106,10 @@ public class UpcomAdapter_qgl extends RecyclerView.Adapter <UpcomAdapter_qgl.Vie
         holder.tv_title.setText(dataList.get(position).getTitle());
         holder.tv_time_qgl.setText(TimeUtils.getDateToString3(dataList.get(position).getCreateTime()));
         holder.tv_time_qgl2.setText(TimeUtils.getDateToString4(dataList.get(position).getCreateTime()));
-//        if (dataList.get(position).getCreateBy().equals("null")&&dataList.get(position).getCreateBy().equals(null)) {
-//            holder.tv_content.setText("");
-//        } else {
-////            String text_content = dataList.get(position).getContent().split(" ")[0] + "  <font color='#2B8CFA'>" + dataList.get(position).getContent().split(" ")[1] + "</font>";
-//            holder.tv_content.setText(Html.fromHtml("发起人:"+dataList.get(position).getCreateBy()));
-//        }
-//        if (dataList.get(position).getField1() == null &&dataList.get(position).getField1() == "null"&&dataList.get(position).getField1() == "") {
-//            holder.tv_des.setText("");
-//        } else {
-////            String text_content = dataList.get(position).getField1().split(" ")[0] + "  <font color='#2B8CFA'>" + dataList.get(position).getField1().split(" ")[1] + "</font>";
-//            holder.tv_des.setText(Html.fromHtml("审批人："+dataList.get(position).getField1()));
-//        }
-
         //0任务协同，1：公文流转2:请假3:会议安排 4 报销 5 指令安排
         switch (dataList.get(position).getType()) {
             case "0":
                 holder.lv_jinji.setVisibility(View.GONE);
-//                holder.tv_type.setText("报");
                 holder.bt_1.setVisibility(View.VISIBLE);
                 holder.bt_2.setVisibility(View.VISIBLE);
                 holder.bt_1.setText("同意");
@@ -199,13 +178,11 @@ public class UpcomAdapter_qgl extends RecyclerView.Adapter <UpcomAdapter_qgl.Vie
                 if (dataList.get(position).getName().equals("null")&&dataList.get(position).getName().equals(null)) {
                     holder.tv_content.setText("");
                 } else {
-//            String text_content = dataList.get(position).getContent().split(" ")[0] + "  <font color='#2B8CFA'>" + dataList.get(position).getContent().split(" ")[1] + "</font>";
                     holder.tv_content.setText(Html.fromHtml("发起人:"+dataList.get(position).getName()));
                 }
                 if (dataList.get(position).getField1() == null &&dataList.get(position).getField1() == "null"&&dataList.get(position).getField1() == "") {
                     holder.tv_des.setText("");
                 } else {
-//               String text_content = dataList.get(position).getField1().split(" ")[0] + "  <font color='#2B8CFA'>" + dataList.get(position).getField1().split(" ")[1] + "</font>";
                     holder.tv_des.setText(Html.fromHtml("审批人："+dataList.get(position).getField1()));
                 }
                 holder.lv_jinji.setVisibility(View.VISIBLE);
@@ -228,7 +205,6 @@ public class UpcomAdapter_qgl extends RecyclerView.Adapter <UpcomAdapter_qgl.Vie
                     holder.lv_txt.setTextColor(Color.parseColor("#6E8AFF"));
                 }
 
-//                holder.tv_type.setText("文");
                 holder.bt_1.setVisibility(View.GONE);
                 holder.bt_2.setVisibility(View.GONE);
                 holder.bt_1.setText("同意");
@@ -301,17 +277,14 @@ public class UpcomAdapter_qgl extends RecyclerView.Adapter <UpcomAdapter_qgl.Vie
                 if (dataList.get(position).getName().equals("null")&&dataList.get(position).getName().equals(null)) {
                     holder.tv_content.setText("");
                 } else {
-//            String text_content = dataList.get(position).getContent().split(" ")[0] + "  <font color='#2B8CFA'>" + dataList.get(position).getContent().split(" ")[1] + "</font>";
                     holder.tv_content.setText(Html.fromHtml("发起人:"+dataList.get(position).getName()));
                 }
                 if (dataList.get(position).getField1() == null &&dataList.get(position).getField1() == "null"&&dataList.get(position).getField1() == "") {
                     holder.tv_des.setText("");
                 } else {
-//            String text_content = dataList.get(position).getField1().split(" ")[0] + "  <font color='#2B8CFA'>" + dataList.get(position).getField1().split(" ")[1] + "</font>";
                     holder.tv_des.setText(Html.fromHtml("审批人："+dataList.get(position).getField1()));
                 }
                 holder.lv_jinji.setVisibility(View.GONE);
-//                holder.tv_type.setText("假");
                 holder.bt_1.setVisibility(View.VISIBLE);
                 holder.bt_2.setVisibility(View.VISIBLE);
                 holder.bt_1.setText("同意");
@@ -385,19 +358,16 @@ public class UpcomAdapter_qgl extends RecyclerView.Adapter <UpcomAdapter_qgl.Vie
                 if (dataList.get(position).getName().equals("null")&&dataList.get(position).getName().equals(null)) {
                     holder.tv_content.setText("");
                 } else {
-//            String text_content = dataList.get(position).getContent().split(" ")[0] + "  <font color='#2B8CFA'>" + dataList.get(position).getContent().split(" ")[1] + "</font>";
                     holder.tv_content.setText(Html.fromHtml("发起人:"+dataList.get(position).getName()));
                 }
                 if (dataList.get(position).getField4() == null &&dataList.get(position).getField4() == "null"&&dataList.get(position).getField4() == "") {
                     holder.tv_des.setText("");
                 } else {
-//            String text_content = dataList.get(position).getField1().split(" ")[0] + "  <font color='#2B8CFA'>" + dataList.get(position).getField1().split(" ")[1] + "</font>";
                     holder.tv_des.setText(Html.fromHtml("会议地点："+dataList.get(position).getField4()));
                 }
 
             holder.lv_jinji.setVisibility(View.GONE);
 
-                //              holder.tv_type.setText("会");
                 holder.bt_1.setVisibility(View.GONE);
                 holder.bt_2.setVisibility(View.VISIBLE);
                 holder.bt_2.setText(dataList.get(position).getField5());
@@ -411,7 +381,6 @@ public class UpcomAdapter_qgl extends RecyclerView.Adapter <UpcomAdapter_qgl.Vie
                          * 也可以不传这个参数
                          * 不传的话  默认都为默认不震动  其他都为true
                          * */
-
                         ZxingConfig config = new ZxingConfig();
                         config.setShowbottomLayout(false);//底部布局（包括闪光灯和相册）
                         //config.setPlayBeep(true);//是否播放提示音
@@ -429,16 +398,13 @@ public class UpcomAdapter_qgl extends RecyclerView.Adapter <UpcomAdapter_qgl.Vie
                 if (dataList.get(position).getName().equals("null")&&dataList.get(position).getName().equals(null)) {
                     holder.tv_content.setText("");
                 } else {
-//            String text_content = dataList.get(position).getContent().split(" ")[0] + "  <font color='#2B8CFA'>" + dataList.get(position).getContent().split(" ")[1] + "</font>";
                     holder.tv_content.setText(Html.fromHtml("发起人:"+dataList.get(position).getName()));
                 }
                 if (dataList.get(position).getField4() == null &&dataList.get(position).getField4() == "null"&&dataList.get(position).getField4() == "") {
                     holder.tv_des.setText("");
                 } else {
-//            String text_content = dataList.get(position).getField1().split(" ")[0] + "  <font color='#2B8CFA'>" + dataList.get(position).getField1().split(" ")[1] + "</font>";
                     holder.tv_des.setText(Html.fromHtml("截止时间："+dataList.get(position).getField4()));
                 }
- //             holder.tv_type.setText("协");
                 holder.lv_jinji.setVisibility(View.GONE);
                 holder.bt_1.setVisibility(View.GONE);
                 holder.bt_2.setVisibility(View.VISIBLE);
@@ -492,7 +458,6 @@ public class UpcomAdapter_qgl extends RecyclerView.Adapter <UpcomAdapter_qgl.Vie
                 if (dataList.get(position).getName().equals("null")&&dataList.get(position).getName().equals(null)) {
                     holder.tv_content.setText("");
                 } else {
-//            String text_content = dataList.get(position).getContent().split(" ")[0] + "  <font color='#2B8CFA'>" + dataList.get(position).getContent().split(" ")[1] + "</font>";
                     holder.tv_content.setText(Html.fromHtml("发起人:"+dataList.get(position).getName()));
                 }
                 holder.tv_des.setVisibility(View.VISIBLE);
@@ -631,7 +596,6 @@ public class UpcomAdapter_qgl extends RecyclerView.Adapter <UpcomAdapter_qgl.Vie
     public int getItemCount() {
         return dataList.size();
     }
-
 
     // 邮件详情数据
     private SecondMail_bean_x mind_setup_jvabean;

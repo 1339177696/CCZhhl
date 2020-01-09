@@ -103,15 +103,25 @@ public class HttpRequest {
 
   }
 
-  /**
+//  /**
+//   * 待办列表
+//   * @param params 入参
+//   * @param callback 回调接口
+//   */
+//  public static void postAgencyListApi(RequestParams params, ResponseCallback callback) {
+//    RequestMode.postRequest(Urls.commUrls+"system/pendingCore/findUnfinishedListInfo", params, callback, null);
+//
+//  }
+   /**
    * 待办列表
    * @param params 入参
    * @param callback 回调接口
    */
   public static void postAgencyListApi(RequestParams params, ResponseCallback callback) {
-    RequestMode.postRequest(Urls.commUrls+"system/pendingCore/findUnfinishedListInfo", params, callback, null);
+    RequestMode.postRequest(Urls.commUrls+"system/pendingCore/selectUnfinishedWork", params, callback, null);
 
   }
+
   /**
    * 已办列表
    * @param params 入参

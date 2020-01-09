@@ -56,7 +56,6 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
     RelativeLayout emptyBg;
     private int mCount = 1;
     private RecyclerView mRecyclerView;
-//    UpcomAdapter mRecyclerViewAdapter;
     Unbinder unbinder;
     private List<Daiban_xin_qgl1.DataBean> memberList = new ArrayList<>();
     private List<Daiban_xin_qgl1.DataBean> dataBean  = new ArrayList<>();
@@ -91,9 +90,7 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
-//        mRecyclerViewAdapter = new UpcomAdapter(getActivity());
         mRecyclerViewAdapter = new UpcomAdapter_qgl(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
         getData();
@@ -190,9 +187,8 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
 
     private void getData() {
         RequestParams params = new RequestParams();
-        params.put("userId", SPUtils.get(getActivity(), "userId", "").toString());
+        params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
         params.put("mail", SPUtils.get(getActivity(), "email", "").toString());
-//        params.put("type", SPUtils.get(getActivity(), "isLead", "").toString());
         HttpRequest.postAgencyListApi(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -200,36 +196,18 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-//                    Agency agency = gson.fromJson(result.getJSONObject("data").toString(), Agency.class);
-                    memberList = gson.fromJson(result.getJSONArray("data").toString(), new TypeToken<List<Daiban_xin_qgl1.DataBean>>() {
-                    }.getType());
+                    memberList = gson.fromJson(result.getJSONArray("data").toString(), new TypeToken<List<Daiban_xin_qgl1.DataBean>>() {}.getType());
                     mRecyclerViewAdapter.addAllData(memberList);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
-                    AgencyCountFinish mAgencyCount = new AgencyCountFinish();
-                    mAgencyCount.setAgencyCountFinish(memberList.size() + "");
+                    AgencyCount mAgencyCount = new AgencyCount();
+                    mAgencyCount.setAgencyCount(memberList.size() + "");
                     EventBus.getDefault().post(mAgencyCount);
-//                    mRecyclerViewAdapter.addAllData(newData(agency));
-//                    mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-//            public void onSuccess(Object responseObj) {
-//                //需要转化为实体对象
-//                Gson gson = new GsonBuilder().serializeNulls().create();
-//                try {
-//                    JSONObject result = new JSONObject(responseObj.toString());
-//                    Agency agency = gson.fromJson(result.getJSONObject("data").toString(), Agency.class);
-//                    mRecyclerViewAdapter.addAllData(newData(agency));
-//                    mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
