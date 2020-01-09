@@ -14,11 +14,14 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.R;
 import com.hulian.oa.agency.l_adapter.HascomAdapter;
+import com.hulian.oa.agency.l_adapter.HascomAdapter_qgl;
 import com.hulian.oa.bean.Agency;
 import com.hulian.oa.bean.AgencyCountFinish;
 import com.hulian.oa.bean.AgencyNew;
+import com.hulian.oa.bean.Daiban_xin_qgl1;
 import com.hulian.oa.bean.InstructionsList;
 import com.hulian.oa.bean.MeetingList;
 import com.hulian.oa.bean.OfficialDocumentList;
@@ -53,8 +56,9 @@ public class L_HascomFragment extends Fragment implements PullLoadMoreRecyclerVi
     RelativeLayout emptyBg;
     private int mCount = 1;
     private RecyclerView mRecyclerView;
-    HascomAdapter mRecyclerViewAdapter;
-
+    HascomAdapter_qgl mRecyclerViewAdapter;
+    private List<Daiban_xin_qgl1.DataBean> memberList = new ArrayList<>();
+    private List<Daiban_xin_qgl1.DataBean> dataBean  = new ArrayList<>();
     private ArrayList<String> list_path;
     private ArrayList<String> list_title;
     Unbinder unbinder;
@@ -71,7 +75,6 @@ public class L_HascomFragment extends Fragment implements PullLoadMoreRecyclerVi
     }
 
     private void initList() {
-
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
@@ -91,11 +94,10 @@ public class L_HascomFragment extends Fragment implements PullLoadMoreRecyclerVi
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
-        mRecyclerViewAdapter = new HascomAdapter(getActivity());
+        mRecyclerViewAdapter = new HascomAdapter_qgl(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
-//        getData();
+        getData();
     }
 
     @Override
@@ -107,13 +109,59 @@ public class L_HascomFragment extends Fragment implements PullLoadMoreRecyclerVi
     //接受点击按钮事件
     public void onEventMainThread(StringBean2 stringBean2){
         if (stringBean2.getDaiban().equals("1")){
+            dataBean.clear();
+            for (int i = 0;i<memberList.size();i++) {
 
+                if (memberList.get(i).getType().equals("1")) {
+                    //公文
+                    dataBean.add(memberList.get(i));
+                }
+            }
+            mRecyclerViewAdapter.clearData();
+            mRecyclerViewAdapter.addAllData(dataBean);
+            AgencyCountFinish mAgencyCount = new AgencyCountFinish();
+            mAgencyCount.setAgencyCountFinish(dataBean.size() + "");
+            EventBus.getDefault().post(mAgencyCount);
         }else if (stringBean2.getDaiban().equals("2")){
-
+            dataBean.clear();
+            for (int i = 0;i<memberList.size();i++) {
+                if (memberList.get(i).getType().equals("3")) {
+                    //公文
+                    dataBean.add(memberList.get(i));
+                }
+            }
+            mRecyclerViewAdapter.clearData();
+            mRecyclerViewAdapter.addAllData(dataBean);
+            AgencyCountFinish mAgencyCount = new AgencyCountFinish();
+            mAgencyCount.setAgencyCountFinish(dataBean.size() + "");
+            EventBus.getDefault().post(mAgencyCount);
         }else if (stringBean2.getDaiban().equals("3")){
-
+            dataBean.clear();
+            for (int i = 0;i<memberList.size();i++) {
+                if (memberList.get(i).getType().equals("4")) {
+                    //公文
+                    dataBean.add(memberList.get(i));
+                }
+            }
+            mRecyclerViewAdapter.clearData();
+            mRecyclerViewAdapter.addAllData(dataBean);
+            AgencyCountFinish mAgencyCount = new AgencyCountFinish();
+            mAgencyCount.setAgencyCountFinish(dataBean.size() + "");
+            EventBus.getDefault().post(mAgencyCount);
         }else if (stringBean2.getDaiban().equals("4")){
+            dataBean.clear();
+            for (int i = 0;i<memberList.size();i++) {
 
+                if (memberList.get(i).getType().equals("2")) {
+                    //公文
+                    dataBean.add(memberList.get(i));
+                }
+            }
+            mRecyclerViewAdapter.clearData();
+            mRecyclerViewAdapter.addAllData(dataBean);
+            AgencyCountFinish mAgencyCount = new AgencyCountFinish();
+            mAgencyCount.setAgencyCountFinish(dataBean.size() + "");
+            EventBus.getDefault().post(mAgencyCount);
         }
     }
 
@@ -137,12 +185,11 @@ public class L_HascomFragment extends Fragment implements PullLoadMoreRecyclerVi
         mCount = 1;
     }
 
+
     private void getData() {
         RequestParams params = new RequestParams();
-        params.put("userId", SPUtils.get(getActivity(), "userId", "").toString());
-        params.put("type", SPUtils.get(getActivity(), "isLead", "").toString());
-//        params.put("pageState", mCount*10-9 + "");
-//        params.put("pageEnd", mCount * 10 + "");
+        params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
+        params.put("mail", SPUtils.get(getActivity(), "email", "").toString());
         HttpRequest.postAgencyFinishListApi(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -150,9 +197,12 @@ public class L_HascomFragment extends Fragment implements PullLoadMoreRecyclerVi
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-                    Agency agency = gson.fromJson(result.getJSONObject("data").toString(), Agency.class);
-                    mRecyclerViewAdapter.addAllData(newData(agency));
+                    memberList = gson.fromJson(result.getJSONArray("data").toString(), new TypeToken<List<Daiban_xin_qgl1.DataBean>>() {}.getType());
+                    mRecyclerViewAdapter.addAllData(memberList);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
+                    AgencyCountFinish mAgencyCount = new AgencyCountFinish();
+                    mAgencyCount.setAgencyCountFinish(memberList.size() + "");
+                    EventBus.getDefault().post(mAgencyCount);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -160,7 +210,6 @@ public class L_HascomFragment extends Fragment implements PullLoadMoreRecyclerVi
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

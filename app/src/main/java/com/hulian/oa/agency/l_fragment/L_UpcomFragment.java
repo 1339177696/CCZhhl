@@ -119,8 +119,8 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
             }
             mRecyclerViewAdapter.clearData();
             mRecyclerViewAdapter.addAllData(dataBean);
-            AgencyCountFinish mAgencyCount = new AgencyCountFinish();
-            mAgencyCount.setAgencyCountFinish(dataBean.size() + "");
+            AgencyCount mAgencyCount = new AgencyCount();
+            mAgencyCount.setAgencyCount(dataBean.size() + "");
             EventBus.getDefault().post(mAgencyCount);
         }else if (stringBean1.getDaiban().equals("2")){
             dataBean.clear();
@@ -132,8 +132,8 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
             }
             mRecyclerViewAdapter.clearData();
             mRecyclerViewAdapter.addAllData(dataBean);
-            AgencyCountFinish mAgencyCount = new AgencyCountFinish();
-            mAgencyCount.setAgencyCountFinish(dataBean.size() + "");
+            AgencyCount mAgencyCount = new AgencyCount();
+            mAgencyCount.setAgencyCount(dataBean.size() + "");
             EventBus.getDefault().post(mAgencyCount);
         }else if (stringBean1.getDaiban().equals("3")){
             dataBean.clear();
@@ -145,8 +145,8 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
             }
             mRecyclerViewAdapter.clearData();
             mRecyclerViewAdapter.addAllData(dataBean);
-            AgencyCountFinish mAgencyCount = new AgencyCountFinish();
-            mAgencyCount.setAgencyCountFinish(dataBean.size() + "");
+            AgencyCount mAgencyCount = new AgencyCount();
+            mAgencyCount.setAgencyCount(dataBean.size() + "");
             EventBus.getDefault().post(mAgencyCount);
 
         }else if (stringBean1.getDaiban().equals("4")){
@@ -160,8 +160,8 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
             }
             mRecyclerViewAdapter.clearData();
             mRecyclerViewAdapter.addAllData(dataBean);
-            AgencyCountFinish mAgencyCount = new AgencyCountFinish();
-            mAgencyCount.setAgencyCountFinish(dataBean.size() + "");
+            AgencyCount mAgencyCount = new AgencyCount();
+            mAgencyCount.setAgencyCount(dataBean.size() + "");
             EventBus.getDefault().post(mAgencyCount);
         }
     }
