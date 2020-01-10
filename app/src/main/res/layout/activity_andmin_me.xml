@@ -97,6 +97,7 @@
             />
 
         <View
+            android:visibility="gone"
             android:id="@+id/mine_xian"
             android:layout_marginTop="@dimen/dp_22"
             android:background="#E3E3E3"
@@ -106,6 +107,7 @@
 
 
         <LinearLayout
+            android:visibility="gone"
             android:orientation="horizontal"
             android:layout_below="@+id/mine_xian"
             android:layout_width="match_parent"
@@ -378,7 +380,22 @@
 
 
 
+
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/main2_outlogin"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/dp_45"
+        android:layout_marginRight="@dimen/dp_45"
+        android:layout_marginBottom="@dimen/dp_80"
+        android:background="@drawable/main2_btn_bg"
+        android:text="退出登录"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_14" />
 
     <!--<LinearLayout-->
         <!--android:layout_marginTop="@dimen/dp_30"-->

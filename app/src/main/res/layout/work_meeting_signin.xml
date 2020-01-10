@@ -249,7 +249,7 @@
                     android:id="@+id/tv_part_lianx_phone"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/dp_10"
-                    android:textColor="@color/black"
+                    android:textColor="#436EEE"
                     android:textSize="@dimen/dp_14"
                     android:background="@null"
                     android:gravity="center_vertical"

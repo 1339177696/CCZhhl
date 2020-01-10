@@ -2,6 +2,7 @@ package com.hulian.oa.work.file.admin.activity.meeting;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -77,7 +78,7 @@ public class MeetingSigninActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.tv_back_instruct, R.id.iv_back, R.id.rl_title})
+    @OnClick({R.id.tv_back_instruct, R.id.iv_back, R.id.rl_title,R.id.tv_part_lianx_phone})
     public void onViewClicked(View view) {
 //        Intent intent=new Intent(MeetingSigninActivity.this, MainActivity.class);
 //        intent.putExtra("isgowork", true);
@@ -111,6 +112,11 @@ public class MeetingSigninActivity extends BaseActivity {
                 break;
             case R.id.rl_title:
                 finish();
+                break;
+            case R.id.tv_part_lianx_phone:
+                if (!tvPartLianxPhone.getText().toString().equals("")){
+                    callPhone(tvPartLianxPhone.getText().toString());
+                }
                 break;
         }
     }
@@ -226,4 +232,17 @@ public class MeetingSigninActivity extends BaseActivity {
             }
         }
     }
+
+    /**
+     * 拨打电话（跳转到拨号界面，用户手动点击拨打）
+     *
+     * @param phoneNum 电话号码
+     */
+    public void callPhone(String phoneNum) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        Uri data = Uri.parse("tel:" + phoneNum);
+        intent.setData(data);
+        startActivity(intent);
+    }
+
 }
