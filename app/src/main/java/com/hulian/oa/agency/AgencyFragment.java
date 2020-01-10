@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -39,17 +40,17 @@ public class AgencyFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    @BindView(R.id.my_tablayout)
-    TabLayout myTablayout;
-    @BindView(R.id.my_viewpager)
-    ViewPager myViewpager;
+//    @BindView(R.id.my_tablayout)
+//    TabLayout myTablayout;
+//    @BindView(R.id.my_viewpager)
+//    ViewPager myViewpager;
     Unbinder unbinder;
     @BindView(R.id.tv_mengban)
     TextView tvMengban;
-    @BindView(R.id.tv_agencyCount)
-    TextView tvAgencyCount;
-    @BindView(R.id.tv_finishCount)
-    TextView tvFinishCount;
+//    @BindView(R.id.tv_agencyCount)
+//    TextView tvAgencyCount;
+//    @BindView(R.id.tv_finishCount)
+//    TextView tvFinishCount;
     @BindView(R.id.zx_qgl_img1)
     ImageView zxQglImg1;
     @BindView(R.id.lr_qgl_btn1)
@@ -70,6 +71,10 @@ public class AgencyFragment extends Fragment {
     private ArrayList<String> list_title;
     private int mViewPagerIndex;
     private int pos = 0;
+
+    private L_UpcomFragment l_upcomFragment;
+    private L_HascomFragment l_hascomFragment;
+    private FragmentManager fManager;
 
     public AgencyFragment() {
         // Required empty public constructor
@@ -106,6 +111,7 @@ public class AgencyFragment extends Fragment {
         View view = inflater.inflate(R.layout.fra_agency, container, false);
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
+        fManager = getFragmentManager();
 //        init();
         return view;
     }
@@ -181,13 +187,15 @@ public class AgencyFragment extends Fragment {
 
     public void onEventMainThread(AgencyCount event) {
         if (!"".equals(event.getAgencyCount())) {
-            tvAgencyCount.setText(event.getAgencyCount());
+//            tvAgencyCount.setText(event.getAgencyCount());
+            daibanNumber.setText(event.getAgencyCount());
         }
     }
 
     public void onEventMainThread(AgencyCountFinish event) {
         if (!"".equals(event.getAgencyCountFinish())) {
-            tvFinishCount.setText(event.getAgencyCountFinish());
+//            tvFinishCount.setText(event.getAgencyCountFinish());
+            yibanNumber.setText(event.getAgencyCountFinish());
         }
     }
 
@@ -210,41 +218,47 @@ public class AgencyFragment extends Fragment {
         EventBus.getDefault().post(fab2);
     }
 
+    //隐藏所有Fragment
+    private void hideAllFragment(FragmentTransaction fragmentTransaction) {
+        if (l_upcomFragment != null) fragmentTransaction.hide(l_upcomFragment);
+        if (l_hascomFragment != null) fragmentTransaction.hide(l_hascomFragment);
+
+    }
 
     @OnClick({R.id.lr_qgl_btn1, R.id.lr_qgl_btn2})
     public void onViewClicked(View view) {
-//        FragmentTransaction fTransaction = fManager.beginTransaction();
-//        hideAllFragment(fTransaction);
+        FragmentTransaction fTransaction = fManager.beginTransaction();
+        hideAllFragment(fTransaction);
         switch (view.getId()) {
             case R.id.lr_qgl_btn1:
 
-//                zxQglTxt1.setTextColor(Color.parseColor("#FFFFFF"));
-//                zxQglImg1.setImageResource(R.mipmap.done);
-//                zxQglTxt2.setTextColor(Color.parseColor("#ccccd5"));
-//                zxQglImg2.setImageResource(R.mipmap.done_default);
-//                if (l_upcomFragment == null) {
-//                    l_upcomFragment = new L_UpcomFragment();
-//                    fTransaction.add(R.id.qgl_fragment_daiban, l_upcomFragment);
-//                } else {
-//                    fTransaction.show(l_upcomFragment);
-//                }
+                zxQglTxt1.setTextColor(Color.parseColor("#FFFFFF"));
+                zxQglImg1.setImageResource(R.mipmap.done);
+                zxQglTxt2.setTextColor(Color.parseColor("#ccccd5"));
+                zxQglImg2.setImageResource(R.mipmap.done_default);
+                if (l_upcomFragment == null) {
+                    l_upcomFragment = new L_UpcomFragment();
+                    fTransaction.add(R.id.qgl_fragment_daiban, l_upcomFragment);
+                } else {
+                    fTransaction.show(l_upcomFragment);
+                }
                 break;
             case R.id.lr_qgl_btn2:
 
-//                zxQglTxt1.setTextColor(Color.parseColor("#ccccd5"));
-//                zxQglImg1.setImageResource(R.mipmap.done_default);
-//                zxQglTxt2.setTextColor(Color.parseColor("#FFFFFF"));
-//                zxQglImg2.setImageResource(R.mipmap.done);
-//                if (l_hascomFragment == null) {
-//                    l_hascomFragment = new L_HascomFragment();
-//                    fTransaction.add(R.id.qgl_fragment_daiban, l_hascomFragment);
-//                } else {
-//                    fTransaction.show(l_hascomFragment);
-//                }
+                zxQglTxt1.setTextColor(Color.parseColor("#ccccd5"));
+                zxQglImg1.setImageResource(R.mipmap.done_default);
+                zxQglTxt2.setTextColor(Color.parseColor("#FFFFFF"));
+                zxQglImg2.setImageResource(R.mipmap.done);
+                if (l_hascomFragment == null) {
+                    l_hascomFragment = new L_HascomFragment();
+                    fTransaction.add(R.id.qgl_fragment_daiban, l_hascomFragment);
+                } else {
+                    fTransaction.show(l_hascomFragment);
+                }
 
                 break;
         }
-//        fTransaction.commit();
+        fTransaction.commit();
     }
 
 }
