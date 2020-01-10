@@ -184,7 +184,11 @@ public class LeaveApplyResultActivity extends BaseActivity {
 //                    tv_end.setText(b);
                     tv_start.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("startTime"));
                     tv_end.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("endTime"));
-                    tv_miaoshu.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("describe"));
+                    if ("null".equals(result.getJSONObject("data").getJSONObject("workLeave").getString("describe"))){
+                        tv_miaoshu.setText("");
+                    }else {
+                        tv_miaoshu.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("describe"));
+                    }
                     tv_leave_shenqingren.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("remark").substring(0,result.getJSONObject("data").getJSONObject("workLeave").getString("remark").length()-3));
                     tvChaosongPersonQgl.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("copier"));
 //                    tv_leave_reason_content.setText(result.getJSONObject("data").getString("describe"));

@@ -229,12 +229,13 @@ public class TaskLauncherActivity extends BaseActivity {
                     return;
 
                 }
-                else if (executor==null||copier.isEmpty())
-                {
-                    Toast.makeText(TaskLauncherActivity.this,"请选择抄送人",Toast.LENGTH_SHORT).show();
-                    return;
-
-                }
+//                抄送人可以不选
+//                else if (executor==null||copier.isEmpty())
+//                {
+//                    Toast.makeText(TaskLauncherActivity.this,"请选择抄送人",Toast.LENGTH_SHORT).show();
+//                    return;
+//
+//                }
                 else if (selectList.size() <= 0) {
                     ToastHelper.showToast(mContext, "公文照片不能为空");
                     return;

@@ -262,7 +262,6 @@
                         android:id="@+id/tv_check_history"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="查看TA的历史记录(10)"
                         android:textColor="#ff2b8cfa"
                         android:textSize="12sp"
                         />

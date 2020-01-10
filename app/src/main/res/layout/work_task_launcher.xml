@@ -453,6 +453,7 @@ android:visibility="gone"
                     android:layout_centerVertical="true"
                     />
                 <TextView
+                    android:text="不提醒"
                     android:id="@+id/tv_remind"
                     android:layout_marginLeft="@dimen/dp_10"
                     android:textColor="@color/black"

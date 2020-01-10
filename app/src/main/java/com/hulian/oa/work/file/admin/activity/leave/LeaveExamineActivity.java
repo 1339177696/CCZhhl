@@ -13,9 +13,11 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.BaseActivity;
 import com.hulian.oa.R;
 import com.hulian.oa.agency.l_fragment.L_UpcomFragment;
+import com.hulian.oa.bean.Leave;
 import com.hulian.oa.bean.People;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
@@ -92,6 +94,8 @@ public class LeaveExamineActivity extends BaseActivity {
     private List<LocalMedia> selectList = new ArrayList<>();
     //图片放大预览测试
     private String[] images = {};
+
+    private int mCount = 1;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -102,6 +106,7 @@ public class LeaveExamineActivity extends BaseActivity {
         ButterKnife.bind(this);
         myDialog = new AlertDialog(this).builder();
         getData();
+        getheitData();
 
     }
     private void getData() {
@@ -238,4 +243,34 @@ public class LeaveExamineActivity extends BaseActivity {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
+
+    // 获取请假历史长度
+    private void getheitData() {
+        RequestParams params = new RequestParams();
+        params.put("pageStart", mCount * 10 - 9 + "");
+        params.put("pageEnd", mCount * 10 + "");
+        params.put("createBy",getIntent().getStringExtra("id"));
+        HttpRequest.get_listWorkLeave(params, new ResponseCallback() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                //需要转化为实体对象
+                Gson gson = new GsonBuilder().serializeNulls().create();
+                try {
+                    JSONObject result = new JSONObject(responseObj.toString());
+                    List<Leave> memberList = gson.fromJson(result.getJSONArray("data").toString(),
+                            new TypeToken<List<Leave>>() {}.getType());
+                    tv_check_history.setText("查看TA的历史记录("+memberList.size()+")");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(OkHttpException failuer) {
+                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
+                Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }
