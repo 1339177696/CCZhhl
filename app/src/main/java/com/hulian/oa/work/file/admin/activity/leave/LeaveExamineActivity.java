@@ -249,7 +249,7 @@ public class LeaveExamineActivity extends BaseActivity {
         RequestParams params = new RequestParams();
         params.put("pageStart", mCount * 10 - 9 + "");
         params.put("pageEnd", mCount * 10 + "");
-        params.put("createBy",getIntent().getStringExtra("id"));
+        params.put("createBy",getIntent().getStringExtra("createByid"));
         HttpRequest.get_listWorkLeave(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {

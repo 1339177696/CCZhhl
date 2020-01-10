@@ -112,7 +112,7 @@ public class AgencyFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
         fManager = getFragmentManager();
-//        init();
+        lrQglBtn1.performClick();//模拟一次点击，既进去后选择第一项
         return view;
     }
 
