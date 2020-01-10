@@ -196,8 +196,7 @@ public class DocumentLotusInfoActivity extends BaseActivity {
                                 }
                             init(d);
                         }
-                        tvQglFile.setText(path_x);
-
+                        tvQglFile.setText(path_x.substring(path_x.lastIndexOf("/")+1));
                     }
                     approveContentList = gson.fromJson(result.getJSONObject("data").getJSONArray("lotusViceList").toString(),
                             new TypeToken<List<Approve_qgl>>() {}.getType());

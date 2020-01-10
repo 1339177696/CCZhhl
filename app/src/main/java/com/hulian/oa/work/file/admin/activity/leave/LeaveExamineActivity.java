@@ -118,7 +118,12 @@ public class LeaveExamineActivity extends BaseActivity {
                     tv_duration.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("duration"));
                     tv_start.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("startTime"));
                     tv_end.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("endTime"));
-                    tv_chaosong_person_qgl.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("describe"));
+                    if ("null".equals(result.getJSONObject("data").getJSONObject("workLeave").getString("describe"))){
+                        tv_chaosong_person_qgl.setText("");
+                    }else {
+                        tv_chaosong_person_qgl.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("describe"));
+                    }
+
                     if(!result.getJSONObject("data").getJSONObject("workLeave").getString("picture").equals("null")) {
                         images = result.getJSONObject("data").getJSONObject("workLeave").getString("picture").split(",");
                         init(images);

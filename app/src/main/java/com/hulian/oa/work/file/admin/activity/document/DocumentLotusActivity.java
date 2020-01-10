@@ -138,7 +138,7 @@ public class DocumentLotusActivity extends BaseActivity {
                     tvShenpiPerson.setText(lotus.getString("approverName"));
                     tvChaosongPerson.setText(lotus.getString("copierName"));
                     tvQglTime.setText(lotus.getString("createTime"));
-                    tvQglFile.setText(lotus.getString("filesName"));
+//                    tvQglFile.setText(lotus.getString("filesName"));
                     if (aa!=null&&aa!=""){
                         List<String> c = Arrays.asList(aa.split(","));
                         List<String> d = new ArrayList<>();
@@ -146,15 +146,13 @@ public class DocumentLotusActivity extends BaseActivity {
                         for (int i = 0;i<=c.size()-1;i++){
                             if (getMIMEType(c.get(i)).equals("image/jpeg")||getMIMEType(c.get(i)).equals("image/png")||getMIMEType(c.get(i)).equals("image/gif")){
                                 d.add(c.get(i));
-
                             }
                             else {
                                 path_x = c.get(i);
                             }
                             init(d);
-
                         }
-
+                        tvQglFile.setText(path_x.substring(path_x.lastIndexOf("/")+1));
                     }
 
 

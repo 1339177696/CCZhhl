@@ -135,11 +135,10 @@ public class WorkFragemt_9 extends Fragment {
 
                 break;
             case R.id.bt_expense:
-                //跳转报销人申请列表
 //                qgl修改
 
-                    startActivity(new Intent(getActivity(), SecondExpenseActivity.class));
-//                ToastHelper.showToast(getActivity(), "功能正在开发中");
+//                    startActivity(new Intent(getActivity(), SecondExpenseActivity.class));
+                ToastHelper.showToast(getActivity(), "功能暂未开放");
                 break;
 //            case R.id.bt_list:
 //                EventBus.getDefault().post(new WorkFragemt_9());
