@@ -371,7 +371,7 @@ public class LauncherDocumentActivity extends BaseActivity {
                 for (People params : selectList3){
                     csidname += params.getUserName() + "-";
                 }
-
+                loadDialog.show();
                 RequestParams params = new RequestParams();
                 params.put("spare4", "0");
                 params.put("initiationType", gwtype);
@@ -398,6 +398,7 @@ public class LauncherDocumentActivity extends BaseActivity {
                     @Override
                     public void onSuccess(Object responseObj) {
                         dismissDialogLoading();
+                        loadDialog.dismiss();
                         try {
                             JSONObject result = new JSONObject(responseObj.toString());
                             ToastHelper.showToast(mContext, result.getString("msg"));
@@ -421,6 +422,7 @@ public class LauncherDocumentActivity extends BaseActivity {
                     @Override
                     public void onFailure(OkHttpException failuer) {
                         //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
+                        loadDialog.dismiss();
                         dismissDialogLoading();
                         Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
                     }

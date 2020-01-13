@@ -339,6 +339,7 @@ public class TaskLauncherActivity extends BaseActivity {
 
     private void getData()
     {
+        loadDialog.show();
         RequestParams params = new RequestParams();
         params.put("title",title);
         params.put("details",context);
@@ -358,6 +359,7 @@ public class TaskLauncherActivity extends BaseActivity {
         HttpRequest.post_CoordinationRelease_add(params,fiels, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
+                loadDialog.dismiss();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
                     JSONObject obj = new JSONObject(result.toString());
@@ -384,6 +386,7 @@ public class TaskLauncherActivity extends BaseActivity {
             }
             @Override
             public void onFailure(OkHttpException failuer) {
+                loadDialog.dismiss();
                 //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }

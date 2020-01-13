@@ -191,6 +191,7 @@ public class NoticeIssueActivity extends BaseActivity {
                     targetDeptId+=params1.getDeptId()+",";
                     targetDeptName+=params1.getDeptName()+",";
                 }
+                loadDialog.show();
                 RequestParams params1 = new RequestParams();
                 params1.put("noticeTitle", etTitle.getText().toString().trim());
                 params1.put("noticeContent", etContent.getText().toString().trim());
@@ -200,6 +201,7 @@ public class NoticeIssueActivity extends BaseActivity {
                 HttpRequest.postNoticeSendApi(params1, new ResponseCallback() {
                     @Override
                     public void onSuccess(Object responseObj) {
+                        loadDialog.dismiss();
                         try {
                             JSONObject result = new JSONObject(responseObj.toString());
                             ToastHelper.showToast(mContext, result.getString("msg"));
@@ -212,6 +214,7 @@ public class NoticeIssueActivity extends BaseActivity {
 
                     @Override
                     public void onFailure(OkHttpException failuer) {
+                        loadDialog.dismiss();
                     }
                 });
                 break;

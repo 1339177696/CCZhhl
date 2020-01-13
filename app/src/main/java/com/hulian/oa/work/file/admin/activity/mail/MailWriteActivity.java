@@ -154,6 +154,7 @@ public class MailWriteActivity extends BaseActivity {
 
     // 发送邮件
     private void getData() {
+        loadDialog.show();
         RequestParams params = new RequestParams();
         params.put("title", zhuti);
         params.put("content", neirong);
@@ -173,6 +174,7 @@ public class MailWriteActivity extends BaseActivity {
         HttpRequest.post_sendMail(params, fils, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
+                loadDialog.dismiss();
                 try {
                     JSONObject obj = new JSONObject(responseObj.toString());
                     String msg = obj.getString("msg");
@@ -187,6 +189,7 @@ public class MailWriteActivity extends BaseActivity {
 
             @Override
             public void onFailure(OkHttpException failuer) {
+                loadDialog.dismiss();
                 //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(MailWriteActivity.this, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }

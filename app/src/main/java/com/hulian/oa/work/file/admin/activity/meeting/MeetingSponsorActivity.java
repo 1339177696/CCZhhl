@@ -181,7 +181,7 @@ public class MeetingSponsorActivity extends BaseActivity {
                     ToastHelper.showToast(mContext, "请填写会议内容");
                     return;
                 }
-
+                loadDialog.show();
                 RequestParams params = new RequestParams();
                 params.put("signType", signType);
                 params.put("meetingTheme", etTitle.getText().toString());
@@ -198,6 +198,7 @@ public class MeetingSponsorActivity extends BaseActivity {
                 HttpRequest.postMeetLauncherApi(params, new ResponseCallback() {
                     @Override
                     public void onSuccess(Object responseObj) {
+                        loadDialog.dismiss();
                         try {
                             JSONObject result = new JSONObject(responseObj.toString());
                             ToastHelper.showToast(mContext, result.getString("msg"));
@@ -213,6 +214,7 @@ public class MeetingSponsorActivity extends BaseActivity {
 
                     @Override
                     public void onFailure(OkHttpException failuer) {
+                        loadDialog.dismiss();
                         //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                         Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
                     }

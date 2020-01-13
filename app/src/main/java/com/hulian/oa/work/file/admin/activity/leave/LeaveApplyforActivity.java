@@ -364,6 +364,7 @@ public class LeaveApplyforActivity extends BaseActivity {
             return;
         }
         showDialogLoading();
+        loadDialog.show();
         RequestParams params = new RequestParams();
         params.put("createBy", SPUtils.get(mContext, "userId", "").toString());
         params.put("copier", copierCode);
@@ -383,6 +384,7 @@ public class LeaveApplyforActivity extends BaseActivity {
             @Override
             public void onSuccess(Object responseObj) {
                 dismissDialogLoading();
+                loadDialog.dismiss();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
                     ToastHelper.showToast(mContext, result.getString("msg"));
@@ -398,6 +400,7 @@ public class LeaveApplyforActivity extends BaseActivity {
             @Override
             public void onFailure(OkHttpException failuer) {
                 dismissDialogLoading();
+                loadDialog.dismiss();
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

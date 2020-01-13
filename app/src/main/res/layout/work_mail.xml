@@ -237,6 +237,7 @@
                     android:background="@color/color_xian"
                     android:layout_height="@dimen/dp_0_5" />
                 <LinearLayout
+                    android:visibility="gone"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/dp_18"
@@ -271,10 +272,12 @@
                         android:layout_height="@dimen/dp_12" />
                 </LinearLayout>
                 <TextView
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:background="@color/color_xian"
                     android:layout_height="@dimen/dp_0_5" />
                 <LinearLayout
+                    android:visibility="gone"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/dp_18"

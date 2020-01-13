@@ -110,7 +110,7 @@
                     android:id="@+id/daiban_number"
                     android:textColor="#FFFFFF"
                     android:layout_marginLeft="@dimen/dp_6"
-                    android:textSize="@dimen/sp_10"
+                    android:textSize="@dimen/sp_14"
                     android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -143,7 +143,7 @@
                     android:id="@+id/yiban_number"
                     android:textColor="#ccccd5"
                     android:layout_marginLeft="@dimen/dp_6"
-                    android:textSize="@dimen/sp_10"
+                    android:textSize="@dimen/sp_14"
                     android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
