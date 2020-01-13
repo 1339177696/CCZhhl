@@ -37,6 +37,7 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.addapp.pickers.picker.TimePicker;
 
 //我的-》日程-》添加日程
 public class AddScheduleActivity extends BaseActivity {
@@ -69,7 +70,6 @@ public class AddScheduleActivity extends BaseActivity {
         ButterKnife.bind(this);
         context = this;
         time = getIntent().getStringExtra("schetime");
-//        Toast.makeText(this,time,Toast.LENGTH_SHORT).show();
         swSelect.setChecked(false);
         swSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -91,12 +91,11 @@ public class AddScheduleActivity extends BaseActivity {
         add_content = edit_content.getText().toString().trim();
         switch (view.getId()) {
             case R.id.tv_select_time:
-                selectTime();
+                onTimePicker(view);
                 break;
             case R.id.btn_select_complete:
                 Log.d("这是发布发送的", "点击了");
                 if (time2.isEmpty()) {
-                    //  tv_select_time.setError("请选择开始时间");
                     ToastHelper.showToast(mContext, "请选择开始时间");
                     return;
                 } else if (time3.isEmpty()) {
@@ -114,73 +113,11 @@ public class AddScheduleActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_select_time2:
-                selectTime2();
+                onTimePicker2(view);
                 break;
         }
 
     }
-
-    private void selectTime() {
-        TimePickerView pvTime = new TimePickerBuilder(context, new OnTimeSelectListener() {
-            @Override
-            public void onTimeSelect(Date date, View v) {
-                //设置时间
-                if(!time3.equals(""))
-                {
-                    if(TimeUtils.differentDaysByMillisecond2(getTime(date),time3)<0){
-                        ToastHelper.showToast(mContext, "请选择不小于开始时间的结束时间");
-                        return;
-                    }
-                }
-
-
-                tv_select_time.setText(getTime(date));
-                time2 = getTime(date);
-                if(!time2.equals("00:00")){
-                    swSelect.setChecked(false);
-                }
-                else if(time3.equals("23:59")){
-                    swSelect.setChecked(true);
-                }
-            }
-        }).setType(new boolean[]{false, false, false, true, true, false})
-                .setLabel("年", "月", "日", "时", "分", "秒")
-                .build();
-        pvTime.show();
-    }
-
-    private void selectTime2() {
-        TimePickerView pvTime = new TimePickerBuilder(context, new OnTimeSelectListener() {
-            @Override
-            public void onTimeSelect(Date date, View v) {
-                //设置时间
-                if(!time2.equals(""))
-                {
-                    if(TimeUtils.differentDaysByMillisecond2(time2,getTime(date))<0){
-                        ToastHelper.showToast(mContext, "请选择不小于开始时间的结束时间");
-                        return;
-                    }
-                }
-                tv_select_time2.setText(getTime(date));
-                time3 = getTime(date);
-                if(!time3.equals("23:59")){
-                    swSelect.setChecked(false);
-                }
-                else if(time2.equals("00:00")){
-                    swSelect.setChecked(true);
-                }
-            }
-        }).setType(new boolean[]{false, false, false, true, true, false})
-                .setLabel("年", "月", "日", "时", "分", "秒")
-                .build();
-        pvTime.show();
-    }
-
-    private String getTime(Date date) {//可根据需要自行截取数据显示
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-        return format.format(date);
-    }
-
 
     private void getadd() {
         String userid = SPUtils.get(this, "userId", "-1").toString();
@@ -226,7 +163,6 @@ public class AddScheduleActivity extends BaseActivity {
         });
     }
 
-
     @OnClick(R.id.rl_remind)
     public void onViewClicked() {
         Intent intent = new Intent(mContext, Me_Schedule_RemindActivity.class);
@@ -239,5 +175,70 @@ public class AddScheduleActivity extends BaseActivity {
         if (requestCode == 110 && resultCode == 110) {
             tvRemind.setText(data.getStringExtra("tixing"));
         }
+    }
+
+    //选择开始时间
+    public void onTimePicker(View view) {
+        TimePicker picker = new TimePicker(this, TimePicker.HOUR_24);
+        picker.setRangeStart(8, 0);//09:00
+        picker.setRangeEnd(16, 0);//18:30
+        picker.setTopLineVisible(false);
+        picker.setLineVisible(false);
+        picker.setWheelModeEnable(false);
+        picker.setOnTimePickListener(new TimePicker.OnTimePickListener() {
+            @Override
+            public void onTimePicked(String hour, String minute) {
+
+                if(!time3.equals(""))
+                {
+                    if(TimeUtils.differentDaysByMillisecond2(hour+":"+minute,time3)<0){
+                        ToastHelper.showToast(mContext, "请选择不小于开始时间的结束时间");
+                        return;
+                    }
+                }
+                tv_select_time.setText(hour+":"+minute);
+                time2 =hour+":"+minute;
+                if(!time2.equals("08:00")){
+                    swSelect.setChecked(false);
+                }
+                else if(time3.equals("16:59")){
+                    swSelect.setChecked(true);
+                }
+            }
+        });
+        picker.show();
+    }
+
+    // 选择结束时间
+
+    public void onTimePicker2(View view) {
+        TimePicker picker = new TimePicker(this, TimePicker.HOUR_24);
+        picker.setRangeStart(8, 0);//09:00
+        picker.setRangeEnd(16, 0);//18:30
+        picker.setTopLineVisible(false);
+        picker.setLineVisible(false);
+        picker.setWheelModeEnable(false);
+        picker.setOnTimePickListener(new TimePicker.OnTimePickListener() {
+            @Override
+            public void onTimePicked(String hour, String minute) {
+                //设置时间
+                if(!time2.equals(""))
+                {
+                    if(TimeUtils.differentDaysByMillisecond2(time2,hour+":"+minute)<0){
+                        ToastHelper.showToast(mContext, "请选择不小于开始时间的结束时间");
+                        return;
+                    }
+                }
+                tv_select_time2.setText(hour+":"+minute);
+                time3 =hour+":"+minute;
+                if(!time3.equals("16:59")){
+                    swSelect.setChecked(false);
+                }
+                else if(time2.equals("08:00")){
+                    swSelect.setChecked(true);
+                }
+            }
+        });
+        picker.show();
     }
 }
