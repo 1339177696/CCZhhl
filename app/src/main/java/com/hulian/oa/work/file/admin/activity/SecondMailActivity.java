@@ -17,6 +17,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.BaseActivity;
 import com.hulian.oa.R;
+import com.hulian.oa.bean.OutIndexBean;
 import com.hulian.oa.bean.SecondMail_bean_x;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
@@ -31,6 +32,7 @@ import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -167,11 +169,8 @@ public class SecondMailActivity extends BaseActivity implements PullLoadMoreRecy
     public void onRefresh() {
         Log.e("wxl", "onRefresh");
         setRefresh();
-        if (type == 1){
-            getData();
-        }else {
-            getOut();
-        }
+        getData();
+        getOut();
     }
     @Override
     public void onLoadMore() {
@@ -197,17 +196,23 @@ public class SecondMailActivity extends BaseActivity implements PullLoadMoreRecy
                     JSONObject result = new JSONObject(responseObj.toString());
                     List<SecondMail_bean_x> memberList = gson.fromJson(result.getJSONArray("data").toString(), new TypeToken<List<SecondMail_bean_x>>() {
                     }.getType());
-                    mRecyclerViewAdapter.addAllData(memberList);
                     tvReceiver.setText(memberList.size() + "");
-                    if(memberList.size() ==0){
-                        emptyBg.setVisibility(View.VISIBLE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
+                    if (type == 1){
+                        for (int j = 0;j<memberList.size();j++){
+                            memberList.get(j).setSf("1");
+                        }
+                        mRecyclerViewAdapter.addAllData(memberList);
+                        if(memberList.size() ==0){
+                            emptyBg.setVisibility(View.VISIBLE);
+                            mPullLoadMoreRecyclerView.setVisibility(View.GONE);
+                        }
+                        else {
+                            emptyBg.setVisibility(View.GONE);
+                            mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
+                        }
+                        mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                     }
-                    else {
-                        emptyBg.setVisibility(View.GONE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
-                    }
-                    mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -240,13 +245,47 @@ public class SecondMailActivity extends BaseActivity implements PullLoadMoreRecy
     //请求发件箱
     public void getOut(){
         RequestParams params = new RequestParams();
-        params.put("username", SPUtils.get(SecondMailActivity.this, "email", "").toString());
-        params.put("password", "123456");
-        params.put("userId", SPUtils.get(SecondMailActivity.this, "userId", "").toString());
-        HttpRequest.post_DeleteCollect(params, new ResponseCallback() {
+        params.put("createBy", SPUtils.get(SecondMailActivity.this, "userId", "").toString());
+        params.put("sendMail", SPUtils.get(SecondMailActivity.this, "email", "").toString());
+        params.put("type", "1");
+        params.put("pageNum", "1");
+        params.put("pageSize", "100");
+        params.put("orderByColumn", "create_time");
+        params.put("isAsc", "desc");
+        HttpRequest.post_FindSentMailList(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
+                try {
+                    JSONObject result = new JSONObject(responseObj.toString());
+                    tv_outbox_num.setText(result.getString("total"));
+                    List<SecondMail_bean_x>list = new ArrayList<>();
+                    if (type == 2){
+                        List<OutIndexBean.RowsBean> memberList = gson.fromJson(result.getJSONArray("rows").toString(), new TypeToken<List<OutIndexBean.RowsBean>>() {}.getType());
+                        if(memberList.size() == 0){
+                            emptyBg.setVisibility(View.VISIBLE);
+                            mPullLoadMoreRecyclerView.setVisibility(View.GONE);
+                        }
+                        else {
+                            emptyBg.setVisibility(View.GONE);
+                            mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
+                        }
 
+                        for (int i = 0;i<memberList.size();i++){
+                            SecondMail_bean_x secondMail_bean_x = new SecondMail_bean_x();
+                            secondMail_bean_x.setSender(memberList.get(i).getSendMailPerson()+"<"+memberList.get(i).getSendMail()+">");
+                            secondMail_bean_x.setSendDate(memberList.get(i).getCreateTime());
+                            secondMail_bean_x.setTitle(memberList.get(i).getTitle());
+                            secondMail_bean_x.setContent(memberList.get(i).getMailContent());
+                            secondMail_bean_x.setRecipients(memberList.get(i).getReadPerson()+"<"+memberList.get(i).getReMail()+">");
+                            secondMail_bean_x.setSf("2");
+                            list.add(secondMail_bean_x);
+                        }
+                        mRecyclerViewAdapter.addAllData(list);
+                        mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override

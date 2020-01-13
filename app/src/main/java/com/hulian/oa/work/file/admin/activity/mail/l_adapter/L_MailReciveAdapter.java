@@ -1,9 +1,7 @@
 package com.hulian.oa.work.file.admin.activity.mail.l_adapter;
 
-import android.accounts.Account;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -12,12 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.hulian.oa.R;
-import com.hulian.oa.bean.Sche_Bean_x;
 import com.hulian.oa.bean.SecondMail_bean_x;
 import com.hulian.oa.utils.TimeUtils;
 import com.hulian.oa.utils.URLImageParser;
 import com.hulian.oa.work.file.admin.activity.mail.MailParticularsActivity;
-import com.hulian.oa.work.file.admin.activity.notice.NoticeParticularsActivity;
+import com.hulian.oa.work.file.admin.activity.mail.MailParticularsActivity2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,11 +78,21 @@ public class L_MailReciveAdapter extends RecyclerView.Adapter <L_MailReciveAdapt
             @Override
             public void onClick(View view)
             {
-                SecondMail_bean_x secondMail_bean_x = new SecondMail_bean_x();
-                secondMail_bean_x = dataList.get(position);
-                Intent intent=new Intent(mContext, MailParticularsActivity.class);
-                intent.putExtra("key",secondMail_bean_x);
-                mContext.startActivity(intent);
+                if (dataList.get(position).getSf().equals("1"))
+                {
+                    SecondMail_bean_x secondMail_bean_x = new SecondMail_bean_x();
+                    secondMail_bean_x = dataList.get(position);
+                    Intent intent=new Intent(mContext, MailParticularsActivity.class);
+                    intent.putExtra("key",secondMail_bean_x);
+                    mContext.startActivity(intent);
+                }else {
+                    SecondMail_bean_x secondMail_bean_x = new SecondMail_bean_x();
+                    secondMail_bean_x = dataList.get(position);
+                    Intent intent=new Intent(mContext, MailParticularsActivity2.class);
+                    intent.putExtra("key",secondMail_bean_x);
+                    mContext.startActivity(intent);
+                }
+
             }
         });
     }

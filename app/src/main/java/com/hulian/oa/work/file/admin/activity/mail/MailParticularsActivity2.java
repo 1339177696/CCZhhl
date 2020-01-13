@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,7 +27,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -47,8 +45,6 @@ import com.hulian.oa.utils.TimeUtils;
 import com.hulian.oa.utils.URLImageParser;
 import com.hulian.oa.views.AlertDialog;
 import com.hulian.oa.views.MyListView;
-import com.hulian.oa.work.file.admin.activity.SecondMailActivity;
-import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_PendFragment;
 import com.hulian.oa.work.file.admin.activity.mail.l_adapter.L_MailReciveAdapter_item_x;
 
 import org.json.JSONException;
@@ -62,7 +58,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import de.greenrobot.event.EventBus;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -73,9 +68,9 @@ import okio.Okio;
 import okio.Sink;
 
 /**
- * 邮件详情
+ * 收件箱邮件详情
  */
-public class MailParticularsActivity extends BaseActivity {
+public class MailParticularsActivity2 extends BaseActivity {
     //回复
     @BindView(R.id.tv_reply)
     TextView tv_reply;
@@ -118,17 +113,14 @@ public class MailParticularsActivity extends BaseActivity {
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
-    //收藏
-    @BindView(R.id.tv_collection)
-    TextView tv_collection;
-    private String state = "0";
+
     // 删除
     AlertDialog myDialog;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.work_mail_particulars);
+        setContentView(R.layout.work_mail_particulars2);
         StatusBarUtil.statusBarLightMode_white(this);
         ButterKnife.bind(this);
         myDialog = new AlertDialog(mContext).builder();
@@ -136,7 +128,7 @@ public class MailParticularsActivity extends BaseActivity {
         iniTview();
         list = account.getAttach();
         if (list != null) {
-            l_mailReciveAdapter_item_x = new L_MailReciveAdapter_item_x(list, MailParticularsActivity.this);
+            l_mailReciveAdapter_item_x = new L_MailReciveAdapter_item_x(list, MailParticularsActivity2.this);
             tv_file_name.setAdapter(l_mailReciveAdapter_item_x);
             tv_file_name.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -150,20 +142,12 @@ public class MailParticularsActivity extends BaseActivity {
             });
         } else {
         }
-        // 先注释
-//        state = account.getCollectState();
-//        if (state.equals("0")){
-//            Drawable top = getResources().getDrawable(R.mipmap.mail_collect_icon);
-//            tv_collection.setCompoundDrawablesWithIntrinsicBounds(null, top , null, null);
-//        }else {
-//            Drawable top = getResources().getDrawable(R.mipmap.ic_store_sel);
-//            tv_collection.setCompoundDrawablesWithIntrinsicBounds(null, top , null, null);
-//        }
+
     }
 
     //调用方法。先请求权限
     public void downloadFilea(String a) {
-        verifyStoragePermissions(MailParticularsActivity.this);
+        verifyStoragePermissions(MailParticularsActivity2.this);
         getFile(a);
     }
 
@@ -243,21 +227,12 @@ public class MailParticularsActivity extends BaseActivity {
                 break;
             case R.id.tv_reply:
                 //实例化SelectPicPopupWindow
-                menuWindow = new Dialog_x(MailParticularsActivity.this);
+                menuWindow = new Dialog_x(MailParticularsActivity2.this);
                 //显示窗口
-                menuWindow.showAtLocation(MailParticularsActivity.this.findViewById(R.id.work_mail_main), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0); //设置layout在PopupWindow中显示的位置
+                menuWindow.showAtLocation(MailParticularsActivity2.this.findViewById(R.id.work_mail_main), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0); //设置layout在PopupWindow中显示的位置
                 break;
             case R.id.tv_collection:
-                if (state.equals("0")){
-                    state = "1";
-                    Drawable top = getResources().getDrawable(R.mipmap.ic_store_sel);
-                    tv_collection.setCompoundDrawablesWithIntrinsicBounds(null, top , null, null);
-                }else {
-                    state = "0";
-                    Drawable top = getResources().getDrawable(R.mipmap.mail_collect_icon);
-                    tv_collection.setCompoundDrawablesWithIntrinsicBounds(null, top , null, null);
-                }
-                getCollection(account.getId(),state);
+
                 break;
             case R.id.tv_deletecolltion:
                 myDialog.setGone().setTitle("提示").setMsg("确定删除么").setNegativeButton("取消",null).setPositiveButton("确定", new View.OnClickListener() {
@@ -268,7 +243,7 @@ public class MailParticularsActivity extends BaseActivity {
                 }).show();
                 break;
             case R.id.tv_forward:
-                Intent intent = new Intent(MailParticularsActivity.this,MailWriteActivity.class);
+                Intent intent = new Intent(MailParticularsActivity2.this,MailWriteActivity.class);
                 intent.putExtra("type","1");
                 intent.putExtra("zhuti",account.getTitle());
                 intent.putExtra("neirong",account.getContent());
@@ -280,7 +255,7 @@ public class MailParticularsActivity extends BaseActivity {
     // 收藏
     public void getCollection(String collectTypeId,String isCollect){
         RequestParams params = new RequestParams();
-        params.put("collectUserId", SPUtils.get(MailParticularsActivity.this, "userId", "").toString());
+        params.put("collectUserId", SPUtils.get(MailParticularsActivity2.this, "userId", "").toString());
         params.put("collectTypeId", collectTypeId);
         params.put("type", isCollect);
         HttpRequest.post_mailCollect(params, new ResponseCallback() {
@@ -300,7 +275,7 @@ public class MailParticularsActivity extends BaseActivity {
     public void getDeleteCollection(String collectTypeId){
         RequestParams params = new RequestParams();
         params.put("ids", collectTypeId);
-        params.put("userId", SPUtils.get(MailParticularsActivity.this, "userId", "").toString());
+        params.put("userId", SPUtils.get(MailParticularsActivity2.this, "userId", "").toString());
         HttpRequest.post_DeleteCollect(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -374,19 +349,19 @@ public class MailParticularsActivity extends BaseActivity {
     // 发送回复
     private void getData(String contebt) {
         RequestParams params = new RequestParams();
-        params.put("userName", SPUtils.get(MailParticularsActivity.this, "email", "").toString());
+        params.put("userName", SPUtils.get(MailParticularsActivity2.this, "email", "").toString());
         params.put("passWord", "123456");
         params.put("content", contebt);
         params.put("mailId", account.getId());
-        params.put("mailuserName", SPUtils.get(MailParticularsActivity.this, "nickname", "").toString());
-        Log.e("mailuserName", SPUtils.get(MailParticularsActivity.this, "nickname", "").toString());
+        params.put("mailuserName", SPUtils.get(MailParticularsActivity2.this, "nickname", "").toString());
+        Log.e("mailuserName", SPUtils.get(MailParticularsActivity2.this, "nickname", "").toString());
         HttpRequest.post_replyMail(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
                 try {
                     JSONObject obj = new JSONObject(responseObj.toString());
                     String msg = obj.getString("msg");
-                    Toast.makeText(MailParticularsActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MailParticularsActivity2.this, msg, Toast.LENGTH_SHORT).show();
                     setResult(1);
                     finish();
                 } catch (JSONException e) {
@@ -397,7 +372,7 @@ public class MailParticularsActivity extends BaseActivity {
             @Override
             public void onFailure(OkHttpException failuer) {
                 //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
-                Toast.makeText(MailParticularsActivity.this, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MailParticularsActivity2.this, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -34,6 +34,16 @@ public class SecondMail_bean_x implements Serializable
         private boolean isSeen;
         private String content;
 
+    public String getSf() {
+        return sf;
+    }
+
+    public void setSf(String sf) {
+        this.sf = sf;
+    }
+
+    private String sf;  // 收发件箱判断
+
     public String getCollectState() {
         return collectState;
     }

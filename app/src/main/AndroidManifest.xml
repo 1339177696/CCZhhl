@@ -251,6 +251,8 @@
             android:configChanges="screenSize|keyboardHidden|orientation"/>
         <activity android:name=".work.file.admin.activity.mail.MailParticularsActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"/>
+         <activity android:name=".work.file.admin.activity.mail.MailParticularsActivity2"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
         <activity android:name=".work.file.admin.activity.meeting.MeetingSigninActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"/>
         <activity android:name=".work.file.admin.activity.meeting.SelDepartmentActivity_meet"
