@@ -89,6 +89,7 @@ public class ScheduleActivity extends BaseActivity {
     private CalendarDate currentDate;
     private boolean initiated = false;
     private L_ScheduleAdapter l_scheduleAdapter;
+    private String timeNow;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -99,35 +100,9 @@ public class ScheduleActivity extends BaseActivity {
         ButterKnife.bind(this);
         context = this;
         init();
-
         initCurrentDate();
         initCalendarView();
         getDatatime(time);
-    }
-
-    @OnClick({R.id.tv_add_schedule, R.id.iv_back})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.tv_add_schedule:
-                if (time != "" && !time.equals("")) {
-                    Intent intent = new Intent(this, AddScheduleActivity.class);
-                    intent.putExtra("schetime", time);
-//                    startActivity(intent);
-                    startActivityForResult(intent, 1);
-
-//                    startActivity(new Intent(this,AddScheduleActivity.class));
-                } else {
-                    time = "" + currentDate.getYear() + currentDate.getMonth() + currentDate.getDay();
-                    Intent intent = new Intent(this, AddScheduleActivity.class);
-                    intent.putExtra("schetime", time);
-//                    startActivity(intent);
-                    startActivityForResult(intent, 1);
-                }
-                break;
-            case R.id.iv_back:
-                finish();
-                break;
-        }
     }
 
     /**
@@ -149,29 +124,6 @@ public class ScheduleActivity extends BaseActivity {
 
         }
         time = currentDate.getYear() + "-" + Month + "-" + Day;
-    }
-
-    /**
-     * 初始化CustomDayView，并作为CalendarViewAdapter的参数传入
-     */
-    private void initCalendarView() {
-        initListener();
-        CustomDayView customDayView = new CustomDayView(context, R.layout.l_custom_day);
-        calendarAdapter = new CalendarViewAdapter(
-                context,
-                onSelectDateListener,
-                CalendarAttr.WeekArrayType.Monday,
-                customDayView);
-        calendarAdapter.setOnCalendarTypeChangedListener(new CalendarViewAdapter.OnCalendarTypeChanged() {
-            @Override
-            public void onCalendarTypeChanged(CalendarAttr.CalendarType type) {
-//                rvToDoList.scrollToPosition(0);
-
-            }
-        });
-//        initMarkData();
-        getMark_Data();
-        initMonthPager();
     }
 
     /**
@@ -213,10 +165,51 @@ public class ScheduleActivity extends BaseActivity {
     }
 
     /**
+     * 初始化CustomDayView，并作为CalendarViewAdapter的参数传入
+     */
+    private void initCalendarView() {
+        initListener();
+        CustomDayView customDayView = new CustomDayView(context, R.layout.l_custom_day);
+        calendarAdapter = new CalendarViewAdapter(
+                context,
+                onSelectDateListener,
+                CalendarAttr.WeekArrayType.Monday,
+                customDayView);
+        calendarAdapter.setOnCalendarTypeChangedListener(new CalendarViewAdapter.OnCalendarTypeChanged() {
+            @Override
+            public void onCalendarTypeChanged(CalendarAttr.CalendarType type) {
+
+            }
+        });
+        getMark_Data();
+        initMonthPager();
+    }
+
+    @OnClick({R.id.tv_add_schedule, R.id.iv_back})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tv_add_schedule:
+                if (time != "" && !time.equals("")) {
+                    Intent intent = new Intent(ScheduleActivity.this, AddScheduleActivity.class);
+                    intent.putExtra("schetime", time);
+                    startActivityForResult(intent, 1);
+                } else {
+                    time = "" + currentDate.getYear() + currentDate.getMonth() + currentDate.getDay();
+                    Intent intent = new Intent(ScheduleActivity.this, AddScheduleActivity.class);
+                    intent.putExtra("schetime", time);
+                    startActivityForResult(intent, 1);
+                }
+                break;
+            case R.id.iv_back:
+                finish();
+                break;
+        }
+    }
+
+    /**
      * 初始化标记数据，HashMap的形式，可自定义
      * 如果存在异步的话，在使用setMarkData之后调用 calendarAdapter.notifyDataChanged();
      */
-
     private void initListener() {
         onSelectDateListener = new OnSelectDateListener() {
             @Override
@@ -238,6 +231,20 @@ public class ScheduleActivity extends BaseActivity {
 //        rvToDoList.setNestedScrollingEnabled(false);
 //        rvToDoList.setLayoutManager(new LinearLayoutManager(this));
 //        rvToDoList.setAdapter(new L_ScheduleAdapter(this));
+    }
+
+    /**
+     * onWindowFocusChanged回调时，将当前月的种子日期修改为今天
+     *
+     * @return void
+     */
+    @Override
+    public void onMultiWindowModeChanged(boolean isInMultiWindowMode) {
+        super.onMultiWindowModeChanged(isInMultiWindowMode);
+        if (isInMultiWindowMode && !initiated) {
+            refreshMonthPager();
+            initiated = true;
+        }
     }
 
     /**
@@ -277,7 +284,6 @@ public class ScheduleActivity extends BaseActivity {
 
         }
         time = date.getYear() + "-" + Month + "-" + Day;
-//        Toast.makeText(ScheduleActivity.this,time,Toast.LENGTH_SHORT).show();
         getDatatime(time);
     }
 
@@ -285,7 +291,7 @@ public class ScheduleActivity extends BaseActivity {
      * 获取接口
      */
     private void getDatatime(String time) {
-        String userid = SPUtils.get(this, "userId", "-1").toString();
+        String userid = SPUtils.get(ScheduleActivity.this, "userId", "-1").toString();
         RequestParams params = new RequestParams();
         params.put("createBy", userid);    //ID
         params.put("scheduleTimeBegin", time); // 时间
@@ -295,8 +301,7 @@ public class ScheduleActivity extends BaseActivity {
                 //需要转化为实体对象
                 Date date = new Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");//只有时分秒
-                String timeNow = sdf.format(date);
-
+                timeNow = sdf.format(date);
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
@@ -307,33 +312,52 @@ public class ScheduleActivity extends BaseActivity {
                     l_scheduleAdapter = new L_ScheduleAdapter(ScheduleActivity.this);
                     rvToDoList.setAdapter(l_scheduleAdapter);
                     List<ScheduleBean3> memberList = new ArrayList<>();
-                    if (memberList2.size() > 0) {
-                        for (int i = 0; i < 24; i++) {
-                            ScheduleBean3 bean3 = new ScheduleBean3();
-                            String str = String.format("%02d", i);
-                            bean3.setTimeTitle("" + str + ":00");
-                            bean3.setHasContent(false);
-                            bean3.setNow(false);
-                            if (timeNow.split(":")[0].toString().equals(str)) {
+                    List<ScheduleBean3> memberList3 = new ArrayList<>();
+                    // 没有数据也显示时间
+//                    if (memberList2.size() > 0) {
+                    //时间这是为8点----17点
+//                        for (int i = 0; i < 24; i++) {
+                    for (int i = 8; i < 18; i++) {
+                        ScheduleBean3 bean3 = new ScheduleBean3();
+                        String str = String.format("%02d", i);
+                        bean3.setTimeTitle("" + str + ":00");
+                        bean3.setHasContent(false);
+                        bean3.setNow(false);
+                        if (timeNow.split(":")[0].toString().equals(str)) {
+                            if (TimeUtils.differentDaysByMillisecond2(timeNow,"17:00")<0)
+                            {
+                                bean3.setNow(false);
+                            }else {
                                 bean3.setNow(true);
-                                if (timeNow.split(":")[1].equals("00")) {
-                                    bean3.setTimeNow(timeNow.split(":")[0] + ":01");
-                                } else
-                                    bean3.setTimeNow(timeNow);
                             }
-                            memberList.add(bean3);
+
+                            if (timeNow.split(":")[1].equals("00")) {
+                                bean3.setTimeNow(timeNow.split(":")[0] + ":01");
+                            } else
+                                bean3.setTimeNow(timeNow);
                         }
-                        for (int i = 0; i < memberList2.size(); i++) {
-                            String startTime = TimeUtils.getDateToString5(memberList2.get(i).getScheduleTimeBegin());
-                            String endTime = TimeUtils.getDateToString5(memberList2.get(i).getScheduleTimeEnd());
-                            for (int j = Integer.parseInt(startTime); j < Integer.parseInt(endTime); j++) {
-                                memberList.get(j).setHasContent(true);
-                                if (j == Integer.parseInt(startTime))
-                                    memberList.get(j).setScheduleContent(memberList2.get(i).getScheduleContent());
-                            }
-                        }
-                        l_scheduleAdapter.addAllData(memberList, time);
+                        memberList.add(bean3);
                     }
+
+//                    for (int i = 0; i < memberList2.size(); i++) {
+//                        if (memberList2.get(i).getIsToday().equals("Y")) {
+//                            ScheduleBean3 memberList4 = new ScheduleBean3();
+//                            memberList4.setQufen("Y");
+//                            memberList4.setScheduleContent(memberList2.get(i).getScheduleContent());
+//                            memberList3.add(memberList4);
+//                        }else {
+//                            String startTime = TimeUtils.getDateToString5(memberList2.get(i).getScheduleTimeBegin());
+//                            String endTime = TimeUtils.getDateToString5(memberList2.get(i).getScheduleTimeEnd());
+//                            for (int j = Integer.parseInt(startTime)-8; j < Integer.parseInt(endTime)-8; j++) {
+//                                //如果是全天就不显示在列表上，设置为备忘录
+//                                memberList.get(j).setHasContent(true);
+//                                if (j == Integer.parseInt(startTime)-8)
+//                                    memberList.get(j).setScheduleContent(memberList2.get(i).getScheduleContent());
+//                            }
+//                        }
+//
+//                    }
+                    l_scheduleAdapter.addAllData(memberList, memberList3,time);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -349,7 +373,7 @@ public class ScheduleActivity extends BaseActivity {
 
     // 获取有日程安排的天
     private void getMark_Data() {
-        String userid = SPUtils.get(this, "userId", "-1").toString();
+        String userid = SPUtils.get(ScheduleActivity.this, "userId", "-1").toString();
         RequestParams params = new RequestParams();
         params.put("createBy", userid);    //ID
         HttpRequest.postSche_selectDates(params, new ResponseCallback() {
@@ -391,4 +415,5 @@ public class ScheduleActivity extends BaseActivity {
             getMark_Data();
         }
     }
+
 }
