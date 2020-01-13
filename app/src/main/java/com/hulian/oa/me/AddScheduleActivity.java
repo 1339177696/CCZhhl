@@ -76,8 +76,10 @@ public class AddScheduleActivity extends BaseActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 swSelect.setChecked(isChecked);
                 if(isChecked){
-                    time2="00:00";
-                    time3="23:59";
+//                    time2="00:00";
+//                    time3="23:59";
+                    time2="08:00";
+                    time3="16:59";
                     tv_select_time.setText(time2);
                     tv_select_time2.setText(time3);
                 }
