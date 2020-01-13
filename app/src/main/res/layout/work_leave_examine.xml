@@ -280,7 +280,7 @@
 
             </RelativeLayout>
             <TextView
-                android:textSize="@dimen/sp_9"
+                android:textSize="@dimen/sp_14"
                 android:layout_marginLeft="@dimen/dp_15"
                 android:layout_marginTop="@dimen/sp_8"
                 android:text="审批意见"
@@ -296,7 +296,7 @@
                 android:layout_marginRight="@dimen/dp_15"
                 android:layout_marginLeft="@dimen/dp_15"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_50" />
+                android:layout_height="@dimen/dp_80" />
 
         </LinearLayout>
 

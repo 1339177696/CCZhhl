@@ -96,6 +96,10 @@ public class LeaveExamineActivity extends BaseActivity {
     private String[] images = {};
 
     private int mCount = 1;
+
+    @BindView(R.id.tv_bohui)
+    TextView tv_bohui;
+    private String bohui = "";
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -105,6 +109,7 @@ public class LeaveExamineActivity extends BaseActivity {
         EventBus.getDefault().register(this);
         ButterKnife.bind(this);
         myDialog = new AlertDialog(this).builder();
+        bohui = tv_bohui.getText().toString();
         getData();
         getheitData();
 
@@ -154,10 +159,10 @@ public class LeaveExamineActivity extends BaseActivity {
                 startActivity(itent);
                 break;
             case R.id.tv_disagree://驳回
-                postData("2","驳回");
+                postData("2",bohui);
                 break;
             case R.id.tv_agree://同意
-                postData("1","");
+                postData("1",bohui);
                 break;
             case R.id.iv_back://返回
                 finish();
