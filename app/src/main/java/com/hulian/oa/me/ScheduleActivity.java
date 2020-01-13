@@ -339,24 +339,24 @@ public class ScheduleActivity extends BaseActivity {
                         memberList.add(bean3);
                     }
 
-//                    for (int i = 0; i < memberList2.size(); i++) {
-//                        if (memberList2.get(i).getIsToday().equals("Y")) {
-//                            ScheduleBean3 memberList4 = new ScheduleBean3();
-//                            memberList4.setQufen("Y");
-//                            memberList4.setScheduleContent(memberList2.get(i).getScheduleContent());
-//                            memberList3.add(memberList4);
-//                        }else {
-//                            String startTime = TimeUtils.getDateToString5(memberList2.get(i).getScheduleTimeBegin());
-//                            String endTime = TimeUtils.getDateToString5(memberList2.get(i).getScheduleTimeEnd());
-//                            for (int j = Integer.parseInt(startTime)-8; j < Integer.parseInt(endTime)-8; j++) {
-//                                //如果是全天就不显示在列表上，设置为备忘录
-//                                memberList.get(j).setHasContent(true);
-//                                if (j == Integer.parseInt(startTime)-8)
-//                                    memberList.get(j).setScheduleContent(memberList2.get(i).getScheduleContent());
-//                            }
-//                        }
-//
-//                    }
+                    for (int i = 0; i < memberList2.size(); i++) {
+                        if (memberList2.get(i).getIsToday().equals("Y")) {
+                            ScheduleBean3 memberList4 = new ScheduleBean3();
+                            memberList4.setQufen("Y");
+                            memberList4.setScheduleContent(memberList2.get(i).getScheduleContent());
+                            memberList3.add(memberList4);
+                        }else {
+                            String startTime = TimeUtils.getDateToString5(memberList2.get(i).getScheduleTimeBegin());
+                            String endTime = TimeUtils.getDateToString5(memberList2.get(i).getScheduleTimeEnd());
+                            for (int j = Integer.parseInt(startTime)-8; j < Integer.parseInt(endTime)-8; j++) {
+                                //如果是全天就不显示在列表上，设置为备忘录
+                                memberList.get(j).setHasContent(true);
+                                if (j == Integer.parseInt(startTime)-8)
+                                    memberList.get(j).setScheduleContent(memberList2.get(i).getScheduleContent());
+                            }
+                        }
+
+                    }
                     l_scheduleAdapter.addAllData(memberList, memberList3,time);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -365,7 +365,6 @@ public class ScheduleActivity extends BaseActivity {
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(ScheduleActivity.this, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

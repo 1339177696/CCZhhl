@@ -184,11 +184,10 @@ public class L_ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemViewType(int position) {
-//        if (("Y").equals(dataList.get(position).getQufen())){
-//            return ITEMONE;
-//        }else {
-//            return ITEMTWO;
-//        }
-return ITEMTWO;
+        if (("Y").equals(dataList.get(position).getQufen())){
+            return ITEMONE;
+        }else {
+            return ITEMTWO;
+        }
     }
 }
