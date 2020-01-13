@@ -50,12 +50,17 @@ public class SecondMailActivity extends BaseActivity implements PullLoadMoreRecy
     DrawerLayout mainDrawerLayout;
     @BindView(R.id.tv_receiver)
     TextView tvReceiver;
+    @BindView(R.id.tv_outbox_num)
+    TextView tv_outbox_num;
     @BindView(R.id.emptyBg)
     RelativeLayout emptyBg;
     private int mCount = 1;
     private RecyclerView mRecyclerView;
     L_MailReciveAdapter mRecyclerViewAdapter;
     Unbinder unbinder;
+    @BindView(R.id.tv_title)
+    TextView tv_title;
+    private int type = 1;
 
     /**
      * 邮件收发
@@ -98,7 +103,7 @@ public class SecondMailActivity extends BaseActivity implements PullLoadMoreRecy
         });
     }
 
-    @OnClick({R.id.tv_apply, R.id.iv_back_x, R.id.tv_write_mail, R.id.main_right_drawer_layout})
+    @OnClick({R.id.tv_apply, R.id.iv_back_x, R.id.tv_write_mail, R.id.main_right_drawer_layout,R.id.liner_inbox,R.id.liner_outbox})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_apply:
@@ -112,15 +117,28 @@ public class SecondMailActivity extends BaseActivity implements PullLoadMoreRecy
                 break;
             case R.id.iv_back_x:
                 finish();
-            case R.id.main_right_drawer_layout:
-                mainDrawerLayout.closeDrawer(Gravity.RIGHT);
                 break;
+//            case R.id.main_right_drawer_layout:
+//                mainDrawerLayout.closeDrawer(Gravity.RIGHT);
+//                break;
+            case R.id.liner_inbox:
+                type = 1;
+                mainDrawerLayout.closeDrawer(Gravity.RIGHT);
+                tv_title.setText("收件箱");
+                onRefresh();
+                break;
+            case R.id.liner_outbox:
+                type = 2;
+                mainDrawerLayout.closeDrawer(Gravity.RIGHT);
+                tv_title.setText("发件箱");
+                onRefresh();
+                break;
+
         }
 
     }
 
     private void initList() {
-
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
@@ -140,7 +158,6 @@ public class SecondMailActivity extends BaseActivity implements PullLoadMoreRecy
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new L_MailReciveAdapter(this);
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
@@ -150,12 +167,15 @@ public class SecondMailActivity extends BaseActivity implements PullLoadMoreRecy
     public void onRefresh() {
         Log.e("wxl", "onRefresh");
         setRefresh();
-        getData();
+        if (type == 1){
+            getData();
+        }else {
+            getOut();
+        }
     }
     @Override
     public void onLoadMore() {
         Log.e("wxl", "onLoadMore");
-
     }
 
     private void setRefresh() {
@@ -201,7 +221,6 @@ public class SecondMailActivity extends BaseActivity implements PullLoadMoreRecy
         });
     }
 
-
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
 
@@ -216,6 +235,25 @@ public class SecondMailActivity extends BaseActivity implements PullLoadMoreRecy
     protected void onResume() {
         super.onResume();
         onRefresh();
+    }
+
+    //请求发件箱
+    public void getOut(){
+        RequestParams params = new RequestParams();
+        params.put("username", SPUtils.get(SecondMailActivity.this, "email", "").toString());
+        params.put("password", "123456");
+        params.put("userId", SPUtils.get(SecondMailActivity.this, "userId", "").toString());
+        HttpRequest.post_DeleteCollect(params, new ResponseCallback() {
+            @Override
+            public void onSuccess(Object responseObj) {
+
+            }
+
+            @Override
+            public void onFailure(OkHttpException failuer) {
+
+            }
+        });
     }
 }
 

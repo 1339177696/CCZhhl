@@ -64,7 +64,9 @@ public class NewsViewAdapter extends RecyclerView.Adapter <NewsViewAdapter.ViewH
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.title.setText(dataList.get(position).getJournalismTitle());
-        holder.tv_content.setText(Html.fromHtml(dataList.get(position).getJournalismContent()));
+        if (!dataList.get(position).getJournalismContent().equals("null")){
+            holder.tv_content.setText(Html.fromHtml(dataList.get(position).getJournalismContent()));
+        }
         holder.tv_time.setText(TimeUtils.getDateToString(dataList.get(position).getCreateTime()));
      //   holder.tv_dianzanCount.setText(TimeUtils.getDateToString(dataList.get(position).getCreateTime()));
 //        Glide.with(mContext).load( dataList.get(position).getJournalismImage()).into(holder.iv_head);

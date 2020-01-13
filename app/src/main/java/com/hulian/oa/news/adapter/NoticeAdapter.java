@@ -62,6 +62,7 @@ public class NoticeAdapter extends RecyclerView.Adapter <NoticeAdapter.ViewHolde
         holder.title.setText(dataList.get(position).getNoticeTitle());
 
         URLImageParser imageGetter = new URLImageParser(holder.tv_content);
+        if (!dataList.get(position).getNoticeContent().equals("null"))
         holder.tv_content.setText(Html.fromHtml(dataList.get(position).getNoticeContent(), imageGetter, null));
     //    holder.tv_content.setText(dataList.get(position).getNoticeContent());
         if(dataList.get(position).getCreateTime()!=null) {
