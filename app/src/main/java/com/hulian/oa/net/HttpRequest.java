@@ -344,6 +344,26 @@ public class HttpRequest {
     RequestMode.postRequest(Urls.commUrls+"system/schedule/add",params,callback,null);
   }
 
+    /**
+     * 修改日程
+     * @param params
+     * @param callback
+     */
+    public static void postSche_Xiugai(RequestParams params,ResponseCallback callback)
+    {
+        RequestMode.postRequest(Urls.commUrls+"system/schedule/androidEdit",params,callback,null);
+    }
+
+    /**
+     * 删除日程
+     * @param params
+     * @param callback
+     */
+    public static void postSche_Dlete(RequestParams params,ResponseCallback callback)
+    {
+        RequestMode.postRequest(Urls.commUrls+"system/schedule/remove",params,callback,null);
+    }
+
   /**
    * 查询有日程的日期
    * @param params

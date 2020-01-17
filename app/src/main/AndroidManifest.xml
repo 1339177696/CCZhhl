@@ -367,6 +367,8 @@
             android:configChanges="screenSize|keyboardHidden|orientation"/>
         <activity android:name=".qglactivity.PersonqglActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity android:name=".me.ScheduleActivity_Detelis"
+                android:configChanges="screenSize|keyboardHidden|orientation"/>
 
     </application>
 

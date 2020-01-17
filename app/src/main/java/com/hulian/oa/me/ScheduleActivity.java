@@ -30,6 +30,7 @@ import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.utils.TimeUtils;
+import com.hulian.oa.work.file.admin.activity.leave.l_fragment.LeaveLaunchFragment;
 import com.ldf.calendar.Utils;
 import com.ldf.calendar.component.CalendarAttr;
 import com.ldf.calendar.component.CalendarViewAdapter;
@@ -50,6 +51,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 
 //我的-》我的日程
 public class ScheduleActivity extends BaseActivity {
@@ -344,6 +346,11 @@ public class ScheduleActivity extends BaseActivity {
                             ScheduleBean3 memberList4 = new ScheduleBean3();
                             memberList4.setQufen("Y");
                             memberList4.setScheduleContent(memberList2.get(i).getScheduleContent());
+                            memberList4.setScheduleTimeBegin(memberList2.get(i).getScheduleTimeBegin());
+                            memberList4.setScheduleTimeEnd(memberList2.get(i).getScheduleTimeEnd());
+                            memberList4.setWarnTime(memberList2.get(i).getWarnTime());
+                            memberList4.setId(memberList2.get(i).getId());
+
                             memberList3.add(memberList4);
                         }else {
                             String startTime = TimeUtils.getDateToString5(memberList2.get(i).getScheduleTimeBegin());
@@ -353,6 +360,10 @@ public class ScheduleActivity extends BaseActivity {
                                 memberList.get(j).setHasContent(true);
                                 if (j == Integer.parseInt(startTime)-8)
                                     memberList.get(j).setScheduleContent(memberList2.get(i).getScheduleContent());
+                                    memberList.get(j).setScheduleTimeBegin(memberList2.get(i).getScheduleTimeBegin());
+                                    memberList.get(j).setScheduleTimeEnd(memberList2.get(i).getScheduleTimeEnd());
+                                    memberList.get(j).setWarnTime(memberList2.get(i).getWarnTime());
+                                    memberList.get(j).setId(memberList2.get(i).getId());
                             }
                         }
 
@@ -415,4 +426,11 @@ public class ScheduleActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        getDatatime(time);
+        // initCalendarView();
+        getMark_Data();
+    }
 }

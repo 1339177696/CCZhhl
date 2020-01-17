@@ -11,6 +11,16 @@ public class ScheduleBean3 {
     private String  timeNow;
     private String isToday;
 
+    public String getWarnTime() {
+        return warnTime;
+    }
+
+    public void setWarnTime(String warnTime) {
+        this.warnTime = warnTime;
+    }
+
+    private String warnTime;
+
     public String getQufen() {
         return qufen;
     }

@@ -389,6 +389,17 @@ public class TimeUtils {
            Date d = new Date(convertTimeToLong(time));
           return sf.format(d);
     }
+
+    public static  String getDateToString1(String time) {
+        sf = new SimpleDateFormat("HH:mm");
+        Date d = new Date(convertTimeToLong(time));
+        return sf.format(d);
+    }
+    public static  String getDateToString6(String time) {
+        sf = new SimpleDateFormat("yyyy-MM-dd");
+        Date d = new Date(convertTimeToLong(time));
+        return sf.format(d);
+    }
     /**
      * 把时间戳变yyyy/MM格式时间
      *

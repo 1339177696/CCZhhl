@@ -1,6 +1,7 @@
 package com.hulian.oa.me.l_adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +29,7 @@ import com.hulian.oa.bean.Sche_Bean_x;
 import com.hulian.oa.bean.ScheduleBean3;
 import com.hulian.oa.me.L_SetActivity;
 import com.hulian.oa.me.ScheduleActivity;
+import com.hulian.oa.me.ScheduleActivity_Detelis;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
@@ -124,7 +127,22 @@ public class L_ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             } else {
                 viewHolder_top.tv_bw_content.setText("");
             }
-
+            viewHolder_top.liner_bw.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v) {
+                    Log.e("点击了备忘录","备忘录");
+                    Intent intent = new Intent(context, ScheduleActivity_Detelis.class);
+                    intent.putExtra("type","0");
+                    intent.putExtra("id",dataList.get(position).getId());
+                    intent.putExtra("title",dataList.get(position).getScheduleContent());
+                    intent.putExtra("qu",dataList.get(position).getQufen());
+                    intent.putExtra("start",dataList.get(position).getScheduleTimeBegin());
+                    intent.putExtra("end",dataList.get(position).getScheduleTimeEnd());
+                    intent.putExtra("warnTime",dataList.get(position).getWarnTime());
+                    context.startActivity(intent);
+                }
+            });
 
         } else if (holder instanceof ViewHolder_List) {
             ViewHolder_List viewHolderList = ((ViewHolder_List) holder);
@@ -152,6 +170,21 @@ public class L_ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 viewHolderList.tv_now_xian.setVisibility(View.GONE);
                 viewHolderList.tv_now_dian .setVisibility(View.GONE);
             }
+            viewHolderList.liner_rc.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("点击了日程","日程");
+                    Intent intent = new Intent(context, ScheduleActivity_Detelis.class);
+                    intent.putExtra("type","0");
+                    intent.putExtra("id",dataList.get(position).getId());
+                    intent.putExtra("title",dataList.get(position).getScheduleContent());
+                    intent.putExtra("qu",dataList.get(position).getIsToday());
+                    intent.putExtra("start",dataList.get(position).getScheduleTimeBegin());
+                    intent.putExtra("end",dataList.get(position).getScheduleTimeEnd());
+                    intent.putExtra("warnTime",dataList.get(position).getWarnTime());
+                    context.startActivity(intent);
+                }
+            });
         }
 
     }
@@ -160,11 +193,13 @@ public class L_ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public static class ViewHolder_Top extends RecyclerView.ViewHolder {
         TextView tv_bw_content;
         TextView tv_my;
+        LinearLayout liner_bw;
 
         ViewHolder_Top(View view) {
             super(view);
             tv_my = (TextView) view.findViewById(R.id.tv_my);
             tv_bw_content = (TextView) view.findViewById(R.id.tv_bw_content);
+            liner_bw = (LinearLayout) view.findViewById(R.id.liner_bw);
         }
     }
 
@@ -173,6 +208,7 @@ public class L_ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         TextView tv_title;
         TextView tv_now, tv_now_xian,tv_now_dian;
         FrameLayout fl_content;
+        LinearLayout liner_rc;
 
         ViewHolder_List(View view) {
             super(view);
@@ -182,6 +218,7 @@ public class L_ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             tv_now = view.findViewById(R.id.tv_now);
             tv_now_xian = view.findViewById(R.id.tv_now_xian);
             tv_now_dian = view.findViewById(R.id.tv_now_dian);
+            liner_rc = view.findViewById(R.id.liner_rc);
         }
     }
 

@@ -60,6 +60,7 @@ public class BaseActivity extends FragmentActivity  {
         gson=new Gson();
         mContext = this;
         loadDialog = new LoadingDialog(this);
+
     }
 
     @SuppressLint("MissingSuperCall")
