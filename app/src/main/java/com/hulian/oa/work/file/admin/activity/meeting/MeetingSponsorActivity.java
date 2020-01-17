@@ -124,6 +124,7 @@ public class MeetingSponsorActivity extends BaseActivity {
                 //   ToastHelper.showToast(mContext, "" + i);
                 RadioButton radiobutton = (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId());
                 signType = radiobutton.getTag().toString();
+
             }
         });
         init();
