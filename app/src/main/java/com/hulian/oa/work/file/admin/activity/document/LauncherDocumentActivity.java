@@ -122,6 +122,11 @@ public class LauncherDocumentActivity extends BaseActivity {
     private String gwjinji = "1";
     List<String> Jinji = new ArrayList<>();
 
+    @BindView(R.id.approver_tv)
+    TextView approver_tv;
+
+    private String qj_id = "";
+    private String qj_name = "";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -143,9 +148,11 @@ public class LauncherDocumentActivity extends BaseActivity {
         });
         initReason();
         initJinji();
-        tv_reaseon.setText("会签");
+        tv_reaseon.setText("签批");
         jinji_leibie.setText("紧急且重要");
         getWenHao();
+
+
     }
 
     private void initSelectImage() {
@@ -341,9 +348,11 @@ public class LauncherDocumentActivity extends BaseActivity {
                     return;
                 }
 
-                if (selectList2.size() <= 0) {
-                    ToastHelper.showToast(mContext, "审批人人不能为空");
-                    return;
+                if (qj_id.equals("")){
+                    if (selectList2.size() <= 0) {
+                        ToastHelper.showToast(mContext, "审批人人不能为空");
+                        return;
+                    }
                 }
                 // 新加的qgl
                 if (selectList3.size() <= 0){
@@ -377,8 +386,13 @@ public class LauncherDocumentActivity extends BaseActivity {
                 params.put("initiationType", gwtype);
                 params.put("symbol", etnumber.getText().toString().trim());
                 params.put("title", etTitle.getText().toString());
-                params.put("approverId", uids.substring(0, uids.length() - 1));
-                params.put("approverName", uidname.substring(0, uidname.length() - 1));
+                if (qj_id.equals("")&&qj_name.equals("")){
+                    params.put("approverId", uids.substring(0, uids.length() - 1));
+                    params.put("approverName", uidname.substring(0, uidname.length() - 1));
+                }else {
+                    params.put("approverId", qj_id);
+                    params.put("approverName", qj_name);
+                }
                 params.put("createName",SPUtils.get(mContext, "nickname", "").toString());
                 params.put("copierId",csids.substring(0, csids.length() - 1));
                 params.put("copierName",csidname.substring(0, csidname.length() - 1));
@@ -443,8 +457,7 @@ public class LauncherDocumentActivity extends BaseActivity {
 
     }
 
-    private void initJinji()
-    {
+    private void initJinji() {
         Jinji.add("紧急且重要");
         Jinji.add("重要不紧急");
         Jinji.add("紧急不重要");
@@ -487,10 +500,9 @@ public class LauncherDocumentActivity extends BaseActivity {
         Log.v("EMAIL", "获取到数据-结束");
     }
 
-    private void initReason()
-    {
-        reasonlist.add("会签");
+    private void initReason() {
         reasonlist.add("签批");
+        reasonlist.add("会签");
         reasonPicker = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
@@ -498,10 +510,20 @@ public class LauncherDocumentActivity extends BaseActivity {
                 if (tv_reaseon.getText().toString().trim().equals("会签"))
                 {
                     gwtype = "1" ;
+                    Log.e("会签","审批人后台给");
+                    getApproval();
+                    approver_tv.setVisibility(View.VISIBLE);
+                    recyclerView2.setVisibility(View.GONE);
+
+
                 }
                 else {
                     gwtype = "0" ;
-
+                    Log.e("签批","空");
+                    approver_tv.setVisibility(View.GONE);
+                    recyclerView2.setVisibility(View.VISIBLE);
+                    qj_id = "";
+                    qj_name = "";
                 }
 
             }
@@ -582,4 +604,29 @@ public class LauncherDocumentActivity extends BaseActivity {
         });
     }
 
+    //请求审批人
+    private void getApproval(){
+        RequestParams params = new RequestParams();
+        HttpRequest.post_findLotusSignApprover(params, new ResponseCallback(){
+            @Override
+            public void onSuccess(Object responseObj) {
+                JSONObject obj = null;
+                try {
+                    JSONObject result = new JSONObject(responseObj.toString());
+                    obj = new JSONObject(result.toString());
+                    approver_tv.setText(obj.getJSONObject("data").getString("approveNames"));
+                    qj_id = obj.getJSONObject("data").getString("approveIds");
+                    qj_name = obj.getJSONObject("data").getString("approveNames");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(OkHttpException failuer) {
+
+            }
+        });
+    }
 }

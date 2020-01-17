@@ -230,12 +230,12 @@
                         android:layout_marginLeft="@dimen/dp_70"
                         android:textColor="#085DD6"
                         android:layout_height="match_parent" />
-                    <ImageView
-                        android:layout_gravity="right|center_vertical"
-                        android:layout_marginLeft="@dimen/dp_5"
-                        android:background="@mipmap/ic_right"
-                        android:layout_width="@dimen/dp_12"
-                        android:layout_height="@dimen/dp_12" />
+                    <!--<ImageView-->
+                        <!--android:layout_gravity="right|center_vertical"-->
+                        <!--android:layout_marginLeft="@dimen/dp_5"-->
+                        <!--android:background="@mipmap/ic_right"-->
+                        <!--android:layout_width="@dimen/dp_12"-->
+                        <!--android:layout_height="@dimen/dp_12" />-->
                 </LinearLayout>
                 <TextView
                     android:layout_width="match_parent"
@@ -269,12 +269,12 @@
                         android:text="0"
                         android:textColor="#085DD6"
                         android:layout_height="match_parent" />
-                    <ImageView
-                        android:layout_gravity="right|center_vertical"
-                        android:layout_marginLeft="@dimen/dp_5"
-                        android:background="@mipmap/ic_right"
-                        android:layout_width="@dimen/dp_12"
-                        android:layout_height="@dimen/dp_12" />
+                    <!--<ImageView-->
+                        <!--android:layout_gravity="right|center_vertical"-->
+                        <!--android:layout_marginLeft="@dimen/dp_5"-->
+                        <!--android:background="@mipmap/ic_right"-->
+                        <!--android:layout_width="@dimen/dp_12"-->
+                        <!--android:layout_height="@dimen/dp_12" />-->
                 </LinearLayout>
                 <TextView
                     android:visibility="gone"

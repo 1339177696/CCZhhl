@@ -145,10 +145,12 @@ public class L_ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 lp.setMargins(int left, int top, int right, int bottom)*/
 
                 viewHolderList.tv_now_xian.setVisibility(View.VISIBLE);
+                viewHolderList.tv_now_dian.setVisibility(View.VISIBLE);
                 viewHolderList.tv_now.setText(dataList.get(position).getTimeNow());
             } else {
                 viewHolderList.tv_now.setVisibility(View.GONE);
                 viewHolderList.tv_now_xian.setVisibility(View.GONE);
+                viewHolderList.tv_now_dian .setVisibility(View.GONE);
             }
         }
 
@@ -169,7 +171,7 @@ public class L_ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public static class ViewHolder_List extends RecyclerView.ViewHolder {
         TextView tv_time;
         TextView tv_title;
-        TextView tv_now, tv_now_xian;
+        TextView tv_now, tv_now_xian,tv_now_dian;
         FrameLayout fl_content;
 
         ViewHolder_List(View view) {
@@ -179,6 +181,7 @@ public class L_ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             fl_content = view.findViewById(R.id.fl_content);
             tv_now = view.findViewById(R.id.tv_now);
             tv_now_xian = view.findViewById(R.id.tv_now_xian);
+            tv_now_dian = view.findViewById(R.id.tv_now_dian);
         }
     }
 

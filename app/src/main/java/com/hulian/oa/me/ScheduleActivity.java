@@ -324,7 +324,7 @@ public class ScheduleActivity extends BaseActivity {
                         bean3.setHasContent(false);
                         bean3.setNow(false);
                         if (timeNow.split(":")[0].toString().equals(str)) {
-                            if (TimeUtils.differentDaysByMillisecond2(timeNow,"17:00")<0)
+                            if (TimeUtils.differentDaysByMillisecond2(timeNow,"18:00")<0)
                             {
                                 bean3.setNow(false);
                             }else {

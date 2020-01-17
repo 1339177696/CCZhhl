@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_27"
+    android:layout_height="@dimen/dp_40"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -15,7 +15,7 @@
             android:textColor="#313131"
             android:layout_centerVertical="true"
             android:text="全天"
-            android:textSize="@dimen/sp_9"
+            android:textSize="@dimen/sp_13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <View
@@ -34,11 +34,11 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_7"
-                android:paddingTop="@dimen/dp_7"
                 android:textColor="#313131"
                 android:id="@+id/tv_bw_content"
-                android:textSize="@dimen/sp_8"
+                android:textSize="@dimen/sp_12"
                 android:text="备忘录"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -46,7 +46,7 @@
 
         <View
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="@dimen/dp_35"
+            android:layout_marginLeft="@dimen/dp_40"
             android:background="#1FC795"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"/>

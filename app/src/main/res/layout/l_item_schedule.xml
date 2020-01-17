@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="@dimen/dp_45">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,13 +18,15 @@
             android:layout_marginTop="-2dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+
         <TextView
             android:layout_centerVertical="true"
             android:layout_below="@id/tv_time"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="@dimen/dp_16"
             android:id="@+id/tv_now"
-            android:textColor="@color/colorAccent"
+            android:textColor="#FF0000"
             android:textSize="@dimen/sp_12"
             android:text="01:00 • "
             android:gravity="top"
@@ -35,13 +38,13 @@
             android:layout_width="match_parent"
             android:layout_toRightOf="@id/tv_time"
             android:layout_height="match_parent">
-        <View
-            android:singleLine="true"
-            android:ellipsize="end"
-            android:background="@color/bg_color"
-            android:layout_centerVertical="true"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            <View
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:background="@color/bg_color"
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
             <TextView
                 android:layout_width="match_parent"
                 android:text=""
@@ -61,11 +64,28 @@
         <TextView
             android:layout_marginLeft="@dimen/dp_50"
             android:layout_centerVertical="true"
+            android:id="@+id/tv_now_dian"
+            android:layout_width="@dimen/dp_2"
+            android:layout_height="@dimen/dp_2"
+            android:background="#FF0000"
+            android:layout_gravity="center_vertical"></TextView>
+        <TextView
+            android:layout_marginLeft="@dimen/dp_50"
+            android:layout_centerVertical="true"
             android:id="@+id/tv_now_xian"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_1"
-            android:background="@color/colorAccent"
+            android:background="#FF0000"
+            android:layout_gravity="center_vertical"></TextView>
+
+        <TextView
+            android:layout_marginTop="@dimen/dp_6"
+            android:layout_marginLeft="@dimen/dp_53"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="#BFBFC1"
             android:layout_gravity="center_vertical"
-            ></TextView>
+            />
+
     </RelativeLayout>
 </LinearLayout>

@@ -236,10 +236,10 @@ public class TaskLauncherActivity extends BaseActivity {
 //                    return;
 //
 //                }
-                else if (selectList.size() <= 0) {
-                    ToastHelper.showToast(mContext, "公文照片不能为空");
-                    return;
-                }
+//                else if (selectList.size() <= 0) {
+//                    ToastHelper.showToast(mContext, "公文照片不能为空");
+//                    return;
+//                }
                 else
                 {
                     getData();

@@ -151,14 +151,25 @@ public class HttpRequest {
   }
 
 
+//  /**
+//   * 查询会议室
+//   * @param params 入参
+//   * @param callback 回调接口
+//   */
+//  public static void postMeetRoomeApi(RequestParams params, ResponseCallback callback) {
+//    RequestMode.postRequest(Urls.commUrls+"system/meetingRoom/queryMeetingRoom", params, callback, null);
+//  }
+
   /**
    * 查询会议室
    * @param params 入参
    * @param callback 回调接口
    */
   public static void postMeetRoomeApi(RequestParams params, ResponseCallback callback) {
-    RequestMode.postRequest(Urls.commUrls+"system/meetingRoom/queryMeetingRoom", params, callback, null);
+    RequestMode.postRequest(Urls.commUrls+"system/meetingRoom/androidQueryMeetingRoom", params, callback, null);
   }
+
+
   /**
    * 发布会议
    * @param params 入参
@@ -719,6 +730,16 @@ public class HttpRequest {
 
     public static void getrcYiDu(RequestParams params, ResponseCallback callback) {
         RequestMode.postRequest(Urls.commUrls+"system/viewMsg/clearMsgByType", params, callback, null);
+    }
+
+    /**
+     * 添加日程
+     * @param params
+     * @param callback
+     */
+    public static void post_findLotusSignApprover(RequestParams params,ResponseCallback callback)
+    {
+        RequestMode.postRequest(Urls.commUrls+"system/lotus/findLotusSignApprover",params,callback,null);
     }
 
 }
