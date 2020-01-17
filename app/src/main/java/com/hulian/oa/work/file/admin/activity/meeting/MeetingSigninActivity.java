@@ -145,8 +145,14 @@ public class MeetingSigninActivity extends BaseActivity {
                     }
 
                     et_title.setText(meeting.getMeetingTheme());
-                    tv_part_time.setText(TimeUtils.getDateToString(meeting.getMeetingTimeBegin()));
-                    tvPartTime2.setText(TimeUtils.getDateToString(meeting.getMeetingTimeEnd()));
+//                    tv_part_time.setText(TimeUtils.getDateToString(meeting.getMeetingTimeBegin()));
+//                    tvPartTime2.setText(TimeUtils.getDateToString(meeting.getMeetingTimeEnd()));
+
+                    tv_part_time.setText(meeting.getMeetingTimeBegin());
+                    tvPartTime2.setText(meeting.getMeetingTimeEnd());
+
+
+
                     tvPartLianx.setText(result.getJSONObject("data").getString("meetingContacts"));
                     tvPartLianxPhone.setText(result.getJSONObject("data").getString("meetingContactsPhone"));
                     et_content.setText(result.getJSONObject("data").getString("meetingContent"));

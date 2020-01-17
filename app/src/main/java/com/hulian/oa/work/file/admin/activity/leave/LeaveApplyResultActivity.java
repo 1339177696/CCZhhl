@@ -103,6 +103,7 @@ public class LeaveApplyResultActivity extends BaseActivity {
     private List<LocalMedia> selectList = new ArrayList<>();
     //图片放大预览测试
     private String[] images = {};
+    String path = "";
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -222,11 +223,14 @@ public class LeaveApplyResultActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.iv_result:
-                Intent intent = new Intent(mContext, PicturePreviewActivity.class);
-                intent.putExtra(PictureConfig.EXTRA_PREVIEW_SELECT_LIST, (Serializable) selectList);
-                intent.putExtra(PictureConfig.EXTRA_POSITION, 1);
-                mContext.startActivity(intent);
-                break;
+                if (!path.equals("")){
+                    Intent intent = new Intent(mContext, PicturePreviewActivity.class);
+                    intent.putExtra(PictureConfig.EXTRA_PREVIEW_SELECT_LIST, (Serializable) selectList);
+                    intent.putExtra(PictureConfig.EXTRA_POSITION, 1);
+                    mContext.startActivity(intent);
+                    break;
+                }
+
         }
 
     }
@@ -235,7 +239,7 @@ public class LeaveApplyResultActivity extends BaseActivity {
     private void init(String[] images) {
 //        修改了images.length
         LocalMedia localMedia = new LocalMedia();
-        String path = "";
+
         for (int i = 0; i < 1; i++) {
             localMedia.setPath(images[i]);
             selectList.add(localMedia);

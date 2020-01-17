@@ -139,6 +139,8 @@ public class UpcomAdapter extends RecyclerView.Adapter <UpcomAdapter.ViewHolder>
                         //发送完成接口
                             RequestParams params = new RequestParams();
                             params.put("id",dataList.get(position).getId());
+                            params.put("userId", SPUtils.get(mContext,"userId","").toString());
+                            params.put("completion","1");
                             HttpRequest.post_CoordinationRelease_deit(params, new ResponseCallback() {
                                 @Override
                                 public void onSuccess(Object responseObj) {

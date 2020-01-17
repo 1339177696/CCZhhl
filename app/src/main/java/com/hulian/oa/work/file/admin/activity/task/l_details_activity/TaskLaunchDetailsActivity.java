@@ -393,6 +393,8 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
     private void get_com_Data(String id) {
         RequestParams params = new RequestParams();
         params.put("id", id);
+        params.put("userId", SPUtils.get(mContext,"userId","").toString());
+        params.put("completion","1");
         HttpRequest.post_CoordinationRelease_deit(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
