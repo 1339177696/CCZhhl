@@ -129,14 +129,7 @@ public class MeetingSponsorActivity extends BaseActivity {
         });
         init();
 
-        // 刷新
-        sw_refres.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
-        {
-            @Override
-            public void onRefresh() {
-                getData(cd);
-            }
-        });
+
     }
 
     private void init() {
@@ -145,6 +138,18 @@ public class MeetingSponsorActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 selectTime();
+            }
+        });
+        // 刷新
+        sw_refres.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
+        {
+            @Override
+            public void onRefresh() {
+                if (!cd.equals("")){
+                    getData(cd);
+                }else {
+                    sw_refres.setRefreshing(false);
+                }
             }
         });
     }
@@ -244,6 +249,7 @@ public class MeetingSponsorActivity extends BaseActivity {
         HttpRequest.postMeetRoomeApi(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
+                sw_refres.setRefreshing(false);
                 //需要转化为实体对象
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {

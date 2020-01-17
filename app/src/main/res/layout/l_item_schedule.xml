@@ -8,14 +8,13 @@
         android:layout_height="match_parent"
         >
         <TextView
+            android:layout_marginTop="-4dp"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="@dimen/dp_20"
             android:id="@+id/tv_time"
             android:textColor="#BFBFC1"
             android:textSize="@dimen/sp_12"
             android:text="01:00"
-            android:gravity="top"
-            android:layout_marginTop="-2dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -33,12 +32,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <FrameLayout
+            android:layout_marginTop="@dimen/dp_2"
             android:id="@+id/fl_content"
             android:layout_marginLeft="@dimen/dp_2"
             android:layout_width="match_parent"
             android:layout_toRightOf="@id/tv_time"
             android:layout_height="match_parent">
             <View
+                android:layout_marginRight="@dimen/dp_5"
                 android:singleLine="true"
                 android:ellipsize="end"
                 android:background="@color/bg_color"
@@ -79,10 +80,10 @@
             android:layout_gravity="center_vertical"></TextView>
 
         <TextView
-            android:layout_marginTop="@dimen/dp_6"
+            android:layout_marginTop="@dimen/dp_2"
             android:layout_marginLeft="@dimen/dp_53"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_1"
+            android:layout_height="0.5dp"
             android:background="#BFBFC1"
             android:layout_gravity="center_vertical"
             />

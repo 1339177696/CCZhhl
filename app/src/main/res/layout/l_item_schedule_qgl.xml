@@ -27,6 +27,7 @@
             android:layout_width="@dimen/dp_2"
             android:layout_height="match_parent" />
         <RelativeLayout
+            android:layout_marginRight="@dimen/dp_5"
             android:background="#C9EFEA"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/view"
