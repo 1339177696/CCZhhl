@@ -25,6 +25,11 @@
             android:textColor="#313131"
             android:textSize="@dimen/sp_17" />
     </RelativeLayout>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/sw_refres"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -522,4 +527,5 @@
         </RelativeLayout>
     </LinearLayout>
     </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

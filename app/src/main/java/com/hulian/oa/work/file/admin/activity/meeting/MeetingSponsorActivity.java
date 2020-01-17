@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -102,6 +103,10 @@ public class MeetingSponsorActivity extends BaseActivity {
     // 会议地点
     private String meetingRoomLocation = "";
 
+    @BindView(R.id.sw_refres)
+    SwipeRefreshLayout sw_refres;
+    private String cd = "";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,6 +127,15 @@ public class MeetingSponsorActivity extends BaseActivity {
             }
         });
         init();
+
+        // 刷新
+        sw_refres.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
+        {
+            @Override
+            public void onRefresh() {
+                getData(cd);
+            }
+        });
     }
 
     private void init() {
@@ -346,7 +360,11 @@ public class MeetingSponsorActivity extends BaseActivity {
 
             numberOfPeople = mList.size() + "";
             if (mList.size() > 0) {
-                getData(mList.size() + "");
+
+                // 替换了
+                cd = mList.size() + "";
+//              getData(mList.size() + "");
+                getData(cd);
                 String name = "";
                 participantId = "";
                 for (People params1 : mList) {
