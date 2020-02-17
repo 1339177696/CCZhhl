@@ -22,6 +22,8 @@
 
     <style name="FullScreenTheme" parent="@android:style/Theme.Light.NoTitleBar.Fullscreen">
         <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <!-- navigation style -->
@@ -34,13 +36,11 @@
     <!-- toolbar 文本 -->
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/black</item>
     </style>
 
     <!-- toolbar 文本 -->
     <style name="Toolbar.SubTitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
         <item name="android:textSize">10sp</item>
-        <item name="android:textColor">@color/black</item>
     </style>
 
     <!-- 黑色主题 -->

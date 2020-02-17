@@ -27,7 +27,7 @@ public class PhoneCallStateObserver {
     private final String TAG = "PhoneCallStateObserver";
 
     private int phoneState = TelephonyManager.CALL_STATE_IDLE;
-    private PhoneCallStateEnum stateEnum = PhoneCallStateObserver.PhoneCallStateEnum.IDLE;
+    private PhoneCallStateEnum stateEnum = PhoneCallStateEnum.IDLE;
 
     private List<Observer<Integer>> autoHangUpObservers = new ArrayList<>(1); // 与本地电话互斥的挂断监听
 

@@ -3,6 +3,7 @@ package com.hulian.oa.message.session;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -10,6 +11,7 @@ import com.hulian.oa.DemoCache;
 import com.hulian.oa.R;
 import com.hulian.oa.message.session.extension.CustomAttachParser;
 import com.hulian.oa.message.session.extension.StickerAttachment;
+import com.hulian.oa.team.activity.AVChatAction;
 import com.hulian.oa.team.activity.AckMessageAction;
 import com.hulian.oa.team.activity.TeamAVChatAction;
 import com.netease.nim.avchatkit.TeamAVChatProfile;
@@ -154,10 +156,10 @@ public class SessionHelper {
             //            p2pCustomization.backgroundUri = "android.resource://com.netease.nim.demo/drawable/bk"
             // 定制加号点开后可以包含的操作， 默认已经有图片，视频等消息了
             ArrayList<BaseAction> actions = new ArrayList<>();
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-//                actions.add(new AVChatAction(AVChatType.AUDIO));
-//                actions.add(new AVChatAction(AVChatType.VIDEO));
-//            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+                actions.add(new AVChatAction(AVChatType.AUDIO));
+                actions.add(new AVChatAction(AVChatType.VIDEO));
+            }
 //            actions.add(new RTSAction());
 //            actions.add(new SnapChatAction());
 //            actions.add(new GuessAction());
@@ -364,7 +366,7 @@ public class SessionHelper {
             final TeamAVChatAction avChatAction = new TeamAVChatAction(AVChatType.VIDEO);
             TeamAVChatProfile.sharedInstance().registerObserver(true);
             ArrayList<BaseAction> actions = new ArrayList<>();
-           // actions.add(avChatAction);
+            actions.add(avChatAction);
 //            if (NIMRedPacketClient.isEnable()) {
 //                actions.add(new RedPacketAction());
 //            }
@@ -401,7 +403,7 @@ public class SessionHelper {
             final TeamAVChatAction avChatAction = new TeamAVChatAction(AVChatType.VIDEO);
             TeamAVChatProfile.sharedInstance().registerObserver(true);
             ArrayList<BaseAction> actions = new ArrayList<>();
-       //     actions.add(avChatAction);
+            actions.add(avChatAction);
 //            actions.add(new GuessAction());
 //            actions.add(new FileAction());
             actions.add(new AckMessageAction());
