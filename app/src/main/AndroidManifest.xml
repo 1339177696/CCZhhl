@@ -106,7 +106,7 @@
         -->
         <meta-data
             android:name="com.netease.nim.appKey"
-            android:value="52196ec2abc3e6ad3425067986c69750" /> <!-- 云信后台服务，请使用独立进程。 -->
+            android:value="09b60e0ed3fe68a770fbc96c1c5f56ed" /> <!-- 云信后台服务，请使用独立进程。 -->
         <service
             android:name="com.netease.nimlib.service.NimService"
             android:process=":core" /> <!-- 云信后台辅助服务 -->
@@ -370,6 +370,13 @@
         <activity android:name=".me.ScheduleActivity_Detelis"
                 android:configChanges="screenSize|keyboardHidden|orientation"/>
 
+        <!-- 申明本地电话状态（通话状态）的广播接收器，第三方APP集成时音视频模块时，如果需要在App中处理网络通话与本地电话的交互请加上此接收器 -->
+        <!-- 在Demo的示例代码中是在Application进行了网络通话与本地电话的互斥处理 -->
+        <receiver android:name="com.netease.nim.avchatkit.receiver.IncomingCallReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

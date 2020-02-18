@@ -53,8 +53,7 @@ public class HeadImageView extends CircleImageView {
      */
     public void loadBuddyAvatar(String account) {
         final UserInfo userInfo = AVChatKit.getUserInfoProvider().getUserInfo(account);
-   //     doLoadImage(userInfo != null ? userInfo.getAvatar() : null, DEFAULT_AVATAR_RES_ID, DEFAULT_AVATAR_THUMB_SIZE);
-        doLoadImage(userInfo != null ? userInfo.getAvatar() : null, R.drawable.nim_avatar_default, DEFAULT_AVATAR_THUMB_SIZE);
+        doLoadImage(userInfo != null ? userInfo.getAvatar() : null, DEFAULT_AVATAR_RES_ID, DEFAULT_AVATAR_THUMB_SIZE);
     }
 
     /**

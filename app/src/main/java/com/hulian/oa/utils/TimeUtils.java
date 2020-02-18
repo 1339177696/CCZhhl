@@ -51,7 +51,7 @@ public class TimeUtils {
         String hour = thanTen(time.hour);
         String minute = thanTen(time.minute);
 
-        timeString = year + "-" + month + "-" + monthDay + " " + hour + ":" + minute;
+        timeString = year + "-" + month + "-" + monthDay + "" + hour + ":" + minute;
         // System.out.println("-------timeString----------" + timeString);
         return timeString;
     }
