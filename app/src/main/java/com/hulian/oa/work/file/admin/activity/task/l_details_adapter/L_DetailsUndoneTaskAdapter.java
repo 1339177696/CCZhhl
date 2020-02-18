@@ -133,7 +133,7 @@ public class L_DetailsUndoneTaskAdapter extends RecyclerView.Adapter <RecyclerVi
 //                viewHolderTop.tv_launch_time_x.setText(dataList.get(position).getStartTime());
                 viewHolderTop.tv_operator_person_x.setText(dataList.get(position).getExecutor().substring(0,dataList.get(position).getExecutor().length()-1));
                 viewHolderTop.tv_completed_count_x.setText(dataList.get(position).getSum()+"完成");
-                viewHolderTop.tv_task_details_x.setText("    "+dataList.get(position).getDetails());
+               // viewHolderTop.tv_task_details_x.setText("    "+dataList.get(position).getDetails());
                 Log.e("大哥哥哥哥",dataList.get(position).getId());
 
                 String aa = dataList.get(position).getFiles();
@@ -237,7 +237,7 @@ public class L_DetailsUndoneTaskAdapter extends RecyclerView.Adapter <RecyclerVi
 //            tv_launch_time_x = ((TextView) itemView.findViewById(R.id.tv_launch_time_x));
             tv_operator_person_x = ((TextView) itemView.findViewById(R.id.tv_operator_person_x));
             tv_completed_count_x = ((TextView) itemView.findViewById(R.id.tv_completed_count_x));
-            tv_task_details_x = ((TextView) itemView.findViewById(R.id.tv_task_details_x));
+            //tv_task_details_x = ((TextView) itemView.findViewById(R.id.tv_task_details_x));
             recyclerView = ((RecyclerView) itemView.findViewById(R.id.recyclerView));
 
 

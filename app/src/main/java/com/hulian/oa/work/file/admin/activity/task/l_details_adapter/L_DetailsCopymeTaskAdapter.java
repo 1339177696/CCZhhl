@@ -119,7 +119,7 @@ public class L_DetailsCopymeTaskAdapter extends RecyclerView.Adapter <RecyclerVi
                 viewHolderTop.tv_operator_person.setText(dataList.get(position).getExecutor().substring(0,dataList.get(position).getExecutor().length()-1));
                 viewHolderTop.tv_chaosong.setText(SPUtils.get(mContext, "nickname", "").toString());
                 viewHolderTop.tv_completed_count.setText(dataList.get(position).getSum()+"完成");
-                viewHolderTop.tv_task_details.setText("    "+dataList.get(position).getDetails());
+               // viewHolderTop.tv_task_details.setText("    "+dataList.get(position).getDetails());
                 //图片信息适配
                 String aa = dataList.get(position).getFiles();
                 if (aa!=null&&aa!=""){
@@ -212,7 +212,7 @@ public class L_DetailsCopymeTaskAdapter extends RecyclerView.Adapter <RecyclerVi
             tv_operator_person = ((TextView) itemView.findViewById(R.id.tv_operator_person_x));
             tv_chaosong = ((TextView) itemView.findViewById(R.id.tv_chaosong));
             tv_completed_count = ((TextView) itemView.findViewById(R.id.tv_completed_count_x));
-            tv_task_details = ((TextView) itemView.findViewById(R.id.tv_task_details_x));
+           // tv_task_details = ((TextView) itemView.findViewById(R.id.tv_task_details_x));
             recyclerView = ((RecyclerView) itemView.findViewById(R.id.recyclerView));
 
 //            tv_undone_top_completed = ((TextView) itemView.findViewById(R.id.tv_undone_top_completed));
