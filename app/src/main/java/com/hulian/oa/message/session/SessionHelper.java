@@ -11,6 +11,7 @@ import com.hulian.oa.DemoCache;
 import com.hulian.oa.R;
 import com.hulian.oa.message.session.extension.CustomAttachParser;
 import com.hulian.oa.message.session.extension.StickerAttachment;
+import com.hulian.oa.message.session.viewholder.MsgViewHolderAVChat;
 import com.hulian.oa.team.activity.AVChatAction;
 import com.hulian.oa.team.activity.AckMessageAction;
 import com.hulian.oa.team.activity.TeamAVChatAction;
@@ -452,7 +453,7 @@ public class SessionHelper {
 
     private static void registerViewHolders() {
 //        NimUIKit.registerMsgItemViewHolder(FileAttachment.class, MsgViewHolderFile.class);
-//        NimUIKit.registerMsgItemViewHolder(AVChatAttachment.class, MsgViewHolderAVChat.class);
+        NimUIKit.registerMsgItemViewHolder(AVChatAttachment.class, MsgViewHolderAVChat.class);
 //        NimUIKit.registerMsgItemViewHolder(GuessAttachment.class, MsgViewHolderGuess.class);
 //        NimUIKit.registerMsgItemViewHolder(CustomAttachment.class, MsgViewHolderDefCustom.class);
 //        NimUIKit.registerMsgItemViewHolder(StickerAttachment.class, MsgViewHolderSticker.class);
