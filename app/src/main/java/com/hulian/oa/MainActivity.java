@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -29,12 +30,20 @@ import com.hulian.oa.team.TeamCreateHelper;
 import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.work.WorkFragment;
 import com.hulian.oa.work.file.admin.activity.mail.pad.MailFragment;
+import com.netease.nim.avchatkit.AVChatKit;
+import com.netease.nim.avchatkit.AVChatProfile;
+import com.netease.nim.avchatkit.TeamAVChatProfile;
+import com.netease.nim.avchatkit.activity.AVChatActivity;
+import com.netease.nim.avchatkit.receiver.PhoneCallStateObserver;
 import com.netease.nim.uikit.business.contact.selector.activity.ContactSelectActivity;
 import com.netease.nim.uikit.common.ToastHelper;
 import com.netease.nim.uikit.support.permission.MPermission;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.NimIntent;
 import com.netease.nimlib.sdk.Observer;
+import com.netease.nimlib.sdk.avchat.AVChatManager;
+import com.netease.nimlib.sdk.avchat.constant.AVChatControlCommand;
+import com.netease.nimlib.sdk.avchat.model.AVChatData;
 import com.netease.nimlib.sdk.msg.SystemMessageObserver;
 import com.netease.nimlib.sdk.msg.SystemMessageService;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
@@ -357,5 +366,30 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             final ArrayList<String> selected = data.getStringArrayListExtra(ContactSelectActivity.RESULT_DATA);
             TeamCreateHelper.createAdvancedTeam(this, selected);
         }
+    }
+
+
+    private void enableAVChat() {
+        registerAVChatIncomingCallObserver(true);
+    }
+
+    private void registerAVChatIncomingCallObserver(boolean register) {
+        AVChatManager.getInstance().observeIncomingCall(new Observer<AVChatData>() {
+            @Override
+            public void onEvent(AVChatData data) {
+                String extra = data.getExtra();
+                Log.e("Extra", "Extra Message->" + extra);
+                if (PhoneCallStateObserver.getInstance().getPhoneCallState() != PhoneCallStateObserver.PhoneCallStateEnum.IDLE
+                        || AVChatProfile.getInstance().isAVChatting()
+                        || AVChatManager.getInstance().getCurrentChatId() != 0) {
+//                    LogUtil.i(TAG, "reject incoming call data =" + data.toString() + " as local phone is not idle");
+                    AVChatManager.getInstance().sendControlCommand(data.getChatId(), AVChatControlCommand.BUSY, null);
+                    return;
+                }
+                // 有网络来电打开AVChatActivity
+                TeamAVChatProfile.sharedInstance().setTeamAVChatting(true);
+                AVChatKit.outgoingTeamCall(MainActivity.this, true, "", "", null, "视频会议");
+            }
+        }, register);
     }
 }

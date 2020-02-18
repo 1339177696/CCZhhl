@@ -10,8 +10,11 @@ import android.view.View;
 import com.hulian.oa.DemoCache;
 import com.hulian.oa.R;
 import com.hulian.oa.message.session.extension.CustomAttachParser;
+import com.hulian.oa.message.session.extension.CustomAttachment;
 import com.hulian.oa.message.session.extension.StickerAttachment;
 import com.hulian.oa.message.session.viewholder.MsgViewHolderAVChat;
+import com.hulian.oa.message.session.viewholder.MsgViewHolderDefCustom;
+import com.hulian.oa.message.session.viewholder.MsgViewHolderTip;
 import com.hulian.oa.team.activity.AVChatAction;
 import com.hulian.oa.team.activity.AckMessageAction;
 import com.hulian.oa.team.activity.TeamAVChatAction;
@@ -455,11 +458,11 @@ public class SessionHelper {
 //        NimUIKit.registerMsgItemViewHolder(FileAttachment.class, MsgViewHolderFile.class);
         NimUIKit.registerMsgItemViewHolder(AVChatAttachment.class, MsgViewHolderAVChat.class);
 //        NimUIKit.registerMsgItemViewHolder(GuessAttachment.class, MsgViewHolderGuess.class);
-//        NimUIKit.registerMsgItemViewHolder(CustomAttachment.class, MsgViewHolderDefCustom.class);
+        NimUIKit.registerMsgItemViewHolder(CustomAttachment.class, MsgViewHolderDefCustom.class);
 //        NimUIKit.registerMsgItemViewHolder(StickerAttachment.class, MsgViewHolderSticker.class);
 //        NimUIKit.registerMsgItemViewHolder(SnapChatAttachment.class, MsgViewHolderSnapChat.class);
 //        NimUIKit.registerMsgItemViewHolder(RTSAttachment.class, MsgViewHolderRTS.class);
-//        NimUIKit.registerTipMsgViewHolder(MsgViewHolderTip.class);
+        NimUIKit.registerTipMsgViewHolder(MsgViewHolderTip.class);
 //        registerRedPacketViewHolder();
     }
 
