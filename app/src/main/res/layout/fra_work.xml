@@ -35,7 +35,7 @@
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="工作中心"
+            android:text="中心"
             android:textColor="#ff313131"
             android:textSize="@dimen/sp_17" />
     </RelativeLayout>

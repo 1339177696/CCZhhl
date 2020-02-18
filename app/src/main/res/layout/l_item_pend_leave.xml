@@ -132,7 +132,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/dp_4"
                     android:layout_toRightOf="@+id/lv_img_my"
-                    android:text="请假时间  2019/8/8 - 2019/8/9"
+                    android:text="2019/8/8 - 2019/8/9"
                     android:textColor="#ff676767"
                     android:textSize="11sp" />
 

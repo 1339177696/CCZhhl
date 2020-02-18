@@ -29,4 +29,5 @@ public class PeopleaddressActivity extends BaseActivity {
     public void onViewClicked() {
         startActivity(new Intent(PeopleaddressActivity.this, PeopleaddressInforActivity.class));
     }
+
 }

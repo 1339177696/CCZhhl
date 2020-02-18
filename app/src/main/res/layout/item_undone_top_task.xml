@@ -71,7 +71,7 @@
                 android:layout_marginLeft="24dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="冯金龙"
+                android:text=""
                 android:textColor="#ff313131"
                 android:textSize="@dimen/sp_14"
                 />
@@ -87,7 +87,7 @@
                 android:id="@+id/qgl_txt1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="执行人"
+                android:text=""
                 android:textColor="#ff676767"
                 android:textSize="@dimen/sp_14" />
 
@@ -133,7 +133,7 @@
                 android:layout_marginLeft="24dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="冯金龙"
+                android:text=""
                 android:textColor="#ff313131"
                 android:textSize="@dimen/sp_14"
                 />
@@ -151,18 +151,6 @@
                 android:text="任务详情"
                 android:textColor="#ff676767"
                 android:textSize="@dimen/sp_14" />
-
-            <TextView
-                android:layout_marginRight="20dp"
-                android:id="@+id/tv_task_details_x"
-                android:layout_marginLeft="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="冯金龙"
-                android:textColor="#ff313131"
-                android:textSize="@dimen/sp_14"
-                />
-
 
 
         </LinearLayout>
