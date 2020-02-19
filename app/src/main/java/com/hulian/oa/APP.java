@@ -10,9 +10,15 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.hulian.oa.message.session.ContactHelper;
 import com.hulian.oa.message.session.SessionHelper;
 import com.hulian.oa.utils.preference.Preferences;
+import com.netease.nim.avchatkit.AVChatKit;
+import com.netease.nim.avchatkit.config.AVChatOptions;
+import com.netease.nim.avchatkit.model.ITeamDataProvider;
+import com.netease.nim.avchatkit.model.IUserInfoProvider;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.api.UIKitOptions;
 import com.netease.nim.uikit.business.contact.core.query.PinYin;
+import com.netease.nim.uikit.business.team.helper.TeamHelper;
+import com.netease.nim.uikit.business.uinfo.UserInfoHelper;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.SDKOptions;
 import com.netease.nimlib.sdk.StatusBarNotificationConfig;
@@ -35,6 +41,7 @@ public class APP extends Application {
         DemoCache.setContext(this);
         // SDK初始化（启动后台服务，若已经存在用户登录信息， SDK 将完成自动登录）
         NIMClient.init(this, getLoginInfo(), NimSDKOptionConfig.getSDKOptions(this));
+
         // ... your codes
         if (NIMUtil.isMainProcess(this)) {
             // 注意：以下操作必须在主进程中进行
@@ -44,6 +51,9 @@ public class APP extends Application {
             PinYin.validate();
             // 初始化UIKit模块
             initUIKit();
+
+            // 初始化音视频模块
+            initAVChatKit();
         }
 
     }
@@ -162,7 +172,45 @@ public class APP extends Application {
         this.loginType = loginType;
     }
 
+    // TODO: 2020/2/15 未添加退出回调处理
+    private void initAVChatKit() {
+        AVChatOptions avChatOptions = new AVChatOptions() {
+            @Override
+            public void logout(Context context) {
+//                MainActivity.logout(context, true);
+            }
+        };
+        avChatOptions.entranceActivity = LuncherActivity.class;
+        avChatOptions.notificationIconRes = R.mipmap.ic_launcher;
+        AVChatKit.init(avChatOptions);
 
+        // 初始化日志系统
+//        LogHelper.init();
+        // 设置用户相关资料提供者
+        AVChatKit.setUserInfoProvider(new IUserInfoProvider() {
+            @Override
+            public UserInfo getUserInfo(String account) {
+                return NimUIKit.getUserInfoProvider().getUserInfo(account);
+            }
+
+            @Override
+            public String getUserDisplayName(String account) {
+                return UserInfoHelper.getUserDisplayName(account);
+            }
+        });
+        // 设置群组数据提供者
+        AVChatKit.setTeamDataProvider(new ITeamDataProvider() {
+            @Override
+            public String getDisplayNameWithoutMe(String teamId, String account) {
+                return TeamHelper.getDisplayNameWithoutMe(teamId, account);
+            }
+
+            @Override
+            public String getTeamMemberDisplayName(String teamId, String account) {
+                return TeamHelper.getTeamMemberDisplayName(teamId, account);
+            }
+        });
+    }
 
 
 }
