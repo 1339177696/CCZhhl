@@ -377,7 +377,9 @@
             android:configChanges="screenSize|keyboardHidden|orientation"/>
         <activity android:name=".L_launched.L_Activity.L_leaveActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"/>
-
+        <activity android:name=".me.ScheduleActivity_Detelis"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            ></activity>
     </application>
 
 </manifest>
