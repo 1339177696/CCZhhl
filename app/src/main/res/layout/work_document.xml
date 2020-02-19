@@ -91,7 +91,7 @@
                         app:tabRippleColor="@color/transparent"
                         app:tabMode="fixed"
                         app:tabIndicatorColor="#ffffff"
-                        app:tabTextAppearance="@style/TabLayoutTextSize2"
+                        app:tabTextAppearance="@style/TabLayoutTextSize"
                         app:tabSelectedTextColor="@color/white"
                         app:tabTextColor="@color/color_xian" />
                 </LinearLayout>

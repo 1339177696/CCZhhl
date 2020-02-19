@@ -81,7 +81,7 @@ public class SecondDocumentActivity extends BaseActivity {
         }
         //员工
         else {
-            linearLayout.setVisibility(View.GONE);
+            linearLayout.setVisibility(View.INVISIBLE);
 
 //            titleDatas.add("待审批");
             titleDatas.add("我发起的");
