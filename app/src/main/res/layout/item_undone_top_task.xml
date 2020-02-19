@@ -87,7 +87,7 @@
                 android:id="@+id/qgl_txt1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:text="执行人"
                 android:textColor="#ff676767"
                 android:textSize="@dimen/sp_14" />
 
@@ -99,7 +99,7 @@
                 android:layout_toRightOf="@id/qgl_txt1"
                 android:textColor="#ff313131"
                 android:textSize="@dimen/sp_14"
-                android:text="执行人"
+                android:text=""
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
