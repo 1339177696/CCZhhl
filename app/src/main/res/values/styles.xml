@@ -172,6 +172,10 @@
     <style name="TabLayoutTextSize3">
         <item name="android:textSize">@dimen/sp_15</item>
     </style>
+
+    <style name="TabLayoutTextSize4">
+        <item name="android:textSize">@dimen/sp_12</item>
+    </style>
     <!--设置Tablayout字体加粗-->
     <style name="TabLayoutTextStyle">
         <item name="android:textStyle">bold</item>

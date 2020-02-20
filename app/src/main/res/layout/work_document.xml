@@ -43,13 +43,13 @@
 
                 </RelativeLayout>
                 <LinearLayout
-                    android:layout_marginTop="@dimen/dp_10"
                     android:paddingLeft="@dimen/dp_55"
                     android:paddingRight="@dimen/dp_55"
                     android:layout_width="match_parent"
                     android:orientation="vertical"
                     android:layout_height="match_parent">
                     <LinearLayout
+                        android:visibility="gone"
                         android:id="@+id/my_linerlayout"
                         android:layout_width="match_parent"
                         android:orientation="horizontal"
@@ -79,7 +79,7 @@
                             android:layout_height="wrap_content" />
                     </LinearLayout>
                     <android.support.design.widget.TabLayout
-                        android:layout_marginTop="-10dp"
+
                         android:layout_gravity="center_horizontal"
                         android:id="@+id/my_tablayout"
                         android:layout_width="match_parent"
@@ -91,7 +91,7 @@
                         app:tabRippleColor="@color/transparent"
                         app:tabMode="fixed"
                         app:tabIndicatorColor="#ffffff"
-                        app:tabTextAppearance="@style/TabLayoutTextSize"
+                        app:tabTextAppearance="@style/TabLayoutTextSize4"
                         app:tabSelectedTextColor="@color/white"
                         app:tabTextColor="@color/color_xian" />
                 </LinearLayout>
@@ -100,7 +100,7 @@
 
 
     <FrameLayout
-        android:layout_marginTop="-30dp"
+        android:layout_marginTop="-45dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
