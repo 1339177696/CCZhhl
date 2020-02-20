@@ -594,5 +594,14 @@ public class TimeUtils {
         }
         return list;
     }
-
+    public static  String getDateToString1(String time) {
+        sf = new SimpleDateFormat("HH:mm");
+        Date d = new Date(convertTimeToLong(time));
+        return sf.format(d);
+    }
+    public static  String getDateToString6(String time) {
+        sf = new SimpleDateFormat("yyyy-MM-dd");
+        Date d = new Date(convertTimeToLong(time));
+        return sf.format(d);
+    }
 }

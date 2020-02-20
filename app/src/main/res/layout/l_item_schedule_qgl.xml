@@ -3,7 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp_27"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/liner_bw"
+    >
 
     <RelativeLayout
         android:layout_marginLeft="@dimen/dp_16"

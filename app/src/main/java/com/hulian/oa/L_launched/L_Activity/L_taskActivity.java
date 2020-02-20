@@ -120,6 +120,7 @@ public class L_taskActivity extends BaseActivity implements PullLoadMoreRecycler
         HttpRequest.post_CoordinationRelease_list(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
+
                 //需要转化为实体对象
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {

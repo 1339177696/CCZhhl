@@ -100,7 +100,6 @@ public class AddScheduleActivity extends BaseActivity {
                 onTimePicker(view);
                 break;
             case R.id.btn_select_complete:
-                Log.d("这是发布发送的", "点击了");
                 if (time2.isEmpty()) {
                     //  tv_select_time.setError("请选择开始时间");
                     ToastHelper.showToast(mContext, "请选择开始时间");

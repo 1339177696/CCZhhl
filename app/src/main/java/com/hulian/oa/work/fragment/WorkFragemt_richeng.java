@@ -108,6 +108,14 @@ public class WorkFragemt_richeng extends Fragment {
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        getDatatime(time);
+        // initCalendarView();
+        getMark_Data();
+    }
+
     /**
      * 初始化当前的年月
      */
@@ -317,6 +325,10 @@ public class WorkFragemt_richeng extends Fragment {
                                 ScheduleBean3 memberList4 = new ScheduleBean3();
                                 memberList4.setQufen("Y");
                                 memberList4.setScheduleContent(memberList2.get(i).getScheduleContent());
+                                memberList4.setScheduleTimeBegin(memberList2.get(i).getScheduleTimeBegin());
+                                memberList4.setScheduleTimeEnd(memberList2.get(i).getScheduleTimeEnd());
+                                memberList4.setWarnTime(memberList2.get(i).getWarnTime());
+                                memberList4.setId(memberList2.get(i).getId());
                                 memberList3.add(memberList4);
                             }else {
                                 String startTime = TimeUtils.getDateToString5(memberList2.get(i).getScheduleTimeBegin());
@@ -326,6 +338,10 @@ public class WorkFragemt_richeng extends Fragment {
                                     memberList.get(j).setHasContent(true);
                                     if (j == Integer.parseInt(startTime)-8)
                                         memberList.get(j).setScheduleContent(memberList2.get(i).getScheduleContent());
+                                        memberList.get(j).setScheduleTimeBegin(memberList2.get(i).getScheduleTimeBegin());
+                                        memberList.get(j).setScheduleTimeEnd(memberList2.get(i).getScheduleTimeEnd());
+                                        memberList.get(j).setWarnTime(memberList2.get(i).getWarnTime());
+                                        memberList.get(j).setId(memberList2.get(i).getId());
                                 }
                             }
 
@@ -416,4 +432,5 @@ public class WorkFragemt_richeng extends Fragment {
         super.onDestroyView();
         unbinder.unbind();
     }
+
 }

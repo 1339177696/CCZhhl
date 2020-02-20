@@ -38,12 +38,14 @@ public class MeetLaunchAdapter extends RecyclerView.Adapter <MeetLaunchAdapter.V
         public TextView tv_title;
         public TextView tv_time,tv_duration;
         public TextView tv_address;
+        public TextView tv_state;
         public ViewHolder(View itemView) {
             super(itemView);
             tv_title = (TextView) itemView.findViewById(R.id.tv_title);
             tv_duration = (TextView) itemView.findViewById(R.id.tv_duration);
             tv_address = (TextView) itemView.findViewById(R.id.tv_address);
             tv_time=(TextView) itemView.findViewById(R.id.tv_time);
+            tv_state=(TextView) itemView.findViewById(R.id.tv_state);
         }
     }
 
@@ -60,6 +62,14 @@ public class MeetLaunchAdapter extends RecyclerView.Adapter <MeetLaunchAdapter.V
         holder.tv_duration.setText(dataList.get(position).getMeetingTimeBegin().substring(0,dataList.get(position).getMeetingTimeBegin().length()-3));
         holder.tv_address.setText(dataList.get(position).getMeetingRoomLocation());
         holder.tv_time.setText(dataList.get(position).getMeetingTime());
+        if (dataList.get(position).getMeetingState().equals("0")){
+            holder.tv_state.setText("未开始");
+        }else if(dataList.get(position).getMeetingState().equals("1")){
+            holder.tv_state.setText("进行中");
+        }else if(dataList.get(position).getMeetingState().equals("2")){
+            holder.tv_state.setText("已结束");
+        }
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

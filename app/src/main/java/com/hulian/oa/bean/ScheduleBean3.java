@@ -10,6 +10,15 @@ public class ScheduleBean3 {
     private boolean isNow;
     private String  timeNow;
     private String isToday;
+    private String warnTime;
+
+    public String getWarnTime() {
+        return warnTime;
+    }
+
+    public void setWarnTime(String warnTime) {
+        this.warnTime = warnTime;
+    }
 
     public String getQufen() {
         return qufen;

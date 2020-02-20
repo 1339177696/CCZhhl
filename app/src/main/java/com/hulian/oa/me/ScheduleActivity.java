@@ -391,4 +391,11 @@ public class ScheduleActivity extends BaseActivity {
             getMark_Data();
         }
     }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        getDatatime(time);
+        // initCalendarView();
+        getMark_Data();
+    }
 }

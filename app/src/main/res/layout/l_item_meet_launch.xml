@@ -6,7 +6,7 @@
     android:layout_marginRight="@dimen/dp_10"
     android:layout_marginTop="@dimen/dp_10"
     android:background="@drawable/liner_border_gb_qgl"
-    android:layout_height="@dimen/dp_70">
+    android:layout_height="@dimen/dp_80">
     <ImageView
         android:id="@+id/iv_remind"
         android:layout_width="@dimen/dp_7"
@@ -149,6 +149,31 @@
                 android:layout_marginLeft="@dimen/dp_8"
                 android:layout_toRightOf="@id/tv_leave_reason_title"
                 android:text="事假"
+                android:textColor="#2B8CFA"
+                android:textSize="@dimen/sp_9" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
+            >
+
+            <TextView
+                android:id="@+id/tv_state_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="状态"
+                android:textColor="#ff676767"
+                android:textSize="@dimen/sp_9" />
+
+            <TextView
+                android:id="@+id/tv_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:layout_toRightOf="@id/tv_state_title"
                 android:textColor="#2B8CFA"
                 android:textSize="@dimen/sp_9" />
         </RelativeLayout>

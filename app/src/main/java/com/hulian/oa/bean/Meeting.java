@@ -13,6 +13,7 @@ public class Meeting {
     private String meetingTheme;// 	会议主题
     private String meetingTime;//会议时间
     private String meetingRoomLocation;//会议室位置
+    private String meetingState;//会议状态
     private String meetingTimeBegin;
     private String meetingTimeEnd;
     private String signType;
@@ -134,5 +135,13 @@ public class Meeting {
 
     public void setMeetingRoomLocation(String meetingRoomLocation) {
         this.meetingRoomLocation = meetingRoomLocation;
+    }
+
+    public String getMeetingState() {
+        return meetingState;
+    }
+
+    public void setMeetingState(String meetingState) {
+        this.meetingState = meetingState;
     }
 }
