@@ -310,7 +310,7 @@
                         android:layout_height="@dimen/dp_53"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:src="@mipmap/gonggao_icon_qgl" />
+                        android:src="@mipmap/kqdk" />
 
                     <TextView
                         android:layout_width="wrap_content"

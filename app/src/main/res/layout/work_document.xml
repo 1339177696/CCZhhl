@@ -211,12 +211,12 @@
         <!--android:layout_height="match_parent" />-->
 
         </LinearLayout>
-<!--        <TextView-->
-<!--            android:id="@+id/tv_mengban"-->
-<!--            android:visibility="gone"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:background="#99ffffff"-->
-<!--            android:layout_height="match_parent" />-->
+        <TextView
+            android:id="@+id/tv_mengban"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:background="#99ffffff"
+            android:layout_height="match_parent" />
 <!--        <fragment-->
 <!--            android:layout_marginRight="@dimen/dp_20"-->
 <!--            android:layout_gravity="right|bottom"-->
