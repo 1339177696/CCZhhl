@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -245,9 +246,12 @@ public class ScheduleActivity_Detelis extends BaseActivity {
             params.put("isToday", "N");
         }
         params.put("warnTime", tv_remind.getText().toString());
+        Log.e("scheduleTimeBegin",time + " " + tv_select_time.getText().toString());
+        Log.e("scheduleTimeEnd",time + " " +  tv_select_time2.getText().toString());
         HttpRequest.postSche_Xiugai(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
+                Log.e("修改日程",responseObj.toString());
                 //需要转化为实体对象
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());

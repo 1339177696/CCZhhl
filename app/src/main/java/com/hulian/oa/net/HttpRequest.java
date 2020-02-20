@@ -129,7 +129,8 @@ public class HttpRequest {
      */
     public static void postSche_Xiugai(RequestParams params,ResponseCallback callback)
     {
-        RequestMode.postRequest(Urls.commUrls+"system/schedule/androidEdit",params,callback,null);
+//        RequestMode.postRequest(Urls.commUrls+"system/schedule/androidEdit",params,callback,null);
+        RequestMode.postRequest(Urls.commUrls+"system/schedule/edit",params,callback,null);
     }
     /**
      * 删除日程
