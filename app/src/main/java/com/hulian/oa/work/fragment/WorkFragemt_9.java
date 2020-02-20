@@ -93,7 +93,7 @@ public class WorkFragemt_9 extends Fragment {
     }
 
     //    , R.id.bt_list, R.id.bt_9
-    @OnClick({R.id.bt_mail, R.id.bt_leave, R.id.bt_document, R.id.bt_coop, R.id.bt_notice, R.id.bt_meeting, R.id.bt_instruct, R.id.bt_expense, R.id.bt_work_space})
+    @OnClick({R.id.bt_mail, R.id.bt_leave, R.id.bt_document, R.id.bt_coop, R.id.bt_notice, R.id.bt_meeting, R.id.bt_instruct, R.id.bt_expense, R.id.bt_work_space,R.id.bt_work_attendance})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_mail:
@@ -131,13 +131,17 @@ public class WorkFragemt_9 extends Fragment {
             case R.id.bt_work_space:
                 //20191129
 //                startActivity(new Intent(getActivity(), WorkSpaceActivity.class));
-                startActivity(new Intent(getActivity(), MessagenotificationActivity.class));
+                //startActivity(new Intent(getActivity(), MessagenotificationActivity.class));
+                ToastHelper.showToast(getActivity(), "功能暂未开放");
 
                 break;
             case R.id.bt_expense:
 //                qgl修改
 
 //                    startActivity(new Intent(getActivity(), SecondExpenseActivity.class));
+                ToastHelper.showToast(getActivity(), "功能暂未开放");
+                break;
+            case R.id.bt_work_attendance:
                 ToastHelper.showToast(getActivity(), "功能暂未开放");
                 break;
 //            case R.id.bt_list:

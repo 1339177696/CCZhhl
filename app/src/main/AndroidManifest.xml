@@ -44,7 +44,7 @@
         android:name=".APP"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_me"
-        android:label="OA"
+        android:label="工作桌面"
         android:largeHeap="true"
         android:supportsRtl="true"
         android:networkSecurityConfig="@xml/network_config"
