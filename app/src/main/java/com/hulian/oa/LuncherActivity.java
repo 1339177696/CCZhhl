@@ -26,6 +26,7 @@ import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.socket.JWebSocketClientService;
 import com.hulian.oa.utils.SPUtils;
+import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.utils.ToastHelper;
 import com.hulian.oa.utils.preference.Preferences;
 import com.hulian.oa.utils.preference.UserPreferences;
@@ -48,6 +49,7 @@ public class LuncherActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StatusBarUtil.transparencyBar(this);
         setContentView(R.layout.activity_luncher);
 //        new Thread( new Runnable( ) {
 //            @Override
