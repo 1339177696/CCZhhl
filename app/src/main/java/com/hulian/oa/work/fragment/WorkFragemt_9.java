@@ -22,6 +22,7 @@ import com.hulian.oa.work.file.admin.activity.SecondMeetingActivity;
 import com.hulian.oa.work.file.admin.activity.SecondNoticeActivity;
 import com.hulian.oa.work.file.admin.activity.SecondTaskCoopActivity;
 import com.hulian.oa.work.file.admin.activity.WorkSpaceActivity;
+import com.hulian.oa.work.file.admin.activity.Work_gd_Activity;
 import com.luck.picture.lib.entity.LocalMedia;
 
 import java.util.ArrayList;
@@ -53,8 +54,8 @@ public class WorkFragemt_9 extends Fragment {
     ImageView btMeeting;
     @BindView(R.id.bt_instruct)
     ImageView btInstruct;
-    @BindView(R.id.bt_expense)
-    ImageView btExpense;
+//    @BindView(R.id.bt_expense)
+//    ImageView btExpense;
     int[] images = {R.mipmap.demo, R.mipmap.demo1, R.mipmap.demo2, R.mipmap.demo3, R.mipmap.demo4};
     //已经选择图片
     private List<LocalMedia> selectList = new ArrayList<>();
@@ -77,9 +78,11 @@ public class WorkFragemt_9 extends Fragment {
 
         } else {
             if (SPUtils.get(getActivity(), "isLead", "").equals("0")) {
-                view = inflater.inflate(R.layout.fragment_work_fragemt_9_lead, container, false);
+//                view = inflater.inflate(R.layout.fragment_work_fragemt_9_lead, container, false);
+                view = inflater.inflate(R.layout.fragment_work_fragment_xin, container, false);
             } else {
-                view = inflater.inflate(R.layout.fragment_work_fragemt_9, container, false);
+//                view = inflater.inflate(R.layout.fragment_work_fragemt_9, container, false);
+                view = inflater.inflate(R.layout.fragment_work_fragment_xin, container, false);
             }
         }
         unbinder = ButterKnife.bind(this, view);
@@ -93,7 +96,8 @@ public class WorkFragemt_9 extends Fragment {
     }
 
     //    , R.id.bt_list, R.id.bt_9
-    @OnClick({R.id.bt_mail, R.id.bt_leave, R.id.bt_document, R.id.bt_coop, R.id.bt_notice, R.id.bt_meeting, R.id.bt_instruct, R.id.bt_expense, R.id.bt_work_space,R.id.bt_work_attendance})
+//    R.id.bt_expense, R.id.bt_work_space,R.id.bt_work_attendance
+    @OnClick({R.id.bt_mail, R.id.bt_leave, R.id.bt_document, R.id.bt_coop, R.id.bt_notice, R.id.bt_meeting, R.id.bt_instruct,R.id.bt_gengduo })
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_mail:
@@ -128,27 +132,32 @@ public class WorkFragemt_9 extends Fragment {
             case R.id.bt_instruct:
                 startActivity(new Intent(getActivity(), SecondInstructActivity.class));
                 break;
-            case R.id.bt_work_space:
-                //20191129
-//                startActivity(new Intent(getActivity(), WorkSpaceActivity.class));
-                //startActivity(new Intent(getActivity(), MessagenotificationActivity.class));
-                ToastHelper.showToast(getActivity(), "功能暂未开放");
-
-                break;
-            case R.id.bt_expense:
-//                qgl修改
-
-//                    startActivity(new Intent(getActivity(), SecondExpenseActivity.class));
-                ToastHelper.showToast(getActivity(), "功能暂未开放");
-                break;
-            case R.id.bt_work_attendance:
-                ToastHelper.showToast(getActivity(), "功能暂未开放");
-                break;
+//            case R.id.bt_work_space:
+//                //20191129
+////                startActivity(new Intent(getActivity(), WorkSpaceActivity.class));
+//                //startActivity(new Intent(getActivity(), MessagenotificationActivity.class));
+//                ToastHelper.showToast(getActivity(), "功能暂未开放");
+//
+//                break;
+//            case R.id.bt_expense:
+////                qgl修改
+//
+////                    startActivity(new Intent(getActivity(), SecondExpenseActivity.class));
+//                ToastHelper.showToast(getActivity(), "功能暂未开放");
+//                break;
+//            case R.id.bt_work_attendance:
+//                ToastHelper.showToast(getActivity(), "功能暂未开放");
+//                break;
 //            case R.id.bt_list:
 //                EventBus.getDefault().post(new WorkFragemt_9());
 //                break;
 //            case R.id.bt_9:
 //                break;
+
+            case R.id.bt_gengduo:
+                // 跳转更多
+                startActivity(new Intent(getActivity(), Work_gd_Activity.class));
+                break;
         }
     }
 

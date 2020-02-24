@@ -372,6 +372,9 @@
         <activity android:name=".me.ScheduleActivity_Detelis"
                 android:configChanges="screenSize|keyboardHidden|orientation"/>
 
+        <activity android:name=".work.file.admin.activity.Work_gd_Activity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/> <!-- 新加的选择人员 -->
+
         <!-- 申明本地电话状态（通话状态）的广播接收器，第三方APP集成时音视频模块时，如果需要在App中处理网络通话与本地电话的交互请加上此接收器 -->
         <!-- 在Demo的示例代码中是在Application进行了网络通话与本地电话的互斥处理 -->
         <receiver android:name="com.netease.nim.avchatkit.receiver.IncomingCallReceiver">
