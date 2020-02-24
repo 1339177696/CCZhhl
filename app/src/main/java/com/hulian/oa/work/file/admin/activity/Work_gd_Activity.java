@@ -23,6 +23,7 @@ public class Work_gd_Activity extends BaseActivity {
     @BindView(R.id.bt_notice)
     ImageView btNotice;
     @BindView(R.id.bt_meeting)
+
     ImageView btMeeting;
     @BindView(R.id.bt_instruct)
     ImageView btInstruct;
