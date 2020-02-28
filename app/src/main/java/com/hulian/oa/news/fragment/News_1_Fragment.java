@@ -196,6 +196,7 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
         Log.e("wxl", "onLoadMore");
         mCount = mCount + 1;
         getData();
+
     }
 
     private void setRefresh() {

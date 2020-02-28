@@ -60,7 +60,7 @@
                 app:tabMaxWidth="0dp"
                 app:tabMode="fixed"
                 app:tabIndicatorColor="@color/colorwhite"
-                app:tabTextAppearance="@style/TabLayoutTextSize"
+                app:tabTextAppearance="@style/TabLayoutTextSize4"
                 app:tabSelectedTextColor="@color/colorwhite"
                 app:tabTextColor="#A0C2F3" />
         </FrameLayout>

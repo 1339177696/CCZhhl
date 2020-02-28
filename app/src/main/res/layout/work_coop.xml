@@ -68,9 +68,22 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+<!--            <android.support.design.widget.TabLayout-->
+<!--                android:layout_marginLeft="@dimen/dp_5"-->
+<!--                android:layout_marginRight="@dimen/dp_5"-->
+<!--                android:layout_gravity="center_horizontal"-->
+<!--                android:id="@+id/my_tablayout"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/dp_40"-->
+<!--                app:tabIndicatorFullWidth="false"-->
+<!--                app:tabMaxWidth="0dp"-->
+<!--                app:tabMode="fixed"-->
+<!--                app:tabIndicatorColor="@color/colorwhite"-->
+<!--                app:tabTextAppearance="@style/TabLayoutTextSize4"-->
+<!--                app:tabSelectedTextColor="@color/colorwhite"-->
+<!--                app:tabTextColor="#A0C2F3" />-->
+
             <android.support.design.widget.TabLayout
-                android:layout_marginLeft="@dimen/dp_5"
-                android:layout_marginRight="@dimen/dp_5"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/my_tablayout"
                 android:layout_width="match_parent"
@@ -79,7 +92,7 @@
                 app:tabMaxWidth="0dp"
                 app:tabMode="fixed"
                 app:tabIndicatorColor="@color/colorwhite"
-                app:tabTextAppearance="@style/TabLayoutTextSize3"
+                app:tabTextAppearance="@style/TabLayoutTextSize4"
                 app:tabSelectedTextColor="@color/colorwhite"
                 app:tabTextColor="#A0C2F3" />
         </FrameLayout>

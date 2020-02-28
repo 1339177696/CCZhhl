@@ -34,6 +34,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import de.greenrobot.event.EventBus;
 
 public class UndoneTaskFragment extends Fragment implements PullLoadMoreRecyclerView.PullLoadMoreListener {
 
@@ -56,6 +57,8 @@ public class UndoneTaskFragment extends Fragment implements PullLoadMoreRecycler
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.l_fra_collection_notice, null);
         unbinder = ButterKnife.bind(this, view);
+        EventBus.getDefault().register(this);
+
         initList();
         return view;
     }
@@ -99,6 +102,8 @@ public class UndoneTaskFragment extends Fragment implements PullLoadMoreRecycler
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        EventBus.getDefault().unregister(this);
+
     }
 
     @Override

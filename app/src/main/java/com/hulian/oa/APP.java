@@ -95,6 +95,8 @@ public class APP extends Application {
         config.notificationSmallIconId = R.drawable.ic_launcher_foreground;
         // 呼吸灯配置
         config.ledARGB = Color.GREEN;
+
+
         config.ledOnMs = 1000;
         config.ledOffMs = 1500;
         // 通知铃声的uri字符串

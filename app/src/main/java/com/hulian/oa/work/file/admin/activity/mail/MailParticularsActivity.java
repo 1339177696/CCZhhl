@@ -129,6 +129,7 @@ public class MailParticularsActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.work_mail_particulars);
+        System.out.println("收件箱=====================");
         StatusBarUtil.statusBarLightMode_white(this);
         ButterKnife.bind(this);
         myDialog = new AlertDialog(mContext).builder();
@@ -242,6 +243,7 @@ public class MailParticularsActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_reply:
+                System.out.println("显示回复");
                 //实例化SelectPicPopupWindow
                 menuWindow = new Dialog_x(MailParticularsActivity.this);
                 //显示窗口

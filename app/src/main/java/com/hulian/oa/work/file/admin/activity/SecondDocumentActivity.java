@@ -73,11 +73,16 @@ public class SecondDocumentActivity extends BaseActivity {
         //领导
         if (SPUtils.get(mContext, "isLead", "").equals("0"))
         {
-            linearLayout.setVisibility(View.VISIBLE);
+//            linearLayout.setVisibility(View.VISIBLE);
+            linearLayout.setVisibility(View.GONE);
 
-            tv_launch.setVisibility(View.GONE);
+//            tv_launch.setVisibility(View.GONE);
+            tv_launch.setVisibility(View.VISIBLE);
+
             titleDatas.add("待审批");
             titleDatas.add("已审批");
+
+
         }
         //员工
         else {
