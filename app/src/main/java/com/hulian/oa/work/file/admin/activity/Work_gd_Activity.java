@@ -6,12 +6,31 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.hulian.oa.BaseActivity;
+import com.hulian.oa.DemoCache;
 import com.hulian.oa.R;
+import com.hulian.oa.bean.People;
+import com.hulian.oa.utils.TimeUtils;
 import com.hulian.oa.utils.ToastHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.hulian.oa.work.file.admin.activity.meeting.SelDepartmentActivity_meet_zb;
+import com.netease.nim.avchatkit.AVChatKit;
+import com.netease.nim.avchatkit.TeamAVChatProfile;
+import com.netease.nim.uikit.business.team.helper.TeamHelper;
+import com.netease.nim.uikit.common.util.log.LogUtil;
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.avchat.AVChatCallback;
+import com.netease.nimlib.sdk.avchat.AVChatManager;
+import com.netease.nimlib.sdk.avchat.model.AVChatChannelInfo;
+import com.netease.nimlib.sdk.msg.MsgService;
+import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
+import com.netease.nimlib.sdk.msg.model.CustomNotification;
+import com.netease.nimlib.sdk.msg.model.CustomNotificationConfig;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Work_gd_Activity extends BaseActivity {
     @BindView(R.id.bt_mail)
@@ -85,7 +104,7 @@ public class Work_gd_Activity extends BaseActivity {
             startActivity(new Intent(Work_gd_Activity.this, SecondLeaveActivity.class));
             break;
             case R.id.bt_shipin:
-                ToastHelper.showToast(Work_gd_Activity.this, "功能暂未开放");
+                startActivityForResult(new Intent(Work_gd_Activity.this, SelDepartmentActivity_meet_zb.class), 0);
                 break;
                 case R.id.bt_yuyin:
                 ToastHelper.showToast(Work_gd_Activity.this, "功能暂未开放");
@@ -114,9 +133,81 @@ public class Work_gd_Activity extends BaseActivity {
 //            case R.id.bt_9:
 //                break;
             case R.id.iv_back:
-                f
+                finish();
                 break;
 
         }
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 1 && requestCode == 0&&data!=null) {
+            List<People> peopleList = (List<People>) data.getSerializableExtra("mList");
+            ArrayList<String> accounts = new ArrayList<>();
+            String roomName = TimeUtils.getNowTime();
+            for (People people : peopleList) {
+                accounts.add(people.getLoginName());
+            }
+
+            creatRoom(roomName, accounts);
+        }
+    }
+
+    private void creatRoom(String roomName, ArrayList<String> accounts) {
+
+        AVChatManager.getInstance().createRoom(roomName, null, new AVChatCallback<AVChatChannelInfo>() {
+            @Override
+            public void onSuccess(AVChatChannelInfo avChatChannelInfo) {
+                LogUtil.ui("create room " + roomName + " success !");
+                onCreateRoomSuccess(roomName, accounts);
+
+
+                TeamAVChatProfile.sharedInstance().setTeamAVChatting(true);
+                AVChatKit.outgoingTeamCall(Work_gd_Activity.this, false, "", roomName, accounts, roomName);
+            }
+
+            @Override
+            public void onFailed(int code) {
+            }
+
+            @Override
+            public void onException(Throwable exception) {
+            }
+        });
+    }
+
+    private void onCreateRoomSuccess(String roomName, List<String> accounts) {
+        String teamID = roomName;
+        // 在群里发送tip消息
+//        IMMessage message = MessageBuilder.createTipMessage(teamID, SessionTypeEnum.Team);
+//        CustomMessageConfig tipConfig = new CustomMessageConfig();
+//        tipConfig.enableHistory = false;
+//        tipConfig.enableRoaming = false;
+//        tipConfig.enablePush = false;
+        String teamNick = TeamHelper.getDisplayNameWithoutMe(teamID, DemoCache.getAccount());
+//        message.setContent(teamNick + getActivity().getString(R.string.t_avchat_start));
+//        message.setConfig(tipConfig);
+//        sendMessage(message);
+        // 对各个成员发送点对点自定义通知
+        String teamName = TeamHelper.getTeamName(teamID);
+        String content = TeamAVChatProfile.sharedInstance().buildContent(roomName, teamID, accounts, teamName);
+        CustomNotificationConfig config = new CustomNotificationConfig();
+        config.enablePush = true;
+        config.enablePushNick = false;
+        config.enableUnreadCount = true;
+
+        for (String account : accounts) {
+            CustomNotification command = new CustomNotification();
+            command.setSessionId(account);
+            command.setSessionType(SessionTypeEnum.P2P);
+            command.setConfig(config);
+            command.setContent(content);
+            command.setApnsText(teamNick + Work_gd_Activity.this.getString(R.string.t_avchat_push_content));
+
+            command.setSendToOnlineUserOnly(false);
+            NIMClient.getService(MsgService.class).sendCustomNotification(command);
+        }
+    }
+
 }
