@@ -108,7 +108,6 @@ public class Work_gd_Activity extends BaseActivity {
                 break;
                 case R.id.bt_yuyin:
                 ToastHelper.showToast(Work_gd_Activity.this, "功能暂未开放");
-
                 break;
 
 
