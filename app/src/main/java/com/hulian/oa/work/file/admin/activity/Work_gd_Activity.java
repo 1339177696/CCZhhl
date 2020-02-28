@@ -55,6 +55,7 @@ public class Work_gd_Activity extends BaseActivity {
     }
 
 
+
     @OnClick({R.id.bt_mail,R.id.bt_qingjia, R.id.bt_coop, R.id.bt_notice, R.id.bt_meeting, R.id.bt_instruct,R.id.bt_k1,R.id.bt_k2,R.id.bt_k3,R.id.bt_baoxiao,R.id.bt_gongwen,R.id.bt_shipin,R.id.bt_yuyin,R.id.iv_back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
