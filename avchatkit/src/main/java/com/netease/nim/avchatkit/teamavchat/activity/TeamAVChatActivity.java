@@ -1,9 +1,13 @@
 package com.netease.nim.avchatkit.teamavchat.activity;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,6 +34,7 @@ import com.netease.nim.avchatkit.common.util.ScreenUtil;
 import com.netease.nim.avchatkit.config.AVChatConfigs;
 import com.netease.nim.avchatkit.config.AVPrivatizationConfig;
 import com.netease.nim.avchatkit.controll.AVChatSoundPlayer;
+import com.netease.nim.avchatkit.service.TeamFloatVideoWindowService;
 import com.netease.nim.avchatkit.teamavchat.TeamAVChatNotification;
 import com.netease.nim.avchatkit.teamavchat.TeamAVChatVoiceMuteDialog;
 import com.netease.nim.avchatkit.teamavchat.adapter.TeamAVChatAdapter;
@@ -77,7 +82,7 @@ import static com.netease.nim.avchatkit.teamavchat.module.TeamAVChatItem.TYPE.TY
  * <li>打开视频模块 {@link AVChatManager#enableVideo()}。</li>
  * <li>设置本地预览画布 {@link AVChatManager#setupLocalVideoRender(IVideoRender, boolean, int)} 。</li>
  * <li>设置视频通话可选参数[可以不设置] {@link AVChatManager#setParameter(AVChatParameters.Key, Object)}, {@link AVChatManager#setParameters(AVChatParameters)}。</li>
- * <li>创建并设置本地视频预览源 {@link AVChatVideoCapturerFactory#createCameraCapturer(boolean )}, {@link AVChatManager#setupVideoCapturer(AVChatVideoCapturer)}</li>
+ * <li>创建并设置本地视频预览源 {@link AVChatVideoCapturerFactory#createCameraCapturer(boolean)}, {@link AVChatManager#setupVideoCapturer(AVChatVideoCapturer)}</li>
  * <li>打开本地视频预览 {@link AVChatManager#startVideoPreview()}。</li>
  * <li>加入房间 {@link AVChatManager#joinRoom2(String, AVChatType, AVChatCallback)}。</li>
  * <li>开始多人会议或者互动直播，以及各种音视频操作。</li>
@@ -138,6 +143,7 @@ public class TeamAVChatActivity extends UI {
     private Observer<AVChatControlEvent> notificationObserver;
     private AVChatCameraCapturer mVideoCapturer;
     private static boolean needFinish = true;
+    private boolean isUserFinish = false;
 
     private TeamAVChatNotification notifier;
 
@@ -186,7 +192,7 @@ public class TeamAVChatActivity extends UI {
     protected void onResume() {
         super.onResume();
         // 取消通知栏
-        activeCallingNotifier(false);
+//        activeCallingNotifier(false);
         // 禁止自动锁屏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -195,7 +201,21 @@ public class TeamAVChatActivity extends UI {
     @Override
     protected void onStop() {
         super.onStop();
-        activeCallingNotifier(true);
+//        activeCallingNotifier(true);
+        if (!isUserFinish)
+            startVideoService();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        unbindService(mVideoServiceConnection);//不显示悬浮框
+    }
+
+    @Override
+    public void finish() {
+        isUserFinish = true;
+        super.finish();
     }
 
     @Override
@@ -705,8 +725,8 @@ public class TeamAVChatActivity extends UI {
 
             } else if (i == R.id.hangup) {// 挂断
                 hangup();
+                needFinish = true;
                 finish();
-
             }
         }
     };
@@ -852,8 +872,38 @@ public class TeamAVChatActivity extends UI {
             if (code.wontAutoLogin()) {
                 AVChatSoundPlayer.instance().stop();
                 hangup();
+                needFinish = true;
                 finish();
             }
+        }
+    };
+
+    //窗口最小化
+    @Override
+    public boolean moveTaskToBack(boolean nonRoot) {
+        return super.moveTaskToBack(nonRoot);
+    }
+
+    public void startVideoService() {
+        moveTaskToBack(true);//最小化Activity
+        Intent intent = new Intent(this, TeamFloatVideoWindowService.class);//开启服务显示悬浮框
+//        intent.putExtra("time",avChatVideoUI.getTime());
+        bindService(intent, mVideoServiceConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    ServiceConnection mVideoServiceConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            // 获取服务的操作对象
+            TeamFloatVideoWindowService.MyBinder binder = (TeamFloatVideoWindowService.MyBinder) service;
+            binder.getService();
+
+            binder.setTime(SystemClock.elapsedRealtime() - seconds * 1000);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
         }
     };
 }

@@ -31,5 +31,8 @@
                 <action android:name="android.intent.action.PHONE_STATE" />
             </intent-filter>
         </receiver>
+
+        <service android:name=".service.FloatVideoWindowService"/>
+        <service android:name=".service.TeamFloatVideoWindowService"/>
     </application>
 </manifest>

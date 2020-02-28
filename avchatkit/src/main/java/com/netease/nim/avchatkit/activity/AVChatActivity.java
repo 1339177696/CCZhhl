@@ -1,14 +1,19 @@
 package com.netease.nim.avchatkit.activity;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.PersistableBundle;
 import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.faceunity.FaceU;
@@ -26,6 +31,7 @@ import com.netease.nim.avchatkit.module.AVSwitchListener;
 import com.netease.nim.avchatkit.module.SimpleAVChatStateObserver;
 import com.netease.nim.avchatkit.notification.AVChatNotification;
 import com.netease.nim.avchatkit.receiver.PhoneCallStateObserver;
+import com.netease.nim.avchatkit.service.FloatVideoWindowService;
 import com.netease.nim.avchatkit.ui.AVChatAudioUI;
 import com.netease.nim.avchatkit.ui.AVChatVideoUI;
 import com.netease.nimlib.sdk.NIMClient;
@@ -94,6 +100,7 @@ public class AVChatActivity extends UI implements AVChatVideoUI.TouchZoneCallbac
     private AVChatAudioUI avChatAudioUI; // 音频界面
     private AVChatVideoUI avChatVideoUI; // 视频界面
 
+    private ImageView sx;
     // face unity
     private FaceU faceU;
 
@@ -157,12 +164,21 @@ public class AVChatActivity extends UI implements AVChatVideoUI.TouchZoneCallbac
 
         // face unity
         initFaceU();
+
+        sx = findViewById(R.id.sx);
+
+        sx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startVideoService();
+            }
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        cancelCallingNotifier();
+//        cancelCallingNotifier();
 
         if (hasOnPause) {
             avChatVideoUI.onResume();
@@ -181,9 +197,16 @@ public class AVChatActivity extends UI implements AVChatVideoUI.TouchZoneCallbac
     @Override
     protected void onStop() {
         super.onStop();
-        activeCallingNotifier();
+//        activeCallingNotifier();
+        if (!isUserFinish)
+            startVideoService();
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        unbindService(mVideoServiceConnection);//不显示悬浮框
+    }
 
     @Override
     public void onBackPressed() {
@@ -383,6 +406,7 @@ public class AVChatActivity extends UI implements AVChatVideoUI.TouchZoneCallbac
             if (state == AVChatType.AUDIO.getValue()) {
                 avChatAudioUI.showAudioInitLayout();
             } else {
+                sx.setVisibility(View.VISIBLE);
                 // 接通以后，自己是小屏幕显示图像，对方是大屏幕显示图像
                 avChatVideoUI.initSmallSurfaceView(AVChatKit.getAccount());
                 avChatVideoUI.showVideoInitLayout();
@@ -727,5 +751,34 @@ public class AVChatActivity extends UI implements AVChatVideoUI.TouchZoneCallbac
             avChatVideoUI.releaseVideo();
         }
     }
+
+    //窗口最小化
+    @Override
+    public boolean moveTaskToBack(boolean nonRoot) {
+        return super.moveTaskToBack(nonRoot);
+    }
+
+    public void startVideoService() {
+        moveTaskToBack(true);//最小化Activity
+        Intent intent = new Intent(this, FloatVideoWindowService.class);//开启服务显示悬浮框
+//        intent.putExtra("time",avChatVideoUI.getTime());
+        bindService(intent, mVideoServiceConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    ServiceConnection mVideoServiceConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            // 获取服务的操作对象
+            FloatVideoWindowService.MyBinder binder = (FloatVideoWindowService.MyBinder) service;
+            binder.getService();
+
+            binder.setTime(avChatVideoUI.getTime());
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+        }
+    };
 
 }

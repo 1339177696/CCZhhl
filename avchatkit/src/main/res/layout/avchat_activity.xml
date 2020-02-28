@@ -18,13 +18,15 @@
         layout="@layout/avchat_surface_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone" />
+        android:visibility="gone"
+        />
 
     <include
         android:id="@+id/avchat_video_layout"
         layout="@layout/avchat_video_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone" />
+        android:visibility="gone"
+        />
 
 </FrameLayout>

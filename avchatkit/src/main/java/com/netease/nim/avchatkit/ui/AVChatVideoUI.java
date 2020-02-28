@@ -588,6 +588,11 @@ public class AVChatVideoUI implements View.OnClickListener, ToggleListener {
         }
     }
 
+    public long getTime(){
+        return time.getBase();
+    }
+
+
     public void showNoneCameraPermissionView(boolean show) {
         permissionRoot.setVisibility(show ? View.VISIBLE : View.GONE);
     }
