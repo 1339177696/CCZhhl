@@ -9,9 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.hulian.oa.BuildConfig;
+import com.hulian.oa.DemoCache;
 import com.hulian.oa.R;
+import com.hulian.oa.bean.People;
 import com.hulian.oa.qglactivity.MessagenotificationActivity;
 import com.hulian.oa.utils.SPUtils;
+import com.hulian.oa.utils.TimeUtils;
 import com.hulian.oa.utils.ToastHelper;
 import com.hulian.oa.work.file.admin.activity.SecondDocumentActivity;
 import com.hulian.oa.work.file.admin.activity.SecondExpenseActivity;
@@ -22,8 +25,26 @@ import com.hulian.oa.work.file.admin.activity.SecondMeetingActivity;
 import com.hulian.oa.work.file.admin.activity.SecondNoticeActivity;
 import com.hulian.oa.work.file.admin.activity.SecondTaskCoopActivity;
 import com.hulian.oa.work.file.admin.activity.WorkSpaceActivity;
+import com.hulian.oa.work.file.admin.activity.meeting.SelDepartmentActivity_meet_zb;
 import com.hulian.oa.work.file.admin.activity.Work_gd_Activity;
+import com.hulian.oa.work.file.admin.activity.meeting.SelDepartmentActivity_meet_zb;
 import com.luck.picture.lib.entity.LocalMedia;
+import com.netease.nim.avchatkit.AVChatKit;
+import com.netease.nim.avchatkit.TeamAVChatProfile;
+import com.netease.nim.avchatkit.common.util.TimeUtil;
+import com.netease.nim.uikit.business.team.helper.TeamHelper;
+import com.netease.nim.uikit.common.util.log.LogUtil;
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.avchat.AVChatCallback;
+import com.netease.nimlib.sdk.avchat.AVChatManager;
+import com.netease.nimlib.sdk.avchat.model.AVChatChannelInfo;
+import com.netease.nimlib.sdk.msg.MessageBuilder;
+import com.netease.nimlib.sdk.msg.MsgService;
+import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
+import com.netease.nimlib.sdk.msg.model.CustomMessageConfig;
+import com.netease.nimlib.sdk.msg.model.CustomNotification;
+import com.netease.nimlib.sdk.msg.model.CustomNotificationConfig;
+import com.netease.nimlib.sdk.msg.model.IMMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -148,6 +169,18 @@ public class WorkFragemt_9 extends Fragment {
 //            case R.id.bt_work_attendance:
 //                ToastHelper.showToast(getActivity(), "功能暂未开放");
 //                break;
+            case R.id.bt_work_space:
+                //20191129
+//                startActivity(new Intent(getActivity(), WorkSpaceActivity.class));
+                startActivity(new Intent(getActivity(), MessagenotificationActivity.class));
+
+                break;
+            case R.id.bt_expense:
+//                qgl修改
+
+//                    startActivity(new Intent(getActivity(), SecondExpenseActivity.class));
+//                ToastHelper.showToast(getActivity(), "功能暂未开放");
+                break;
 //            case R.id.bt_list:
 //                EventBus.getDefault().post(new WorkFragemt_9());
 //                break;
@@ -157,6 +190,7 @@ public class WorkFragemt_9 extends Fragment {
             case R.id.bt_gengduo:
                 // 跳转更多
                 startActivity(new Intent(getActivity(), Work_gd_Activity.class));
+
                 break;
         }
     }
@@ -169,4 +203,7 @@ public class WorkFragemt_9 extends Fragment {
             selectList.add(localMedia);
         }
     }
+
+
+
 }
