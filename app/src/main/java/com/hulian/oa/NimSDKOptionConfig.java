@@ -159,13 +159,14 @@ class NimSDKOptionConfig {
         StatusBarNotificationConfig config = new StatusBarNotificationConfig();
         // 点击通知需要跳转到的界面
         config.notificationEntrance = MainActivity.class;
-        config.notificationSmallIconId = R.drawable.ic_launcher_foreground;
+        config.notificationSmallIconId = R.drawable.ic_launcher_me;
         config.notificationColor = DemoCache.getContext().getResources().getColor(R.color.colorTheme);
         // 通知铃声的uri字符串
         config.notificationSound = "android.resource://com.hulian.oa/raw/msg";
         config.notificationFolded = true;
 //        config.notificationFolded = false;
-        config.downTimeEnableNotification = true;
+        // 在锁屏上显示
+        config.downTimeEnableNotification = false;
         // 呼吸灯配置
         config.ledARGB = Color.GREEN;
         config.ledOnMs = 1000;
