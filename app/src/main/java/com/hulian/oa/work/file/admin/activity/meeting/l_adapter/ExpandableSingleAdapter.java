@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hulian.oa.R;
 import com.hulian.oa.bean.Department;
@@ -25,6 +26,7 @@ public class ExpandableSingleAdapter extends BaseExpandableListAdapter {
     private List<Department> mGroupArray;
     private List<List<People>> mChildArray;
     TextView tv_count;
+    private boolean isVideo = false;
     /**
      * 构造函数
      *
@@ -41,8 +43,20 @@ public class ExpandableSingleAdapter extends BaseExpandableListAdapter {
         mChildLayout = childLayout;
         mGroupArray = groupData;
         mChildArray = childData;
-        mInflater = ( LayoutInflater ) context
+        mInflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+    public ExpandableSingleAdapter(Context context, List<Department> groupData, int expandedGroupLayout,
+                                   List<List<People>> childData, int childLayout,boolean isVideo) {
+        mContext = context;
+        mExpandedGroupLayout = expandedGroupLayout;
+        mChildLayout = childLayout;
+        mGroupArray = groupData;
+        mChildArray = childData;
+        mInflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.isVideo = isVideo;
     }
 
     public Object getChild(int groupPosition, int childPosition) {
@@ -57,12 +71,12 @@ public class ExpandableSingleAdapter extends BaseExpandableListAdapter {
                              boolean isLastChild, View convertView, ViewGroup parent) {
         // 取得显示给定分组给定子位置的数据用的视图。
         View v;
-        if ( convertView == null ) {
+        if (convertView == null) {
             v = newChildView(parent);
         } else {
             v = convertView;
         }
-        bindChildView(v, mChildArray.get(groupPosition).get(childPosition), mChildArray.get(groupPosition),mGroupArray.get(groupPosition) );
+        bindChildView(v, mChildArray.get(groupPosition).get(childPosition), mChildArray.get(groupPosition), mGroupArray.get(groupPosition));
         return v;
     }
 
@@ -96,21 +110,22 @@ public class ExpandableSingleAdapter extends BaseExpandableListAdapter {
         // 取得用于显示给定分组的视图。 这个方法仅返回分组的视图对象， 要想获取子元素的视图对象，
         // 就需要调用 getChildView(int, int, boolean, View, ViewGroup)。
         View v;
-            v = newGroupView(parent);
-        bindGroupView(v, mGroupArray.get(groupPosition), isExpanded,groupPosition);
+        v = newGroupView(parent);
+        bindGroupView(v, mGroupArray.get(groupPosition), isExpanded, groupPosition);
         return v;
     }
 
     /**
      * 绑定组数据
-     *  @param view
+     *
+     * @param view
      * @param data
      * @param isExpanded
      * @param groupPosition
      */
     private void bindGroupView(View view, Department data, boolean isExpanded, int groupPosition) {
         // 绑定组视图的数据 当然这些都是模拟的
-        TextView tv_title = ( TextView ) view.findViewById(R.id.group_title);
+        TextView tv_title = (TextView) view.findViewById(R.id.group_title);
         CheckBox checkBox = (CheckBox) view.findViewById(R.id.bb);
         checkBox.setChecked(data.isIscheck());
         checkBox.setOnClickListener(new View.OnClickListener() {
@@ -118,14 +133,12 @@ public class ExpandableSingleAdapter extends BaseExpandableListAdapter {
             public void onClick(View view) {
                 boolean isChecked = checkBox.isChecked();
                 data.setIscheck(isChecked);
-                for(int i=0;i<mChildArray.get(groupPosition).size();i++){
+                for (int i = 0; i < mChildArray.get(groupPosition).size(); i++) {
                     mChildArray.get(groupPosition).get(i).setIscheck(isChecked);
                 }
-                if(isChecked){
-                    data.setCount(mChildArray.get(groupPosition).size()+"");
-                }
-                else
-                {
+                if (isChecked) {
+                    data.setCount(mChildArray.get(groupPosition).size() + "");
+                } else {
                     data.setCount("0");
                 }
 
@@ -135,12 +148,11 @@ public class ExpandableSingleAdapter extends BaseExpandableListAdapter {
         });
 
         tv_title.setText(data.getDeptName());
-         tv_count = ( TextView ) view.findViewById(R.id.tv_count);
-         if(data.getCount()==null){
-             tv_count.setText("已选择0人");
-         }
-         else
-        tv_count.setText("已选择"+data.getCount()+"人");
+        tv_count = (TextView) view.findViewById(R.id.tv_count);
+        if (data.getCount() == null) {
+            tv_count.setText("已选择0人");
+        } else
+            tv_count.setText("已选择" + data.getCount() + "人");
 
 //        if ( !use_default_indicator ) {
 //            ImageView iv_tip = ( ImageView ) view.findViewById(R.id.iv_tip);
@@ -154,17 +166,18 @@ public class ExpandableSingleAdapter extends BaseExpandableListAdapter {
 
     /**
      * 绑定子数据
-     *  @param view
+     *
+     * @param view
      * @param data
      * @param peopleList
      */
     private void bindChildView(View view, People data, List<People> peopleList, Department mDapart) {
         // 绑定组视图的数据 当然这些都是模拟的
-        TextView tv_name = ( TextView ) view.findViewById(R.id.tv_name);
+        TextView tv_name = (TextView) view.findViewById(R.id.tv_name);
         tv_name.setText(data.getUserName());
-        TextView tv_role=( TextView ) view.findViewById(R.id.tv_role);
-        if(data.getIsLead().equals("0"))
-        tv_role.setText("一级领导");
+        TextView tv_role = (TextView) view.findViewById(R.id.tv_role);
+        if (data.getIsLead().equals("0"))
+            tv_role.setText("一级领导");
         else {
             tv_role.setText("二级领导");
         }
@@ -174,22 +187,23 @@ public class ExpandableSingleAdapter extends BaseExpandableListAdapter {
             @Override
             public void onClick(View v) {
                 boolean isChecked = checkBox.isChecked();
-           //     notifyDataSetChanged();
-                int j=0;
-                if(isChecked)
-                for(int i=0;i<mChildArray.size();i++){
-                    for(int k=0;k<mChildArray.get(i).size();k++)
-                        mChildArray.get(i).get(k).setIscheck(false);
+                //     notifyDataSetChanged();
+                int j = 0;
+                if (isChecked) {
+                    for (int i = 0; i < mChildArray.size(); i++) {
+                        for (int k = 0; k < mChildArray.get(i).size(); k++)
+                            mChildArray.get(i).get(k).setIscheck(false);
+                    }
                 }
 
 
                 data.setIscheck(isChecked);
-                for(int i=0;i<peopleList.size();i++){
-                    if(peopleList.get(i).isIscheck()){
+                for (int i = 0; i < peopleList.size(); i++) {
+                    if (peopleList.get(i).isIscheck()) {
                         j++;
                     }
                 }
-                mDapart.setCount(j+"");
+                mDapart.setCount(j + "");
 //                if(j==peopleList.size()){
 //                    mDapart.setIscheck(true);
 //                }
@@ -206,21 +220,21 @@ public class ExpandableSingleAdapter extends BaseExpandableListAdapter {
             public void onClick(View v) {
                 boolean isChecked = checkBox.isChecked();
                 //     notifyDataSetChanged();
-                int j=0;
-                if(!isChecked)
-                    for(int i=0;i<mChildArray.size();i++){
-                        for(int k=0;k<mChildArray.get(i).size();k++)
+                int j = 0;
+                if (!isChecked)
+                    for (int i = 0; i < mChildArray.size(); i++) {
+                        for (int k = 0; k < mChildArray.get(i).size(); k++)
                             mChildArray.get(i).get(k).setIscheck(false);
                     }
 
                 checkBox.setChecked(!isChecked);
                 data.setIscheck(!isChecked);
-                for(int i=0;i<peopleList.size();i++){
-                    if(peopleList.get(i).isIscheck()){
+                for (int i = 0; i < peopleList.size(); i++) {
+                    if (peopleList.get(i).isIscheck()) {
                         j++;
                     }
                 }
-                mDapart.setCount(j+"");
+                mDapart.setCount(j + "");
 //                if(j==peopleList.size()){
 //                    mDapart.setIscheck(true);
 //                }

@@ -455,6 +455,7 @@ public class AVChatActivity extends UI implements AVChatVideoUI.TouchZoneCallbac
             if (info != null && info.getChatId() == ackInfo.getChatId()) {
                 if (ackInfo.getEvent() == AVChatEventType.CALLEE_ACK_BUSY) {
                     hangUpByOther(AVChatExitCode.PEER_BUSY);
+                    Toast.makeText(AVChatActivity.this,"对方正忙",Toast.LENGTH_SHORT).show();
                 } else if (ackInfo.getEvent() == AVChatEventType.CALLEE_ACK_REJECT) {
                     hangUpByOther(AVChatExitCode.REJECT);
                 } else if (ackInfo.getEvent() == AVChatEventType.CALLEE_ACK_AGREE) {
