@@ -38,8 +38,6 @@ public class BaseActivity extends FragmentActivity  {
     public FragmentManager fm;
     public FragmentTransaction ft;
     public static List<Activity> activitys;
-
-    //das
     /**加载对话框*/
     private Dialog dialogLoading;
     protected LoadingDialog loadDialog;//加载等待弹窗
