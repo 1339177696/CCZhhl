@@ -162,6 +162,7 @@ class NimSDKOptionConfig {
         config.notificationSmallIconId = R.drawable.ic_launcher_me;
         config.notificationColor = DemoCache.getContext().getResources().getColor(R.color.colorTheme);
         // 通知铃声的uri字符串
+
         config.notificationSound = "android.resource://com.hulian.oa/raw/msg";
         config.notificationFolded = true;
 //        config.notificationFolded = false;
