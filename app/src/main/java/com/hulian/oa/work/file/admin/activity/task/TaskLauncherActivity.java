@@ -262,8 +262,13 @@ public class TaskLauncherActivity extends BaseActivity {
         TimePickerView pvTime = new TimePickerBuilder(mContext, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
-                //设置时间
-                textView.setText(getTime(date));
+                //判断选择开始时间是否大于当前时间
+                if(TimeUtils.timeCompare(TimeUtils.getNowTime1(),getTime(date))==1){
+                    ToastHelper.showToast(mContext, "请选择当前时间之后");
+                }else {
+                    //设置时间
+                    textView.setText(getTime(date));
+                }
             }
         }).setType(new boolean[]{true,true,true,true,true,false})
                 .setLabel("年","月","日","时","分","秒")

@@ -47,6 +47,8 @@ public class MeActivity extends BaseActivity {
     TextView tvName;
     @BindView(R.id.tv_dept)
     TextView tvDept;
+    @BindView(R.id.tv_type)
+    TextView tv_type;
 
     private JWebSocketClientService jWebSClientService;
 
@@ -57,6 +59,7 @@ public class MeActivity extends BaseActivity {
         StatusBarUtil.statusBarLightMode_white(this);
         setContentView(R.layout.activity_andmin_me);
         ButterKnife.bind(this);
+        tv_type.setText(SPUtils.get(mContext, "nickname", "").toString().substring(SPUtils.get(mContext, "nickname", "").toString().length()-2,SPUtils.get(mContext, "nickname", "").toString().length()));
         tvName.setText(SPUtils.get(mContext, "nickname", "").toString());
         tvDept.setText(SPUtils.get(mContext, "deptname", "").toString());
         mine_phone.setText(SPUtils.get(mContext, "username", "").toString());

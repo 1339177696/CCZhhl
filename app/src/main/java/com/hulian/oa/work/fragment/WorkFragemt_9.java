@@ -64,8 +64,9 @@ public class WorkFragemt_9 extends Fragment {
     ImageView btMail;
     @BindView(R.id.bt_leave)
     ImageView btLeave;
-    @BindView(R.id.bt_document)
-    ImageView btDocument;
+    // 公文流轉（去掉）
+//    @BindView(R.id.bt_document)
+//    ImageView btDocument;
     @BindView(R.id.bt_coop)
     ImageView btCoop;
     @BindView(R.id.bt_notice)
@@ -116,8 +117,8 @@ public class WorkFragemt_9 extends Fragment {
     }
 
     //    , R.id.bt_list, R.id.bt_9
-//    R.id.bt_expense, R.id.bt_work_space,R.id.bt_work_attendance
-    @OnClick({R.id.bt_mail, R.id.bt_leave, R.id.bt_document, R.id.bt_coop, R.id.bt_notice, R.id.bt_meeting, R.id.bt_instruct,R.id.bt_gengduo })
+//    R.id.bt_expense, R.id.bt_work_space,R.id.bt_work_attendance   R.id.bt_document,
+    @OnClick({R.id.bt_mail, R.id.bt_leave,R.id.bt_coop, R.id.bt_notice, R.id.bt_meeting, R.id.bt_instruct,R.id.bt_gengduo ,R.id.bt_baoxiao})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_mail:
@@ -137,9 +138,10 @@ public class WorkFragemt_9 extends Fragment {
                 //跳转到请假人申请列表
                 startActivity(new Intent(getActivity(), SecondLeaveActivity.class));
                 break;
-            case R.id.bt_document:
-                startActivity(new Intent(getActivity(), SecondDocumentActivity.class));
-                break;
+                //公文流轉去掉了
+//            case R.id.bt_document:
+//                startActivity(new Intent(getActivity(), SecondDocumentActivity.class));
+//                break;
             case R.id.bt_coop:
                 startActivity(new Intent(getActivity(), SecondTaskCoopActivity.class));
                 break;
@@ -185,11 +187,13 @@ public class WorkFragemt_9 extends Fragment {
 //                break;
 //            case R.id.bt_9:
 //                break;
+            case R.id.bt_baoxiao:
+                ToastHelper.showToast(getActivity(), "功能暂未开放");
+                break;
 
             case R.id.bt_gengduo:
                 // 跳转更多
                 startActivity(new Intent(getActivity(), Work_gd_Activity.class));
-
                 break;
         }
     }
