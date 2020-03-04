@@ -1,6 +1,7 @@
 package com.hulian.oa.work.file.admin.activity.meeting.l_adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +9,13 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hulian.oa.R;
 import com.hulian.oa.bean.Department;
 import com.hulian.oa.bean.Dept;
 import com.hulian.oa.bean.People;
+import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.ToastHelper;
 
 import java.util.ArrayList;
@@ -29,6 +32,8 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
     private List<Department> mGroupArray;
     private List<List<People>> mChildArray;
     TextView tv_count;
+    private boolean isVideo = false;
+
     /**
      * 构造函数
      *
@@ -45,8 +50,20 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         mChildLayout = childLayout;
         mGroupArray = groupData;
         mChildArray = childData;
-        mInflater = ( LayoutInflater ) context
+        mInflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+    public ExpandableAdapter(Context context, List<Department> groupData, int expandedGroupLayout,
+                             List<List<People>> childData, int childLayout, boolean isVideo) {
+        mContext = context;
+        mExpandedGroupLayout = expandedGroupLayout;
+        mChildLayout = childLayout;
+        mGroupArray = groupData;
+        mChildArray = childData;
+        mInflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.isVideo = isVideo;
     }
 
     public Object getChild(int groupPosition, int childPosition) {
@@ -61,12 +78,12 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
                              boolean isLastChild, View convertView, ViewGroup parent) {
         // 取得显示给定分组给定子位置的数据用的视图。
         View v;
-        if ( convertView == null ) {
+        if (convertView == null) {
             v = newChildView(parent);
         } else {
             v = convertView;
         }
-        bindChildView(v, mChildArray.get(groupPosition).get(childPosition), mChildArray.get(groupPosition),mGroupArray.get(groupPosition) );
+        bindChildView(v, mChildArray.get(groupPosition).get(childPosition), mChildArray.get(groupPosition), mGroupArray.get(groupPosition));
         return v;
     }
 
@@ -100,21 +117,22 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         // 取得用于显示给定分组的视图。 这个方法仅返回分组的视图对象， 要想获取子元素的视图对象，
         // 就需要调用 getChildView(int, int, boolean, View, ViewGroup)。
         View v;
-            v = newGroupView(parent);
-        bindGroupView(v, mGroupArray.get(groupPosition), isExpanded,groupPosition);
+        v = newGroupView(parent);
+        bindGroupView(v, mGroupArray.get(groupPosition), isExpanded, groupPosition);
         return v;
     }
 
     /**
      * 绑定组数据
-     *  @param view
+     *
+     * @param view
      * @param data
      * @param isExpanded
      * @param groupPosition
      */
     private void bindGroupView(View view, Department data, boolean isExpanded, int groupPosition) {
         // 绑定组视图的数据 当然这些都是模拟的
-        TextView tv_title = ( TextView ) view.findViewById(R.id.group_title);
+        TextView tv_title = (TextView) view.findViewById(R.id.group_title);
         CheckBox checkBox = (CheckBox) view.findViewById(R.id.bb);
         checkBox.setChecked(data.isIscheck());
         checkBox.setOnClickListener(new View.OnClickListener() {
@@ -122,14 +140,12 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
             public void onClick(View view) {
                 boolean isChecked = checkBox.isChecked();
                 data.setIscheck(isChecked);
-                for(int i=0;i<mChildArray.get(groupPosition).size();i++){
+                for (int i = 0; i < mChildArray.get(groupPosition).size(); i++) {
                     mChildArray.get(groupPosition).get(i).setIscheck(isChecked);
                 }
-                if(isChecked){
-                    data.setCount(mChildArray.get(groupPosition).size()+"");
-                }
-                else
-                {
+                if (isChecked) {
+                    data.setCount(mChildArray.get(groupPosition).size() + "");
+                } else {
                     data.setCount("0");
                 }
 
@@ -139,12 +155,11 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         });
 
         tv_title.setText(data.getDeptName());
-         tv_count = ( TextView ) view.findViewById(R.id.tv_count);
-         if(data.getCount()==null){
-             tv_count.setText("已选择0人");
-         }
-         else
-        tv_count.setText("已选择"+data.getCount()+"人");
+        tv_count = (TextView) view.findViewById(R.id.tv_count);
+        if (data.getCount() == null) {
+            tv_count.setText("已选择0人");
+        } else
+            tv_count.setText("已选择" + data.getCount() + "人");
 
 //        if ( !use_default_indicator ) {
 //            ImageView iv_tip = ( ImageView ) view.findViewById(R.id.iv_tip);
@@ -154,21 +169,25 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
 //                iv_tip.setImageResource(R.mipmap.right);
 //            }
 //        }
+        if (isVideo){
+            checkBox.setVisibility(View.GONE);
+        }
     }
 
     /**
      * 绑定子数据
-     *  @param view
+     *
+     * @param view
      * @param data
      * @param peopleList
      */
     private void bindChildView(View view, People data, List<People> peopleList, Department mDapart) {
         // 绑定组视图的数据 当然这些都是模拟的
-        TextView tv_name = ( TextView ) view.findViewById(R.id.tv_name);
+        TextView tv_name = (TextView) view.findViewById(R.id.tv_name);
         tv_name.setText(data.getUserName());
-        TextView tv_role=( TextView ) view.findViewById(R.id.tv_role);
-        if(data.getIsLead().equals("0"))
-        tv_role.setText("一级领导");
+        TextView tv_role = (TextView) view.findViewById(R.id.tv_role);
+        if (data.getIsLead().equals("0"))
+            tv_role.setText("一级领导");
         else {
             tv_role.setText("二级领导");
         }
@@ -179,18 +198,17 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
             public void onClick(View v) {
                 boolean isChecked = checkBox.isChecked();
                 data.setIscheck(isChecked);
-           //     notifyDataSetChanged();
-                int j=0;
-                for(int i=0;i<peopleList.size();i++){
-                    if(peopleList.get(i).isIscheck()){
+                //     notifyDataSetChanged();
+                int j = 0;
+                for (int i = 0; i < peopleList.size(); i++) {
+                    if (peopleList.get(i).isIscheck()) {
                         j++;
                     }
                 }
-                mDapart.setCount(j+"");
-                if(j==peopleList.size()){
+                mDapart.setCount(j + "");
+                if (j == peopleList.size()) {
                     mDapart.setIscheck(true);
-                }
-                else {
+                } else {
                     mDapart.setIscheck(false);
                 }
                 EventBus.getDefault().post(mChildArray);
@@ -200,24 +218,48 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // ToastHelper.showToast(mContext,""+data.isIscheck());
-                boolean isChecked = data.isIscheck();
-                data.setIscheck(!isChecked);
-                checkBox.setChecked(!isChecked);
+                // ToastHelper.showToast(mContext,""+data.isIscheck());
+                boolean isChecked = !data.isIscheck();
+
+
                 //     notifyDataSetChanged();
-                int j=0;
-                for(int i=0;i<peopleList.size();i++){
-                    if(peopleList.get(i).isIscheck()){
+                int j = 0;
+                for (int i = 0; i < peopleList.size(); i++) {
+                    if (peopleList.get(i).isIscheck()) {
                         j++;
                     }
                 }
-                mDapart.setCount(j+"");
-                if(j==peopleList.size()){
+                mDapart.setCount(j + "");
+                if (j == peopleList.size()) {
                     mDapart.setIscheck(true);
-                }
-                else {
+                } else {
                     mDapart.setIscheck(false);
                 }
+
+                //如果是视频会议页面进入只允许选择11人加上自己12人
+                if (isVideo && isChecked) {
+                    int num = 1;
+                    for (int n = 0; n < mChildArray.size(); n++) {
+                        for (int m = 0; m < mChildArray.get(n).size(); m++) {
+                            if (mChildArray.get(n).get(m).isIscheck()) {
+                                num++;
+                            }
+                        }
+                    }
+                    if (num < 12) {
+                        if (TextUtils.equals(data.getUserName(), SPUtils.get(mContext, "nickname", "").toString())) {
+                            Toast.makeText(mContext, "无法选择自己", Toast.LENGTH_SHORT).show();
+                            isChecked = false;
+                        } else
+                            Toast.makeText(mContext, "已选择" + num + "人", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(mContext, "已选择最大人数11人", Toast.LENGTH_SHORT).show();
+                        isChecked = false;
+                    }
+                }
+                data.setIscheck(isChecked);
+                checkBox.setChecked(isChecked);
+
                 EventBus.getDefault().post(mChildArray);
                 notifyDataSetChanged();
             }

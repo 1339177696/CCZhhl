@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -145,6 +146,8 @@ public class TeamAVChatActivity extends UI {
     private static boolean needFinish = true;
     private boolean isUserFinish = false;
 
+    private ImageView sx;
+
     private TeamAVChatNotification notifier;
 
     public static void startActivity(Context context, boolean receivedCall, String teamId, String roomId, ArrayList<String> accounts, String teamName) {
@@ -181,6 +184,15 @@ public class TeamAVChatActivity extends UI {
         setChatting(true);
 
         NIMClient.getService(AuthServiceObserver.class).observeOnlineStatus(userStatusObserver, true);
+
+        sx = findViewById(R.id.sx);
+
+        sx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startVideoService();
+            }
+        });
     }
 
     @Override

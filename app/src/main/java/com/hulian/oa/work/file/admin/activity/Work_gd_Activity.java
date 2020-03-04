@@ -15,6 +15,8 @@ import com.hulian.oa.utils.ToastHelper;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import com.hulian.oa.work.file.admin.activity.meeting.SelDepartmentActivity_meet_video;
 import com.hulian.oa.work.file.admin.activity.meeting.SelDepartmentActivity_meet_zb;
 import com.netease.nim.avchatkit.AVChatKit;
 import com.netease.nim.avchatkit.TeamAVChatProfile;
@@ -47,6 +49,7 @@ public class Work_gd_Activity extends BaseActivity {
     ImageView btMeeting;
     @BindView(R.id.bt_instruct)
     ImageView btInstruct;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +59,7 @@ public class Work_gd_Activity extends BaseActivity {
 
     // 最终提交
 
-
-    @OnClick({R.id.bt_mail,R.id.bt_qingjia, R.id.bt_coop, R.id.bt_notice, R.id.bt_meeting, R.id.bt_instruct,R.id.bt_k1,R.id.bt_k2,R.id.bt_k3,R.id.bt_baoxiao,R.id.bt_gongwen,R.id.bt_shipin,R.id.bt_yuyin,R.id.iv_back})
+    @OnClick({R.id.bt_mail, R.id.bt_qingjia, R.id.bt_coop, R.id.bt_notice, R.id.bt_meeting, R.id.bt_instruct, R.id.bt_k1, R.id.bt_k2, R.id.bt_k3, R.id.bt_baoxiao, R.id.bt_gongwen, R.id.bt_shipin, R.id.bt_yuyin, R.id.iv_back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_mail:
@@ -102,13 +104,13 @@ public class Work_gd_Activity extends BaseActivity {
                 startActivity(new Intent(Work_gd_Activity.this, SecondDocumentActivity.class));
                 break;
             case R.id.bt_k2:
-            //跳转到请假人申请列表
-            startActivity(new Intent(Work_gd_Activity.this, SecondLeaveActivity.class));
-            break;
-            case R.id.bt_shipin:
-                startActivityForResult(new Intent(Work_gd_Activity.this, SelDepartmentActivity_meet_zb.class), 0);
+                //跳转到请假人申请列表
+                startActivity(new Intent(Work_gd_Activity.this, SecondLeaveActivity.class));
                 break;
-                case R.id.bt_yuyin:
+            case R.id.bt_shipin:
+                startActivityForResult(new Intent(Work_gd_Activity.this, SelDepartmentActivity_meet_video.class), 0);
+                break;
+            case R.id.bt_yuyin:
                 ToastHelper.showToast(Work_gd_Activity.this, "功能暂未开放");
                 break;
 
@@ -144,7 +146,7 @@ public class Work_gd_Activity extends BaseActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == 1 && requestCode == 0&&data!=null) {
+        if (resultCode == 1 && requestCode == 0 && data != null) {
             List<People> peopleList = (List<People>) data.getSerializableExtra("mList");
             ArrayList<String> accounts = new ArrayList<>();
             String roomName = TimeUtils.getNowTime();

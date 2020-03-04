@@ -50,7 +50,9 @@
             android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:background="#EBEBEB"
-            android:layout_height="@dimen/dp_56">
+            android:layout_height="@dimen/dp_56"
+            android:id="@+id/title_rl"
+            >
             <CheckBox
                 android:layout_marginLeft="@dimen/dp_28"
                 android:button="@null"
