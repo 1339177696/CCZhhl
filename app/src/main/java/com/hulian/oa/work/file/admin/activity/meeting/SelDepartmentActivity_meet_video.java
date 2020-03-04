@@ -60,7 +60,7 @@ public class SelDepartmentActivity_meet_video extends BaseActivity {
     private RelativeLayout iv_back;
 
     // 筛选
-    private CheckBox mMainCkb, ckb_leader, ckb_worker;
+//    private CheckBox mMainCkb, ckb_leader, ckb_worker;
     private ExpandableListView expandableListView;
     //最外面一层 分组名
     private List<Department> groupArray;
@@ -113,18 +113,18 @@ public class SelDepartmentActivity_meet_video extends BaseActivity {
         tv_select_people.setText(username);
 
 
-        for (int i = 0; i < event.size(); i++) {
-            for (int j = 0; j < event.get(i).size(); j++) {
-                if (!event.get(i).get(j).isIscheck()) {
-                    allcheckede = false;
-                    mMainCkb.setChecked(allcheckede);
-                    return;
-                } else {
-                    allcheckede = true;
-                    mMainCkb.setChecked(true);
-                }
-            }
-        }
+//        for (int i = 0; i < event.size(); i++) {
+//            for (int j = 0; j < event.get(i).size(); j++) {
+//                if (!event.get(i).get(j).isIscheck()) {
+//                    allcheckede = false;
+//                    mMainCkb.setChecked(allcheckede);
+//                    return;
+//                } else {
+//                    allcheckede = true;
+//                    mMainCkb.setChecked(true);
+//                }
+//            }
+//        }
     }
 
     public void init() {
@@ -152,21 +152,21 @@ public class SelDepartmentActivity_meet_video extends BaseActivity {
                     ToastHelper.showToast(mContext, "请选择参会人");
             }
         });
-        mMainCkb = findViewById(R.id.ckb_main);
-        ckb_leader = findViewById(R.id.ckb_leader);
-        ckb_worker = findViewById(R.id.ckb_worker);
+//        mMainCkb = findViewById(R.id.ckb_main);
+//        ckb_leader = findViewById(R.id.ckb_leader);
+//        ckb_worker = findViewById(R.id.ckb_worker);
 
         expandableListView = findViewById(R.id.exlistview);
         expandableListView.setGroupIndicator(null);
-        Drawable drawableWeiHui1 = getResources().getDrawable(R.drawable.zz_img_qgl1);
-        drawableWeiHui1.setBounds(0, 0, 80, 80);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
-        mMainCkb.setCompoundDrawables(null, drawableWeiHui1, null, null);//只放上面
-        Drawable drawableWeiHui2 = getResources().getDrawable(R.drawable.zz_img_qgl2);
-        drawableWeiHui2.setBounds(0, 0, 80, 80);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
-        ckb_leader.setCompoundDrawables(null, drawableWeiHui2, null, null);//只放上面
-        Drawable drawableWeiHui3 = getResources().getDrawable(R.drawable.zz_img_qgl2);
-        drawableWeiHui3.setBounds(0, 0, 80, 80);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
-        ckb_worker.setCompoundDrawables(null, drawableWeiHui3, null, null);//只放上面
+//        Drawable drawableWeiHui1 = getResources().getDrawable(R.drawable.zz_img_qgl1);
+//        drawableWeiHui1.setBounds(0, 0, 80, 80);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
+//        mMainCkb.setCompoundDrawables(null, drawableWeiHui1, null, null);//只放上面
+//        Drawable drawableWeiHui2 = getResources().getDrawable(R.drawable.zz_img_qgl2);
+//        drawableWeiHui2.setBounds(0, 0, 80, 80);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
+//        ckb_leader.setCompoundDrawables(null, drawableWeiHui2, null, null);//只放上面
+//        Drawable drawableWeiHui3 = getResources().getDrawable(R.drawable.zz_img_qgl2);
+//        drawableWeiHui3.setBounds(0, 0, 80, 80);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
+//        ckb_worker.setCompoundDrawables(null, drawableWeiHui3, null, null);//只放上面
 
         iv_back = findViewById(R.id.iv_back);
         iv_back.setOnClickListener(new View.OnClickListener() {
@@ -182,113 +182,113 @@ public class SelDepartmentActivity_meet_video extends BaseActivity {
         expandableListView.setAdapter(expandableAdapter);
         getDepartMent();
 
-        mMainCkb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ckb_leader.setChecked(mMainCkb.isChecked());
-                ckb_worker.setChecked(mMainCkb.isChecked());
-                for (int i = 0; i < childArray.size(); i++) {
-                    groupArray.get(i).setIscheck(mMainCkb.isChecked());
-                    for (int j = 0; j < childArray.get(i).size(); j++) {
-                        childArray.get(i).get(j).setIscheck(mMainCkb.isChecked());
-                    }
-                    if (mMainCkb.isChecked())
-                        groupArray.get(i).setCount(childArray.get(i).size() + "");
-                    else
-                        groupArray.get(i).setCount("0");
-                }
-                onEventMainThread(childArray);
-                expandableAdapter.notifyDataSetChanged();
-            }
-        });
-        ckb_leader.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (ckb_leader.isChecked() && ckb_worker.isChecked()) {
-                    mMainCkb.setChecked(true);
-                } else
-                    mMainCkb.setChecked(false);
-                if (ckb_leader.isChecked()) {
-                    for (int i = 0; i < childArray.size(); i++) {
-                        for (int j = 0; j < childArray.get(i).size(); j++) {
-                            if (childArray.get(i).get(j).getIsLead().equals("0")) {
-                                childArray.get(i).get(j).setIscheck(true);
-
-                            }
-                        }
-                    }
-
-                    onEventMainThread(childArray);
-                    expandableAdapter.notifyDataSetChanged();
-                } else {
-                    for (int i = 0; i < childArray.size(); i++) {
-
-                        for (int j = 0; j < childArray.get(i).size(); j++) {
-                            if (childArray.get(i).get(j).getIsLead().equals("0")) {
-                                childArray.get(i).get(j).setIscheck(false);
-                            }
-                        }
-
-                    }
-
-
-                }
-                for (int i = 0; i < childArray.size(); i++) {
-                    int k = 0;
-                    for (int j = 0; j < childArray.get(i).size(); j++) {
-                        if (childArray.get(i).get(j).isIscheck()) {
-                            k++;
-
-                        }
-                        groupArray.get(i).setCount(k + "");
-                    }
-                }
-                onEventMainThread(childArray);
-                expandableAdapter.notifyDataSetChanged();
-            }
-        });
-        ckb_worker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (ckb_leader.isChecked() && ckb_worker.isChecked()) {
-                    mMainCkb.setChecked(true);
-                } else
-                    mMainCkb.setChecked(false);
-                if (ckb_worker.isChecked()) {
-                    for (int i = 0; i < childArray.size(); i++) {
-                        for (int j = 0; j < childArray.get(i).size(); j++) {
-                            if (childArray.get(i).get(j).getIsLead().equals("1")) {
-                                childArray.get(i).get(j).setIscheck(true);
-                            }
-                        }
-                    }
-                    onEventMainThread(childArray);
-
-                    expandableAdapter.notifyDataSetChanged();
-                } else {
-                    for (int i = 0; i < childArray.size(); i++) {
-                        for (int j = 0; j < childArray.get(i).size(); j++) {
-                            if (childArray.get(i).get(j).getIsLead().equals("1")) {
-                                childArray.get(i).get(j).setIscheck(false);
-                            }
-                        }
-                        groupArray.get(i).setCount("0");
-                    }
-
-                }
-                for (int i = 0; i < childArray.size(); i++) {
-                    int k = 0;
-                    for (int j = 0; j < childArray.get(i).size(); j++) {
-                        if (childArray.get(i).get(j).isIscheck()) {
-                            k++;
-                        }
-                    }
-                    groupArray.get(i).setCount(k + "");
-                }
-                onEventMainThread(childArray);
-                expandableAdapter.notifyDataSetChanged();
-            }
-        });
+//        mMainCkb.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ckb_leader.setChecked(mMainCkb.isChecked());
+//                ckb_worker.setChecked(mMainCkb.isChecked());
+//                for (int i = 0; i < childArray.size(); i++) {
+//                    groupArray.get(i).setIscheck(mMainCkb.isChecked());
+//                    for (int j = 0; j < childArray.get(i).size(); j++) {
+//                        childArray.get(i).get(j).setIscheck(mMainCkb.isChecked());
+//                    }
+//                    if (mMainCkb.isChecked())
+//                        groupArray.get(i).setCount(childArray.get(i).size() + "");
+//                    else
+//                        groupArray.get(i).setCount("0");
+//                }
+//                onEventMainThread(childArray);
+//                expandableAdapter.notifyDataSetChanged();
+//            }
+//        });
+//        ckb_leader.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (ckb_leader.isChecked() && ckb_worker.isChecked()) {
+//                    mMainCkb.setChecked(true);
+//                } else
+//                    mMainCkb.setChecked(false);
+//                if (ckb_leader.isChecked()) {
+//                    for (int i = 0; i < childArray.size(); i++) {
+//                        for (int j = 0; j < childArray.get(i).size(); j++) {
+//                            if (childArray.get(i).get(j).getIsLead().equals("0")) {
+//                                childArray.get(i).get(j).setIscheck(true);
+//
+//                            }
+//                        }
+//                    }
+//
+//                    onEventMainThread(childArray);
+//                    expandableAdapter.notifyDataSetChanged();
+//                } else {
+//                    for (int i = 0; i < childArray.size(); i++) {
+//
+//                        for (int j = 0; j < childArray.get(i).size(); j++) {
+//                            if (childArray.get(i).get(j).getIsLead().equals("0")) {
+//                                childArray.get(i).get(j).setIscheck(false);
+//                            }
+//                        }
+//
+//                    }
+//
+//
+//                }
+//                for (int i = 0; i < childArray.size(); i++) {
+//                    int k = 0;
+//                    for (int j = 0; j < childArray.get(i).size(); j++) {
+//                        if (childArray.get(i).get(j).isIscheck()) {
+//                            k++;
+//
+//                        }
+//                        groupArray.get(i).setCount(k + "");
+//                    }
+//                }
+//                onEventMainThread(childArray);
+//                expandableAdapter.notifyDataSetChanged();
+//            }
+//        });
+//        ckb_worker.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (ckb_leader.isChecked() && ckb_worker.isChecked()) {
+//                    mMainCkb.setChecked(true);
+//                } else
+//                    mMainCkb.setChecked(false);
+//                if (ckb_worker.isChecked()) {
+//                    for (int i = 0; i < childArray.size(); i++) {
+//                        for (int j = 0; j < childArray.get(i).size(); j++) {
+//                            if (childArray.get(i).get(j).getIsLead().equals("1")) {
+//                                childArray.get(i).get(j).setIscheck(true);
+//                            }
+//                        }
+//                    }
+//                    onEventMainThread(childArray);
+//
+//                    expandableAdapter.notifyDataSetChanged();
+//                } else {
+//                    for (int i = 0; i < childArray.size(); i++) {
+//                        for (int j = 0; j < childArray.get(i).size(); j++) {
+//                            if (childArray.get(i).get(j).getIsLead().equals("1")) {
+//                                childArray.get(i).get(j).setIscheck(false);
+//                            }
+//                        }
+//                        groupArray.get(i).setCount("0");
+//                    }
+//
+//                }
+//                for (int i = 0; i < childArray.size(); i++) {
+//                    int k = 0;
+//                    for (int j = 0; j < childArray.get(i).size(); j++) {
+//                        if (childArray.get(i).get(j).isIscheck()) {
+//                            k++;
+//                        }
+//                    }
+//                    groupArray.get(i).setCount(k + "");
+//                }
+//                onEventMainThread(childArray);
+//                expandableAdapter.notifyDataSetChanged();
+//            }
+//        });
     }
 
     private void getDepartMent() {

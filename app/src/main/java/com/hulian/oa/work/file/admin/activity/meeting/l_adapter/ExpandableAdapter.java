@@ -169,6 +169,9 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
 //                iv_tip.setImageResource(R.mipmap.right);
 //            }
 //        }
+        if (isVideo){
+            checkBox.setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -235,12 +238,20 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
 
                 //如果是视频会议页面进入只允许选择11人加上自己12人
                 if (isVideo && isChecked) {
-                    if (j < 11) {
+                    int num = 1;
+                    for (int n = 0; n < mChildArray.size(); n++) {
+                        for (int m = 0; m < mChildArray.get(n).size(); m++) {
+                            if (mChildArray.get(n).get(m).isIscheck()) {
+                                num++;
+                            }
+                        }
+                    }
+                    if (num < 12) {
                         if (TextUtils.equals(data.getUserName(), SPUtils.get(mContext, "nickname", "").toString())) {
                             Toast.makeText(mContext, "无法选择自己", Toast.LENGTH_SHORT).show();
                             isChecked = false;
                         } else
-                            Toast.makeText(mContext, "已选择" + j + "人", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext, "已选择" + num + "人", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(mContext, "已选择最大人数11人", Toast.LENGTH_SHORT).show();
                         isChecked = false;
