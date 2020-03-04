@@ -76,6 +76,7 @@ public class UserProfileActivity extends UI {
 
     // 基本信息
     private HeadImageView headImageView;
+    private TextView tex;
     private TextView nameText;
     private ImageView genderImage;
     private TextView accountText;
@@ -186,7 +187,8 @@ public class UserProfileActivity extends UI {
     };
 
     private void findViews() {
-        headImageView = findView(R.id.user_head_image);
+//        headImageView = findView(R.id.user_head_image);
+        tex = findView(R.id.tv_type);
         nameText = findView(R.id.user_name);
         genderImage = findView(R.id.gender_img);
         accountText = findView(R.id.user_account);
@@ -276,12 +278,12 @@ public class UserProfileActivity extends UI {
 
     private void updateUserInfoView() {
         accountText.setText("帐号：" + account);
+
      //   headImageView.loadBuddyAvatar(account);
-        headImageView.setImageResource(R.drawable.nim_avatar_default);
+//        headImageView.setImageResource(R.drawable.nim_avatar_default);
         if (TextUtils.equals(account, DemoCache.getAccount())) {
             nameText.setText(UserInfoHelper.getUserName(account));
         }
-
           userInfo = (NimUserInfo) NimUIKit.getUserInfoProvider().getUserInfo(account);
 
         begin_phone.setText(userInfo.getAccount()+"");
@@ -407,6 +409,8 @@ public class UserProfileActivity extends UI {
                 nickText.setVisibility(View.GONE);
                 nameText.setText(name);
             }
+            tex.setText(UserInfoHelper.getUserName(account).substring(UserInfoHelper.getUserName(account).length()-2,UserInfoHelper.getUserName(account).length()));
+
         } else {
             aliasLayout.setVisibility(View.GONE);
             aliasLayout.findViewById(R.id.arrow_right).setVisibility(View.GONE);
