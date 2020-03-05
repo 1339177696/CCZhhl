@@ -69,7 +69,7 @@ public class L_LaunchTaskAdapter extends RecyclerView.Adapter <L_LaunchTaskAdapt
 
         //        开始时间
         String b = dataList.get(position).getStartTime();
-        holder.tv_time.setText(b.substring(0,b.length()-5));
+        holder.tv_time.setText(b);
 
         //        截止时间
         String a = dataList.get(position).getEndTime();

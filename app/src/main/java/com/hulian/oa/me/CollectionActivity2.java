@@ -46,6 +46,8 @@ public class CollectionActivity2 extends BaseActivity implements PullLoadMoreRec
     RelativeLayout ivBack;
     @BindView(R.id.tv_search)
     TextView tvSearch;
+    @BindView(R.id.emptyBg)
+    RelativeLayout emptyBg;
     private int mCount = 1;
     private RecyclerView mRecyclerView;
     L_CollectionNewsAdapter mRecyclerViewAdapter;
@@ -134,6 +136,12 @@ public class CollectionActivity2 extends BaseActivity implements PullLoadMoreRec
                             }.getType());
                     mRecyclerViewAdapter.addAllData(memberList);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
+                    if(memberList.size()==0){
+                        emptyBg.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        emptyBg.setVisibility(View.GONE);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

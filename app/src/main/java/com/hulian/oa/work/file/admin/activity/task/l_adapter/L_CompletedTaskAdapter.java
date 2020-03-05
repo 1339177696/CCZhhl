@@ -76,7 +76,7 @@ public class L_CompletedTaskAdapter extends RecyclerView.Adapter <L_CompletedTas
         //        开始时间
         String b = dataList.get(position).getStartTime();
 //        String c = getDataaa(b);
-        holder.tv_time.setText(b.substring(0,b.length()-5));
+        holder.tv_time.setText(b);
 
 
         //   截止时间

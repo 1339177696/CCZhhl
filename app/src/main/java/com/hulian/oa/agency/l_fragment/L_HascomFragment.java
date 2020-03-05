@@ -205,6 +205,12 @@ public class L_HascomFragment extends Fragment implements PullLoadMoreRecyclerVi
                     AgencyCountFinish mAgencyCount = new AgencyCountFinish();
                     mAgencyCount.setAgencyCountFinish(memberList.size() + "");
                     EventBus.getDefault().post(mAgencyCount);
+                    if(memberList.size()==0){
+                        emptyBg.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        emptyBg.setVisibility(View.GONE);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

@@ -58,7 +58,8 @@ public class MeetLaunchAdapter extends RecyclerView.Adapter <MeetLaunchAdapter.V
     public void onBindViewHolder(MeetLaunchAdapter.ViewHolder holder, final int position) {
         holder.tv_title.setText(dataList.get(position).getMeetingTheme());
 //        holder.tv_duration.setText(TimeUtils.getDateToString((dataList.get(position).getMeetingTimeBegin())));
-        holder.tv_duration.setText((dataList.get(position).getMeetingTimeBegin()));
+        String time = dataList.get(position).getMeetingTimeBegin();
+        holder.tv_duration.setText(time.substring(0,time.length()-3));
         holder.tv_address.setText(dataList.get(position).getMeetingRoomLocation());
         holder.tv_time.setText(dataList.get(position).getMeetingTime());
 

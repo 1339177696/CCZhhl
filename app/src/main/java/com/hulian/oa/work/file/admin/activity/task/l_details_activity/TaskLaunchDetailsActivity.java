@@ -225,7 +225,7 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
                     huifu_bean_x = gson.fromJson(result.getJSONObject("data").getString("object"), new TypeToken<Hufu_bean>() {}.getType());
                     JSONObject jsonObject = new JSONObject(result.getJSONObject("data").getString("object"));
                     String a = jsonObject.getString("startTime");
-                    laUnStartTime.setText(a.substring(0,a.length()-3).replace("-","/"));
+                    laUnStartTime.setText(a.replace("-","/"));
                     String b = jsonObject.getString("endTime");
                     laUnStopTime.setText(b.replace("-","/"));
                     String sum = result.getJSONObject("data").getString("sum");

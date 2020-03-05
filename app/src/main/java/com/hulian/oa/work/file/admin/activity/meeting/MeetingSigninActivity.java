@@ -147,9 +147,10 @@ public class MeetingSigninActivity extends BaseActivity {
                     et_title.setText(meeting.getMeetingTheme());
 //                    tv_part_time.setText(TimeUtils.getDateToString(meeting.getMeetingTimeBegin()));
 //                    tvPartTime2.setText(TimeUtils.getDateToString(meeting.getMeetingTimeEnd()));
-
-                    tv_part_time.setText(meeting.getMeetingTimeBegin());
-                    tvPartTime2.setText(meeting.getMeetingTimeEnd());
+                    String start_time = meeting.getMeetingTimeBegin();
+                    String end_time = meeting.getMeetingTimeEnd();
+                    tv_part_time.setText(start_time.substring(0,start_time.length()-3));
+                    tvPartTime2.setText(end_time.substring(0,end_time.length()-3));
 
 
 
