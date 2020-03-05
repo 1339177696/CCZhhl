@@ -71,8 +71,9 @@ public class L_InstructAdapter extends RecyclerView.Adapter <L_InstructAdapter.V
             if(dataList.get(position).getContent()==null||dataList.get(position).getContent().equals("")){
                 holder.tv_name.setText(dataList.get(position).getCreateBy()+"下发给"+dataList.get(position).getReceiver()+"的指令");
             }
-            else
-            holder.tv_name.setText(dataList.get(position).getContent());
+            else{
+                holder.tv_name.setText(dataList.get(position).getContent());
+            }
         }
        catch (Exception e){
 
@@ -152,7 +153,9 @@ else {
 //                //测试数据end
 
                 intent.putExtra("id",dataList.get(position).getId());
-                intent.putExtra("content",dataList.get(position).getCreateBy()+"下发给"+dataList.get(position).getReceiver()+"的指令");
+                intent.putExtra("content",dataList.get(position).getContent());
+
+                //intent.putExtra("content",dataList.get(position).getCreateBy()+"下发给"+dataList.get(position).getReceiver()+"的指令");
                 mContext.startActivity(intent);
             }
         });
