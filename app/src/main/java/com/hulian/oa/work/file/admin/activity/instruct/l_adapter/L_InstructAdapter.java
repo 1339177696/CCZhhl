@@ -64,6 +64,7 @@ public class L_InstructAdapter extends RecyclerView.Adapter <L_InstructAdapter.V
         return new L_InstructAdapter.ViewHolder(v);
     }
 
+
     @Override
     public void onBindViewHolder(L_InstructAdapter.ViewHolder holder, final int position) {
 
