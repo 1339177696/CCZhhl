@@ -69,10 +69,10 @@ public class L_InstructAdapter extends RecyclerView.Adapter <L_InstructAdapter.V
 
         try {
             if(dataList.get(position).getContent()==null||dataList.get(position).getContent().equals("")){
-                holder.tv_name.setText(dataList.get(position).getCreateBy()+"下发给"+dataList.get(position).getReceiver()+"的指令");
+//                holder.tv_name.setText(dataList.get(position).getCreateBy()+"下发给"+dataList.get(position).getReceiver()+"的指令");
             }
             else{
-                holder.tv_name.setText(dataList.get(position).getContent());
+//                holder.tv_name.setText(dataList.get(position).getContent());
             }
         }
        catch (Exception e){
@@ -97,6 +97,11 @@ else {
         if(dataList.get(position).getCreateTime()!=null) {
             holder.tv_time.setText(TimeUtils.getDateToString3(dataList.get(position).getCreateTime()));
             holder.tv_time2.setText(TimeUtils.getDateToString4(dataList.get(position).getCreateTime()));
+            String time = dataList.get(position).getCreateTime();
+            holder.tv_name.setText(time.substring(time.length()-8,time.length()-3));
+
+
+
         }
 //        holder.tv_operate.setText(dataList.get(position).getState());
         String operate = "";
