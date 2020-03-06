@@ -23,7 +23,7 @@ public class HeadImageView extends CircleImageView {
 
     public static final int DEFAULT_AVATAR_THUMB_SIZE = (int) AVChatKit.getContext().getResources().getDimension(R.dimen.avatar_max_size);
     public static final int DEFAULT_AVATAR_NOTIFICATION_ICON_SIZE = (int) AVChatKit.getContext().getResources().getDimension(R.dimen.avatar_notification_size);
-    private static final int DEFAULT_AVATAR_RES_ID = R.drawable.nim_avatar_default;
+    private static final int DEFAULT_AVATAR_RES_ID = R.drawable.multi_select_bg;
 
     public HeadImageView(Context context) {
         super(context);

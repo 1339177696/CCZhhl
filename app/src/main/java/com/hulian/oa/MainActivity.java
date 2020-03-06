@@ -119,8 +119,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         rgFooter.setOnCheckedChangeListener(this);
 
         rgFooter.check(R.id.rb_message);
-        rgFooter.check(R.id.rb_agency);
-        rgFooter.check(R.id.rb_work);
+//        rgFooter.check(R.id.rb_agency);
+//        rgFooter.check(R.id.rb_work);
 
         registerMsgUnreadInfoObserver(true);
         registerSystemMessageObservers(true);

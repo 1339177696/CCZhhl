@@ -16,8 +16,8 @@ import com.netease.nimlib.sdk.team.model.Team;
 
 public class ContactHolder extends AbsContactViewHolder<ContactItem> {
 
-    protected HeadImageView head;
-
+//    protected HeadImageView head;
+TextView tv_type;
     protected TextView name;
 
     protected TextView desc;
@@ -30,12 +30,15 @@ public class ContactHolder extends AbsContactViewHolder<ContactItem> {
         final IContact contact = item.getContact();
         if (contact.getContactType() == IContact.Type.Friend) {
           //  head.loadBuddyAvatar(contact.getContactId());
-            head.setImageResource(R.drawable.nim_avatar_default);
+            //head.setImageResource(R.drawable.nim_admin_icon);
+
+
         } else {
             Team team = NimUIKit.getTeamProvider().getTeamById(contact.getContactId());
-            head.loadTeamIconByTeam(team);
+           // head.loadTeamIconByTeam(team);
         }
         name.setText(contact.getDisplayName());
+        tv_type.setText(contact.getDisplayName().substring(contact.getDisplayName().length()-2,contact.getDisplayName().length()));
         headLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +68,8 @@ public class ContactHolder extends AbsContactViewHolder<ContactItem> {
         View view = inflater.inflate(R.layout.nim_contacts_item, null);
 
         headLayout = (RelativeLayout) view.findViewById(R.id.head_layout);
-        head = (HeadImageView) view.findViewById(R.id.contacts_item_head);
+//        head = (HeadImageView) view.findViewById(R.id.contacts_item_head);
+        tv_type = (TextView) view.findViewById(R.id.tv_type_niu);
         name = (TextView) view.findViewById(R.id.contacts_item_name);
         desc = (TextView) view.findViewById(R.id.contacts_item_desc);
 
