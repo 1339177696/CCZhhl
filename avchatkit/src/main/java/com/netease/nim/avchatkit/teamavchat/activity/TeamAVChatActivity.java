@@ -11,6 +11,7 @@ import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,7 @@ import com.netease.nimlib.sdk.avchat.AVChatManager;
 import com.netease.nimlib.sdk.avchat.AVChatStateObserver;
 import com.netease.nimlib.sdk.avchat.AVChatStateObserverLite;
 import com.netease.nimlib.sdk.avchat.constant.AVChatControlCommand;
+import com.netease.nimlib.sdk.avchat.constant.AVChatServerRecordMode;
 import com.netease.nimlib.sdk.avchat.constant.AVChatType;
 import com.netease.nimlib.sdk.avchat.constant.AVChatUserRole;
 import com.netease.nimlib.sdk.avchat.constant.AVChatVideoCropRatio;
@@ -413,6 +415,7 @@ public class TeamAVChatActivity extends UI {
             public void onJoinedChannel(int code, String audioFile, String videoFile, int i) {
                 if (code == 200) {
                     onJoinRoomSuccess();
+                    Log.e("videoFile",videoFile);
                 } else {
                     onJoinRoomFailed(code, null);
                 }
@@ -460,8 +463,10 @@ public class TeamAVChatActivity extends UI {
         AVChatManager.getInstance().setParameter(AVChatParameters.KEY_VIDEO_FIXED_CROP_RATIO, AVChatVideoCropRatio.CROP_RATIO_1_1);
 
         AVChatConfigs avChatConfigs = new AVChatConfigs(this);
-        AVChatManager.getInstance().setParameter(AVChatParameters.KEY_SERVER_AUDIO_RECORD, avChatConfigs.isServerRecordAudio());
-        AVChatManager.getInstance().setParameter(AVChatParameters.KEY_SERVER_VIDEO_RECORD, avChatConfigs.isServerRecordVideo());
+
+        AVChatManager.getInstance().setParameter(AVChatParameters.KEY_SERVER_AUDIO_RECORD, true);
+        AVChatManager.getInstance().setParameter(AVChatParameters.KEY_SERVER_VIDEO_RECORD, true);
+        AVChatManager.getInstance().setParameter(AVChatParameters.KEY_SERVER_RECORD_MODE, AVChatServerRecordMode.MIX);
 
         AVChatManager.getInstance().joinRoom2(roomId, AVChatType.VIDEO, new AVChatCallback<AVChatData>() {
             @Override
