@@ -85,8 +85,8 @@ public class Fra_post_order_qgl2 extends Fragment {
 //                .setTag(5)
 //                .build();
 //添加菜单
-//        youjian,
-        fabTop.addFab(qingjia,renwu,email,collection);
+//        youjian,,collection
+        fabTop.addFab(qingjia,renwu,email);
         //    fabTop.setAnimationManager(new FabAlphaAnimate(fabTop));
 //设置菜单点击事件
         fabTop.setFabClickListener(new OnFabClickListener() {
@@ -105,6 +105,7 @@ public class Fra_post_order_qgl2 extends Fragment {
                     fabTop.closeAnimate();
                     EventBus.getDefault().post("3");
 //                    EventBus.getDefault().post("任务协同");
+
                 } else if (Integer.parseInt(tag+"") == 4){
                     fabTop.closeAnimate();
                     EventBus.getDefault().post("4");

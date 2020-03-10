@@ -13,8 +13,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:contentDescription="@string/empty"
-        android:scaleType="fitStart"
-        android:src="@mipmap/ic_secretary" />
+        android:scaleType="fitStart" />
 
     <TextView
         android:id="@+id/tv_func_name"
@@ -25,7 +24,7 @@
         android:layout_toRightOf="@+id/img_head"
         android:ellipsize="end"
         android:singleLine="true"
-        android:text="系统功能"
+        android:text=""
         android:textColor="#333333"
         android:textSize="16sp" />
 

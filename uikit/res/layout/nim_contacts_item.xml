@@ -12,11 +12,30 @@
         android:layout_alignParentLeft="true"
         android:gravity="center">
 
-        <com.netease.nim.uikit.common.ui.imageview.HeadImageView
-            android:id="@+id/contacts_item_head"
-            android:layout_width="@dimen/avatar_size_in_contact"
-            android:layout_height="@dimen/avatar_size_in_contact"
-            android:scaleType="centerCrop"/>
+<!--        <com.netease.nim.uikit.common.ui.imageview.HeadImageView-->
+<!--            android:id="@+id/contacts_item_head"-->
+<!--            android:layout_width="@dimen/avatar_size_in_contact"-->
+<!--            android:layout_height="@dimen/avatar_size_in_contact"-->
+<!--            android:scaleType="centerCrop"/>-->
+        <FrameLayout
+            android:id="@+id/iv_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="@dimen/dp_38"
+                android:background="@drawable/bg_agency_head"
+                android:layout_height="@dimen/dp_38" />
+            <TextView
+                android:id="@+id/tv_type_niu"
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:textColor="#0054CC"
+                android:text="报"
+                android:textSize="@dimen/sp_13"
+                android:gravity="center"
+                android:layout_height="match_parent" />
+        </FrameLayout>
+
     </RelativeLayout>
 
     <LinearLayout

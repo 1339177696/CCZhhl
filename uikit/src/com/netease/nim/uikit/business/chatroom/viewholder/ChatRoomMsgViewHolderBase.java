@@ -308,6 +308,7 @@ public abstract class ChatRoomMsgViewHolderBase extends RecyclerViewHolder<BaseM
                     }
                 }
                 return false;
+
             }
         };
         // 消息长按事件响应处理

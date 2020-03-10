@@ -45,20 +45,21 @@ public class FuncViewHolder extends AbsContactViewHolder<FuncViewHolder.FuncItem
 
     @Override
     public void refresh(ContactDataAdapter contactAdapter, int position, FuncItem item) {
-        if (item == FuncItem.VERIFY) {
-            funcName.setText("验证提醒");
-            image.setImageResource(R.mipmap.icon_verify_remind);
-            image.setScaleType(ImageView.ScaleType.FIT_XY);
-            int unreadCount = SystemMessageUnreadManager.getInstance().getSysMsgUnreadCount();
-            updateUnreadNum(unreadCount);
-            ReminderManager.getInstance().registerUnreadNumChangedCallback(this);
-            sUnreadCallbackRefs.add(new WeakReference<ReminderManager.UnreadNumChangedCallback>(this));
-        }
+//        if (item == FuncItem.VERIFY) {
+//            funcName.setText("验证提醒");
+//            image.setImageResource(R.mipmap.icon_verify_remind);
+//            image.setScaleType(ImageView.ScaleType.FIT_XY);
+//            int unreadCount = SystemMessageUnreadManager.getInstance().getSysMsgUnreadCount();
+//            updateUnreadNum(unreadCount);
+//            ReminderManager.getInstance().registerUnreadNumChangedCallback(this);
+//            sUnreadCallbackRefs.add(new WeakReference<ReminderManager.UnreadNumChangedCallback>(this));
+//        }
 //        else if (item == FuncItem.ROBOT) {
 //            funcName.setText("智能机器人");
 //            image.setImageResource(R.drawable.ic_robot);
 //        }
-        else if (item == FuncItem.NORMAL_TEAM) {
+        //else
+       if (item == FuncItem.NORMAL_TEAM) {
             funcName.setText("讨论组");
             image.setImageResource(R.mipmap.ic_secretary);
         }
@@ -128,7 +129,7 @@ public class FuncViewHolder extends AbsContactViewHolder<FuncViewHolder.FuncItem
 
         public static List<AbsContactItem> provide() {
             List<AbsContactItem> items = new ArrayList<>();
-            items.add(VERIFY);
+//            items.add(VERIFY);
             //items.add(ROBOT);
             items.add(NORMAL_TEAM);
 //            items.add(ADVANCED_TEAM);

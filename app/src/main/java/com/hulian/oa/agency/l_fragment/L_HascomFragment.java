@@ -100,15 +100,12 @@ public class L_HascomFragment extends Fragment implements PullLoadMoreRecyclerVi
         getData();
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-        EventBus.getDefault().unregister(this);
-    }
+
     //接受点击按钮事件
     public void onEventMainThread(StringBean2 stringBean2){
-        if (stringBean2.getDaiban().equals("1")){
+
+        Log.e("wwwwwww", stringBean2.getDaiban()+"");
+       if (stringBean2.getDaiban().equals("1")){
             dataBean.clear();
             for (int i = 0;i<memberList.size();i++) {
 
@@ -165,7 +162,12 @@ public class L_HascomFragment extends Fragment implements PullLoadMoreRecyclerVi
         }
     }
 
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+        EventBus.getDefault().unregister(this);
+    }
     @Override
     public void onRefresh() {
         Log.e("wxl", "onRefresh");
@@ -203,6 +205,12 @@ public class L_HascomFragment extends Fragment implements PullLoadMoreRecyclerVi
                     AgencyCountFinish mAgencyCount = new AgencyCountFinish();
                     mAgencyCount.setAgencyCountFinish(memberList.size() + "");
                     EventBus.getDefault().post(mAgencyCount);
+                    if(memberList.size()==0){
+                        emptyBg.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        emptyBg.setVisibility(View.GONE);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

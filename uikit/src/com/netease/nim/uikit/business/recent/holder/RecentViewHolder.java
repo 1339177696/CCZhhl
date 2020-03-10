@@ -39,7 +39,8 @@ public abstract class RecentViewHolder extends RecyclerViewHolder<BaseQuickAdapt
 
     protected FrameLayout portraitPanel;
 
-    protected HeadImageView imgHead;
+//    protected HeadImageView imgHead;
+    protected TextView type;
 
     protected TextView tvNickname;
 
@@ -72,7 +73,8 @@ public abstract class RecentViewHolder extends RecyclerViewHolder<BaseQuickAdapt
 
     public void inflate(BaseViewHolder holder, final RecentContact recent) {
         this.portraitPanel = holder.getView(R.id.portrait_panel);
-        this.imgHead = holder.getView(R.id.img_head);
+//        this.imgHead = holder.getView(R.id.img_head);
+        this.type = holder.getView(R.id.type_miu);
         this.tvNickname = holder.getView(R.id.tv_nickname);
         this.tvMessage = holder.getView(R.id.tv_message);
         this.tvUnread = holder.getView(R.id.unread_number_tip);
@@ -147,15 +149,15 @@ public abstract class RecentViewHolder extends RecyclerViewHolder<BaseQuickAdapt
         // 设置头像
         if (recent.getSessionType() == SessionTypeEnum.P2P) {
          //   imgHead.loadBuddyAvatar(recent.getContactId());
-            imgHead.setImageResource(R.drawable.nim_avatar_default);
+//            imgHead.setImageResource(R.drawable.nim_avatar_default);
         } else if (recent.getSessionType() == SessionTypeEnum.Team) {
             Team team = NimUIKit.getTeamProvider().getTeamById(recent.getContactId());
        //     imgHead.loadTeamIconByTeam(team);
-            imgHead.setImageResource(R.drawable.nim_avatar_group);
+//            imgHead.setImageResource(R.drawable.nim_avatar_group);
         } else if (recent.getSessionType() == SessionTypeEnum.SUPER_TEAM) {
          //   SuperTeam team = NimUIKit.getSuperTeamProvider().getTeamById(recent.getContactId());
          //   imgHead.loadSuperTeamIconByTeam(team);
-            imgHead.setImageResource(R.drawable.nim_avatar_group);
+//            imgHead.setImageResource(R.drawable.nim_avatar_group);
         }
     }
 
@@ -212,6 +214,7 @@ public abstract class RecentViewHolder extends RecyclerViewHolder<BaseQuickAdapt
             tvNickname.setMaxWidth(labelWidth);
         }
         tvNickname.setText(nick);
+        type.setText(nick.substring(nick.length()-2,nick.length()));
     }
 
     protected String unreadCountShowRule(int unread) {

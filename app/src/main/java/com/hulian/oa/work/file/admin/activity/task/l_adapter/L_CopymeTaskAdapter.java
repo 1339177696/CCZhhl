@@ -74,7 +74,7 @@ public class L_CopymeTaskAdapter extends RecyclerView.Adapter <L_CopymeTaskAdapt
 
 //        截止时间
         String a = dataList.get(position).getEndTime();
-        holder.tv_deadline_time.setText(a.substring(0,a.length()-3));
+        holder.tv_deadline_time.setText(a);
 
 //        holder.tv_time.setText(dataList.get(position).getStartTime());
 //        holder.tv_deadline_time.setText(dataList.get(position).getEndTime());

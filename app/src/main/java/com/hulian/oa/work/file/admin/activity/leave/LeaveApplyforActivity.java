@@ -410,8 +410,13 @@ public class LeaveApplyforActivity extends BaseActivity {
         TimePickerView pvTime = new TimePickerBuilder(mContext, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
-                //设置时间
-                textView.setText(getTime(date));
+                //判断选择开始时间是否大于当前时间
+                if(TimeUtils.timeCompare(TimeUtils.getNowTime1(),getTime(date))==1){
+                    ToastHelper.showToast(mContext, "请选择当前时间之后");
+                }else {
+                    //设置时间
+                    textView.setText(getTime(date));
+                }
                 if (!"请选择开始时间".equals(tvTimeStart.getText().toString().trim()) && !"请选择结束时间".equals(tvTimeEnd.getText().toString().trim())) {
 //                   if(!TimeUtils.compareTwoTime2(tvTimeStart.getText().toString().trim(),tvTimeEnd.getText().toString().trim())){
 //                       ToastHelper.showToast(mContext,"请选择不小于开始时间的结束时间");

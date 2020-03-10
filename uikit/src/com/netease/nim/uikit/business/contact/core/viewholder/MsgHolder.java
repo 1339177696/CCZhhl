@@ -27,7 +27,7 @@ public class MsgHolder extends AbsContactViewHolder<MsgItem> {
 
     private static final String PREFIX = "...";
 
-    protected HeadImageView head;
+    //protected HeadImageView head;
 
     protected TextView name;
 
@@ -41,7 +41,7 @@ public class MsgHolder extends AbsContactViewHolder<MsgItem> {
     public View inflate(LayoutInflater inflater) {
         View view = inflater.inflate(R.layout.nim_contacts_item, null);
 
-        head = (HeadImageView) view.findViewById(R.id.contacts_item_head);
+        //head = (HeadImageView) view.findViewById(R.id.contacts_item_head);
         name = (TextView) view.findViewById(R.id.contacts_item_name);
         time = (TextView) view.findViewById(R.id.contacts_item_time);
         desc = (TextView) view.findViewById(R.id.contacts_item_desc);
@@ -65,10 +65,10 @@ public class MsgHolder extends AbsContactViewHolder<MsgItem> {
 
         if (record.getSessionType() == SessionTypeEnum.P2P) {
           //  head.loadBuddyAvatar(contact.getContactId());
-            head.setImageResource(R.drawable.nim_avatar_default);
+            //head.setImageResource(R.drawable.nim_avatar_default);
         } else {
             Team team = NimUIKit.getTeamProvider().getTeamById(contact.getContactId());
-            head.loadTeamIconByTeam(team);
+           // head.loadTeamIconByTeam(team);
         }
         name.setText(contact.getDisplayName());
 

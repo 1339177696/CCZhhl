@@ -64,15 +64,17 @@ public class L_InstructAdapter extends RecyclerView.Adapter <L_InstructAdapter.V
         return new L_InstructAdapter.ViewHolder(v);
     }
 
+
     @Override
     public void onBindViewHolder(L_InstructAdapter.ViewHolder holder, final int position) {
 
         try {
             if(dataList.get(position).getContent()==null||dataList.get(position).getContent().equals("")){
-                holder.tv_name.setText(dataList.get(position).getCreateBy()+"下发给"+dataList.get(position).getReceiver()+"的指令");
+//                holder.tv_name.setText(dataList.get(position).getCreateBy()+"下发给"+dataList.get(position).getReceiver()+"的指令");
             }
-            else
-            holder.tv_name.setText(dataList.get(position).getContent());
+            else{
+//                holder.tv_name.setText(dataList.get(position).getContent());
+            }
         }
        catch (Exception e){
 
@@ -96,6 +98,11 @@ else {
         if(dataList.get(position).getCreateTime()!=null) {
             holder.tv_time.setText(TimeUtils.getDateToString3(dataList.get(position).getCreateTime()));
             holder.tv_time2.setText(TimeUtils.getDateToString4(dataList.get(position).getCreateTime()));
+            String time = dataList.get(position).getCreateTime();
+            holder.tv_name.setText(time.substring(time.length()-8,time.length()-3));
+
+
+
         }
 //        holder.tv_operate.setText(dataList.get(position).getState());
         String operate = "";
@@ -152,7 +159,9 @@ else {
 //                //测试数据end
 
                 intent.putExtra("id",dataList.get(position).getId());
-                intent.putExtra("content",dataList.get(position).getCreateBy()+"下发给"+dataList.get(position).getReceiver()+"的指令");
+                intent.putExtra("content",dataList.get(position).getContent());
+
+                //intent.putExtra("content",dataList.get(position).getCreateBy()+"下发给"+dataList.get(position).getReceiver()+"的指令");
                 mContext.startActivity(intent);
             }
         });

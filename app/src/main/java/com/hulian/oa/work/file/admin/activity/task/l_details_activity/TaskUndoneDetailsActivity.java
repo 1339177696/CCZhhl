@@ -234,7 +234,7 @@ public class TaskUndoneDetailsActivity extends BaseActivity implements PullLoadM
 
                     JSONObject jsonObject = new JSONObject(result.getJSONObject("data").getString("object"));
                     String a = jsonObject.getString("startTime");
-                    la_un_start_time.setText(a.substring(0,a.length()-3).replace("-","/"));
+                    la_un_start_time.setText(a.replace("-","/"));
                     String b = jsonObject.getString("endTime");
                     la_un_stop_time.setText(b.replace("-","/"));
 

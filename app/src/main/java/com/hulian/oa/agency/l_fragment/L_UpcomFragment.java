@@ -202,6 +202,12 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
                     AgencyCount mAgencyCount = new AgencyCount();
                     mAgencyCount.setAgencyCount(memberList.size() + "");
                     EventBus.getDefault().post(mAgencyCount);
+                    if(memberList.size()==0){
+                        emptyBg.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        emptyBg.setVisibility(View.GONE);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

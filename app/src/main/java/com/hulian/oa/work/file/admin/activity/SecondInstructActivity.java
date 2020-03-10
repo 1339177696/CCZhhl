@@ -48,6 +48,7 @@ public class SecondInstructActivity extends BaseActivity implements PullLoadMore
     private Context mContext;
     private int mCount = 1;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

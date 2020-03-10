@@ -174,7 +174,7 @@ public class TaskCompletedDetailsActivity extends BaseActivity implements PullLo
 
                     JSONObject jsonObject = new JSONObject(result.getJSONObject("data").getString("object"));
                     String a = jsonObject.getString("startTime");
-                    laUnStartTime.setText(a.substring(0, a.length() - 3).replace("-","/"));
+                    laUnStartTime.setText(a.replace("-","/"));
                     String b = jsonObject.getString("endTime");
                     laUnStopTime.setText(b.replace("-","/"));
 

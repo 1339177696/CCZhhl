@@ -39,10 +39,12 @@ import com.hulian.oa.work.file.admin.activity.meeting.l_adapter.MeetGridViewAdap
 import com.hulian.oa.work.file.admin.activity.meeting.l_adapter.MeetRoomAdapter;
 import com.hulian.oa.work.file.admin.activity.meeting.l_fragment.MeetLaunchFragment;
 import com.hulian.oa.work.file.admin.activity.meeting.l_fragment.MeetReceiverFragment;
+import com.netease.nim.avchatkit.common.util.TimeUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -177,6 +179,7 @@ public class MeetingSponsorActivity extends BaseActivity {
                     return;
                 }
                 if (TextUtils.isEmpty(meetingTime)) {
+
                     ToastHelper.showToast(mContext, "请选择会议开始时间");
                     return;
                 }
@@ -310,15 +313,19 @@ public class MeetingSponsorActivity extends BaseActivity {
                 //设置时间
                 if(!meetingTimeEnd.equals(""))
                 {
-                    if(TimeUtils.differentDaysByMillisecond(getTime(date),meetingTimeEnd)<0){
+                    if(TimeUtils.differentDaysByMillisecond(getTime(date),meetingTimeEnd)>0){
                         ToastHelper.showToast(mContext, "请选择不小于开始时间的结束时间");
                         return;
                     }
                 }
+//                判断选择开始时间是否大于当前时间
+                if(TimeUtils.timeCompare(TimeUtils.getNowTime1(),getTime(date))==1){
+                    ToastHelper.showToast(mContext, "请选择当前时间之后");
+                }else {
+                    tvPartTime.setText(getTime(date));
+                    meetingTime = tvPartTime.getText().toString();
+                }
 
-                tvPartTime.setText(getTime(date));
-                //    meetingTime = getTime(date);
-                meetingTime = tvPartTime.getText().toString();
             }
         }).setType(new boolean[]{true, true, true, true, true, false})
                 .setLabel("年", "月", "日", "时", "分", "秒")
@@ -432,5 +439,6 @@ public class MeetingSponsorActivity extends BaseActivity {
         intent.setData(data);
         startActivity(intent);
     }
+
 
 }
