@@ -66,7 +66,7 @@ public class MeActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rl_mine_program, R.id.rl_mine_file, R.id.rl_mine_collection, R.id.rl_mine_set, R.id.iv_back, R.id.mine_out_login,R.id.main2_outlogin})
+    @OnClick({R.id.rl_mine_program, R.id.rl_mine_file, R.id.rl_mine_collection, R.id.rl_mine_set, R.id.iv_back, R.id.mine_out_login,R.id.main2_outlogin,R.id.rl_mine_banben})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_mine_program:
@@ -88,6 +88,9 @@ public class MeActivity extends BaseActivity {
                 NIMClient.getService(AuthService.class).logout();
                 SPUtils.clear(mContext);
                 exitApp(mContext);
+                break;
+            case R.id.rl_mine_banben:
+                startActivity(new Intent(mContext, LBanbenActivity.class));
                 break;
         }
     }

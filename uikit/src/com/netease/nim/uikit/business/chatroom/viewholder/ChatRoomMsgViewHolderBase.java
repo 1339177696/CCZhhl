@@ -56,8 +56,8 @@ public abstract class ChatRoomMsgViewHolderBase extends RecyclerViewHolder<BaseM
     protected LinearLayout nameContainer;
     protected TextView readReceiptTextView;
 
-    private HeadImageView avatarLeft;
-    private HeadImageView avatarRight;
+//    private HeadImageView avatarLeft;
+//    private HeadImageView avatarRight;
 
     public ImageView nameIconView;
 
@@ -172,8 +172,8 @@ public abstract class ChatRoomMsgViewHolderBase extends RecyclerViewHolder<BaseM
 
     protected final void inflate() {
         timeTextView = findViewById(R.id.message_item_time);
-        avatarLeft = findViewById(R.id.message_item_portrait_left);
-        avatarRight = findViewById(R.id.message_item_portrait_right);
+//        avatarLeft = findViewById(R.id.message_item_portrait_left);
+//        avatarRight = findViewById(R.id.message_item_portrait_right);
         alertButton = findViewById(R.id.message_item_alert);
         progressBar = findViewById(R.id.message_item_progress);
         nameTextView = findViewById(R.id.message_item_nickname);
@@ -244,19 +244,19 @@ public abstract class ChatRoomMsgViewHolderBase extends RecyclerViewHolder<BaseM
     }
 
     private void setHeadImageView() {
-        HeadImageView show = isReceivedMessage() ? avatarLeft : avatarRight;
-        HeadImageView hide = isReceivedMessage() ? avatarRight : avatarLeft;
-        hide.setVisibility(View.GONE);
-        if (!isShowHeadImage()) {
-            show.setVisibility(View.GONE);
-            return;
-        }
-        if (isMiddleItem()) {
-            show.setVisibility(View.GONE);
-        } else {
-            show.setVisibility(View.VISIBLE);
-            show.loadBuddyAvatar(message.getFromAccount());
-        }
+//        HeadImageView show = isReceivedMessage() ? avatarLeft : avatarRight;
+//        HeadImageView hide = isReceivedMessage() ? avatarRight : avatarLeft;
+//        hide.setVisibility(View.GONE);
+//        if (!isShowHeadImage()) {
+//            show.setVisibility(View.GONE);
+//            return;
+//        }
+//        if (isMiddleItem()) {
+//            show.setVisibility(View.GONE);
+//        } else {
+//            show.setVisibility(View.VISIBLE);
+//            show.loadBuddyAvatar(message.getFromAccount());
+//        }
 
     }
 
@@ -288,8 +288,8 @@ public abstract class ChatRoomMsgViewHolderBase extends RecyclerViewHolder<BaseM
                     NimUIKitImpl.getSessionListener().onAvatarClicked(context, message);
                 }
             };
-            avatarLeft.setOnClickListener(portraitListener);
-            avatarRight.setOnClickListener(portraitListener);
+//            avatarLeft.setOnClickListener(portraitListener);
+//            avatarRight.setOnClickListener(portraitListener);
         }
     }
 
@@ -323,8 +323,8 @@ public abstract class ChatRoomMsgViewHolderBase extends RecyclerViewHolder<BaseM
                     return true;
                 }
             };
-            avatarLeft.setOnLongClickListener(longClickListener);
-            avatarRight.setOnLongClickListener(longClickListener);
+//            avatarLeft.setOnLongClickListener(longClickListener);
+//            avatarRight.setOnLongClickListener(longClickListener);
         }
     }
 

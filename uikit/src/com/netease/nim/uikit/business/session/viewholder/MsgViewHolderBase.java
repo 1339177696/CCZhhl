@@ -2,6 +2,7 @@ package com.netease.nim.uikit.business.session.viewholder;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.netease.nim.uikit.R;
 import com.netease.nim.uikit.business.session.module.list.MsgAdapter;
 import com.netease.nim.uikit.business.team.helper.TeamHelper;
+import com.netease.nim.uikit.business.uinfo.UserInfoHelper;
 import com.netease.nim.uikit.common.ui.imageview.HeadImageView;
 import com.netease.nim.uikit.common.ui.recyclerview.adapter.BaseMultiItemFetchLoadAdapter;
 import com.netease.nim.uikit.common.ui.recyclerview.holder.BaseViewHolder;
@@ -58,8 +60,13 @@ public abstract class MsgViewHolderBase extends RecyclerViewHolder<BaseMultiItem
     protected TextView readReceiptTextView;
     protected TextView ackMsgTextView;
 
-    private HeadImageView avatarLeft;
-    private HeadImageView avatarRight;
+//    private HeadImageView avatarLeft;
+//    private HeadImageView avatarRight;
+
+    private TextView tv_lift;
+    private TextView tv_rhit;
+    private FrameLayout portrait_panel;
+    private FrameLayout portrait_panel2;
 
     public ImageView nameIconView;
 
@@ -179,8 +186,14 @@ public abstract class MsgViewHolderBase extends RecyclerViewHolder<BaseMultiItem
 
     protected final void inflate() {
         timeTextView = findViewById(R.id.message_item_time);
-        avatarLeft = findViewById(R.id.message_item_portrait_left);
-        avatarRight = findViewById(R.id.message_item_portrait_right);
+//        avatarLeft = findViewById(R.id.message_item_portrait_left);
+        tv_lift = findViewById(R.id.type_miu_head);
+        tv_rhit = findViewById(R.id.type_miu_rhit);
+        portrait_panel = findViewById(R.id.portrait_panel);
+        portrait_panel2 = findViewById(R.id.portrait_panel2);
+//        avatarRight = findViewById(R.id.message_item_portrait_right);
+
+
         alertButton = findViewById(R.id.message_item_alert);
         progressBar = findViewById(R.id.message_item_progress);
         nameTextView = findViewById(R.id.message_item_nickname);
@@ -254,20 +267,29 @@ public abstract class MsgViewHolderBase extends RecyclerViewHolder<BaseMultiItem
     }
 
     private void setHeadImageView() {
-        HeadImageView show = isReceivedMessage() ? avatarLeft : avatarRight;
-        HeadImageView hide = isReceivedMessage() ? avatarRight : avatarLeft;
+//        HeadImageView show = isReceivedMessage() ? avatarLeft : avatarRight;
+//        HeadImageView hide = isReceivedMessage() ? avatarRight : avatarLeft;
+
+        FrameLayout shou = isReceivedMessage() ?portrait_panel:portrait_panel2;
+        FrameLayout hide = isReceivedMessage() ?portrait_panel2:portrait_panel;
+        TextView shou1 = isReceivedMessage() ?tv_lift:tv_rhit;
+        TextView hide1 = isReceivedMessage() ?tv_rhit:tv_lift;
 
         hide.setVisibility(View.GONE);
+        portrait_panel.setVisibility(View.GONE);
         if (!isShowHeadImage()) {
-            show.setVisibility(View.GONE);
+            shou.setVisibility(View.GONE);
             return;
         }
         if (isMiddleItem()) {
-            show.setVisibility(View.GONE);
+            shou.setVisibility(View.GONE);
+
         } else {
-            show.setVisibility(View.VISIBLE);
-         //   show.loadBuddyAvatar(message);
-            show.setImageResource(R.drawable.nim_avatar_default);
+            shou.setVisibility(View.VISIBLE);
+            //   show.loadBuddyAvatar(message);
+            Log.d("那麽",message.getFromNick()+"aa");
+            shou1.setText(message.getFromNick().substring(message.getFromNick().length()-2,message.getFromNick().length()));
+//            show.setImageResource(R.drawable.nim_avatar_default);
         }
 
     }
@@ -298,10 +320,11 @@ public abstract class MsgViewHolderBase extends RecyclerViewHolder<BaseMultiItem
                 @Override
                 public void onClick(View v) {
                     NimUIKitImpl.getSessionListener().onAvatarClicked(context, message);
+
                 }
             };
-            avatarLeft.setOnClickListener(portraitListener);
-            avatarRight.setOnClickListener(portraitListener);
+//            avatarLeft.setOnClickListener(portraitListener);
+//            avatarRight.setOnClickListener(portraitListener);
         }
         // 已读回执响应事件
         if (NimUIKitImpl.getSessionListener() != null) {
@@ -343,8 +366,8 @@ public abstract class MsgViewHolderBase extends RecyclerViewHolder<BaseMultiItem
                     return true;
                 }
             };
-            avatarLeft.setOnLongClickListener(longClickListener);
-            avatarRight.setOnLongClickListener(longClickListener);
+//            avatarLeft.setOnLongClickListener(longClickListener);
+//            avatarRight.setOnLongClickListener(longClickListener);
         }
     }
 

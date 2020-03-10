@@ -397,7 +397,44 @@
 
 
         </RelativeLayout>
+        <View
+            android:background="#E3E3E3"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"/>
+        <RelativeLayout
+            android:id="@+id/rl_mine_banben"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_56">
 
+            <ImageView
+                android:id="@+id/mine_img6"
+                android:layout_marginLeft="@dimen/dp_17"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/richeng_icon_qgl"
+                android:layout_width="@dimen/dp_27"
+                android:layout_height="@dimen/dp_27" />
+
+            <TextView
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/mine_img6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="关于工作界面"
+                android:textColor="#ff313131"
+                android:textSize="@dimen/sp_14"
+                />
+
+            <ImageView
+                android:layout_marginRight="@dimen/dp_19"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/qj_selected_icon_qgl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </RelativeLayout>
 
 
 

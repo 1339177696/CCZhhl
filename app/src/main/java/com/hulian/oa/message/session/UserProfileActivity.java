@@ -90,6 +90,7 @@ public class UserProfileActivity extends UI {
     private RelativeLayout signatureLayout;
     private RelativeLayout aliasLayout;
     private TextView nickText;
+    private TextView tv_email;
 
     // 开关
     private ViewGroup toggleLayout;
@@ -189,6 +190,7 @@ public class UserProfileActivity extends UI {
     private void findViews() {
 //        headImageView = findView(R.id.user_head_image);
         tex = findView(R.id.tv_type);
+        tv_email = findView(R.id.tv_email);
         nameText = findView(R.id.user_name);
         genderImage = findView(R.id.gender_img);
         accountText = findView(R.id.user_account);
@@ -320,6 +322,7 @@ public class UserProfileActivity extends UI {
         if (!TextUtils.isEmpty(userInfo.getEmail())) {
             emailLayout.setVisibility(View.VISIBLE);
             emailText.setText(userInfo.getEmail());
+
         } else {
             emailLayout.setVisibility(View.GONE);
         }
@@ -410,6 +413,8 @@ public class UserProfileActivity extends UI {
                 nameText.setText(name);
             }
             tex.setText(UserInfoHelper.getUserName(account).substring(UserInfoHelper.getUserName(account).length()-2,UserInfoHelper.getUserName(account).length()));
+            Log.e("邮箱",UserInfoHelper.getUserDisplayName(account));
+            Log.e("邮箱1",userInfo.getEmail()+"dddd");
 
         } else {
             aliasLayout.setVisibility(View.GONE);

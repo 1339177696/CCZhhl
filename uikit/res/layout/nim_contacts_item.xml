@@ -23,13 +23,13 @@
             android:layout_height="wrap_content">
             <ImageView
                 android:layout_width="@dimen/dp_38"
-                android:background="@drawable/bg_agency_head"
+                android:background="@drawable/bg_head1_img"
                 android:layout_height="@dimen/dp_38" />
             <TextView
                 android:id="@+id/tv_type_niu"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
-                android:textColor="#0054CC"
+                android:textColor="@color/white"
                 android:text="报"
                 android:textSize="@dimen/sp_13"
                 android:gravity="center"
