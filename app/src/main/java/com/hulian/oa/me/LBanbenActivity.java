@@ -52,6 +52,8 @@ public class LBanbenActivity extends BaseActivity {
     public void postVer(int v) {
         RequestParams params = new RequestParams();
         params.put("apkVersion", v + "");
+
+
         HttpRequest.posVerson(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
