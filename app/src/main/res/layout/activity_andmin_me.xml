@@ -420,7 +420,7 @@
                 android:layout_toRightOf="@+id/mine_img6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="关于工作界面"
+                android:text="关于工作桌面"
                 android:textColor="#ff313131"
                 android:textSize="@dimen/sp_14"
                 />
@@ -448,7 +448,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="@dimen/dp_45"
         android:layout_marginRight="@dimen/dp_45"
-        android:layout_marginBottom="@dimen/dp_80"
+        android:layout_marginBottom="@dimen/dp_45"
         android:background="@drawable/main2_btn_bg"
         android:text="退出登录"
         android:textColor="@color/white"

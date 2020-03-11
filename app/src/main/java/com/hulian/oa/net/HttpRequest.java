@@ -24,6 +24,15 @@ public class HttpRequest {
     RequestMode.getRequest("https://www.wanandroid.com/banner/json", params, callback, null);
   }
 
+
+    /**
+     * 检查版本升级
+     * @param params 入参
+     * @param callback 回调接口
+     */
+    public static void posVerson(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls+"system/apkVersion/android/apkInfo", params, callback, User.class);
+    }
   /**
    * @param params 入参
    * @param callback 回调接口
