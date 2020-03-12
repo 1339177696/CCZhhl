@@ -31,7 +31,7 @@ public class HttpRequest {
      * @param callback 回调接口
      */
     public static void posVerson(RequestParams params, ResponseCallback callback) {
-        RequestMode.postRequest(Urls.commUrls+"system/apkVersion/android/apkInfo", params, callback, User.class);
+        RequestMode.postRequest(Urls.commUrls+"system/apkVersion/android/apkInfo", params, callback, null);
     }
   /**
    * @param params 入参

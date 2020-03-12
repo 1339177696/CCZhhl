@@ -57,13 +57,13 @@ public class LBanbenActivity extends BaseActivity {
             public void onSuccess(Object responseObj) {
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-//                    String code = result.getString("code");
-//                    if (result.getJSONObject("code").equals("0")) {
-//                        Toast.makeText(LBanbenActivity.this, "当前为最新版本", Toast.LENGTH_LONG).show();
-//                    } else if (result.getJSONObject("code").equals("301")) {
-//                        String apkurl = result.getJSONObject("data").getString("apkPath");
-//                        updateApk(LBanbenActivity.this, "", "", true, true, 10000000, apkurl, LBanbenActivity.this.getResources().getString(R.string.app_name));
-//                    }
+                    String apkurl = result.getJSONObject("data").getString("apkPath");
+                    String versionNum = result.getJSONObject("data").getString("versionNum");
+                    if (apkurl.equals("")) {
+                        Toast.makeText(LBanbenActivity.this, "当前为最新版本", Toast.LENGTH_LONG).show();
+                    } else {
+                        updateApk(LBanbenActivity.this, "", versionNum, true, true, 10000000, apkurl, LBanbenActivity.this.getResources().getString(R.string.app_name));
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -72,6 +72,7 @@ public class LBanbenActivity extends BaseActivity {
 
             @Override
             public void onFailure(OkHttpException failuer) {
+                Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
 
             }
         });
