@@ -2,6 +2,7 @@ package com.hulian.oa.me;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -19,9 +20,12 @@ import com.hulian.oa.utils.StatusBarUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.addapp.pickers.util.LogUtils;
 
 /**
  * 创建：  qgl
@@ -62,7 +66,7 @@ public class LBanbenActivity extends BaseActivity {
                     if (apkurl.equals("")) {
                         Toast.makeText(LBanbenActivity.this, "当前为最新版本", Toast.LENGTH_LONG).show();
                     } else {
-                        updateApk(LBanbenActivity.this, "", versionNum, true, true, 10000000, apkurl, LBanbenActivity.this.getResources().getString(R.string.app_name));
+                       updateApk(LBanbenActivity.this, "", versionNum, true, true, 10000000, apkurl, LBanbenActivity.this.getResources().getString(R.string.app_name));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -89,4 +93,7 @@ public class LBanbenActivity extends BaseActivity {
                 break;
         }
     }
+
+
+
 }
