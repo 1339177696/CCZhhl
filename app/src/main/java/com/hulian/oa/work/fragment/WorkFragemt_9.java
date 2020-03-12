@@ -109,6 +109,7 @@ public class WorkFragemt_9 extends Fragment {
             }
         }
         unbinder = ButterKnife.bind(this, view);
+
         return view;
     }
 
