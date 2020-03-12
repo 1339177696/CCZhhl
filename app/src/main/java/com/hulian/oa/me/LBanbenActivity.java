@@ -59,6 +59,7 @@ public class LBanbenActivity extends BaseActivity {
                     JSONObject result = new JSONObject(responseObj.toString());
                     String apkurl = result.getJSONObject("data").getString("apkPath");
                     String versionNum = result.getJSONObject("data").getString("versionNum");
+
                     if (apkurl.equals("")) {
                         Toast.makeText(LBanbenActivity.this, "当前为最新版本", Toast.LENGTH_LONG).show();
                     } else {
