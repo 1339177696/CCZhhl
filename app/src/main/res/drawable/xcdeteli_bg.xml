@@ -3,6 +3,4 @@
     <item android:state_focused="true" android:drawable="@color/layout_dark" />
     <item android:state_pressed="true" android:drawable="@color/layout_dark" />
     <item android:drawable="@color/layout_light" />
-
-
 </selector>
