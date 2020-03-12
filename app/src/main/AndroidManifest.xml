@@ -382,6 +382,11 @@
         <activity android:name=".me.ScheduleActivity_Detelis"
             android:configChanges="screenSize|keyboardHidden|orientation"
             ></activity>
+          <activity android:name=".xcpsactivity.XCDetelisActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            ></activity>
+
+
     </application>
 
 </manifest>
