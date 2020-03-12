@@ -52,19 +52,18 @@ public class LBanbenActivity extends BaseActivity {
     public void postVer(int v) {
         RequestParams params = new RequestParams();
         params.put("apkVersion", v + "");
-
-
         HttpRequest.posVerson(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-                    if (result.getJSONObject("code").equals("0")) {
-                        Toast.makeText(LBanbenActivity.this, "当前为最新版本", Toast.LENGTH_LONG).show();
-                    } else if (result.getJSONObject("code").equals("301")) {
-                        String apkurl = result.getJSONObject("data").getString("apkPath");
-                        updateApk(LBanbenActivity.this, "", "", true, true, 10000000, apkurl, LBanbenActivity.this.getResources().getString(R.string.app_name));
-                    }
+//                    String code = result.getString("code");
+//                    if (result.getJSONObject("code").equals("0")) {
+//                        Toast.makeText(LBanbenActivity.this, "当前为最新版本", Toast.LENGTH_LONG).show();
+//                    } else if (result.getJSONObject("code").equals("301")) {
+//                        String apkurl = result.getJSONObject("data").getString("apkPath");
+//                        updateApk(LBanbenActivity.this, "", "", true, true, 10000000, apkurl, LBanbenActivity.this.getResources().getString(R.string.app_name));
+//                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
