@@ -67,6 +67,7 @@ public class ScreenReportActivity extends BaseActivity {
 
 
 
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
