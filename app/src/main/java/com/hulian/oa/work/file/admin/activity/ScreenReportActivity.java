@@ -99,7 +99,6 @@ public class ScreenReportActivity extends BaseActivity {
             case R.id.cancel:
                 finish();
                 break;
-
             case R.id.originator:
                 break;
             case R.id.start_time:
