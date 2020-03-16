@@ -65,9 +65,6 @@ public class ScreenReportActivity extends BaseActivity {
     private String meetingTime = "";
     private String meetingTimeEnd = "";
 
-
-
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
