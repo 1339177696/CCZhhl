@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#EBEBEB"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/ll_top"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:background="@drawable/baoxiao_bg"
+        android:orientation="vertical"/>
+
+
+
+
+    <LinearLayout
+        android:id="@+id/work_leave_list_liner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_top"
+        android:orientation="vertical">
+
+
+
+
+        <RelativeLayout
+            android:id="@+id/iv_back"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_53"
+            android:background="@drawable/baoxiao_bg"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="@dimen/dp_15"
+                android:layout_height="@dimen/dp_15"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:background="@mipmap/ic_left_white" />
+
+            <TextView
+                android:id="@+id/title_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="汇报筛选"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/dp_18" />
+
+
+        </RelativeLayout>
+
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/bg_img"
+            android:paddingLeft="@dimen/dp_40"
+            android:paddingRight="@dimen/dp_40">
+
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_90"
+        android:background="@drawable/background_frame_solid_1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        >
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+
+
+
+</RelativeLayout>

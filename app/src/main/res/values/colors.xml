@@ -27,4 +27,8 @@
     <!--新增色值end-->
     <color name="line_default_color">#e5e5e5</color>
     <color name="bg_yellow">#fc9b0d</color>
+
+    <color name="text_title">#101010</color>
+    <color name="text">#99101010</color>
+    <color name="line_color">#19000000</color>
 </resources>

@@ -146,4 +146,6 @@ dependencies {
     implementation 'com.github.addappcn:android-pickers:1.0.3'
     implementation files('libs/nim-avchat-6.6.0.jar')
     implementation files('libs/nrtc-sdk.jar')
+
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
 }
