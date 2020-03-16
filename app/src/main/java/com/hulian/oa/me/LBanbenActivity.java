@@ -1,5 +1,6 @@
 package com.hulian.oa.me;
 
+import android.app.FragmentManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -11,6 +12,8 @@ import android.widget.Toast;
 
 import com.hulian.oa.BaseActivity;
 import com.hulian.oa.R;
+import com.hulian.oa.Version.VersionInfo_qgl;
+import com.hulian.oa.Version.Version_qgl;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
@@ -26,6 +29,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.addapp.pickers.util.LogUtils;
+import sskj.lee.appupdatelibrary.BaseUpdateDialogFragment;
+import sskj.lee.appupdatelibrary.BaseVersion;
+import sskj.lee.appupdatelibrary.SimpleUpdateFragment;
 
 /**
  * 创建：  qgl
@@ -40,6 +46,11 @@ public class LBanbenActivity extends BaseActivity {
     @BindView(R.id.rela_r1)
     RelativeLayout relaR1;
     private  int ver;
+    private int versioncodel;  // 版本号
+    private String versionname;  // 版本名称
+    private String Version_context = "";
+    private String Version_title = "工作桌面";
+    private String Version_url;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void onCreate(Bundle savedInstanceState) {
@@ -47,8 +58,11 @@ public class LBanbenActivity extends BaseActivity {
         StatusBarUtil.statusBarLightMode_white(this);
         setContentView(R.layout.lbanbenactivity);
         ButterKnife.bind(this);
-        ver = getLocalVersion(this);
-        appVersion.setText("Version"+getLocalVersionName(LBanbenActivity.this));
+//        ver = getLocalVersion(this);
+//        appVersion.setText("Version"+getLocalVersionName(LBanbenActivity.this));
+
+        versioncodel = Version_qgl.getLocalVersion(this);
+        versionname = Version_qgl.getLocalVersionName(this);
     }
 
 
@@ -66,7 +80,12 @@ public class LBanbenActivity extends BaseActivity {
                     if (apkurl.equals("")) {
                         Toast.makeText(LBanbenActivity.this, "当前为最新版本", Toast.LENGTH_LONG).show();
                     } else {
-                       updateApk(LBanbenActivity.this, "", versionNum, true, true, 10000000, apkurl, LBanbenActivity.this.getResources().getString(R.string.app_name));
+                      // updateApk(LBanbenActivity.this, "", versionNum, true, true, 10000000, apkurl, LBanbenActivity.this.getResources().getString(R.string.app_name));
+                        Toast.makeText(LBanbenActivity.this,"温馨提示，为节省您的流量请在WiFi情况下载",Toast.LENGTH_LONG).show();
+//                        Version_context = welcome_jvabean.getInfo().getContent();
+                        Version_context = "1.功能优化。";
+                        Version_url = apkurl;
+                        qgl();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -89,11 +108,38 @@ public class LBanbenActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.rela_r1:
-                postVer(ver);
+                postVer(versioncodel);
                 break;
         }
     }
 
+    /**
+     * 弹出对话框
+     */
+    public void qgl()
+    {
+        SimpleUpdateFragment updateFragment = new SimpleUpdateFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(BaseUpdateDialogFragment.INTENT_KEY, initData(BaseVersion.NOTIFYCATION_STYLE));
+        updateFragment.setArguments(bundle);
+        FragmentManager transition = getFragmentManager();
+        updateFragment.show(transition, "tag");
+    }
 
+    /**
+     * 对话框样式
+     * @param dialogStyle
+     * @return
+     */
+    private VersionInfo_qgl initData(int dialogStyle)
+    {
+        VersionInfo_qgl versionInfo = new VersionInfo_qgl();
+        versionInfo.setContent(Version_context);
+        versionInfo.setTitle(Version_title);
+        versionInfo.setMustup(false);
+        versionInfo.setUrl(Version_url);
+        versionInfo.setViewStyle(dialogStyle);
+        return versionInfo;
+    }
 
 }
