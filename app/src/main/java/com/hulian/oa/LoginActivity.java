@@ -201,6 +201,7 @@ public class LoginActivity extends BaseActivity {
                 SPUtils.put(mContext,"deptname",user.getDept().getDeptName());
                 SPUtils.put(mContext,"email",user.getEmail());
                 SPUtils.put(mContext, "password", token1);
+                SPUtils.put(mContext, "roleKey", user.getRoles().get(0).getRoleKey());
                 initNotificationConfig();
                 Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                 startActivity(intent);

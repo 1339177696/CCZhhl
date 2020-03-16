@@ -97,7 +97,17 @@
                 android:gravity="center"
                 />
 
+            <TextView
+                android:textSize="16sp"
+                android:visibility="gone"
+                android:id="@+id/tv_uname"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="青格乐"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
             <ImageView
+                android:id="@+id/hb_img"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:src="@mipmap/qj_zuzhi_jigou_icon_qgl"

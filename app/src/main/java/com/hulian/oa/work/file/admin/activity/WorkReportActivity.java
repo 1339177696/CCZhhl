@@ -55,7 +55,7 @@ public class WorkReportActivity extends BaseActivity {
         ButterKnife.bind(this);
         mContext = this;
         //领导
-        if (SPUtils.get(mContext, "isLead", "").equals("0")) {
+        if (SPUtils.get(mContext, "roleKey", "").equals("boos")) {
 //            tv_apply.setVisibility(View.GONE);
 
             titleDatas.add("看汇报");
@@ -75,19 +75,30 @@ public class WorkReportActivity extends BaseActivity {
         myTablayout.setSelectedTabIndicator(0);
         myViewpager.setAdapter(myViewPageAdapter);
         myTablayout.setupWithViewPager(myViewpager);
-        //替换tab中原有的样式(职工)
-        myTablayout.getTabAt(0).setCustomView(R.layout.item_bx_tab_f);
-        myTablayout.getTabAt(1).setCustomView(R.layout.item_bx_tab_s);
+        if (SPUtils.get(mContext, "roleKey", "").equals("boos")){
+            //领导
+            myTablayout.getTabAt(0).setCustomView(R.layout.item_bx_tab_f);
+            TextView textView = myTablayout.getTabAt(0).getCustomView().findViewById(R.id.tv_title);
+            ImageView imageView = myTablayout.getTabAt(0).getCustomView().findViewById(R.id.iv_pic);
+            textView.setText("看汇报");
+            imageView.setBackground(ContextCompat.getDrawable(this,R.drawable.huibao_pic_f));
+        }else {
+            //替换tab中原有的样式(职工)
+            myTablayout.getTabAt(0).setCustomView(R.layout.item_bx_tab_f);
+            myTablayout.getTabAt(1).setCustomView(R.layout.item_bx_tab_s);
+            TextView textView = myTablayout.getTabAt(0).getCustomView().findViewById(R.id.tv_title);
+            ImageView imageView = myTablayout.getTabAt(0).getCustomView().findViewById(R.id.iv_pic);
+            TextView textView1 = myTablayout.getTabAt(1).getCustomView().findViewById(R.id.tv_title);
+            ImageView imageView1 = myTablayout.getTabAt(1).getCustomView().findViewById(R.id.iv_pic);
+            textView.setText("写汇报");
+            textView1.setText("看汇报");
+            //标题左边选中和未选中的图片效果
+            imageView.setBackground(ContextCompat.getDrawable(this,R.drawable.huibao_pic_f));
+            imageView1.setBackground(ContextCompat.getDrawable(this,R.drawable.huibao_pic_s));
+        }
+
         //初始化替换后的文字和图片
-        TextView textView = myTablayout.getTabAt(0).getCustomView().findViewById(R.id.tv_title);
-        ImageView imageView = myTablayout.getTabAt(0).getCustomView().findViewById(R.id.iv_pic);
-        TextView textView1 = myTablayout.getTabAt(1).getCustomView().findViewById(R.id.tv_title);
-        ImageView imageView1 = myTablayout.getTabAt(1).getCustomView().findViewById(R.id.iv_pic);
-        textView.setText("写汇报");
-        textView1.setText("看汇报");
-        //标题左边选中和未选中的图片效果
-        imageView.setBackground(ContextCompat.getDrawable(this,R.drawable.huibao_pic_f));
-        imageView1.setBackground(ContextCompat.getDrawable(this,R.drawable.huibao_pic_s));
+
         myTablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
