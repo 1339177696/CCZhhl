@@ -86,7 +86,7 @@ public class ScreenReportActivity extends BaseActivity {
             gvTest.setVisibility(View.GONE);
             participantId = SPUtils.get(mContext, "userId", "").toString();
         }
-
+        myDialog = new AlertDialog(mContext).builder();
     }
 
 

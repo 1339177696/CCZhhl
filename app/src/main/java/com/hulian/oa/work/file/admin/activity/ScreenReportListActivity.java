@@ -108,6 +108,7 @@ public class ScreenReportListActivity extends BaseActivity implements BaseQuickA
         HttpRequest.getGetWorkReportList(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
+                swipeRefreshLayout.setRefreshing(false);
                 //需要转化为实体对象
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
@@ -135,37 +136,6 @@ public class ScreenReportListActivity extends BaseActivity implements BaseQuickA
         });
 
 
-//        Report report1 = new Report();
-//        report1.setName("王俊杰");
-//        report1.setFinishWork("设计oa报销页面");
-//        report1.setUnFinishWork("设计飞机场");
-//        report1.setTime("2020-02-28 09:52");
-//        report1.setType("1");
-//
-//        mData.add(report1);
-//        Report report2 = new Report();
-//        report2.setName("王俊杰1");
-//        report2.setFinishWork("设计oa报销页面");
-//        report2.setUnFinishWork("设计飞机场");
-//        report2.setTime("2020-02-28 09:52");
-//        report2.setType("1");
-//        mData.add(report2);
-//        Report report3 = new Report();
-//        report3.setName("王俊杰2");
-//        report3.setFinishWork("设计oa报销页面");
-//        report3.setUnFinishWork("设计飞机场");
-//        report3.setTime("2020-02-28 09:52");
-//        report3.setType("2");
-//        mData.add(report3);
-//        Report report4 = new Report();
-//        report4.setName("王俊杰3");
-//        report4.setFinishWork("设计oa报销页面");
-//        report4.setUnFinishWork("设计飞机场");
-//        report4.setTime("2020-02-28 09:52");
-//        report4.setType("3");
-//        mData.add(report4);
-//        mAdapter.notifyDataSetChanged();
-//        swipeRefreshLayout.setRefreshing(false);
     }
 
 

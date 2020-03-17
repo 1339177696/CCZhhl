@@ -98,7 +98,7 @@ public class ReadReportFragment extends Fragment implements  BaseQuickAdapter.Re
         swipeRefreshLayout.setRefreshing(true);
         setRefresh();
         getData();
-        swipeRefreshLayout.setRefreshing(false);
+
     }
 
 
@@ -115,6 +115,7 @@ public class ReadReportFragment extends Fragment implements  BaseQuickAdapter.Re
         HttpRequest.getGetWorkReportList(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
+                swipeRefreshLayout.setRefreshing(false);
                 //需要转化为实体对象
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {

@@ -866,4 +866,14 @@ public class HttpRequest {
         RequestMode.postRequest(Urls.commUrls + "system/reportInfo/android/selectById", params, callback, null);
     }
 
+    /**
+     * 意见反馈
+     *
+     * @param params
+     * @param callback
+     */
+    public static void sendWorkReportOpinion(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/reportLog/android/add", params, callback, null);
+    }
+
 }
