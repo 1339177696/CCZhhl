@@ -64,11 +64,11 @@ public class SecondExpenseActivity extends BaseActivity {
             tv_apply.setVisibility(View.VISIBLE);
             titleDatas.add("待审批");
             titleDatas.add("已审批");
-//            titleDatas.add("我发起的");
-//            titleDatas.add("我审批的");
-//            titleDatas.add("抄送我的");
+//            titleDatas.hb_add("我发起的");
+//            titleDatas.hb_add("我审批的");
+//            titleDatas.hb_add("抄送我的");
             fragmentList.add(new ExpenseLaunchFragment());
-//            fragmentList.add(new ExpensePendFragment());
+//            fragmentList.hb_add(new ExpensePendFragment());
             fragmentList.add(new ExpenseApprovedFragment());
         }
         //员工

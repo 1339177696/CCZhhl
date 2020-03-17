@@ -153,7 +153,7 @@
                     >
                     <ImageView
                         android:id="@+id/iv_time"
-                        android:background="@mipmap/time"
+                        android:background="@mipmap/hb_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
@@ -206,7 +206,7 @@
                     >
                 <ImageView
                     android:id="@+id/iv_addItem"
-                    android:background="@mipmap/add"
+                    android:background="@mipmap/hb_add"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"

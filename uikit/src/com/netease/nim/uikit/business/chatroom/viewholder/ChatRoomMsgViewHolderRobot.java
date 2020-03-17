@@ -62,7 +62,7 @@ public class ChatRoomMsgViewHolderRobot extends ChatRoomMsgViewHolderText implem
 
     @Override
     protected void bindContentView() {
-        onClickIds = new HashSet<>(); // for child to add
+        onClickIds = new HashSet<>(); // for child to hb_add
         RobotAttachment attachment = (RobotAttachment) message.getAttachment();
 
         if (attachment.isRobotSend()) {

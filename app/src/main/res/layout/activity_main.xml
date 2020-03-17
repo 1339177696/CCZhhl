@@ -28,26 +28,31 @@
             android:background="@null"
             android:gravity="center"
             android:orientation="horizontal">
+
             <RadioButton
                 android:id="@+id/rb_message"
                 style="@style/footer_radioButton_style"
                 android:drawableTop="@drawable/main_low_tab3"
                 android:text="消息" />
+
             <RadioButton
                 android:id="@+id/rb_agency"
                 style="@style/footer_radioButton_style"
                 android:drawableTop="@drawable/main_low_tab5"
                 android:text="待办" />
+
             <RadioButton
                 android:id="@+id/rb_address"
                 style="@style/footer_radioButton_style"
                 android:drawableTop="@drawable/main_low_tab4"
                 android:text="通讯录" />
+
             <RadioButton
                 android:id="@+id/rb_work"
                 style="@style/footer_radioButton_style"
                 android:drawableTop="@drawable/main_low_tab1"
                 android:text="工作" />
+
             <RadioButton
                 android:id="@+id/rb_news"
                 style="@style/footer_radioButton_style"

@@ -168,7 +168,7 @@ public class AdvancedTeamMemberActivity extends UI implements TAdapterDelegate,
             this.memberAccounts.clear();
         }
 
-        // add
+        // hb_add
         if (this.members.isEmpty()) {
             this.members.addAll(m);
         } else {

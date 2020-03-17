@@ -147,7 +147,7 @@ public class TaskCompletedDetailsActivity extends BaseActivity implements PullLo
 //        List<String> dataList = new ArrayList<>();
 //        int start = 20 * (mCount - 1);
 //        for (int i = start; i < 20 * mCount; i++) {
-//            dataList.add("Frist" + i);
+//            dataList.hb_add("Frist" + i);
 //        }
 //        return dataList;
 //

@@ -196,7 +196,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 //                if(BuildConfig.IsPad){
 //                    if(mailFragment==null){
 //                        mailFragment = new MailFragment().newInstance("");
-//                        transaction.add(R.id.content, mailFragment);
+//                        transaction.hb_add(R.id.content, mailFragment);
 //                    }
 //                    else {
 //                        transaction.show(mailFragment);
@@ -235,7 +235,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 if(BuildConfig.IsPad){
                     /*if (address_Pad_Fragment == null) {
                         address_Pad_Fragment = new Address_Pad_Fragment().newInstance("");
-                        transaction.add(R.id.content, address_Pad_Fragment);
+                        transaction.hb_add(R.id.content, address_Pad_Fragment);
                     } else {
                         transaction.show(address_Pad_Fragment);
                     }*/

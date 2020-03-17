@@ -164,13 +164,13 @@ public class SessionHelper {
                 actions.add(new AVChatAction(AVChatType.AUDIO));
                 actions.add(new AVChatAction(AVChatType.VIDEO));
             }
-//            actions.add(new RTSAction());
-//            actions.add(new SnapChatAction());
-//            actions.add(new GuessAction());
-//            actions.add(new FileAction());
-//            actions.add(new TipAction());
+//            actions.hb_add(new RTSAction());
+//            actions.hb_add(new SnapChatAction());
+//            actions.hb_add(new GuessAction());
+//            actions.hb_add(new FileAction());
+//            actions.hb_add(new TipAction());
 //            if (NIMRedPacketClient.isEnable()) {
-//                actions.add(new RedPacketAction());
+//                actions.hb_add(new RedPacketAction());
 //            }
             p2pCustomization.actions = actions;
             p2pCustomization.withSticker = true;
@@ -192,8 +192,8 @@ public class SessionHelper {
                 }
             };
             infoButton.iconId = R.drawable.ic_launcher_foreground;
-//            buttons.add(cloudMsgButton);
-//            buttons.add(infoButton);
+//            buttons.hb_add(cloudMsgButton);
+//            buttons.hb_add(infoButton);
             p2pCustomization.buttons = buttons;
         }
         return p2pCustomization;
@@ -234,9 +234,9 @@ public class SessionHelper {
             };
             // 定制加号点开后可以包含的操作， 默认已经有图片，视频等消息了
 //            ArrayList<BaseAction> actions = new ArrayList<>();
-//            actions.add(new SnapChatAction());
-//            actions.add(new GuessAction());
-//            actions.add(new FileAction());
+//            actions.hb_add(new SnapChatAction());
+//            actions.hb_add(new GuessAction());
+//            actions.hb_add(new FileAction());
 //            myP2pCustomization.actions = actions;
 //            myP2pCustomization.withSticker = true;
 //            // 定制ActionBar右边的按钮，可以加多个
@@ -249,7 +249,7 @@ public class SessionHelper {
 //                }
 //            };
 //            cloudMsgButton.iconId = R.drawable.nim_ic_messge_history;
-//            buttons.add(cloudMsgButton);
+//            buttons.hb_add(cloudMsgButton);
 //            myP2pCustomization.buttons = buttons;
         }
         return myP2pCustomization;
@@ -312,8 +312,8 @@ public class SessionHelper {
 //                }
 //            };
 //            infoButton.iconId = R.drawable.nim_ic_actionbar_robot_info;
-//            buttons.add(cloudMsgButton);
-//            buttons.add(infoButton);
+//            buttons.hb_add(cloudMsgButton);
+//            buttons.hb_add(infoButton);
 //            robotCustomization.buttons = buttons;
 //        }
 //        return robotCustomization;
@@ -372,9 +372,9 @@ public class SessionHelper {
             ArrayList<BaseAction> actions = new ArrayList<>();
             actions.add(avChatAction);
 //            if (NIMRedPacketClient.isEnable()) {
-//                actions.add(new RedPacketAction());
+//                actions.hb_add(new RedPacketAction());
 //            }
-         //   actions.add(new TipAction());
+         //   actions.hb_add(new TipAction());
             SessionTeamCustomization.SessionTeamCustomListener listener = new SessionTeamCustomization.SessionTeamCustomListener() {
 
                 @Override
@@ -408,13 +408,13 @@ public class SessionHelper {
             TeamAVChatProfile.sharedInstance().registerObserver(true);
             ArrayList<BaseAction> actions = new ArrayList<>();
             actions.add(avChatAction);
-//            actions.add(new GuessAction());
-//            actions.add(new FileAction());
+//            actions.hb_add(new GuessAction());
+//            actions.hb_add(new FileAction());
             actions.add(new AckMessageAction());
 //            if (NIMRedPacketClient.isEnable()) {
-//                actions.add(new RedPacketAction());
+//                actions.hb_add(new RedPacketAction());
 //            }
-//            actions.add(new TipAction());
+//            actions.hb_add(new TipAction());
             SessionTeamCustomization.SessionTeamCustomListener listener = new SessionTeamCustomization.SessionTeamCustomListener() {
 
                 @Override

@@ -27,7 +27,7 @@ public class RequestParams {
      * Constructs a new RequestParams instance containing the key/value string
      * params from the specified map.
      *
-     * @param source the source key/value string map to add.
+     * @param source the source key/value string map to hb_add.
      */
     public RequestParams(Map<String, String> source) {
         if (source != null) {

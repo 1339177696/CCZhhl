@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/day_report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <ImageView
+            android:id="@+id/day_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="25dp"
+            android:src="@mipmap/day"
+            />
+
+        <TextView
+            android:id="@+id/day_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="日报"
+            android:textColor="@color/text_title"
+            android:textSize="18sp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintLeft_toRightOf="@+id/day_iv"
+            app:layout_constraintTop_toTopOf="@+id/day_iv"
+            app:layout_constraintBottom_toTopOf="@+id/day_content"
+            />
+
+        <TextView
+            android:id="@+id/day_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="填写你的日报"
+            android:textColor="@color/text"
+            android:textSize="18sp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintLeft_toRightOf="@+id/day_iv"
+            app:layout_constraintTop_toBottomOf="@+id/day_tv"
+            app:layout_constraintBottom_toBottomOf="@+id/day_iv"
+            />
+
+        <ImageView
+            android:id="@+id/day_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/filter_return"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="25dp"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/day_iv"
+            app:layout_constraintRight_toRightOf="@+id/day_return"
+            android:background="@color/line_color"
+            />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/week_report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <ImageView
+            android:id="@+id/week_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="25dp"
+            android:src="@mipmap/week"
+            />
+
+        <TextView
+            android:id="@+id/week_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="周报"
+            android:textColor="@color/text_title"
+            android:textSize="18sp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintLeft_toRightOf="@+id/week_iv"
+            app:layout_constraintTop_toTopOf="@+id/week_iv"
+            app:layout_constraintBottom_toTopOf="@+id/week_content"
+            />
+
+        <TextView
+            android:id="@+id/week_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="填写你的周报"
+            android:textColor="@color/text"
+            android:textSize="18sp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintLeft_toRightOf="@+id/week_iv"
+            app:layout_constraintTop_toBottomOf="@+id/week_tv"
+            app:layout_constraintBottom_toBottomOf="@+id/week_iv"
+            />
+
+        <ImageView
+            android:id="@+id/week_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/filter_return"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="25dp"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/week_iv"
+            app:layout_constraintRight_toRightOf="@+id/week_return"
+            android:background="@color/line_color"
+            />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/month_report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <ImageView
+            android:id="@+id/month_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="25dp"
+            android:src="@mipmap/month"
+            />
+
+        <TextView
+            android:id="@+id/month_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="月报"
+            android:textColor="@color/text_title"
+            android:textSize="18sp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintLeft_toRightOf="@+id/month_iv"
+            app:layout_constraintTop_toTopOf="@+id/month_iv"
+            app:layout_constraintBottom_toTopOf="@+id/month_content"
+            />
+
+        <TextView
+            android:id="@+id/month_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="填写你的月报"
+            android:textColor="@color/text"
+            android:textSize="18sp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintLeft_toRightOf="@+id/month_iv"
+            app:layout_constraintTop_toBottomOf="@+id/month_tv"
+            app:layout_constraintBottom_toBottomOf="@+id/month_iv"
+            />
+
+        <ImageView
+            android:id="@+id/month_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/filter_return"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="25dp"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/month_iv"
+            app:layout_constraintRight_toRightOf="@+id/month_return"
+            android:background="@color/line_color"
+            />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+
+</LinearLayout>

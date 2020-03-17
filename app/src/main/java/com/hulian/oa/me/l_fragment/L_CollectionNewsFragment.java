@@ -175,7 +175,7 @@ public class L_CollectionNewsFragment extends Fragment implements PullLoadMoreRe
 //        List<String> dataList = new ArrayList<>();
 //        int start = 20 * (mCount - 1);
 //        for (int i = start; i < 2 * mCount; i++) {
-//            dataList.add("Frist" + i);
+//            dataList.hb_add("Frist" + i);
 //        }
 //        return dataList;
 //    }

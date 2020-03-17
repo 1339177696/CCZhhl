@@ -219,7 +219,7 @@ public class LauncherDocumentActivity extends BaseActivity {
 
         @Override
         public void onAddPicClick() {
-//            selectList2.add("流转人"+count);
+//            selectList2.hb_add("流转人"+count);
 //            adapter2.setList(selectList2);
 //            adapter2.notifyDataSetChanged();
 //            count++;
@@ -542,7 +542,7 @@ public class LauncherDocumentActivity extends BaseActivity {
 //
 //    List<File> fils = new ArrayList<>();
 //                for (LocalMedia imgurl : selectList) {
-//        fils.add(new File(imgurl.getPath()));
+//        fils.hb_add(new File(imgurl.getPath()));
 //    }
 //    showDialogLoading();
 //                HttpRequest.postDocumentSendApi(params, fils, new ResponseCallback() {

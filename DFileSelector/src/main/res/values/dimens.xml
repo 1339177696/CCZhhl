@@ -7,7 +7,7 @@
 
 
     <!-- dp and sp values, must be defind in this file! -->
-    <!-- view size,you can add if there is no one -->
+    <!-- view size,you can hb_add if there is no one -->
     <dimen name="dp_m_60">-60dp</dimen>
     <dimen name="dp_m_30">-30dp</dimen>
     <dimen name="dp_m_20">-20dp</dimen>
@@ -399,7 +399,7 @@
     <dimen name="dp_640">640dp</dimen>
     <dimen name="dp_720">720dp</dimen>
 
-    <!-- font size,you can add if there is no one -->
+    <!-- font size,you can hb_add if there is no one -->
     <dimen name="sp_6">6sp</dimen>
     <dimen name="sp_7">7sp</dimen>
     <dimen name="sp_8">8sp</dimen>

@@ -342,7 +342,7 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
     }
 
     /**
-     * add one new data in to certain location
+     * hb_add one new data in to certain location
      *
      * @param position
      */
@@ -356,7 +356,7 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
     }
 
     /**
-     * add one new data
+     * hb_add one new data
      */
     public void addData(T data) {
         mData.add(data);
@@ -364,7 +364,7 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
     }
 
     /**
-     * add new data in to certain location
+     * hb_add new data in to certain location
      *
      * @param position
      */
@@ -963,7 +963,7 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
 
 
     /**
-     * add animation when you want to show time
+     * hb_add animation when you want to show hb_time
      *
      * @param holder
      */
@@ -1073,7 +1073,7 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
     /**
      * {@link #addAnimation(RecyclerView.ViewHolder)}
      *
-     * @param firstOnly true just show anim when first loading false show anim when load the data every time
+     * @param firstOnly true just show anim when first loading false show anim when load the data every hb_time
      */
     public void isFirstOnly(boolean firstOnly) {
         this.mFirstOnlyEnable = firstOnly;

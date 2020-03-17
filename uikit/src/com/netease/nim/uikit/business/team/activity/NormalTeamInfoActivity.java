@@ -450,7 +450,7 @@ public class NormalTeamInfoActivity extends UI implements OnClickListener, TAdap
             this.memberAccounts.clear();
         }
 
-        // add
+        // hb_add
         if (this.memberAccounts.isEmpty()) {
             this.memberAccounts.addAll(accounts);
         } else {
@@ -498,7 +498,7 @@ public class NormalTeamInfoActivity extends UI implements OnClickListener, TAdap
                     .NORMAL, teamId, account, identity));
         }
 
-        // add item
+        // hb_add item
         dataSource.add(new TeamMemberAdapter.TeamMemberItem(TeamMemberAdapter.TeamMemberItemTag.ADD, null, null, null));
 
         // remove item
@@ -584,7 +584,7 @@ public class NormalTeamInfoActivity extends UI implements OnClickListener, TAdap
      * 添加群成员
      */
     private void addMembersToTeam(final ArrayList<String> selected) {
-        // add members
+        // hb_add members
         DialogMaker.showProgressDialog(this, getString(R.string.empty), true);
         NIMClient.getService(TeamService.class).addMembers(teamId, selected).setCallback(new RequestCallback<List<String>>() {
             @Override

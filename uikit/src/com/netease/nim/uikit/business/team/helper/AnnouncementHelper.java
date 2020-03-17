@@ -18,7 +18,7 @@ import java.util.UUID;
 public class AnnouncementHelper {
     public final static String JSON_KEY_CREATOR = "creator";
     public final static String JSON_KEY_TITLE = "title";
-    public final static String JSON_KEY_TIME = "time";
+    public final static String JSON_KEY_TIME = "hb_time";
     public final static String JSON_KEY_CONTENT = "content";
     public final static String JSON_KEY_ID = "id";
 

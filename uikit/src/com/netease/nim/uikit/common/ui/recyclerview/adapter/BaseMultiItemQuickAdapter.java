@@ -51,7 +51,7 @@ public abstract class BaseMultiItemQuickAdapter<T, K extends BaseViewHolder> ext
     }
 
     /**
-     * add viewType->layoutResId, viewType->ViewHolder.class
+     * hb_add viewType->layoutResId, viewType->ViewHolder.class
      *
      * @param type            view type
      * @param layoutResId

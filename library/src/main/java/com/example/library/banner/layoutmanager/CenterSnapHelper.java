@@ -110,7 +110,7 @@ public class CenterSnapHelper extends RecyclerView.OnFlingListener {
      * {@link RecyclerView#setOnFlingListener(RecyclerView.OnFlingListener)}.
      * You can call this method with {@code null} to detach it from the current RecyclerView.
      *
-     * @param recyclerView The RecyclerView instance to which you want to add this helper or
+     * @param recyclerView The RecyclerView instance to which you want to hb_add this helper or
      *                     {@code null} if you want to remove CenterSnapHelper from the current
      *                     RecyclerView.
      * @throws IllegalArgumentException if there is already a {@link RecyclerView.OnFlingListener}

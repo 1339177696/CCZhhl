@@ -43,7 +43,7 @@ public class LoadingView extends View {
     //两个小球动画距离
     private float ballMoveDistance = (float) (DEFAULT_RADIUS * 3.5);
 
-    //默认1秒 speed = 1/time;故speed=0.5表示2秒结束动画
+    //默认1秒 speed = 1/hb_time;故speed=0.5表示2秒结束动画
     private float animationSpeed = DEFAULT_SPEED;
 
     private float baseX;

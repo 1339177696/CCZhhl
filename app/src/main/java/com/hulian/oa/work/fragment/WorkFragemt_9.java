@@ -24,6 +24,7 @@ import com.hulian.oa.work.file.admin.activity.SecondMailActivity;
 import com.hulian.oa.work.file.admin.activity.SecondMeetingActivity;
 import com.hulian.oa.work.file.admin.activity.SecondNoticeActivity;
 import com.hulian.oa.work.file.admin.activity.SecondTaskCoopActivity;
+import com.hulian.oa.work.file.admin.activity.WorkReportActivity;
 import com.hulian.oa.work.file.admin.activity.WorkSpaceActivity;
 import com.hulian.oa.work.file.admin.activity.meeting.SelDepartmentActivity_meet_video;
 import com.hulian.oa.work.file.admin.activity.meeting.SelDepartmentActivity_meet_zb;
@@ -122,7 +123,7 @@ public class WorkFragemt_9 extends Fragment {
 
     //    , R.id.bt_list, R.id.bt_9
 //    R.id.bt_expense, R.id.bt_work_space,R.id.bt_work_attendance   R.id.bt_document,,R.id.bt_gengduo
-    @OnClick({R.id.bt_shipin,R.id.bt_yuyin,R.id.bt_mail,R.id.bt_coop,R.id.bt_meeting,R.id.bt_notice,R.id.bt_time, R.id.bt_instruct ,R.id.bt_leave, R.id.bt_baoxiao})
+    @OnClick({R.id.bt_shipin,R.id.bt_yuyin,R.id.bt_mail,R.id.bt_coop,R.id.bt_meeting,R.id.bt_notice,R.id.bt_time, R.id.bt_instruct ,R.id.bt_leave, R.id.bt_baoxiao,R.id.bt_Work_report})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             //视频会议
@@ -222,6 +223,10 @@ public class WorkFragemt_9 extends Fragment {
 //                // 跳转更多
 //                startActivity(new Intent(getActivity(), Work_gd_Activity.class));
 //                break;
+            //工作汇报
+            case R.id.bt_Work_report:
+                startActivity(new Intent(getActivity(), WorkReportActivity.class));
+                break;
         }
     }
 

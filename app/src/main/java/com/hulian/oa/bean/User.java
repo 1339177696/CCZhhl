@@ -1,5 +1,7 @@
 package com.hulian.oa.bean;
 
+import java.util.List;
+
 public class User {
     String remark;
     private  String userName;
@@ -9,6 +11,18 @@ public class User {
     private String isLead;//权限状态（0：领导，1：职员，2：多岗位）
     private String deptId;
     private String email;
+
+    public List<Roles> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Roles> roles) {
+        this.roles = roles;
+    }
+
+    private List<Roles> roles;
+
+
 
     public String getEmail() {
         return email;

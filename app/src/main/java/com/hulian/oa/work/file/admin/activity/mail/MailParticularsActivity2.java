@@ -840,7 +840,7 @@ public class MailParticularsActivity2 extends BaseActivity {
                     {".tsp", "application/dsptype"},
                     {".tsv", "text/tab-separated-values"},
                     {".ttf", "application/octet-stream"},
-                    {".ttz", "application/t-time"},
+                    {".ttz", "application/t-hb_time"},
                     {".txt", "text/plain"},
                     {".ult", "audio/x-mod"},
                     {".ustar", "application/x-ustar"},

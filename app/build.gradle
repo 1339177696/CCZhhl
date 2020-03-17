@@ -147,4 +147,6 @@ dependencies {
     implementation files('libs/nim-avchat-6.6.0.jar')
     implementation files('libs/nrtc-sdk.jar')
     implementation project(':appupdatelibrary')
+
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
 }

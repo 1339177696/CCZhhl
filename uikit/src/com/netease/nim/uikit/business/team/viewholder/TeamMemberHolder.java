@@ -67,7 +67,7 @@ public class TeamMemberHolder extends TViewHolder {
         if (getAdapter().getMode() == TeamMemberAdapter.Mode.NORMAL) {
             view.setVisibility(View.VISIBLE);
             if (memberItem.getTag() == TeamMemberAdapter.TeamMemberItemTag.ADD) {
-                // add team member
+                // hb_add team member
                 headImageView.setBackgroundResource(R.drawable.nim_team_member_add_selector);
                 nameTextView.setText(context.getString(R.string.add));
                 headImageView.setOnClickListener(new View.OnClickListener() {

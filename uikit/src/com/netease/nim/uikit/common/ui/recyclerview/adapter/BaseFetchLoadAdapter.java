@@ -265,7 +265,7 @@ public abstract class BaseFetchLoadAdapter<T, K extends BaseViewHolder> extends 
     /**
      * fetch end, no more data
      *
-     * @param data last load data to add
+     * @param data last load data to hb_add
      * @param gone if true gone the fetch more view
      */
     public void fetchMoreEnd(List<T> data, boolean gone) {
@@ -513,7 +513,7 @@ public abstract class BaseFetchLoadAdapter<T, K extends BaseViewHolder> extends 
     }
 
     /**
-     * add new data in to certain location
+     * hb_add new data in to certain location
      *
      * @param position
      */
@@ -543,7 +543,7 @@ public abstract class BaseFetchLoadAdapter<T, K extends BaseViewHolder> extends 
     }
 
     /**
-     * add new data to head location
+     * hb_add new data to head location
      */
     public void addFrontData(List<T> data) {
         if (data == null || data.isEmpty()) {
@@ -942,7 +942,7 @@ public abstract class BaseFetchLoadAdapter<T, K extends BaseViewHolder> extends 
     /**
      * {@link #addAnimation(RecyclerView.ViewHolder)}
      *
-     * @param firstOnly true just show anim when first loading false show anim when load the data every time
+     * @param firstOnly true just show anim when first loading false show anim when load the data every hb_time
      */
     public void setAnimationShowFirstOnly(boolean firstOnly) {
         this.mAnimationShowFirstOnly = firstOnly;
@@ -958,7 +958,7 @@ public abstract class BaseFetchLoadAdapter<T, K extends BaseViewHolder> extends 
     }
 
     /**
-     * add animation when you want to show time
+     * hb_add animation when you want to show hb_time
      *
      * @param holder
      */

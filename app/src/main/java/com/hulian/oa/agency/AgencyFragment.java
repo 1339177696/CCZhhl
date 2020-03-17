@@ -119,11 +119,11 @@ public class AgencyFragment extends Fragment {
 
 //    private void init() {
 //        ArrayList<String> titleDatas = new ArrayList<>();
-//        titleDatas.add("待办");
-//        titleDatas.add("已办");
+//        titleDatas.hb_add("待办");
+//        titleDatas.hb_add("已办");
 //        ArrayList<Fragment> fragmentList = new ArrayList<Fragment>();
-//        fragmentList.add(new L_UpcomFragment());
-//        fragmentList.add(new L_HascomFragment());
+//        fragmentList.hb_add(new L_UpcomFragment());
+//        fragmentList.hb_add(new L_HascomFragment());
 //        MyViewPageAdapter myViewPageAdapter = new MyViewPageAdapter(getActivity().getSupportFragmentManager(), titleDatas, fragmentList);
 //        //   myTablayout.setSelectedTabIndicator(0);
 //        myViewpager.setAdapter(myViewPageAdapter);

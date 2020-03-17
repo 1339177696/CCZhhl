@@ -456,7 +456,7 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
 //        params.put("respondent", SPUtils.get(mContext, "userId", "").toString());
 //        List<File> fils = new ArrayList<>();
 //        for (String imgurl : selectList1) {
-//            fils.add(new File(imgurl));
+//            fils.hb_add(new File(imgurl));
 //        }
 
 

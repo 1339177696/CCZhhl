@@ -597,7 +597,7 @@ public class AdvancedTeamInfoActivity extends UI implements
             this.memberAccounts.clear();
         }
 
-        // add
+        // hb_add
         if (this.members.isEmpty()) {
             this.members.addAll(m);
         } else {
@@ -671,7 +671,7 @@ public class AdvancedTeamInfoActivity extends UI implements
 
         dataSource.clear();
 
-        // add item
+        // hb_add item
         if (team.getTeamInviteMode() == TeamInviteModeEnum.All || isSelfAdmin || isSelfManager) {
             dataSource.add(new TeamMemberAdapter.TeamMemberItem(TeamMemberAdapter.TeamMemberItemTag.ADD, null, null,
                     null));

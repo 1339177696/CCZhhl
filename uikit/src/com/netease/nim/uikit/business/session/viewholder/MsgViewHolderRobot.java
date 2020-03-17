@@ -63,7 +63,7 @@ public class MsgViewHolderRobot extends MsgViewHolderText implements RobotConten
 
     @Override
     protected void bindContentView() {
-        onClickIds = new HashSet<>(); // for child to add
+        onClickIds = new HashSet<>(); // for child to hb_add
         RobotAttachment attachment = (RobotAttachment) message.getAttachment();
 
         if (attachment.isRobotSend()) {

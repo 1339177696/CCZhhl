@@ -154,7 +154,7 @@ public class FriendDataCache {
                 friendAccountSet.addAll(myFriendAccounts);
 
                 // log
-                DataCacheManager.Log(myFriendAccounts, "on add friends", UIKitLogTag.FRIEND_CACHE);
+                DataCacheManager.Log(myFriendAccounts, "on hb_add friends", UIKitLogTag.FRIEND_CACHE);
             }
 
             // 通知好友关系更新
@@ -193,7 +193,7 @@ public class FriendDataCache {
                 friendAccountSet.removeAll(addedAccounts);
 
                 // log
-                DataCacheManager.Log(addedAccounts, "on add users to black list", UIKitLogTag.FRIEND_CACHE);
+                DataCacheManager.Log(addedAccounts, "on hb_add users to black list", UIKitLogTag.FRIEND_CACHE);
 
                 // notify
                 NimUIKitImpl.getContactChangedObservable().notifyAddToBlackList(addedAccounts);

@@ -88,10 +88,10 @@ public class SecondDocumentActivity extends BaseActivity {
         else {
             linearLayout.setVisibility(View.GONE);
 
-//            titleDatas.add("待审批");
+//            titleDatas.hb_add("待审批");
             titleDatas.add("我发起的");
 
-//            titleDatas.add("已审批");
+//            titleDatas.hb_add("已审批");
             titleDatas.add("抄送我的");
             tv_launch.setVisibility(View.VISIBLE);
         }

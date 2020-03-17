@@ -322,9 +322,9 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
     }
 
     /**
-     * add childView id
+     * hb_add childView id
      *
-     * @param viewId add the child view id   can support childview click
+     * @param viewId hb_add the child view id   can support childview click
      * @return
      */
     public BaseViewHolder addOnClickListener(int viewId) {
@@ -333,7 +333,7 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
     }
 
     /**
-     * add long click view id
+     * hb_add long click view id
      *
      * @param viewId
      * @return

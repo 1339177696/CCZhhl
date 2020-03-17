@@ -51,7 +51,7 @@ public abstract class BaseMultiItemFetchLoadAdapter<T, K extends BaseViewHolder>
     }
 
     /**
-     * add viewType->layoutResId, viewType->ViewHolder.class
+     * hb_add viewType->layoutResId, viewType->ViewHolder.class
      *
      * @param type            view type
      * @param layoutResId

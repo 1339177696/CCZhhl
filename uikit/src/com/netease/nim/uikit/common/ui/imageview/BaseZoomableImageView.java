@@ -96,7 +96,7 @@ public abstract class BaseZoomableImageView extends View {
     // Stacked to the internal queue to invalidate the view
     private Runnable mRefresh = null;
 
-    // The time of the last draw operation
+    // The hb_time of the last draw operation
     private double mLastDraw = 0;
 
     // The current bitmap being displayed.
@@ -605,7 +605,7 @@ public abstract class BaseZoomableImageView extends View {
         return mSuppMatrix.postTranslate(dx, dy);
     }
 
-    // Fling a view by a distance over time
+    // Fling a view by a distance over hb_time
     protected void scrollBy(float distanceX, float distanceY, final float durationMs) {
         final float dx = distanceX;
         final float dy = distanceY;
@@ -670,7 +670,7 @@ public abstract class BaseZoomableImageView extends View {
                     && getLayerType() == View.LAYER_TYPE_HARDWARE) {
                 canvas.drawBitmap(mBitmap, mMatrix, null);
             } else {
-                // Check if the time between draws has been met and draw the bitmap
+                // Check if the hb_time between draws has been met and draw the bitmap
                 if ((System.currentTimeMillis() - mLastDraw) > sPaintDelay) {
                     canvas.drawBitmap(mBitmap, mMatrix, mPaint);
                     mLastDraw = System.currentTimeMillis();

@@ -141,7 +141,7 @@ public class TeamAVChatProfile {
     public boolean checkOfflineOutTime(CustomNotification notification) {
         // 时间差在45s内，考虑本地时间误差，条件适当放宽
         long time = TimeUtil.currentTimeMillis() - notification.getTime();
-        LogUtil.ui("rev offline team AVChat request time = " + time);
+        LogUtil.ui("rev offline team AVChat request hb_time = " + time);
         return time > OFFLINE_EXPIRY || time < -OFFLINE_EXPIRY;
     }
 

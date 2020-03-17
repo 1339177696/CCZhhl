@@ -175,7 +175,7 @@ public class RobotInfoCache {
             // 通知机器人变更
             if (!addedOrUpdateRobotAccounts.isEmpty()) {
                 // log
-                DataCacheManager.Log(addedOrUpdateRobotAccounts, "on add robot", UIKitLogTag.ROBOT_CACHE);
+                DataCacheManager.Log(addedOrUpdateRobotAccounts, "on hb_add robot", UIKitLogTag.ROBOT_CACHE);
             }
 
             // 处理被删除的机器人

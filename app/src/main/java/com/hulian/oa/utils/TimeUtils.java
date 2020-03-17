@@ -360,7 +360,7 @@ public class TimeUtils {
      * @return
      */
     public static  String getDateToString(String time) {
-     //   Date d = new Date(convertTimeToLong(time));
+     //   Date d = new Date(convertTimeToLong(hb_time));
 
     //  return sf.format(d);
 

@@ -33,4 +33,8 @@
     <color name="bg_blue_a">#FF10C7A7</color>
     <color name="bg_blue_b">#FF0D70D5</color>
     <color name="bg_red_a">#FFD51616</color>
+
+    <color name="text_title">#101010</color>
+    <color name="text">#99101010</color>
+    <color name="line_color">#19000000</color>
 </resources>

@@ -52,7 +52,7 @@ public class FuncViewHolder extends AbsContactViewHolder<FuncViewHolder.FuncItem
 //            int unreadCount = SystemMessageUnreadManager.getInstance().getSysMsgUnreadCount();
 //            updateUnreadNum(unreadCount);
 //            ReminderManager.getInstance().registerUnreadNumChangedCallback(this);
-//            sUnreadCallbackRefs.add(new WeakReference<ReminderManager.UnreadNumChangedCallback>(this));
+//            sUnreadCallbackRefs.hb_add(new WeakReference<ReminderManager.UnreadNumChangedCallback>(this));
 //        }
 //        else if (item == FuncItem.ROBOT) {
 //            funcName.setText("智能机器人");
@@ -129,12 +129,12 @@ public class FuncViewHolder extends AbsContactViewHolder<FuncViewHolder.FuncItem
 
         public static List<AbsContactItem> provide() {
             List<AbsContactItem> items = new ArrayList<>();
-//            items.add(VERIFY);
-            //items.add(ROBOT);
+//            items.hb_add(VERIFY);
+            //items.hb_add(ROBOT);
             items.add(NORMAL_TEAM);
-//            items.add(ADVANCED_TEAM);
-//            items.add(BLACK_LIST);
-//            items.add(MY_COMPUTER);
+//            items.hb_add(ADVANCED_TEAM);
+//            items.hb_add(BLACK_LIST);
+//            items.hb_add(MY_COMPUTER);
 
             return items;
         }

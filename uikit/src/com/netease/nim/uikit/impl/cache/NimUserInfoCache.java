@@ -111,7 +111,7 @@ public class NimUserInfoCache {
         NIMClient.getService(UserService.class).fetchUserInfo(accounts).setCallback(new RequestCallback<List<NimUserInfo>>() {
             @Override
             public void onSuccess(List<NimUserInfo> users) {
-                Log.i(UIKitLogTag.USER_CACHE, "fetch userInfo completed, add users size =" + users.size());
+                Log.i(UIKitLogTag.USER_CACHE, "fetch userInfo completed, hb_add users size =" + users.size());
                 // 这里不需要更新缓存，由监听用户资料变更（添加）来更新缓存
                 if (callback != null) {
                     callback.onSuccess(users);

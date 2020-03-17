@@ -126,7 +126,7 @@ public class L_DocumentPubActivity extends BaseActivity {
 
         @Override
         public void onAddPicClick() {
-//            selectList2.add("流转人"+count);
+//            selectList2.hb_add("流转人"+count);
 //            adapter2.setList(selectList2);
 //            adapter2.notifyDataSetChanged();
 //            count++;

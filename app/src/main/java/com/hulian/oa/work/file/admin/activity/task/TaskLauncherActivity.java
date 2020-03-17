@@ -315,7 +315,7 @@ public class TaskLauncherActivity extends BaseActivity {
     // 抄送人
 //    public void onEventMainThread(People_x event_x) {
 //        selectList2_x.clear();
-//        selectList2_x.add(event_x);
+//        selectList2_x.hb_add(event_x);
 //        String uids="";
 //        String uname="";
 //        for(People_x params_x1:selectList2_x)

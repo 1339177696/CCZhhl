@@ -38,7 +38,7 @@ class LogFormat {
     static String formatLog(String tag, String time, String msg, Throwable tr) {
         StringBuilder sb = new StringBuilder();
 
-        // time
+        // hb_time
         sb.append(time);
         sb.append(": ");
 

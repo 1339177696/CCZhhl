@@ -904,7 +904,7 @@ public class TeamAVChatActivity extends UI {
     public void startVideoService() {
         moveTaskToBack(true);//最小化Activity
         Intent intent = new Intent(this, TeamFloatVideoWindowService.class);//开启服务显示悬浮框
-//        intent.putExtra("time",avChatVideoUI.getTime());
+//        intent.putExtra("hb_time",avChatVideoUI.getTime());
         bindService(intent, mVideoServiceConnection, Context.BIND_AUTO_CREATE);
     }
 
