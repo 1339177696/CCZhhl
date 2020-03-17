@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -188,8 +189,9 @@ public class HascomAdapter_qgl extends RecyclerView.Adapter <HascomAdapter_qgl.V
                 }
                 break;
             case "5":
-                if (dataList.get(position).getName().equals("null")&&dataList.get(position).getName().equals(null)) {
-                    holder.tv_content.setText("");
+                if (TextUtils.equals("null",dataList.get(position).getName())
+                       || TextUtils.isEmpty(dataList.get(position).getName())) {
+                    holder.tv_content.setText("发起人:");
                 } else {
 //            String text_content = dataList.get(position).getContent().split(" ")[0] + "  <font color='#2B8CFA'>" + dataList.get(position).getContent().split(" ")[1] + "</font>";
                     holder.tv_content.setText(Html.fromHtml("发起人:"+dataList.get(position).getName()));
