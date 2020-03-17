@@ -40,7 +40,6 @@ public class AgencyFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
 //    @BindView(R.id.my_tablayout)
 //    TabLayout myTablayout;
 //    @BindView(R.id.my_viewpager)
