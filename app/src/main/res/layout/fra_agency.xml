@@ -198,7 +198,7 @@
                         android:layout_marginLeft="@dimen/dp_4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="现场评审"
+                        android:text="业务事项"
                         android:textColor="#FFFFFF"
                         android:textSize="@dimen/sp_9"
                         />
@@ -213,6 +213,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:layout_marginLeft="30dp"
                     android:id="@+id/lr_qgl_btn1"
                     android:gravity="center"
                     android:layout_gravity="center"
@@ -243,6 +244,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:id="@+id/lr_qgl_btn2"

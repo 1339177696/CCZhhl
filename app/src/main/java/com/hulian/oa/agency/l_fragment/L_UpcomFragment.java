@@ -65,6 +65,7 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
     private RecyclerView mRecyclerView;
 //    UpcomAdapter mRecyclerViewAdapter;
     UpcomAdapter_qgl mRecyclerViewAdapter;
+
     Unbinder unbinder;
 
     @BindView(R.id.tv_mengban)
