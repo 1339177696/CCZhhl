@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.hulian.oa">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -44,11 +45,12 @@
         android:name=".APP"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_me"
-        android:label="OA"
+        android:label="工作桌面"
         android:largeHeap="true"
         android:supportsRtl="true"
         android:networkSecurityConfig="@xml/network_config"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="label,allowBackup">
         <!--qgl-->
         <service
             android:name=".socket.JWebSocketClientService"
@@ -380,6 +382,11 @@
         <activity android:name=".me.ScheduleActivity_Detelis"
             android:configChanges="screenSize|keyboardHidden|orientation"
             ></activity>
+          <activity android:name=".xcpsactivity.XCDetelisActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            ></activity>
+
+
     </application>
 
 </manifest>

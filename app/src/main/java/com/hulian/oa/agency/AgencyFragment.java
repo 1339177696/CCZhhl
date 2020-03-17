@@ -17,6 +17,7 @@ import com.hulian.oa.MainActivity;
 import com.hulian.oa.R;
 import com.hulian.oa.agency.l_fragment.L_HascomFragment;
 import com.hulian.oa.agency.l_fragment.L_UpcomFragment;
+import com.hulian.oa.agency.l_fragment.PingShenFragment;
 import com.hulian.oa.bean.AgencyCount;
 import com.hulian.oa.bean.AgencyCountFinish;
 import com.hulian.oa.bean.Fab;
@@ -56,8 +57,17 @@ public class AgencyFragment extends Fragment {
     TextView yibanNumber;
     @BindView(R.id.lr_qgl_btn2)
     LinearLayout lrQglBtn2;
+
+    @BindView(R.id.zx_qgl_img3)
+    ImageView zxQglImg3;
+    @BindView(R.id.zx_qgl_txt3)
+    TextView zxQglTxt3;
+    @BindView(R.id.lr_qgl_btn3)
+    LinearLayout lrQglBtn3;
+
     private L_UpcomFragment l_upcomFragment;
     private L_HascomFragment l_hascomFragment;
+    private PingShenFragment l_pingshenFragment;
     private FragmentManager fManager;
 
     public AgencyFragment() {
@@ -96,7 +106,8 @@ public class AgencyFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
         fManager = getFragmentManager();
-        lrQglBtn1.performClick();//模拟一次点击，既进去后选择第一项
+        lrQglBtn3.performClick();//模拟一次点击，既进去后选择第一项
+//        lrQglBtn1.performClick();//模拟一次点击，既进去后选择第一项
 //        init();
         return view;
     }
@@ -207,20 +218,22 @@ public class AgencyFragment extends Fragment {
     private void hideAllFragment(FragmentTransaction fragmentTransaction) {
         if (l_upcomFragment != null) fragmentTransaction.hide(l_upcomFragment);
         if (l_hascomFragment != null) fragmentTransaction.hide(l_hascomFragment);
+        if (l_pingshenFragment != null) fragmentTransaction.hide(l_pingshenFragment);
 
     }
 
-    @OnClick({R.id.lr_qgl_btn1, R.id.lr_qgl_btn2})
+    @OnClick({R.id.lr_qgl_btn1, R.id.lr_qgl_btn2,R.id.lr_qgl_btn3})
     public void onViewClicked(View view) {
         FragmentTransaction fTransaction = fManager.beginTransaction();
         hideAllFragment(fTransaction);
         switch (view.getId()) {
             case R.id.lr_qgl_btn1:
-
                 zxQglTxt1.setTextColor(Color.parseColor("#FFFFFF"));
                 zxQglImg1.setImageResource(R.mipmap.done);
                 zxQglTxt2.setTextColor(Color.parseColor("#ccccd5"));
                 zxQglImg2.setImageResource(R.mipmap.done_default);
+                zxQglTxt3.setTextColor(Color.parseColor("#ccccd5"));
+                zxQglImg3.setImageResource(R.mipmap.done_default);
                 if (l_upcomFragment == null) {
                     l_upcomFragment = new L_UpcomFragment();
                     fTransaction.add(R.id.qgl_fragment_daiban, l_upcomFragment);
@@ -229,18 +242,32 @@ public class AgencyFragment extends Fragment {
                 }
                 break;
             case R.id.lr_qgl_btn2:
-
                 zxQglTxt1.setTextColor(Color.parseColor("#ccccd5"));
                 zxQglImg1.setImageResource(R.mipmap.done_default);
                 zxQglTxt2.setTextColor(Color.parseColor("#FFFFFF"));
                 zxQglImg2.setImageResource(R.mipmap.done);
+                zxQglTxt3.setTextColor(Color.parseColor("#ccccd5"));
+                zxQglImg3.setImageResource(R.mipmap.done_default);
                 if (l_hascomFragment == null) {
                     l_hascomFragment = new L_HascomFragment();
                     fTransaction.add(R.id.qgl_fragment_daiban, l_hascomFragment);
                 } else {
                     fTransaction.show(l_hascomFragment);
                 }
-
+                break;
+            case R.id.lr_qgl_btn3:
+                zxQglTxt1.setTextColor(Color.parseColor("#ccccd5"));
+                zxQglImg1.setImageResource(R.mipmap.done_default);
+                zxQglTxt2.setTextColor(Color.parseColor("#ccccd5"));
+                zxQglImg2.setImageResource(R.mipmap.done_default);
+                zxQglTxt3.setTextColor(Color.parseColor("#FFFFFF"));
+                zxQglImg3.setImageResource(R.mipmap.done);
+                if (l_pingshenFragment == null) {
+                    l_pingshenFragment = new PingShenFragment();
+                    fTransaction.add(R.id.qgl_fragment_daiban, l_pingshenFragment);
+                } else {
+                    fTransaction.show(l_pingshenFragment);
+                }
                 break;
         }
         fTransaction.commit();

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:background="#2D4BCA"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="办理信息"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_11" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="15dp"
+        android:text="许可事项" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
+        android:text="特种设备生产单位许可（锅炉制造）"
+        android:textColor="#000"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="30dp"
+        android:text="办理意见" />
+
+    <EditText
+        android:id="@+id/et_task_details"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_100"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/l_task_launch_content_bg"
+        android:gravity="start"
+        android:hint=""
+        android:paddingLeft="@dimen/dp_15"
+        android:paddingTop="10dp"
+        android:textSize="@dimen/sp_9" />
+
+    <RadioGroup
+        android:id="@+id/radio_goup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_30"
+        android:layout_marginBottom="@dimen/dp_22"
+        android:orientation="horizontal">
+
+
+        <RadioButton
+            android:id="@+id/tv_disagree"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_30"
+            android:layout_weight="1"
+            android:background="@drawable/work_leave_cheked_bg_qgl"
+            android:button="@null"
+            android:gravity="center"
+            android:text="审批驳回"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="@dimen/dp_15"
+            android:layout_height="@dimen/dp_1" />
+
+        <RadioButton
+            android:id="@+id/tv_agree"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_30"
+            android:layout_weight="1"
+            android:background="@drawable/work_leave_cheked_bg_qgl"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:text="审批同意"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+    </RadioGroup>
+
+
+</LinearLayout>

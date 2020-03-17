@@ -181,6 +181,36 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
+                <LinearLayout
+                    android:id="@+id/lr_qgl_btn3"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="@dimen/dp_20"
+                    android:background="@drawable/zx_xinwen_bg">
+                    <ImageView
+                        android:id="@+id/zx_qgl_img3"
+                        android:src="@mipmap/done"
+                        android:layout_width="@dimen/dp_10"
+                        android:layout_height="@dimen/dp_11" />
+                    <TextView
+                        android:id="@+id/zx_qgl_txt3"
+                        android:layout_marginLeft="@dimen/dp_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="现场评审"
+                        android:textColor="#FFFFFF"
+                        android:textSize="@dimen/sp_9"
+                        />
+
+                    <TextView
+                        android:textColor="#FFFFFF"
+                        android:layout_marginLeft="@dimen/dp_6"
+                        android:textSize="@dimen/sp_10"
+                        android:text="4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/lr_qgl_btn1"
@@ -191,7 +221,7 @@
                     android:background="@drawable/zx_xinwen_bg">
                     <ImageView
                         android:id="@+id/zx_qgl_img1"
-                        android:src="@mipmap/done"
+                        android:src="@mipmap/done_default"
                         android:layout_width="@dimen/dp_10"
                         android:layout_height="@dimen/dp_11" />
                     <TextView
@@ -200,7 +230,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="待办事项"
-                        android:textColor="#FFFFFF"
+                        android:textColor="#ccccd5"
                         android:textSize="@dimen/sp_9"
                         />
 
