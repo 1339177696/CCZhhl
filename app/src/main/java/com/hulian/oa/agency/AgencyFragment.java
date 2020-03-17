@@ -114,6 +114,7 @@ public class AgencyFragment extends Fragment {
         fManager = getFragmentManager();
         lrQglBtn1.performClick();//模拟一次点击，既进去后选择第一项
         return view;
+
     }
 
 //    private void init() {
