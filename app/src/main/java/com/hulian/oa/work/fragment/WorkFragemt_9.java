@@ -173,6 +173,7 @@ public class WorkFragemt_9 extends Fragment {
                 break;
                 //报销
             case R.id.bt_baoxiao:
+                startActivity(new Intent(getActivity(),SecondExpenseActivity.class));
                 ToastHelper.showToast(getActivity(), "功能暂未开放");
                 break;
             //公文流轉去掉了
@@ -202,12 +203,14 @@ public class WorkFragemt_9 extends Fragment {
                 //startActivity(new Intent(getActivity(), MessagenotificationActivity.class));
 
                 //break;
-           // case R.id.bt_expense:
+            case R.id.bt_expense:
 //                qgl修改
 
 //                    startActivity(new Intent(getActivity(), SecondExpenseActivity.class));
 //                ToastHelper.showToast(getActivity(), "功能暂未开放");
                 //break;
+                ToastHelper.showToast(getActivity(), "功能暂未开放");
+                break;
 //            case R.id.bt_list:
 //                EventBus.getDefault().post(new WorkFragemt_9());
 //                break;

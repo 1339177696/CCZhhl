@@ -392,6 +392,7 @@
                 <action android:name="android.intent.action.PHONE_STATE" />
             </intent-filter>
         </receiver>
+        <activity android:name=".views.l_flowview.ExpenseDetailsActivity" android:configChanges="screenSize|keyboardHidden|orientation"></activity>
     </application>
 
 </manifest>

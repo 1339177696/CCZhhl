@@ -20,6 +20,8 @@
     <color name="color_b_gray">#e5e5e5</color>
     <color name="color_f6">#f6f6f6</color>
     <color name="color_a_black">#000000</color>
+    <color name="color_b_black">#FF101010</color>
+    <color name="color_c_black">#FF000000</color>
     <color name="bar_grey">#393a3e</color>
     <color name="bg_all">#EBEBEB</color>
     <color name="bg_color">#E1F0FF</color>
@@ -27,4 +29,8 @@
     <!--新增色值end-->
     <color name="line_default_color">#e5e5e5</color>
     <color name="bg_yellow">#fc9b0d</color>
+    <color name="bg_yellow_a">#FFFEA903</color>
+    <color name="bg_blue_a">#FF10C7A7</color>
+    <color name="bg_blue_b">#FF0D70D5</color>
+    <color name="bg_red_a">#FFD51616</color>
 </resources>

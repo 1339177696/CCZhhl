@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EBEBEB">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:background="@drawable/baoxiao_bg"
+        android:id="@+id/ll_top"
+        android:orientation="vertical"
+        >
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/iv_back"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_height="@dimen/dp_53"
+        android:background="@drawable/baoxiao_bg"
+        >
+        <ImageView
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_width="@dimen/dp_15"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/ic_left_white"
+            android:layout_height="@dimen/dp_15" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="报销详情"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/dp_18" />
+    </RelativeLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/banner_bg_qgl"
+        />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_20"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/liner_border_gb_qgl"
+            android:orientation="vertical"
+            >
+            <!--头像部分-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_10"
+                >
+                <com.hulian.oa.views.CircleImagview
+                    android:id="@+id/ci_title"
+                    android:layout_width="@dimen/dp_40"
+                    android:layout_height="@dimen/dp_40"
+                    android:src="@drawable/nim_avatar_default"
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    />
+            <LinearLayout
+                android:layout_toRightOf="@id/ci_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginLeft="@dimen/dp_10"
+                >
+                <TextView
+                    android:text="申请人"
+                    android:textSize="@dimen/dp_14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tv_state"
+                    android:text="审批通过"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_reject_reson"
+                        android:text="驳回原因"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_toRightOf="@id/tv_reject_reson"
+                        android:text="驳回原因"
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_reject_time"
+                    android:text="驳回时间"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_toRightOf="@id/tv_reject_time"
+                    android:text="2020-12-12 12:40"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                </RelativeLayout>
+            </LinearLayout>
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@mipmap/passed"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_7"
+                    />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_0_5"
+                android:background="@color/color_c_black"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_20"
+                />
+            <!--报销标题-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="谁谁的报销申请"
+                    android:textSize="@dimen/dp_14"
+                    android:textColor="@color/color_b_black"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_alignParentLeft="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:text="2020-12-12 14-12"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <android.support.constraint.ConstraintLayout
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                >
+                <TextView
+                    android:id="@+id/tv_department_title"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginLeft="@dimen/dp_30"
+                    android:text="所在部门"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tv_department"
+                    android:text="设计部"
+                    android:textColor="@color/color_b_black"
+                    app:layout_constraintLeft_toRightOf="@id/tv_department_title"
+                    app:layout_constraintTop_toTopOf="@+id/tv_department_title"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tv_bill_count_title"
+                    app:layout_constraintRight_toRightOf="@id/tv_department_title"
+                    app:layout_constraintTop_toBottomOf="@id/tv_department_title"
+                    android:text="发票张数"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tv_bill_count"
+                    android:text="20张"
+                    android:textColor="@color/color_b_black"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_department"
+                    app:layout_constraintTop_toTopOf="@id/tv_bill_count_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tv_expense_amount_title"
+                    app:layout_constraintRight_toRightOf="@id/tv_bill_count_title"
+                    app:layout_constraintTop_toBottomOf="@id/tv_bill_count_title"
+                    android:text="报销(金额)"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tv_expense_amount"
+                    android:text="13000元"
+                    android:textColor="@color/color_b_black"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_bill_count"
+                    app:layout_constraintTop_toTopOf="@id/tv_expense_amount_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_0_5"
+                    android:background="@color/color_c_black"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginTop="@dimen/dp_12"
+                    app:layout_constraintTop_toBottomOf="@id/tv_expense_amount_title"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_20"
+                    />
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_expense_reason_title"-->
+                    <!--app:layout_constraintLeft_toLeftOf="@id/tv_expense_amount_title"-->
+                    <!--app:layout_constraintTop_toBottomOf="@id/tv_expense_amount_title"-->
+                    <!--android:text="报销事由"-->
+                    <!--android:layout_marginTop="@dimen/dp_5"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content" />-->
+                <!--<TextView-->
+                    <!--android:text="出差费用"-->
+                    <!--app:layout_constraintLeft_toLeftOf="@id/tv_expense_amount"-->
+                    <!--app:layout_constraintTop_toTopOf="@id/tv_expense_reason_title"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content" />-->
+            </android.support.constraint.ConstraintLayout>
+            <LinearLayout
+                android:id="@+id/ll_expense_rules"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <include layout="@layout/item_work_expense_result_s"></include>
+                <include layout="@layout/item_work_expense_result_s"></include>
+                <include layout="@layout/item_work_expense_result_s"></include>
+            </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_30"
+                >
+
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+    </ScrollView>
+    </FrameLayout>
+</LinearLayout>

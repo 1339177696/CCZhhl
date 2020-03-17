@@ -1,7 +1,6 @@
 package com.hulian.oa.work.file.admin.activity.expense.l_fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,20 +17,21 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.R;
 import com.hulian.oa.bean.Expense;
-import com.hulian.oa.bean.Leave;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
+import com.hulian.oa.utils.gallery.DisplayUtils;
+import com.hulian.oa.views.CustomDecoration;
 import com.hulian.oa.work.file.admin.activity.expense.l_adapter.L_ExpenseApplyLaunchAdapter;
-import com.hulian.oa.work.file.admin.activity.leave.l_fragment.LeaveLaunchFragment;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -39,7 +39,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import de.greenrobot.event.EventBus;
 
-//报销申请中  我发起的
+//报销管理  我发起的
 public class ExpenseLaunchFragment extends Fragment implements PullLoadMoreRecyclerView.PullLoadMoreListener {
 
     @BindView(R.id.recyclerView)
@@ -85,7 +85,10 @@ public class ExpenseLaunchFragment extends Fragment implements PullLoadMoreRecyc
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
+//        DividerItemDecoration divider = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+//        divider.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.devide_line));
+//        mPullLoadMoreRecyclerView.addItemDecoration(divider);
+        mPullLoadMoreRecyclerView.addItemDecoration(new CustomDecoration(getContext(),CustomDecoration.VERTICAL_LIST,R.drawable.devide_line, DisplayUtils.dip2px(getContext(),15)));
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new L_ExpenseApplyLaunchAdapter(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
@@ -155,5 +158,4 @@ public class ExpenseLaunchFragment extends Fragment implements PullLoadMoreRecyc
             }
         });
     }
-
 }

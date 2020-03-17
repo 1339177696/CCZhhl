@@ -1,6 +1,5 @@
 package com.hulian.oa.work.file.admin.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -8,10 +7,10 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hulian.oa.BaseActivity;
@@ -24,10 +23,6 @@ import com.hulian.oa.work.file.admin.activity.expense.l_fragment.ExpenseApproved
 import com.hulian.oa.work.file.admin.activity.expense.l_fragment.ExpenseCopymeFragment;
 import com.hulian.oa.work.file.admin.activity.expense.l_fragment.ExpenseLaunchFragment;
 import com.hulian.oa.work.file.admin.activity.expense.l_fragment.ExpensePendFragment;
-import com.hulian.oa.work.file.admin.activity.leave.l_fragment.LeaveApprovedFragment;
-import com.hulian.oa.work.file.admin.activity.leave.l_fragment.LeaveCopymeFragment;
-import com.hulian.oa.work.file.admin.activity.leave.l_fragment.LeaveLaunchFragment;
-import com.hulian.oa.work.file.admin.activity.leave.l_fragment.LeavePendFragment;
 
 
 import java.util.ArrayList;
@@ -47,12 +42,14 @@ public class SecondExpenseActivity extends BaseActivity {
     ViewPager myViewpager;
     Context mContext;
     @BindView(R.id.tv_apply)
-    LinearLayout tv_apply;
+    TextView tv_apply;
     private ArrayList<String> list_path;
     private ArrayList<String> list_title;
     ArrayList<String> titleDatas   = new ArrayList<>();;
     ArrayList<Fragment> fragmentList = new ArrayList<Fragment>();
 
+    @BindView(R.id.tv_baoxiao)
+    TextView tv_baoxiao;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,13 +62,13 @@ public class SecondExpenseActivity extends BaseActivity {
         if (SPUtils.get(mContext, "isLead", "").equals("0")) {
 //            tv_apply.setVisibility(View.GONE);
             tv_apply.setVisibility(View.VISIBLE);
-//            titleDatas.add("待审批");
-//            titleDatas.add("已审批");
-            titleDatas.add("我发起的");
-            titleDatas.add("我审批的");
-            titleDatas.add("抄送我的");
+            titleDatas.add("待审批");
+            titleDatas.add("已审批");
+//            titleDatas.add("我发起的");
+//            titleDatas.add("我审批的");
+//            titleDatas.add("抄送我的");
             fragmentList.add(new ExpenseLaunchFragment());
-            fragmentList.add(new ExpensePendFragment());
+//            fragmentList.add(new ExpensePendFragment());
             fragmentList.add(new ExpenseApprovedFragment());
         }
         //员工
@@ -86,19 +83,53 @@ public class SecondExpenseActivity extends BaseActivity {
     }
     private void init() {
         MyViewPageAdapter myViewPageAdapter = new MyViewPageAdapter(getSupportFragmentManager(), titleDatas, fragmentList);
-//        myTablayout.setSelectedTabIndicator(0);
+        myTablayout.setSelectedTabIndicator(0);
         myViewpager.setAdapter(myViewPageAdapter);
         myTablayout.setupWithViewPager(myViewpager);
+        //替换tab中原有的样式(职工)
+        myTablayout.getTabAt(0).setCustomView(R.layout.item_bx_tab_f);
+        myTablayout.getTabAt(1).setCustomView(R.layout.item_bx_tab_s);
+        //初始化替换后的文字和图片
+        TextView textView = myTablayout.getTabAt(0).getCustomView().findViewById(R.id.tv_title);
+        ImageView imageView = myTablayout.getTabAt(0).getCustomView().findViewById(R.id.iv_pic);
+        TextView textView1 = myTablayout.getTabAt(1).getCustomView().findViewById(R.id.tv_title);
+        ImageView imageView1 = myTablayout.getTabAt(1).getCustomView().findViewById(R.id.iv_pic);
+        textView.setText("我发起的");
+        textView1.setText("抄送我的");
+        //标题左边选中和未选中的图片效果
+        imageView.setBackground(ContextCompat.getDrawable(this,R.drawable.baoxiao_pic_f));
+        imageView1.setBackground(ContextCompat.getDrawable(this,R.drawable.baoxiao_pic_s));
+        myTablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                tab.getCustomView().findViewById(R.id.tv_title).setSelected(true);
+                myViewpager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                tab.getCustomView().findViewById(R.id.tv_title).setSelected(false);
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
     }
-    @OnClick({R.id.tv_apply,R.id.iv_back})
+    @OnClick({R.id.tv_apply,R.id.iv_back,R.id.tv_baoxiao})
     public void onViewClicked(View view) {
         switch (view.getId()){
-            case R.id.tv_apply:
+            case R.id.tv_apply://报销申请
                 startActivity(new Intent(mContext, ExpenseApplyForActivity.class));
+//                startActivity(new Intent(mContext, ExpenseDetailsActivity.class));
                 break;
             case R.id.iv_back:
                 finish();
+                break;
+            case R.id.tv_baoxiao:
+                startActivity(new Intent(mContext, ExpenseApplyForActivity.class));
                 break;
         }
     }

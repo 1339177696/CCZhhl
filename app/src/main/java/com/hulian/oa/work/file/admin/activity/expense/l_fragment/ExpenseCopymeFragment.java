@@ -24,6 +24,8 @@ import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
+import com.hulian.oa.utils.gallery.DisplayUtils;
+import com.hulian.oa.views.CustomDecoration;
 import com.hulian.oa.work.file.admin.activity.expense.l_adapter.L_ExpenseApplyCopymeAdapter;
 import com.hulian.oa.work.file.admin.activity.expense.l_adapter.L_ExpenseApplyLaunchAdapter;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
@@ -88,7 +90,7 @@ public class ExpenseCopymeFragment extends Fragment implements PullLoadMoreRecyc
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
+        mPullLoadMoreRecyclerView.addItemDecoration(new CustomDecoration(getContext(),CustomDecoration.VERTICAL_LIST,R.drawable.devide_line, DisplayUtils.dip2px(getContext(),15)));
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new L_ExpenseApplyLaunchAdapter(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
