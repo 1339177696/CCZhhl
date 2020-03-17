@@ -49,6 +49,7 @@ public class AgencyFragment extends Fragment {
     @BindView(R.id.lr_qgl_btn1)
     LinearLayout lrQglBtn1;
     @BindView(R.id.zx_qgl_img2)
+
     ImageView zxQglImg2;
     @BindView(R.id.zx_qgl_txt2)
     TextView zxQglTxt2;
