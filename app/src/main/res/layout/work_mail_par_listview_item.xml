@@ -6,7 +6,7 @@
 
         <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40">
+        android:layout_height="@dimen/dp_30">
             <ImageView
                 android:id="@+id/iv_icon"
                 android:layout_marginLeft="@dimen/dp_20"
@@ -25,7 +25,7 @@
                 android:layout_centerVertical="true"
                 android:text="文件名.txt"
                 android:textColor="@color/black"
-                android:textSize="@dimen/dp_14"
+                android:textSize="@dimen/dp_10"
             />
             <ImageView
                 android:src="@mipmap/mine_more"

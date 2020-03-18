@@ -342,7 +342,7 @@ android:visibility="gone"
                         android:paddingTop="@dimen/dp_2"
                         android:paddingBottom="@dimen/dp_2"
                         android:paddingLeft="@dimen/dp_5"
-                        android:paddingRight="@dimen/dp_5"
+                        android:paddingRight="@dimen/dp_8"
                         android:textSize="@dimen/sp_10" />
                     <LinearLayout
                         android:id="@+id/ll_del"
@@ -412,9 +412,10 @@ android:visibility="gone"
                     />
                 <TextView
                     android:id="@+id/tv_deadline"
+                    android:text="截止前30分钟"
                     android:layout_marginLeft="@dimen/dp_10"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/dp_14"
+                    android:textSize="@dimen/sp_9"
                     android:background="@null"
                     android:layout_toRightOf="@id/tv_deadline_title"
                     android:layout_width="match_parent"

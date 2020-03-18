@@ -239,10 +239,10 @@ public class TaskLauncherActivity extends BaseActivity {
                     return;
 
                 }
-                else if (selectList.size() <= 0) {
-                    ToastHelper.showToast(mContext, "照片不能为空");
-                    return;
-                }
+//                else if (selectList.size() <= 0) {
+//                    ToastHelper.showToast(mContext, "照片不能为空");
+//                    return;
+//                }
                 else
                 {
                     getData();
@@ -268,7 +268,7 @@ public class TaskLauncherActivity extends BaseActivity {
                 //设置时间
                 textView.setText(getTime(date));
             }
-        }).setType(new boolean[]{true,true,true,true,true,false})
+        }).setType(new boolean[]{false,true,true,true,true,false})
                 .setLabel("年","月","日","时","分","秒")
                 .build();
         pvTime.show();

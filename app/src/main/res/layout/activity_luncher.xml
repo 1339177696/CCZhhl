@@ -7,6 +7,6 @@
     tools:context=".LuncherActivity">
 <ImageView
     android:layout_width="match_parent"
-    android:background="@mipmap/ic_activity_launcher"
+    android:background="@mipmap/logo_qgl_icon2"
     android:layout_height="match_parent" />
 </LinearLayout>

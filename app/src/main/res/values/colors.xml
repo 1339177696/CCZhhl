@@ -27,4 +27,12 @@
     <!--新增色值end-->
     <color name="line_default_color">#e5e5e5</color>
     <color name="bg_yellow">#fc9b0d</color>
+
+    <color name="layout_dark">#E6F3F8</color>
+    <color name="layout_light">#ffffff</color>
+
+
+    <color name="red">#ff5654</color>
+    <color name="red_transparent">#ddff5654</color>
+
 </resources>

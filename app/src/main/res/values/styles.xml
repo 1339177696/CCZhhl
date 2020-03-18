@@ -228,4 +228,17 @@
         <item name="android:windowExitAnimation">@anim/actionsheet_dialog_out</item>
     </style>
 
+    <!--现场评审样式-->
+    <style name="xcps_radioButton_style">
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">@dimen/dp_8</item>
+        <item name="android:textColor">@drawable/rbtn_main_txt</item>
+        <item name="android:textSize">@dimen/sp_9</item>
+    </style>
+
 </resources>

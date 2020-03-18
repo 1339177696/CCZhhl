@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_all"
+    android:orientation="vertical">
+    <View
+        android:background="#2D4BCA"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_10"/>
+    <RelativeLayout
+        android:id="@+id/iv_back"
+        android:layout_width="match_parent"
+        android:background="#2D4BCA"
+        android:gravity="center_vertical"
+        android:layout_height="@dimen/dp_40">
+        <ImageView
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_width="@dimen/dp_12"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/ic_left_white"
+            android:layout_height="@dimen/dp_12" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="我发起的会议"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_11" />
+    </RelativeLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView
+            android:id="@+id/lm_meeting"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/dp_10" />
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/emptyBg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginBottom="50dp"
+            >
+            <ImageView
+                android:id="@+id/emptyBg1"
+                android:layout_width="@dimen/dp_260"
+                android:layout_height="@dimen/dp_150"
+                android:layout_centerInParent="true"
+                android:contentDescription="@string/empty"
+                android:src="@mipmap/ic_bg_empty"/>
+
+            <TextView
+                android:id="@+id/message_list_empty_hint"
+                android:layout_width="fill_parent"
+                android:text="暂无数据"
+                android:textSize="@dimen/sp_10"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/emptyBg1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dip"
+                android:gravity="center"/>
+        </RelativeLayout>
+
+    </FrameLayout>
+</LinearLayout>

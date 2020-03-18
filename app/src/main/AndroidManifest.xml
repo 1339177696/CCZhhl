@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.hulian.oa">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -44,11 +45,12 @@
         android:name=".APP"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_me"
-        android:label="OA"
+        android:label="工作桌面"
         android:largeHeap="true"
         android:supportsRtl="true"
         android:networkSecurityConfig="@xml/network_config"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="label,allowBackup">
         <!--qgl-->
         <service
             android:name=".socket.JWebSocketClientService"
@@ -107,7 +109,7 @@
         -->
         <meta-data
             android:name="com.netease.nim.appKey"
-            android:value="52196ec2abc3e6ad3425067986c69750" /> <!-- 云信后台服务，请使用独立进程。 -->
+            android:value="09b60e0ed3fe68a770fbc96c1c5f56ed" /> <!-- 云信后台服务，请使用独立进程。 -->
         <service
             android:name="com.netease.nimlib.service.NimService"
             android:process=":core" /> <!-- 云信后台辅助服务 -->
@@ -367,6 +369,23 @@
             android:configChanges="screenSize|keyboardHidden|orientation"/>
         <activity android:name=".qglactivity.PersonqglActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity android:name=".L_launched.L_Activity.L_mailActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity android:name=".L_launched.L_Activity.L_mailActivity_deteils"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity android:name=".L_launched.L_Activity.L_meetingActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity android:name=".L_launched.L_Activity.L_taskActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity android:name=".L_launched.L_Activity.L_leaveActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity android:name=".me.ScheduleActivity_Detelis"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            ></activity>
+          <activity android:name=".xcpsactivity.XCDetelisActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            ></activity>
+
 
     </application>
 

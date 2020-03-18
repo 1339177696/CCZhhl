@@ -17,6 +17,7 @@ import com.hulian.oa.MainActivity;
 import com.hulian.oa.R;
 import com.hulian.oa.agency.l_fragment.L_HascomFragment;
 import com.hulian.oa.agency.l_fragment.L_UpcomFragment;
+import com.hulian.oa.agency.l_fragment.PingShenFragment;
 import com.hulian.oa.bean.AgencyCount;
 import com.hulian.oa.bean.AgencyCountFinish;
 import com.hulian.oa.bean.Fab;
@@ -36,8 +37,8 @@ public class AgencyFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
     Unbinder unbinder;
-    @BindView(R.id.tv_mengban)
-    TextView tvMengban;
+//    @BindView(R.id.tv_mengban)
+//    TextView tvMengban;
     @BindView(R.id.iv_mine)
     ImageView iv_mine;
     @BindView(R.id.zx_qgl_img1)
@@ -57,9 +58,17 @@ public class AgencyFragment extends Fragment {
     TextView yibanNumber;
     @BindView(R.id.lr_qgl_btn2)
     LinearLayout lrQglBtn2;
-    private int pos = 0;
+
+    @BindView(R.id.zx_qgl_img3)
+    ImageView zxQglImg3;
+    @BindView(R.id.zx_qgl_txt3)
+    TextView zxQglTxt3;
+    @BindView(R.id.lr_qgl_btn3)
+    LinearLayout lrQglBtn3;
+
     private L_UpcomFragment l_upcomFragment;
     private L_HascomFragment l_hascomFragment;
+    private PingShenFragment l_pingshenFragment;
     private FragmentManager fManager;
 
     public AgencyFragment() {
@@ -98,7 +107,8 @@ public class AgencyFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
         fManager = getFragmentManager();
-        lrQglBtn1.performClick();//模拟一次点击，既进去后选择第一项
+        lrQglBtn3.performClick();//模拟一次点击，既进去后选择第一项
+//        lrQglBtn1.performClick();//模拟一次点击，既进去后选择第一项
 //        init();
         return view;
     }
@@ -151,13 +161,13 @@ public class AgencyFragment extends Fragment {
         EventBus.getDefault().unregister(this);
     }
 
-    public void onEventMainThread(Fab event) {
-        if (event.getTag().equals("0")) {
-            tvMengban.setVisibility(View.GONE);
-        } else {
-            tvMengban.setVisibility(View.VISIBLE);
-        }
-    }
+//    public void onEventMainThread(Fab event) {
+//        if (event.getTag().equals("0")) {
+//            tvMengban.setVisibility(View.GONE);
+//        } else {
+//            tvMengban.setVisibility(View.VISIBLE);
+//        }
+//    }
 
     public void onEventMainThread(AgencyCount event) {
         if (!"".equals(event.getAgencyCount())) {
@@ -181,12 +191,12 @@ public class AgencyFragment extends Fragment {
     }
 
 
-    @OnClick(R.id.tv_mengban)
-    public void onViewClicked2() {
-        Fab2 fab2 = new Fab2();
-        fab2.setTag("0");
-        EventBus.getDefault().post(fab2);
-    }
+//    @OnClick(R.id.tv_mengban)
+//    public void onViewClicked2() {
+//        Fab2 fab2 = new Fab2();
+//        fab2.setTag("0");
+//        EventBus.getDefault().post(fab2);
+//    }
 
     @OnClick(R.id.iv_mine)
     public void ononViewClicked() {
@@ -197,17 +207,11 @@ public class AgencyFragment extends Fragment {
     //接受点击事件,发送给fragment
     public void onEventMainThread(String event) {
         if (!"".equals(event)) {
-            if (pos == 0) {
-                //待办
-                StringBean1 resultmemberList = new StringBean1();
-                resultmemberList.setDaiban(event);
-                EventBus.getDefault().post(resultmemberList);
-            } else {
                 // 已办
                 StringBean2 stringBean2 = new StringBean2();
                 stringBean2.setDaiban(event);
                 EventBus.getDefault().post(stringBean2);
-            }
+
         }
     }
 
@@ -215,20 +219,22 @@ public class AgencyFragment extends Fragment {
     private void hideAllFragment(FragmentTransaction fragmentTransaction) {
         if (l_upcomFragment != null) fragmentTransaction.hide(l_upcomFragment);
         if (l_hascomFragment != null) fragmentTransaction.hide(l_hascomFragment);
+        if (l_pingshenFragment != null) fragmentTransaction.hide(l_pingshenFragment);
 
     }
 
-    @OnClick({R.id.lr_qgl_btn1, R.id.lr_qgl_btn2})
+    @OnClick({R.id.lr_qgl_btn1, R.id.lr_qgl_btn2,R.id.lr_qgl_btn3})
     public void onViewClicked(View view) {
         FragmentTransaction fTransaction = fManager.beginTransaction();
         hideAllFragment(fTransaction);
         switch (view.getId()) {
             case R.id.lr_qgl_btn1:
-                pos = 0;
                 zxQglTxt1.setTextColor(Color.parseColor("#FFFFFF"));
                 zxQglImg1.setImageResource(R.mipmap.done);
                 zxQglTxt2.setTextColor(Color.parseColor("#ccccd5"));
                 zxQglImg2.setImageResource(R.mipmap.done_default);
+                zxQglTxt3.setTextColor(Color.parseColor("#ccccd5"));
+                zxQglImg3.setImageResource(R.mipmap.done_default);
                 if (l_upcomFragment == null) {
                     l_upcomFragment = new L_UpcomFragment();
                     fTransaction.add(R.id.qgl_fragment_daiban, l_upcomFragment);
@@ -237,16 +243,31 @@ public class AgencyFragment extends Fragment {
                 }
                 break;
             case R.id.lr_qgl_btn2:
-                pos = 1;
                 zxQglTxt1.setTextColor(Color.parseColor("#ccccd5"));
                 zxQglImg1.setImageResource(R.mipmap.done_default);
                 zxQglTxt2.setTextColor(Color.parseColor("#FFFFFF"));
                 zxQglImg2.setImageResource(R.mipmap.done);
+                zxQglTxt3.setTextColor(Color.parseColor("#ccccd5"));
+                zxQglImg3.setImageResource(R.mipmap.done_default);
                 if (l_hascomFragment == null) {
                     l_hascomFragment = new L_HascomFragment();
                     fTransaction.add(R.id.qgl_fragment_daiban, l_hascomFragment);
                 } else {
                     fTransaction.show(l_hascomFragment);
+                }
+                break;
+            case R.id.lr_qgl_btn3:
+                zxQglTxt1.setTextColor(Color.parseColor("#ccccd5"));
+                zxQglImg1.setImageResource(R.mipmap.done_default);
+                zxQglTxt2.setTextColor(Color.parseColor("#ccccd5"));
+                zxQglImg2.setImageResource(R.mipmap.done_default);
+                zxQglTxt3.setTextColor(Color.parseColor("#FFFFFF"));
+                zxQglImg3.setImageResource(R.mipmap.done);
+                if (l_pingshenFragment == null) {
+                    l_pingshenFragment = new PingShenFragment();
+                    fTransaction.add(R.id.qgl_fragment_daiban, l_pingshenFragment);
+                } else {
+                    fTransaction.show(l_pingshenFragment);
                 }
                 break;
         }

@@ -3,12 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="#ffffff"
-    android:paddingLeft="10dp"
-    android:paddingTop="@dimen/dp_10"
-    android:paddingRight="@dimen/dp_10"
+    android:layout_marginLeft="@dimen/dp_10"
+    android:layout_marginRight="@dimen/dp_10"
+    android:layout_marginTop="@dimen/dp_5"
+    android:padding="@dimen/dp_5"
+    android:background="@drawable/edit_background3"
     android:orientation="vertical"
-    android:layout_height="wrap_content">
+    android:layout_height="@dimen/dp_70">
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
@@ -125,10 +126,10 @@
 
 
     </LinearLayout>
-    <TextView
-        android:layout_marginRight="-10dp"
-        android:background="#D9D9D9"
-        android:layout_marginTop="@dimen/dp_10"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_0_5" />
+    <!--<TextView-->
+        <!--android:layout_marginRight="-10dp"-->
+        <!--android:background="#D9D9D9"-->
+        <!--android:layout_marginTop="@dimen/dp_10"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/dp_0_5" />-->
 </LinearLayout>

@@ -181,8 +181,39 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
+                <LinearLayout
+                    android:id="@+id/lr_qgl_btn3"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="@dimen/dp_20"
+                    android:background="@drawable/zx_xinwen_bg">
+                    <ImageView
+                        android:id="@+id/zx_qgl_img3"
+                        android:src="@mipmap/done"
+                        android:layout_width="@dimen/dp_10"
+                        android:layout_height="@dimen/dp_11" />
+                    <TextView
+                        android:id="@+id/zx_qgl_txt3"
+                        android:layout_marginLeft="@dimen/dp_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="业务事项"
+                        android:textColor="#FFFFFF"
+                        android:textSize="@dimen/sp_9"
+                        />
+
+                    <TextView
+                        android:textColor="#FFFFFF"
+                        android:layout_marginLeft="@dimen/dp_6"
+                        android:textSize="@dimen/sp_10"
+                        android:text="4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
 
                 <LinearLayout
+                    android:layout_marginLeft="30dp"
                     android:id="@+id/lr_qgl_btn1"
                     android:gravity="center"
                     android:layout_gravity="center"
@@ -191,7 +222,7 @@
                     android:background="@drawable/zx_xinwen_bg">
                     <ImageView
                         android:id="@+id/zx_qgl_img1"
-                        android:src="@mipmap/done"
+                        android:src="@mipmap/done_default"
                         android:layout_width="@dimen/dp_10"
                         android:layout_height="@dimen/dp_11" />
                     <TextView
@@ -200,7 +231,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="待办事项"
-                        android:textColor="#FFFFFF"
+                        android:textColor="#ccccd5"
                         android:textSize="@dimen/sp_9"
                         />
 
@@ -213,6 +244,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:id="@+id/lr_qgl_btn2"
@@ -266,21 +298,21 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_mengban"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#99ffffff"
-            android:visibility="gone" />
+        <!--<TextView-->
+            <!--android:id="@+id/tv_mengban"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="#99ffffff"-->
+            <!--android:visibility="gone" />-->
 
-        <fragment
-            android:id="@+id/fg_order"
-            android:name="com.hulian.oa.work.file.admin.activity.instruct.fragment.Fra_post_order_qgl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|bottom"
-            android:layout_marginRight="@dimen/dp_20"
-            android:layout_marginBottom="@dimen/dp_20"
-            tools:layout="@layout/fra_order_post_qgl" />
+        <!--<fragment-->
+            <!--android:id="@+id/fg_order"-->
+            <!--android:name="com.hulian.oa.work.file.admin.activity.instruct.fragment.Fra_post_order_qgl"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="right|bottom"-->
+            <!--android:layout_marginRight="@dimen/dp_20"-->
+            <!--android:layout_marginBottom="@dimen/dp_20"-->
+            <!--tools:layout="@layout/fra_order_post_qgl" />-->
     </FrameLayout>
 </LinearLayout>

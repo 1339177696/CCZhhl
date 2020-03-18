@@ -118,10 +118,10 @@ public class SuspensionFab_qgl extends RelativeLayout implements View.OnClickLis
         setBackground(null);
         //添加默认显示的一个按钮
         FabAttributes build = new FabAttributes.Builder()
-                .setSrc(context.getResources().getDrawable(R.mipmap.daiban_fenlei_icon))
+                .setSrc(context.getResources().getDrawable(R.mipmap.db_faqi_icon_qgl))
                 .setFabSize(FloatingActionButton.SIZE_AUTO)
              //   .setPressedTranslationZ(10)
-                .setBackgroundTint(Color.parseColor("#FF6F3D"))
+                .setBackgroundTint(Color.parseColor("#00B5B9"))
                 .setElevation(15)
                 .setTag(defaultTag)
                 .build();

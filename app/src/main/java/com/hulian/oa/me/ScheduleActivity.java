@@ -332,7 +332,7 @@ public class ScheduleActivity extends BaseActivity {
                                     memberList.get(j).setScheduleContent(memberList2.get(i).getScheduleContent());
                             }
                         }
-                        l_scheduleAdapter.addAllData(memberList, time);
+                        l_scheduleAdapter.addAllData(memberList,null, time);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -390,5 +390,12 @@ public class ScheduleActivity extends BaseActivity {
             // initCalendarView();
             getMark_Data();
         }
+    }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        getDatatime(time);
+        // initCalendarView();
+        getMark_Data();
     }
 }

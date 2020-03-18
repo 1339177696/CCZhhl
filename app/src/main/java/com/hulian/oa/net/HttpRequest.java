@@ -121,6 +121,26 @@ public class HttpRequest {
         RequestMode.postRequest(Urls.commUrls+"system/pendingCore/selectUnfinishedWork", params, callback, null);
 
     }
+
+    /**
+     * 修改日程
+     * @param params
+     * @param callback
+     */
+    public static void postSche_Xiugai(RequestParams params,ResponseCallback callback)
+    {
+//        RequestMode.postRequest(Urls.commUrls+"system/schedule/androidEdit",params,callback,null);
+        RequestMode.postRequest(Urls.commUrls+"system/schedule/edit",params,callback,null);
+    }
+    /**
+     * 删除日程
+     * @param params
+     * @param callback
+     */
+    public static void postSche_Dlete(RequestParams params,ResponseCallback callback)
+    {
+        RequestMode.postRequest(Urls.commUrls+"system/schedule/remove",params,callback,null);
+    }
 //  /**
 //   * 已办列表
 //   * @param params 入参
@@ -149,14 +169,26 @@ public class HttpRequest {
   }
 
 
-  /**
+//  /**
+//   * 查询会议室
+//   * @param params 入参
+//   * @param callback 回调接口
+//   */
+//  public static void postMeetRoomeApi(RequestParams params, ResponseCallback callback) {
+//    RequestMode.postRequest(Urls.commUrls+"system/meetingRoom/queryMeetingRoom", params, callback, null);
+//  }
+
+   /**
    * 查询会议室
    * @param params 入参
    * @param callback 回调接口
    */
   public static void postMeetRoomeApi(RequestParams params, ResponseCallback callback) {
-    RequestMode.postRequest(Urls.commUrls+"system/meetingRoom/queryMeetingRoom", params, callback, null);
+    RequestMode.postRequest(Urls.commUrls+"system/meetingRoom/androidQueryMeetingRoom", params, callback, null);
   }
+
+
+
   /**
    * 发布会议
    * @param params 入参
@@ -410,6 +442,29 @@ public class HttpRequest {
     {
         RequestMode.postRequest(Urls.commUrls+"system/mail/findInboxInfo",params,callback,null);
     }
+
+/**
+     * 发件箱
+     * @param params
+     * @param callback
+     */
+    public static void post_Outbox(RequestParams params,ResponseCallback callback)
+    {
+        RequestMode.postRequest(Urls.commUrls+"system/mail/findSentMailList",params,callback,null);
+    }
+
+    /**
+     * 发件箱详情
+     * @param params
+     * @param callback
+     */
+    public static void post_Outbox_Detelis(RequestParams params,ResponseCallback callback)
+    {
+        RequestMode.postRequest(Urls.commUrls+"system/mail/findSentOrDraftInfoById",params,callback,null);
+    }
+
+
+
 
     /**
      * 邮箱回复

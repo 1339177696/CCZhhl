@@ -5,12 +5,18 @@
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
+    <View
+        android:id="@+id/view_xian"
+        android:background="#2D4BCA"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_10"/>
     <RelativeLayout
+        android:layout_below="@+id/view_xian"
         android:id="@+id/relayou_my"
         android:layout_width="match_parent"
         android:background="#2D4BCA"
         android:gravity="center_vertical"
-        android:layout_height="@dimen/dp_45">
+        android:layout_height="@dimen/dp_40">
         <ImageView
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_width="@dimen/dp_12"
@@ -22,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="指令下发"
+            android:text="指令发送"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_11" />
     </RelativeLayout>
@@ -577,7 +583,7 @@
                 android:layout_width="match_parent"
                 android:background="@drawable/edit_background_login_bt"
                 android:textColor="#ffffff"
-                android:text="发布"
+                android:text="发送"
                 android:textSize="@dimen/sp_11"
                 android:layout_marginRight="@dimen/dp_90"
                 android:layout_marginLeft="@dimen/dp_90"

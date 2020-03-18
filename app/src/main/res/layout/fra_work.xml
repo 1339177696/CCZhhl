@@ -23,7 +23,7 @@
         <RelativeLayout
             android:layout_marginTop="@dimen/dp_10"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_45">
+            android:layout_height="@dimen/dp_40">
             <ImageView
                 android:id="@+id/iv_mine"
                 android:layout_marginLeft="@dimen/dp_20"
@@ -37,25 +37,26 @@
                 android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="工作"
+                android:text="日程"
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/sp_11" />
         </RelativeLayout>
 
     </RelativeLayout>
-    <ScrollView
-        android:scrollbars="none"
-        android:layout_marginLeft="@dimen/dp_13"
-        android:layout_marginRight="@dimen/dp_13"
-        android:layout_marginTop="@dimen/dp_70"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <!--<ScrollView-->
+        <!--android:scrollbars="none"-->
+        <!--android:layout_marginLeft="@dimen/dp_13"-->
+        <!--android:layout_marginRight="@dimen/dp_13"-->
+        <!--android:layout_marginTop="@dimen/dp_70"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
         <LinearLayout
+            android:layout_marginTop="@dimen/dp_50"
             android:id="@+id/fg_content"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </ScrollView>
+            android:layout_height="match_parent" />
+    <!--</ScrollView>-->
 </RelativeLayout>
 
 </LinearLayout>

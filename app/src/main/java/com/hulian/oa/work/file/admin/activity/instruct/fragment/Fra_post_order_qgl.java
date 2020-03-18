@@ -26,6 +26,10 @@ import com.hulian.oa.views.fabVIew.OnFabClickListener;
 import com.hulian.oa.views.fabVIew.SuspensionFab_qgl;
 import com.hulian.oa.work.file.admin.activity.PostOrderActivity;
 import com.hulian.oa.work.file.admin.activity.SecondInstructActivity;
+import com.hulian.oa.work.file.admin.activity.leave.LeaveApplyforActivity;
+import com.hulian.oa.work.file.admin.activity.mail.MailWriteActivity;
+import com.hulian.oa.work.file.admin.activity.meeting.MeetingSponsorActivity;
+import com.hulian.oa.work.file.admin.activity.task.TaskLauncherActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -60,25 +64,11 @@ public class Fra_post_order_qgl extends Fragment {
         fabTop = (SuspensionFab_qgl) view.findViewById(R.id.fab_top);
 //构建展开按钮属性
         FabAttributes collection = new FabAttributes.Builder()
-                .setBackgroundTint(Color.parseColor("#FF6F3D"))
-                .setSrc(getResources().getDrawable(R.mipmap.daiban_gongwen_icon))
+                .setBackgroundTint(Color.parseColor("#FFAD4A"))
+                .setSrc(getResources().getDrawable(R.mipmap.db_youjian_icon))
                 .setFabSize(FloatingActionButton.SIZE_NORMAL)
                 .setPressedTranslationZ(10)
                 .setTag(1)
-                .build();
-        FabAttributes email = new FabAttributes.Builder()
-                .setBackgroundTint(Color.parseColor("#00B5B9"))
-                .setSrc(getResources().getDrawable(R.mipmap.daiban_huiyi_icon))
-                .setFabSize(FloatingActionButton.SIZE_NORMAL)
-                .setPressedTranslationZ(10)
-                .setTag(2)
-                .build();
-        FabAttributes renwu = new FabAttributes.Builder()
-                .setBackgroundTint(Color.parseColor("#4768F3"))
-                .setSrc(getResources().getDrawable(R.mipmap.daiban_renwu_icon))
-                .setFabSize(FloatingActionButton.SIZE_NORMAL)
-                .setPressedTranslationZ(10)
-                .setTag(3)
                 .build();
         FabAttributes qingjia = new FabAttributes.Builder()
                 .setBackgroundTint(Color.parseColor("#F64250"))
@@ -87,8 +77,23 @@ public class Fra_post_order_qgl extends Fragment {
                 .setPressedTranslationZ(10)
                 .setTag(4)
                 .build();
+        FabAttributes renwu = new FabAttributes.Builder()
+                .setBackgroundTint(Color.parseColor("#4768F3"))
+                .setSrc(getResources().getDrawable(R.mipmap.daiban_renwu_icon))
+                .setFabSize(FloatingActionButton.SIZE_NORMAL)
+                .setPressedTranslationZ(10)
+                .setTag(3)
+                .build();
+        FabAttributes email = new FabAttributes.Builder()
+                .setBackgroundTint(Color.parseColor("#00B5B9"))
+                .setSrc(getResources().getDrawable(R.mipmap.daiban_huiyi_icon))
+                .setFabSize(FloatingActionButton.SIZE_NORMAL)
+                .setPressedTranslationZ(10)
+                .setTag(2)
+                .build();
+
 //添加菜单
-        fabTop.addFab(collection, email, renwu, qingjia);
+        fabTop.addFab(qingjia,renwu,email,collection);
         //    fabTop.setAnimationManager(new FabAlphaAnimate(fabTop));
 //设置菜单点击事件
         fabTop.setFabClickListener(new OnFabClickListener() {
@@ -96,16 +101,24 @@ public class Fra_post_order_qgl extends Fragment {
             public void onFabClick(FloatingActionButton fab, Object tag) {
                 if (Integer.parseInt(tag + "") == 1) {
                     fabTop.closeAnimate();
-                    EventBus.getDefault().post("公文审批");
+//                    EventBus.getDefault().post("邮件发起");
+                    startActivity(new Intent(getActivity(), MailWriteActivity.class));
+
                 } else if (Integer.parseInt(tag + "") == 2) {
                     fabTop.closeAnimate();
-                    EventBus.getDefault().post("会议安排");
+//                    EventBus.getDefault().post("会议安排");
+                    startActivity(new Intent(getActivity(), MeetingSponsorActivity.class));
+
                 } else if (Integer.parseInt(tag + "") == 3) {
                     fabTop.closeAnimate();
-                    EventBus.getDefault().post("任务协同");
+//                    EventBus.getDefault().post("任务协同");
+                    startActivity(new Intent(getActivity(), TaskLauncherActivity.class));
+
                 } else {
                     fabTop.closeAnimate();
-                    EventBus.getDefault().post("请假审批");
+//                    EventBus.getDefault().post("请假审批");
+                    startActivity(new Intent(getActivity(), LeaveApplyforActivity.class));
+
                 }
             }
         });

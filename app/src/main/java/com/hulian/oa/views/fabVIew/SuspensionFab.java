@@ -121,7 +121,7 @@ public class SuspensionFab extends RelativeLayout implements View.OnClickListene
                 .setSrc(context.getResources().getDrawable(R.mipmap.add_icon))
                 .setFabSize(FloatingActionButton.SIZE_AUTO)
              //   .setPressedTranslationZ(10)
-                .setBackgroundTint(Color.parseColor("#0053cb"))
+                .setBackgroundTint(Color.parseColor("#4768F3"))
                 .setElevation(15)
                 .setTag(defaultTag)
                 .build();

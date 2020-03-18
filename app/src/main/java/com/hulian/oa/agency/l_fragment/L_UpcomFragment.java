@@ -1,5 +1,6 @@
 package com.hulian.oa.agency.l_fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -22,6 +24,8 @@ import com.hulian.oa.bean.Agency;
 import com.hulian.oa.bean.AgencyCount;
 import com.hulian.oa.bean.AgencyNew;
 import com.hulian.oa.bean.Daiban_xin_qgl1;
+import com.hulian.oa.bean.Fab;
+import com.hulian.oa.bean.Fab2;
 import com.hulian.oa.bean.InstructionsList;
 import com.hulian.oa.bean.Leave;
 import com.hulian.oa.bean.MeetingList;
@@ -35,6 +39,8 @@ import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.qglactivity.qglbean.StringBean1;
 import com.hulian.oa.utils.SPUtils;
+import com.hulian.oa.work.file.admin.activity.meeting.MeetingSponsorActivity;
+import com.hulian.oa.work.file.admin.activity.task.TaskLauncherActivity;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
 import org.json.JSONException;
@@ -45,6 +51,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import de.greenrobot.event.EventBus;
 
@@ -58,7 +65,11 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
     private RecyclerView mRecyclerView;
 //    UpcomAdapter mRecyclerViewAdapter;
     UpcomAdapter_qgl mRecyclerViewAdapter;
+
     Unbinder unbinder;
+
+    @BindView(R.id.tv_mengban)
+    TextView tvMengban;
 
    private List<Daiban_xin_qgl1.DataBean> memberList = new ArrayList<>();
 
@@ -72,6 +83,22 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
         EventBus.getDefault().register(this);
         initList();
         return view;
+    }
+
+
+    public void onEventMainThread(Fab event) {
+        if (event.getTag().equals("0")) {
+            tvMengban.setVisibility(View.GONE);
+        } else {
+            tvMengban.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @OnClick(R.id.tv_mengban)
+    public void onViewClicked2() {
+        Fab2 fab2 = new Fab2();
+        fab2.setTag("0");
+        EventBus.getDefault().post(fab2);
     }
 
     private void initList() {
@@ -138,6 +165,7 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
     private void getData() {
         RequestParams params = new RequestParams();
         params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
+        params.put("mail", SPUtils.get(getActivity(), "email", "").toString());
 //        params.put("type", SPUtils.get(getActivity(), "isLead", "").toString());
         HttpRequest.postAgencyListApi(params, new ResponseCallback() {
             @Override
@@ -288,66 +316,67 @@ public class L_UpcomFragment extends Fragment implements PullLoadMoreRecyclerVie
 
 
     //接受点击事件
-    public void onEventMainThread(StringBean1 event) {
-        Log.e("待办点击的",event.getDaiban());
-        if (event.getDaiban().equals("公文审批")){
-            dataBean.clear();
-            for (int i = 0;i<memberList.size();i++) {
+//    public void onEventMainThread(StringBean1 event) {
+//        Log.e("待办点击的",event.getDaiban());
+//        if (event.getDaiban().equals("公文审批")){
+//            dataBean.clear();
+//            for (int i = 0;i<memberList.size();i++) {
+//
+//                if (memberList.get(i).getType().equals("1")) {
+//                    //公文
+//                    dataBean.add(memberList.get(i));
+//                }
+//            }
+//            mRecyclerViewAdapter.clearData();
+//            mRecyclerViewAdapter.addAllData(dataBean);
+//            AgencyCount mAgencyCount = new AgencyCount();
+//            mAgencyCount.setAgencyCount(dataBean.size() + "");
+//            EventBus.getDefault().post(mAgencyCount);
+//
+//        }else if (event.getDaiban().equals("会议安排")){
+//            dataBean.clear();
+//            for (int i = 0;i<memberList.size();i++) {
+//                if (memberList.get(i).getType().equals("3")) {
+//                    //公文
+//                    dataBean.add(memberList.get(i));
+//                }
+//            }
+//            mRecyclerViewAdapter.clearData();
+//            mRecyclerViewAdapter.addAllData(dataBean);
+//            AgencyCount mAgencyCount = new AgencyCount();
+//            mAgencyCount.setAgencyCount(dataBean.size() + "");
+//            EventBus.getDefault().post(mAgencyCount);
+//
+//        }else if (event.getDaiban().equals("任务协同")){
+//            dataBean.clear();
+//            for (int i = 0;i<memberList.size();i++) {
+//                if (memberList.get(i).getType().equals("4")) {
+//                    //公文
+//                    dataBean.add(memberList.get(i));
+//                }
+//            }
+//            mRecyclerViewAdapter.clearData();
+//            mRecyclerViewAdapter.addAllData(dataBean);
+//            AgencyCount mAgencyCount = new AgencyCount();
+//            mAgencyCount.setAgencyCount(dataBean.size() + "");
+//            EventBus.getDefault().post(mAgencyCount);
+//
+//        }else if (event.getDaiban().equals("请假审批")){
+//            dataBean.clear();
+//            for (int i = 0;i<memberList.size();i++) {
+//
+//                if (memberList.get(i).getType().equals("2")) {
+//                    //公文
+//                    dataBean.add(memberList.get(i));
+//                }
+//            }
+//            mRecyclerViewAdapter.clearData();
+//            mRecyclerViewAdapter.addAllData(dataBean);
+//            AgencyCount mAgencyCount = new AgencyCount();
+//            mAgencyCount.setAgencyCount(dataBean.size() + "");
+//            EventBus.getDefault().post(mAgencyCount);
+//        }
+//    }
 
-                if (memberList.get(i).getType().equals("1")) {
-                    //公文
-                    dataBean.add(memberList.get(i));
-                }
-            }
-            mRecyclerViewAdapter.clearData();
-            mRecyclerViewAdapter.addAllData(dataBean);
-            AgencyCount mAgencyCount = new AgencyCount();
-            mAgencyCount.setAgencyCount(dataBean.size() + "");
-            EventBus.getDefault().post(mAgencyCount);
-
-        }else if (event.getDaiban().equals("会议安排")){
-            dataBean.clear();
-            for (int i = 0;i<memberList.size();i++) {
-                if (memberList.get(i).getType().equals("3")) {
-                    //公文
-                    dataBean.add(memberList.get(i));
-                }
-            }
-            mRecyclerViewAdapter.clearData();
-            mRecyclerViewAdapter.addAllData(dataBean);
-            AgencyCount mAgencyCount = new AgencyCount();
-            mAgencyCount.setAgencyCount(dataBean.size() + "");
-            EventBus.getDefault().post(mAgencyCount);
-
-        }else if (event.getDaiban().equals("任务协同")){
-            dataBean.clear();
-            for (int i = 0;i<memberList.size();i++) {
-                if (memberList.get(i).getType().equals("4")) {
-                    //公文
-                    dataBean.add(memberList.get(i));
-                }
-            }
-            mRecyclerViewAdapter.clearData();
-            mRecyclerViewAdapter.addAllData(dataBean);
-            AgencyCount mAgencyCount = new AgencyCount();
-            mAgencyCount.setAgencyCount(dataBean.size() + "");
-            EventBus.getDefault().post(mAgencyCount);
-
-        }else if (event.getDaiban().equals("请假审批")){
-            dataBean.clear();
-            for (int i = 0;i<memberList.size();i++) {
-
-                if (memberList.get(i).getType().equals("2")) {
-                    //公文
-                    dataBean.add(memberList.get(i));
-                }
-            }
-            mRecyclerViewAdapter.clearData();
-            mRecyclerViewAdapter.addAllData(dataBean);
-            AgencyCount mAgencyCount = new AgencyCount();
-            mAgencyCount.setAgencyCount(dataBean.size() + "");
-            EventBus.getDefault().post(mAgencyCount);
-        }
-    }
 
 }

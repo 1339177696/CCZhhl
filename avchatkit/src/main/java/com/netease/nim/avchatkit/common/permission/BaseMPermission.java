@@ -173,7 +173,7 @@ public class BaseMPermission {
         Log.i(TAG, "----- MPermission result " + (preRequest ? "before" : "after") + " request：");
         List<MPermissionResultEnum> result = getPermissionResult(activity, permissions);
         int i = 0;
-        for (BaseMPermission.MPermissionResultEnum p : result) {
+        for (MPermissionResultEnum p : result) {
             Log.i(TAG, "* MPermission=" + permissions[i++] + ", result=" + p);
         }
     }

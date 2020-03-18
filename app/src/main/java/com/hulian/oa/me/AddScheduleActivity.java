@@ -2,8 +2,10 @@ package com.hulian.oa.me;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -32,11 +34,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.addapp.pickers.picker.TimePicker;
 
 //我的-》日程-》添加日程
 public class AddScheduleActivity extends BaseActivity {
@@ -62,6 +66,7 @@ public class AddScheduleActivity extends BaseActivity {
     RelativeLayout rlRemind;
     @BindView(R.id.sw_select)
     Switch swSelect;
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,8 +81,8 @@ public class AddScheduleActivity extends BaseActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 swSelect.setChecked(isChecked);
                 if(isChecked){
-                    time2="00:00";
-                    time3="23:59";
+                    time2="08:00";
+                    time3="16:59";
                     tv_select_time.setText(time2);
                     tv_select_time2.setText(time3);
                 }
@@ -91,10 +96,10 @@ public class AddScheduleActivity extends BaseActivity {
         add_content = edit_content.getText().toString().trim();
         switch (view.getId()) {
             case R.id.tv_select_time:
-                selectTime();
+//                selectTime();
+                onTimePicker(view);
                 break;
             case R.id.btn_select_complete:
-                Log.d("这是发布发送的", "点击了");
                 if (time2.isEmpty()) {
                     //  tv_select_time.setError("请选择开始时间");
                     ToastHelper.showToast(mContext, "请选择开始时间");
@@ -114,7 +119,8 @@ public class AddScheduleActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_select_time2:
-                selectTime2();
+//                selectTime2();
+                onTimePicker2(view);
                 break;
         }
 
@@ -132,8 +138,6 @@ public class AddScheduleActivity extends BaseActivity {
                         return;
                     }
                 }
-
-
                 tv_select_time.setText(getTime(date));
                 time2 = getTime(date);
                 if(!time2.equals("00:00")){
@@ -240,4 +244,68 @@ public class AddScheduleActivity extends BaseActivity {
             tvRemind.setText(data.getStringExtra("tixing"));
         }
     }
+
+
+    public void onTimePicker(View view) {
+        TimePicker picker = new TimePicker(this, TimePicker.HOUR_24);
+        picker.setRangeStart(8, 0);//09:00
+        picker.setRangeEnd(16, 0);//18:30
+        picker.setTopLineVisible(false);
+        picker.setLineVisible(false);
+        picker.setWheelModeEnable(false);
+        picker.setOnTimePickListener(new TimePicker.OnTimePickListener() {
+            @Override
+            public void onTimePicked(String hour, String minute) {
+
+                if(!time3.equals(""))
+                {
+                    if(TimeUtils.differentDaysByMillisecond2(hour+":"+minute,time3)<0){
+                        ToastHelper.showToast(mContext, "请选择不小于开始时间的结束时间");
+                        return;
+                    }
+                }
+                tv_select_time.setText(hour+":"+minute);
+                time2 =hour+":"+minute;
+                if(!time2.equals("08:00")){
+                    swSelect.setChecked(false);
+                }
+                else if(time3.equals("16:59")){
+                    swSelect.setChecked(true);
+                }
+            }
+        });
+        picker.show();
+    }
+
+    public void onTimePicker2(View view) {
+        TimePicker picker = new TimePicker(this, TimePicker.HOUR_24);
+        picker.setRangeStart(8, 0);//09:00
+        picker.setRangeEnd(16, 0);//18:30
+        picker.setTopLineVisible(false);
+        picker.setLineVisible(false);
+        picker.setWheelModeEnable(false);
+        picker.setOnTimePickListener(new TimePicker.OnTimePickListener() {
+            @Override
+            public void onTimePicked(String hour, String minute) {
+                //设置时间
+                if(!time2.equals(""))
+                {
+                    if(TimeUtils.differentDaysByMillisecond2(time2,hour+":"+minute)<0){
+                        ToastHelper.showToast(mContext, "请选择不小于开始时间的结束时间");
+                        return;
+                    }
+                }
+                tv_select_time2.setText(hour+":"+minute);
+                time3 =hour+":"+minute;
+                if(!time3.equals("16:59")){
+                    swSelect.setChecked(false);
+                }
+                else if(time2.equals("08:00")){
+                    swSelect.setChecked(true);
+                }
+            }
+        });
+        picker.show();
+    }
+
 }

@@ -64,15 +64,15 @@ public class Fra_post_order extends Fragment  {
          fabTop = (SuspensionFab) view.findViewById(R.id.fab_top);
 //构建展开按钮属性
         FabAttributes collection = new FabAttributes.Builder()
-                .setBackgroundTint(Color.parseColor("#42c099"))
-                .setSrc(getResources().getDrawable(R.mipmap.list_icon))
+                .setBackgroundTint(Color.parseColor("#5B32BB"))
+                .setSrc(getResources().getDrawable(R.mipmap.zhiling_gz_icon))
                 .setFabSize(FloatingActionButton.SIZE_NORMAL)
                 .setPressedTranslationZ(10)
                 .setTag(1)
                 .build();
         FabAttributes email = new FabAttributes.Builder()
-                .setBackgroundTint(Color.parseColor("#ff6400"))
-                .setSrc(getResources().getDrawable(R.mipmap.instruction_icon))
+                .setBackgroundTint(Color.parseColor("#00B5B9"))
+                .setSrc(getResources().getDrawable(R.mipmap.zhiling_fs_icon))
                 .setFabSize(FloatingActionButton.SIZE_NORMAL)
                 .setPressedTranslationZ(10)
                 .setTag(2)

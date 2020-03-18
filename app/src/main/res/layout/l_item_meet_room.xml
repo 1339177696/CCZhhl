@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"
             android:layout_below="@id/tv_meet_room_num"
             android:id="@+id/tv_meet_count"
             android:text="容纳人数：100"
@@ -38,19 +38,62 @@
             android:textSize="@dimen/sp_9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/meetingContacts"
+                android:layout_marginTop="@dimen/dp_5"
+                android:textSize="@dimen/sp_9"
+                android:layout_below="@+id/tv_meet_count"
+                android:text="会议联系人："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/meetingPhone"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_below="@+id/meetingContacts"
+                android:textSize="@dimen/sp_9"
+                android:text="联系电话："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </RelativeLayout>
     </RelativeLayout>
-    <TextView
-        android:id="@+id/tv_sel_room"
-        android:text="选择"
-        android:textColor="@color/white"
-        android:textSize="@dimen/sp_7"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/dp_10"
+
+    <RelativeLayout
         android:layout_centerVertical="true"
-        android:background="@drawable/bt_7background_meet"
-        android:layout_width="55dp"
-        android:layout_height="21dp"
-        android:gravity="center"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_80">
+
+        <RelativeLayout
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_marginTop="@dimen/dp_15"
+                android:id="@+id/tv_sel_room"
+                android:text="选择"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_7"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dp_10"
+                android:background="@drawable/bt_7background_meet"
+                android:layout_width="55dp"
+                android:layout_height="21dp"
+                android:gravity="center"
+                />
+
+            <ImageView
+                android:id="@+id/phone_ls"
+                android:layout_alignLeft="@+id/tv_sel_room"
+                android:layout_marginTop="@dimen/dp_15"
+                android:layout_below="@+id/tv_sel_room"
+                android:layout_marginRight="@dimen/dp_10"
+                android:src="@mipmap/dh_icon"
+                android:layout_width="@dimen/dp_18"
+                android:layout_height="@dimen/dp_18" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
 </RelativeLayout>

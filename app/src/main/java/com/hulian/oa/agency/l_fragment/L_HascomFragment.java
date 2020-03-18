@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -23,6 +24,8 @@ import com.hulian.oa.bean.AgencyCount;
 import com.hulian.oa.bean.AgencyCountFinish;
 import com.hulian.oa.bean.AgencyNew;
 import com.hulian.oa.bean.Daiban_xin_qgl1;
+import com.hulian.oa.bean.Fab;
+import com.hulian.oa.bean.Fab2;
 import com.hulian.oa.bean.InstructionsList;
 import com.hulian.oa.bean.MeetingList;
 import com.hulian.oa.bean.OfficialDocumentList;
@@ -46,6 +49,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import de.greenrobot.event.EventBus;
 
@@ -59,19 +63,19 @@ public class L_HascomFragment extends Fragment implements PullLoadMoreRecyclerVi
     private RecyclerView mRecyclerView;
 //    HascomAdapter mRecyclerViewAdapter;
     HascomAdapter_qgl mRecyclerViewAdapter;
-
     private ArrayList<String> list_path;
     private ArrayList<String> list_title;
     Unbinder unbinder;
-
     private List<Daiban_xin_qgl1.DataBean> memberList = new ArrayList<>();
-
     private List<Daiban_xin_qgl1.DataBean> dataBean  = new ArrayList<>();
+
+    @BindView(R.id.tv_mengban)
+    TextView tvMengban;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.l_fra_collection_notice, null);
+        View view = inflater.inflate(R.layout.l_fra_collection_notice_qgl, null);
         unbinder = ButterKnife.bind(this, view);
         initList();
         EventBus.getDefault().register(this);
@@ -139,6 +143,8 @@ public class L_HascomFragment extends Fragment implements PullLoadMoreRecyclerVi
     private void getData() {
         RequestParams params = new RequestParams();
         params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
+        params.put("mail", SPUtils.get(getActivity(), "email", "").toString());
+
 //        params.put("type", SPUtils.get(getActivity(), "isLead", "").toString());
         HttpRequest.postAgencyFinishListApi(params, new ResponseCallback() {
             @Override
@@ -269,7 +275,22 @@ public class L_HascomFragment extends Fragment implements PullLoadMoreRecyclerVi
         EventBus.getDefault().unregister(this);
     }
 
+    /*根据点击隐藏显示蒙版*/
+    public void onEventMainThread(Fab event) {
+        if (event.getTag().equals("0")) {
+            tvMengban.setVisibility(View.GONE);
+        } else {
+            tvMengban.setVisibility(View.VISIBLE);
+        }
+    }
 
+    /*点击蒙版*/
+    @OnClick(R.id.tv_mengban)
+    public void onViewClicked2() {
+        Fab2 fab2 = new Fab2();
+        fab2.setTag("0");
+        EventBus.getDefault().post(fab2);
+    }
     //接受点击事件
     public void onEventMainThread(StringBean2 event) {
         Log.e("已办点击的",event.getDaiban());
@@ -321,6 +342,21 @@ public class L_HascomFragment extends Fragment implements PullLoadMoreRecyclerVi
             for (int i = 0;i<memberList.size();i++) {
 
                 if (memberList.get(i).getType().equals("2")) {
+                    //公文
+                    dataBean.add(memberList.get(i));
+                }
+            }
+            mRecyclerViewAdapter.clearData();
+            mRecyclerViewAdapter.addAllData(dataBean);
+            AgencyCountFinish mAgencyCount = new AgencyCountFinish();
+            mAgencyCount.setAgencyCountFinish(dataBean.size() + "");
+            EventBus.getDefault().post(mAgencyCount);
+        }else if (event.getDaiban().equals("邮件列表")){
+            Log.e("点击了","邮件列表");
+            dataBean.clear();
+            for (int i = 0;i<memberList.size();i++) {
+
+                if (memberList.get(i).getType().equals("5")) {
                     //公文
                     dataBean.add(memberList.get(i));
                 }

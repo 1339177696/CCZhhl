@@ -111,7 +111,7 @@
 
     <RadioButton
         android:id="@+id/tv_remind2"
-        android:text="5分钟"
+        android:text="提前5分钟"
         android:padding="@dimen/dp_15"
         android:background="@color/white"
         android:textSize="@dimen/sp_9"
@@ -129,7 +129,7 @@
 
     <RadioButton
         android:id="@+id/tv_remind3"
-        android:text="10分钟"
+        android:text="提前10分钟"
         android:padding="@dimen/dp_15"
         android:background="@color/white"
         android:textSize="@dimen/sp_9"
@@ -147,7 +147,7 @@
 
     <RadioButton
         android:id="@+id/tv_remind4"
-        android:text="30分钟"
+        android:text="提前30分钟"
         android:padding="@dimen/dp_15"
         android:background="@color/white"
         android:textSize="@dimen/sp_9"

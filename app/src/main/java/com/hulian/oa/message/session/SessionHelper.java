@@ -3,13 +3,19 @@ package com.hulian.oa.message.session;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.text.TextUtils;
 import android.view.View;
 
 import com.hulian.oa.DemoCache;
 import com.hulian.oa.R;
 import com.hulian.oa.message.session.extension.CustomAttachParser;
+import com.hulian.oa.message.session.extension.CustomAttachment;
 import com.hulian.oa.message.session.extension.StickerAttachment;
+import com.hulian.oa.message.session.viewholder.MsgViewHolderAVChat;
+import com.hulian.oa.message.session.viewholder.MsgViewHolderDefCustom;
+import com.hulian.oa.message.session.viewholder.MsgViewHolderTip;
+import com.hulian.oa.team.activity.AVChatAction;
 import com.hulian.oa.team.activity.AckMessageAction;
 import com.hulian.oa.team.activity.TeamAVChatAction;
 import com.netease.nim.avchatkit.TeamAVChatProfile;
@@ -154,10 +160,10 @@ public class SessionHelper {
             //            p2pCustomization.backgroundUri = "android.resource://com.netease.nim.demo/drawable/bk"
             // 定制加号点开后可以包含的操作， 默认已经有图片，视频等消息了
             ArrayList<BaseAction> actions = new ArrayList<>();
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-//                actions.add(new AVChatAction(AVChatType.AUDIO));
-//                actions.add(new AVChatAction(AVChatType.VIDEO));
-//            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+                actions.add(new AVChatAction(AVChatType.AUDIO));
+                actions.add(new AVChatAction(AVChatType.VIDEO));
+            }
 //            actions.add(new RTSAction());
 //            actions.add(new SnapChatAction());
 //            actions.add(new GuessAction());
@@ -182,7 +188,7 @@ public class SessionHelper {
 
                 @Override
                 public void onClick(Context context, View view, String sessionId) {
-                 //   MessageInfoActivity.startActivity(context, sessionId); //打开聊天信息
+                    //   MessageInfoActivity.startActivity(context, sessionId); //打开聊天信息
                 }
             };
             infoButton.iconId = R.drawable.ic_launcher_foreground;
@@ -254,7 +260,7 @@ public class SessionHelper {
             return true;
         }
         LocalAntiSpamResult result = NIMClient.getService(MsgService.class).checkLocalAntiSpam(message.getContent(),
-                                                                                               "**");
+                "**");
         int operator = result == null ? 0 : result.getOperator();
         switch (operator) {
             case 1: // 替换，允许发送
@@ -364,11 +370,11 @@ public class SessionHelper {
             final TeamAVChatAction avChatAction = new TeamAVChatAction(AVChatType.VIDEO);
             TeamAVChatProfile.sharedInstance().registerObserver(true);
             ArrayList<BaseAction> actions = new ArrayList<>();
-           // actions.add(avChatAction);
+            actions.add(avChatAction);
 //            if (NIMRedPacketClient.isEnable()) {
 //                actions.add(new RedPacketAction());
 //            }
-         //   actions.add(new TipAction());
+            //   actions.add(new TipAction());
             SessionTeamCustomization.SessionTeamCustomListener listener = new SessionTeamCustomization.SessionTeamCustomListener() {
 
                 @Override
@@ -401,7 +407,7 @@ public class SessionHelper {
             final TeamAVChatAction avChatAction = new TeamAVChatAction(AVChatType.VIDEO);
             TeamAVChatProfile.sharedInstance().registerObserver(true);
             ArrayList<BaseAction> actions = new ArrayList<>();
-       //     actions.add(avChatAction);
+            actions.add(avChatAction);
 //            actions.add(new GuessAction());
 //            actions.add(new FileAction());
             actions.add(new AckMessageAction());
@@ -450,13 +456,13 @@ public class SessionHelper {
 
     private static void registerViewHolders() {
 //        NimUIKit.registerMsgItemViewHolder(FileAttachment.class, MsgViewHolderFile.class);
-//        NimUIKit.registerMsgItemViewHolder(AVChatAttachment.class, MsgViewHolderAVChat.class);
+        NimUIKit.registerMsgItemViewHolder(AVChatAttachment.class, MsgViewHolderAVChat.class);
 //        NimUIKit.registerMsgItemViewHolder(GuessAttachment.class, MsgViewHolderGuess.class);
-//        NimUIKit.registerMsgItemViewHolder(CustomAttachment.class, MsgViewHolderDefCustom.class);
+        NimUIKit.registerMsgItemViewHolder(CustomAttachment.class, MsgViewHolderDefCustom.class);
 //        NimUIKit.registerMsgItemViewHolder(StickerAttachment.class, MsgViewHolderSticker.class);
 //        NimUIKit.registerMsgItemViewHolder(SnapChatAttachment.class, MsgViewHolderSnapChat.class);
 //        NimUIKit.registerMsgItemViewHolder(RTSAttachment.class, MsgViewHolderRTS.class);
-//        NimUIKit.registerTipMsgViewHolder(MsgViewHolderTip.class);
+        NimUIKit.registerTipMsgViewHolder(MsgViewHolderTip.class);
 //        registerRedPacketViewHolder();
     }
 
@@ -494,7 +500,7 @@ public class SessionHelper {
             @Override
             public void onAckMsgClicked(Context context, IMMessage message) {
                 // 已读回执事件处理，用于群组的已读回执事件的响应，弹出消息已读详情
-            //    AckMsgInfoActivity.start(context, message);
+                //    AckMsgInfoActivity.start(context, message);
             }
         };
         NimUIKit.setSessionListener(listener);
@@ -634,14 +640,14 @@ public class SessionHelper {
                                                         SessionTypeEnum sessionTypeEnum) {
         List<PopupMenuItem> moreMenuItems = new ArrayList<PopupMenuItem>();
         moreMenuItems.add(new PopupMenuItem(context, ACTION_HISTORY_QUERY, sessionId, sessionTypeEnum,
-                                            DemoCache.getContext().getString(R.string.message_history_query)));
+                DemoCache.getContext().getString(R.string.message_history_query)));
         moreMenuItems.add(new PopupMenuItem(context, ACTION_SEARCH_MESSAGE, sessionId, sessionTypeEnum,
-                                            DemoCache.getContext().getString(R.string.message_search_title)));
+                DemoCache.getContext().getString(R.string.message_search_title)));
         moreMenuItems.add(new PopupMenuItem(context, ACTION_CLEAR_MESSAGE, sessionId, sessionTypeEnum,
-                                            DemoCache.getContext().getString(R.string.message_clear)));
+                DemoCache.getContext().getString(R.string.message_clear)));
         if (sessionTypeEnum == SessionTypeEnum.P2P) {
             moreMenuItems.add(new PopupMenuItem(context, ACTION_CLEAR_P2P_MESSAGE, sessionId, sessionTypeEnum,
-                                                DemoCache.getContext().getString(R.string.message_p2p_clear)));
+                    DemoCache.getContext().getString(R.string.message_p2p_clear)));
         }
         return moreMenuItems;
     }
