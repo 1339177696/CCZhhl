@@ -139,7 +139,7 @@
             <TextView
                 android:id="@+id/tv_part_time_title"
                 android:drawablePadding="@dimen/dp_3"
-                android:drawableLeft="@mipmap/time"
+                android:drawableLeft="@mipmap/hb_time"
                 android:text="开始时间"
                 android:textColor="@color/text_title"
                 android:textSize="16sp"
@@ -176,7 +176,7 @@
             <TextView
                 android:id="@+id/stop_time_title"
                 android:drawablePadding="@dimen/dp_3"
-                android:drawableLeft="@mipmap/time"
+                android:drawableLeft="@mipmap/hb_time"
                 android:text="结束时间"
                 android:textColor="@color/text_title"
                 android:textSize="16sp"

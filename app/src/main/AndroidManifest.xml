@@ -475,6 +475,9 @@
         <activity
             android:name=".work.file.admin.activity.ScreenReportListActivity"
             android:configChanges="screenSize|keyboardHidden|orientation" />
+        <activity
+            android:name=".work.file.admin.activity.ReportSelDepartmentActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation" />
 
         <activity
             android:name=".work.file.admin.activity.Work_gd_Activity"

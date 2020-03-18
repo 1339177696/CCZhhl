@@ -21,6 +21,36 @@ public class Report implements Serializable {
 
     private String id;
     private String createBy;//汇报创建人
+    @SerializedName("tomorrowWorkPlan")
+    private String planWork;//计划任务
+
+    private String coordinateWork;//协调的工作
+
+    private String receivePersonName;//汇报接收人姓名
+
+    public String getPlanWork() {
+        return planWork;
+    }
+
+    public void setPlanWork(String planWork) {
+        this.planWork = planWork;
+    }
+
+    public String getCoordinateWork() {
+        return coordinateWork;
+    }
+
+    public void setCoordinateWork(String coordinateWork) {
+        this.coordinateWork = coordinateWork;
+    }
+
+    public String getReceivePersonName() {
+        return receivePersonName;
+    }
+
+    public void setReceivePersonName(String receivePersonName) {
+        this.receivePersonName = receivePersonName;
+    }
 
     public String getId() {
         return id;

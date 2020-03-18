@@ -7,6 +7,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -69,6 +70,7 @@ public class ScreenReportListActivity extends BaseActivity implements BaseQuickA
         mAdapter.openLoadAnimation();
         mAdapter.setEnableLoadMore(true);
         mAdapter.setOnLoadMoreListener(this, listview);
+        mAdapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.list_empty, null));
         listview.setLayoutManager(new LinearLayoutManager(ScreenReportListActivity.this));
         listview.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -101,11 +103,11 @@ public class ScreenReportListActivity extends BaseActivity implements BaseQuickA
     private void getData() {
         RequestParams params = new RequestParams();
         params.put("createBy", getIntent().getStringExtra("createBy"));
-        params.put("beginDate", getIntent().getStringExtra("params.beginDate"));
-        params.put("endDate", getIntent().getStringExtra("params.endDate"));
-        params.put("pageStart", mCount * 10 - 9 + "");
+        params.put("params[beginDate]", getIntent().getStringExtra("beginDate"));
+        params.put("params[endDate]", getIntent().getStringExtra("endDate"));
+        params.put("pageStart", mCount * 10 - 10 + "");
         params.put("pageEnd", mCount * 10 + "");
-        HttpRequest.getGetWorkReportList(params, new ResponseCallback() {
+        HttpRequest.getScreenReportList(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
                 swipeRefreshLayout.setRefreshing(false);

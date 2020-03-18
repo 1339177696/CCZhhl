@@ -17,6 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.BaseActivity;
 import com.hulian.oa.R;
@@ -26,6 +28,7 @@ import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
+import com.hulian.oa.utils.NullStringToEmptyAdapterFactory;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.views.MyDialog;
@@ -204,12 +207,17 @@ public class ReadReportActivity extends BaseActivity {
     }
 
     private void getData() {
+        loadDialog.show();
         RequestParams params = new RequestParams();
         params.put("id", report.getId());
         HttpRequest.getGetWorkReport(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
                 try {
+                    loadDialog.dismiss();
+                    //把字符串中的null 替换为""
+                    Gson gson = new GsonBuilder().registerTypeAdapterFactory(new NullStringToEmptyAdapterFactory()).create();
+
                     JSONObject result = new JSONObject(responseObj.toString());
                     if (TextUtils.equals("0", result.getString("code"))) {
                         JSONObject data = result.getJSONObject("data");
@@ -226,17 +234,19 @@ public class ReadReportActivity extends BaseActivity {
                                 }
                             }
 
-                        }else {
+                        } else {
                             input_comments.setVisibility(View.GONE);
                         }
-                        name.setText(data.getJSONObject("info").getString("createByName"));
-                        time.setText(data.getJSONObject("info").getString("createTime"));
+                        Report report = gson.fromJson(data.getString("info"), Report.class);
 
-                        finishedWork.setText(data.getJSONObject("info").getString("finishWork"));
-                        unfinishedWork.setText(data.getJSONObject("info").getString("unfinishedWork"));
-                        planWork.setText(data.getJSONObject("info").getString("tomorrowWorkPlan"));
-                        coordinateWork.setText(data.getJSONObject("info").getString("coordinateWork"));
-                        recipient.setText(data.getJSONObject("info").getString("receivePersonName"));
+                        name.setText(report.getName());
+                        time.setText(report.getTime());
+
+                        finishedWork.setText(report.getFinishWork());
+                        unfinishedWork.setText(report.getUnFinishWork());
+                        planWork.setText(report.getPlanWork());
+                        coordinateWork.setText(report.getCoordinateWork());
+                        recipient.setText(report.getReceivePersonName());
 
                         showImage(data.getJSONObject("info").getString("img"));
                     }
@@ -257,7 +267,7 @@ public class ReadReportActivity extends BaseActivity {
     //照片
     private void showImage(String imgList) {
 
-        if (imgList != null && imgList != "") {
+        if (TextUtils.isEmpty(imgList) && TextUtils.equals(imgList, "null")) {
             List<String> c = Arrays.asList(imgList.split(","));
             for (int i = 0; i <= c.size() - 1; i++) {
                 // 初始化list

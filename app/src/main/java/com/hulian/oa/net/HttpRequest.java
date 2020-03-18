@@ -843,17 +843,27 @@ public class HttpRequest {
      * @param callback
      */
     public static void postReport(RequestParams params, List<File> files, ResponseCallback callback) {
-        RequestMode.postMultipart(Urls.commUrls + "system/reportInfo/android/add", params, files,callback, null);
+        RequestMode.postMultipart(Urls.commUrls + "system/reportInfo/android/add", params, files, callback, null);
     }
 
     /**
-     * 获取汇报详情
+     * 查看汇报列表
      *
      * @param params
      * @param callback
      */
     public static void getGetWorkReportList(RequestParams params, ResponseCallback callback) {
         RequestMode.postRequest(Urls.commUrls + "system/reportInfo/android/list", params, callback, null);
+    }
+
+    /**
+     * 筛选列表
+     *
+     * @param params
+     * @param callback
+     */
+    public static void getScreenReportList(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/reportInfo/android/list1", params, callback, null);
     }
 
     /**
@@ -874,6 +884,16 @@ public class HttpRequest {
      */
     public static void sendWorkReportOpinion(RequestParams params, ResponseCallback callback) {
         RequestMode.postRequest(Urls.commUrls + "system/reportLog/android/add", params, callback, null);
+    }
+
+    /**
+     * 领导列表
+     *
+     * @param params
+     * @param callback
+     */
+    public static void getLeadershipList(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/reportInfo/android/findReportMaySelectPerson", params, callback, null);
     }
 
 }

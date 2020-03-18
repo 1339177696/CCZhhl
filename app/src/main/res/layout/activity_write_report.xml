@@ -350,7 +350,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@mipmap/add"
+                    android:src="@mipmap/hb_add"
                     />
                 <TextView
                     android:id="@+id/tv_6"
