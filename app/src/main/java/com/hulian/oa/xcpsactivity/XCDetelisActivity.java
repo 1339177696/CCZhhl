@@ -1,13 +1,21 @@
 package com.hulian.oa.xcpsactivity;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.view.Display;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 
 import com.hulian.oa.BaseActivity;
@@ -252,6 +260,34 @@ public class XCDetelisActivity extends BaseActivity {
                 xcd_img.setImageResource(R.mipmap.shenqingcailiao_img);
                 break;
             case R.id.floatbutton:
+                final View inflate = LayoutInflater.from(this).inflate(R.layout.banlixinxi_dialog, null);
+                final RadioButton yes = (RadioButton)inflate.findViewById(R.id.tv_disagree);
+                final RadioButton no = (RadioButton)inflate.findViewById(R.id.tv_agree);
+
+                final Dialog dialog = new AlertDialog
+                        .Builder(this)
+                        .setView(inflate)
+                        .show();
+                yes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                no.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                // 将对话框的大小按屏幕大小的百分比设置
+                WindowManager windowManager = getWindowManager();
+                Display display = windowManager.getDefaultDisplay();
+                WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
+                lp.gravity= Gravity.CENTER_HORIZONTAL|Gravity.BOTTOM;
+                lp.width = (int)(display.getWidth() * 1); //设置宽度
+                dialog.getWindow().setAttributes(lp);
+                dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 break;
         }
     }

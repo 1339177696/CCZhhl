@@ -2,13 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginBottom="20dp">
 
-
+    <LinearLayout
+        android:background="@drawable/free_dialog_bg"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <RelativeLayout
         android:id="@+id/rl_title"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"
+        android:layout_height="@dimen/dp_30"
         android:background="#2D4BCA"
         android:gravity="center_vertical">
 
@@ -75,7 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_30"
             android:layout_weight="1"
-            android:background="@drawable/work_leave_cheked_bg_qgl"
+            android:background="@drawable/work_leave_cheked_bg_qgl1"
             android:button="@null"
             android:gravity="center"
             android:text="审批驳回"
@@ -91,7 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_30"
             android:layout_weight="1"
-            android:background="@drawable/work_leave_cheked_bg_qgl"
+            android:background="@drawable/work_leave_cheked_bg_qgl1"
             android:button="@null"
             android:checked="true"
             android:gravity="center"
@@ -101,5 +106,5 @@
 
     </RadioGroup>
 
-
+    </LinearLayout>
 </LinearLayout>
