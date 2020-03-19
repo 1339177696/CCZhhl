@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -16,22 +17,30 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.BaseActivity;
 import com.hulian.oa.R;
+import com.hulian.oa.bean.Opinion;
 import com.hulian.oa.bean.Report;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
+import com.hulian.oa.utils.NullStringToEmptyAdapterFactory;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.views.MyDialog;
+import com.hulian.oa.views.NoScrollRecyclerView;
+import com.hulian.oa.work.adapter.OpinionAdapter;
 import com.hulian.oa.work.file.admin.activity.document.l_adapter.FullyGridLayoutManager;
 import com.hulian.oa.work.file.admin.activity.leave.l_adapter.LeaveResultAdapter;
 import com.hulian.oa.work.file.admin.activity.mypreview.PicturePreviewActivity;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.entity.LocalMedia;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -73,18 +82,14 @@ public class ReadReportActivity extends BaseActivity {
     RecyclerView recycler;
     @BindView(R.id.recipient)
     TextView recipient;//接收人
-    @BindView(R.id.opinion_people)
-    TextView opinionPeople;//意见人
-    @BindView(R.id.opinion_time)
-    TextView opinionTime;//意见时间
-    @BindView(R.id.opinion_content)
-    TextView opinionContent;//意见内容
-    @BindView(R.id.report_read)
-    ConstraintLayout reportRead;//汇报意见查看（查看自己）
+    @BindView(R.id.report_read_list)
+    NoScrollRecyclerView reportReadList;//汇报意见查看列表
     @BindView(R.id.reporting_opinions)
-    EditText reportingOpinions;//汇报意见输入（查看非自己）
+    EditText reportingOpinions;//汇报意见输入框
     @BindView(R.id.submit)
     TextView submit;//提交
+    @BindView(R.id.input_comments)
+    LinearLayout input_comments;//
 
     private String dialogText;
     private LeaveResultAdapter adapter;
@@ -92,9 +97,9 @@ public class ReadReportActivity extends BaseActivity {
     private Report report;
     private boolean isMyReport;
 
-    //图片放大预览测试
-    private String[] images = {
-    };
+    private OpinionAdapter opinionAdapter;
+    private List<Opinion> opinionList = new ArrayList<>();
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -107,10 +112,10 @@ public class ReadReportActivity extends BaseActivity {
         report = (Report) getIntent().getSerializableExtra("report");
         String type = report.getType();
         setTitleText(type);
-
-        if (TextUtils.equals(report.getCreateBy(),SPUtils.get(ReadReportActivity.this, "userId", "").toString())){
+        String userId = SPUtils.get(ReadReportActivity.this, "userId", "").toString();
+        if (TextUtils.equals(report.getCreateBy(), userId)) {
             isMyReport = true;
-        }else {
+        } else {
             isMyReport = false;
         }
 
@@ -123,6 +128,7 @@ public class ReadReportActivity extends BaseActivity {
         FullyGridLayoutManager manager = new FullyGridLayoutManager(mContext, 4, GridLayoutManager.VERTICAL, false);
         recycler.setLayoutManager(manager);
         adapter = new LeaveResultAdapter(mContext);
+        adapter.setList(selectList);
         recycler.setAdapter(adapter);
 
         //图片信息大图预览
@@ -136,6 +142,12 @@ public class ReadReportActivity extends BaseActivity {
             }
         });
 
+        opinionAdapter = new OpinionAdapter(opinionList);
+        opinionAdapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_view, null));
+        reportReadList.setLayoutManager(new LinearLayoutManager(ReadReportActivity.this));
+        reportReadList.setAdapter(opinionAdapter);
+
+
         getData();
     }
 
@@ -146,7 +158,7 @@ public class ReadReportActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.submit:
-                showDialog();
+                sendOpinion();
                 break;
         }
     }
@@ -186,41 +198,55 @@ public class ReadReportActivity extends BaseActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //提交
                 dialog.dismiss();
+                opinionList.clear();
+                selectList.clear();
+                getData();
             }
         });
     }
 
     private void getData() {
+        loadDialog.show();
         RequestParams params = new RequestParams();
         params.put("id", report.getId());
         HttpRequest.getGetWorkReport(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
                 try {
+                    loadDialog.dismiss();
+                    //把字符串中的null 替换为""
+                    Gson gson = new GsonBuilder().registerTypeAdapterFactory(new NullStringToEmptyAdapterFactory()).create();
+
                     JSONObject result = new JSONObject(responseObj.toString());
-                    if (TextUtils.equals("0",result.getString("code"))) {
+                    if (TextUtils.equals("0", result.getString("code"))) {
                         JSONObject data = result.getJSONObject("data");
-                        String content = data.getJSONObject("logs").getString("opinionContent");
-                        if (!isMyReport&&TextUtils.isEmpty(content)){
-                            reportingOpinions.setVisibility(View.VISIBLE);
-                            submit.setVisibility(View.VISIBLE);
-                        }else {
-                            reportRead.setVisibility(View.VISIBLE);
-                            opinionPeople.setText(data.getJSONObject("logs").getString("opinionReplePName"));
-                            opinionTime.setText(data.getJSONObject("logs").getString("createTime"));
-                            opinionContent.setText(data.getJSONObject("logs").getString("opinionContent"));
+                        List<Opinion> memberList = gson.fromJson(data.getJSONArray("logs").toString(),
+                                new TypeToken<List<Opinion>>() {
+                                }.getType());
 
+                        opinionList.addAll(memberList);
+                        opinionAdapter.notifyDataSetChanged();
+                        if (!isMyReport) {
+                            for (Opinion opinion : memberList) {
+                                if (TextUtils.equals(opinion.getName(), SPUtils.get(ReadReportActivity.this, "nickname", "").toString())) {
+                                    input_comments.setVisibility(View.GONE);
+                                }
+                            }
+
+                        } else {
+                            input_comments.setVisibility(View.GONE);
                         }
-                        name.setText(data.getJSONObject("info").getString("createByName"));
-                        time.setText(data.getJSONObject("info").getString("createTime"));
+                        Report report = gson.fromJson(data.getString("info"), Report.class);
 
-                        finishedWork.setText(data.getJSONObject("info").getString("finishWork"));
-                        unfinishedWork.setText(data.getJSONObject("info").getString("unfinishedWork"));
-                        planWork.setText(data.getJSONObject("info").getString("tomorrowWorkPlan"));
+                        name.setText(report.getName());
+                        time.setText(report.getTime());
 
-
+                        finishedWork.setText(report.getFinishWork());
+                        unfinishedWork.setText(report.getUnFinishWork());
+                        planWork.setText(report.getPlanWork());
+                        coordinateWork.setText(report.getCoordinateWork());
+                        recipient.setText(report.getReceivePersonName());
 
                         showImage(data.getJSONObject("info").getString("img"));
                     }
@@ -241,7 +267,7 @@ public class ReadReportActivity extends BaseActivity {
     //照片
     private void showImage(String imgList) {
 
-        if (imgList != null && imgList != "") {
+        if (TextUtils.isEmpty(imgList) && TextUtils.equals(imgList, "null")) {
             List<String> c = Arrays.asList(imgList.split(","));
             for (int i = 0; i <= c.size() - 1; i++) {
                 // 初始化list
@@ -255,8 +281,34 @@ public class ReadReportActivity extends BaseActivity {
 
             }
 
-            adapter.setList(selectList);
+            adapter.notifyDataSetChanged();
         }
+    }
+
+    private void sendOpinion() {
+        RequestParams params = new RequestParams();
+        params.put("opinionContent", reportingOpinions.getText() + "");
+        params.put("opinionReplePId", SPUtils.get(ReadReportActivity.this, "userId", "").toString());
+        params.put("opinionReplePName", SPUtils.get(ReadReportActivity.this, "nickname", "").toString());
+        params.put("proId", report.getId());
+        HttpRequest.sendWorkReportOpinion(params, new ResponseCallback() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                try {
+                    JSONObject data = new JSONObject(responseObj.toString());
+                    if (TextUtils.equals("0", data.getString("code"))) {
+                        showDialog();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(OkHttpException failuer) {
+
+            }
+        });
     }
 
 

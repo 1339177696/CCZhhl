@@ -195,7 +195,7 @@ public class HttpRequest {
      * @param callback 回调接口
      */
     public static void postMeetLauncherApi(RequestParams params, ResponseCallback callback) {
-        RequestMode.postRequest(Urls.commUrls + "system/meeting/hb_add", params, callback, null);
+        RequestMode.postRequest(Urls.commUrls + "system/meeting/add", params, callback, null);
     }
 //  /**
 //   * 发布公文
@@ -215,7 +215,7 @@ public class HttpRequest {
      */
     public static void postDocumentSendApi(RequestParams params, List<File> files, ResponseCallback callback) {
         //  RequestMode.postRequest(Urls.commUrls+"system/officialDocument/publish", params, callback, null);
-        RequestMode.postMultipart_qgl(Urls.commUrls + "system/lotus/hb_add", params, files, callback, null);
+        RequestMode.postMultipart_qgl(Urls.commUrls + "system/lotus/add", params, files, callback, null);
     }
 
 
@@ -226,7 +226,7 @@ public class HttpRequest {
      * @param callback 回调接口
      */
     public static void post_workCoordinationReply_add(RequestParams params, List<File> files, ResponseCallback callback) {
-        RequestMode.postMultipart(Urls.commUrls + "system/workCoordinationReply/hb_add", params, files, callback, null);
+        RequestMode.postMultipart(Urls.commUrls + "system/workCoordinationReply/add", params, files, callback, null);
     }
 //  /**
 //   * 我发起的/我审批的
@@ -373,7 +373,7 @@ public class HttpRequest {
      * @param callback
      */
     public static void postSche_Tianjia(RequestParams params, ResponseCallback callback) {
-        RequestMode.postRequest(Urls.commUrls + "system/schedule/hb_add", params, callback, null);
+        RequestMode.postRequest(Urls.commUrls + "system/schedule/add", params, callback, null);
     }
 
     /**
@@ -413,7 +413,7 @@ public class HttpRequest {
      * @param callback
      */
     public static void postSuggest(RequestParams params, List<File> file, ResponseCallback callback) {
-        RequestMode.postMultipart_qgl(Urls.commUrls + "system/opinionManagement/hb_add", params, file, callback, null);
+        RequestMode.postMultipart_qgl(Urls.commUrls + "system/opinionManagement/add", params, file, callback, null);
     }
 
     /**
@@ -433,7 +433,7 @@ public class HttpRequest {
 //   */
 //  public static void post_CoordinationRelease_add(RequestParams params,ResponseCallback callback)
 //  {
-//    RequestMode.postRequest(Urls.commUrls+"system/workCoordinationRelease/hb_add",params,callback,null);
+//    RequestMode.postRequest(Urls.commUrls+"system/workCoordinationRelease/add",params,callback,null);
 //  }
 
     /**
@@ -443,7 +443,7 @@ public class HttpRequest {
      * @param callback
      */
     public static void post_CoordinationRelease_add(RequestParams params, List<File> file, ResponseCallback callback) {
-        RequestMode.postMultipart_qgl(Urls.commUrls + "system/workCoordinationRelease/hb_add", params, file, callback, null);
+        RequestMode.postMultipart_qgl(Urls.commUrls + "system/workCoordinationRelease/add", params, file, callback, null);
     }
 
     /**
@@ -584,7 +584,7 @@ public class HttpRequest {
      * @param callback
      */
     public static void post_sendExpense(RequestParams params, List<File> files, ResponseCallback callback) {
-        RequestMode.postMultipart(Urls.commUrls + "system/workReimbursement/hb_add", params, files, callback, null);
+        RequestMode.postMultipart(Urls.commUrls + "system/workReimbursement/add", params, files, callback, null);
     }
 
     /**
@@ -843,17 +843,27 @@ public class HttpRequest {
      * @param callback
      */
     public static void postReport(RequestParams params, List<File> files, ResponseCallback callback) {
-        RequestMode.postMultipart(Urls.commUrls + "system/reportInfo/android/hb_add", params, files,callback, null);
+        RequestMode.postMultipart(Urls.commUrls + "system/reportInfo/android/add", params, files, callback, null);
     }
 
     /**
-     * 获取汇报详情
+     * 查看汇报列表
      *
      * @param params
      * @param callback
      */
     public static void getGetWorkReportList(RequestParams params, ResponseCallback callback) {
         RequestMode.postRequest(Urls.commUrls + "system/reportInfo/android/list", params, callback, null);
+    }
+
+    /**
+     * 筛选列表
+     *
+     * @param params
+     * @param callback
+     */
+    public static void getScreenReportList(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/reportInfo/android/list1", params, callback, null);
     }
 
     /**
@@ -866,15 +876,24 @@ public class HttpRequest {
         RequestMode.postRequest(Urls.commUrls + "system/reportInfo/android/selectById", params, callback, null);
     }
 
-
     /**
-     * 获取汇报详情
+     * 意见反馈
      *
      * @param params
      * @param callback
      */
-    public static void posVerson(RequestParams params, ResponseCallback callback) {
-        RequestMode.postRequest(Urls.commUrls + "system/apkVersion/android/apkInfo", params, callback, null);
+    public static void sendWorkReportOpinion(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/reportLog/android/add", params, callback, null);
+    }
+
+    /**
+     * 领导列表
+     *
+     * @param params
+     * @param callback
+     */
+    public static void getLeadershipList(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/reportInfo/android/findReportMaySelectPerson", params, callback, null);
     }
 
 }

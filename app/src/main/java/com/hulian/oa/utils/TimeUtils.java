@@ -156,52 +156,53 @@ public class TimeUtils {
 //            // TODO Auto-generated catch block
 //            e.printStackTrace();
 //        }
-        String result="";
-        try{
+        String result = "";
+        try {
             Date now = dateFormat.parse(starTime);
-            Date date=dateFormat.parse(endTime);
-            long l=date.getTime()-now.getTime();       //获取时间差
-            long day=l/(24*60*60*1000);
-            long hour=(l/(60*60*1000)-day*24);
-            long min=((l/(60*1000))-day*24*60-hour*60);
-            long s=(l/1000-day*24*60*60-hour*60*60-min*60);
-        //    System.out.println(""+day+"天"+hour+"小时"+min+"分"+s+"秒");
-            result=""+day+"天"+hour+"小时"+min+"分";
-            if(day==0)
-                result=result.split("天")[1].toString();
-           else if(hour==0)
-                result=result.split("小时")[1].toString();
-           return result;
-        }catch(Exception e){
+            Date date = dateFormat.parse(endTime);
+            long l = date.getTime() - now.getTime();       //获取时间差
+            long day = l / (24 * 60 * 60 * 1000);
+            long hour = (l / (60 * 60 * 1000) - day * 24);
+            long min = ((l / (60 * 1000)) - day * 24 * 60 - hour * 60);
+            long s = (l / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
+            //    System.out.println(""+day+"天"+hour+"小时"+min+"分"+s+"秒");
+            result = "" + day + "天" + hour + "小时" + min + "分";
+            if (day == 0)
+                result = result.split("天")[1].toString();
+            else if (hour == 0)
+                result = result.split("小时")[1].toString();
+            return result;
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return timeString;
 
     }
-    public static int differentDaysByMillisecond(String date1,String date2)
-    {
+
+    public static int differentDaysByMillisecond(String date1, String date2) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         int days = 0;
         try {
-            days = (int) (( dateFormat.parse(date2).getTime() - dateFormat.parse(date1).getTime()) / (1000*3600*24));
+            days = (int) ((dateFormat.parse(date2).getTime() - dateFormat.parse(date1).getTime()) / (1000 * 3600 * 24));
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return days;
     }
-    public static int differentDaysByMillisecond2(String date1,String date2)
-    {
+
+    public static int differentDaysByMillisecond2(String date1, String date2) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM:dd");
 
         int days = 0;
         try {
-            days = (int) (( dateFormat.parse(date2).getTime() - dateFormat.parse(date1).getTime()) / (1000*3600*24));
+            days = (int) ((dateFormat.parse(date2).getTime() - dateFormat.parse(date1).getTime()) / (1000 * 3600 * 24));
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return days;
     }
+
     /**
      * 计算相差的小时(返回小时)
      *
@@ -312,6 +313,7 @@ public class TimeUtils {
 
     /**
      * 判断是否大于当前时间（到分）
+     *
      * @param time
      * @return
      */
@@ -337,8 +339,10 @@ public class TimeUtils {
 
         return isDayu;
     }
+
     /**
      * 转换时间日期格式字串为long型
+     *
      * @param time 格式为：yyyy-MM-dd HH:mm:ss的时间日期类型
      */
     public static Long convertTimeToLong(String time) {
@@ -362,62 +366,65 @@ public class TimeUtils {
     public static  String getDateToString(String time) {
      //   Date d = new Date(convertTimeToLong(hb_time));
 
-    //  return sf.format(d);
+        //  return sf.format(d);
 
-     String daynow= getDateToString4(time);
+        String daynow = getDateToString4(time);
         sf = new SimpleDateFormat("MM-dd HH:mm");
         Date d = new Date(convertTimeToLong(time));
         Calendar calendar = Calendar.getInstance();
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
 
-        if(Integer.parseInt(daynow)==day){
-            return sf.format(d).split(" ")[1]+"";
-        }
-        else {
+        if (Integer.parseInt(daynow) == day) {
+            return sf.format(d).split(" ")[1] + "";
+        } else {
             return sf.format(d);
         }
     }
+
     /**
      * 把时间戳变MM-dd HH:mm格式时间
      *
      * @param time
      * @return
      */
-    public static  String getDateToString0(String time) {
-          sf = new SimpleDateFormat("MM-dd HH:mm");
-           Date d = new Date(convertTimeToLong(time));
-          return sf.format(d);
+    public static String getDateToString0(String time) {
+        sf = new SimpleDateFormat("MM-dd HH:mm");
+        Date d = new Date(convertTimeToLong(time));
+        return sf.format(d);
     }
 
-    public static  String getDateToString1(String time) {
+    public static String getDateToString1(String time) {
         sf = new SimpleDateFormat("HH:mm");
         Date d = new Date(convertTimeToLong(time));
         return sf.format(d);
     }
-    public static  String getDateToString6(String time) {
+
+    public static String getDateToString6(String time) {
         sf = new SimpleDateFormat("yyyy-MM-dd");
         Date d = new Date(convertTimeToLong(time));
         return sf.format(d);
     }
+
     /**
      * 把时间戳变yyyy/MM格式时间
      *
      * @param time
      * @return
      */
-    public static  String getDateToString3(String time) {
+    public static String getDateToString3(String time) {
         Date d = new Date(convertTimeToLong(time));
         sf = new SimpleDateFormat("yyyy/MM");
         return sf.format(d);
     }
+
     /**
      * 把时间戳变dd格式时间
      *
      * @param time
      * @return
      */
-    public static  String getDateToString4(String time) {
+    public static String getDateToString4(String time) {
         Date d = new Date(convertTimeToLong(time));
         sf = new SimpleDateFormat("dd");
         return sf.format(d);
@@ -430,30 +437,32 @@ public class TimeUtils {
      * @param time
      * @return
      */
-    public static  String getDateToString2(String time) {
+    public static String getDateToString2(String time) {
         Date d = new Date(convertTimeToLong(time));
         sf = new SimpleDateFormat("HH:mm");
         return sf.format(d);
     }
+
     /**
      * 把时间戳变HH格式时间
      *
      * @param time
      * @return
      */
-    public static  String getDateToString5(String time) {
+    public static String getDateToString5(String time) {
         Date d = new Date(convertTimeToLong(time));
         sf = new SimpleDateFormat("HH");
         return sf.format(d);
     }
+
     /**
      * list集合去重：
-     *          把list里的对象遍历一遍，用list.contain()，如果不存在就放入到另外一个list集合中
+     * 把list里的对象遍历一遍，用list.contain()，如果不存在就放入到另外一个list集合中
      */
-    public static List removeDuplicate(List list){
+    public static List removeDuplicate(List list) {
         List listTemp = new ArrayList();
-        for(int i=0;i<list.size();i++){
-            if(!listTemp.contains(list.get(i))){
+        for (int i = 0; i < list.size(); i++) {
+            if (!listTemp.contains(list.get(i))) {
                 listTemp.add(list.get(i));
             }
         }
@@ -479,6 +488,7 @@ public class TimeUtils {
         }
         return l;
     }
+
     /**
      * 返回时间MM-dd HH:mm
      *
@@ -496,8 +506,9 @@ public class TimeUtils {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return l+"";
+        return l + "";
     }
+
     /**
      * 比较两个时间
      *
@@ -583,9 +594,9 @@ public class TimeUtils {
 
     // 删除ArrayList中重复元素，保持顺序
     public static List removeDuplicateWithOrder(List<People> list) {
-        for  ( int  i  =   0 ; i  <  list.size()  -   1 ; i ++ )  {
-            for  ( int  j  =  list.size()  -   1 ; j  >  i; j -- )  {
-                if  (list.get(j).getUserId().equals(list.get(i).getUserId()))  {
+        for (int i = 0; i < list.size() - 1; i++) {
+            for (int j = list.size() - 1; j > i; j--) {
+                if (list.get(j).getUserId().equals(list.get(i).getUserId())) {
                     list.remove(j);
                 }
             }
@@ -597,32 +608,33 @@ public class TimeUtils {
     /**
      * 判断2个时间大小
      * yyyy-MM-dd HH:mm 格式（自己可以修改成想要的时间格式）
+     *
      * @param startTime
      * @param endTime
      * @return
      */
-    public static int timeCompare(String startTime, String endTime){
-        int i=0;
-   //注意：传过来的时间格式必须要和这里填入的时间格式相同
+    public static int timeCompare(String startTime, String endTime) {
+        int i = 0;
+        //注意：传过来的时间格式必须要和这里填入的时间格式相同
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         try {
             Date date1 = dateFormat.parse(startTime);//开始时间
             Date date2 = dateFormat.parse(endTime);//结束时间
             // 1 结束时间小于开始时间 2 开始时间与结束时间相同 3 结束时间大于开始时间
-            if (date2.getTime()<date1.getTime()){
+            if (date2.getTime() < date1.getTime()) {
                 //结束时间小于开始时间
-                i= 1;
-            }else if (date2.getTime()==date1.getTime()){
+                i = 1;
+            } else if (date2.getTime() == date1.getTime()) {
                 //开始时间与结束时间相同
-                i= 2;
-            }else if (date2.getTime()>date1.getTime()){
+                i = 2;
+            } else if (date2.getTime() > date1.getTime()) {
                 //结束时间大于开始时间
-           i= 3;
+                i = 3;
             }
         } catch (Exception e) {
 
         }
-        return  i;
+        return i;
     }
 
 }

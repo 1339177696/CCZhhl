@@ -71,6 +71,7 @@ public class ReadReportFragment extends Fragment implements  BaseQuickAdapter.Re
         mAdapter.openLoadAnimation();
         mAdapter.setEnableLoadMore(true);
         mAdapter.setOnLoadMoreListener(this,mRecyclerView);
+        mAdapter.setEmptyView(LayoutInflater.from(getContext()).inflate(R.layout.list_empty, null));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
 
@@ -98,7 +99,7 @@ public class ReadReportFragment extends Fragment implements  BaseQuickAdapter.Re
         swipeRefreshLayout.setRefreshing(true);
         setRefresh();
         getData();
-        swipeRefreshLayout.setRefreshing(false);
+
     }
 
 
@@ -112,11 +113,14 @@ public class ReadReportFragment extends Fragment implements  BaseQuickAdapter.Re
         params.put("pageStart", mCount*10-10 + "");
         params.put("pageEnd", mCount * 10 + "");
         params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
+        params.put("receivePerson", SPUtils.get(getActivity(), "userId", "").toString());
         HttpRequest.getGetWorkReportList(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
+                swipeRefreshLayout.setRefreshing(false);
                 //需要转化为实体对象
                 Gson gson = new GsonBuilder().serializeNulls().create();
+
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
                     List<Report> memberList = gson.fromJson(result.getJSONArray("data").toString(),
@@ -128,7 +132,7 @@ public class ReadReportFragment extends Fragment implements  BaseQuickAdapter.Re
                     }else {
                         mAdapter.loadMoreComplete();
                     }
-//                    mAdapter.notifyDataSetChanged();
+                    mAdapter.notifyDataSetChanged();
 
 
                 } catch (JSONException e) {

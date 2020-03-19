@@ -7,6 +7,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
+import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.work.adapter.WriteReportAdapter;
 
@@ -69,6 +71,7 @@ public class ScreenReportListActivity extends BaseActivity implements BaseQuickA
         mAdapter.openLoadAnimation();
         mAdapter.setEnableLoadMore(true);
         mAdapter.setOnLoadMoreListener(this, listview);
+        mAdapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.list_empty, null));
         listview.setLayoutManager(new LinearLayoutManager(ScreenReportListActivity.this));
         listview.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -101,13 +104,15 @@ public class ScreenReportListActivity extends BaseActivity implements BaseQuickA
     private void getData() {
         RequestParams params = new RequestParams();
         params.put("createBy", getIntent().getStringExtra("createBy"));
-        params.put("beginDate", getIntent().getStringExtra("params.beginDate"));
-        params.put("endDate", getIntent().getStringExtra("params.endDate"));
-        params.put("pageStart", mCount * 10 - 9 + "");
+        params.put("params[beginDate]", getIntent().getStringExtra("beginDate"));
+        params.put("params[endDate]", getIntent().getStringExtra("endDate"));
+        params.put("pageStart", mCount * 10 - 10 + "");
         params.put("pageEnd", mCount * 10 + "");
-        HttpRequest.getGetWorkReportList(params, new ResponseCallback() {
+        params.put("receivePerson", SPUtils.get(this, "userId", "").toString());
+        HttpRequest.getScreenReportList(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
+                swipeRefreshLayout.setRefreshing(false);
                 //需要转化为实体对象
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
@@ -135,37 +140,6 @@ public class ScreenReportListActivity extends BaseActivity implements BaseQuickA
         });
 
 
-//        Report report1 = new Report();
-//        report1.setName("王俊杰");
-//        report1.setFinishWork("设计oa报销页面");
-//        report1.setUnFinishWork("设计飞机场");
-//        report1.setTime("2020-02-28 09:52");
-//        report1.setType("1");
-//
-//        mData.hb_add(report1);
-//        Report report2 = new Report();
-//        report2.setName("王俊杰1");
-//        report2.setFinishWork("设计oa报销页面");
-//        report2.setUnFinishWork("设计飞机场");
-//        report2.setTime("2020-02-28 09:52");
-//        report2.setType("1");
-//        mData.hb_add(report2);
-//        Report report3 = new Report();
-//        report3.setName("王俊杰2");
-//        report3.setFinishWork("设计oa报销页面");
-//        report3.setUnFinishWork("设计飞机场");
-//        report3.setTime("2020-02-28 09:52");
-//        report3.setType("2");
-//        mData.hb_add(report3);
-//        Report report4 = new Report();
-//        report4.setName("王俊杰3");
-//        report4.setFinishWork("设计oa报销页面");
-//        report4.setUnFinishWork("设计飞机场");
-//        report4.setTime("2020-02-28 09:52");
-//        report4.setType("3");
-//        mData.hb_add(report4);
-//        mAdapter.notifyDataSetChanged();
-//        swipeRefreshLayout.setRefreshing(false);
     }
 
 

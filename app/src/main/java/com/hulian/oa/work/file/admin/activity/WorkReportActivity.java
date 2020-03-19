@@ -55,8 +55,8 @@ public class WorkReportActivity extends BaseActivity {
         ButterKnife.bind(this);
         mContext = this;
         //领导
-        if (SPUtils.get(mContext, "roleKey", "").equals("boos")) {
-//            tv_apply.setVisibility(View.GONE);
+        if (SPUtils.get(this, "roleKey", "").toString().contains("boss")) {//boss没有写日报权限
+            tv_apply.setVisibility(View.VISIBLE);
 
             titleDatas.add("看汇报");
             fragmentList.add(new ReadReportFragment());
@@ -75,7 +75,7 @@ public class WorkReportActivity extends BaseActivity {
         myTablayout.setSelectedTabIndicator(0);
         myViewpager.setAdapter(myViewPageAdapter);
         myTablayout.setupWithViewPager(myViewpager);
-        if (SPUtils.get(mContext, "roleKey", "").equals("boos")){
+        if (!SPUtils.get(this, "roleKey", "").toString().contains("common")) {//没有员工身份
             //领导
             myTablayout.getTabAt(0).setCustomView(R.layout.item_bx_tab_f);
             TextView textView = myTablayout.getTabAt(0).getCustomView().findViewById(R.id.tv_title);

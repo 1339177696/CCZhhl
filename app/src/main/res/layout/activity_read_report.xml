@@ -455,99 +455,35 @@
                     android:textSize="18sp"
                     />
 
-                <android.support.constraint.ConstraintLayout
+                <com.hulian.oa.views.NoScrollRecyclerView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/report_read"
+                    android:id="@+id/report_read_list"
                     app:layout_constraintLeft_toLeftOf="@+id/tv_7"
                     app:layout_constraintTop_toBottomOf="@+id/tv_7"
                     app:layout_constraintRight_toRightOf="parent"
                     android:layout_marginTop="20dp"
-                    android:visibility="gone"
-                    >
-                    <TextView
-                        android:id="@+id/opinion_people_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:text="意见人:"
-                        android:textColor="@color/text"
-                        android:textSize="16sp"
-                        app:layout_constraintRight_toRightOf="@+id/opinion_time_tv"
-                        />
+                    android:overScrollMode="never"
+                    />
 
-                    <TextView
-                        android:id="@+id/opinion_people"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:text="曹宇"
-                        android:textColor="@color/text"
-                        android:textSize="16sp"
-                        app:layout_constraintTop_toTopOf="@+id/opinion_people_tv"
-                        app:layout_constraintLeft_toRightOf="@+id/opinion_people_tv"
-                        android:layout_marginLeft="5dp"
-                        />
 
-                    <TextView
-                        android:id="@+id/opinion_time_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="意见时间:"
-                        android:textColor="@color/text"
-                        android:textSize="16sp"
-                        app:layout_constraintTop_toBottomOf="@+id/opinion_people_tv"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        android:layout_marginTop="8dp"
-                        />
 
-                    <TextView
-                        android:id="@+id/opinion_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:text="2020-03-09"
-                        android:textColor="@color/text"
-                        android:textSize="16sp"
-                        app:layout_constraintTop_toTopOf="@+id/opinion_time_tv"
-                        app:layout_constraintLeft_toRightOf="@+id/opinion_time_tv"
-                        android:layout_marginLeft="5dp"
-                        />
 
-                    <TextView
-                        android:id="@+id/opinion_content_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="意见内容:"
-                        android:textColor="@color/text"
-                        android:textSize="16sp"
-                        app:layout_constraintTop_toBottomOf="@+id/opinion_time_tv"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        android:layout_marginTop="8dp"
-                        />
 
-                    <TextView
-                        android:id="@+id/opinion_content"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:text="汇报写的及其简单，希望把工作内容写的详细些，有助 于检查工作情况，需要配合人员填写清楚。"
-                        android:textColor="@color/text"
-                        android:textSize="16sp"
-                        app:layout_constraintTop_toTopOf="@+id/opinion_content_tv"
-                        app:layout_constraintLeft_toRightOf="@+id/opinion_content_tv"
-                        android:layout_marginLeft="5dp"
-                        />
+            </android.support.constraint.ConstraintLayout>
 
-                </android.support.constraint.ConstraintLayout>
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:id="@+id/input_comments"
+                >
 
                 <EditText
-                    android:visibility="gone"
                     android:id="@+id/reporting_opinions"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    app:layout_constraintLeft_toLeftOf="@+id/tv_7"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_7"
-                    android:layout_marginTop="20dp"
                     android:background="@drawable/background_frame_hollow_1"
                     android:hint="输入汇报意见"
                     android:padding="10dp"
@@ -555,23 +491,21 @@
                     android:minEms="3"
                     />
 
+                <TextView
+                    android:id="@+id/submit"
+                    android:layout_width="200dp"
+                    android:layout_height="35dp"
+                    android:text="提交"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:background="@drawable/background_frame_semicircle_2"
+                    android:layout_marginTop="70dp"
+                    android:layout_marginBottom="70dp"
+                    />
 
-            </android.support.constraint.ConstraintLayout>
-
-            <TextView
-                android:visibility="gone"
-                android:id="@+id/submit"
-                android:layout_width="200dp"
-                android:layout_height="35dp"
-                android:text="提交"
-                android:textColor="#ffffff"
-                android:textSize="18sp"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:background="@drawable/background_frame_semicircle_2"
-                android:layout_marginTop="70dp"
-                android:layout_marginBottom="70dp"
-                />
+            </LinearLayout>
 
 
 
