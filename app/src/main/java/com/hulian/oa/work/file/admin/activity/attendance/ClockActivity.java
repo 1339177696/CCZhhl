@@ -79,8 +79,8 @@ public class ClockActivity extends BaseActivity {
         textView.setText("考勤打卡");
         textView1.setText("打卡日历");
         //标题左边选中和未选中的图片效果
-        imageView.setBackground(ContextCompat.getDrawable(this, R.drawable.huibao_pic_f));
-        imageView1.setBackground(ContextCompat.getDrawable(this, R.drawable.huibao_pic_s));
+        imageView.setBackground(ContextCompat.getDrawable(this, R.drawable.kaoqin_dk));
+        imageView1.setBackground(ContextCompat.getDrawable(this, R.drawable.kaoqin_rl));
         //初始化替换后的文字和图片
         myTablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

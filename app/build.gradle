@@ -149,4 +149,5 @@ dependencies {
     implementation project(':appupdatelibrary')
 
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+    implementation project(':calendarview')
 }

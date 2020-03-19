@@ -30,20 +30,6 @@ public class User {
         return rolesStr;
     }
 
-
-
-    public List<Roles> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Roles> roles) {
-        this.roles = roles;
-    }
-
-    private List<Roles> roles;
-
-
-
     public String getEmail() {
         return email;
     }

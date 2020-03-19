@@ -152,7 +152,7 @@
                     android:textSize="18sp"
                     />
 
-                <EditText
+                <TextView
                     android:id="@+id/finished_work"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -160,7 +160,6 @@
                     android:background="@null"
                     app:layout_constraintTop_toBottomOf="@+id/tv_1"
                     android:layout_marginTop="10dp"
-                    android:hint="请输入今日完成的工作内容"
                     android:textSize="16sp"
                     />
 
@@ -202,7 +201,7 @@
                     android:textSize="18sp"
                     />
 
-                <EditText
+                <TextView
                     android:id="@+id/unfinished_work"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -210,7 +209,6 @@
                     android:background="@null"
                     app:layout_constraintTop_toBottomOf="@+id/tv_2"
                     android:layout_marginTop="10dp"
-                    android:hint="请输入未完成的工作内容"
                     android:textSize="16sp"
                     />
 
@@ -252,7 +250,7 @@
                     android:textSize="18sp"
                     />
 
-                <EditText
+                <TextView
                     android:id="@+id/plan_work"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -260,7 +258,6 @@
                     android:background="@null"
                     app:layout_constraintTop_toBottomOf="@+id/tv_3"
                     android:layout_marginTop="10dp"
-                    android:hint="请输入明日工作计划内容"
                     android:textSize="16sp"
                     />
 
@@ -302,7 +299,7 @@
                     android:textSize="18sp"
                     />
 
-                <EditText
+                <TextView
                     android:id="@+id/coordinate_work"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -311,7 +308,6 @@
                     android:background="@null"
                     app:layout_constraintTop_toBottomOf="@+id/tv_4"
                     android:layout_marginTop="10dp"
-                    android:hint="请输入需要协调的工作内容"
                     android:textSize="16sp"
                     />
 

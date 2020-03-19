@@ -896,4 +896,16 @@ public class HttpRequest {
         RequestMode.postRequest(Urls.commUrls + "system/reportInfo/android/findReportMaySelectPerson", params, callback, null);
     }
 
+     /**
+     * 升级
+     *
+     * @param params
+     * @param callback
+     */
+    public static void posVerson(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/apkVersion/android/apkInfo", params, callback, null);
+    }
+
+
+
 }

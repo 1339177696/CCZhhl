@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.RequiresApi;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -76,16 +77,12 @@ public class LBanbenActivity extends BaseActivity {
             public void onSuccess(Object responseObj) {
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-                    String apkurl = result.getJSONObject("data").getString("apkPath");
-                    String versionNum = result.getJSONObject("data").getString("versionNum");
-                    if (apkurl.equals("")) {
+                    if (TextUtils.equals("",result.getJSONObject("data").getString("apkPath"))) {
                         Toast.makeText(LBanbenActivity.this, "当前为最新版本", Toast.LENGTH_LONG).show();
                     } else {
-                      // updateApk(LBanbenActivity.this, "", versionNum, true, true, 10000000, apkurl, LBanbenActivity.this.getResources().getString(R.string.app_name));
                         Toast.makeText(LBanbenActivity.this,"温馨提示，为节省您的流量请在WiFi情况下载",Toast.LENGTH_LONG).show();
-//                        Version_context = welcome_jvabean.getInfo().getContent();
                         Version_context = "1.功能优化。";
-                        Version_url = apkurl;
+                        Version_url = result.getJSONObject("data").getString("apkPath");
                         qgl();
                     }
                 } catch (JSONException e) {

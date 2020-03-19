@@ -69,15 +69,15 @@ public class ReadReportActivity extends BaseActivity {
     @BindView(R.id.tv_1)
     TextView tv1;
     @BindView(R.id.finished_work)
-    EditText finishedWork;
+    TextView finishedWork;
     @BindView(R.id.unfinished_work)
-    EditText unfinishedWork;
+    TextView unfinishedWork;
     @BindView(R.id.tv_3)
     TextView tv3;
     @BindView(R.id.plan_work)
-    EditText planWork;
+    TextView planWork;
     @BindView(R.id.coordinate_work)
-    EditText coordinateWork;//协调的工作
+    TextView coordinateWork;//协调的工作
     @BindView(R.id.recycler)
     RecyclerView recycler;
     @BindView(R.id.recipient)
@@ -118,13 +118,6 @@ public class ReadReportActivity extends BaseActivity {
         } else {
             isMyReport = false;
         }
-
-
-        finishedWork.setFocusable(false);
-        unfinishedWork.setFocusable(false);
-        planWork.setFocusable(false);
-        coordinateWork.setFocusable(false);
-
         FullyGridLayoutManager manager = new FullyGridLayoutManager(mContext, 4, GridLayoutManager.VERTICAL, false);
         recycler.setLayoutManager(manager);
         adapter = new LeaveResultAdapter(mContext);

@@ -37,4 +37,10 @@
     <color name="text_title">#101010</color>
     <color name="text">#99101010</color>
     <color name="line_color">#19000000</color>
+
+
+    <color name="choose_color_a">#000000</color>
+    <color name="choose_color_b">#19000000</color>
+
+
 </resources>

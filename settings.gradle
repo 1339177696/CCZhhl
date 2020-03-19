@@ -1,1 +1,1 @@
-include ':app', ':avchatkit', ':faceunity', ':uikit', ':calendar', ':DFileSelector', ':library', ':doodle', ':appupdatelibrary'
+include ':app', ':avchatkit', ':faceunity', ':uikit', ':calendar', ':DFileSelector', ':library', ':doodle', ':appupdatelibrary', ':calendarview'
