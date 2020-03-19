@@ -318,10 +318,10 @@
 
 
         </RelativeLayout>
-        <View
-            android:background="#E3E3E3"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_1"/>
+<!--        <View-->
+<!--            android:background="#E3E3E3"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="@dimen/dp_1"/>-->
         <!--隐藏了-->
         <RelativeLayout
             android:visibility="gone"

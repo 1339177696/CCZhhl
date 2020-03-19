@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:id="@+id/iv_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_19"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_marginBottom="@dimen/dp_15">
+
+            <ImageView
+                android:layout_width="@dimen/dp_40"
+                android:layout_height="@dimen/dp_40"
+                android:background="@mipmap/bg_agency_head" />
+
+            <TextView
+                android:id="@+id/tv_type"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="报"
+                android:textColor="#0054CC"
+                android:textSize="@dimen/sp_16" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/clock_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/iv_image"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_toRightOf="@+id/iv_image"
+            android:text="王俊杰"
+            android:textColor="#ff101010"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/clock_department"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/clock_name"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_toRightOf="@+id/iv_image"
+            android:text="设计部  考勤(查看规则)"
+            android:textColor="#ff37447a"
+            android:textSize="9sp" />
+
+        <TextView
+            android:id="@+id/current_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/iv_image"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginRight="@dimen/dp_30"
+            android:text="2020-02-13 星期四"
+            android:textColor="#ff37447a"
+            android:textSize="9sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/show_year_view"
+            android:layout_marginBottom="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2020年"
+            android:textColor="#ff37447a"
+            android:textSize="12sp"
+            />
+        <TextView
+            android:id="@+id/show_month_view"
+            android:layout_marginBottom="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2月"
+            android:textColor="#ff37447a"
+            android:textSize="12sp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_28"
+        android:background="#fff">
+        <TextView
+            style="@style/weekIndicatorStyle"
+            android:text="日" />
+        <TextView
+            style="@style/weekIndicatorStyle"
+            android:text="一" />
+        <TextView
+            style="@style/weekIndicatorStyle"
+            android:text="二"/>
+        <TextView
+            style="@style/weekIndicatorStyle"
+            android:text="三" />
+        <TextView
+            style="@style/weekIndicatorStyle"
+            android:text="四" />
+        <TextView
+            style="@style/weekIndicatorStyle"
+            android:text="五" />
+        <TextView
+            style="@style/weekIndicatorStyle"
+            android:text="六" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@drawable/l_ade_bg_bottom"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:layout_height="match_parent">
+            <com.ldf.calendar.view.MonthPager
+                android:id="@+id/calendar_view"
+                android:layout_width="match_parent"
+                android:layout_height="270dp"
+                android:background="#fff">
+            </com.ldf.calendar.view.MonthPager>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ffffff"
+                android:layout_gravity="bottom"
+                android:clipToPadding="false"
+                android:clipChildren="false"
+                android:layout_marginBottom="@dimen/dp_45"/>
+    </LinearLayout>
+
+</LinearLayout>

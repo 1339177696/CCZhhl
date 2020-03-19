@@ -26,6 +26,7 @@ import com.hulian.oa.work.file.admin.activity.SecondNoticeActivity;
 import com.hulian.oa.work.file.admin.activity.SecondTaskCoopActivity;
 import com.hulian.oa.work.file.admin.activity.WorkReportActivity;
 import com.hulian.oa.work.file.admin.activity.WorkSpaceActivity;
+import com.hulian.oa.work.file.admin.activity.attendance.ClockActivity;
 import com.hulian.oa.work.file.admin.activity.meeting.SelDepartmentActivity_meet_video;
 import com.hulian.oa.work.file.admin.activity.meeting.SelDepartmentActivity_meet_zb;
 import com.hulian.oa.work.file.admin.activity.Work_gd_Activity;
@@ -162,7 +163,7 @@ public class WorkFragemt_9 extends Fragment {
                 break;
                 //考勤打卡
             case R.id.bt_time:
-                ToastHelper.showToast(getActivity(), "功能暂未开放");
+                startActivity(new Intent(getActivity(), ClockActivity.class));
                 break;
                 //指令安排
             case R.id.bt_instruct:
@@ -175,7 +176,6 @@ public class WorkFragemt_9 extends Fragment {
                 //报销
             case R.id.bt_baoxiao:
                 startActivity(new Intent(getActivity(),SecondExpenseActivity.class));
-                ToastHelper.showToast(getActivity(), "功能暂未开放");
                 break;
             //公文流轉去掉了
 //            case R.id.bt_document:

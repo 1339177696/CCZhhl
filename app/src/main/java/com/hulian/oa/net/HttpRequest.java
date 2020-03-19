@@ -866,8 +866,9 @@ public class HttpRequest {
         RequestMode.postRequest(Urls.commUrls + "system/reportInfo/android/selectById", params, callback, null);
     }
 
+
     /**
-     * 获取版本信息
+     * 获取汇报详情
      *
      * @param params
      * @param callback
