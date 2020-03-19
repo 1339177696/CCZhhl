@@ -267,7 +267,7 @@ public class ReadReportActivity extends BaseActivity {
     //照片
     private void showImage(String imgList) {
 
-        if (TextUtils.isEmpty(imgList) && TextUtils.equals(imgList, "null")) {
+        if (!TextUtils.isEmpty(imgList) && !TextUtils.equals(imgList, "null")) {
             List<String> c = Arrays.asList(imgList.split(","));
             for (int i = 0; i <= c.size() - 1; i++) {
                 // 初始化list
