@@ -23,6 +23,7 @@ import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
+import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.work.adapter.WriteReportAdapter;
 
@@ -107,6 +108,7 @@ public class ScreenReportListActivity extends BaseActivity implements BaseQuickA
         params.put("params[endDate]", getIntent().getStringExtra("endDate"));
         params.put("pageStart", mCount * 10 - 10 + "");
         params.put("pageEnd", mCount * 10 + "");
+        params.put("receivePerson", SPUtils.get(this, "userId", "").toString());
         HttpRequest.getScreenReportList(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
