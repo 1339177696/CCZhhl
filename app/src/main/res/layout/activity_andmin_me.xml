@@ -49,13 +49,13 @@
             android:layout_height="wrap_content">
             <ImageView
                 android:layout_width="@dimen/dp_66"
-                android:background="@mipmap/bg_agency_head"
+                android:background="@mipmap/bg_head1_img"
                 android:layout_height="@dimen/dp_66" />
             <TextView
                 android:id="@+id/tv_type"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
-                android:textColor="#0054CC"
+                android:textColor="#ffffff"
                 android:text="报"
                 android:textSize="@dimen/sp_19"
                 android:gravity="center"

@@ -28,6 +28,9 @@ import com.netease.nimlib.sdk.uinfo.UserInfoProvider;
 import com.netease.nimlib.sdk.uinfo.model.UserInfo;
 import com.netease.nimlib.sdk.util.NIMUtil;
 
+import java.io.File;
+
+
 
 public class APP extends Application {
     public static Context context;

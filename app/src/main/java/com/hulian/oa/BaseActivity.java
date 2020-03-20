@@ -26,9 +26,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.hulian.oa.update.NotificationInfo;
-import com.hulian.oa.update.UpdateInfo;
-import com.hulian.oa.update.UpdateManager;
 import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.views.LoadingDialog;
 
@@ -151,36 +148,6 @@ public class BaseActivity extends FragmentActivity  {
     public  void showToast(String text){
         Toast.makeText(BaseActivity.this,text+"", Toast.LENGTH_SHORT).show();
     }
-
-    //升级
-    public void upadateSystem() {
-        updateApk(BaseActivity.this, "", "", true, true, 10000000, "", BaseActivity.this.getResources().getString(R.string.app_name));
-    }
-
-    /**
-     * @param hitContent  提示更新内容
-     * @param versionName 更新版本名
-     * @param isForce     是否强制升级
-     * @param isSlient    是否静默安装
-     * @param fileSize    Apk文件大小
-     * @param apkURL      Apk下载链接
-     * @param apkName     Apk名称
-     */
-    public void updateApk(Context mContext, String hitContent, String versionName, boolean isForce, boolean isSlient, long fileSize, String apkURL, String apkName) {
-        //不用害怕 根据英文名称直译就可以
-        UpdateInfo updateInfo = new UpdateInfo();
-        updateInfo.versionName = versionName;
-        updateInfo.versionCode = 10;
-        updateInfo.isForce = isForce;
-        updateInfo.size = fileSize;
-        updateInfo.updateContent = hitContent;
-        if (isForce) {
-            updateInfo.isIgnorable = false;
-        }
-        NotificationInfo notificationInfo = new NotificationInfo(R.mipmap.ic_launcher, R.mipmap.ic_launcher, apkName, "正在下载中", hitContent);
-        new UpdateManager(mContext, apkURL, apkName, isSlient, updateInfo, notificationInfo).init();
-    }
-
     /**
      * 获取本地软件版本号
      */

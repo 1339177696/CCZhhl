@@ -18,6 +18,7 @@ import com.hulian.oa.me.MeActivity;
 import com.hulian.oa.news.adapter.MyViewPageAdapter;
 import com.hulian.oa.news.fragment.News_1_Fragment;
 import com.hulian.oa.news.fragment.News_2_Fragment;
+import com.hulian.oa.utils.SPUtils;
 
 import java.util.ArrayList;
 
@@ -39,7 +40,8 @@ public class NewsFragment extends Fragment {
     TabLayout myTablayout;
     @BindView(R.id.my_viewpager)
     ViewPager myViewpager;
-
+    @BindView(R.id.tv_type)
+    TextView tv_type;
     private ArrayList<String> list_path;
     private ArrayList<String> list_title;
 
@@ -79,6 +81,8 @@ public class NewsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fra_news, container, false);
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
+        tv_type.setText(SPUtils.get(getActivity(), "nickname", "").toString().substring(SPUtils.get(getActivity(), "nickname", "").toString().length()-2,SPUtils.get(getActivity(), "nickname", "").toString().length()));
+
         ArrayList<String> titleDatas = new ArrayList<>();
         titleDatas.add("新闻");
         titleDatas.add("通告");
@@ -112,7 +116,7 @@ public class NewsFragment extends Fragment {
             tvMengban.setVisibility(View.VISIBLE);
         }
     }
-    @OnClick(R.id.iv_gomine)
+    @OnClick(R.id.tv_type)
     public void onViewClicked() {
         startActivity(new Intent(getActivity(), MeActivity.class));
     }

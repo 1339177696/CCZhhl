@@ -14,12 +14,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.hulian.oa.R;
 import com.hulian.oa.address.adapter.PersonAdapter;
 import com.hulian.oa.address.bean.People;
 import com.hulian.oa.address.viewholder.FuncViewHolder;
 import com.hulian.oa.me.MeActivity;
+import com.hulian.oa.utils.SPUtils;
 import com.netease.nim.uikit.api.model.contact.ContactsCustomization;
 import com.netease.nim.uikit.business.contact.ContactsFragment;
 import com.netease.nim.uikit.business.contact.core.item.AbsContactItem;
@@ -37,8 +39,8 @@ public class AddressFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    @BindView(R.id.iv_mine)
-    ImageView ivMine;
+//    @BindView(R.id.iv_mine)
+//    ImageView ivMine;
     @BindView(R.id.contact_fragment)
     LinearLayout contactFragment;
     private PersonAdapter mListAdapter;
@@ -49,7 +51,8 @@ public class AddressFragment extends Fragment {
     EditText editText;
     @BindView(R.id.listview)
     ListView listview;
-
+    @BindView(R.id.tv_type)
+    TextView tv_type;
     private ContactsFragment fragment;
 
     public AddressFragment() {
@@ -87,6 +90,7 @@ public class AddressFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fra_address, container, false);
         ButterKnife.bind(this, view);
+        tv_type.setText(SPUtils.get(getActivity(), "nickname", "").toString().substring(SPUtils.get(getActivity(), "nickname", "").toString().length()-2,SPUtils.get(getActivity(), "nickname", "").toString().length()));
 
         FragmentManager fragment1 = getFragmentManager();
         //2,碎片的显示需要使用FragmentTransaction类操作
@@ -186,7 +190,7 @@ public class AddressFragment extends Fragment {
         listview.setAdapter(mListAdapter);
     }
 
-    @OnClick(R.id.iv_mine)
+    @OnClick(R.id.tv_type)
     public void onViewClicked() {
         startActivity(new Intent(getActivity(), MeActivity.class));
     }

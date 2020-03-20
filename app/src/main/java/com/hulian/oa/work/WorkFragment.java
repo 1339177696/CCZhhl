@@ -9,9 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.hulian.oa.R;
 import com.hulian.oa.me.MeActivity;
+import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.work.file.admin.activity.task.l_fragment.CompletedTaskFragment;
 import com.hulian.oa.work.fragment.WorkFragemt_9;
 import com.hulian.oa.work.fragment.WorkFragemt_list;
@@ -31,8 +33,8 @@ public class WorkFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     Unbinder unbinder;
-    @BindView(R.id.iv_mine)
-    ImageView ivMine;
+//    @BindView(R.id.iv_mine)
+//    ImageView ivMine;
 //    @BindView(R.id.iv_news)
 //    ImageView ivNews;
     @BindView(R.id.fg_content)
@@ -41,6 +43,8 @@ public class WorkFragment extends Fragment {
     private ArrayList<String> list_title;
     WorkFragemt_9 workFragemt_9;
     WorkFragemt_list workFragemt_list;
+    @BindView(R.id.tv_type)
+    TextView tv_type;
     public WorkFragment() {
         // Required empty public constructor
     }
@@ -77,6 +81,8 @@ public class WorkFragment extends Fragment {
         View view = inflater.inflate(R.layout.fra_work, container, false);
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
+        tv_type.setText(SPUtils.get(getActivity(), "nickname", "").toString().substring(SPUtils.get(getActivity(), "nickname", "").toString().length()-2,SPUtils.get(getActivity(), "nickname", "").toString().length()));
+
         workFragemt_9=new WorkFragemt_9();
         workFragemt_list=new WorkFragemt_list();
         init9fragment();
@@ -107,10 +113,10 @@ public class WorkFragment extends Fragment {
         EventBus.getDefault().unregister(this);
     }
 
-    @OnClick({R.id.iv_mine})
+    @OnClick({R.id.tv_type})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.iv_mine:
+            case R.id.tv_type:
                 startActivity(new Intent(getActivity(), MeActivity.class));
                 break;
             default:

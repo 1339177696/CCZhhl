@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.hulian.oa.me.MeActivity;
 import com.hulian.oa.message.session.search.GlobalSearchActivity;
+import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.views.PopWindow;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.api.model.contact.ContactChangedObserver;
@@ -76,6 +77,7 @@ public class Wechat extends TFragment {
     private TextView iv_circle;
     private TextView emptyHint;
     private  TextView tv_search;
+    private  TextView tv_type;
 
     private ImageView iv_gomine;
     private ImageView iv_more;
@@ -166,6 +168,8 @@ public class Wechat extends TFragment {
         emptyBg = findView(com.netease.nim.uikit.R.id.emptyBg);
         emptyHint = findView(com.netease.nim.uikit.R.id.message_list_empty_hint);
         iv_people=findView(com.netease.nim.uikit.R.id.iv_people);
+        tv_type=findView(com.netease.nim.uikit.R.id.tv_type);
+        tv_type.setText(SPUtils.get(getActivity(), "nickname", "").toString().substring(SPUtils.get(getActivity(), "nickname", "").toString().length()-2,SPUtils.get(getActivity(), "nickname", "").toString().length()));
 
         iv_people.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,6 +178,12 @@ public class Wechat extends TFragment {
             }
         });
         findView(com.netease.nim.uikit.R.id.iv_gomine).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), MeActivity.class));
+            }
+        });
+        findView(com.netease.nim.uikit.R.id.tv_type).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), MeActivity.class));
