@@ -3,13 +3,16 @@ package com.hulian.oa;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
@@ -66,7 +69,9 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             android.Manifest.permission.READ_PHONE_STATE,
             android.Manifest.permission.RECORD_AUDIO,
             android.Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.ACCESS_FINE_LOCATION
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.CALL_PHONE,
+            Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS
     };
     private boolean isFirstIn;
     private Observer<Integer> sysMsgUnreadCountChangedObserver = new Observer<Integer>() {
@@ -392,4 +397,5 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             }
         }, register);
     }
+
 }

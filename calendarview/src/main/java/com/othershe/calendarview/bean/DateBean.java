@@ -7,6 +7,7 @@ public class DateBean {
     private String lunarHoliday;//阳历节假日
     private int type;//0:上月，1:当月，2:下月
     private String term;//节气
+    private String key;
 
     public String getKey() {
         return key;
@@ -16,7 +17,7 @@ public class DateBean {
         this.key = key;
     }
 
-    private String key;
+
 
     public int[] getSolar() {
         return solar;

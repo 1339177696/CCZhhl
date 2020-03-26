@@ -4,6 +4,9 @@ import android.text.format.Time;
 
 import com.hulian.oa.bean.People;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,9 +17,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.TimeZone;
 
 public class TimeUtils {
     private static SimpleDateFormat sf = null;
+
 
     /**
      * 获取当前时间
@@ -32,13 +37,57 @@ public class TimeUtils {
         String monthDay = thanTen(time.monthDay);
         String hour = thanTen(time.hour);
         String minute = thanTen(time.minute);
+
         timeString = year + "-" + month + "-" + monthDay/* + " " + hour + ":" + minute*/;
         // System.out.println("-------timeString----------" + timeString);
         return timeString;
     }
 
     /**
+     * 获取当前时间
+     *
+     * @return
+     */
+    public static String getNowhousr() {
+        String timeString = null;
+        Time time = new Time();
+        time.setToNow();
+        String year = thanTen(time.year);
+        String month = thanTen(time.month + 1);
+        String monthDay = thanTen(time.monthDay);
+        String hour = thanTen(time.hour);
+        String minute = thanTen(time.minute);
+
+        timeString = hour + ":" + minute;
+        // System.out.println("-------timeString----------" + timeString);
+        return timeString;
+    }
+
+    public static String getMway() {
+        final Calendar c = Calendar.getInstance();
+        c.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+        String mWay = String.valueOf(c.get(Calendar.DAY_OF_WEEK));
+        if ("1".equals(mWay)) {
+            mWay = "天";
+        } else if ("2".equals(mWay)) {
+            mWay = "一";
+        } else if ("3".equals(mWay)) {
+            mWay = "二";
+        } else if ("4".equals(mWay)) {
+            mWay = "三";
+        } else if ("5".equals(mWay)) {
+            mWay = "四";
+        } else if ("6".equals(mWay)) {
+            mWay = "五";
+        } else if ("7".equals(mWay)) {
+            mWay = "六";
+        }
+        return mWay;
+    }
+
+    /**
      * 获取到分
+     *
      * @return
      */
     public static String getNowTime1() {
@@ -363,8 +412,8 @@ public class TimeUtils {
      * @param time
      * @return
      */
-    public static  String getDateToString(String time) {
-     //   Date d = new Date(convertTimeToLong(hb_time));
+    public static String getDateToString(String time) {
+        //   Date d = new Date(convertTimeToLong(hb_time));
 
         //  return sf.format(d);
 
@@ -518,7 +567,7 @@ public class TimeUtils {
      */
     public static boolean compareTwoTime(String starTime, String endString) {
         boolean isDayu = false;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
 
         try {
             Date parse = dateFormat.parse(starTime);
@@ -635,6 +684,23 @@ public class TimeUtils {
 
         }
         return i;
+    }
+
+    /**
+     * 时间戳转换
+     * @param seconds
+     * @param format
+     * @return
+     */
+    public static String timeStamp2Date(String seconds,String format) {
+        if(seconds == null || seconds.isEmpty() || seconds.equals("null")){
+            return "";
+        }
+        if(format == null || format.isEmpty()){
+            format = "yyyy-MM-dd HH:mm:ss";
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        return sdf.format(new Date());
     }
 
 }

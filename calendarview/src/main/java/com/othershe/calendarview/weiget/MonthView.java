@@ -3,10 +3,12 @@ package com.othershe.calendarview.weiget;
 import android.content.Context;
 import android.graphics.Color;
 import android.text.TextUtils;
+import android.text.format.Time;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.othershe.calendarview.R;
@@ -17,6 +19,7 @@ import com.othershe.calendarview.listener.OnMultiChooseListener;
 import com.othershe.calendarview.listener.OnSingleChooseListener;
 import com.othershe.calendarview.utils.CalendarUtil;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -88,6 +91,7 @@ public class MonthView extends ViewGroup {
             View view;
             TextView solarDay;//阳历TextView
             TextView lunarDay;//阴历TextView(节假日、节气同样使用阴历TextView来显示)
+            LinearLayout linearLayout;
             if (item_layout != 0 && calendarViewAdapter != null) {
                 view = LayoutInflater.from(mContext).inflate(item_layout, null);
                 TextView[] views = calendarViewAdapter.convertView(view, date);
@@ -109,8 +113,11 @@ public class MonthView extends ViewGroup {
             if (date.getType() == 0 || date.getType() == 2) {
                 solarDay.setTextColor(mAttrsBean.getColorLunar());
             }
-            solarDay.setText(String.valueOf(date.getSolar()[2]));
-
+            if (Arrays.equals(getNowIntTime(),date.getSolar())) {
+                solarDay.setText("今");
+            } else {
+                solarDay.setText(String.valueOf(date.getSolar()[2]));
+            }
             //设置农历（节假日显示）
             if (mAttrsBean.isShowLunar()) {
                 if ("初一".equals(date.getLunar()[1])) {
@@ -269,6 +276,7 @@ public class MonthView extends ViewGroup {
             }
         } else if (type == 1) {
             v.setBackgroundResource(mAttrsBean.getDayBg());
+
             solarDay.setTextColor(mAttrsBean.getColorChoose());
             lunarDay.setTextColor(mAttrsBean.getColorChoose());
         }
@@ -391,4 +399,22 @@ public class MonthView extends ViewGroup {
         this.item_layout = item_layout;
         this.calendarViewAdapter = calendarViewAdapter;
     }
+
+
+    /**
+     * 获取当前时间数组
+     *
+     * @return
+     */
+    public static int[] getNowIntTime() {
+        int [] timeInt = null;
+        Time time = new Time();
+        time.setToNow();
+        int year = time.year;
+        int month = time.month + 1;
+        int monthDay = time.monthDay;
+        timeInt = new int[]{year,month,monthDay};
+        return timeInt;
+    }
+
 }

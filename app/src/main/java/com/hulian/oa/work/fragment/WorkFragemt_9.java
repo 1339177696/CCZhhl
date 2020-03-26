@@ -163,8 +163,7 @@ public class WorkFragemt_9 extends Fragment {
                 break;
                 //考勤打卡
             case R.id.bt_time:
-//                startActivity(new Intent(getActivity(), ClockActivity.class));
-                ToastHelper.showToast(getActivity(), "功能暂未开放");
+                startActivity(new Intent(getActivity(), ClockActivity.class));
                 break;
                 //指令安排
             case R.id.bt_instruct:

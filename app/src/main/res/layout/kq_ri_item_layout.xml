@@ -18,8 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="2dp"
-        android:ems="1"
-        android:text="wwww" />
+        android:ems="1" />
 
     <TextView
         android:id="@+id/bg"

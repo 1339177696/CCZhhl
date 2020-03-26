@@ -17,8 +17,6 @@ import com.hulian.oa.R;
 import com.hulian.oa.news.adapter.MyViewPageAdapter;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.StatusBarUtil;
-import com.hulian.oa.work.file.admin.activity.ScreenReportActivity;
-import com.hulian.oa.work.file.admin.activity.WorkReportActivity;
 import com.hulian.oa.work.fragment.CalendarFragment;
 import com.hulian.oa.work.fragment.ClockFragment;
 
@@ -51,11 +49,19 @@ public class ClockActivity extends BaseActivity {
         StatusBarUtil.statusBarLightMode_white(this);
         setContentView(R.layout.clockactivity);
         ButterKnife.bind(this);
-        if (SPUtils.get(mContext, "roleKey", "").equals("boos")) {
+        if (SPUtils.get(this, "roleKey", "").toString().contains("synthesizeLead")){
             tVclose.setVisibility(View.VISIBLE);
-        } else {
+        }else if (SPUtils.get(this, "roleKey", "").toString().contains("eachLead")){
+            tVclose.setVisibility(View.VISIBLE);
+        }else {
             tVclose.setVisibility(View.GONE);
         }
+            // 根据用户角色判断是否显示下属打卡
+//        if (SPUtils.get(mContext, "roleKey", "").equals("boos")) {
+//            tVclose.setVisibility(View.VISIBLE);
+//        } else {
+//            tVclose.setVisibility(View.GONE);
+//        }
         titleDatas.add("考勤打卡");
         titleDatas.add("打卡日历");
         fragmentList.add(new ClockFragment());
@@ -105,6 +111,8 @@ public class ClockActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()){
             case R.id.tv_close:// 下属打卡
+                // 跳转选择部门人员列表
+                startActivity(new Intent(ClockActivity.this, SubordpersonActivity.class));
                 break;
             case R.id.iv_back:
                 finish();
