@@ -132,6 +132,7 @@
 
                 />
             <LinearLayout
+                android:visibility="gone"
                 android:layout_marginBottom="@dimen/dp_10"
                 android:layout_marginTop="@dimen/dp_10"
                 android:layout_gravity="center"
@@ -162,6 +163,7 @@
                 android:layout_marginRight="@dimen/dp_14"
                 android:background="#E3E3E3" />
             <RelativeLayout
+                android:id="@+id/rela_cale_jilu"
                 android:layout_marginBottom="@dimen/dp_10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -190,41 +192,59 @@
                     </RelativeLayout>
 
                     <TextView
+
                         android:id="@+id/s_dk_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/dp_10"
-                        android:layout_toRightOf="@+id/s_rela_on"
+                        android:layout_toRightOf="@+id/s_sb_time"
                         android:text="打卡时间 08:30"
                         android:textColor="#ff333333"
                         android:textSize="@dimen/sp_12" />
 
                     <TextView
+                        android:layout_toRightOf="@+id/s_rela_on"
                         android:id="@+id/s_sb_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/dp_10"
-                        android:layout_toRightOf="@+id/s_dk_time"
                         android:text="上班时间 08:30"
                         android:textColor="#ff333333"
                         android:textSize="@dimen/sp_12" />
 
                     <TextView
-                        android:background="@drawable/kqrl_tv_bg_yellow"
+                        android:id="@+id/sb_dk_waiqin"
+                        android:background="@drawable/kqrl_tv_bg_blue"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/dp_10"
-                        android:layout_toRightOf="@+id/s_sb_time"
+                        android:layout_toRightOf="@+id/s_dk_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="迟到1小时50分"
+                        android:text="外勤"
                         android:textColor="#ffffffff"
                         android:textSize="@dimen/sp_10"
                         />
 
+                    <TextView
+                        android:id="@+id/sb_dk_chidao"
+                        android:background="@drawable/kqrl_tv_bg_yellow"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_toRightOf="@+id/sb_dk_waiqin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="迟到"
+                        android:textColor="#ffffffff"
+                        android:textSize="@dimen/sp_10"
+                        />
+
+
+
                 </RelativeLayout>
                 <LinearLayout
+                    android:id="@+id/s_liner"
                     android:layout_marginTop="@dimen/dp_10"
                     android:layout_marginLeft="@dimen/dp_46"
                     android:layout_below="@+id/s_rela"
@@ -237,6 +257,7 @@
                         android:layout_height="@dimen/dp_18"/>
 
                     <TextView
+                        android:id="@+id/s_dk_adress"
                         android:layout_marginLeft="@dimen/dp_6"
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
@@ -283,7 +304,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/dp_10"
-                        android:layout_toRightOf="@+id/x_rela_on"
+                        android:layout_toRightOf="@+id/x_sb_time"
                         android:text="打卡时间 08:30"
                         android:textColor="#ff333333"
                         android:textSize="@dimen/sp_12" />
@@ -294,25 +315,40 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/dp_10"
-                        android:layout_toRightOf="@+id/x_dk_time"
+                        android:layout_toRightOf="@+id/x_rela_on"
                         android:text="下班时间 08:30"
                         android:textColor="#ff333333"
                         android:textSize="@dimen/sp_12" />
 
                     <TextView
+                        android:id="@+id/xb_dk_waiqin"
                         android:background="@drawable/kqrl_tv_bg_blue"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/dp_10"
-                        android:layout_toRightOf="@+id/x_sb_time"
+                        android:layout_toRightOf="@+id/x_dk_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="正常"
+                        android:text="外勤"
+                        android:textColor="#ffffffff"
+                        android:textSize="@dimen/sp_10"
+                        />
+
+                    <TextView
+                        android:id="@+id/xb_dk_chidao"
+                        android:background="@drawable/kqrl_tv_bg_yellow"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_toRightOf="@+id/xb_dk_waiqin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="早退"
                         android:textColor="#ffffffff"
                         android:textSize="@dimen/sp_10"
                         />
 
                 </RelativeLayout>
                 <LinearLayout
+                    android:id="@+id/x_liner"
                     android:layout_marginTop="@dimen/dp_10"
                     android:layout_marginLeft="@dimen/dp_46"
                     android:layout_below="@+id/x_rela"
@@ -325,6 +361,7 @@
                         android:layout_height="@dimen/dp_18"/>
 
                     <TextView
+                        android:id="@+id/x_dk_adress"
                         android:layout_marginLeft="@dimen/dp_6"
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"

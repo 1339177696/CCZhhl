@@ -703,4 +703,21 @@ public class TimeUtils {
         return sdf.format(new Date());
     }
 
+
+    public static String dateClearZero(String xq){
+        Integer year = Integer.parseInt(xq.substring(0, 4));
+        Integer month = Integer.parseInt(xq.substring(5, 7));
+        Integer day = Integer.parseInt(xq.substring(8, 10));
+        StringBuilder res = new StringBuilder();
+        if(year > 0){
+            res.append(year + ".");
+        }
+        if(month > 0){
+            res.append(month + ".");
+        }
+        if(day > 0){
+            res.append(day);
+        }
+        return res.toString();
+    }
 }

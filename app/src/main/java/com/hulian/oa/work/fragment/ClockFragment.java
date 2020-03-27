@@ -160,6 +160,9 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
         }
     };
 
+    private String gp = "1";
+    private String tp = "1";
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -185,8 +188,7 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
         permissions();
         // 规则制定查询
         postRule();
-        // 请求打卡信息
-        ClockType();
+
         return view;
     }
 
@@ -253,6 +255,7 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
                 public void onClick(View v) {
                     //提交
                     dialog.dismiss();
+                    EventBus.getDefault().post(new CalendarFragment());
                     if (type) {
                         reOnBtn.setVisibility(View.GONE);
                         reNoBtn.setVisibility(View.VISIBLE);
@@ -315,6 +318,8 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
                     if (result.getString("code").equals("500")){
                         showToast("打卡失败");
                     }else {
+                        // 这个是上班打卡之后出现的打卡ID
+                        dk_id = result.getString("msg");
                         showDialog();
                     }
                 } catch (JSONException e) {
@@ -350,7 +355,6 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
                         showToast("打卡失败");
                     }else {
                         showDialog();
-
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -385,9 +389,9 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
                         permissionsNo.setVisibility(View.VISIBLE);
                         permissionsYes.setVisibility(View.GONE);
                     } else {
+
                         permissionsYes.setVisibility(View.VISIBLE);
                         permissionsNo.setVisibility(View.GONE);
-                        dk_id = result.getJSONObject("data").getString("id");
                         gz_sb_time = result.getJSONObject("data").getString("upTime");
                         gz_xb_time = result.getJSONObject("data").getString("downTime");
                         jingweidu = result.getJSONObject("data").getString("registerCoordinate");
@@ -399,8 +403,9 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
                         f_weigdu = sourceStrArray[1];
                         distance = result.getJSONObject("data").getString("distance");
                         fw_time = TimeUtils.timeStamp2Date(result.getJSONObject("data").getString("remark"),"HH:mm:ss");
-                        createTime = TimeUtils.timeStamp2Date(result.getJSONObject("data").getString("remark"),"yyyy:MM:dd");
-
+                        createTime = TimeUtils.timeStamp2Date(result.getJSONObject("data").getString("remark"),"yyyy-MM-dd");
+                        // 请求打卡信息
+                        ClockType();
 //                        // 判断上班打卡是否在规定时间内
                         if (TimeUtils.compareTwoTime(gz_sb_time,fw_time)){
                             reOnBtn.setBackgroundResource(R.drawable.clock_rela_bg_no);
@@ -410,7 +415,7 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
                             dk_time = "0";
                         }
                         // 判断下班打卡是否在规定时间外
-                        if (TimeUtils.compareTwoTime(gz_xb_time,fw_time)){
+                        if (TimeUtils.compareTwoTime(fw_time,gz_xb_time)){
                             reNoBtn.setBackgroundResource(R.drawable.clock_rela_bg_no);
                             xb_dk_time = "1";
                         }else {
@@ -455,6 +460,73 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
         HttpRequest.OnClock_Type(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
+                //需要转化为实体对象
+                Gson gson = new GsonBuilder().serializeNulls().create();
+                try {
+                    JSONObject result = new JSONObject(responseObj.toString());
+                    if (result.optString("data") != ""){
+                        // 有打卡记录，隐藏上班打卡按钮
+                        reOnBtn.setVisibility(View.GONE);
+                        sbRelabtn.setVisibility(View.VISIBLE);
+                        sbDktime.setText("打卡时间"+result.getJSONObject("data").getString("registerUpTime"));
+                        sbDkadress.setText(result.getJSONObject("data").getString("registerUpAddress"));
+                        dk_id = result.getJSONObject("data").getString("id");
+                        if (result.getJSONObject("data").getString("registerUpState").equals("0"))
+                        {
+                            sbDkchidao.setVisibility(View.GONE);
+                            if (result.getJSONObject("data").getString("regisgerUpType").equals("0")){
+                                sbDkwaiqin.setVisibility(View.VISIBLE);
+                                sbDkwaiqin.setText("正常");
+                            }else {
+                                sbDkwaiqin.setVisibility(View.VISIBLE);
+                            }
+                        }else {
+                            sbDkchidao.setVisibility(View.VISIBLE);
+                            if (result.getJSONObject("data").getString("regisgerUpType").equals("0")){
+                                sbDkwaiqin.setVisibility(View.GONE);
+                            }else {
+                                sbDkwaiqin.setVisibility(View.VISIBLE);
+                            }
+                        }
+                        // 如果有下班打卡时间，隐藏打卡按钮
+                        if (!TextUtils.equals(result.getJSONObject("data").getString("registerDownTime"),"null"))
+                        {
+                            reNoBtn.setVisibility(View.GONE);
+                            xbRelabtn.setVisibility(View.VISIBLE);
+                            xbDktime.setText("打卡时间"+result.getJSONObject("data").getString("registerDownTime"));
+                            xbDkadress.setText(result.getJSONObject("data").getString("registerDownAddress"));
+                            if (result.getJSONObject("data").getString("registerDownState").equals("0"))
+                            {
+                                xbDkchidao.setVisibility(View.GONE);
+                                if (result.getJSONObject("data").getString("regisgerDownType").equals("0")){
+                                    xbDkwaiqin.setVisibility(View.VISIBLE);
+                                    sbDkwaiqin.setText("正常");
+                                }else {
+                                    sbDkwaiqin.setVisibility(View.VISIBLE);
+                                }
+                            }else {
+                                xbDkchidao.setVisibility(View.VISIBLE);
+                                xbDkchidao.setText("早退");
+                                if (result.getJSONObject("data").getString("regisgerUpType").equals("0")){
+                                    xbDkwaiqin.setVisibility(View.GONE);
+                                }else {
+                                    xbDkwaiqin.setVisibility(View.VISIBLE);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            reNoBtn.setVisibility(View.VISIBLE);
+                        }
+
+                    }else {
+                        // 未打卡
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
             }
 
@@ -639,7 +711,7 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
     // 上班回显数据
     public void sb_iniData(){
         sbDktime.setText("打卡时间"+sbTime.getText().toString());
-        String tp = "1";
+        tp = "1";
         if (dk_type.equals("0")){
             sbDkwaiqin.setVisibility(View.GONE);
             tp = "1";
@@ -667,7 +739,7 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
     //下班回显数据
     public void xb_iniData(){
         xbDktime.setText("打卡时间"+xbTime.getText().toString());
-        String tp = "1";
+        tp = "1";
         if (dk_type.equals("0")){
             xbDkwaiqin.setVisibility(View.GONE);
             tp = "1";

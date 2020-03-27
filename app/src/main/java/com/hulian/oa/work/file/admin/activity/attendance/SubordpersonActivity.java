@@ -105,6 +105,7 @@ public class SubordpersonActivity extends BaseActivity {
                         }
                     }
                     Intent intent = new Intent(SubordpersonActivity.this,SubordActivity.class);
+                    intent.putExtra("userid", mList.get(0).getUserId());
                     intent.putExtra("mList", (Serializable) mList);
                     startActivity(intent);
                     finish();

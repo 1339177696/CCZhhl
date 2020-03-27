@@ -943,6 +943,17 @@ public class HttpRequest {
     }
 
 
+  /**
+     *查询月打卡每日状态
+     * @param params
+     * @param callback
+     */
+    public static void OnClock_month(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/attenceInfo/android/findRegisterDayState", params, callback, null);
+    }
+
+
+
 
 
 }
