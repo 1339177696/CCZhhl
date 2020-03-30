@@ -163,6 +163,7 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
     private String gp = "1";
     private String tp = "1";
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
