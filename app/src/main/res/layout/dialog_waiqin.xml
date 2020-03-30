@@ -58,7 +58,7 @@
                 android:id="@+id/tv_adress_wq"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:text="121212"
                 android:textColor="#DDDADD"
                 android:textSize="@dimen/sp_12"
                 />

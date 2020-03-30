@@ -282,6 +282,7 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
             Dialog dialog = new MyDialog(getActivity(), true, true, (float) 0.8).setNewView(view);
             dialog.setCanceledOnTouchOutside(false);
             dialog.show();
+            tv_text3.setText(adress);
             im_diss.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -291,9 +292,8 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
         tv_text5.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Toast.makeText(getActivity(), "外勤打卡成功", Toast.LENGTH_LONG).show();
-                    tv_text3.setText("123");
-                    registerUpRemark = et_content.toString().trim();
+//                  Toast.makeText(getActivity(), "外勤打卡成功", Toast.LENGTH_LONG).show();
+                    registerUpRemark = et_content.getText().toString().trim();
                     postData();
                     dialog.dismiss();
                 }
@@ -559,6 +559,7 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
 
     @Override
     public void onDestroyView() {
+        mRunning = false;
         super.onDestroyView();
         unbinder.unbind();
     }

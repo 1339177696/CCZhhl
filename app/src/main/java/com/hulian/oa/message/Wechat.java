@@ -133,6 +133,7 @@ public class Wechat extends TFragment {
         registerObservers(true);
         registerDropCompletedListener(true);
         registerOnlineStateChangeListener(true);
+        NimUIKit.setEarPhoneModeEnable(false);
     }
 
     @Override
