@@ -247,7 +247,7 @@ public class CalendarFragment extends Fragment {
 
     // 刷新
     public void onEventMainThread(CalendarFragment event) {
-        calendarView.getMultiDate();
+        calendarView = null;
         postRule();
     }
 
