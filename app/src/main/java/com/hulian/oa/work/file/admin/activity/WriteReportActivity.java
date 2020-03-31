@@ -29,6 +29,7 @@ import com.hulian.oa.utils.ToastHelper;
 import com.hulian.oa.views.MyDialog;
 import com.hulian.oa.work.file.admin.activity.document.l_adapter.FullyGridLayoutManager;
 import com.hulian.oa.work.file.admin.activity.document.l_adapter.L_GridImageAdapter;
+import com.hulian.oa.work.fragment.ReadReportFragment;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
@@ -44,6 +45,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by 陈泽宇 on 2020/3/11.
@@ -89,12 +91,9 @@ public class WriteReportActivity extends BaseActivity {
         StatusBarUtil.statusBarLightMode_white(this);
         setContentView(R.layout.activity_write_report);
         ButterKnife.bind(this);
-
         init();
-
         type = getIntent().getStringExtra("type");
         setTitleText(type);
-
         getRecipient();//获取接收人
     }
 
@@ -236,6 +235,7 @@ public class WriteReportActivity extends BaseActivity {
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
                     showDialog();
+                    EventBus.getDefault().post(new ReadReportFragment());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

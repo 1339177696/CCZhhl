@@ -71,7 +71,7 @@ public class LBanbenActivity extends BaseActivity {
         ButterKnife.bind(this);
         versioncodel = Version_qgl.getLocalVersion(this);
         versionname = Version_qgl.getLocalVersionName(this);
-
+        appVersion.setText("Version "+versionname);
     }
     // 后台检测版本
     public void postVer(int v) {

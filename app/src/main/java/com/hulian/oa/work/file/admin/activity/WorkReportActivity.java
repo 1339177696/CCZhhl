@@ -33,7 +33,6 @@ import butterknife.OnClick;
  */
 public class WorkReportActivity extends BaseActivity {
 
-
     @BindView(R.id.my_tablayout)
     TabLayout myTablayout;
     @BindView(R.id.my_viewpager)

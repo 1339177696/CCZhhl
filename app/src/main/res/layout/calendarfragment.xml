@@ -216,7 +216,7 @@
 
                     <TextView
                         android:id="@+id/sb_dk_waiqin"
-                        android:background="@drawable/kqrl_tv_bg_blue"
+                        android:background="@drawable/dk_tv_bg_lv"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/dp_10"
                         android:layout_toRightOf="@+id/s_dk_time"
@@ -257,6 +257,7 @@
                         android:layout_height="@dimen/dp_18"/>
 
                     <TextView
+                        android:layout_marginRight="@dimen/dp_10"
                         android:id="@+id/s_dk_adress"
                         android:layout_marginLeft="@dimen/dp_6"
                         android:layout_gravity="center"
@@ -322,7 +323,7 @@
 
                     <TextView
                         android:id="@+id/xb_dk_waiqin"
-                        android:background="@drawable/kqrl_tv_bg_blue"
+                        android:background="@drawable/dk_tv_bg_lv"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/dp_10"
                         android:layout_toRightOf="@+id/x_dk_time"
@@ -361,6 +362,7 @@
                         android:layout_height="@dimen/dp_18"/>
 
                     <TextView
+                        android:layout_marginRight="@dimen/dp_10"
                         android:id="@+id/x_dk_adress"
                         android:layout_marginLeft="@dimen/dp_6"
                         android:layout_gravity="center"

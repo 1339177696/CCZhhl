@@ -25,17 +25,20 @@ import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.work.adapter.WriteReportAdapter;
 import com.hulian.oa.work.file.admin.activity.ReadReportActivity;
+import com.othershe.calendarview.weiget.CalendarView;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by 陈泽宇 on 2020/3/10.
@@ -59,6 +62,7 @@ public class ReadReportFragment extends Fragment implements  BaseQuickAdapter.Re
         View view;
         view = inflater.inflate(R.layout.fragment_read_report, container, false);
         unbinder = ButterKnife.bind(this, view);
+        EventBus.getDefault().register(this);
         initList();
         return view;
 
@@ -88,10 +92,16 @@ public class ReadReportFragment extends Fragment implements  BaseQuickAdapter.Re
     }
 
 
+    // 刷新
+    public void onEventMainThread(ReadReportFragment event) {
+        onRefresh();
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override

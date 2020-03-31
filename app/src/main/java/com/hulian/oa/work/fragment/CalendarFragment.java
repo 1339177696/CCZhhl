@@ -78,7 +78,6 @@ public class CalendarFragment extends Fragment {
     TextView clockDepartment;
     @BindView(R.id.current_time)
     TextView currentTime;
-
     @BindView(R.id.permissions_dar_no)
     RelativeLayout permissionsDarno;
     @BindView(R.id.clock_fg_img)
@@ -99,14 +98,12 @@ public class CalendarFragment extends Fragment {
     TextView sDkadress;
     @BindView(R.id.x_dk_adress)
     TextView xDkadress;
-
     @BindView(R.id.rela_cale_jilu)
     RelativeLayout Relacalejilu;
     @BindView(R.id.x_liner)
     LinearLayout Xliner;
     @BindView(R.id.s_liner)
     LinearLayout Sliner;
-
     @BindView(R.id.sb_dk_chidao)
     TextView sbDkchidao;
     @BindView(R.id.sb_dk_waiqin)
@@ -115,8 +112,6 @@ public class CalendarFragment extends Fragment {
     TextView xbDkwaiqin;
     @BindView(R.id.xb_dk_chidao)
     TextView xbDkchidao;
-
-
 
     private int[] cDate = CalendarUtil.getCurrentDate();
 
@@ -148,6 +143,7 @@ public class CalendarFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        EventBus.getDefault().unregister(this);
     }
 
     @OnClick({R.id.cale_left, R.id.cale_riht, R.id.clock_department, R.id.clock_fg_img})
@@ -184,7 +180,6 @@ public class CalendarFragment extends Fragment {
                 break;
         }
     }
-
 
     /**
      * 请求打卡规则
@@ -242,12 +237,12 @@ public class CalendarFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 
     // 刷新
     public void onEventMainThread(CalendarFragment event) {
-        calendarView = null;
+        calendarView = new CalendarView(getActivity());
+        markData = new HashMap<>();
         postRule();
     }
 
@@ -269,6 +264,7 @@ public class CalendarFragment extends Fragment {
                         for (int i = 0; i <= list.size() - 1; i++) {
                                 markData.put(TimeUtils.dateClearZero(list.get(i).getYMD()), list.get(i).getSTATE());
                         }
+
                     }else {
                         markData = null;
                     }
@@ -362,6 +358,7 @@ public class CalendarFragment extends Fragment {
                             sbDkchidao.setVisibility(View.GONE);
                             if (result.getJSONObject("data").getString("regisgerUpType").equals("0")){
                                 sbDkwaiqin.setVisibility(View.VISIBLE);
+                                sbDkwaiqin.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
                                 sbDkwaiqin.setText("正常");
                             }else {
                                 sbDkwaiqin.setVisibility(View.VISIBLE);
@@ -390,14 +387,15 @@ public class CalendarFragment extends Fragment {
                                 xbDkchidao.setVisibility(View.GONE);
                                 if (result.getJSONObject("data").getString("regisgerDownType").equals("0")){
                                     xbDkwaiqin.setVisibility(View.VISIBLE);
-                                    sbDkwaiqin.setText("正常");
+                                    xbDkwaiqin.setText("正常");
+                                    xbDkwaiqin.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
                                 }else {
-                                    sbDkwaiqin.setVisibility(View.VISIBLE);
+                                    xbDkwaiqin.setVisibility(View.VISIBLE);
                                 }
                             }else {
                                 xbDkchidao.setVisibility(View.VISIBLE);
                                 xbDkchidao.setText("早退");
-                                if (result.getJSONObject("data").getString("regisgerUpType").equals("0")){
+                                if (result.getJSONObject("data").getString("regisgerDownType").equals("0")){
                                     xbDkwaiqin.setVisibility(View.GONE);
                                 }else {
                                     xbDkwaiqin.setVisibility(View.VISIBLE);

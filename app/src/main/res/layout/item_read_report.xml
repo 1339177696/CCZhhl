@@ -44,7 +44,7 @@
         android:id="@+id/finished_work"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="今日完成的工作:"
+        android:text="完成的工作:"
         android:textColor="@color/text"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@+id/title_name"
@@ -53,8 +53,11 @@
         />
 
     <TextView
+        app:layout_constraintRight_toRightOf="parent"
+        android:singleLine="true"
+        android:ellipsize="end"
         android:id="@+id/finished_work_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toRightOf="@+id/finished_work"
         app:layout_constraintBaseline_toBaselineOf="@+id/finished_work"
@@ -62,7 +65,6 @@
         android:textColor="@color/text"
         android:textSize="16sp"
         tools:text="设计oa报销页面"
-        android:maxLines="1"
         />
 
     <TextView
@@ -78,8 +80,11 @@
         />
 
     <TextView
+        app:layout_constraintRight_toRightOf="parent"
+        android:singleLine="true"
+        android:ellipsize="end"
         android:id="@+id/unfinished_work_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toRightOf="@+id/unfinished_work"
         app:layout_constraintBaseline_toBaselineOf="@+id/unfinished_work"
@@ -87,7 +92,6 @@
         android:textColor="@color/text"
         android:textSize="16sp"
         tools:text="设计oa汇报页面"
-        android:maxLines="1"
         />
 
 
