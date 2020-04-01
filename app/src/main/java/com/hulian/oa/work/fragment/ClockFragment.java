@@ -46,6 +46,7 @@ import com.hulian.oa.utils.NullStringToEmptyAdapterFactory;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.TimeUtils;
 import com.hulian.oa.utils.ToastHelper;
+import com.hulian.oa.views.LoadingDialog;
 import com.hulian.oa.views.MyDialog;
 import com.hulian.oa.work.file.admin.activity.ScreenReportActivity;
 import com.hulian.oa.work.file.admin.activity.ScreenReportListActivity;
@@ -157,23 +158,14 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
         }
     };
 
-    private String gp = "1";
-    private String tp = "1";
-
-
+    protected LoadingDialog loadDialog;//加载等待弹窗
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view;
         view = inflater.inflate(R.layout.clockfragment, container, false);
-        //检查版本是否大于M
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, MY_PERMISSIONS_REQUEST_CALL_LOCATION);
-            } else {
-                //"权限已申请";
-            }
-        }
+        loadDialog = new LoadingDialog(getActivity());
+
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
         mcontext = getActivity();
@@ -185,8 +177,8 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
         //权限判断
         permissions();
         // 规则制定查询
+        loadDialog.show();
         postRule();
-
         return view;
     }
 
@@ -200,25 +192,27 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
                 break;
             case R.id.re_on_btn:
                 Log.d("点击了","点击了上班");
+                loadDialog.show();
                 //上班打卡按钮
                 type = true;
                 //开始定位
-                showLocation();
+                post_permission();
                 break;
             case R.id.re_no_btn:
                 Log.d("点击了","点击了下班");
-
+                loadDialog.show();
                 //下班打卡时间
                 type = false;
                 //开始定位
-                showLocation();
+                post_permission();
                 break;
             case R.id.tv_update:
                 Log.d("点击了","点击了更新打卡");
+                loadDialog.show();
                 //下班打卡时间
                 type = false;
                 //开始定位
-                showLocation();
+                post_permission();
                 break;
             case R.id.permissions_no:
                 if (permi) {
@@ -322,7 +316,9 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
         HttpRequest.OnClock(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
+                loadDialog.dismiss();
                 try {
+
                     JSONObject result = new JSONObject(responseObj.toString());
                     if (result.getString("code").equals("500")){
                         showToast("打卡失败");
@@ -338,7 +334,9 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                 showToast("服务器异常");
+                loadDialog.dismiss();
+
+                showToast("服务器异常");
             }
         });
 
@@ -358,6 +356,8 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
         HttpRequest.OnClock(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
+                loadDialog.dismiss();
+
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
                     if (result.getString("code").equals("500")){
@@ -372,6 +372,8 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
 
             @Override
             public void onFailure(OkHttpException failuer) {
+                loadDialog.dismiss();
+
                 showToast("服务器异常");
             }
         });
@@ -385,6 +387,7 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
         HttpRequest.PostClock_rules(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
+                loadDialog.dismiss();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
                     if (result.optString("data") == "") {
@@ -398,7 +401,6 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
                         permissionsNo.setVisibility(View.VISIBLE);
                         permissionsYes.setVisibility(View.GONE);
                     } else {
-
                         permissionsYes.setVisibility(View.VISIBLE);
                         permissionsNo.setVisibility(View.GONE);
                         gz_sb_time = result.getJSONObject("data").getString("upTime");
@@ -416,7 +418,7 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
                         // 请求打卡信息
                         ClockType();
 //                        // 判断上班打卡是否在规定时间内
-                        if (TimeUtils.compareTwoTime(gz_sb_time,fw_time)){
+                        if (TimeUtils.compareTwoTime(gz_sb_time,fw_time)>0){
                             reOnBtn.setBackgroundResource(R.drawable.clock_rela_bg_no);
                             dk_time = "1";
                         }else {
@@ -424,7 +426,7 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
                             dk_time = "0";
                         }
                         // 判断下班打卡是否在规定时间外
-                        if (TimeUtils.compareTwoTime(fw_time,gz_xb_time)){
+                        if (TimeUtils.compareTwoTime(fw_time,gz_xb_time)>0){
                             reNoBtn.setBackgroundResource(R.drawable.clock_rela_bg_no);
                             xb_dk_time = "1";
                         }else {
@@ -457,6 +459,7 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
             @Override
             public void onFailure(OkHttpException failuer) {
                // ToastHelper.showToast(getActivity(), "服务器请求失败");
+                loadDialog.dismiss();
             }
         });
     }
@@ -531,6 +534,8 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
 
                     }else {
                         // 未打卡
+                        reOnBtn.setVisibility(View.VISIBLE);
+                        sbRelabtn.setVisibility(View.GONE);
 
                     }
 
@@ -683,10 +688,12 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
 
 
                 } else {
+                    loadDialog.dismiss();
                     //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
                     Log.e("AmapError", "location Error, ErrCode:"
                             + amapLocation.getErrorCode() + ", errInfo:"
                             + amapLocation.getErrorInfo());
+                    Toast.makeText(getActivity(),"定位失败，请手动打开定位权限",Toast.LENGTH_LONG).show();
                 }
             }
         } catch (Exception e) {
@@ -770,6 +777,19 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
             }
         }
         xbDkadress.setText(registerUpAddress);
+    }
+
+    // 开启定位权限
+    public void post_permission(){
+        //检查版本是否大于M
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, MY_PERMISSIONS_REQUEST_CALL_LOCATION);
+            } else {
+                //"权限已申请";
+                showLocation();
+            }
+        }
     }
 
 }

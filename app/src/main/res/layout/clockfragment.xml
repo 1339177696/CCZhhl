@@ -197,7 +197,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-
+                    android:visibility="gone"
                     android:id="@+id/re_on_btn"
                     android:layout_width="@dimen/dp_91"
                     android:layout_height="@dimen/dp_91"

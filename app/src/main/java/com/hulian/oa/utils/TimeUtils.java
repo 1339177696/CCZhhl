@@ -565,25 +565,27 @@ public class TimeUtils {
      * @param endString 结束时间
      * @return 结束时间大于开始时间返回true，否则反之֮
      */
-    public static boolean compareTwoTime(String starTime, String endString) {
+    public static long compareTwoTime(String starTime, String endString) {
         boolean isDayu = false;
+        long dif = 0;
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
 
         try {
             Date parse = dateFormat.parse(starTime);
             Date parse1 = dateFormat.parse(endString);
 
-            long diff = parse1.getTime() - parse.getTime();
-            if (diff >= 0) {
-                isDayu = true;
-            } else {
-                isDayu = false;
-            }
+            dif = parse1.getTime() - parse.getTime();
+//            if (diff > 0) {
+//                isDayu = true;
+//            } else {
+//                isDayu = false;
+//            }
+
         } catch (ParseException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return isDayu;
+        return dif;
 
     }
 
