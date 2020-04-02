@@ -55,7 +55,7 @@ import butterknife.OnClick;
 
 /**
  * Created by 陈泽宇 on 2020/3/11.
- * Describe:日报页面详情
+ * Describe:日报详情页面
  */
 public class ReadReportActivity extends BaseActivity {
 

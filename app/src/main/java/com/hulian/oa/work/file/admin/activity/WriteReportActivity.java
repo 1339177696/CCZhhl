@@ -208,10 +208,10 @@ public class WriteReportActivity extends BaseActivity {
             ToastHelper.showToast(WriteReportActivity.this,"请输入完成的工作内容");
             return;
         }
-        if (TextUtils.isEmpty(planWork.getText())){
-            ToastHelper.showToast(WriteReportActivity.this,"请输入工作计划内容");
-            return;
-        }
+//        if (TextUtils.isEmpty(planWork.getText())){
+//            ToastHelper.showToast(WriteReportActivity.this,"请输入工作计划内容");
+//            return;
+//        }
         RequestParams params = new RequestParams();
         params.put("reportType", type);
         params.put("finishWork", finishedWork.getText() + "");
