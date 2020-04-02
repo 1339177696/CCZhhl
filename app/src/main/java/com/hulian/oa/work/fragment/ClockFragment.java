@@ -74,7 +74,7 @@ import static com.hulian.oa.utils.TimeUtils.getMway;
 /**
  * Created by qgl on 2020/3/17 16:55.
  */
-public class ClockFragment extends Fragment implements AMapLocationListener{
+public class ClockFragment extends Fragment implements AMapLocationListener {
     Unbinder unbinder;
     @BindView(R.id.tv_type)
     TextView tvType;
@@ -153,12 +153,13 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            sbTime.setText((String)msg.obj);
-            xbTime.setText((String)msg.obj);
+            sbTime.setText((String) msg.obj);
+            xbTime.setText((String) msg.obj);
         }
     };
 
     protected LoadingDialog loadDialog;//加载等待弹窗
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -191,7 +192,7 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
                 startActivity(new Intent(getActivity(), AttendrulesActivity.class));
                 break;
             case R.id.re_on_btn:
-                Log.d("点击了","点击了上班");
+                Log.d("点击了", "点击了上班");
                 loadDialog.show();
                 //上班打卡按钮
                 type = true;
@@ -199,7 +200,7 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
                 post_permission();
                 break;
             case R.id.re_no_btn:
-                Log.d("点击了","点击了下班");
+                Log.d("点击了", "点击了下班");
                 loadDialog.show();
                 //下班打卡时间
                 type = false;
@@ -207,7 +208,7 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
                 post_permission();
                 break;
             case R.id.tv_update:
-                Log.d("点击了","点击了更新打卡");
+                Log.d("点击了", "点击了更新打卡");
                 loadDialog.show();
                 //下班打卡时间
                 type = false;
@@ -233,78 +234,81 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
                 break;
         }
     }
+
     // 上班弹框
     private void showDialog() {
-            //是正常
-            View view = LayoutInflater.from(mcontext).inflate(R.layout.dialog_daka, null);
-            TextView textView = view.findViewById(R.id.tv_text);
-            TextView tv_m1 = view.findViewById(R.id.tv_m1);
-            if (type) {
-                tv_m1.setText("上班打卡成功");
-            } else {
-                tv_m1.setText("下班打卡成功");
-            }
-            textView.setText(TimeUtils.getNowhousr());
-            TextView submit = view.findViewById(R.id.confirm);
-            Dialog dialog = new MyDialog(getActivity(), true, true, (float) 0.7).setNewView(view);
-            dialog.setCanceledOnTouchOutside(false);
-            dialog.show();
-            submit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //提交
-                    dialog.dismiss();
-                    EventBus.getDefault().post(new CalendarFragment());
-                    if (type) {
-                        reOnBtn.setVisibility(View.GONE);
-                        reNoBtn.setVisibility(View.VISIBLE);
-                        sbRelabtn.setVisibility(View.VISIBLE);
-                        // 上班打卡成功，开始赋值
-                        sb_iniData();
-                    } else {
-                        reNoBtn.setVisibility(View.GONE);
-                        xbRelabtn.setVisibility(View.VISIBLE);
-                        xb_iniData();
-                    }
-
+        //是正常
+        View view = LayoutInflater.from(mcontext).inflate(R.layout.dialog_daka, null);
+        TextView textView = view.findViewById(R.id.tv_text);
+        TextView tv_m1 = view.findViewById(R.id.tv_m1);
+        if (type) {
+            tv_m1.setText("上班打卡成功");
+        } else {
+            tv_m1.setText("下班打卡成功");
+        }
+        textView.setText(TimeUtils.getNowhousr());
+        TextView submit = view.findViewById(R.id.confirm);
+        Dialog dialog = new MyDialog(getActivity(), true, true, (float) 0.7).setNewView(view);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //提交
+                dialog.dismiss();
+                EventBus.getDefault().post(new CalendarFragment());
+                if (type) {
+                    reOnBtn.setVisibility(View.GONE);
+                    reNoBtn.setVisibility(View.VISIBLE);
+                    sbRelabtn.setVisibility(View.VISIBLE);
+                    // 上班打卡成功，开始赋值
+                    sb_iniData();
+                } else {
+                    reNoBtn.setVisibility(View.GONE);
+                    xbRelabtn.setVisibility(View.VISIBLE);
+                    xb_iniData();
                 }
-            });
+
+            }
+        });
     }
+
     // 外勤弹框
     private void showDialog1(String adress) {
-            View view = LayoutInflater.from(mcontext).inflate(R.layout.dialog_waiqin, null);
-            TextView tv_text3 = view.findViewById(R.id.tv_adress_wq);
-            TextView tv_text5 = view.findViewById(R.id.tv_text5);
-            EditText et_content = view.findViewById(R.id.et_content);
-            ImageView im_diss = view.findViewById(R.id.im_diss);
-            Dialog dialog = new MyDialog(getActivity(), true, true, (float) 0.8).setNewView(view);
-            dialog.setCanceledOnTouchOutside(false);
-            dialog.show();
-            tv_text3.setText(adress);
-            im_diss.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                }
-            });
-            tv_text5.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        View view = LayoutInflater.from(mcontext).inflate(R.layout.dialog_waiqin, null);
+        TextView tv_text3 = view.findViewById(R.id.tv_adress_wq);
+        TextView tv_text5 = view.findViewById(R.id.tv_text5);
+        EditText et_content = view.findViewById(R.id.et_content);
+        ImageView im_diss = view.findViewById(R.id.im_diss);
+        Dialog dialog = new MyDialog(getActivity(), true, true, (float) 0.8).setNewView(view);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+        tv_text3.setText(adress);
+        im_diss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_text5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 //                  Toast.makeText(getActivity(), "外勤打卡成功", Toast.LENGTH_LONG).show();
-                    registerUpRemark = et_content.getText().toString().trim();
-                    if (type){
-                        postData();
-                    }else {
-                        postData1();
-                    }
-                    dialog.dismiss();
+                registerUpRemark = et_content.getText().toString().trim();
+                if (type) {
+                    postData();
+                } else {
+                    postData1();
                 }
-            });
+                dialog.dismiss();
+            }
+        });
     }
+
     //发送上班数据
     public void postData() {
         RequestParams params = new RequestParams();
-        params.put("createBy",SPUtils.get(getActivity(), "userId", "").toString());
+        params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
         params.put("deptId", SPUtils.get(getActivity(), "deptId", "").toString());
         params.put("createTime", createTime);
         params.put("registerUpTime", sbTime.getText().toString());
@@ -320,9 +324,9 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
                 try {
 
                     JSONObject result = new JSONObject(responseObj.toString());
-                    if (result.getString("code").equals("500")){
+                    if (result.getString("code").equals("500")) {
                         showToast("打卡失败");
-                    }else {
+                    } else {
                         // 这个是上班打卡之后出现的打卡ID
                         dk_id = result.getString("msg");
                         showDialog();
@@ -341,10 +345,10 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
         });
 
 
-
     }
+
     // 发送下班数据
-    public void postData1(){
+    public void postData1() {
         RequestParams params = new RequestParams();
         params.put("id", dk_id);
         params.put("registerDownTime", xbTime.getText().toString());
@@ -360,9 +364,9 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
 
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-                    if (result.getString("code").equals("500")){
+                    if (result.getString("code").equals("500")) {
                         showToast("打卡失败");
-                    }else {
+                    } else {
                         showDialog();
                     }
                 } catch (JSONException e) {
@@ -406,30 +410,30 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
                         gz_sb_time = result.getJSONObject("data").getString("upTime");
                         gz_xb_time = result.getJSONObject("data").getString("downTime");
                         jingweidu = result.getJSONObject("data").getString("registerCoordinate");
-                        workTime.setText("上班时间  "+gz_sb_time);
-                        underTime.setText("下班时间  "+gz_xb_time);
+                        workTime.setText("上班时间  " + gz_sb_time);
+                        underTime.setText("下班时间  " + gz_xb_time);
                         //按逗号获取经纬度
                         String[] sourceStrArray = jingweidu.split(",");
                         f_jingdu = sourceStrArray[0];
                         f_weigdu = sourceStrArray[1];
                         distance = result.getJSONObject("data").getString("distance");
-                        fw_time = TimeUtils.timeStamp2Date(result.getJSONObject("data").getString("remark"),"HH:mm:ss");
-                        createTime = TimeUtils.timeStamp2Date(result.getJSONObject("data").getString("remark"),"yyyy-MM-dd");
+                        fw_time = TimeUtils.timeStamp2Date(result.getJSONObject("data").getString("remark"), "HH:mm:ss");
+                        createTime = TimeUtils.timeStamp2Date(result.getJSONObject("data").getString("remark"), "yyyy-MM-dd");
                         // 请求打卡信息
                         ClockType();
 //                        // 判断上班打卡是否在规定时间内
-                        if (TimeUtils.compareTwoTime(gz_sb_time,fw_time)>0){
+                        if (TimeUtils.compareTwoTime(gz_sb_time, fw_time) > 0) {
                             reOnBtn.setBackgroundResource(R.drawable.clock_rela_bg_no);
                             dk_time = "1";
-                        }else {
+                        } else {
                             reOnBtn.setBackgroundResource(R.drawable.clock_rela_bg_yes);
                             dk_time = "0";
                         }
                         // 判断下班打卡是否在规定时间外
-                        if (TimeUtils.compareTwoTime(fw_time,gz_xb_time)>0){
+                        if (TimeUtils.compareTwoTime(fw_time, gz_xb_time) > 0) {
                             reNoBtn.setBackgroundResource(R.drawable.clock_rela_bg_no);
                             xb_dk_time = "1";
-                        }else {
+                        } else {
                             reNoBtn.setBackgroundResource(R.drawable.clock_rela_bg_yes);
                             xb_dk_time = "0";
                         }
@@ -437,8 +441,8 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
-                                while(mRunning){
-                                    handler.sendMessage(handler.obtainMessage(100,TimeUtils.timeStamp2Date(fw_time,"HH:mm")));
+                                while (mRunning) {
+                                    handler.sendMessage(handler.obtainMessage(100, TimeUtils.timeStamp2Date(fw_time, "HH:mm")));
                                     try {
                                         Thread.sleep(1000);
                                     } catch (InterruptedException e) {
@@ -458,13 +462,14 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
 
             @Override
             public void onFailure(OkHttpException failuer) {
-               // ToastHelper.showToast(getActivity(), "服务器请求失败");
+                // ToastHelper.showToast(getActivity(), "服务器请求失败");
                 loadDialog.dismiss();
             }
         });
     }
+
     // 请求打卡信息
-    public void ClockType(){
+    public void ClockType() {
         RequestParams params = new RequestParams();
         params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
         params.put("createTime", createTime);
@@ -475,64 +480,59 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-                    if (result.optString("data") != ""){
+                    if (result.optString("data") != "") {
                         // 有打卡记录，隐藏上班打卡按钮
                         reOnBtn.setVisibility(View.GONE);
                         sbRelabtn.setVisibility(View.VISIBLE);
-                        sbDktime.setText("打卡时间"+result.getJSONObject("data").getString("registerUpTime"));
+                        sbDktime.setText("打卡时间" + result.getJSONObject("data").getString("registerUpTime"));
                         sbDkadress.setText(result.getJSONObject("data").getString("registerUpAddress"));
                         dk_id = result.getJSONObject("data").getString("id");
-                        if (result.getJSONObject("data").getString("registerUpState").equals("0"))
-                        {
-                             sbDkchidao.setVisibility(View.GONE);
-                            if (result.getJSONObject("data").getString("regisgerUpType").equals("0")){
+                        if (result.getJSONObject("data").getString("registerUpState").equals("0")) {
+                            sbDkchidao.setVisibility(View.GONE);
+                            if (result.getJSONObject("data").getString("regisgerUpType").equals("0")) {
                                 sbDkwaiqin.setVisibility(View.VISIBLE);
                                 sbDkwaiqin.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
                                 sbDkwaiqin.setText("正常");
-                            }else {
+                            } else {
                                 sbDkwaiqin.setVisibility(View.VISIBLE);
                             }
-                        }else {
+                        } else {
                             sbDkchidao.setVisibility(View.VISIBLE);
-                            if (result.getJSONObject("data").getString("regisgerUpType").equals("0")){
+                            if (result.getJSONObject("data").getString("regisgerUpType").equals("0")) {
                                 sbDkwaiqin.setVisibility(View.GONE);
-                            }else {
+                            } else {
                                 sbDkwaiqin.setVisibility(View.VISIBLE);
                             }
                         }
                         // 如果有下班打卡时间，隐藏打卡按钮
-                        if (!TextUtils.equals(result.getJSONObject("data").getString("registerDownTime"),"null"))
-                        {
+                        if (!TextUtils.equals(result.getJSONObject("data").getString("registerDownTime"), "null")) {
                             reNoBtn.setVisibility(View.GONE);
                             xbRelabtn.setVisibility(View.VISIBLE);
-                            xbDktime.setText("打卡时间"+result.getJSONObject("data").getString("registerDownTime"));
+                            xbDktime.setText("打卡时间" + result.getJSONObject("data").getString("registerDownTime"));
                             xbDkadress.setText(result.getJSONObject("data").getString("registerDownAddress"));
-                            if (result.getJSONObject("data").getString("registerDownState").equals("0"))
-                            {
+                            if (result.getJSONObject("data").getString("registerDownState").equals("0")) {
                                 xbDkchidao.setVisibility(View.GONE);
-                                if (result.getJSONObject("data").getString("regisgerDownType").equals("0")){
+                                if (result.getJSONObject("data").getString("regisgerDownType").equals("0")) {
 //                                    xbDkwaiqin.setVisibility(View.VISIBLE);
                                     xbDkwaiqin.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
                                     xbDkwaiqin.setText("正常");
-                                }else {
+                                } else {
                                     xbDkwaiqin.setVisibility(View.VISIBLE);
                                 }
-                            }else {
+                            } else {
                                 xbDkchidao.setVisibility(View.VISIBLE);
                                 xbDkchidao.setText("早退");
-                                if (result.getJSONObject("data").getString("regisgerDownType").equals("0")){
+                                if (result.getJSONObject("data").getString("regisgerDownType").equals("0")) {
                                     xbDkwaiqin.setVisibility(View.GONE);
-                                }else {
+                                } else {
                                     xbDkwaiqin.setVisibility(View.VISIBLE);
                                 }
                             }
-                        }
-                        else
-                        {
+                        } else {
                             reNoBtn.setVisibility(View.VISIBLE);
                         }
 
-                    }else {
+                    } else {
                         // 未打卡
                         reOnBtn.setVisibility(View.VISIBLE);
                         sbRelabtn.setVisibility(View.GONE);
@@ -552,6 +552,7 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
         });
 
     }
+
     //权限判断
     public void permissions() {
         if (SPUtils.get(getActivity(), "roleKey", "").toString().contains("synthesizeLead")) {
@@ -621,6 +622,7 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
 
     /**
      * 地图回调
+     *
      * @param amapLocation
      */
     @Override
@@ -655,31 +657,29 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
 
                     Log.i("获取定位时间", df.format(date));
                     Log.i("poi", amapLocation.getPoiName());
-                    convertToDouble(f_jingdu,0);
-                    convertToDouble(f_weigdu,0);
+                    convertToDouble(f_jingdu, 0);
+                    convertToDouble(f_weigdu, 0);
                     // 停止定位
                     mlocationClient.stopLocation();
                     registerUpAddress = amapLocation.getAddress();
-                    registerUpCoordinate = amapLocation.getLongitude()+","+amapLocation.getLatitude();
+                    registerUpCoordinate = amapLocation.getLongitude() + "," + amapLocation.getLatitude();
                     // 判断范围，是否外勤
-                    double juli = CoordinateConverter.calculateLineDistance(new DPoint(amapLocation.getLatitude(),amapLocation.getLongitude()),new DPoint(convertToDouble(f_weigdu,0),convertToDouble(f_jingdu,0)));
-                    if (type){
+                    double juli = CoordinateConverter.calculateLineDistance(new DPoint(amapLocation.getLatitude(), amapLocation.getLongitude()), new DPoint(convertToDouble(f_weigdu, 0), convertToDouble(f_jingdu, 0)));
+                    if (type) {
                         // 上班
-                        if (juli<=convertToDouble(distance,0)){
+                        if (juli <= convertToDouble(distance, 0)) {
                             dk_type = "0";
                             postData();
-                        }else
-                        {
+                        } else {
                             dk_type = "1";
                             showDialog1(registerUpAddress);
                         }
-                    }else {
+                    } else {
                         //下班
-                        if (juli<=convertToDouble(distance,0)){
+                        if (juli <= convertToDouble(distance, 0)) {
                             dk_type = "0";
                             postData1();
-                        }else
-                        {
+                        } else {
                             dk_type = "1";
                             showDialog1(registerUpAddress);
                         }
@@ -693,7 +693,7 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
                     Log.e("AmapError", "location Error, ErrCode:"
                             + amapLocation.getErrorCode() + ", errInfo:"
                             + amapLocation.getErrorInfo());
-                    Toast.makeText(getActivity(),"定位失败，请手动打开定位权限",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "定位失败，请手动打开定位权限", Toast.LENGTH_LONG).show();
                 }
             }
         } catch (Exception e) {
@@ -732,47 +732,48 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
     }
 
     // 上班回显数据
-    public void sb_iniData(){
-        sbDktime.setText("打卡时间"+sbTime.getText().toString());
-        if (dk_type.equals("0")){
+    public void sb_iniData() {
+        sbDktime.setText("打卡时间" + sbTime.getText().toString());
+        if (dk_type.equals("0")) {
             sbDkwaiqin.setVisibility(View.GONE);
-            if (dk_time.equals("0")){
+            if (dk_time.equals("0")) {
                 sbDkchidao.setVisibility(View.GONE);
                 sbDkwaiqin.setVisibility(View.VISIBLE);
                 sbDkwaiqin.setText("正常");
                 sbDkwaiqin.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
-            }else {
+            } else {
                 sbDkchidao.setVisibility(View.VISIBLE);
             }
-        }else {
+        } else {
             sbDkwaiqin.setVisibility(View.VISIBLE);
-            if (dk_time.equals("0")){
+            if (dk_time.equals("0")) {
                 sbDkchidao.setVisibility(View.GONE);
-            }else {
+            } else {
                 sbDkchidao.setVisibility(View.VISIBLE);
             }
         }
         sbDkadress.setText(registerUpAddress);
 
     }
+
     //下班回显数据
-    public void xb_iniData(){
-        xbDktime.setText("打卡时间"+xbTime.getText().toString());
-        if (dk_type.equals("0")){
+    public void xb_iniData() {
+        xbDktime.setText("打卡时间" + xbTime.getText().toString());
+        if (dk_type.equals("0")) {
             xbDkwaiqin.setVisibility(View.GONE);
-            if (xb_dk_time.equals("0")){
+            if (xb_dk_time.equals("0")) {
                 xbDkchidao.setVisibility(View.GONE);
                 xbDkwaiqin.setVisibility(View.VISIBLE);
                 xbDkwaiqin.setText("正常");
                 xbDkwaiqin.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
-            }else {
+            } else {
                 xbDkchidao.setVisibility(View.VISIBLE);
             }
-        }else{
+        } else {
             xbDkwaiqin.setVisibility(View.VISIBLE);
-            if (xb_dk_time.equals("0")){
+            if (xb_dk_time.equals("0")) {
                 xbDkchidao.setVisibility(View.GONE);
-            }else {
+            } else {
                 xbDkchidao.setVisibility(View.VISIBLE);
             }
         }
@@ -780,7 +781,7 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
     }
 
     // 开启定位权限
-    public void post_permission(){
+    public void post_permission() {
         //检查版本是否大于M
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
