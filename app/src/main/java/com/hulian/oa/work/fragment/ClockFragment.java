@@ -34,10 +34,13 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.location.CoordinateConverter;
 import com.amap.api.location.DPoint;
+import com.amap.api.services.core.LatLonPoint;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hulian.oa.R;
 import com.hulian.oa.bean.Res;
+import com.hulian.oa.gaode.utils.DataConversionUtils;
+import com.hulian.oa.gaode.utils.DatasKey;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
@@ -52,6 +55,7 @@ import com.hulian.oa.work.file.admin.activity.ScreenReportActivity;
 import com.hulian.oa.work.file.admin.activity.ScreenReportListActivity;
 import com.hulian.oa.work.file.admin.activity.attendance.AttendrulesActivity;
 import com.hulian.oa.work.file.admin.activity.attendance.AttendrulesmodifyActivity;
+import com.hulian.oa.work.file.admin.activity.attendance.MapActivity;
 import com.netease.nim.avchatkit.common.util.TimeUtil;
 import com.othershe.calendarview.utils.CalendarUtil;
 
@@ -74,7 +78,7 @@ import static com.hulian.oa.utils.TimeUtils.getMway;
 /**
  * Created by qgl on 2020/3/17 16:55.
  */
-public class ClockFragment extends Fragment implements AMapLocationListener{
+public class ClockFragment extends Fragment {
     Unbinder unbinder;
     @BindView(R.id.tv_type)
     TextView tvType;
@@ -137,8 +141,6 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
     private String jingweidu = "";  // 规则经纬度
     private String distance = "";  // 规则距离
     private String fw_time = "";  // 服务器时间
-    private String b_jingdu = "";  // 自己精读
-    private String b_weigdu = "";  // 维度
     private String f_jingdu = "";  // 服务器经度
     private String f_weigdu = "";  // 服务器维度
     private String dk_type = "";  // 打卡状态，0 正常，1 外勤
@@ -153,19 +155,26 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            sbTime.setText((String)msg.obj);
-            xbTime.setText((String)msg.obj);
+            sbTime.setText((String) msg.obj);
+            xbTime.setText((String) msg.obj);
         }
     };
 
-    protected LoadingDialog loadDialog;//加载等待弹窗
+    protected LoadingDialog loadDialog;//加载等待弹窗'
+
+    private AMapLocationListener mAMapLocationListener;
+    private AMapLocationClient locationClient = null;
+    private AMapLocation location;
+    private AMapLocationClientOption locationOption = new AMapLocationClientOption();
+    // 要申请的权限
+    private String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CALL_PHONE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS};
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view;
         view = inflater.inflate(R.layout.clockfragment, container, false);
         loadDialog = new LoadingDialog(getActivity());
-
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
         mcontext = getActivity();
@@ -177,8 +186,8 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
         //权限判断
         permissions();
         // 规则制定查询
-        loadDialog.show();
         postRule();
+        initListener();
         return view;
     }
 
@@ -191,28 +200,25 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
                 startActivity(new Intent(getActivity(), AttendrulesActivity.class));
                 break;
             case R.id.re_on_btn:
-                Log.d("点击了","点击了上班");
+                Log.d("点击了", "点击了上班");
                 loadDialog.show();
                 //上班打卡按钮
                 type = true;
-                //开始定位
-                post_permission();
+                initPermission();
                 break;
             case R.id.re_no_btn:
-                Log.d("点击了","点击了下班");
                 loadDialog.show();
+                Log.d("点击了", "点击了下班");
                 //下班打卡时间
                 type = false;
-                //开始定位
-                post_permission();
+                initPermission();
                 break;
             case R.id.tv_update:
-                Log.d("点击了","点击了更新打卡");
                 loadDialog.show();
+                Log.d("点击了", "点击了更新打卡");
                 //下班打卡时间
                 type = false;
-                //开始定位
-                post_permission();
+                initPermission();
                 break;
             case R.id.permissions_no:
                 if (permi) {
@@ -233,78 +239,81 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
                 break;
         }
     }
+
     // 上班弹框
     private void showDialog() {
-            //是正常
-            View view = LayoutInflater.from(mcontext).inflate(R.layout.dialog_daka, null);
-            TextView textView = view.findViewById(R.id.tv_text);
-            TextView tv_m1 = view.findViewById(R.id.tv_m1);
-            if (type) {
-                tv_m1.setText("上班打卡成功");
-            } else {
-                tv_m1.setText("下班打卡成功");
-            }
-            textView.setText(TimeUtils.getNowhousr());
-            TextView submit = view.findViewById(R.id.confirm);
-            Dialog dialog = new MyDialog(getActivity(), true, true, (float) 0.7).setNewView(view);
-            dialog.setCanceledOnTouchOutside(false);
-            dialog.show();
-            submit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //提交
-                    dialog.dismiss();
-                    EventBus.getDefault().post(new CalendarFragment());
-                    if (type) {
-                        reOnBtn.setVisibility(View.GONE);
-                        reNoBtn.setVisibility(View.VISIBLE);
-                        sbRelabtn.setVisibility(View.VISIBLE);
-                        // 上班打卡成功，开始赋值
-                        sb_iniData();
-                    } else {
-                        reNoBtn.setVisibility(View.GONE);
-                        xbRelabtn.setVisibility(View.VISIBLE);
-                        xb_iniData();
-                    }
-
+        //是正常
+        View view = LayoutInflater.from(mcontext).inflate(R.layout.dialog_daka, null);
+        TextView textView = view.findViewById(R.id.tv_text);
+        TextView tv_m1 = view.findViewById(R.id.tv_m1);
+        if (type) {
+            tv_m1.setText("上班打卡成功");
+            textView.setText(sbTime.getText().toString());
+        } else {
+            tv_m1.setText("下班打卡成功");
+            textView.setText(xbTime.getText().toString());
+        }
+        TextView submit = view.findViewById(R.id.confirm);
+        Dialog dialog = new MyDialog(getActivity(), true, true, (float) 0.7).setNewView(view);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //提交
+                dialog.dismiss();
+                EventBus.getDefault().post(new CalendarFragment());
+                if (type) {
+                    reOnBtn.setVisibility(View.GONE);
+                    reNoBtn.setVisibility(View.VISIBLE);
+                    sbRelabtn.setVisibility(View.VISIBLE);
+                    // 上班打卡成功，开始赋值
+                    sb_iniData();
+                } else {
+                    reNoBtn.setVisibility(View.GONE);
+                    xbRelabtn.setVisibility(View.VISIBLE);
+                    xb_iniData();
                 }
-            });
+
+            }
+        });
     }
+
     // 外勤弹框
     private void showDialog1(String adress) {
-            View view = LayoutInflater.from(mcontext).inflate(R.layout.dialog_waiqin, null);
-            TextView tv_text3 = view.findViewById(R.id.tv_adress_wq);
-            TextView tv_text5 = view.findViewById(R.id.tv_text5);
-            EditText et_content = view.findViewById(R.id.et_content);
-            ImageView im_diss = view.findViewById(R.id.im_diss);
-            Dialog dialog = new MyDialog(getActivity(), true, true, (float) 0.8).setNewView(view);
-            dialog.setCanceledOnTouchOutside(false);
-            dialog.show();
-            tv_text3.setText(adress);
-            im_diss.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                }
-            });
-            tv_text5.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        View view = LayoutInflater.from(mcontext).inflate(R.layout.dialog_waiqin, null);
+        TextView tv_text3 = view.findViewById(R.id.tv_adress_wq);
+        TextView tv_text5 = view.findViewById(R.id.tv_text5);
+        EditText et_content = view.findViewById(R.id.et_content);
+        ImageView im_diss = view.findViewById(R.id.im_diss);
+        Dialog dialog = new MyDialog(getActivity(), true, true, (float) 0.8).setNewView(view);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+        tv_text3.setText(adress);
+        im_diss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_text5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 //                  Toast.makeText(getActivity(), "外勤打卡成功", Toast.LENGTH_LONG).show();
-                    registerUpRemark = et_content.getText().toString().trim();
-                    if (type){
-                        postData();
-                    }else {
-                        postData1();
-                    }
-                    dialog.dismiss();
+                registerUpRemark = et_content.getText().toString().trim();
+                if (type) {
+                    postData();
+                } else {
+                    postData1();
                 }
-            });
+            }
+        });
     }
+
     //发送上班数据
     public void postData() {
         RequestParams params = new RequestParams();
-        params.put("createBy",SPUtils.get(getActivity(), "userId", "").toString());
+        params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
         params.put("deptId", SPUtils.get(getActivity(), "deptId", "").toString());
         params.put("createTime", createTime);
         params.put("registerUpTime", sbTime.getText().toString());
@@ -318,11 +327,10 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
             public void onSuccess(Object responseObj) {
                 loadDialog.dismiss();
                 try {
-
                     JSONObject result = new JSONObject(responseObj.toString());
-                    if (result.getString("code").equals("500")){
+                    if (result.getString("code").equals("500")) {
                         showToast("打卡失败");
-                    }else {
+                    } else {
                         // 这个是上班打卡之后出现的打卡ID
                         dk_id = result.getString("msg");
                         showDialog();
@@ -335,16 +343,15 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
             @Override
             public void onFailure(OkHttpException failuer) {
                 loadDialog.dismiss();
-
                 showToast("服务器异常");
             }
         });
 
 
-
     }
+
     // 发送下班数据
-    public void postData1(){
+    public void postData1() {
         RequestParams params = new RequestParams();
         params.put("id", dk_id);
         params.put("registerDownTime", xbTime.getText().toString());
@@ -357,12 +364,11 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
             @Override
             public void onSuccess(Object responseObj) {
                 loadDialog.dismiss();
-
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-                    if (result.getString("code").equals("500")){
+                    if (result.getString("code").equals("500")) {
                         showToast("打卡失败");
-                    }else {
+                    } else {
                         showDialog();
                     }
                 } catch (JSONException e) {
@@ -372,6 +378,7 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
 
             @Override
             public void onFailure(OkHttpException failuer) {
+
                 loadDialog.dismiss();
 
                 showToast("服务器异常");
@@ -383,6 +390,7 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
      * 请求打卡规则
      */
     public void postRule() {
+        loadDialog.show();
         RequestParams params = new RequestParams();
         HttpRequest.PostClock_rules(params, new ResponseCallback() {
             @Override
@@ -406,30 +414,31 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
                         gz_sb_time = result.getJSONObject("data").getString("upTime");
                         gz_xb_time = result.getJSONObject("data").getString("downTime");
                         jingweidu = result.getJSONObject("data").getString("registerCoordinate");
-                        workTime.setText("上班时间  "+gz_sb_time);
-                        underTime.setText("下班时间  "+gz_xb_time);
+                        workTime.setText("上班时间  " + gz_sb_time);
+                        underTime.setText("下班时间  " + gz_xb_time);
                         //按逗号获取经纬度
                         String[] sourceStrArray = jingweidu.split(",");
                         f_jingdu = sourceStrArray[0];
                         f_weigdu = sourceStrArray[1];
                         distance = result.getJSONObject("data").getString("distance");
-                        fw_time = TimeUtils.timeStamp2Date(result.getJSONObject("data").getString("remark"),"HH:mm:ss");
-                        createTime = TimeUtils.timeStamp2Date(result.getJSONObject("data").getString("remark"),"yyyy-MM-dd");
+                        Log.d("时间转换", TimeUtils.time_getDateToString(Long.parseLong(result.getJSONObject("data").getString("remark")), "hHH:mm"));
+                        fw_time = TimeUtils.time_getDateToString(Long.parseLong(result.getJSONObject("data").getString("remark")), "HH:mm");
+                        createTime = TimeUtils.time_getDateToString(Long.parseLong(result.getJSONObject("data").getString("remark")), "yyyy-MM-dd");
                         // 请求打卡信息
                         ClockType();
 //                        // 判断上班打卡是否在规定时间内
-                        if (TimeUtils.compareTwoTime(gz_sb_time,fw_time)>0){
+                        if (TimeUtils.compareTwoTime(gz_sb_time, fw_time) > 0) {
                             reOnBtn.setBackgroundResource(R.drawable.clock_rela_bg_no);
                             dk_time = "1";
-                        }else {
+                        } else {
                             reOnBtn.setBackgroundResource(R.drawable.clock_rela_bg_yes);
                             dk_time = "0";
                         }
                         // 判断下班打卡是否在规定时间外
-                        if (TimeUtils.compareTwoTime(fw_time,gz_xb_time)>0){
+                        if (TimeUtils.compareTwoTime(fw_time, gz_xb_time) > 0) {
                             reNoBtn.setBackgroundResource(R.drawable.clock_rela_bg_no);
                             xb_dk_time = "1";
-                        }else {
+                        } else {
                             reNoBtn.setBackgroundResource(R.drawable.clock_rela_bg_yes);
                             xb_dk_time = "0";
                         }
@@ -437,8 +446,8 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
-                                while(mRunning){
-                                    handler.sendMessage(handler.obtainMessage(100,TimeUtils.timeStamp2Date(fw_time,"HH:mm")));
+                                while (mRunning) {
+                                    handler.sendMessage(handler.obtainMessage(100, fw_time));
                                     try {
                                         Thread.sleep(1000);
                                     } catch (InterruptedException e) {
@@ -458,81 +467,82 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
 
             @Override
             public void onFailure(OkHttpException failuer) {
-               // ToastHelper.showToast(getActivity(), "服务器请求失败");
                 loadDialog.dismiss();
+                ToastHelper.showToast(getActivity(), "服务器请求失败");
             }
         });
     }
+
     // 请求打卡信息
-    public void ClockType(){
+    public void ClockType() {
+        if (!loadDialog.isShowing()) {
+            loadDialog.show();
+        }
         RequestParams params = new RequestParams();
         params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
         params.put("createTime", createTime);
         HttpRequest.OnClock_Type(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
+                loadDialog.dismiss();
                 //需要转化为实体对象
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-                    if (result.optString("data") != ""){
+                    if (result.optString("data") != "") {
                         // 有打卡记录，隐藏上班打卡按钮
                         reOnBtn.setVisibility(View.GONE);
                         sbRelabtn.setVisibility(View.VISIBLE);
-                        sbDktime.setText("打卡时间"+result.getJSONObject("data").getString("registerUpTime"));
+                        sbDktime.setText("打卡时间" + result.getJSONObject("data").getString("registerUpTime"));
                         sbDkadress.setText(result.getJSONObject("data").getString("registerUpAddress"));
                         dk_id = result.getJSONObject("data").getString("id");
-                        if (result.getJSONObject("data").getString("registerUpState").equals("0"))
-                        {
-                             sbDkchidao.setVisibility(View.GONE);
-                            if (result.getJSONObject("data").getString("regisgerUpType").equals("0")){
+                        if (result.getJSONObject("data").getString("registerUpState").equals("0")) {
+                            sbDkchidao.setVisibility(View.GONE);
+                            if (result.getJSONObject("data").getString("regisgerUpType").equals("0")) {
                                 sbDkwaiqin.setVisibility(View.VISIBLE);
                                 sbDkwaiqin.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
                                 sbDkwaiqin.setText("正常");
-                            }else {
+                            } else {
                                 sbDkwaiqin.setVisibility(View.VISIBLE);
                             }
-                        }else {
+                        } else {
                             sbDkchidao.setVisibility(View.VISIBLE);
-                            if (result.getJSONObject("data").getString("regisgerUpType").equals("0")){
+                            if (result.getJSONObject("data").getString("regisgerUpType").equals("0")) {
                                 sbDkwaiqin.setVisibility(View.GONE);
-                            }else {
+                            } else {
                                 sbDkwaiqin.setVisibility(View.VISIBLE);
                             }
                         }
                         // 如果有下班打卡时间，隐藏打卡按钮
-                        if (!TextUtils.equals(result.getJSONObject("data").getString("registerDownTime"),"null"))
-                        {
+                        if (!TextUtils.equals(result.getJSONObject("data").getString("registerDownTime"), "null")) {
                             reNoBtn.setVisibility(View.GONE);
                             xbRelabtn.setVisibility(View.VISIBLE);
-                            xbDktime.setText("打卡时间"+result.getJSONObject("data").getString("registerDownTime"));
+                            xbDktime.setText("打卡时间" + result.getJSONObject("data").getString("registerDownTime"));
                             xbDkadress.setText(result.getJSONObject("data").getString("registerDownAddress"));
-                            if (result.getJSONObject("data").getString("registerDownState").equals("0"))
-                            {
+                            if (result.getJSONObject("data").getString("registerDownState").equals("0")) {
                                 xbDkchidao.setVisibility(View.GONE);
-                                if (result.getJSONObject("data").getString("regisgerDownType").equals("0")){
+                                if (result.getJSONObject("data").getString("regisgerDownType").equals("0")) {
 //                                    xbDkwaiqin.setVisibility(View.VISIBLE);
                                     xbDkwaiqin.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
                                     xbDkwaiqin.setText("正常");
-                                }else {
+                                } else {
                                     xbDkwaiqin.setVisibility(View.VISIBLE);
                                 }
-                            }else {
+                            } else {
                                 xbDkchidao.setVisibility(View.VISIBLE);
                                 xbDkchidao.setText("早退");
-                                if (result.getJSONObject("data").getString("regisgerDownType").equals("0")){
+                                if (result.getJSONObject("data").getString("regisgerDownType").equals("0")) {
                                     xbDkwaiqin.setVisibility(View.GONE);
-                                }else {
+                                } else {
                                     xbDkwaiqin.setVisibility(View.VISIBLE);
                                 }
                             }
-                        }
-                        else
-                        {
+                        } else {
                             reNoBtn.setVisibility(View.VISIBLE);
                         }
 
-                    }else {
+                    } else {
+
                         // 未打卡
                         reOnBtn.setVisibility(View.VISIBLE);
                         sbRelabtn.setVisibility(View.GONE);
@@ -547,11 +557,13 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
 
             @Override
             public void onFailure(OkHttpException failuer) {
+                loadDialog.dismiss();
 
             }
         });
 
     }
+
     //权限判断
     public void permissions() {
         if (SPUtils.get(getActivity(), "roleKey", "").toString().contains("synthesizeLead")) {
@@ -566,7 +578,10 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
     @Override
     public void onDestroy() {
         mRunning = false;
-        destroyLocation();
+        stopLocation();
+        if (null != locationClient) {
+            locationClient.onDestroy();
+        }
         EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
@@ -581,137 +596,6 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
     // 刷新
     public void onEventMainThread(ClockFragment event) {
         postRule();
-    }
-
-    /********************高德定位************/
-    private static final int MY_PERMISSIONS_REQUEST_CALL_LOCATION = 1;
-    public AMapLocationClient mlocationClient;
-    public AMapLocationClientOption mLocationOption = null;
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == MY_PERMISSIONS_REQUEST_CALL_LOCATION) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                //"权限已申请"
-                //showLocation();
-            } else {
-                showToast("权限已拒绝,不能定位");
-            }
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    // TODO:
-    private void showLocation() {
-        try {
-            mlocationClient = new AMapLocationClient(getActivity());
-            mLocationOption = new AMapLocationClientOption();
-            mlocationClient.setLocationListener(this);
-            //设置定位模式为高精度模式，Battery_Saving为低功耗模式，Device_Sensors是仅设备模式
-            mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-            mLocationOption.setInterval(5000);
-            //设置定位参数
-            mlocationClient.setLocationOption(mLocationOption);
-            //启动定位
-            mlocationClient.startLocation();
-        } catch (Exception e) {
-
-        }
-    }
-
-    /**
-     * 地图回调
-     * @param amapLocation
-     */
-    @Override
-    public void onLocationChanged(AMapLocation amapLocation) {
-        try {
-            if (amapLocation != null) {
-                if (amapLocation.getErrorCode() == 0) {
-                    //定位成功回调信息，设置相关消息
-                    //获取当前定位结果来源，如网络定位结果，详见定位类型表
-                    Log.i("定位类型", amapLocation.getLocationType() + "");
-                    Log.i("获取纬度", amapLocation.getLatitude() + "");
-                    Log.i("获取经度", amapLocation.getLongitude() + "");
-                    Log.i("获取精度信息", amapLocation.getAccuracy() + "");
-                    //如果option中设置isNeedAddress为false，则没有此结果，网络定位结果中会有地址信息，GPS定位不返回地址信息。
-                    Log.i("地址", amapLocation.getAddress());
-                    Log.i("国家信息", amapLocation.getCountry());
-                    Log.i("省信息", amapLocation.getProvince());
-                    Log.i("城市信息", amapLocation.getCity());
-                    Log.i("城区信息", amapLocation.getDistrict());
-                    Log.i("街道信息", amapLocation.getStreet());
-                    Log.i("街道门牌号信息", amapLocation.getStreetNum());
-                    Log.i("城市编码", amapLocation.getCityCode());
-                    Log.i("地区编码", amapLocation.getAdCode());
-                    Log.i("获取当前定位点的AOI信息", amapLocation.getAoiName());
-                    Log.i("获取当前室内定位的建筑物Id", amapLocation.getBuildingId());
-                    Log.i("获取当前室内定位的楼层", amapLocation.getFloor());
-                    Log.i("获取GPS的当前状态", amapLocation.getGpsAccuracyStatus() + "");
-
-                    //获取定位时间
-                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    Date date = new Date(amapLocation.getTime());
-
-                    Log.i("获取定位时间", df.format(date));
-                    Log.i("poi", amapLocation.getPoiName());
-                    convertToDouble(f_jingdu,0);
-                    convertToDouble(f_weigdu,0);
-                    // 停止定位
-                    mlocationClient.stopLocation();
-                    registerUpAddress = amapLocation.getAddress();
-                    registerUpCoordinate = amapLocation.getLongitude()+","+amapLocation.getLatitude();
-                    // 判断范围，是否外勤
-                    double juli = CoordinateConverter.calculateLineDistance(new DPoint(amapLocation.getLatitude(),amapLocation.getLongitude()),new DPoint(convertToDouble(f_weigdu,0),convertToDouble(f_jingdu,0)));
-                    if (type){
-                        // 上班
-                        if (juli<=convertToDouble(distance,0)){
-                            dk_type = "0";
-                            postData();
-                        }else
-                        {
-                            dk_type = "1";
-                            showDialog1(registerUpAddress);
-                        }
-                    }else {
-                        //下班
-                        if (juli<=convertToDouble(distance,0)){
-                            dk_type = "0";
-                            postData1();
-                        }else
-                        {
-                            dk_type = "1";
-                            showDialog1(registerUpAddress);
-                        }
-
-                    }
-
-
-                } else {
-                    loadDialog.dismiss();
-                    //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
-                    Log.e("AmapError", "location Error, ErrCode:"
-                            + amapLocation.getErrorCode() + ", errInfo:"
-                            + amapLocation.getErrorInfo());
-                    Toast.makeText(getActivity(),"定位失败，请手动打开定位权限",Toast.LENGTH_LONG).show();
-                }
-            }
-        } catch (Exception e) {
-        }
-    }
-
-    /**
-     * 销毁定位
-     */
-    private void destroyLocation() {
-        if (null != mlocationClient) {
-            /**
-             * 如果AMapLocationClient是在当前Activity实例化的，
-             * 在Activity的onDestroy中一定要执行AMapLocationClient的onDestroy
-             */
-            mlocationClient.onDestroy();
-            mlocationClient = null;
-        }
     }
 
     private void showToast(String string) {
@@ -732,64 +616,340 @@ public class ClockFragment extends Fragment implements AMapLocationListener{
     }
 
     // 上班回显数据
-    public void sb_iniData(){
-        sbDktime.setText("打卡时间"+sbTime.getText().toString());
-        if (dk_type.equals("0")){
+    public void sb_iniData() {
+        sbDktime.setText("打卡时间" + sbTime.getText().toString());
+        if (dk_type.equals("0")) {
             sbDkwaiqin.setVisibility(View.GONE);
-            if (dk_time.equals("0")){
+            if (dk_time.equals("0")) {
                 sbDkchidao.setVisibility(View.GONE);
                 sbDkwaiqin.setVisibility(View.VISIBLE);
                 sbDkwaiqin.setText("正常");
                 sbDkwaiqin.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
-            }else {
+            } else {
                 sbDkchidao.setVisibility(View.VISIBLE);
             }
-        }else {
+        } else {
             sbDkwaiqin.setVisibility(View.VISIBLE);
-            if (dk_time.equals("0")){
+            if (dk_time.equals("0")) {
                 sbDkchidao.setVisibility(View.GONE);
-            }else {
+            } else {
                 sbDkchidao.setVisibility(View.VISIBLE);
             }
         }
         sbDkadress.setText(registerUpAddress);
 
     }
+
     //下班回显数据
-    public void xb_iniData(){
-        xbDktime.setText("打卡时间"+xbTime.getText().toString());
-        if (dk_type.equals("0")){
+    public void xb_iniData() {
+        xbDktime.setText("打卡时间" + xbTime.getText().toString());
+        if (dk_type.equals("0")) {
             xbDkwaiqin.setVisibility(View.GONE);
-            if (xb_dk_time.equals("0")){
+            if (xb_dk_time.equals("0")) {
                 xbDkchidao.setVisibility(View.GONE);
                 xbDkwaiqin.setVisibility(View.VISIBLE);
                 xbDkwaiqin.setText("正常");
                 xbDkwaiqin.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
-            }else {
+            } else {
                 xbDkchidao.setVisibility(View.VISIBLE);
             }
-        }else{
+        } else {
             xbDkwaiqin.setVisibility(View.VISIBLE);
-            if (xb_dk_time.equals("0")){
+            if (xb_dk_time.equals("0")) {
                 xbDkchidao.setVisibility(View.GONE);
-            }else {
+            } else {
                 xbDkchidao.setVisibility(View.VISIBLE);
             }
         }
         xbDkadress.setText(registerUpAddress);
     }
 
-    // 开启定位权限
-    public void post_permission(){
-        //检查版本是否大于M
+    /********************高德定位************/
+//    /**
+//     * 地图回调
+//     * @param amapLocation
+//     */
+//    @Override
+//    public void onLocationChanged(AMapLocation amapLocation) {
+//        try {
+//            if (amapLocation != null) {
+//                if (amapLocation.getErrorCode() == 0) {
+//
+//                    //定位成功回调信息，设置相关消息
+//                    //获取当前定位结果来源，如网络定位结果，详见定位类型表
+//                    Log.i("定位类型", amapLocation.getLocationType() + "");
+//                    Log.i("获取纬度", amapLocation.getLatitude() + "");
+//                    Log.i("获取经度", amapLocation.getLongitude() + "");
+//                    Log.i("获取精度信息", amapLocation.getAccuracy() + "");
+//                    //如果option中设置isNeedAddress为false，则没有此结果，网络定位结果中会有地址信息，GPS定位不返回地址信息。
+//                    Log.i("地址", amapLocation.getAddress());
+//                    Log.i("国家信息", amapLocation.getCountry());
+//                    Log.i("省信息", amapLocation.getProvince());
+//                    Log.i("城市信息", amapLocation.getCity());
+//                    Log.i("城区信息", amapLocation.getDistrict());
+//                    Log.i("街道信息", amapLocation.getStreet());
+//                    Log.i("街道门牌号信息", amapLocation.getStreetNum());
+//                    Log.i("城市编码", amapLocation.getCityCode());
+//                    Log.i("地区编码", amapLocation.getAdCode());
+//                    Log.i("获取当前定位点的AOI信息", amapLocation.getAoiName());
+//                    Log.i("获取当前室内定位的建筑物Id", amapLocation.getBuildingId());
+//                    Log.i("获取当前室内定位的楼层", amapLocation.getFloor());
+//                    Log.i("获取GPS的当前状态", amapLocation.getGpsAccuracyStatus() + "");
+//                    //获取定位时间
+//                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                    Date date = new Date(amapLocation.getTime());
+//                    Log.i("获取定位时间", df.format(date));
+//                    Log.i("poi", amapLocation.getPoiName());
+//                    convertToDouble(f_jingdu,0);
+//                    convertToDouble(f_weigdu,0);
+//                    // 停止定位
+//                    mlocationClient.stopLocation();
+//                    registerUpAddress = amapLocation.getAddress();
+//                    registerUpCoordinate = amapLocation.getLongitude()+","+amapLocation.getLatitude();
+//                    // 判断范围，是否外勤
+//                    double juli = CoordinateConverter.calculateLineDistance(new DPoint(amapLocation.getLatitude(),amapLocation.getLongitude()),new DPoint(convertToDouble(f_weigdu,0),convertToDouble(f_jingdu,0)));
+//                    if (type){
+//                        // 上班
+//                        if (juli<=convertToDouble(distance,0)){
+//                            dk_type = "0";
+//                            postData();
+//                        }else
+//                        {
+//                            loadDialog.dismiss();
+//                            dk_type = "1";
+//                            showDialog1(registerUpAddress);
+//                        }
+//                    }else {
+//                        //下班
+//                        if (juli<=convertToDouble(distance,0)){
+//                            dk_type = "0";
+//                            postData1();
+//                        }else
+//                        {
+//                            loadDialog.dismiss();
+//                            dk_type = "1";
+//                            showDialog1(registerUpAddress);
+//                        }
+//                    }
+//
+//                } else {
+//                    loadDialog.dismiss();
+//                    //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
+//                    Log.e("AmapError", "location Error, ErrCode:"
+//                            + amapLocation.getErrorCode() + ", errInfo:"
+//                            + amapLocation.getErrorInfo());
+//                    showToastWithErrorInfo(amapLocation.getErrorCode());
+//                }
+//            }
+//        } catch (Exception e) {
+//        }
+//    }
+    private void showToastWithErrorInfo(int error) {
+        String tips = "定位错误码：" + error;
+        switch (error) {
+            case 4:
+                tips = "请检查设备网络是否通畅，检查通过接口设置的网络访问超时时间，建议采用默认的30秒。";
+                break;
+            case 7:
+                tips = "请仔细检查key绑定的sha1值与apk签名sha1值是否对应。";
+                break;
+            case 12:
+                tips = "请在设备的设置中开启app的定位权限。";
+                break;
+            case 18:
+                tips = "建议手机关闭飞行模式，并打开WIFI开关";
+                break;
+            case 19:
+                tips = "建议手机插上sim卡，打开WIFI开关";
+                break;
+        }
+        Toast.makeText(getActivity(), tips, Toast.LENGTH_LONG).show();
+    }
+
+    private void initListener() {
+        //gps定位监听器
+        mAMapLocationListener = new AMapLocationListener() {
+            @Override
+            public void onLocationChanged(AMapLocation loc) {
+                try {
+                    if (null != loc) {
+                        stopLocation();
+                        if (loc.getErrorCode() == 0) {//可在其中解析amapLocation获取相应内容。
+                            location = loc;
+                            doWhenLocationSucess();
+                        } else {
+                            if (loadDialog.isShowing()){
+                                loadDialog.dismiss();
+                            }
+                            //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
+                            showToastWithErrorInfo(loc.getErrorCode());
+                            Log.e("AmapError", "location Error, ErrCode:"
+                                    + loc.getErrorCode() + ", errInfo:"
+                                    + loc.getErrorInfo());
+
+                        }
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
+    }
+
+    /**
+     * 初始化定位
+     */
+    private void initLocation() {
+        if (null == locationClient) {
+            //初始化client
+            locationClient = new AMapLocationClient(getActivity().getApplicationContext());
+            //设置定位参数
+            locationClient.setLocationOption(getDefaultOption());
+            // 设置定位监听
+            locationClient.setLocationListener(mAMapLocationListener);
+        }
+    }
+
+    /**
+     * 默认的定位参数
+     */
+    private AMapLocationClientOption getDefaultOption() {
+        AMapLocationClientOption mOption = new AMapLocationClientOption();
+        mOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);//可选，设置定位模式，可选的模式有高精度、仅设备、仅网络。默认为高精度模式
+        mOption.setGpsFirst(false);//可选，设置是否gps优先，只在高精度模式下有效。默认关闭
+        mOption.setHttpTimeOut(30000);//可选，设置网络请求超时时间。默认为30秒。在仅设备模式下无效
+        mOption.setInterval(2000);//可选，设置定位间隔。默认为2秒
+        mOption.setNeedAddress(true);//可选，设置是否返回逆地理地址信息。默认是true
+        mOption.setOnceLocation(false);//可选，设置是否单次定位。默认是false
+        mOption.setOnceLocationLatest(false);//可选，设置是否等待wifi刷新，默认为false.如果设置为true,会自动变为单次定位，持续定位时不要使用
+        AMapLocationClientOption.setLocationProtocol(AMapLocationClientOption.AMapLocationProtocol.HTTP);//可选， 设置网络请求的协议。可选HTTP或者HTTPS。默认为HTTP
+        mOption.setSensorEnable(false);//可选，设置是否使用传感器。默认是false
+        mOption.setWifiScan(true); //可选，设置是否开启wifi扫描。默认为true，如果设置为false会同时停止主动刷新，停止以后完全依赖于系统刷新，定位位置可能存在误差
+        mOption.setMockEnable(true);//如果您希望位置被模拟，请通过setMockEnable(true);方法开启允许位置模拟
+        return mOption;
+    }
+
+    /**
+     * 开始定位
+     */
+    public void startLocation() {
+        initLocation();
+        // 设置定位参数
+        locationClient.setLocationOption(locationOption);
+        // 启动定位
+        locationClient.startLocation();
+    }
+
+    /**
+     * 停止定位
+     */
+    private void stopLocation() {
+        if (null != locationClient) {
+            locationClient.stopLocation();
+        }
+    }
+
+
+    private void initPermission() {
+        // 版本判断。当手机系统大于 23 时，才有必要去判断权限是否获取
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, MY_PERMISSIONS_REQUEST_CALL_LOCATION);
+            // 检查该权限是否已经获取
+            int i = ContextCompat.checkSelfPermission(getActivity(), permissions[0]);
+            int l = ContextCompat.checkSelfPermission(getActivity(), permissions[1]);
+            int m = ContextCompat.checkSelfPermission(getActivity(), permissions[2]);
+            int n = ContextCompat.checkSelfPermission(getActivity(), permissions[3]);
+            // 权限是否已经 授权 GRANTED---授权  DINIED---拒绝
+            if (i != PackageManager.PERMISSION_GRANTED || l != PackageManager.PERMISSION_GRANTED || m != PackageManager.PERMISSION_GRANTED ||
+                    n != PackageManager.PERMISSION_GRANTED) {
+                // 如果没有授予该权限，就去提示用户请求
+                requestPermissions(permissions, 321);
             } else {
-                //"权限已申请";
-                showLocation();
+                startLocation();
             }
         }
     }
+
+
+    /**
+     * 当定位成功需要做的事情
+     */
+    private void doWhenLocationSucess() {
+//定位成功回调信息，设置相关消息
+        //获取当前定位结果来源，如网络定位结果，详见定位类型表
+        Log.i("定位类型", location.getLocationType() + "");
+        Log.i("获取纬度", location.getLatitude() + "");
+        Log.i("获取经度", location.getLongitude() + "");
+        Log.i("获取精度信息", location.getAccuracy() + "");
+        //如果option中设置isNeedAddress为false，则没有此结果，网络定位结果中会有地址信息，GPS定位不返回地址信息。
+        Log.i("地址", location.getAddress());
+        Log.i("国家信息", location.getCountry());
+        Log.i("省信息", location.getProvince());
+        Log.i("城市信息", location.getCity());
+        Log.i("城区信息", location.getDistrict());
+        Log.i("街道信息", location.getStreet());
+        Log.i("街道门牌号信息", location.getStreetNum());
+        Log.i("城市编码", location.getCityCode());
+        Log.i("地区编码", location.getAdCode());
+        Log.i("获取当前定位点的AOI信息", location.getAoiName());
+        Log.i("获取当前室内定位的建筑物Id", location.getBuildingId());
+        Log.i("获取当前室内定位的楼层", location.getFloor());
+        Log.i("获取GPS的当前状态", location.getGpsAccuracyStatus() + "");
+        //获取定位时间
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date(location.getTime());
+        Log.i("获取定位时间", df.format(date));
+        Log.i("poi", location.getPoiName());
+        convertToDouble(f_jingdu, 0);
+        convertToDouble(f_weigdu, 0);
+        registerUpAddress = location.getAddress();
+        registerUpCoordinate = location.getLongitude() + "," + location.getLatitude();
+        // 判断范围，是否外勤
+        double juli = CoordinateConverter.calculateLineDistance(new DPoint(location.getLatitude(), location.getLongitude()), new DPoint(convertToDouble(f_weigdu, 0), convertToDouble(f_jingdu, 0)));
+        if (type) {
+            // 上班
+            if (juli <= convertToDouble(distance, 0)) {
+                dk_type = "0";
+                postData();
+            } else {
+                dk_type = "1";
+                showDialog1(registerUpAddress);
+            }
+        } else {
+            //下班
+            if (juli <= convertToDouble(distance, 0)) {
+                dk_type = "0";
+                postData1();
+            } else {
+                dk_type = "1";
+                showDialog1(registerUpAddress);
+            }
+        }
+    }
+
+    /**
+     * 用户权限 申请 的回调方法
+     *
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 321) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    //如果没有获取权限，那么可以提示用户去设置界面--->应用权限开启权限
+                    Toast toast = Toast.makeText(getActivity(), "请开启权限", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                } else {
+                    //获取权限成功
+                    startLocation();
+                }
+            }
+        }
+    }
+
 
 }

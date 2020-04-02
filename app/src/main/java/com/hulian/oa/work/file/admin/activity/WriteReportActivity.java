@@ -212,6 +212,7 @@ public class WriteReportActivity extends BaseActivity {
             ToastHelper.showToast(WriteReportActivity.this,"请输入工作计划内容");
             return;
         }
+        loadDialog.show();
         RequestParams params = new RequestParams();
         params.put("reportType", type);
         params.put("finishWork", finishedWork.getText() + "");
@@ -232,6 +233,7 @@ public class WriteReportActivity extends BaseActivity {
         HttpRequest.postReport(params, fils, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
+                loadDialog.dismiss();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
                     showDialog();
@@ -244,6 +246,7 @@ public class WriteReportActivity extends BaseActivity {
             @Override
             public void onFailure(OkHttpException failuer) {
                 //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
+                loadDialog.dismiss();
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
