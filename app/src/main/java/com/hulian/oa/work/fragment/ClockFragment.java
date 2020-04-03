@@ -165,6 +165,7 @@ public class ClockFragment extends Fragment {
     private String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CALL_PHONE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS};
 
 
+    Handler handler = new Handler();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -179,31 +180,18 @@ public class ClockFragment extends Fragment {
         clockName.setText(SPUtils.get(getActivity(), "nickname", "").toString());
         clockDepartment.setText(SPUtils.get(getActivity(), "deptname", "").toString() + "   考勤(查看规则)");
         currentTime.setText("" + cDate[0] + "-" + cDate[1] + "-" + cDate[2] + "   星期" + getMway());
-
         //权限判断
         permissions();
         // 规则制定查询
         postRule();
         initListener();
-
-        final Handler startTimehandler  = new Handler(){
-            public void handleMessage(android.os.Message msg) {
-                if (null != xbTime) {
-                    xbTime.setText((String) msg.obj);
-                }
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                sbTime.setText((String) msg.obj);
+                xbTime.setText((String) msg.obj);
             }
         };
-
-        new Timer("开机计时器").scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                String timeFormat = "16:00:00";
-                Message msg = new Message();
-                msg.obj = timeFormat;
-                startTimehandler.sendMessage(msg);
-            }
-
-        }, 0, 1000L);
         return view;
     }
 
@@ -480,7 +468,19 @@ public class ClockFragment extends Fragment {
                             xb_dk_time = "0";
                         }
 
-
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                while (true) {
+                                    handler.sendMessage(handler.obtainMessage(100, fw_time));
+                                    try {
+                                        Thread.sleep(1000);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        }).start();
 
                     }
 
@@ -498,33 +498,6 @@ public class ClockFragment extends Fragment {
             }
         });
     }
-
-
-//    Handler handler = new Handler() {
-//        @Override
-//        public void handleMessage(Message msg) {
-//            sbTime.setText((String) msg.obj);
-//            xbTime.setText((String) msg.obj);
-//        }
-//    };
-
-//    private void init() {
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                while(true){
-//                    handler.sendMessage(handler.obtainMessage(100,"16:08:00"));
-//                    try {
-//                        Thread.sleep(1000);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        }).start();
-//    }
-
-
     // 请求打卡信息
     public void ClockType() {
         if (!loadDialog.isShowing())
