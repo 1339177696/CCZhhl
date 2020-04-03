@@ -250,17 +250,17 @@
             android:paddingRight="@dimen/dp_10"
            >
 
-        <EditText
-            android:id="@+id/et_content"
-            android:background="@drawable/l_write_mail_content_bg"
-            android:layout_width="match_parent"
-            android:gravity="start|top"
-            android:layout_height="@dimen/dp_200"
-            android:padding="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_10"
-            android:textColor="@color/black"
-            android:textSize="@dimen/dp_14" />
-    </RelativeLayout>
+            <EditText
+                android:id="@+id/et_content"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_200"
+                android:layout_marginRight="@dimen/dp_10"
+                android:background="@drawable/l_write_mail_content_bg"
+                android:gravity="start|top"
+                android:padding="@dimen/dp_10"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dp_14" />
+        </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

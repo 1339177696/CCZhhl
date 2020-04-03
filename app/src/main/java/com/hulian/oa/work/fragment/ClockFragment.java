@@ -48,7 +48,6 @@ import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.NullStringToEmptyAdapterFactory;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.TimeUtils;
-import com.hulian.oa.utils.ToastHelper;
 import com.hulian.oa.views.LoadingDialog;
 import com.hulian.oa.views.MyDialog;
 import com.hulian.oa.work.file.admin.activity.ScreenReportActivity;
@@ -66,6 +65,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -74,6 +75,7 @@ import butterknife.Unbinder;
 import de.greenrobot.event.EventBus;
 
 import static com.hulian.oa.utils.TimeUtils.getMway;
+import static com.hulian.oa.utils.TimeUtils.timeStamp2Date;
 
 /**
  * Created by qgl on 2020/3/17 16:55.
@@ -152,13 +154,6 @@ public class ClockFragment extends Fragment {
     private String registerUpRemark = "";  // 外勤备注
     private String dk_id = ""; // 服务器打卡ID
     private boolean mRunning = true;
-    Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            sbTime.setText((String) msg.obj);
-            xbTime.setText((String) msg.obj);
-        }
-    };
 
     protected LoadingDialog loadDialog;//加载等待弹窗'
 
@@ -168,6 +163,7 @@ public class ClockFragment extends Fragment {
     private AMapLocationClientOption locationOption = new AMapLocationClientOption();
     // 要申请的权限
     private String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CALL_PHONE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS};
+
 
     @Nullable
     @Override
@@ -183,14 +179,33 @@ public class ClockFragment extends Fragment {
         clockName.setText(SPUtils.get(getActivity(), "nickname", "").toString());
         clockDepartment.setText(SPUtils.get(getActivity(), "deptname", "").toString() + "   考勤(查看规则)");
         currentTime.setText("" + cDate[0] + "-" + cDate[1] + "-" + cDate[2] + "   星期" + getMway());
+
         //权限判断
         permissions();
         // 规则制定查询
         postRule();
         initListener();
+
+        final Handler startTimehandler  = new Handler(){
+            public void handleMessage(android.os.Message msg) {
+                if (null != xbTime) {
+                    xbTime.setText((String) msg.obj);
+                }
+            }
+        };
+
+        new Timer("开机计时器").scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                String timeFormat = "16:00:00";
+                Message msg = new Message();
+                msg.obj = timeFormat;
+                startTimehandler.sendMessage(msg);
+            }
+
+        }, 0, 1000L);
         return view;
     }
-
 
     @OnClick({R.id.clock_department, R.id.rela_on, R.id.re_on_btn, R.id.re_no_btn, R.id.tv_update, R.id.permissions_no})
     public void onViewClicked(View view) {
@@ -201,20 +216,23 @@ public class ClockFragment extends Fragment {
                 break;
             case R.id.re_on_btn:
                 Log.d("点击了", "点击了上班");
-                loadDialog.show();
+                if (!loadDialog.isShowing())
+                    loadDialog.show();
                 //上班打卡按钮
                 type = true;
                 initPermission();
                 break;
             case R.id.re_no_btn:
-                loadDialog.show();
+                if (!loadDialog.isShowing())
+                    loadDialog.show();
                 Log.d("点击了", "点击了下班");
                 //下班打卡时间
                 type = false;
                 initPermission();
                 break;
             case R.id.tv_update:
-                loadDialog.show();
+                if (!loadDialog.isShowing())
+                    loadDialog.show();
                 Log.d("点击了", "点击了更新打卡");
                 //下班打卡时间
                 type = false;
@@ -234,7 +252,7 @@ public class ClockFragment extends Fragment {
                     intent.putExtra("jingwei", "");
                     startActivity(intent);
                 } else {
-                    ToastHelper.showToast(getActivity(), "请联系管理员");
+                    Toast.makeText(getActivity(),"请联系管理员",Toast.LENGTH_LONG).show();
                 }
                 break;
         }
@@ -242,6 +260,8 @@ public class ClockFragment extends Fragment {
 
     // 上班弹框
     private void showDialog() {
+        if (loadDialog.isShowing())
+            loadDialog.dismiss();
         //是正常
         View view = LayoutInflater.from(mcontext).inflate(R.layout.dialog_daka, null);
         TextView textView = view.findViewById(R.id.tv_text);
@@ -281,6 +301,9 @@ public class ClockFragment extends Fragment {
 
     // 外勤弹框
     private void showDialog1(String adress) {
+        if (loadDialog.isShowing()){
+            loadDialog.dismiss();
+        }
         View view = LayoutInflater.from(mcontext).inflate(R.layout.dialog_waiqin, null);
         TextView tv_text3 = view.findViewById(R.id.tv_adress_wq);
         TextView tv_text5 = view.findViewById(R.id.tv_text5);
@@ -293,13 +316,15 @@ public class ClockFragment extends Fragment {
         im_diss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 dialog.dismiss();
             }
         });
         tv_text5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                  Toast.makeText(getActivity(), "外勤打卡成功", Toast.LENGTH_LONG).show();
+                dialog.dismiss();
+//              Toast.makeText(getActivity(), "外勤打卡成功", Toast.LENGTH_LONG).show();
                 registerUpRemark = et_content.getText().toString().trim();
                 if (type) {
                     postData();
@@ -312,6 +337,13 @@ public class ClockFragment extends Fragment {
 
     //发送上班数据
     public void postData() {
+        if (!loadDialog.isShowing())
+            loadDialog.show();
+        if (TimeUtils.compareTwoTime(sbTime.getText().toString().trim(), gz_xb_time) > 0) {
+
+        }else {
+
+        }
         RequestParams params = new RequestParams();
         params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
         params.put("deptId", SPUtils.get(getActivity(), "deptId", "").toString());
@@ -325,6 +357,7 @@ public class ClockFragment extends Fragment {
         HttpRequest.OnClock(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
+               if (loadDialog.isShowing())
                 loadDialog.dismiss();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
@@ -342,6 +375,7 @@ public class ClockFragment extends Fragment {
 
             @Override
             public void onFailure(OkHttpException failuer) {
+              if (loadDialog.isShowing())
                 loadDialog.dismiss();
                 showToast("服务器异常");
             }
@@ -351,7 +385,9 @@ public class ClockFragment extends Fragment {
     }
 
     // 发送下班数据
-    public void postData1() {
+    public void postData1(){
+        if (!loadDialog.isShowing())
+            loadDialog.show();
         RequestParams params = new RequestParams();
         params.put("id", dk_id);
         params.put("registerDownTime", xbTime.getText().toString());
@@ -363,6 +399,7 @@ public class ClockFragment extends Fragment {
         HttpRequest.OnClock(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
+               if (loadDialog.isShowing())
                 loadDialog.dismiss();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
@@ -379,8 +416,8 @@ public class ClockFragment extends Fragment {
             @Override
             public void onFailure(OkHttpException failuer) {
 
+               if (loadDialog.isShowing())
                 loadDialog.dismiss();
-
                 showToast("服务器异常");
             }
         });
@@ -395,7 +432,7 @@ public class ClockFragment extends Fragment {
         HttpRequest.PostClock_rules(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
-                loadDialog.dismiss();
+                //loadDialog不用听继续转，请求个人打卡
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
                     if (result.optString("data") == "") {
@@ -421,8 +458,8 @@ public class ClockFragment extends Fragment {
                         f_jingdu = sourceStrArray[0];
                         f_weigdu = sourceStrArray[1];
                         distance = result.getJSONObject("data").getString("distance");
-                        Log.d("时间转换", TimeUtils.time_getDateToString(Long.parseLong(result.getJSONObject("data").getString("remark")), "hHH:mm"));
-                        fw_time = TimeUtils.time_getDateToString(Long.parseLong(result.getJSONObject("data").getString("remark")), "HH:mm");
+                        Log.d("时间转换", TimeUtils.time_getDateToString(Long.parseLong(result.getJSONObject("data").getString("remark")), "HH:mm"));
+                        fw_time = TimeUtils.time_getDateToString(Long.parseLong(result.getJSONObject("data").getString("remark")), "HH:mm:ss");
                         createTime = TimeUtils.time_getDateToString(Long.parseLong(result.getJSONObject("data").getString("remark")), "yyyy-MM-dd");
                         // 请求打卡信息
                         ClockType();
@@ -442,20 +479,9 @@ public class ClockFragment extends Fragment {
                             reNoBtn.setBackgroundResource(R.drawable.clock_rela_bg_yes);
                             xb_dk_time = "0";
                         }
-                        //放置时间，开始计数
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                while (mRunning) {
-                                    handler.sendMessage(handler.obtainMessage(100, fw_time));
-                                    try {
-                                        Thread.sleep(1000);
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }
-                        }).start();
+
+
+
                     }
 
                 } catch (JSONException e) {
@@ -468,16 +494,41 @@ public class ClockFragment extends Fragment {
             @Override
             public void onFailure(OkHttpException failuer) {
                 loadDialog.dismiss();
-                ToastHelper.showToast(getActivity(), "服务器请求失败");
+                Toast.makeText(getActivity(),"服务器返回失败",Toast.LENGTH_LONG).show();
             }
         });
     }
 
+
+//    Handler handler = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            sbTime.setText((String) msg.obj);
+//            xbTime.setText((String) msg.obj);
+//        }
+//    };
+
+//    private void init() {
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                while(true){
+//                    handler.sendMessage(handler.obtainMessage(100,"16:08:00"));
+//                    try {
+//                        Thread.sleep(1000);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        }).start();
+//    }
+
+
     // 请求打卡信息
     public void ClockType() {
-        if (!loadDialog.isShowing()) {
+        if (!loadDialog.isShowing())
             loadDialog.show();
-        }
         RequestParams params = new RequestParams();
         params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
         params.put("createTime", createTime);
@@ -558,7 +609,6 @@ public class ClockFragment extends Fragment {
             @Override
             public void onFailure(OkHttpException failuer) {
                 loadDialog.dismiss();
-
             }
         });
 
@@ -665,85 +715,6 @@ public class ClockFragment extends Fragment {
     }
 
     /********************高德定位************/
-//    /**
-//     * 地图回调
-//     * @param amapLocation
-//     */
-//    @Override
-//    public void onLocationChanged(AMapLocation amapLocation) {
-//        try {
-//            if (amapLocation != null) {
-//                if (amapLocation.getErrorCode() == 0) {
-//
-//                    //定位成功回调信息，设置相关消息
-//                    //获取当前定位结果来源，如网络定位结果，详见定位类型表
-//                    Log.i("定位类型", amapLocation.getLocationType() + "");
-//                    Log.i("获取纬度", amapLocation.getLatitude() + "");
-//                    Log.i("获取经度", amapLocation.getLongitude() + "");
-//                    Log.i("获取精度信息", amapLocation.getAccuracy() + "");
-//                    //如果option中设置isNeedAddress为false，则没有此结果，网络定位结果中会有地址信息，GPS定位不返回地址信息。
-//                    Log.i("地址", amapLocation.getAddress());
-//                    Log.i("国家信息", amapLocation.getCountry());
-//                    Log.i("省信息", amapLocation.getProvince());
-//                    Log.i("城市信息", amapLocation.getCity());
-//                    Log.i("城区信息", amapLocation.getDistrict());
-//                    Log.i("街道信息", amapLocation.getStreet());
-//                    Log.i("街道门牌号信息", amapLocation.getStreetNum());
-//                    Log.i("城市编码", amapLocation.getCityCode());
-//                    Log.i("地区编码", amapLocation.getAdCode());
-//                    Log.i("获取当前定位点的AOI信息", amapLocation.getAoiName());
-//                    Log.i("获取当前室内定位的建筑物Id", amapLocation.getBuildingId());
-//                    Log.i("获取当前室内定位的楼层", amapLocation.getFloor());
-//                    Log.i("获取GPS的当前状态", amapLocation.getGpsAccuracyStatus() + "");
-//                    //获取定位时间
-//                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//                    Date date = new Date(amapLocation.getTime());
-//                    Log.i("获取定位时间", df.format(date));
-//                    Log.i("poi", amapLocation.getPoiName());
-//                    convertToDouble(f_jingdu,0);
-//                    convertToDouble(f_weigdu,0);
-//                    // 停止定位
-//                    mlocationClient.stopLocation();
-//                    registerUpAddress = amapLocation.getAddress();
-//                    registerUpCoordinate = amapLocation.getLongitude()+","+amapLocation.getLatitude();
-//                    // 判断范围，是否外勤
-//                    double juli = CoordinateConverter.calculateLineDistance(new DPoint(amapLocation.getLatitude(),amapLocation.getLongitude()),new DPoint(convertToDouble(f_weigdu,0),convertToDouble(f_jingdu,0)));
-//                    if (type){
-//                        // 上班
-//                        if (juli<=convertToDouble(distance,0)){
-//                            dk_type = "0";
-//                            postData();
-//                        }else
-//                        {
-//                            loadDialog.dismiss();
-//                            dk_type = "1";
-//                            showDialog1(registerUpAddress);
-//                        }
-//                    }else {
-//                        //下班
-//                        if (juli<=convertToDouble(distance,0)){
-//                            dk_type = "0";
-//                            postData1();
-//                        }else
-//                        {
-//                            loadDialog.dismiss();
-//                            dk_type = "1";
-//                            showDialog1(registerUpAddress);
-//                        }
-//                    }
-//
-//                } else {
-//                    loadDialog.dismiss();
-//                    //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
-//                    Log.e("AmapError", "location Error, ErrCode:"
-//                            + amapLocation.getErrorCode() + ", errInfo:"
-//                            + amapLocation.getErrorInfo());
-//                    showToastWithErrorInfo(amapLocation.getErrorCode());
-//                }
-//            }
-//        } catch (Exception e) {
-//        }
-//    }
     private void showToastWithErrorInfo(int error) {
         String tips = "定位错误码：" + error;
         switch (error) {
@@ -778,9 +749,8 @@ public class ClockFragment extends Fragment {
                             location = loc;
                             doWhenLocationSucess();
                         } else {
-                            if (loadDialog.isShowing()){
+                            if (loadDialog.isShowing())
                                 loadDialog.dismiss();
-                            }
                             //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
                             showToastWithErrorInfo(loc.getErrorCode());
                             Log.e("AmapError", "location Error, ErrCode:"
@@ -861,11 +831,15 @@ public class ClockFragment extends Fragment {
             // 权限是否已经 授权 GRANTED---授权  DINIED---拒绝
             if (i != PackageManager.PERMISSION_GRANTED || l != PackageManager.PERMISSION_GRANTED || m != PackageManager.PERMISSION_GRANTED ||
                     n != PackageManager.PERMISSION_GRANTED) {
+
                 // 如果没有授予该权限，就去提示用户请求
                 requestPermissions(permissions, 321);
             } else {
                 startLocation();
             }
+        }
+        else {
+            startLocation();
         }
     }
 
@@ -901,29 +875,36 @@ public class ClockFragment extends Fragment {
         Log.i("poi", location.getPoiName());
         convertToDouble(f_jingdu, 0);
         convertToDouble(f_weigdu, 0);
-        registerUpAddress = location.getAddress();
-        registerUpCoordinate = location.getLongitude() + "," + location.getLatitude();
-        // 判断范围，是否外勤
-        double juli = CoordinateConverter.calculateLineDistance(new DPoint(location.getLatitude(), location.getLongitude()), new DPoint(convertToDouble(f_weigdu, 0), convertToDouble(f_jingdu, 0)));
-        if (type) {
-            // 上班
-            if (juli <= convertToDouble(distance, 0)) {
-                dk_type = "0";
-                postData();
+        if (TextUtils.equals(location.getAddress(),"")){
+            if (loadDialog.isShowing())
+                loadDialog.dismiss();
+            showToast("获取地址失败");
+        }else {
+            registerUpAddress = location.getAddress();
+            registerUpCoordinate = location.getLongitude() + "," + location.getLatitude();
+            // 判断范围，是否外勤
+            double juli = CoordinateConverter.calculateLineDistance(new DPoint(location.getLatitude(), location.getLongitude()), new DPoint(convertToDouble(f_weigdu, 0), convertToDouble(f_jingdu, 0)));
+            if (type) {
+                // 上班
+                if (juli <= convertToDouble(distance, 0)) {
+                    dk_type = "0";
+                    postData();
+                } else {
+                    dk_type = "1";
+                    showDialog1(registerUpAddress);
+                }
             } else {
-                dk_type = "1";
-                showDialog1(registerUpAddress);
-            }
-        } else {
-            //下班
-            if (juli <= convertToDouble(distance, 0)) {
-                dk_type = "0";
-                postData1();
-            } else {
-                dk_type = "1";
-                showDialog1(registerUpAddress);
+                //下班
+                if (juli <= convertToDouble(distance, 0)) {
+                    dk_type = "0";
+                    postData1();
+                } else {
+                    dk_type = "1";
+                    showDialog1(registerUpAddress);
+                }
             }
         }
+
     }
 
     /**

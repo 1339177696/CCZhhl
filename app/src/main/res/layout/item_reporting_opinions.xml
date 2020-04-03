@@ -67,14 +67,16 @@
         />
 
     <TextView
+        android:layout_marginRight="10dp"
         android:id="@+id/opinion_content"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         tools:text="汇报写的及其简单，希望把工作内容写的详细些，有助 于检查工作情况，需要配合人员填写清楚。"
         android:textColor="@color/text"
         android:textSize="16sp"
         app:layout_constraintTop_toTopOf="@+id/opinion_content_tv"
         app:layout_constraintLeft_toRightOf="@+id/opinion_content_tv"
+        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="5dp"
         />
 

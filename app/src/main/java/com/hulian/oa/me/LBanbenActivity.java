@@ -55,7 +55,6 @@ public class LBanbenActivity extends BaseActivity {
     TextView appVersion;
     @BindView(R.id.rela_r1)
     RelativeLayout relaR1;
-    private  int ver;
     private int versioncodel;  // 版本号
     private String versionname;  // 版本名称
     private String Version_context = "";
@@ -85,7 +84,7 @@ public class LBanbenActivity extends BaseActivity {
                     String code = result.getJSONObject("data").getString("versionNum");
                     if (Integer.valueOf(code)>v){
                         Toast.makeText(LBanbenActivity.this,"温馨提示，为节省您的流量请在WiFi情况下载",Toast.LENGTH_LONG).show();
-                        Version_context = "1.考勤打卡Bug修复。";
+                        Version_context = "1.考勤打卡Bug修复0。";
                         Version_url = result.getJSONObject("data").getString("phoneUri");
                         sendRequest();
                         // 开启下载
