@@ -93,6 +93,7 @@ public class ClockActivity extends BaseActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 tab.getCustomView().findViewById(R.id.tv_title).setSelected(true);
                 myViewpager.setCurrentItem(tab.getPosition());
+
             }
 
             @Override

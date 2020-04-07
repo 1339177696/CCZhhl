@@ -722,4 +722,14 @@ public class TimeUtils {
         }
         return res.toString();
     }
+
+    /*时间戳转换成字符窜*/
+    public static String time_getDateToString(long time,String format) {
+        if(format == null || format.isEmpty()){
+            format = "yyyy-MM-dd HH:mm:ss";
+        }
+        Date d = new Date(time);
+        sf = new SimpleDateFormat(format);
+        return sf.format(d);
+    }
 }

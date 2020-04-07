@@ -241,7 +241,7 @@ public class SubordActivity extends BaseActivity {
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
                     if (result.optString("data") != ""){
-//                        // 有打卡记录，
+                        // 有打卡记录，
                         sDKtime.setText("打卡时间   "+result.getJSONObject("data").getString("registerUpTime"));
                         sDkadress.setText(result.getJSONObject("data").getString("registerUpAddress"));
                         Sliner.setVisibility(View.VISIBLE);
@@ -250,6 +250,7 @@ public class SubordActivity extends BaseActivity {
                             sbDkchidao.setVisibility(View.GONE);
                             if (result.getJSONObject("data").getString("regisgerUpType").equals("0")){
                                 sbDkwaiqin.setVisibility(View.VISIBLE);
+                                sbDkwaiqin.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
                                 sbDkwaiqin.setText("正常");
                             }else {
                                 sbDkwaiqin.setVisibility(View.VISIBLE);
@@ -278,14 +279,15 @@ public class SubordActivity extends BaseActivity {
                                 xbDkchidao.setVisibility(View.GONE);
                                 if (result.getJSONObject("data").getString("regisgerDownType").equals("0")){
                                     xbDkwaiqin.setVisibility(View.VISIBLE);
-                                    sbDkwaiqin.setText("正常");
+                                    xbDkwaiqin.setText("正常");
+                                    xbDkwaiqin.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
                                 }else {
-                                    sbDkwaiqin.setVisibility(View.VISIBLE);
+                                    xbDkwaiqin.setVisibility(View.VISIBLE);
                                 }
                             }else {
                                 xbDkchidao.setVisibility(View.VISIBLE);
                                 xbDkchidao.setText("早退");
-                                if (result.getJSONObject("data").getString("regisgerUpType").equals("0")){
+                                if (result.getJSONObject("data").getString("regisgerDownType").equals("0")){
                                     xbDkwaiqin.setVisibility(View.GONE);
                                 }else {
                                     xbDkwaiqin.setVisibility(View.VISIBLE);

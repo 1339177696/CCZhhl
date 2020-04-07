@@ -204,7 +204,7 @@ public class CalendarFragment extends Fragment {
                     } else {
                         permissionsDar_yes.setVisibility(View.VISIBLE);
                         permissionsDarno.setVisibility(View.GONE);
-                        createTime = TimeUtils.timeStamp2Date(result.getJSONObject("data").getString("remark"),"yyyy-MM-dd");
+                        createTime = TimeUtils.time_getDateToString(Long.parseLong(result.getJSONObject("data").getString("remark")),"yyyy-MM-dd");
                         sSbtime.setText("上班时间   "+result.getJSONObject("data").getString("upTime"));
                         xSbtime.setText("下班时间   "+result.getJSONObject("data").getString("downTime"));
                         PostStateMonth();
@@ -241,7 +241,6 @@ public class CalendarFragment extends Fragment {
 
     // 刷新
     public void onEventMainThread(CalendarFragment event) {
-        calendarView = new CalendarView(getActivity());
         markData = new HashMap<>();
         postRule();
     }

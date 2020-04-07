@@ -164,6 +164,8 @@ public class WorkFragemt_9 extends Fragment {
                 //考勤打卡
             case R.id.bt_time:
                 startActivity(new Intent(getActivity(), ClockActivity.class));
+                // 此处修改部分手机闪屏上一个界面问题
+                getActivity().overridePendingTransition(0, 0);
                 break;
                 //指令安排
             case R.id.bt_instruct:

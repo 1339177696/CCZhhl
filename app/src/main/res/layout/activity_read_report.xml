@@ -455,8 +455,6 @@
                     app:layout_constraintTop_toTopOf="@+id/iv_7"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_7"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginRight="10dp"
-                    android:paddingRight="5dp"
                     android:textSize="18sp"
                     />
 
