@@ -2,6 +2,7 @@ package com.hulian.oa.work.file.admin.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +25,7 @@ import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.ToastHelper;
+import com.hulian.oa.work.file.admin.activity.attendance.SubordpersonActivity;
 import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_PendFragment;
 import com.hulian.oa.work.file.admin.activity.leave.SelPeopleActivity_Leave_people;
 import com.luck.picture.lib.entity.LocalMedia;
@@ -82,9 +84,9 @@ public class PostOrderActivity extends BaseActivity {
             case R.id.tv_sel_peo:
                 break;
             case R.id.rl_sel_people:
-                Intent intent=new Intent(PostOrderActivity.this, SelPeopleActivity_x.class);
-                intent.putExtra("partId", SPUtils.get(mContext, "deptId", "").toString());
-                startActivity(intent);
+                Intent intent=new Intent(PostOrderActivity.this, SubordpersonActivity2.class);
+//                intent.putExtra("partId", SPUtils.get(mContext, "deptId", "").toString());
+                startActivityForResult(intent,0x200);
                 break;
             case R.id.et_content:
                 break;
@@ -126,9 +128,21 @@ public class PostOrderActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case 0x200:
+                if (resultCode == 0x100){
+                    tvSelPeo.setText(data.getStringExtra("userName"));
+                    tvSelPeo.setTag(data.getStringExtra("userId"));
+                }
+                break;
+        }
+    }
+
     public void onEventMainThread(People_x event) {
-        tvSelPeo.setText(event.getUserName());
-        tvSelPeo.setTag(event.getUserId()+"");
+
 
     }
     @Override

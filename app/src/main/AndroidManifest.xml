@@ -517,7 +517,9 @@
             android:configChanges="screenSize|keyboardHidden|orientation" /> <!-- 新加的选择人员 -->
         <activity
             android:name=".work.file.admin.activity.ReadReportActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation" /> <!-- 新加的选择人员 -->
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:windowSoftInputMode="adjustPan"
+            />
     <activity
             android:name=".me.LBanbenActivity"
             android:configChanges="screenSize|keyboardHidden|orientation" /> <!-- 新加的升级 -->
@@ -534,6 +536,7 @@
         <activity android:name=".work.file.admin.activity.attendance.ClockActivity" android:configChanges="screenSize|keyboardHidden|orientation"></activity>
 <!--        下属打卡选择人员-->
         <activity android:name=".work.file.admin.activity.attendance.SubordpersonActivity" android:configChanges="screenSize|keyboardHidden|orientation"></activity>
+        <activity android:name=".work.file.admin.activity.SubordpersonActivity2" android:configChanges="screenSize|keyboardHidden|orientation"></activity>
         <!--        下属打卡内容-->
         <activity android:name=".work.file.admin.activity.attendance.SubordActivity" android:configChanges="screenSize|keyboardHidden|orientation"></activity>
 <!--        考勤规则-->
