@@ -165,7 +165,15 @@ public class ClockFragment extends Fragment {
     private String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CALL_PHONE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS};
 
 
-    Handler handler = new Handler();
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            sbTime.setText((String) msg.obj);
+            xbTime.setText((String) msg.obj);
+        }
+    };
+
+    private Long timer;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -185,13 +193,7 @@ public class ClockFragment extends Fragment {
         // 规则制定查询
         postRule();
         initListener();
-        handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                sbTime.setText((String) msg.obj);
-                xbTime.setText((String) msg.obj);
-            }
-        };
+
         return view;
     }
 
@@ -448,6 +450,7 @@ public class ClockFragment extends Fragment {
                         distance = result.getJSONObject("data").getString("distance");
                         Log.d("时间转换", TimeUtils.time_getDateToString(Long.parseLong(result.getJSONObject("data").getString("remark")), "HH:mm"));
                         fw_time = TimeUtils.time_getDateToString(Long.parseLong(result.getJSONObject("data").getString("remark")), "HH:mm:ss");
+                        timer =  Long.parseLong(result.getJSONObject("data").getString("remark"));
                         createTime = TimeUtils.time_getDateToString(Long.parseLong(result.getJSONObject("data").getString("remark")), "yyyy-MM-dd");
                         // 请求打卡信息
                         ClockType();
@@ -471,8 +474,9 @@ public class ClockFragment extends Fragment {
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
-                                while (true) {
-                                    handler.sendMessage(handler.obtainMessage(100, fw_time));
+                                while(mRunning){
+                                    timer =  timer + 1000;
+                                    handler.sendMessage(handler.obtainMessage(100,TimeUtils.time_getDateToString(timer,"HH:mm")));
                                     try {
                                         Thread.sleep(1000);
                                     } catch (InterruptedException e) {
@@ -481,8 +485,8 @@ public class ClockFragment extends Fragment {
                                 }
                             }
                         }).start();
-
                     }
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -498,6 +502,7 @@ public class ClockFragment extends Fragment {
             }
         });
     }
+
     // 请求打卡信息
     public void ClockType() {
         if (!loadDialog.isShowing())

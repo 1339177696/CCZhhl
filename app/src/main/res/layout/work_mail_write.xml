@@ -307,7 +307,7 @@
             android:layout_marginTop="@dimen/dp_25"
             android:id="@+id/tv_send"
             android:textSize="@dimen/sp_14"
-            android:text="发起"
+            android:text="发送"
             android:layout_width="@dimen/dp_220"
             android:layout_height="@dimen/dp_36"
             android:gravity="center"

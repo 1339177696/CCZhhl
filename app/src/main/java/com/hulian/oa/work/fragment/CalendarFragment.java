@@ -241,7 +241,6 @@ public class CalendarFragment extends Fragment {
 
     // 刷新
     public void onEventMainThread(CalendarFragment event) {
-
         markData = new HashMap<>();
         postRule();
     }
@@ -269,7 +268,6 @@ public class CalendarFragment extends Fragment {
                         markData = null;
                     }
                     //日历赋值
-
                     calederData(markData);
                 } catch (JSONException e) {
                     e.printStackTrace();
