@@ -598,7 +598,10 @@ public class ClockFragment extends Fragment {
             permi = true;
         } else if (SPUtils.get(getActivity(), "roleKey", "").toString().contains("eachLead")) {
             permi = true;
-        } else {
+        } else if (SPUtils.get(getActivity(), "roleKey", "").toString().contains("boss"))
+        {
+            permi = true;
+        }else {
             permi = false;
         }
     }

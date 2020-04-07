@@ -53,7 +53,11 @@ public class ClockActivity extends BaseActivity {
             tVclose.setVisibility(View.VISIBLE);
         }else if (SPUtils.get(this, "roleKey", "").toString().contains("eachLead")){
             tVclose.setVisibility(View.VISIBLE);
-        }else {
+        }else if (SPUtils.get(this, "roleKey", "").toString().contains("boss"))
+        {
+            tVclose.setVisibility(View.VISIBLE);
+        }
+        else {
             tVclose.setVisibility(View.GONE);
         }
             // 根据用户角色判断是否显示下属打卡

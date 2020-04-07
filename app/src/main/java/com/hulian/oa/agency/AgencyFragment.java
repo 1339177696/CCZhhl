@@ -232,7 +232,7 @@ public class AgencyFragment extends Fragment {
         hideAllFragment(fTransaction);
         switch (view.getId()) {
             case R.id.lr_qgl_btn1:
-
+                pos = 0;
                 zxQglTxt1.setTextColor(Color.parseColor("#FFFFFF"));
                 zxQglImg1.setImageResource(R.mipmap.done);
                 zxQglTxt2.setTextColor(Color.parseColor("#ccccd5"));
@@ -245,7 +245,7 @@ public class AgencyFragment extends Fragment {
                 }
                 break;
             case R.id.lr_qgl_btn2:
-
+                pos = 1;
                 zxQglTxt1.setTextColor(Color.parseColor("#ccccd5"));
                 zxQglImg1.setImageResource(R.mipmap.done_default);
                 zxQglTxt2.setTextColor(Color.parseColor("#FFFFFF"));
@@ -256,7 +256,6 @@ public class AgencyFragment extends Fragment {
                 } else {
                     fTransaction.show(l_hascomFragment);
                 }
-
                 break;
         }
         fTransaction.commit();

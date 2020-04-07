@@ -254,6 +254,8 @@ public class SubordActivity extends BaseActivity {
                                 sbDkwaiqin.setText("正常");
                             }else {
                                 sbDkwaiqin.setVisibility(View.VISIBLE);
+                                sbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
+                                sbDkwaiqin.setText("外勤");
                             }
                         }else {
                             sbDkchidao.setVisibility(View.VISIBLE);
@@ -261,6 +263,8 @@ public class SubordActivity extends BaseActivity {
                                 sbDkwaiqin.setVisibility(View.GONE);
                             }else {
                                 sbDkwaiqin.setVisibility(View.VISIBLE);
+                                sbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
+                                sbDkwaiqin.setText("外勤");
                             }
                         }
                         if (result.getJSONObject("data").getString("registerDownTime").equals("null"))
@@ -282,6 +286,8 @@ public class SubordActivity extends BaseActivity {
                                     xbDkwaiqin.setText("正常");
                                     xbDkwaiqin.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
                                 }else {
+                                    xbDkwaiqin.setText("外勤");
+                                    xbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
                                     xbDkwaiqin.setVisibility(View.VISIBLE);
                                 }
                             }else {
@@ -290,6 +296,8 @@ public class SubordActivity extends BaseActivity {
                                 if (result.getJSONObject("data").getString("regisgerDownType").equals("0")){
                                     xbDkwaiqin.setVisibility(View.GONE);
                                 }else {
+                                    xbDkwaiqin.setText("外勤");
+                                    xbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
                                     xbDkwaiqin.setVisibility(View.VISIBLE);
                                 }
                             }

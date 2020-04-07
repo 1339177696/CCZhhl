@@ -278,7 +278,7 @@
 
                     <TextView
                         android:id="@+id/sb_dk_waiqin"
-                        android:background="@drawable/kqrl_tv_bg_blue"
+                        android:background="@drawable/dk_tv_bg_lv"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/dp_10"
                         android:layout_toRightOf="@+id/s_dk_time"
@@ -384,7 +384,7 @@
 
                     <TextView
                         android:id="@+id/xb_dk_waiqin"
-                        android:background="@drawable/kqrl_tv_bg_blue"
+                        android:background="@drawable/dk_tv_bg_lv"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/dp_10"
                         android:layout_toRightOf="@+id/x_dk_time"

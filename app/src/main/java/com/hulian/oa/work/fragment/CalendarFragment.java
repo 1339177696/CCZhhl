@@ -361,6 +361,8 @@ public class CalendarFragment extends Fragment {
                                 sbDkwaiqin.setText("正常");
                             }else {
                                 sbDkwaiqin.setVisibility(View.VISIBLE);
+                                sbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
+                                sbDkwaiqin.setText("外勤");
                             }
                         }else {
                             sbDkchidao.setVisibility(View.VISIBLE);
@@ -368,6 +370,8 @@ public class CalendarFragment extends Fragment {
                                 sbDkwaiqin.setVisibility(View.GONE);
                             }else {
                                 sbDkwaiqin.setVisibility(View.VISIBLE);
+                                sbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
+                                sbDkwaiqin.setText("外勤");
                             }
                         }
                         if (result.getJSONObject("data").getString("registerDownTime").equals("null"))
@@ -390,6 +394,8 @@ public class CalendarFragment extends Fragment {
                                     xbDkwaiqin.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
                                 }else {
                                     xbDkwaiqin.setVisibility(View.VISIBLE);
+                                    xbDkwaiqin.setText("外勤");
+                                    xbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
                                 }
                             }else {
                                 xbDkchidao.setVisibility(View.VISIBLE);
@@ -398,6 +404,8 @@ public class CalendarFragment extends Fragment {
                                     xbDkwaiqin.setVisibility(View.GONE);
                                 }else {
                                     xbDkwaiqin.setVisibility(View.VISIBLE);
+                                    xbDkwaiqin.setText("外勤");
+                                    xbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
                                 }
                             }
                         }

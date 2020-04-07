@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="指令安排"
+            android:text="指令跟踪"
             android:textColor="#313131"
             android:textSize="@dimen/sp_17" />
     </RelativeLayout>
