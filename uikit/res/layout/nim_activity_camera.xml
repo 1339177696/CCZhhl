@@ -12,7 +12,6 @@
         android:layout_height="fill_parent" />
 
     <RelativeLayout
-        android:id="@+id/rl_takePhoto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -31,7 +30,6 @@
 
         <RelativeLayout
             android:layout_below="@+id/camera_tip"
-            android:id="@+id/button_capture_wrapper"
             android:layout_width="wrap_content"
             android:clipChildren="false"
             android:layout_height="wrap_content"
@@ -67,7 +65,6 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/rl_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="11dp"
@@ -92,7 +89,6 @@
             android:textSize="15sp" />
 
         <ImageView
-            android:id="@+id/iv_lightOn"
             android:layout_width="27dp"
             android:layout_height="27dp"
             android:layout_alignParentRight="true"

@@ -48,7 +48,6 @@
                 android:layout_height="wrap_content" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/tv_bill_msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toRightOf="@id/tv_bill_msg_title"
@@ -102,7 +101,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/tv_bill_data_sub"
             android:text="2020年1月12日"
             android:textColor="@color/color_b_black"
             app:layout_constraintLeft_toLeftOf="@id/tv_amount_sub"

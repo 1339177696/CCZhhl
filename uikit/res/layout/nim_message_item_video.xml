@@ -12,7 +12,6 @@
         android:scaleType="centerCrop" />
 
     <LinearLayout
-        android:id="@+id/message_item_video_play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

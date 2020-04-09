@@ -46,7 +46,6 @@
             android:layout_width="@dimen/dp_60"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/tv_part_content"
             android:layout_below="@id/tv_title"
             app:layout_constraintTop_toTopOf="@id/tv_part"
             app:layout_constraintLeft_toRightOf="@id/tv_part"

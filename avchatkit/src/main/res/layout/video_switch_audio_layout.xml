@@ -48,7 +48,6 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/avchat_video_netunstable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/switch_mode_top_layout"

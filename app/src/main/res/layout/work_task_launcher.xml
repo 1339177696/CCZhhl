@@ -309,7 +309,6 @@
                 <TextView
                     android:layout_marginLeft="9dp"
                     android:layout_toRightOf="@+id/img5"
-                    android:id="@+id/tv_copyperson_title"
                     android:text="抄送人"
                     android:textColor="#ff313131"
                     android:textSize="@dimen/sp_14"

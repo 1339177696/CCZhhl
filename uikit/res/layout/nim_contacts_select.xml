@@ -6,7 +6,6 @@
     android:background="@color/white">
 
     <RelativeLayout
-        android:id="@+id/rlRoot"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
@@ -26,7 +25,6 @@
         </android.support.design.widget.AppBarLayout>
 
         <RelativeLayout
-            android:id="@+id/contactsLayout"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_above="@+id/rlCtrl"

@@ -15,7 +15,6 @@
         android:layout_marginTop="@dimen/dp_22"
         android:background="@drawable/liner_yuan_qgl1" />
     <RelativeLayout
-        android:id="@+id/lv_liner_my"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/dp_18"

@@ -34,7 +34,6 @@
         android:layout_height="match_parent">
     </ListView>
     <TextView
-        android:id="@+id/person_number"
         android:layout_width="match_parent"
         android:text="共 3 人"
         android:textColor="@color/colorText"

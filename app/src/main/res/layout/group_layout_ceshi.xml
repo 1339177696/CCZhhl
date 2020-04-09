@@ -6,7 +6,6 @@
     android:descendantFocusability="blocksDescendants">
 
     <RelativeLayout
-        android:id="@+id/group_layout"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/dp_64"
         android:background="@drawable/ceshi_text_item_bg"

@@ -23,7 +23,6 @@
         android:layout_centerVertical="true" />
 
     <View
-        android:id="@+id/line"
         style="@style/horizontal_light_thin_divider"
         android:layout_alignParentBottom="true" />
 

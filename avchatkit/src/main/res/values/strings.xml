@@ -36,7 +36,6 @@
     <string name="avchat_wait_recieve">等待对方接听…</string>
     <string name="avchat_audio_call_request">请求通话</string>
     <string name="avchat_connecting">连接中…</string>
-    <string name="avchat_audio_to_video_invitation">对方邀请你开启视频聊天…</string>
     <string name="avchat_network_unstable_notificaton">当前网络不稳定</string>
     <string name="avchat_peer_close_camera">对方关闭了摄像头</string>
     <string name="avchat_local_close_camera">你关闭了摄像头</string>

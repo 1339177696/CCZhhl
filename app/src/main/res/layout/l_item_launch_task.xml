@@ -17,7 +17,6 @@
         android:background="@drawable/liner_yuan_qgl1" />
 
     <LinearLayout
-        android:id="@+id/lv_liner_my"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/dp_15"
@@ -107,7 +106,6 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/rela_yout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_10"

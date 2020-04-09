@@ -171,7 +171,6 @@
             >
             <TextView
                 android:drawableLeft="@mipmap/qj_shiyou_icon_qgl"
-                android:id="@+id/tv_schedule_content"
                 android:text="内容"
                 android:drawablePadding="@dimen/dp_5"
                 android:gravity="center"

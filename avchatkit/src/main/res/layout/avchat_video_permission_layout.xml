@@ -3,7 +3,6 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
-        android:id="@+id/avchat_permission_tip_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -11,7 +10,6 @@
         android:textColor="@color/white"
         android:textSize="17sp" />
     <TextView
-        android:id="@+id/avchat_permission_tip_2"
         android:layout_marginTop="18dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,7 +18,6 @@
         android:textColor="@color/white"
         android:textSize="17sp" />
     <TextView
-        android:id="@+id/avchat_permission_tip_3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"

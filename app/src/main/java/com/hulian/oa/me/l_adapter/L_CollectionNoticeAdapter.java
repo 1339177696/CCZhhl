@@ -7,20 +7,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hulian.oa.R;
 import com.hulian.oa.bean.Bean_x;
-import com.hulian.oa.bean.Notice;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
-import com.hulian.oa.news.activity.NewsActivityInfo_x;
 import com.hulian.oa.views.AlertDialog;
-import com.hulian.oa.work.file.admin.activity.notice.NoticeParticularsActivity;
 import com.hulian.oa.work.file.admin.activity.notice.adapter.NoticeParticularsActivity_x;
 
 import org.json.JSONException;

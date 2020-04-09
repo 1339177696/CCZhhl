@@ -318,7 +318,6 @@
                         />
 
                     <EditText
-                        android:id="@+id/tv_total_money"
                         android:text="20"
                         android:textSize="14dp"
                         android:layout_width="@dimen/dp_80"

@@ -47,7 +47,6 @@
                     android:src="@mipmap/renwu_faqi_icon2" />
 
                 <TextView
-                    android:id="@+id/gw_text11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -133,7 +132,6 @@
                     android:src="@mipmap/document_approver_icon_qgl" />
 
                 <TextView
-                    android:id="@+id/gw_text12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"

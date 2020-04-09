@@ -100,7 +100,6 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/nick_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:gravity="center"
@@ -231,7 +230,6 @@
         </LinearLayout>
         <LinearLayout
             android:background="@color/bg_all"
-            android:id="@+id/operate_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="bottom"

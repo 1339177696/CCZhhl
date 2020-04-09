@@ -2,39 +2,27 @@
     <string name="app_name">OA</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="user_profile">个人名片</string>
     <!-- session -->
-    <string name="input_panel_guess">猜 拳</string>
     <string name="input_panel_audio_call">语音通话</string>
     <string name="input_panel_video_call">视频通话</string>
-    <string name="input_panel_file">发送文件</string>
-    <string name="input_panel_RTS">白 板</string>
-    <string name="input_panel_snapchat">阅后即焚</string>
-    <string name="input_panel_tip">Tip</string>
     <string name="input_panel_ack_msg">已读回执</string>
     <string name="message_history_query">云消息记录</string>
     <string name="message_search_title">搜索本地消息记录</string>
     <string name="message_clear">清空本地消息记录</string>
     <string name="message_p2p_clear">清空点对点历史消息</string>
-    <string name="message_p2p_clear_tips">确定清空点对点历史消息?</string>
-    <string name="sure_keep_roam">确认单保留漫游</string>
-    <string name="message_info">聊天信息</string>
     <string name="user_not_exsit">该用户不存在</string>
     <string name="user_tips">请检查你输入的帐号是否正确</string>
     <!-- 通讯录 -->
     <string name="add_friend">加为好友</string>
     <string name="remove_friend">删除好友</string>
-    <string name="begin_chat">聊天</string>
     <string name="remove_friend_tip">删除好友后，将同时解除双方的好友关系</string>
     <string name="remove_friend_success">删除好友成功</string>
     <string name="add_friend_self_tip">不能添加自己为好友</string>
     <string name="add_friend_verify_tip">好友验证请求</string>
-    <string name="black_list_tip">你不会接收到列表中联系人的任何消息</string>
 
     <!-- 群 -->
     <string name="add_buddy">添加好友</string>
-    <string name="create_normal_team">创建讨论组</string>
     <string name="team_apply_sending">发送中…</string>
     <string name="no_team">您还没有群</string>
     <string name="no_normal_team">您还没有讨论组</string>
@@ -46,33 +34,6 @@
     <string name="has_exist_in_team">已经在群里</string>
     <string name="team_num_limit">群数量已达上限</string>
     <!-- setting -->
-    <string name="settings">设置</string>
-    <string name="no_disturb">免打扰</string>
-    <string name="multiport_push">PC/Web在线推送</string>
-    <string name="msg_notice">消息提醒</string>
-    <string name="recent_sticky">消息置顶</string>
-    <string name="setting_about">关于</string>
-    <string name="setting_close">已关闭</string>
-    <string name="no_disturb_tips">在设定的时间段内云信消息提醒将不再响铃振动,如果开启了不显示通知，则通知不再显示</string>
-    <string name="time_from">从</string>
-    <string name="time_to">至</string>
-    <string name="time_from_default">22:00</string>
-    <string name="time_to_default">08:00</string>
-    <string name="black_list">黑名单</string>
-    <string name="msg_speaker">听筒模式</string>
-    <string name="ring">响铃模式</string>
-    <string name="vibrate">振动模式</string>
-    <string name="led">自定义呼吸灯</string>
-    <string name="notice_content">通知栏标题定制</string>
-    <string name="clear_index">清理全文检索缓存</string>
-    <string name="clear_sdk_cache">清理SDK文件缓存</string>
-    <string name="push_no_detail">推送不展示消息详情</string>
-    <string name="operation_too_frequent">操作太频繁</string>
-    <string name="setting_private_config">私有化配置</string>
-    <string name="private_config_note"> \n 1.私有化配置的将在app重启后生效，请注销登陆并杀掉进程。
-        \n 2.如果要切换到环境，关闭或打开开关退出登陆杀掉进程即可。\n </string>
-    <string name="local_db_migration">本地消息迁移</string>
-    <string name="delete_friend_is_delete_alias">删除好友是否同步删除备注</string>
 
 
     <!-- 个人名片 -->
@@ -80,40 +41,15 @@
     <string name="phone">手 机</string>
     <string name="email">邮 箱</string>
     <string name="signature">签 名</string>
-    <string name="head">头 像</string>
-    <string name="user_information">个人信息</string>
-    <string name="nickname">昵 称</string>
     <string name="alias">备注名</string>
-    <string name="gender">性 别</string>
-    <string name="male">男</string>
-    <string name="female">女</string>
-    <string name="other">其他</string>
-    <string name="phone_number">手机号码</string>
     <string name="set_head_image">设置头像</string>
-    <string name="user_info_update_success">设置成功</string>
-    <string name="user_info_update_cancel">取消更新</string>
-    <string name="user_info_update_failed">设置失败，请重试</string>
-    <string name="head_update_success">头像设置成功</string>
-    <string name="head_update_failed">头像设置失败，请重试</string>
-    <string name="nickname_empty">昵称不能为空</string>
     <!-- 已读回执 -->
     <string name="send_ack_msg">发送已读回执消息</string>
-    <string name="ack_msg_info">消息已读详情</string>
     <string name="ack_msg_tip">已读回执能力支持文本、图片、音频、视频、文件、自定义等消息类型。此处仅以文本消息作为演示，开发者可以根据具体业务场景进行功能设计。</string>
-    <string name="down_time_enable_notification">免打扰期间显示通知</string>
     <string name="verify_reminder">验证提醒</string>
     <string name="clear_all_success">清空成功</string>
     <string name="delete_tip">删除提示</string>
     <string name="delete_system_message">删除该条系统消息？</string>
     <string name="delete_success">删除成功</string>
 
-    <string name="update_app_title">版本更新</string>
-    <string name="update_app_confirm">确定</string>
-    <string name="update_app_updateNow">立即更新</string>
-    <string name="update_app_tlaterSay">稍后再说</string>
-    <string name="update_app_ignorable">忽略</string>
-
-    <string name="updatecontent">1.推出新版本</string>
-    <string name="custom_content_text">自定义通知栏进度:%d%%/100%%</string>
-    <string name="update_title">VersionCheckLib V2版震撼来袭</string>
 </resources>

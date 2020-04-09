@@ -68,7 +68,6 @@
         <!--</RelativeLayout>-->
     <!--</LinearLayout>-->
     <LinearLayout
-        android:id="@+id/lv_liner_my"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/dp_18"

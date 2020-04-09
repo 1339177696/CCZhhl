@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/face_u_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -366,7 +365,6 @@
             </LinearLayout>
             <!--enlarge eye select-->
             <LinearLayout
-                android:id="@+id/enlarge_eye_level_select_block"
                 android:layout_width="match_parent"
                 android:layout_height="58dp"
                 android:gravity="center"
@@ -396,7 +394,6 @@
             </LinearLayout>
             <!--cheek thin select-->
             <LinearLayout
-                android:id="@+id/cheekthin_level_select_block"
                 android:layout_width="match_parent"
                 android:layout_height="58dp"
                 android:gravity="center"

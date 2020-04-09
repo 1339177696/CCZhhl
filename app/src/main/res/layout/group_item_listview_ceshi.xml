@@ -9,7 +9,6 @@
     <RelativeLayout
 
         android:layout_marginLeft="@dimen/dp_40"
-        android:id="@+id/group_layout"
         android:layout_width="fill_parent"
         android:layout_height="48dp"
         android:background="@drawable/ceshi_text_item_bg"

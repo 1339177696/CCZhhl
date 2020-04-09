@@ -90,7 +90,6 @@
                         android:src="@mipmap/renwu_faqi_icon2" />
 
                     <TextView
-                        android:id="@+id/gw_text11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -248,7 +247,6 @@
                         android:src="@mipmap/renwu_faqi_icon2" />
 
                     <TextView
-                        android:id="@+id/gw_text121"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -434,7 +432,6 @@
                         android:overScrollMode="never" />
 
                     <com.hulian.oa.views.l_flowview.FlowLayoutScrollView
-                        android:id="@+id/flsv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_2"
@@ -488,7 +485,6 @@
                         android:overScrollMode="never" />
 
                     <com.hulian.oa.views.l_flowview.FlowLayoutScrollView
-                        android:id="@+id/flsv2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_2"

@@ -29,7 +29,6 @@
 
 
     <LinearLayout
-        android:id="@+id/yixin_profile_buddy_operations"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

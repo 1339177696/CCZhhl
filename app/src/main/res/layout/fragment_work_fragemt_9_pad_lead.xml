@@ -75,7 +75,6 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/bt_work_space"
                     android:layout_width="@dimen/dp_53"
                     android:layout_height="@dimen/dp_53"
                     android:layout_centerHorizontal="true"
@@ -247,7 +246,6 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/bt_file"
                         android:layout_width="@dimen/dp_53"
                         android:layout_height="@dimen/dp_53"
                         android:layout_centerHorizontal="true"

@@ -414,9 +414,6 @@
         <!-- 新增界面-end -->
         <!-- 新加的收藏新闻界面 -->
         <activity
-            android:name=".news.activity.NewsActivityInfo_x"
-            android:configChanges="screenSize|keyboardHidden|orientation" /> <!-- 新加的收藏通知界面 -->
-        <activity
             android:name=".work.file.admin.activity.notice.adapter.NoticeParticularsActivity_x"
             android:configChanges="screenSize|keyboardHidden|orientation" /> <!-- 新加的选择部门 -->
         <activity

@@ -7,7 +7,6 @@
 
 
     <LinearLayout
-        android:id="@+id/work_leave_result_liner"
         android:orientation="vertical"
         android:background="@mipmap/banner_bg_qgl"
         android:layout_width="match_parent"

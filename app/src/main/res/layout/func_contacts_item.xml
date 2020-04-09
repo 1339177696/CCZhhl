@@ -44,7 +44,6 @@
         android:visibility="gone" />
 
     <View
-        android:id="@+id/bottomLine"
         style="@style/horizontal_light_thin_divider"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="10dp"

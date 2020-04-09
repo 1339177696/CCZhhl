@@ -148,7 +148,6 @@
                 android:visibility="invisible"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/my_img1"
-                android:id="@+id/work_mail_shoujianren2"
                 android:textColor="@color/black"
                 android:textSize="@dimen/dp_14"
                 android:layout_toRightOf="@id/tv_receive_person"

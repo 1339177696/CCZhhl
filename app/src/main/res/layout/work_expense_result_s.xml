@@ -208,7 +208,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
-                    android:id="@+id/tv_expense_amount"
                     android:text="13000元"
                     android:textColor="@color/color_b_black"
                     app:layout_constraintLeft_toLeftOf="@id/tv_bill_count"
@@ -241,7 +240,6 @@
                     <!--android:layout_height="wrap_content" />-->
             </android.support.constraint.ConstraintLayout>
             <LinearLayout
-                android:id="@+id/ll_expense_rules"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"

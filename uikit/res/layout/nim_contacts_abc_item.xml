@@ -23,9 +23,7 @@
             android:textColor="#666666"
             android:textSize="13sp" />
 
-        <View
-            android:id="@+id/bottomLine"
-            style="@style/horizontal_deep_thick_divider" />
+        <View style="@style/horizontal_deep_thick_divider" />
     </LinearLayout>
 
 </RelativeLayout>

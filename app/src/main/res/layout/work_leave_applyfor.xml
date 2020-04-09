@@ -263,7 +263,6 @@
 
                         <ImageView
                             android:layout_gravity="center"
-                            android:id="@+id/wl_img_my5"
                             android:src="@mipmap/qj_leibie_icon_qgl"
                             android:layout_width="25dp"
                             android:layout_height="25dp" />
@@ -396,7 +395,6 @@
                             android:textSize="@dimen/sp_12" />
                         <LinearLayout
 
-                            android:id="@+id/ll_del2"
                             android:layout_width="@dimen/dp_30"
                             android:layout_height="@dimen/dp_35"
                             android:layout_alignParentRight="true"
@@ -600,7 +598,6 @@
                             android:textSize="@dimen/sp_12" />
                         <LinearLayout
                             android:visibility="gone"
-                            android:id="@+id/ll_del1"
                             android:layout_width="@dimen/dp_30"
                             android:layout_height="@dimen/dp_35"
                             android:layout_alignParentRight="true"

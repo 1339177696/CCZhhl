@@ -122,11 +122,6 @@
         <item name="android:gravity">center_vertical</item>
     </style>
 
-    <style name="edit_text_style">
-        <item name="android:textCursorDrawable">@color/white</item>
-        <item name="android:textColor">@color/white</item>
-    </style>
-
     <style name="SuperCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/image_original_selector</item>
     </style>

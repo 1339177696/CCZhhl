@@ -111,14 +111,12 @@
         android:layout_height="wrap_content">
         <Button
             android:layout_marginRight="@dimen/dp_25"
-            android:id="@+id/bt_num13"
             android:text="13"
             android:layout_width="@dimen/dp_110"
             android:textColor="#ffffff"
             android:background="@color/colorTheme"
             android:layout_height="@dimen/dp_165" />
         <Button
-            android:id="@+id/bt_num14"
             android:text="14"
             android:layout_marginLeft="@dimen/dp_25"
             android:layout_width="@dimen/dp_110"

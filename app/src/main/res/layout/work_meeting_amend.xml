@@ -173,7 +173,6 @@
                 android:gravity="center"
                 >
                 <TextView
-                    android:id="@+id/tv_meet_update"
                     android:textSize="@dimen/dp_18"
                     android:text="修改"
                     android:layout_width="@dimen/dp_120"
@@ -185,7 +184,6 @@
                     android:layout_marginRight="@dimen/dp_20"
                     />
                 <TextView
-                    android:id="@+id/tv_meet_pub"
                     android:layout_marginLeft="@dimen/dp_20"
                     android:textSize="@dimen/dp_16"
                     android:text="发布"

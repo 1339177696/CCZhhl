@@ -56,12 +56,6 @@
         <item name="android:textColor">@drawable/rbtn_main_txt</item>
         <item name="android:textSize">@dimen/sp_12</item>
     </style>
-    <style name="MytabStyle" parent="android:Widget">
-        <!--<item name="tabBackground">@drawable/tab_background</item>-->
-        <item name="tabIndicatorColor">#ffffff</item>
-        <item name="tabIndicatorHeight">1dp</item>
-        <item name="android:textSize">@dimen/sp_12</item>
-    </style>
     <!--新增样式 start-->
     <style name="weekIndicatorStyle">
         <item name="android:layout_width">@dimen/dp_0</item>
@@ -72,20 +66,8 @@
         <item name="android:textColor">#ff25adff</item>
     </style>
     <!--//下划线颜色-->
-    <style name="MyEditText" parent="Theme.AppCompat.Light">
-        <item name="colorControlNormal">@android:color/darker_gray</item>
-        <item name="colorControlActivated">@android:color/holo_orange_dark</item>
-    </style>
     <!--新增样式 end-->
 
-    <style name="MyTabLayoutTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@android:color/white</item>
-    </style>
-    <style name="MyTabLayoutTextAppearanceInverse" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
-        <item name="android:textSize">15sp</item>
-        <item name="android:textColor">@color/colorTheme</item>
-    </style>
     <!-- 搜索界面主题 -->
     <style name="global_search_bg" parent="@style/AppTheme">
         <item name="windowActionBar">false</item>
@@ -165,33 +147,13 @@
         <item name="android:textSize">@dimen/sp_17</item>
     </style>
     <!--设置Tablayout字体大小-->
-    <style name="TabLayoutTextSize2">
-        <item name="android:textSize">@dimen/sp_14</item>
-    </style>
     <!--设置Tablayout字体大小-->
-    <style name="TabLayoutTextSize3">
-        <item name="android:textSize">@dimen/sp_15</item>
-    </style>
 
     <style name="TabLayoutTextSize4">
         <item name="android:textSize">@dimen/sp_12</item>
     </style>
     <!--设置Tablayout字体加粗-->
-    <style name="TabLayoutTextStyle">
-        <item name="android:textStyle">bold</item>
-    </style>
 
-    <style name="MySwitch" parent="Theme.AppCompat.Light">
-        <!-- Active thumb color & Active track color(30% transparency)
-            switch 打开时的拇指按钮的颜色 轨迹颜色默认为30%这个颜色 -->
-        <item name="colorControlActivated">@color/colorTheme</item>
-        <!-- Inactive thumb color switch关闭时的拇指按钮的颜色 -->
-        <item name="colorSwitchThumbNormal">@color/image_overlay_false</item>
-        <!-- Inactive track color(30% transparency) switch关闭时的轨迹的颜色  30%这个颜色 -->
-        <item name="android:colorForeground">@color/colorAccent</item>
-        <!--使用方法：
-        在布局文件中给需要自定义控件中增加app:theme="@style/MySwitch"-->
-    </style>
     <!--底部弹框动画-->
     <style name="bottomDialog">
         <item name="android:windowEnterAnimation">@anim/dialog_fr_in</item>
@@ -230,15 +192,6 @@
     <style name="ActionSheetDialogAnimation" parent="@android:style/Animation.Dialog">
         <item name="android:windowEnterAnimation">@anim/actionsheet_dialog_in</item>
         <item name="android:windowExitAnimation">@anim/actionsheet_dialog_out</item>
-    </style>
-
-    <style name="BaseDialog" parent="android:Theme.Light">
-        <item name="android:windowFrame">@null</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-
     </style>
 
 </resources>

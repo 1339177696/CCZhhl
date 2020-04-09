@@ -541,14 +541,12 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/qgl_liner2"
         android:layout_above="@+id/qgl_rela2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_msg"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
