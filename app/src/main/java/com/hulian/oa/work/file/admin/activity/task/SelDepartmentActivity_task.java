@@ -15,7 +15,6 @@ import com.hulian.oa.BaseActivity;
 import com.hulian.oa.R;
 import com.hulian.oa.bean.Department;
 import com.hulian.oa.bean.People;
-import com.hulian.oa.me.SelPeopleActivity;
 import com.hulian.oa.me.l_adapter.DepartmentAdapter;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;

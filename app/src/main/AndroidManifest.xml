@@ -106,28 +106,7 @@
         </activity>
 
         <activity
-            android:name=".message.activity.MessageInfoAcitivity"
-            android:configChanges="screenSize|keyboardHidden|orientation" />
-        <activity
-            android:name=".message.activity.MeaaageAdressActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation" />
-        <activity
-            android:name=".message.activity.MessageMeActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation" />
-        <activity
-            android:name=".message.activity.MessageRemindActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation" />
-        <activity
             android:name=".news.activity.NewsActivityInfo"
-            android:configChanges="screenSize|keyboardHidden|orientation" />
-        <activity
-            android:name=".address.activity.PeopleaddressActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation" />
-        <activity
-            android:name=".address.activity.PeopleaddressInforActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation" />
-        <activity
-            android:name=".agency.activity.AgencyInfoActivity"
             android:configChanges="screenSize|keyboardHidden|orientation" />
         <activity
             android:name=".LoginActivity"
@@ -210,12 +189,6 @@
             android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" /> <!-- 消息历史搜索 -->
-        <activity
-            android:name=".message.session.search.SearchMessageActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="fullSensor"
-            android:theme="@style/global_search_bg"
-            android:windowSoftInputMode="adjustPan|stateUnspecified" />
         <activity
             android:name=".message.session.search.DisplayMessageActivity"
             android:configChanges="keyboardHidden|orientation"
@@ -386,9 +359,6 @@
             android:name=".me.FileBoxActivity"
             android:configChanges="screenSize|keyboardHidden|orientation" />
         <activity
-            android:name=".me.CollectionActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation" />
-        <activity
             android:name=".me.CollectionActivity2"
             android:configChanges="screenSize|keyboardHidden|orientation" />
         <activity
@@ -402,12 +372,6 @@
             android:configChanges="screenSize|keyboardHidden|orientation" />
         <activity
             android:name=".me.Me_Schedule_RemindActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation" />
-        <activity
-            android:name=".me.SelDepartmentActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation" />
-        <activity
-            android:name=".me.SelPeopleActivity"
             android:configChanges="screenSize|keyboardHidden|orientation" />
         <activity
             android:name=".work.file.admin.activity.PostOrderActivity"
@@ -462,17 +426,8 @@
             android:name=".work.file.admin.activity.notice.adapter.NoticeParticularsActivity_x"
             android:configChanges="screenSize|keyboardHidden|orientation" /> <!-- 新加的选择部门 -->
         <activity
-            android:name=".me.SelDepartmentActivity_x"
-            android:configChanges="screenSize|keyboardHidden|orientation" /> <!-- 新加的选择人员 -->
-        <activity
             android:name=".me.SelPeopleActivity_x"
             android:configChanges="screenSize|keyboardHidden|orientation" /> <!-- 新加的选择部门2 -->
-        <activity
-            android:name=".me.SelDepartmentActivity_xx"
-            android:configChanges="screenSize|keyboardHidden|orientation" />
-        <activity
-            android:name=".me.SelPeopleActivity_xx"
-            android:configChanges="screenSize|keyboardHidden|orientation" /> <!-- 新加的选择部门人员3 -->
         <activity
             android:name=".work.file.admin.activity.meeting.SelDepartmentActivity_meet_x"
             android:configChanges="screenSize|keyboardHidden|orientation" />

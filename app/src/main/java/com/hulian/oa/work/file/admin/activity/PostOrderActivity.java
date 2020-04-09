@@ -15,20 +15,13 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.hulian.oa.BaseActivity;
 import com.hulian.oa.R;
-import com.hulian.oa.bean.People;
 import com.hulian.oa.bean.People_x;
-import com.hulian.oa.me.SelPeopleActivity;
-import com.hulian.oa.me.SelPeopleActivity_x;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.ToastHelper;
-import com.hulian.oa.work.file.admin.activity.attendance.SubordpersonActivity;
-import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_PendFragment;
-import com.hulian.oa.work.file.admin.activity.leave.SelPeopleActivity_Leave_people;
-import com.luck.picture.lib.entity.LocalMedia;
 import com.netease.nimlib.sdk.AbortableFuture;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 
@@ -36,7 +29,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -2,7 +2,6 @@ package com.hulian.oa.work.file.admin.activity.task.l_adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,24 +11,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.R;
-import com.hulian.oa.bean.Notice;
 import com.hulian.oa.bean.Notice_x;
-import com.hulian.oa.me.SelDepartmentActivity;
-import com.hulian.oa.me.SelDepartmentActivity_xx;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
-import com.hulian.oa.utils.TimeUtils;
-import com.hulian.oa.work.file.admin.activity.task.TaskLauncherActivity;
 import com.hulian.oa.work.file.admin.activity.task.l_details_activity.TaskUndoneDetailsActivity;
 import com.hulian.oa.work.file.admin.activity.task.l_fragment.CompletedTaskFragment;
-import com.hulian.oa.work.file.admin.activity.task.l_fragment.UndoneTaskFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
