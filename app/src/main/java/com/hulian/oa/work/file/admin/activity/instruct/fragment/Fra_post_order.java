@@ -24,7 +24,6 @@ import com.hulian.oa.bean.Fab2;
 import com.hulian.oa.bean.People_x;
 import com.hulian.oa.pad.PAD_zhiling_XF;
 import com.hulian.oa.utils.SPUtils;
-import com.hulian.oa.views.Myfab;
 import com.hulian.oa.views.fabVIew.FabAlphaAnimate;
 import com.hulian.oa.views.fabVIew.FabAttributes;
 import com.hulian.oa.views.fabVIew.OnFabClickListener;

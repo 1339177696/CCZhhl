@@ -231,9 +231,7 @@
         <activity
             android:name=".work.file.admin.activity.file.FileFollowActivity"
             android:configChanges="screenSize|keyboardHidden|orientation" />
-        <activity
-            android:name=".work.file.admin.activity.file.FollowCodeActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation" />
+
         <activity
             android:name=".work.file.admin.activity.file.MasterAuthInfoActivity"
             android:configChanges="screenSize|keyboardHidden|orientation" />
@@ -304,9 +302,7 @@
         <activity
             android:name=".work.file.admin.activity.meeting.MeetingSigninActivity"
             android:configChanges="screenSize|keyboardHidden|orientation" />
-        <activity
-            android:name=".work.file.admin.activity.meeting.SelDepartmentActivity_meet"
-            android:configChanges="screenSize|keyboardHidden|orientation" />
+
         <activity
             android:name=".work.file.admin.activity.meeting.SelDepartmentActivity_meet_zb"
             android:configChanges="screenSize|keyboardHidden|orientation" />
@@ -414,9 +410,7 @@
         <activity
             android:name=".work.file.admin.activity.mypreview.PicturePreviewActivity"
             android:configChanges="screenSize|keyboardHidden|orientation" />
-        <activity
-            android:name=".work.file.admin.activity.mypreview.PicturePreviewActivity2"
-            android:configChanges="screenSize|keyboardHidden|orientation" />
+
         <!-- 新增界面-end -->
         <!-- 新加的收藏新闻界面 -->
         <activity

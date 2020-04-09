@@ -28,7 +28,6 @@ import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.net.Urls;
 import com.hulian.oa.utils.StatusBarUtil;
-import com.hulian.oa.views.BaseDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
