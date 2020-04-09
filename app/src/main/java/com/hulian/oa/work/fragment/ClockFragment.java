@@ -11,7 +11,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
@@ -24,7 +23,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,48 +32,28 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.location.CoordinateConverter;
 import com.amap.api.location.DPoint;
-import com.amap.api.services.core.LatLonPoint;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hulian.oa.R;
-import com.hulian.oa.bean.Res;
-import com.hulian.oa.gaode.utils.DataConversionUtils;
-import com.hulian.oa.gaode.utils.DatasKey;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
-import com.hulian.oa.utils.NullStringToEmptyAdapterFactory;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.TimeUtils;
 import com.hulian.oa.views.LoadingDialog;
 import com.hulian.oa.views.MyDialog;
-import com.hulian.oa.work.file.admin.activity.ScreenReportActivity;
-import com.hulian.oa.work.file.admin.activity.ScreenReportListActivity;
 import com.hulian.oa.work.file.admin.activity.attendance.AttendrulesActivity;
 import com.hulian.oa.work.file.admin.activity.attendance.AttendrulesmodifyActivity;
-import com.hulian.oa.work.file.admin.activity.attendance.MapActivity;
-import com.netease.nim.avchatkit.common.util.TimeUtil;
 import com.othershe.calendarview.utils.CalendarUtil;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import de.greenrobot.event.EventBus;
-
 import static com.hulian.oa.utils.TimeUtils.getMway;
-import static com.hulian.oa.utils.TimeUtils.timeStamp2Date;
 
 /**
  * Created by qgl on 2020/3/17 16:55.
@@ -147,16 +125,14 @@ public class ClockFragment extends Fragment {
     private String f_weigdu = "";  // 服务器维度
     private String dk_type = "";  // 打卡状态，0 正常，1 外勤
     private String dk_time = "";  // 上班打卡时间，0 正常，1 迟到
-    private String xb_dk_time = "";  // 上班打卡时间，0 正常，1 迟到
+    private String xb_dk_time = "";  // 下班打卡时间，0 正常，1 迟到
     private String createTime = "";  // 服务器返回年月日
     private String registerUpAddress = "";  // 打卡地点
     private String registerUpCoordinate = "";  // 打卡坐标
     private String registerUpRemark = "";  // 外勤备注
     private String dk_id = ""; // 服务器打卡ID
     private boolean mRunning = true;
-
     protected LoadingDialog loadDialog;//加载等待弹窗'
-
     private AMapLocationListener mAMapLocationListener;
     private AMapLocationClient locationClient = null;
     private AMapLocation location;
@@ -164,16 +140,27 @@ public class ClockFragment extends Fragment {
     // 要申请的权限
     private String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CALL_PHONE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS};
 
-
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+            // 上班时间大于则时间
+            if (TimeUtils.compareTwoTime((String) msg.obj, gz_sb_time) >= 0) {
+                reOnBtn.setBackgroundResource(R.drawable.clock_rela_bg_yes);
+            } else {
+                reOnBtn.setBackgroundResource(R.drawable.clock_rela_bg_no);
+            }
+            // 下班时间大于则时间
+            if (TimeUtils.compareTwoTime((String) msg.obj, gz_xb_time) > 0) {
+                reNoBtn.setBackgroundResource(R.drawable.clock_rela_bg_no);
+            } else {
+                reNoBtn.setBackgroundResource(R.drawable.clock_rela_bg_yes);
+            }
             sbTime.setText((String) msg.obj);
             xbTime.setText((String) msg.obj);
         }
     };
-
     private Long timer;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -193,7 +180,6 @@ public class ClockFragment extends Fragment {
         // 规则制定查询
         postRule();
         initListener();
-
         return view;
     }
 
@@ -242,7 +228,7 @@ public class ClockFragment extends Fragment {
                     intent.putExtra("jingwei", "");
                     startActivity(intent);
                 } else {
-                    Toast.makeText(getActivity(),"请联系管理员",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "请联系管理员", Toast.LENGTH_LONG).show();
                 }
                 break;
         }
@@ -291,7 +277,7 @@ public class ClockFragment extends Fragment {
 
     // 外勤弹框
     private void showDialog1(String adress) {
-        if (loadDialog.isShowing()){
+        if (loadDialog.isShowing()) {
             loadDialog.dismiss();
         }
         View view = LayoutInflater.from(mcontext).inflate(R.layout.dialog_waiqin, null);
@@ -329,10 +315,10 @@ public class ClockFragment extends Fragment {
     public void postData() {
         if (!loadDialog.isShowing())
             loadDialog.show();
-        if (TimeUtils.compareTwoTime(sbTime.getText().toString().trim(), gz_xb_time) > 0) {
-
-        }else {
-
+        if (TimeUtils.compareTwoTime(sbTime.getText().toString().trim(), gz_sb_time) >= 0) {
+            dk_time = "0";
+        } else {
+            dk_time = "1";
         }
         RequestParams params = new RequestParams();
         params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
@@ -347,12 +333,12 @@ public class ClockFragment extends Fragment {
         HttpRequest.OnClock(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
-               if (loadDialog.isShowing())
-                loadDialog.dismiss();
+                if (loadDialog.isShowing())
+                    loadDialog.dismiss();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
                     if (result.getString("code").equals("500")) {
-                        showToast("打卡失败");
+                        Toast.makeText(getActivity(), "打卡失败", Toast.LENGTH_LONG).show();
                     } else {
                         // 这个是上班打卡之后出现的打卡ID
                         dk_id = result.getString("msg");
@@ -365,9 +351,9 @@ public class ClockFragment extends Fragment {
 
             @Override
             public void onFailure(OkHttpException failuer) {
-              if (loadDialog.isShowing())
-                loadDialog.dismiss();
-                showToast("服务器异常");
+                if (loadDialog.isShowing())
+                    loadDialog.dismiss();
+                Toast.makeText(getActivity(), "服务器异常", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -375,9 +361,14 @@ public class ClockFragment extends Fragment {
     }
 
     // 发送下班数据
-    public void postData1(){
+    public void postData1() {
         if (!loadDialog.isShowing())
             loadDialog.show();
+        if (TimeUtils.compareTwoTime(xbTime.getText().toString().trim(), gz_xb_time) > 0) {
+            xb_dk_time = "1";
+        } else {
+            xb_dk_time = "0";
+        }
         RequestParams params = new RequestParams();
         params.put("id", dk_id);
         params.put("registerDownTime", xbTime.getText().toString());
@@ -389,12 +380,12 @@ public class ClockFragment extends Fragment {
         HttpRequest.OnClock(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
-               if (loadDialog.isShowing())
-                loadDialog.dismiss();
+                if (loadDialog.isShowing())
+                    loadDialog.dismiss();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
                     if (result.getString("code").equals("500")) {
-                        showToast("打卡失败");
+                        Toast.makeText(getActivity(), "打卡失败", Toast.LENGTH_LONG).show();
                     } else {
                         showDialog();
                     }
@@ -405,10 +396,9 @@ public class ClockFragment extends Fragment {
 
             @Override
             public void onFailure(OkHttpException failuer) {
-
-               if (loadDialog.isShowing())
-                loadDialog.dismiss();
-                showToast("服务器异常");
+                if (loadDialog.isShowing())
+                    loadDialog.dismiss();
+                Toast.makeText(getActivity(), "服务器异常", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -450,33 +440,33 @@ public class ClockFragment extends Fragment {
                         distance = result.getJSONObject("data").getString("distance");
                         Log.d("时间转换", TimeUtils.time_getDateToString(Long.parseLong(result.getJSONObject("data").getString("remark")), "HH:mm"));
                         fw_time = TimeUtils.time_getDateToString(Long.parseLong(result.getJSONObject("data").getString("remark")), "HH:mm:ss");
-                        timer =  Long.parseLong(result.getJSONObject("data").getString("remark"));
+                        timer = Long.parseLong(result.getJSONObject("data").getString("remark"));
                         createTime = TimeUtils.time_getDateToString(Long.parseLong(result.getJSONObject("data").getString("remark")), "yyyy-MM-dd");
                         // 请求打卡信息
                         ClockType();
 //                        // 判断上班打卡是否在规定时间内
                         if (TimeUtils.compareTwoTime(gz_sb_time, fw_time) > 0) {
                             reOnBtn.setBackgroundResource(R.drawable.clock_rela_bg_no);
-                            dk_time = "1";
+                            //dk_time = "1";
                         } else {
                             reOnBtn.setBackgroundResource(R.drawable.clock_rela_bg_yes);
-                            dk_time = "0";
+                           // dk_time = "0";
                         }
                         // 判断下班打卡是否在规定时间外
                         if (TimeUtils.compareTwoTime(fw_time, gz_xb_time) > 0) {
                             reNoBtn.setBackgroundResource(R.drawable.clock_rela_bg_no);
-                            xb_dk_time = "1";
+                           // xb_dk_time = "1";
                         } else {
                             reNoBtn.setBackgroundResource(R.drawable.clock_rela_bg_yes);
-                            xb_dk_time = "0";
+                            //xb_dk_time = "0";
                         }
 
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
-                                while(mRunning){
-                                    timer =  timer + 1000;
-                                    handler.sendMessage(handler.obtainMessage(100,TimeUtils.time_getDateToString(timer,"HH:mm")));
+                                while (mRunning) {
+                                    timer = timer + 1000;
+                                    handler.sendMessage(handler.obtainMessage(100, TimeUtils.time_getDateToString(timer, "HH:mm")));
                                     try {
                                         Thread.sleep(1000);
                                     } catch (InterruptedException e) {
@@ -498,7 +488,7 @@ public class ClockFragment extends Fragment {
             @Override
             public void onFailure(OkHttpException failuer) {
                 loadDialog.dismiss();
-                Toast.makeText(getActivity(),"服务器返回失败",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "服务器返回失败", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -594,14 +584,11 @@ public class ClockFragment extends Fragment {
 
     //权限判断
     public void permissions() {
-        if (SPUtils.get(getActivity(), "roleKey", "").toString().contains("synthesizeLead")) {
+        if (SPUtils.get(getActivity(), "roleKey", "").toString().contains("synthesizeLead")
+                || SPUtils.get(getActivity(), "roleKey", "").toString().contains("eachLead")
+                || SPUtils.get(getActivity(), "roleKey", "").toString().contains("boss")) {
             permi = true;
-        } else if (SPUtils.get(getActivity(), "roleKey", "").toString().contains("eachLead")) {
-            permi = true;
-        } else if (SPUtils.get(getActivity(), "roleKey", "").toString().contains("boss"))
-        {
-            permi = true;
-        }else {
+        } else {
             permi = false;
         }
     }
@@ -624,13 +611,9 @@ public class ClockFragment extends Fragment {
         unbinder.unbind();
     }
 
-    // 刷新
+    // Event接受刷新指令
     public void onEventMainThread(ClockFragment event) {
         postRule();
-    }
-
-    private void showToast(String string) {
-        Toast.makeText(getActivity(), string, Toast.LENGTH_LONG).show();
     }
 
     //把String转化为double
@@ -694,59 +677,7 @@ public class ClockFragment extends Fragment {
         }
         xbDkadress.setText(registerUpAddress);
     }
-
     /********************高德定位************/
-    private void showToastWithErrorInfo(int error) {
-        String tips = "定位错误码：" + error;
-        switch (error) {
-            case 4:
-                tips = "请检查设备网络是否通畅，检查通过接口设置的网络访问超时时间，建议采用默认的30秒。";
-                break;
-            case 7:
-                tips = "请仔细检查key绑定的sha1值与apk签名sha1值是否对应。";
-                break;
-            case 12:
-                tips = "请在设备的设置中开启app的定位权限。";
-                break;
-            case 18:
-                tips = "建议手机关闭飞行模式，并打开WIFI开关";
-                break;
-            case 19:
-                tips = "建议手机插上sim卡，打开WIFI开关";
-                break;
-        }
-        Toast.makeText(getActivity(), tips, Toast.LENGTH_LONG).show();
-    }
-
-    private void initListener() {
-        //gps定位监听器
-        mAMapLocationListener = new AMapLocationListener() {
-            @Override
-            public void onLocationChanged(AMapLocation loc) {
-                try {
-                    if (null != loc) {
-                        stopLocation();
-                        if (loc.getErrorCode() == 0) {//可在其中解析amapLocation获取相应内容。
-                            location = loc;
-                            doWhenLocationSucess();
-                        } else {
-                            if (loadDialog.isShowing())
-                                loadDialog.dismiss();
-                            //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
-                            showToastWithErrorInfo(loc.getErrorCode());
-                            Log.e("AmapError", "location Error, ErrCode:"
-                                    + loc.getErrorCode() + ", errInfo:"
-                                    + loc.getErrorInfo());
-
-                        }
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        };
-    }
-
     /**
      * 初始化定位
      */
@@ -792,6 +723,36 @@ public class ClockFragment extends Fragment {
     }
 
     /**
+     * 定位回调
+     */
+    private void initListener() {
+        //gps定位监听器
+        mAMapLocationListener = new AMapLocationListener() {
+            @Override
+            public void onLocationChanged(AMapLocation loc) {
+                try {
+                    if (null != loc) {
+                        stopLocation();
+                        if (loc.getErrorCode() == 0) {
+                            //可在其中解析amapLocation获取相应内容。
+                            location = loc;
+                            doWhenLocationSucess();
+                        } else {
+                            if (loadDialog.isShowing())
+                                loadDialog.dismiss();
+                            //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
+                            showToastWithErrorInfo(loc.getErrorCode());
+                            Log.e("AmapError", "location Error, ErrCode:" + loc.getErrorCode() + ", errInfo:" + loc.getErrorInfo());
+                        }
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
+    }
+
+    /**
      * 停止定位
      */
     private void stopLocation() {
@@ -800,7 +761,9 @@ public class ClockFragment extends Fragment {
         }
     }
 
-
+    /**
+     * 判断手机版本获取手机权限
+     */
     private void initPermission() {
         // 版本判断。当手机系统大于 23 时，才有必要去判断权限是否获取
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -818,18 +781,15 @@ public class ClockFragment extends Fragment {
             } else {
                 startLocation();
             }
-        }
-        else {
+        } else {
             startLocation();
         }
     }
-
 
     /**
      * 当定位成功需要做的事情
      */
     private void doWhenLocationSucess() {
-//定位成功回调信息，设置相关消息
         //获取当前定位结果来源，如网络定位结果，详见定位类型表
         Log.i("定位类型", location.getLocationType() + "");
         Log.i("获取纬度", location.getLatitude() + "");
@@ -849,18 +809,15 @@ public class ClockFragment extends Fragment {
         Log.i("获取当前室内定位的建筑物Id", location.getBuildingId());
         Log.i("获取当前室内定位的楼层", location.getFloor());
         Log.i("获取GPS的当前状态", location.getGpsAccuracyStatus() + "");
-        //获取定位时间
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = new Date(location.getTime());
-        Log.i("获取定位时间", df.format(date));
         Log.i("poi", location.getPoiName());
-        convertToDouble(f_jingdu, 0);
-        convertToDouble(f_weigdu, 0);
-        if (TextUtils.equals(location.getAddress(),"")){
+//        convertToDouble(f_jingdu, 0);
+//        convertToDouble(f_weigdu, 0);
+        // 模拟器存在，获取经纬度没有地址的情况
+        if (TextUtils.equals(location.getAddress(), "")) {
             if (loadDialog.isShowing())
                 loadDialog.dismiss();
-            showToast("获取地址失败");
-        }else {
+            Toast.makeText(getActivity(), "获取地址失败", Toast.LENGTH_LONG).show();
+        } else {
             registerUpAddress = location.getAddress();
             registerUpCoordinate = location.getLongitude() + "," + location.getLatitude();
             // 判断范围，是否外勤
@@ -913,5 +870,31 @@ public class ClockFragment extends Fragment {
         }
     }
 
+    /**
+     * Toast
+     *
+     * @param error
+     */
+    private void showToastWithErrorInfo(int error) {
+        String tips = "定位错误码：" + error;
+        switch (error) {
+            case 4:
+                tips = "请检查设备网络是否通畅，检查通过接口设置的网络访问超时时间，建议采用默认的30秒。";
+                break;
+            case 7:
+                tips = "请仔细检查key绑定的sha1值与apk签名sha1值是否对应。";
+                break;
+            case 12:
+                tips = "请在设备的设置中开启app的定位权限。";
+                break;
+            case 18:
+                tips = "建议手机关闭飞行模式，并打开WIFI开关";
+                break;
+            case 19:
+                tips = "建议手机插上sim卡，打开WIFI开关";
+                break;
+        }
+        Toast.makeText(getActivity(), tips, Toast.LENGTH_LONG).show();
+    }
 
 }

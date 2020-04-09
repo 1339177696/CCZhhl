@@ -49,23 +49,15 @@ public class ClockActivity extends BaseActivity {
         StatusBarUtil.statusBarLightMode_white(this);
         setContentView(R.layout.clockactivity);
         ButterKnife.bind(this);
-        if (SPUtils.get(this, "roleKey", "").toString().contains("synthesizeLead")){
-            tVclose.setVisibility(View.VISIBLE);
-        }else if (SPUtils.get(this, "roleKey", "").toString().contains("eachLead")){
-            tVclose.setVisibility(View.VISIBLE);
-        }else if (SPUtils.get(this, "roleKey", "").toString().contains("boss"))
-        {
+        if (SPUtils.get(this, "roleKey", "").toString().contains("synthesizeLead")
+                || SPUtils.get(this, "roleKey", "").toString().contains("eachLead")
+                || SPUtils.get(this, "roleKey", "").toString().contains("boss")) {
             tVclose.setVisibility(View.VISIBLE);
         }
         else {
             tVclose.setVisibility(View.GONE);
         }
-            // 根据用户角色判断是否显示下属打卡
-//        if (SPUtils.get(mContext, "roleKey", "").equals("boos")) {
-//            tVclose.setVisibility(View.VISIBLE);
-//        } else {
-//            tVclose.setVisibility(View.GONE);
-//        }
+
         titleDatas.add("考勤打卡");
         titleDatas.add("打卡日历");
         fragmentList.add(new ClockFragment());

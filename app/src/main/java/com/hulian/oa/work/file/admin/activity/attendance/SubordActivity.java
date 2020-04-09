@@ -97,7 +97,6 @@ public class SubordActivity extends BaseActivity {
     @BindView(R.id.xb_dk_chidao)
     TextView xbDkchidao;
     private int[] cDate = CalendarUtil.getCurrentDate();
-    List<People> mList = new ArrayList<People>();
     private String createTime = "";
 
     HashMap<String, String> markData = new HashMap<>();
