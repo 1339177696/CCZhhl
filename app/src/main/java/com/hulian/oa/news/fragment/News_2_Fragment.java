@@ -112,7 +112,6 @@ public class News_2_Fragment extends Fragment implements PullLoadMoreRecyclerVie
     }
 
     private void getData() {
-        loadDialog.show();
         RequestParams params = new RequestParams();
         params.put("pageState", mCount*10-9 + "");
         params.put("pageEnd", mCount * 10 + "");
@@ -120,6 +119,7 @@ public class News_2_Fragment extends Fragment implements PullLoadMoreRecyclerVie
         HttpRequest.postNoticeListApi(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
+                if (loadDialog.isShowing())
                 loadDialog.dismiss();
                 //需要转化为实体对象
                 Gson gson = new GsonBuilder().serializeNulls().create();
@@ -137,7 +137,8 @@ public class News_2_Fragment extends Fragment implements PullLoadMoreRecyclerVie
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                loadDialog.dismiss();
+                if (loadDialog.isShowing())
+                    loadDialog.dismiss();
                 //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
@@ -146,6 +147,9 @@ public class News_2_Fragment extends Fragment implements PullLoadMoreRecyclerVie
     }
 
     public void onEventMainThread(News_2_Fragment event) {
-        onRefresh();
+        loadDialog.setCancelable(false);
+        loadDialog.show();
+        setRefresh();
+        getData();
     }
 }

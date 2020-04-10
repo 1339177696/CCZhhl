@@ -93,11 +93,9 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new NewsViewAdapter(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
-
         getData();
 
     }
@@ -171,8 +169,6 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
 
     //新加的用户IDqgl
     private void getData() {
-        loadDialog.setCancelable(false);
-        loadDialog.show();
         RequestParams params = new RequestParams();
         params.put("pageState", mCount * 10 - 9 + "");
         params.put("pageEnd", mCount * 10 + "");
@@ -180,7 +176,9 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
         HttpRequest.postNesListApi(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
-                loadDialog.dismiss();
+                if (loadDialog.isShowing())
+                     loadDialog.dismiss();
+
                 //需要转化为实体对象
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
@@ -204,8 +202,8 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
 
             @Override
             public void onFailure(OkHttpException failuer) {
+                if (loadDialog.isShowing())
                 loadDialog.dismiss();
-
                 //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
@@ -214,7 +212,10 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
     }
 
     public void onEventMainThread(News_1_Fragment event) {
-        onRefresh();
+        loadDialog.setCancelable(false);
+        loadDialog.show();
+        setRefresh();
+        getData();
     }
 
 }
