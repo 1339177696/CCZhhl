@@ -18,45 +18,33 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.R;
-import com.hulian.oa.bean.News;
 import com.hulian.oa.bean.Notice;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
-import com.hulian.oa.news.adapter.NewsViewAdapter;
 import com.hulian.oa.news.adapter.NoticeAdapter;
 import com.hulian.oa.utils.SPUtils;
+import com.hulian.oa.views.LoadingDialog;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
-import com.youth.banner.Banner;
-import com.youth.banner.BannerConfig;
-import com.youth.banner.Transformer;
-import com.youth.banner.listener.OnBannerListener;
-import com.youth.banner.loader.ImageLoader;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 import de.greenrobot.event.EventBus;
 
 public class News_2_Fragment extends Fragment implements PullLoadMoreRecyclerView.PullLoadMoreListener{
-
     @BindView(R.id.listview)
     PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
     private int mCount = 1;
     private RecyclerView mRecyclerView;
     NoticeAdapter mRecyclerViewAdapter;
-
-    private ArrayList<String> list_path;
-    private ArrayList<String> list_title;
     Unbinder unbinder;
+    protected LoadingDialog loadDialog;//加载等待弹窗
 
     @Nullable
     @Override
@@ -64,12 +52,12 @@ public class News_2_Fragment extends Fragment implements PullLoadMoreRecyclerVie
         View view = inflater.inflate(R.layout.fra_news_2, null);
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
+        loadDialog = new LoadingDialog(getActivity());
         initList();
         return view;
     }
 
     private void initList() {
-
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
@@ -124,6 +112,7 @@ public class News_2_Fragment extends Fragment implements PullLoadMoreRecyclerVie
     }
 
     private void getData() {
+        loadDialog.show();
         RequestParams params = new RequestParams();
         params.put("pageState", mCount*10-9 + "");
         params.put("pageEnd", mCount * 10 + "");
@@ -131,6 +120,7 @@ public class News_2_Fragment extends Fragment implements PullLoadMoreRecyclerVie
         HttpRequest.postNoticeListApi(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
+                loadDialog.dismiss();
                 //需要转化为实体对象
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
@@ -147,6 +137,7 @@ public class News_2_Fragment extends Fragment implements PullLoadMoreRecyclerVie
 
             @Override
             public void onFailure(OkHttpException failuer) {
+                loadDialog.dismiss();
                 //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }

@@ -3,11 +3,9 @@ package com.hulian.oa.agency;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,15 +15,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hulian.oa.R;
-import com.hulian.oa.agency.l_fragment.L_HascomFragment;
-import com.hulian.oa.agency.l_fragment.L_UpcomFragment;
+import com.hulian.oa.agency.fragment.HascomFragment;
+import com.hulian.oa.agency.fragment.UpcomFragment;
 import com.hulian.oa.bean.AgencyCount;
 import com.hulian.oa.bean.AgencyCountFinish;
 import com.hulian.oa.bean.Fab;
 import com.hulian.oa.bean.Fab2;
 import com.hulian.oa.bean.StringBean1;
 import com.hulian.oa.bean.StringBean2;
-import com.hulian.oa.work.file.admin.activity.expense.ExpenseExamineActivity;
+import com.hulian.oa.work.activity.expense.ExpenseExamineActivity;
 
 import java.util.ArrayList;
 
@@ -72,8 +70,8 @@ public class AgencyFragment extends Fragment {
     private int mViewPagerIndex;
     private int pos = 0;
 
-    private L_UpcomFragment l_upcomFragment;
-    private L_HascomFragment l_hascomFragment;
+    private UpcomFragment l_upcomFragment;
+    private HascomFragment l_hascomFragment;
     private FragmentManager fManager;
 
     public AgencyFragment() {
@@ -238,7 +236,7 @@ public class AgencyFragment extends Fragment {
                 zxQglTxt2.setTextColor(Color.parseColor("#ccccd5"));
                 zxQglImg2.setImageResource(R.mipmap.done_default);
                 if (l_upcomFragment == null) {
-                    l_upcomFragment = new L_UpcomFragment();
+                    l_upcomFragment = new UpcomFragment();
                     fTransaction.add(R.id.qgl_fragment_daiban, l_upcomFragment);
                 } else {
                     fTransaction.show(l_upcomFragment);
@@ -251,7 +249,7 @@ public class AgencyFragment extends Fragment {
                 zxQglTxt2.setTextColor(Color.parseColor("#FFFFFF"));
                 zxQglImg2.setImageResource(R.mipmap.done);
                 if (l_hascomFragment == null) {
-                    l_hascomFragment = new L_HascomFragment();
+                    l_hascomFragment = new HascomFragment();
                     fTransaction.add(R.id.qgl_fragment_daiban, l_hascomFragment);
                 } else {
                     fTransaction.show(l_hascomFragment);

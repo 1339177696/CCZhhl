@@ -13,7 +13,7 @@ import com.hulian.oa.R;
 import com.hulian.oa.bean.Notice;
 import com.hulian.oa.utils.TimeUtils;
 import com.hulian.oa.utils.URLImageParser;
-import com.hulian.oa.work.file.admin.activity.notice.NoticeParticularsActivity;
+import com.hulian.oa.work.activity.notice.NoticeParticularsActivity;
 
 import java.util.ArrayList;
 import java.util.List;

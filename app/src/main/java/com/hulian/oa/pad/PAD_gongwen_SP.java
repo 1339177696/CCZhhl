@@ -10,7 +10,6 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Path;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -21,7 +20,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.provider.MediaStore;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.util.Log;
@@ -29,7 +27,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -39,15 +36,11 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.target.Target;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import com.hulian.oa.BaseActivity;
+import com.hulian.oa.activity.BaseActivity;
 import com.hulian.oa.R;
-import com.hulian.oa.agency.l_fragment.L_UpcomFragment;
+import com.hulian.oa.agency.fragment.UpcomFragment;
 import com.hulian.oa.bean.DocumentImage;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
@@ -55,35 +48,26 @@ import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.ToastHelper;
-import com.hulian.oa.work.file.admin.activity.document.DocumentLotusActivity;
-import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_ApprovedFragment;
-import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_PendFragment;
-import com.luck.picture.lib.entity.LocalMedia;
-import com.luck.picture.lib.tools.Constant;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 import cn.forward.androids.utils.ImageUtils;
 import cn.forward.androids.utils.Util;
@@ -117,8 +101,6 @@ import okhttp3.Response;
 import okio.BufferedSink;
 import okio.Okio;
 import okio.Sink;
-
-import static com.netease.nim.uikit.common.util.media.BitmapUtil.calculateInSampleSize;
 
 /**
  * Created by qgl on 2019/8/31 9:11.
@@ -813,9 +795,9 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
                         ToastHelper.showToast(mContext, result.getString("msg"));
                         if (result.getString("code").equals("0")) {
                             finish();
-                            EventBus.getDefault().post(new L_PendFragment());
-                            EventBus.getDefault().post(new L_ApprovedFragment());
-                            EventBus.getDefault().post(new L_UpcomFragment());
+//                            EventBus.getDefault().post(new L_PendFragment());
+//                            EventBus.getDefault().post(new L_ApprovedFragment());
+                            EventBus.getDefault().post(new UpcomFragment());
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -849,9 +831,9 @@ public class PAD_gongwen_SP extends BaseActivity implements View.OnClickListener
                         JSONObject result = new JSONObject(responseObj.toString());
                         ToastHelper.showToast(mContext, result.getString("msg"));
                         if (result.getString("code").equals("0")) {
-                            EventBus.getDefault().post(new L_PendFragment());
-                            EventBus.getDefault().post(new L_ApprovedFragment());
-                            EventBus.getDefault().post(new L_UpcomFragment());
+//                            EventBus.getDefault().post(new L_PendFragment());
+//                            EventBus.getDefault().post(new L_ApprovedFragment());
+                            EventBus.getDefault().post(new UpcomFragment());
                             finish();
                         }
                     } catch (JSONException e) {

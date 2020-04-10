@@ -88,7 +88,6 @@
     <dimen name="dp_209">348.3333dp</dimen>
     <dimen name="dp_220">366.6667dp</dimen>
     <dimen name="dp_260">433.3333dp</dimen>
-    <dimen name="dp_350">583.3333dp</dimen>
     <dimen name="sp_8">13.3333sp</dimen>
 	<dimen name="sp_9">15.0000sp</dimen>
 	<dimen name="sp_10">16.6667sp</dimen>

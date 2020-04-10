@@ -206,7 +206,6 @@
             android:layout_marginTop="10dp"
             >
             <RelativeLayout
-                android:layout_below="@id/tv_roam_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="@dimen/dp_80"

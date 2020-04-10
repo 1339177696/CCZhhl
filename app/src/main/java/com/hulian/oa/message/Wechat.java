@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.hulian.oa.me.MeActivity;
-import com.hulian.oa.message.session.search.GlobalSearchActivity;
+import com.hulian.oa.me.activity.MeActivity;
+import com.hulian.oa.message.activity.search.GlobalSearchActivity;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.views.PopWindow;
 import com.netease.nim.uikit.api.NimUIKit;

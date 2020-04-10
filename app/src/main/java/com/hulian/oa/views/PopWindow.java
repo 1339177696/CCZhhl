@@ -11,7 +11,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.PopupWindow;
 
 import com.hulian.oa.R;
-import com.hulian.oa.message.session.AddFriendActivity;
+import com.hulian.oa.message.activity.AddFriendActivity;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.business.contact.selector.activity.ContactSelectActivity;
 import com.netease.nim.uikit.business.team.helper.TeamHelper;

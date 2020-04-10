@@ -14,14 +14,11 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.PowerManager;
-import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.hulian.oa.MainActivity;
 import com.hulian.oa.R;
-import com.hulian.oa.qglactivity.MessagenotificationActivity;
+import com.hulian.oa.push.activity.MessagenotificationActivity;
 import com.hulian.oa.socket.util.Util;
 
 import org.java_websocket.handshake.ServerHandshake;

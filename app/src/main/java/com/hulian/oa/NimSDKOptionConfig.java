@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Environment;
 import android.text.TextUtils;
 
+import com.hulian.oa.activity.MainActivity;
 import com.hulian.oa.utils.preference.UserPreferences;
 import com.netease.nim.uikit.api.wrapper.MessageRevokeTip;
 import com.netease.nim.uikit.api.wrapper.NimUserInfoProvider;

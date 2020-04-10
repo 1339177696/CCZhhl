@@ -18,7 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.hulian.oa.BaseActivity;
+import com.hulian.oa.activity.BaseActivity;
 import com.hulian.oa.R;
 
 import java.lang.reflect.Field;

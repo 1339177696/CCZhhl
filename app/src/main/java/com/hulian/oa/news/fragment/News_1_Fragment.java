@@ -1,10 +1,6 @@
 package com.hulian.oa.news.fragment;
 
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,44 +9,30 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
-import com.bumptech.glide.Glide;
 import com.example.library.banner.layoutmanager.CenterScrollListener;
 import com.example.library.banner.layoutmanager.OverFlyingLayoutManager;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.hulian.oa.LoginActivity;
-import com.hulian.oa.MainActivity;
 import com.hulian.oa.R;
 import com.hulian.oa.bean.News;
-import com.hulian.oa.bean.User;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
-import com.hulian.oa.net.Urls;
 import com.hulian.oa.news.adapter.LocalDataAdapter;
 import com.hulian.oa.news.adapter.NewsViewAdapter;
 import com.hulian.oa.utils.SPUtils;
-import com.hulian.oa.work.file.admin.activity.PostOrderActivity;
-import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_PendFragment;
+import com.hulian.oa.views.LoadingDialog;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 import com.youth.banner.Banner;
-import com.youth.banner.BannerConfig;
-import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
-import com.youth.banner.loader.ImageLoader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,19 +43,16 @@ import butterknife.Unbinder;
 import de.greenrobot.event.EventBus;
 
 public class News_1_Fragment extends Fragment implements OnBannerListener, PullLoadMoreRecyclerView.PullLoadMoreListener {
-
-    RecyclerView recyclerView;
     OverFlyingLayoutManager mOverFlyingLayoutManager;
     Handler mHandler;
     Runnable mRunnable;
     int currentPosition = 0;
-
     @BindView(R.id.listview)
     PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
     private int mCount = 1;
     private RecyclerView mRecyclerView;
     NewsViewAdapter mRecyclerViewAdapter;
-    private ArrayList<String> list_path=new ArrayList<>();
+    private ArrayList<String> list_path = new ArrayList<>();
     private ArrayList<String> list_title;
     @BindView(R.id.banner)
     Banner banner;
@@ -81,20 +60,20 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
     RecyclerView recycler_banner;
     Unbinder unbinder;
     View rootView;
+    protected LoadingDialog loadDialog;//加载等待弹窗
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fra_news_1, null);
         unbinder = ButterKnife.bind(this, rootView);
-       // initData();
-     //   initView();
         EventBus.getDefault().register(this);
+        loadDialog = new LoadingDialog(getActivity());
         initList();
         return rootView;
     }
 
     private void initList() {
-
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
@@ -124,23 +103,9 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
     }
 
     private void initView() {
-//        //  banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
-//        banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
-//        banner.setImageLoader(new MyLoader());
-//        banner.setBannerAnimation(Transformer.Default);
-//    //    banner.setBannerTitles(list_title);
-//        banner.setDelayTime(3000);
-//        banner.isAutoPlay(true);
-//        banner.setIndicatorGravity(BannerConfig.CENTER);
-//        banner.setBannerAnimation(Transformer.DepthPage);
-//        banner.setImages(list_path)
-//                .setOnBannerListener(this)
-//                .start();
         mOverFlyingLayoutManager = new OverFlyingLayoutManager(0.75f, 385, OverFlyingLayoutManager.HORIZONTAL);
-
-        recycler_banner.setAdapter(new LocalDataAdapter(getActivity(),list_path));
+        recycler_banner.setAdapter(new LocalDataAdapter(getActivity(), list_path));
         recycler_banner.setLayoutManager(mOverFlyingLayoutManager);
-
         recycler_banner.addOnScrollListener(new CenterScrollListener());
         mOverFlyingLayoutManager.setOnPageChangeListener(new OverFlyingLayoutManager.OnPageChangeListener() {
             @Override
@@ -181,7 +146,7 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
 
     @Override
     public void OnBannerClick(int position) {
-     //   Toast.makeText(getActivity(), "你点了第" + (position + 1) + "张轮播图", Toast.LENGTH_SHORT).show();
+        //   Toast.makeText(getActivity(), "你点了第" + (position + 1) + "张轮播图", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -206,13 +171,16 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
 
     //新加的用户IDqgl
     private void getData() {
+        loadDialog.setCancelable(false);
+        loadDialog.show();
         RequestParams params = new RequestParams();
-        params.put("pageState", mCount*10-9 + "");
+        params.put("pageState", mCount * 10 - 9 + "");
         params.put("pageEnd", mCount * 10 + "");
         params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
         HttpRequest.postNesListApi(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
+                loadDialog.dismiss();
                 //需要转化为实体对象
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
@@ -222,7 +190,7 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
                             }.getType());
                     mRecyclerViewAdapter.addAllData(memberList);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
-                    if(mCount==1){
+                    if (mCount == 1) {
                         list_path.removeAll(list_path);
                         list_path.add(memberList.get(0).getJournalismImage());
                         list_path.add(memberList.get(1).getJournalismImage());
@@ -236,23 +204,13 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
 
             @Override
             public void onFailure(OkHttpException failuer) {
+                loadDialog.dismiss();
+
                 //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
 
-    }
-    /**
-     * 网络加载图片
-     * 使用了Glide图片加载框架
-     */
-    private class MyLoader extends ImageLoader {
-        @Override
-        public void displayImage(Context context, Object path, ImageView imageView) {
-            Glide.with(context)
-                    .load((String) path)
-                    .into(imageView);
-        }
     }
 
     public void onEventMainThread(News_1_Fragment event) {

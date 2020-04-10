@@ -96,7 +96,6 @@
     <dimen name="dp_209">209dp</dimen>
     <dimen name="dp_220">220dp</dimen>
     <dimen name="dp_260">260dp</dimen>
-    <dimen name="dp_350">350dp</dimen>
 
     <!-- font size,you can hb_add if there is no one -->
     <dimen name="sp_8">8sp</dimen>

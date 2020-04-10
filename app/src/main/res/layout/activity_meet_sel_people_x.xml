@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".work.file.admin.activity.notice.NoticeSelPartActivity">
+    tools:context=".work.activity.notice.NoticeSelPartActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:background="#101a62"

@@ -10,7 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hulian.oa.R;
-import com.hulian.oa.work.file.admin.adapter.Followadapter;
+import com.hulian.oa.work.adapter.Followadapter;
 
 import java.util.List;
 

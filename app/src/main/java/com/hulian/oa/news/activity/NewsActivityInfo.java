@@ -18,13 +18,12 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.hulian.oa.BaseActivity;
+import com.hulian.oa.activity.BaseActivity;
 import com.hulian.oa.R;
 import com.hulian.oa.bean.Fab;
 import com.hulian.oa.bean.Fab2;
 import com.hulian.oa.bean.JournalismComments;
-import com.hulian.oa.bean.News;
-import com.hulian.oa.me.CollectionActivity2;
+import com.hulian.oa.me.activity.CollectionActivity2;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
@@ -35,16 +34,12 @@ import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.TimeUtils;
 import com.hulian.oa.utils.ToastHelper;
 import com.hulian.oa.utils.URLImageParser;
-import com.hulian.oa.work.file.admin.activity.document.l_fragment.L_PendFragment;
-import com.hulian.oa.work.file.admin.activity.task.l_details_activity.TaskUndoneDetailsActivity;
-import com.netease.nim.avchatkit.common.util.TimeUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 

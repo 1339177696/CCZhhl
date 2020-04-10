@@ -9,7 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.hulian.oa.R;
-import com.hulian.oa.message.session.SessionHelper;
+import com.hulian.oa.message.helper.SessionHelper;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.api.model.team.TeamDataChangedObserver;
 import com.netease.nim.uikit.api.wrapper.NimToolBarOptions;

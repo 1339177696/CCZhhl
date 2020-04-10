@@ -1,8 +1,5 @@
 package com.hulian.oa.address.pad;
 
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -20,31 +17,24 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.hulian.oa.BaseActivity;
 import com.hulian.oa.R;
-import com.hulian.oa.address.AddressFragment;
 import com.hulian.oa.address.adapter.ExpandablePadAdapter;
 import com.hulian.oa.bean.Department;
 import com.hulian.oa.bean.People;
-import com.hulian.oa.bean.People_x;
-import com.hulian.oa.me.l_adapter.DepartmentAdapter;
+import com.hulian.oa.me.adapter.DepartmentAdapter;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
-import com.hulian.oa.utils.ToastHelper;
-import com.hulian.oa.work.file.admin.activity.meeting.l_adapter.ExpandableSingleAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import de.greenrobot.event.EventBus;
 
 //选择部门，人员
 public class Address_Pad_Fragment extends Fragment {

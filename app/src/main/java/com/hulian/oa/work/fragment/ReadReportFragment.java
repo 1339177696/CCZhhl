@@ -2,7 +2,6 @@ package com.hulian.oa.work.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,15 +23,12 @@ import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.work.adapter.WriteReportAdapter;
-import com.hulian.oa.work.file.admin.activity.ReadReportActivity;
-import com.othershe.calendarview.weiget.CalendarView;
-import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
+import com.hulian.oa.work.activity.ReadReportActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;

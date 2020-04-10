@@ -7,8 +7,10 @@ import android.graphics.Color;
 import android.text.TextUtils;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.hulian.oa.message.session.ContactHelper;
-import com.hulian.oa.message.session.SessionHelper;
+import com.hulian.oa.activity.LoginActivity;
+import com.hulian.oa.activity.LuncherActivity;
+import com.hulian.oa.message.helper.ContactHelper;
+import com.hulian.oa.message.helper.SessionHelper;
 import com.hulian.oa.utils.preference.Preferences;
 import com.netease.nim.avchatkit.AVChatKit;
 import com.netease.nim.avchatkit.config.AVChatOptions;
@@ -27,9 +29,6 @@ import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.uinfo.UserInfoProvider;
 import com.netease.nimlib.sdk.uinfo.model.UserInfo;
 import com.netease.nimlib.sdk.util.NIMUtil;
-
-import java.io.File;
-
 
 
 public class APP extends Application {

@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hulian.oa.R;
-import com.hulian.oa.work.file.admin.activity.WriteReportActivity;
+import com.hulian.oa.work.activity.WriteReportActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

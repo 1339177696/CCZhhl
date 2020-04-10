@@ -236,7 +236,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                <com.hulian.oa.views.l_flowview.NoScrollRecyclerView
+                <com.hulian.oa.views.flowview.NoScrollRecyclerView
                     android:id="@+id/recycler_item"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -244,7 +244,7 @@
                     tools:itemCount="1"
                     >
 
-                </com.hulian.oa.views.l_flowview.NoScrollRecyclerView>
+                </com.hulian.oa.views.flowview.NoScrollRecyclerView>
                 </LinearLayout>
                 <RelativeLayout
                     android:layout_width="match_parent"

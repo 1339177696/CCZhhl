@@ -102,7 +102,7 @@ android:id="@+id/fg_order"
 android:layout_marginBottom="@dimen/dp_40"
 android:layout_width="wrap_content"
 android:layout_height="wrap_content"
-android:name="com.hulian.oa.work.file.admin.activity.instruct.fragment.Fra_post_order"
+android:name="com.hulian.oa.work.activity.instruct.fragment.Fra_post_order"
     />
     </FrameLayout>
 </LinearLayout>
