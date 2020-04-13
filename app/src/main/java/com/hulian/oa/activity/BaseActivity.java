@@ -159,20 +159,5 @@ public class BaseActivity extends FragmentActivity  {
         return localVersion;
     }
 
-    /**
-     * 获取本地软件版本号名称
-     */
-    public static String getLocalVersionName(Context ctx) {
-        String localVersion = "";
-        try {
-            PackageInfo packageInfo = ctx.getApplicationContext()
-                    .getPackageManager()
-                    .getPackageInfo(ctx.getPackageName(), 0);
-            localVersion = packageInfo.versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return localVersion;
-    }
 
 }

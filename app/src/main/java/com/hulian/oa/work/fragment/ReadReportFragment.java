@@ -159,6 +159,7 @@ public class ReadReportFragment extends Fragment implements  BaseQuickAdapter.Re
 
     @Override
     public void onLoadMoreRequested() {
+
         mCount = mCount + 1;
         getData();
     }
