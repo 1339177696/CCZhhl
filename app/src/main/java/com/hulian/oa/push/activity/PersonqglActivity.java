@@ -47,7 +47,6 @@ public class PersonqglActivity extends BaseActivity {
         ButterKnife.bind(this);
         getPerson();
     }
-
     // 请求审批人,抄送人
     public void getPerson(){
         RequestParams params = new RequestParams();
@@ -97,18 +96,12 @@ public class PersonqglActivity extends BaseActivity {
 
     }
 
-    private void Ceshi(){
-
-    }
-
     @OnClick(R.id.iv_back)
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
                 finish();
                 break;
-
-
         }
 
     }

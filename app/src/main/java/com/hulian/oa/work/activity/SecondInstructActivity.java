@@ -36,7 +36,6 @@ import butterknife.OnClick;
 //工作指令
 public class SecondInstructActivity extends BaseActivity implements PullLoadMoreRecyclerView.PullLoadMoreListener {
 
-
     @BindView(R.id.recyclerview)
     PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
     @BindView(R.id.search)
@@ -47,7 +46,6 @@ public class SecondInstructActivity extends BaseActivity implements PullLoadMore
     L_InstructAdapter mRecyclerViewAdapter;
     private Context mContext;
     private int mCount = 1;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,12 +62,8 @@ public class SecondInstructActivity extends BaseActivity implements PullLoadMore
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                if(s.length() > 0) {
                 handler.removeCallbacks(mSearchTesk);
                 handler.postDelayed(mSearchTesk, 500);
-//                }else {
-//                    handler.removeCallbacks(mSearchTesk);
-//                }
             }
 
             @Override
@@ -106,7 +100,6 @@ public class SecondInstructActivity extends BaseActivity implements PullLoadMore
             case R.id.rl_title:
                 finish();
                 break;
-//                startActivity(new Intent(SecondInstructActivity.this, InstructReceiverActivity.class));
         }
     }
 
@@ -131,7 +124,6 @@ public class SecondInstructActivity extends BaseActivity implements PullLoadMore
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new L_InstructAdapter(this);
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
@@ -199,19 +191,6 @@ public class SecondInstructActivity extends BaseActivity implements PullLoadMore
 
             }
         });
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-
-//                    }
-//                });
-//
-//            }
-//        }, 1000);
-
     }
 
     @Override

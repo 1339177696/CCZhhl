@@ -48,10 +48,8 @@ public class MailWriteActivity extends BaseActivity {
     AlertDialog myDialog;
     @BindView(R.id.gv_test)
     MyGridView gvTest;
-
     @BindView(R.id.gv_test2)
     MyGridView gvTest2;
-
     //收件人
     @BindView(R.id.work_mail_shoujianren)
     TextView work_mail_shoujianren;
@@ -69,7 +67,6 @@ public class MailWriteActivity extends BaseActivity {
     EditText et_annex;
     @BindView(R.id.tv_user)
     TextView tvUser;
-
     private String id;
     private String aid;
     private String zhuti = "";
@@ -77,7 +74,6 @@ public class MailWriteActivity extends BaseActivity {
     private String youxiang;
     private String username = "";
     private List<String> selectList = new ArrayList<>();
-
     private String receiveMailCcName="";
     private String receiveMailCc="";
     @Override
@@ -189,27 +185,12 @@ public class MailWriteActivity extends BaseActivity {
             @Override
             public void onFailure(OkHttpException failuer) {
                 loadDialog.dismiss();
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(MailWriteActivity.this, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     public void onEventMainThread(List<People> resultmemberLis) {
-//        if (resultmemberLis.size() > 0) {
-//            String name = "";
-//            String email = "";
-//            aid = "";
-//            for (People params1 : resultmemberLis) {
-//                aid += params1.getUserId() + ",";
-//                name += params1.getUserName() + ",";
-//                email += params1.getEmail() + ",";
-//            }
-//            work_mail_shoujianren.setText(name.substring(0, name.length() - 1));
-//            id = aid.substring(0, aid.length() - 1);
-//            youxiang = email.substring(0, email.length() - 1);
-//            username = name.substring(0, name.length() - 1);
-//        }
     }
 
     @Override
@@ -261,7 +242,6 @@ public class MailWriteActivity extends BaseActivity {
         } else if (resultCode == 1 && requestCode == 1) {
 
             List<People> mList = (List<People>) data.getSerializableExtra("mList");
-
             if (mList.size() > 0) {
                 String name = "";
                 String email = "";

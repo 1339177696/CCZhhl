@@ -38,7 +38,6 @@ import de.greenrobot.event.EventBus;
 
 //已审批
 public class LeaveApprovedFragment extends Fragment implements PullLoadMoreRecyclerView.PullLoadMoreListener {
-
     @BindView(R.id.lv_notice)
     PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
     @BindView(R.id.emptyBg)
@@ -86,7 +85,6 @@ public class LeaveApprovedFragment extends Fragment implements PullLoadMoreRecyc
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new L_LeaveApprovedAdapter(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
@@ -138,10 +136,8 @@ public class LeaveApprovedFragment extends Fragment implements PullLoadMoreRecyc
                     mRecyclerViewAdapter.addAllData(memberList);
                     if (mCount == 1 && memberList.size() == 0) {
                         emptyBg.setVisibility(View.VISIBLE);
-//                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
                     } else {
                         emptyBg.setVisibility(View.GONE);
-//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     }
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                 } catch (JSONException e) {
@@ -151,7 +147,6 @@ public class LeaveApprovedFragment extends Fragment implements PullLoadMoreRecyc
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

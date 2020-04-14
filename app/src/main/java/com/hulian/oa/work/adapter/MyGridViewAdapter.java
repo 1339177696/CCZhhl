@@ -57,18 +57,10 @@ public class MyGridViewAdapter extends BaseAdapter {
         }
         holder.bt_box.setText(1+position+"");
         if(position%2==0){
-     //       holder.bt_box.setClickable(false);
             holder.bt_box.setBackgroundResource(R.drawable.bt_background);
         }
         else {
-          //  holder.bt_box.setClickable(true);
             holder.bt_box.setBackgroundResource(R.drawable.bt_background_sel);
-//            holder.bt_box.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//
-//                }
-//            });
         }
         return convertView;
     }

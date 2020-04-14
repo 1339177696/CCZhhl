@@ -19,7 +19,6 @@ public class L_LeaveHistoryAdapter extends RecyclerView.Adapter <L_LeaveHistoryA
     private Context mContext;
     private List<Leave> dataList = new ArrayList<>();
 
-
     public void addAllData(List<Leave> dataList) {
         this.dataList.addAll(dataList);
         notifyDataSetChanged();
@@ -72,21 +71,12 @@ public class L_LeaveHistoryAdapter extends RecyclerView.Adapter <L_LeaveHistoryA
         holder.tv_duration.setText(dataList.get(position).getDuration()+"天");
         holder.lv_img_my.setText("请假时间  "+dataList.get(position).getStartTime().replace("-","/")+"-"+dataList.get(position).getEndTime().replace("-","/"));
         if(dataList.get(position).getState().equals("0")){
-//            holder.tv_approval.setBackgroundColor(mContext.getResources().getColor(R.color.tab_color_true));
             holder.tv_approval.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_daishenpi_icon_qgl));
-
-//            holder.tv_approval.setText("待审批");
-
         }
         else if (dataList.get(position).getState().equals("1")){
-//            holder.tv_approval.setText("已审批");
-//            holder.tv_approval.setBackgroundColor(mContext.getResources().getColor(R.color.color_a_green));
             holder.tv_approval.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_shenpi_tongguo_icon_qgl));
-
         }
         else {
-//            holder.tv_approval.setText("驳回");
-//            holder.tv_approval.setBackgroundColor(mContext.getResources().getColor(R.color.colorText));
             holder.tv_approval.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_bohui_icon_qgl));
 
         }

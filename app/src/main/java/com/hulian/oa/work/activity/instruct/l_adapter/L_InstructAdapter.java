@@ -25,7 +25,6 @@ public class L_InstructAdapter extends RecyclerView.Adapter <L_InstructAdapter.V
     private Context mContext;
     private List<Instruct> dataList = new ArrayList<>();
 
-
     public void addAllData(List<Instruct> dataList) {
         this.dataList.addAll(dataList);
         notifyDataSetChanged();
@@ -48,10 +47,8 @@ public class L_InstructAdapter extends RecyclerView.Adapter <L_InstructAdapter.V
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
             tv_posert= (TextView) itemView.findViewById(R.id.tv_posert);
             tv_receiver= (TextView) itemView.findViewById(R.id.tv_receiver);
-
             tv_time = (TextView) itemView.findViewById(R.id.tv_time);
             tv_operate = (ImageView) itemView.findViewById(R.id.tv_operate);
-
             tv_time= (TextView) itemView.findViewById(R.id.tv_time);
             tv_time2=(TextView) itemView.findViewById(R.id.tv_time2);
         }
@@ -69,23 +66,13 @@ public class L_InstructAdapter extends RecyclerView.Adapter <L_InstructAdapter.V
 
         try {
             if(dataList.get(position).getContent()==null||dataList.get(position).getContent().equals("")){
-//                holder.tv_name.setText(dataList.get(position).getCreateBy()+"下发给"+dataList.get(position).getReceiver()+"的指令");
             }
             else{
-//                holder.tv_name.setText(dataList.get(position).getContent());
             }
         }
        catch (Exception e){
 
        }
-//        if("0".equals(SPUtils.get(mContext,"isLead","-1").toString())){
-//            holder.tv_receiver.setText(dataList.get(position).getContent().split("—")[0]+"");
-//            holder.tv_posert.setText(SPUtils.get(mContext, "nickname", "").toString());
-//        }
-//        else {
-//            holder.tv_posert.setText(dataList.get(position).getContent().split("—")[0]+"");
-//            holder.tv_receiver.setText(SPUtils.get(mContext, "nickname", "").toString());
-//        }
         holder.tv_posert.setText(dataList.get(position).getCreateBy());
         if (dataList.get(position).getReceiver()!=null) {
             holder.tv_receiver.setVisibility(View.VISIBLE);
@@ -99,11 +86,7 @@ else {
             holder.tv_time2.setText(TimeUtils.getDateToString4(dataList.get(position).getCreateTime()));
             String time = dataList.get(position).getCreateTime();
             holder.tv_name.setText(time.substring(time.length()-8,time.length()-3));
-
-
-
         }
-//        holder.tv_operate.setText(dataList.get(position).getState());
         String operate = "";
         Intent intent;
         if(SPUtils.get(mContext,"isLead","").equals("0")){
@@ -143,24 +126,9 @@ else {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                //测试数据start
-//                if (position == 0){//已反馈 跳转指令详情
-//                    holder.tv_operate.setText("详情");
-//                    mContext.startActivity(new Intent(mContext, InstructDetailsActivity.class));
-//                }else if (position==1){
-//                 //未反馈  已接收 跳转到反馈界面
-//                    holder.tv_operate.setText("反馈");
-//                        mContext.startActivity(new Intent(mContext, InstructBackActivity.class));
-//                }else if(position==2){
-//                    holder.tv_operate.setText("接收");
-//                    mContext.startActivity(new Intent(mContext, InstructReceiverActivity.class));
-//                }
-//                //测试数据end
-
+                  //测试数据end
                 intent.putExtra("id",dataList.get(position).getId());
                 intent.putExtra("content",dataList.get(position).getContent());
-
-                //intent.putExtra("content",dataList.get(position).getCreateBy()+"下发给"+dataList.get(position).getReceiver()+"的指令");
                 mContext.startActivity(intent);
             }
         });

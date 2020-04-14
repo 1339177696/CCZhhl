@@ -42,9 +42,7 @@ public class Work_gd_Activity extends BaseActivity {
     ImageView btCoop;
     @BindView(R.id.bt_notice)
     ImageView btNotice;
-
     @BindView(R.id.bt_meeting)
-
     ImageView btMeeting;
     @BindView(R.id.bt_instruct)
     ImageView btInstruct;
@@ -62,16 +60,6 @@ public class Work_gd_Activity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_mail:
-       /*         if(BuildConfig.IsPad)//业务驾驶舱
-                {
-                    //tartActivity(new Intent(getActivity(), SecondMailActivity.class));
-                    init(images);
-                    Intent intent = new Intent(getActivity(), PicturePreviewActivity2.class);
-                    intent.putExtra(PictureConfig.EXTRA_PREVIEW_SELECT_LIST, (Serializable) selectList);
-                    intent.putExtra(PictureConfig.EXTRA_POSITION, 0);
-                    getActivity().startActivity(intent);
-                }
-                else*/
                 startActivity(new Intent(Work_gd_Activity.this, SecondMailActivity.class));
                 break;
             case R.id.bt_qingjia:
@@ -112,29 +100,6 @@ public class Work_gd_Activity extends BaseActivity {
             case R.id.bt_yuyin:
                 ToastHelper.showToast(Work_gd_Activity.this, "功能暂未开放");
                 break;
-
-
-//            case R.id.bt_work_space:
-//                //20191129
-////                startActivity(new Intent(getActivity(), WorkSpaceActivity.class));
-//                //startActivity(new Intent(getActivity(), MessagenotificationActivity.class));
-//                ToastHelper.showToast(getActivity(), "功能暂未开放");
-//
-//                break;
-//            case R.id.bt_expense:
-////                qgl修改
-//
-////                    startActivity(new Intent(getActivity(), SecondExpenseActivity.class));
-//                ToastHelper.showToast(getActivity(), "功能暂未开放");
-//                break;
-//            case R.id.bt_work_attendance:
-//                ToastHelper.showToast(getActivity(), "功能暂未开放");
-//                break;
-//            case R.id.bt_list:
-//                EventBus.getDefault().post(new WorkFragemt_9());
-//                break;
-//            case R.id.bt_9:
-//                break;
             case R.id.iv_back:
                 finish();
                 break;
@@ -164,8 +129,6 @@ public class Work_gd_Activity extends BaseActivity {
             public void onSuccess(AVChatChannelInfo avChatChannelInfo) {
                 LogUtil.ui("create room " + roomName + " success !");
                 onCreateRoomSuccess(roomName, accounts);
-
-
                 TeamAVChatProfile.sharedInstance().setTeamAVChatting(true);
                 AVChatKit.outgoingTeamCall(Work_gd_Activity.this, false, "", roomName, accounts, roomName);
             }

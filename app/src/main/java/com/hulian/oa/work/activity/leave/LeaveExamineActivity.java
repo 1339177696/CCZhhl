@@ -56,9 +56,6 @@ public class LeaveExamineActivity extends BaseActivity {
     TextView tv_chaosong_person_qgl;
     @BindView(R.id.recycler2)
     RecyclerView recyclerView;
-    //请假标题
-//    @BindView(R.id.tv_leave_title)
-//    TextView tv_leave_title;
     //请假事由
     @BindView(R.id.tv_leave_reason)
     TextView tv_leave_reason;
@@ -71,9 +68,6 @@ public class LeaveExamineActivity extends BaseActivity {
     //结束时间
     @BindView(R.id.tv_end)
     TextView tv_end;
-    //请假事由详细信息
-//    @BindView(R.id.tv_leave_reason_content)
-//    TextView tv_leave_reason_content;
     //查看他的历史记录
     @BindView(R.id.tv_check_history)
     TextView tv_check_history;
@@ -83,18 +77,13 @@ public class LeaveExamineActivity extends BaseActivity {
     //同意
     @BindView(R.id.tv_agree)
     RadioButton tv_agree;
-    //转交
-//    @BindView(R.id.tv_transfer)
-//    TextView tv_transfer;
     AlertDialog myDialog;
     private LeaveExamineAdapter adapter;
     //已经选择图片
     private List<LocalMedia> selectList = new ArrayList<>();
     //图片放大预览测试
     private String[] images = {};
-
     private int mCount = 1;
-
     @BindView(R.id.tv_bohui)
     TextView tv_bohui;
     private String bohui = "";
@@ -147,7 +136,6 @@ public class LeaveExamineActivity extends BaseActivity {
             }
         });
     }
-//    R.id.tv_transfer,
     @OnClick({R.id.tv_disagree,R.id.tv_agree,R.id.tv_check_history,R.id.iv_back})
     public void onViewClicked(View view) {
         switch (view.getId()){
@@ -165,9 +153,6 @@ public class LeaveExamineActivity extends BaseActivity {
             case R.id.iv_back://返回
                 finish();
                 break;
-//            case R.id.tv_transfer://转交
-//                startActivity(new Intent(mContext,SelDepartmentActivity_Leave.class));
-//                break;
         }
     }
 
@@ -201,7 +186,6 @@ public class LeaveExamineActivity extends BaseActivity {
             }
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -270,7 +254,6 @@ public class LeaveExamineActivity extends BaseActivity {
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

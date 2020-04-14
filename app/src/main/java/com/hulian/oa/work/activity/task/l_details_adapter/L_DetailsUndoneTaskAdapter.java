@@ -94,10 +94,8 @@ public class L_DetailsUndoneTaskAdapter extends RecyclerView.Adapter <RecyclerVi
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View inflate = null;
         RecyclerView.ViewHolder viewHolder = null;
-
         //根据i返回不同布局
         switch (viewType) {
             case ITEMONE:
@@ -115,14 +113,9 @@ public class L_DetailsUndoneTaskAdapter extends RecyclerView.Adapter <RecyclerVi
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
             if (holder instanceof ViewHolder_Top){//设置数据 事件
                 ViewHolder_Top viewHolderTop = ((ViewHolder_Top) holder);
-
-//                viewHolderTop.tv_title_x.setText(dataList.get(position).getTitle());
                 viewHolderTop.tv_launch_person_x.setText(dataList.get(position).getCreateBy()+"发起");
-//                viewHolderTop.tv_deadline_x.setText(dataList.get(position).getEndTime()+"截止");
-//                viewHolderTop.tv_launch_time_x.setText(dataList.get(position).getStartTime());
                 viewHolderTop.tv_operator_person_x.setText(dataList.get(position).getExecutor().substring(0,dataList.get(position).getExecutor().length()-1));
                 viewHolderTop.tv_completed_count_x.setText(dataList.get(position).getSum()+"完成");
-               // viewHolderTop.tv_task_details_x.setText("    "+dataList.get(position).getDetails());
                 Log.e("大哥哥哥哥",dataList.get(position).getId());
 
                 String aa = dataList.get(position).getFiles();
@@ -158,25 +151,13 @@ public class L_DetailsUndoneTaskAdapter extends RecyclerView.Adapter <RecyclerVi
 
                     }
                 }
-//                viewHolderTop.tv_undone_top_completed.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        clickInterface.onButtonClick(v, position);
-//
-////                        getData(v,dataList.get(position).getId(),1);
-//                    }
-//                });
             }else if (holder instanceof ViewHolder_List)
             {
                 ViewHolder_List viewHolderList = ((ViewHolder_List) holder);
                 viewHolderList.tv_name.setText(dataList.get(position).getRespondent());
-
-
                 String a = dataList.get(position).getCreateTime();
                 String b =  getDataaa(a);
                 viewHolderList.tv_reply_time.setText(b);
-
-
                 if (dataList.get(position).getContent()!=null)
                 {
                     viewHolderList.tv_content.setVisibility(View.VISIBLE);
@@ -208,29 +189,16 @@ public class L_DetailsUndoneTaskAdapter extends RecyclerView.Adapter <RecyclerVi
 
     }
     public static class ViewHolder_Top extends RecyclerView.ViewHolder {
-//        TextView tv_title_x;
-//        TextView tv_deadline_x;
         TextView tv_launch_person_x;
-//        TextView tv_launch_time_x;
         TextView tv_operator_person_x;
         TextView tv_completed_count_x;
-        TextView tv_task_details_x;
         RecyclerView recyclerView;
-
-        TextView tv_undone_top_completed;
         public ViewHolder_Top(View itemView) {
             super(itemView);
-//            tv_title_x = ((TextView) itemView.findViewById(R.id.tv_title_x));
-//            tv_deadline_x = ((TextView) itemView.findViewById(R.id.tv_deadline_x));
             tv_launch_person_x = ((TextView) itemView.findViewById(R.id.tv_launch_person_x));
-//            tv_launch_time_x = ((TextView) itemView.findViewById(R.id.tv_launch_time_x));
             tv_operator_person_x = ((TextView) itemView.findViewById(R.id.tv_operator_person_x));
             tv_completed_count_x = ((TextView) itemView.findViewById(R.id.tv_completed_count_x));
-            //tv_task_details_x = ((TextView) itemView.findViewById(R.id.tv_task_details_x));
             recyclerView = ((RecyclerView) itemView.findViewById(R.id.recyclerView));
-
-
-//            tv_undone_top_completed = ((TextView) itemView.findViewById(R.id.tv_undone_top_completed));
         }
     }
     public static class ViewHolder_List extends RecyclerView.ViewHolder {

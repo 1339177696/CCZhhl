@@ -51,19 +51,16 @@ public class TaskCopymeDetailsActivity extends BaseActivity implements PullLoadM
     private String id;
     private Hufu_bean huifu_bean_x;
     private List<Hufu_bean>list = new ArrayList<>();
-
     @BindView(R.id.la_un_start_time)
     TextView la_un_start_time;
      @BindView(R.id.la_un_stop_time)
     TextView la_un_stop_time;
-
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StatusBarUtil.statusBarLightMode_white(this);
-
         setContentView(R.layout.l_activity_copyme_details_task);
         ButterKnife.bind(this);
         porid = getIntent().getStringExtra("PORID");
@@ -94,7 +91,6 @@ public class TaskCopymeDetailsActivity extends BaseActivity implements PullLoadM
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new L_DetailsCopymeTaskAdapter(this);
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
@@ -146,13 +142,11 @@ public class TaskCopymeDetailsActivity extends BaseActivity implements PullLoadM
                     huifu_bean_x = gson.fromJson(result.getJSONObject("data").getString("object"), new TypeToken<Hufu_bean>(){}.getType());
                     String sum = result.getJSONObject("data").getString("sum");
                     huifu_bean_x.setSum(sum);
-
                     JSONObject jsonObject = new JSONObject(result.getJSONObject("data").getString("object"));
                     String a = jsonObject.getString("startTime");
                     la_un_start_time.setText(a.replace("-","/"));
                     String b = jsonObject.getString("endTime");
                     la_un_stop_time.setText(b.replace("-","/"));
-
                     mRecyclerViewAdapter.addAllData(list,huifu_bean_x);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                 } catch (JSONException e) {
@@ -162,37 +156,10 @@ public class TaskCopymeDetailsActivity extends BaseActivity implements PullLoadM
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
     }
-//    private void getData() {
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        mRecyclerViewAdapter.addAllData(setList());
-//                        mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
-//                    }
-//                });
-//
-//            }
-//        }, 1000);
-//
-//    }
-//
-//    private List<String> setList() {
-//        List<String> dataList = new ArrayList<>();
-//        int start = 20 * (mCount - 1);
-//        for (int i = start; i < 20 * mCount; i++) {
-//            dataList.hb_add("Frist" + i);
-//        }
-//        return dataList;
-//
-//    }
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {

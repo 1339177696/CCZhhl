@@ -42,9 +42,7 @@ public class TeamCreateHelper {
      * 创建讨论组
      */
     public static void createNormalTeam(final Context context, List<String> memberAccounts, final boolean isNeedBack, final RequestCallback<CreateTeamResult> callback) {
-
         String teamName = "讨论组";
-
         DialogMaker.showProgressDialog(context, context.getString(com.netease.nim.uikit.R.string.empty), true);
         // 创建群
         HashMap<TeamFieldEnum, Serializable> fields = new HashMap<TeamFieldEnum, Serializable>();
@@ -55,7 +53,6 @@ public class TeamCreateHelper {
                     @Override
                     public void onSuccess(CreateTeamResult result) {
                         DialogMaker.dismissProgressDialog();
-
                         ArrayList<String> failedAccounts = result.getFailedInviteAccounts();
                         if (failedAccounts != null && !failedAccounts.isEmpty()) {
                             TeamHelper.onMemberTeamNumOverrun(failedAccounts, context);
@@ -98,9 +95,7 @@ public class TeamCreateHelper {
      * 创建高级群
      */
     public static void createAdvancedTeam(final Context context, List<String> memberAccounts) {
-
         String teamName = "高级群";
-
         DialogMaker.showProgressDialog(context, context.getString(com.netease.nim.uikit.R.string.empty), true);
         // 创建群
         TeamTypeEnum type = TeamTypeEnum.Advanced;
@@ -127,9 +122,7 @@ public class TeamCreateHelper {
                         } else {
                             tip = context.getString(com.netease.nim.uikit.R.string.create_team_failed) + ", code=" + code;
                         }
-
                         ToastHelper.showToast(context, tip);
-
                         Log.e(TAG, "create team error: " + code);
                     }
 

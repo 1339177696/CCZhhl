@@ -17,10 +17,8 @@ import java.util.List;
 
 public class Followadapter extends BaseAdapter {
     private String changeStr = "";
-    //
     private List<String> mlistdatas;
     private LayoutInflater mInflater;
-
     public Followadapter(Context mcontext, List<String> mlistdatas) {
         this.mlistdatas = mlistdatas;
         mInflater = LayoutInflater.from(mcontext);

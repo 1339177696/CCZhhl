@@ -106,9 +106,7 @@ public class CalendarFragment extends Fragment {
     TextView xbDkwaiqin;
     @BindView(R.id.xb_dk_chidao)
     TextView xbDkchidao;
-
     private int[] cDate = CalendarUtil.getCurrentDate();
-
     private boolean permi; //权限
     private String createTime = "";  // 服务器年月日
     private String clanderTime = ""; // 天

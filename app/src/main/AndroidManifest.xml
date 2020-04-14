@@ -416,8 +416,6 @@
         <activity
             android:name=".work.activity.WorkSpaceActivity"
             android:configChanges="screenSize|keyboardHidden|orientation" />
-        <activity android:name=".pad.PAD_gongwen_SP" />
-        <activity android:name=".pad.PAD_zhiling_XF" />
         <activity
             android:name=".push.activity.MessagenotificationActivity"
             android:configChanges="screenSize|keyboardHidden|orientation" />

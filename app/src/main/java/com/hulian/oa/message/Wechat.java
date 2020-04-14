@@ -70,31 +70,21 @@ public class Wechat extends TFragment {
     private static final int REQUEST_CODE_NORMAL = 1;
     // view
     private RecyclerView recyclerView;
-
     private View emptyBg;
-
     private ImageView iv_people ;
     private TextView iv_circle;
     private TextView emptyHint;
     private  TextView tv_search;
     private  TextView tv_type;
-
     private ImageView iv_gomine;
     private ImageView iv_more;
     // data
     private List<RecentContact> items;
-
     private Map<String, RecentContact> cached; // 暂缓刷上列表的数据（未读数红点拖拽动画运行时用）
-
     private RecentContactAdapter adapter;
-
     private boolean msgLoaded = false;
-
     private RecentContactsCallback callback;
-
     private UserInfoObserver userInfoObserver;
-
-
     public Wechat() {
         // Required empty public constructor
     }
@@ -109,9 +99,6 @@ public class Wechat extends TFragment {
     public static Wechat newInstance(String requestJson) {
         Wechat fragment = new Wechat();
         Bundle args = new Bundle();
-//        args.putString("requestJson", requestJson);
-//        args.putString("gid", gid);
-//        args.putString("idno", idno);
         fragment.setArguments(args);
         return fragment;
     }
@@ -120,8 +107,6 @@ public class Wechat extends TFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-//            gid = getArguments().getString("gid");
-//            idno=getArguments().getString("idno");
         }
     }
     @Override

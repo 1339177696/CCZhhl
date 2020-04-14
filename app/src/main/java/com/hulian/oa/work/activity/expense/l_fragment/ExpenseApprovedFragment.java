@@ -40,7 +40,6 @@ import de.greenrobot.event.EventBus;
  * 领导
  */
 public class ExpenseApprovedFragment extends Fragment implements PullLoadMoreRecyclerView.PullLoadMoreListener {
-
     @BindView(R.id.recyclerView)
     PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
     private int mCount = 1;
@@ -82,7 +81,6 @@ public class ExpenseApprovedFragment extends Fragment implements PullLoadMoreRec
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new L_ExpenseApprovedAdapter(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
@@ -141,7 +139,6 @@ public class ExpenseApprovedFragment extends Fragment implements PullLoadMoreRec
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

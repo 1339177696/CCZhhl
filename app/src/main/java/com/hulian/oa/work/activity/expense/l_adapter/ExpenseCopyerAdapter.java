@@ -105,8 +105,6 @@ public class ExpenseCopyerAdapter extends
      */
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
-
-
         //少于8张，显示继续添加的图标
         if (getItemViewType(position) == TYPE_CAMERA) {
             Drawable drawable = ContextCompat.getDrawable(context,R.drawable.addimg);

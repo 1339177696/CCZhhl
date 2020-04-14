@@ -18,7 +18,6 @@ import com.netease.nimlib.sdk.team.model.Team;
  */
 
 public class AckMessageAction extends BaseAction {
-
     public AckMessageAction() {
         super(R.drawable.message_plus_ack_selector, R.string.input_panel_ack_msg);
     }

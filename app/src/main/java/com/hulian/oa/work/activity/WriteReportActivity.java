@@ -52,8 +52,6 @@ import de.greenrobot.event.EventBus;
  * Describe:写日报页面
  */
 public class WriteReportActivity extends BaseActivity {
-
-
     @BindView(R.id.title_text)
     TextView titleText;
     @BindView(R.id.tv_1)
@@ -74,8 +72,6 @@ public class WriteReportActivity extends BaseActivity {
     TextView recipient;//接收人
     @BindView(R.id.work_leave_list_liner)
     LinearLayout workLeaveListLiner;
-
-
     private int maxSelectNum = 9;
     //已经选择图片
     private List<LocalMedia> selectList = new ArrayList<>();
@@ -208,10 +204,6 @@ public class WriteReportActivity extends BaseActivity {
             ToastHelper.showToast(WriteReportActivity.this,"请输入完成的工作内容");
             return;
         }
-//        if (TextUtils.isEmpty(planWork.getText())){
-//            ToastHelper.showToast(WriteReportActivity.this,"请输入工作计划内容");
-//            return;
-//        }
         loadDialog.show();
         RequestParams params = new RequestParams();
         params.put("reportType", type);
@@ -223,7 +215,6 @@ public class WriteReportActivity extends BaseActivity {
         params.put("receivePersonName", recipient.getText() + "");
         params.put("createBy",SPUtils.get(mContext, "userId", "").toString() );
         params.put("createByName",SPUtils.get(mContext, "nickname", "").toString() );
-
 
         //qgl新加的多图片上传
         List<File> fils = new ArrayList<>();
@@ -245,7 +236,6 @@ public class WriteReportActivity extends BaseActivity {
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 loadDialog.dismiss();
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }

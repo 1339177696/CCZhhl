@@ -26,8 +26,6 @@ import java.util.List;
 public class L_LeaveApplyLaunchAdapter extends RecyclerView.Adapter <L_LeaveApplyLaunchAdapter.ViewHolder>{
     private Context mContext;
     private List<Leave> dataList = new ArrayList<>();
-
-
     public void addAllData(List<Leave> dataList) {
         this.dataList.addAll(dataList);
         notifyDataSetChanged();
@@ -52,7 +50,6 @@ public class L_LeaveApplyLaunchAdapter extends RecyclerView.Adapter <L_LeaveAppl
         public TextView tv_duration;
         //已审批
         public ImageView tv_pend;
-
         public TextView l_item_time;
         public ViewHolder(View itemView) {
             super(itemView);
@@ -68,7 +65,6 @@ public class L_LeaveApplyLaunchAdapter extends RecyclerView.Adapter <L_LeaveAppl
     @Override
     public L_LeaveApplyLaunchAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.l_item_apply_launch_leave, parent, false);
-
         return new L_LeaveApplyLaunchAdapter.ViewHolder(v);
     }
 
@@ -76,17 +72,10 @@ public class L_LeaveApplyLaunchAdapter extends RecyclerView.Adapter <L_LeaveAppl
     @Override
     public void onBindViewHolder(L_LeaveApplyLaunchAdapter.ViewHolder holder, final int position) {
         holder.tv_title.setText(dataList.get(position).getRemark());
-
-        Log.e("时间",dataList.get(position).getCreateTime());
-     //   String a = getDataaa(dataList.get(position).getCreateTime());
-//        holder.tv_time.setText(dataList.get(position).getCreateTime().split(" ")[0]);
         holder.tv_time.setText(TimeUtils.getDateToString(dataList.get(position).getCreateTime()));
-
-
         holder.tv_leave_reason.setText(dataList.get(position).getCause());
         holder.tv_duration.setText(dataList.get(position).getDuration()+"天");
         holder.l_item_time.setText("请假时间"+dataList.get(position).getStartTime()+"--"+dataList.get(position).getEndTime());
-
         if(dataList.get(position).getState().equals("0")){
             holder.tv_pend.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_daishenpi_icon_qgl));
         }
@@ -117,39 +106,4 @@ public class L_LeaveApplyLaunchAdapter extends RecyclerView.Adapter <L_LeaveAppl
         return dataList.size();
     }
 
-
-    private String getDataaa(String fromDate) {
-        String strTime = null;
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-        String toDate = df.format(curDate);
-        try {
-            //前的时间
-            Date fd = df.parse(fromDate);
-            //后的时间
-            Date td = df.parse(toDate);
-            //两时间差,精确到毫秒
-            long diff = td.getTime() - fd.getTime();
-            long day = diff / 86400000;                         //以天数为单位取整
-            long hour = diff % 86400000 / 3600000;               //以小时为单位取整
-            long min = diff % 86400000 % 3600000 / 60000;       //以分钟为单位取整
-            long seconds = diff % 86400000 % 3600000 % 60000 / 1000;   //以秒为单位取整
-
-            if (day<=0)
-            {
-                strTime = fromDate.substring(10,fromDate.length()-3);
-            }
-            else
-            {
-                System.out.println("两时间差---> " + day + "天" + hour + "小时" + min + "分" + seconds + "秒");
-                strTime = fromDate.substring(0,fromDate.length()-8);
-
-            }
-            return strTime;
-        } catch (ParseException e)
-        {
-            e.printStackTrace();
-        }
-        return null;
-    }
 }

@@ -74,7 +74,6 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
     TextView laUnStopTime;
     @BindView(R.id.file_btn)
     ImageView file_btn;
-
     private int mCount = 1;
     private RecyclerView mRecyclerView;
     L_DetailsLaunchTaskAdapter mRecyclerViewAdapter;
@@ -92,11 +91,9 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
     RelativeLayout launch_rela_huifu;
     @BindView(R.id.iv_back)
     FrameLayout iv_back;
-
     @BindView(R.id.tv_off)
     TextView tv_off;
     private List<String> selectList1 = new ArrayList<>();
-
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -111,7 +108,6 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
     }
 
     private void initList() {
-
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
 //        mRecyclerView.setNestedScrollingEnabled(false);
@@ -132,12 +128,10 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new L_DetailsLaunchTaskAdapter(this);
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
         getData();
-
         launch_minput.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -241,10 +235,8 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
                         tv_off.setVisibility(View.GONE);
 
                     }
-
                     mRecyclerViewAdapter.addAllData(list, huifu_bean_x);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -287,7 +279,6 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -403,7 +394,6 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
                     String msg = obj.getString("msg");
                     if (code.equals("0")) {
                         EventBus.getDefault().post(new UpcomFragment());
-                        //   EventBus.getDefault().post(new L_HascomFragment());
                         Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
                         launch_rela_huifu.setVisibility(View.GONE);
                     } else {
@@ -416,7 +406,6 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -444,43 +433,6 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
         context = "";
         gethuifuData();
     }
-
-
-//    private void gethuifufile() {
-//        RequestParams params = new RequestParams();
-//        params.put("proid", id);
-//        params.put("content", context);
-//        params.put("respondent", SPUtils.get(mContext, "userId", "").toString());
-//        List<File> fils = new ArrayList<>();
-//        for (String imgurl : selectList1) {
-//            fils.hb_add(new File(imgurl));
-//        }
-
-
-//        qgl注释的
-//        HttpRequest.post_workCoordinationReply_add(params, fils, new ResponseCallback() {
-//            @Override
-//            public void onSuccess(Object responseObj) {
-//
-//                try {
-//                    JSONObject result = new JSONObject(responseObj.toString());
-//                    ToastHelper.showToast(mContext, result.getString("msg"));
-//                    if (result.getString("code").equals("0")) {
-//                        onRefresh();
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(OkHttpException failuer) {
-//                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
-//                Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
-
 //    取消任务
     public void getCancelTask(){
         RequestParams params = new RequestParams();
@@ -501,7 +453,6 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

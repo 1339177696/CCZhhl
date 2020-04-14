@@ -34,7 +34,6 @@ public class FileBoxActivity extends BaseActivity implements PullLoadMoreRecycle
         initList();
     }
     private void initList() {
-
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
@@ -54,7 +53,6 @@ public class FileBoxActivity extends BaseActivity implements PullLoadMoreRecycle
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(FileBoxActivity.this);
         mRecyclerViewAdapter = new L_FileBoxAdapter(FileBoxActivity.this);
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);

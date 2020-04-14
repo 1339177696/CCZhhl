@@ -41,7 +41,6 @@ import de.greenrobot.event.EventBus;
  */
 
 public class ExpensePendFragment extends Fragment implements PullLoadMoreRecyclerView.PullLoadMoreListener {
-
     @BindView(R.id.recyclerView)
     PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
     private int mCount = 1;
@@ -63,7 +62,6 @@ public class ExpensePendFragment extends Fragment implements PullLoadMoreRecycle
     }
 
     private void initList() {
-
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
@@ -83,7 +81,6 @@ public class ExpensePendFragment extends Fragment implements PullLoadMoreRecycle
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new L_ExpensePendAdapter(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
@@ -122,8 +119,6 @@ public class ExpensePendFragment extends Fragment implements PullLoadMoreRecycle
         params.put("pageStart", mCount*10-9 + "");
         params.put("pageEnd", mCount * 10 + "");
         params.put("approver", SPUtils.get(getActivity(), "userId", "").toString());
-//        params.put("state","0");
-
         HttpRequest.get_listWorkExpense(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -143,7 +138,6 @@ public class ExpensePendFragment extends Fragment implements PullLoadMoreRecycle
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

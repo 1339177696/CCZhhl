@@ -16,7 +16,6 @@ import java.util.List;
 
 public class Peopleadapter extends BaseAdapter {
     private String changeStr = "";
-    //
     private List<String> mlistdatas;
     private LayoutInflater mInflater;
 

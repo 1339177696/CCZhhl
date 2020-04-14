@@ -55,7 +55,6 @@ public class ExpenseLaunchFragment extends Fragment implements PullLoadMoreRecyc
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.l_fra_launch_leave,null);
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
@@ -152,7 +151,6 @@ public class ExpenseLaunchFragment extends Fragment implements PullLoadMoreRecyc
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

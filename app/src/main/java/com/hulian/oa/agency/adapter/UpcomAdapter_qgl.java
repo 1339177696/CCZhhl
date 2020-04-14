@@ -130,7 +130,6 @@ public class UpcomAdapter_qgl extends RecyclerView.Adapter <UpcomAdapter_qgl.Vie
                             }
                             @Override
                             public void onFailure(OkHttpException failuer) {
-                                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -160,7 +159,6 @@ public class UpcomAdapter_qgl extends RecyclerView.Adapter <UpcomAdapter_qgl.Vie
                             }
                             @Override
                             public void onFailure(OkHttpException failuer) {
-                                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -227,7 +225,6 @@ public class UpcomAdapter_qgl extends RecyclerView.Adapter <UpcomAdapter_qgl.Vie
                             }
                             @Override
                             public void onFailure(OkHttpException failuer) {
-                                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -260,7 +257,6 @@ public class UpcomAdapter_qgl extends RecyclerView.Adapter <UpcomAdapter_qgl.Vie
 
                             @Override
                             public void onFailure(OkHttpException failuer) {
-                                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -308,7 +304,6 @@ public class UpcomAdapter_qgl extends RecyclerView.Adapter <UpcomAdapter_qgl.Vie
                             }
                             @Override
                             public void onFailure(OkHttpException failuer) {
-                                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -341,7 +336,6 @@ public class UpcomAdapter_qgl extends RecyclerView.Adapter <UpcomAdapter_qgl.Vie
                             }
                             @Override
                             public void onFailure(OkHttpException failuer) {
-                                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -442,7 +436,6 @@ public class UpcomAdapter_qgl extends RecyclerView.Adapter <UpcomAdapter_qgl.Vie
 
                             @Override
                             public void onFailure(OkHttpException failuer) {
-                                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -461,8 +454,6 @@ public class UpcomAdapter_qgl extends RecyclerView.Adapter <UpcomAdapter_qgl.Vie
                 holder.lv_jinji.setVisibility(View.GONE);
                 break;
             case "6":
-
-                //                holder.tv_type.setText("令");
                 holder.bt_1.setVisibility(View.GONE);
                 holder.bt_2.setVisibility(View.VISIBLE);
                 holder.bt_2.setBackgroundResource(R.drawable.bt_8background);
@@ -543,14 +534,6 @@ public class UpcomAdapter_qgl extends RecyclerView.Adapter <UpcomAdapter_qgl.Vie
                         mContext.startActivity(intent);
                         break;
                     case "1":
-//                        if(BuildConfig.IsPad) {
-//                            intent.setClass(mContext, PAD_gongwen_SP.class);
-//                        }
-//                        else {
-//                            intent.setClass(mContext, DocumentLotusActivity.class);
-//                        }
-//                        intent.putExtra("offId",dataList.get(position).getId());
-//                        mContext.startActivity(intent);
                         break;
                     case "2":
                         intent.setClass(mContext, LeaveExamineActivity.class);
@@ -572,16 +555,6 @@ public class UpcomAdapter_qgl extends RecyclerView.Adapter <UpcomAdapter_qgl.Vie
                     case "5":
                         MailPart(dataList.get(position).getId(),position);
                         break;
-//                    case "6":
-//                        if(dataList.get(position).getStatus().equals("1")){
-//                            intent.setClass(mContext, InstructBackActivity.class);
-//                        }
-//                        else {
-//                            intent.setClass(mContext, InstructReceiverActivity.class);
-//                        }
-////                        intent.putExtra("id",dataList.get(position).getId());
-////                        intent.putExtra("content",dataList.get(position).getContent());
-//                        break;
                  }
 
             }

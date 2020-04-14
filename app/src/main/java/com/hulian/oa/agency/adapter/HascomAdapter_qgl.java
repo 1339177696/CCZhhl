@@ -97,10 +97,8 @@ public class HascomAdapter_qgl extends RecyclerView.Adapter <HascomAdapter_qgl.V
         //0任务协同，1：公文流转2:指令安排3:会议安排 4 报销 5 请假
         switch (dataList.get(position).getType()) {
             case "0":
-//                holder.tv_type.setText("协");
                 break;
             case "1":
-//                holder.tv_type.setText("文");
                 holder.lv_jinji.setVisibility(View.VISIBLE);
                 if (dataList.get(position).getStatus().equals("1"))
                 {
@@ -123,64 +121,50 @@ public class HascomAdapter_qgl extends RecyclerView.Adapter <HascomAdapter_qgl.V
                 if (dataList.get(position).getName().equals("null")&&dataList.get(position).getName().equals(null)) {
                     holder.tv_content.setText("");
                 } else {
-//            String text_content = dataList.get(position).getContent().split(" ")[0] + "  <font color='#2B8CFA'>" + dataList.get(position).getContent().split(" ")[1] + "</font>";
                     holder.tv_content.setText(Html.fromHtml("发起人:"+dataList.get(position).getName()));
                 }
                 if (dataList.get(position).getField5() == null &&dataList.get(position).getField5() == "null"&&dataList.get(position).getField5() == "") {
                     holder.tv_des.setText("");
                 } else {
-//            String text_content = dataList.get(position).getField5ield1().split(" ")[0] + "  <font color='#2B8CFA'>" + dataList.get(position).getField5ield1().split(" ")[1] + "</font>";
                     holder.tv_des.setText(Html.fromHtml("审批状态："+dataList.get(position).getField5()));
                 }
                 break;
             case "2":
                 holder.lv_jinji.setVisibility(View.GONE);
-
-//                holder.tv_type.setText("令");
                 if (dataList.get(position).getName().equals("null")&&dataList.get(position).getName().equals(null)) {
                     holder.tv_content.setText("");
                 } else {
-//            String text_content = dataList.get(position).getContent().split(" ")[0] + "  <font color='#2B8CFA'>" + dataList.get(position).getContent().split(" ")[1] + "</font>";
                     holder.tv_content.setText(Html.fromHtml("发起人:"+dataList.get(position).getName()));
                 }
                 if (dataList.get(position).getField5() == null &&dataList.get(position).getField5() == "null"&&dataList.get(position).getField5() == "") {
                     holder.tv_des.setText("");
                 } else {
-//            String text_content = dataList.get(position).getField1().split(" ")[0] + "  <font color='#2B8CFA'>" + dataList.get(position).getField1().split(" ")[1] + "</font>";
                     holder.tv_des.setText(Html.fromHtml("审批状态："+dataList.get(position).getField5()));
                 }
                 break;
             case "3":
                 holder.lv_jinji.setVisibility(View.GONE);
-
-//                holder.tv_type.setText("会");
                 if (dataList.get(position).getName().equals("null")&&dataList.get(position).getName().equals(null)) {
                     holder.tv_content.setText("");
                 } else {
-//            String text_content = dataList.get(position).getContent().split(" ")[0] + "  <font color='#2B8CFA'>" + dataList.get(position).getContent().split(" ")[1] + "</font>";
                     holder.tv_content.setText(Html.fromHtml("发起人:"+dataList.get(position).getName()));
                 }
                 if (dataList.get(position).getField4() == null &&dataList.get(position).getField4() == "null"&&dataList.get(position).getField4() == "") {
                     holder.tv_des.setText("");
                 } else {
-//            String text_content = dataList.get(position).getField1().split(" ")[0] + "  <font color='#2B8CFA'>" + dataList.get(position).getField1().split(" ")[1] + "</font>";
                     holder.tv_des.setText(Html.fromHtml("会议地点："+dataList.get(position).getField4()));
                 }
                 break;
             case "4":
                 holder.lv_jinji.setVisibility(View.GONE);
-
-//                holder.tv_type.setText("报");
                 if (dataList.get(position).getName()==null&&dataList.get(position).getName()=="null"&&dataList.get(position).getName()=="") {
                     holder.tv_content.setText("");
                 } else {
-//            String text_content = dataList.get(position).getContent().split(" ")[0] + "  <font color='#2B8CFA'>" + dataList.get(position).getContent().split(" ")[1] + "</font>";
                     holder.tv_content.setText(Html.fromHtml("发起人:"+dataList.get(position).getName()));
                 }
                 if (dataList.get(position).getField4() == null &&dataList.get(position).getField4() == "null"&&dataList.get(position).getField4() == "") {
                     holder.tv_des.setText("");
                 } else {
-//            String text_content = dataList.get(position).getField1().split(" ")[0] + "  <font color='#2B8CFA'>" + dataList.get(position).getField1().split(" ")[1] + "</font>";
                     holder.tv_des.setText(Html.fromHtml("截止时间："+dataList.get(position).getField4()));
                 }
                 break;
@@ -189,7 +173,6 @@ public class HascomAdapter_qgl extends RecyclerView.Adapter <HascomAdapter_qgl.V
                        || TextUtils.isEmpty(dataList.get(position).getName())) {
                     holder.tv_content.setText("发起人:");
                 } else {
-//            String text_content = dataList.get(position).getContent().split(" ")[0] + "  <font color='#2B8CFA'>" + dataList.get(position).getContent().split(" ")[1] + "</font>";
                     holder.tv_content.setText(Html.fromHtml("发起人:"+dataList.get(position).getName()));
                 }
                 holder.tv_des.setVisibility(View.VISIBLE);
@@ -211,11 +194,6 @@ public class HascomAdapter_qgl extends RecyclerView.Adapter <HascomAdapter_qgl.V
 
                         break;
                     case "1":
-//                        intent.setClass(mContext, DocumentLotusInfoActivity.class);
-//                        intent.putExtra("source","0");
-//                        intent.putExtra("offId",dataList.get(position).getId());
-//                        mContext.startActivity(intent);
-
                         break;
                     case "2":
                         intent.setClass(mContext, LeaveApplyResultActivity.class);
@@ -223,10 +201,6 @@ public class HascomAdapter_qgl extends RecyclerView.Adapter <HascomAdapter_qgl.V
                         intent.putExtra("source","0");
                         intent.putExtra("createByid",dataList.get(position).getCreateBy());
                         mContext.startActivity(intent);
-
-//                        intent.setClass(mContext, InstructDetailsActivity.class);
-//                        intent.putExtra("source","0");
-//                        intent.putExtra("id",dataList.get(position).getId());
                         break;
                     case "3":
                         intent.setClass(mContext, MeetingSigninActivity.class);
@@ -236,23 +210,13 @@ public class HascomAdapter_qgl extends RecyclerView.Adapter <HascomAdapter_qgl.V
 
                         break;
                     case "4":
-//                        intent.setClass(mContext, ExpenseApplyResultActivity.class);
-//                        intent.putExtra("id",dataList.get(position).getId());
-//                        intent.putExtra("source","0");
-//                        intent.putExtra("createByid",dataList.get(position).getCreateBy());
-
                         intent.setClass(mContext, TaskCompletedDetailsActivity.class);
                         intent.putExtra("PORID",dataList.get(position).getId());
                         intent.putExtra("source","0");
                         intent.putExtra("ID",dataList.get(position).getId());
                         mContext.startActivity(intent);
-
                         break;
                     case "5":
-//                        intent.setClass(mContext, LeaveApplyResultActivity.class);
-//                        intent.putExtra("id",dataList.get(position).getId());
-//                        intent.putExtra("source","0");
-//                        intent.putExtra("createByid",dataList.get(position).getCreateBy());
                         MailPart(dataList.get(position).getId(),position);
 
                         break;

@@ -4,13 +4,9 @@ import java.io.Serializable;
 
 public class ReminderItem implements Serializable {
     private static final long serialVersionUID = -2101649256143239157L;
-
     protected final int id;
-
     private int unread;
-
     private boolean indicator;
-
     public ReminderItem(int id) {
         this.id = id;
         this.unread = 0;

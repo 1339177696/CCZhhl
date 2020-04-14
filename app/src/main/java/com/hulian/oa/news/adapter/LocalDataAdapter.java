@@ -30,10 +30,7 @@ public class LocalDataAdapter extends RecyclerView.Adapter<LocalDataAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-     //   holder.imageView.setImageResource(list_path.get(position));
-//        Glide.with(mContext).load( list_path.get(position)).into(holder.imageView);
           holder.imageView.setImageURI(list_path.get(position));
-    //    holder.imageView.setTag(position);
     }
 
     @Override
@@ -50,7 +47,6 @@ public class LocalDataAdapter extends RecyclerView.Adapter<LocalDataAdapter.View
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                 //   Toast.makeText(v.getContext(), "点击了" + v.getTag(), Toast.LENGTH_SHORT).show();
                 }
             });
         }

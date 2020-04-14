@@ -62,7 +62,6 @@ public class L_LeaveApprovedAdapter extends RecyclerView.Adapter <L_LeaveApprove
     @Override
     public L_LeaveApprovedAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.l_item_approved_leave, parent, false);
-
         return new L_LeaveApprovedAdapter.ViewHolder(v);
     }
 
@@ -73,7 +72,6 @@ public class L_LeaveApprovedAdapter extends RecyclerView.Adapter <L_LeaveApprove
         holder.tv_leave_reason.setText(dataList.get(position).getCause());
         holder.tv_duration.setText(dataList.get(position).getDuration()+"天");
         holder.leave_item_time.setText(dataList.get(position).getStartTime()+"--"+dataList.get(position).getEndTime());
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

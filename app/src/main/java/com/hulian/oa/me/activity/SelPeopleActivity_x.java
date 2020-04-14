@@ -42,7 +42,6 @@ public class SelPeopleActivity_x extends BaseActivity {
     List<People> memberList = new ArrayList<>();
     List<People_x> aa = new ArrayList<>();
     private RelativeLayout iv_back;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +83,6 @@ public class SelPeopleActivity_x extends BaseActivity {
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-
                     aa = gson.fromJson(result.getJSONArray("data").toString(),
                             new TypeToken<List<People_x>>() {
                             }.getType());
@@ -111,7 +109,6 @@ public class SelPeopleActivity_x extends BaseActivity {
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

@@ -56,7 +56,6 @@ public class WorkReportActivity extends BaseActivity {
         //领导
         if (SPUtils.get(this, "roleKey", "").toString().contains("boss")) {//boss没有写日报权限
             tv_apply.setVisibility(View.VISIBLE);
-
             titleDatas.add("看汇报");
             fragmentList.add(new ReadReportFragment());
         }

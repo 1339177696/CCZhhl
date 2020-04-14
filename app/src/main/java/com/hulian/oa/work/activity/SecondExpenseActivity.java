@@ -33,8 +33,6 @@ import butterknife.OnClick;
  * 报销审批
  */
 public class SecondExpenseActivity extends BaseActivity {
-
-
     @BindView(R.id.my_tablayout)
     TabLayout myTablayout;
     @BindView(R.id.my_viewpager)
@@ -46,7 +44,6 @@ public class SecondExpenseActivity extends BaseActivity {
     private ArrayList<String> list_title;
     ArrayList<String> titleDatas   = new ArrayList<>();;
     ArrayList<Fragment> fragmentList = new ArrayList<Fragment>();
-
     @BindView(R.id.tv_baoxiao)
     TextView tv_baoxiao;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -59,15 +56,10 @@ public class SecondExpenseActivity extends BaseActivity {
         mContext = this;
         //领导
         if (SPUtils.get(mContext, "isLead", "").equals("0")) {
-//            tv_apply.setVisibility(View.GONE);
             tv_apply.setVisibility(View.VISIBLE);
             titleDatas.add("待审批");
             titleDatas.add("已审批");
-//            titleDatas.hb_add("我发起的");
-//            titleDatas.hb_add("我审批的");
-//            titleDatas.hb_add("抄送我的");
             fragmentList.add(new ExpenseLaunchFragment());
-//            fragmentList.hb_add(new ExpensePendFragment());
             fragmentList.add(new ExpenseApprovedFragment());
         }
         //员工
@@ -122,7 +114,6 @@ public class SecondExpenseActivity extends BaseActivity {
         switch (view.getId()){
             case R.id.tv_apply://报销申请
                 startActivity(new Intent(mContext, ExpenseApplyForActivity.class));
-//                startActivity(new Intent(mContext, ExpenseDetailsActivity.class));
                 break;
             case R.id.iv_back:
                 finish();

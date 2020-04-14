@@ -56,9 +56,6 @@ public class NewsFragment extends Fragment {
     public static NewsFragment newInstance(String requestJson) {
         NewsFragment fragment = new NewsFragment();
         Bundle args = new Bundle();
-//        args.putString("requestJson", requestJson);
-//        args.putString("gid", gid);
-//        args.putString("idno", idno);
         fragment.setArguments(args);
         return fragment;
     }
@@ -67,8 +64,7 @@ public class NewsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-//            gid = getArguments().getString("gid");
-//            idno=getArguments().getString("idno");
+
         }
     }
 

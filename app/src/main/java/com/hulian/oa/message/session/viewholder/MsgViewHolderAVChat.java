@@ -16,10 +16,8 @@ import com.netease.nimlib.sdk.msg.constant.MsgDirectionEnum;
  * Created by zhoujianghua on 2015/8/6.
  */
 public class MsgViewHolderAVChat extends MsgViewHolderBase {
-
     private ImageView typeImage;
     private TextView statusLabel;
-
     public MsgViewHolderAVChat(BaseMultiItemFetchLoadAdapter adapter) {
         super(adapter);
     }
@@ -40,9 +38,7 @@ public class MsgViewHolderAVChat extends MsgViewHolderBase {
         if (message.getAttachment() == null) {
             return;
         }
-
         layoutByDirection();
-
         refreshContent();
     }
 
@@ -68,7 +64,6 @@ public class MsgViewHolderAVChat extends MsgViewHolderBase {
 
     private void refreshContent() {
         AVChatAttachment attachment = (AVChatAttachment) message.getAttachment();
-
         String textString = "";
         switch (attachment.getState()) {
             case Success: //成功接听

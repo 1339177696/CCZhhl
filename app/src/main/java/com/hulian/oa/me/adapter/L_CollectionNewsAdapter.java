@@ -157,7 +157,6 @@ public class L_CollectionNewsAdapter extends RecyclerView.Adapter <RecyclerView.
             public void onClick(View view) {
                 Intent intent= new Intent();
                 dataList.get(position).setIsCollect("1");
-
                 if (dataList.get(position).getCollectType().equals("0")){
                     intent.putExtra("getIsCollect",dataList.get(position).getIsCollect());
                     intent.putExtra("getJournalismId",dataList.get(position).getCollectTypeId());
@@ -167,8 +166,6 @@ public class L_CollectionNewsAdapter extends RecyclerView.Adapter <RecyclerView.
                     //新改的传收藏状态qgl
                     intent.putExtra("isCollect",dataList.get(position).getIsCollect());
                     intent.setClass(mContext,NoticeParticularsActivity.class);
-
-
                 }
                 mContext.startActivity(intent);
             }
@@ -207,7 +204,6 @@ public class L_CollectionNewsAdapter extends RecyclerView.Adapter <RecyclerView.
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

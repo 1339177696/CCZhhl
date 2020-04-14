@@ -38,7 +38,6 @@ public class L_CollectionNewsFragment extends Fragment implements PullLoadMoreRe
     private int mCount = 1;
     private RecyclerView mRecyclerView;
     L_CollectionNewsAdapter mRecyclerViewAdapter;
-
     private ArrayList<String> list_path;
     private ArrayList<String> list_title;
     Unbinder unbinder;
@@ -46,7 +45,6 @@ public class L_CollectionNewsFragment extends Fragment implements PullLoadMoreRe
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.l_fra_collection_news,null);
         unbinder = ButterKnife.bind(this, view);
         initList();
@@ -54,7 +52,6 @@ public class L_CollectionNewsFragment extends Fragment implements PullLoadMoreRe
     }
 
     private void initList() {
-
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
@@ -74,9 +71,7 @@ public class L_CollectionNewsFragment extends Fragment implements PullLoadMoreRe
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
-
         mRecyclerViewAdapter = new L_CollectionNewsAdapter(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
         getData();
@@ -106,25 +101,6 @@ public class L_CollectionNewsFragment extends Fragment implements PullLoadMoreRe
         mRecyclerViewAdapter.clearData();
         mCount = 1;
     }
-
-//    private void getData() {
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                getActivity().runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        mRecyclerViewAdapter.addAllData(setList());
-//                        mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
-//                    }
-//                });
-//
-//            }
-//        }, 1000);
-//
-//    }
-
-
     private void getData() {
         String collectUserId = SPUtils.get(getActivity(),"userId","-1").toString();
         RequestParams params = new RequestParams();
@@ -140,10 +116,6 @@ public class L_CollectionNewsFragment extends Fragment implements PullLoadMoreRe
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-//                    List<Bean_x> memberList = gson.fromJson(result.getJSONArray("data").toString(),
-//                            new TypeToken<List<Bean_x>>() {
-//                            }.getType());
-//                    mRecyclerViewAdapter.addAllData(memberList);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -152,25 +124,9 @@ public class L_CollectionNewsFragment extends Fragment implements PullLoadMoreRe
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
 
     }
-
-
-
-
-//    private List<String> setList() {
-//        List<String> dataList = new ArrayList<>();
-//        int start = 20 * (mCount - 1);
-//        for (int i = start; i < 2 * mCount; i++) {
-//            dataList.hb_add("Frist" + i);
-//        }
-//        return dataList;
-//    }
-
-
-
 }

@@ -40,12 +40,6 @@ public class Fra_post_order_qgl2 extends Fragment {
         View view = inflater.inflate(R.layout.fra_order_post_qgl2, container, false);
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
-//        if (SPUtils.get(getActivity(), "isLead", "").equals("0")) {
-//            llOrder.setVisibility(View.VISIBLE);
-//        } else {
-//            llOrder.setVisibility(View.GONE);
-//        }
-
         fabTop = (SuspensionFab_qgl2) view.findViewById(R.id.fab_top);
 //构建展开按钮属性
         FabAttributes collection = new FabAttributes.Builder()
@@ -76,17 +70,7 @@ public class Fra_post_order_qgl2 extends Fragment {
                 .setPressedTranslationZ(10)
                 .setTag(4)
                 .build();
-//        FabAttributes youjian = new FabAttributes.Builder()
-//                .setBackgroundTint(Color.parseColor("#FFAD4A"))
-//                .setSrc(getResources().getDrawable(R.mipmap.db_youjian_icon))
-//                .setFabSize(FloatingActionButton.SIZE_NORMAL)
-//                .setPressedTranslationZ(10)
-//                .setTag(5)
-//                .build();
-//添加菜单
-//        youjian,,collection
         fabTop.addFab(qingjia,renwu,email);
-        //    fabTop.setAnimationManager(new FabAlphaAnimate(fabTop));
 //设置菜单点击事件
         fabTop.setFabClickListener(new OnFabClickListener() {
             @Override
@@ -95,26 +79,17 @@ public class Fra_post_order_qgl2 extends Fragment {
                 if (Integer.parseInt(tag + "") == 1) {
                     fabTop.closeAnimate();
                     EventBus.getDefault().post("1");
-//                    EventBus.getDefault().post("公文审批");
                 } else if (Integer.parseInt(tag + "") == 2) {
                     fabTop.closeAnimate();
                     EventBus.getDefault().post("2");
-//                    EventBus.getDefault().post("会议安排");
                 } else if (Integer.parseInt(tag + "") == 3) {
                     fabTop.closeAnimate();
                     EventBus.getDefault().post("3");
-//                    EventBus.getDefault().post("任务协同");
 
                 } else if (Integer.parseInt(tag+"") == 4){
                     fabTop.closeAnimate();
                     EventBus.getDefault().post("4");
-//                    EventBus.getDefault().post("请假审批");
                 }
-//                else {
-//                    fabTop.closeAnimate();
-//                    EventBus.getDefault().post("5");
-//                    EventBus.getDefault().post("邮件列表");
-//                }
             }
         });
 

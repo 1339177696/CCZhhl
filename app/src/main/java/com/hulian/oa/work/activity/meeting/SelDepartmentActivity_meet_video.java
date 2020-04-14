@@ -56,9 +56,7 @@ public class SelDepartmentActivity_meet_video extends BaseActivity {
     //创建适配器对象
     private DepartmentAdapter adapter;
     private RelativeLayout iv_back;
-
     // 筛选
-//    private CheckBox mMainCkb, ckb_leader, ckb_worker;
     private ExpandableListView expandableListView;
     //最外面一层 分组名
     private List<Department> groupArray;
@@ -137,9 +135,6 @@ public class SelDepartmentActivity_meet_video extends BaseActivity {
                     ToastHelper.showToast(mContext, "请选择参会人");
             }
         });
-//        mMainCkb = findViewById(R.id.ckb_main);
-//        ckb_leader = findViewById(R.id.ckb_leader);
-//        ckb_worker = findViewById(R.id.ckb_worker);
 
         expandableListView = findViewById(R.id.exlistview);
         expandableListView.setGroupIndicator(null);
@@ -166,114 +161,6 @@ public class SelDepartmentActivity_meet_video extends BaseActivity {
         expandableAdapter = new ExpandableAdapter(this, groupArray, R.layout.group_layout_ceshi, childArray, R.layout.group_item_listview_ceshi,true);
         expandableListView.setAdapter(expandableAdapter);
         getDepartMent();
-
-//        mMainCkb.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                ckb_leader.setChecked(mMainCkb.isChecked());
-//                ckb_worker.setChecked(mMainCkb.isChecked());
-//                for (int i = 0; i < childArray.size(); i++) {
-//                    groupArray.get(i).setIscheck(mMainCkb.isChecked());
-//                    for (int j = 0; j < childArray.get(i).size(); j++) {
-//                        childArray.get(i).get(j).setIscheck(mMainCkb.isChecked());
-//                    }
-//                    if (mMainCkb.isChecked())
-//                        groupArray.get(i).setCount(childArray.get(i).size() + "");
-//                    else
-//                        groupArray.get(i).setCount("0");
-//                }
-//                onEventMainThread(childArray);
-//                expandableAdapter.notifyDataSetChanged();
-//            }
-//        });
-//        ckb_leader.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (ckb_leader.isChecked() && ckb_worker.isChecked()) {
-//                    mMainCkb.setChecked(true);
-//                } else
-//                    mMainCkb.setChecked(false);
-//                if (ckb_leader.isChecked()) {
-//                    for (int i = 0; i < childArray.size(); i++) {
-//                        for (int j = 0; j < childArray.get(i).size(); j++) {
-//                            if (childArray.get(i).get(j).getIsLead().equals("0")) {
-//                                childArray.get(i).get(j).setIscheck(true);
-//
-//                            }
-//                        }
-//                    }
-//
-//                    onEventMainThread(childArray);
-//                    expandableAdapter.notifyDataSetChanged();
-//                } else {
-//                    for (int i = 0; i < childArray.size(); i++) {
-//
-//                        for (int j = 0; j < childArray.get(i).size(); j++) {
-//                            if (childArray.get(i).get(j).getIsLead().equals("0")) {
-//                                childArray.get(i).get(j).setIscheck(false);
-//                            }
-//                        }
-//
-//                    }
-//
-//
-//                }
-//                for (int i = 0; i < childArray.size(); i++) {
-//                    int k = 0;
-//                    for (int j = 0; j < childArray.get(i).size(); j++) {
-//                        if (childArray.get(i).get(j).isIscheck()) {
-//                            k++;
-//
-//                        }
-//                        groupArray.get(i).setCount(k + "");
-//                    }
-//                }
-//                onEventMainThread(childArray);
-//                expandableAdapter.notifyDataSetChanged();
-//            }
-//        });
-//        ckb_worker.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (ckb_leader.isChecked() && ckb_worker.isChecked()) {
-//                    mMainCkb.setChecked(true);
-//                } else
-//                    mMainCkb.setChecked(false);
-//                if (ckb_worker.isChecked()) {
-//                    for (int i = 0; i < childArray.size(); i++) {
-//                        for (int j = 0; j < childArray.get(i).size(); j++) {
-//                            if (childArray.get(i).get(j).getIsLead().equals("1")) {
-//                                childArray.get(i).get(j).setIscheck(true);
-//                            }
-//                        }
-//                    }
-//                    onEventMainThread(childArray);
-//
-//                    expandableAdapter.notifyDataSetChanged();
-//                } else {
-//                    for (int i = 0; i < childArray.size(); i++) {
-//                        for (int j = 0; j < childArray.get(i).size(); j++) {
-//                            if (childArray.get(i).get(j).getIsLead().equals("1")) {
-//                                childArray.get(i).get(j).setIscheck(false);
-//                            }
-//                        }
-//                        groupArray.get(i).setCount("0");
-//                    }
-//
-//                }
-//                for (int i = 0; i < childArray.size(); i++) {
-//                    int k = 0;
-//                    for (int j = 0; j < childArray.get(i).size(); j++) {
-//                        if (childArray.get(i).get(j).isIscheck()) {
-//                            k++;
-//                        }
-//                    }
-//                    groupArray.get(i).setCount(k + "");
-//                }
-//                onEventMainThread(childArray);
-//                expandableAdapter.notifyDataSetChanged();
-//            }
-//        });
     }
 
     private void getDepartMent() {
@@ -302,13 +189,6 @@ public class SelDepartmentActivity_meet_video extends BaseActivity {
                     expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
                         @Override
                         public boolean onGroupClick(ExpandableListView expandableListView, View view, int groupPosition, long id) {
-                            //如果分组被打开 直接关闭
-//                            if ( expandableListView.isGroupExpanded(groupPosition) ) {
-//                                expandableListView.collapseGroup(groupPosition);
-//                            }
-//                            else {
-//                             //    initPeopleData(groupArray.get(groupPosition).getDeptId(),groupPosition);
-//                            }
                             //返回false表示系统自己处理展开和关闭事件 返回true表示调用者自己处理展开和关闭事件
                             return false;
                         }
@@ -321,7 +201,6 @@ public class SelDepartmentActivity_meet_video extends BaseActivity {
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -345,7 +224,6 @@ public class SelDepartmentActivity_meet_video extends BaseActivity {
                             }.getType());
                     List<People> childModels = childArray.get(position);
                     childModels.addAll(memberList);
-                    //  expandableListView.expandGroup(position, true);
                     expandableListView.collapseGroup(position);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -354,7 +232,6 @@ public class SelDepartmentActivity_meet_video extends BaseActivity {
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

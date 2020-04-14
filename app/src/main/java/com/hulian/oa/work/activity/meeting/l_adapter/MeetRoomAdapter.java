@@ -26,11 +26,8 @@ public class MeetRoomAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-//        if(list.size()<3) {
             return list.size();
-//        }
-//        else
-//            return 3;
+
     }
 
     @Override
@@ -61,11 +58,9 @@ public class MeetRoomAdapter extends BaseAdapter {
         if (list.get(position).getIsCheck().equals("0")) {
             tv_sel_room.setText("选择");
             tv_sel_room.setBackgroundResource(R.drawable.bt_7background_qgl2);
-            //   tv_sel_room.setBackgroundColor(R.color.color_a_blue);
         } else {
             tv_sel_room.setText("已选");
             tv_sel_room.setBackgroundResource(R.drawable.bt_7background_qgl1);
-            //    tv_sel_room.setBackgroundColor(R.color.bg_yellow);
         }
 
         if (list.get(position).getMeetingContacts() != null && list.get(position).getMeetingContacts() != "") {

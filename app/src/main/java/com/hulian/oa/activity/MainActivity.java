@@ -96,9 +96,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     RadioButton rbNews;
     @BindView(R.id.rg_footer)
     RadioGroup rgFooter;
-
     private FragmentTransaction transaction;
-
     private AddressFragment addressFragment;
     private Wechat messageFragment;
     private NewsFragment newsFragment;
@@ -112,21 +110,11 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
-//        if(BuildConfig.IsPad){
-//        //    ToastHelper.showToast(mContext,"111111111111");
-//            rbMessage.setText("邮件");
-//        }
         rgFooter.setOnCheckedChangeListener(this);
-
         rgFooter.check(R.id.rb_message);
-//        rgFooter.check(R.id.rb_agency);
-//        rgFooter.check(R.id.rb_work);
-
         registerMsgUnreadInfoObserver(true);
         registerSystemMessageObservers(true);
         requestSystemMessageUnreadCount();
-        //       initUnreadCover();
         requestBasicPermission();
 
     }
@@ -194,23 +182,12 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         switch (i) {
             case R.id.rb_message:
                 StatusBarUtil.statusBarLightMode(this);
-//                if(BuildConfig.IsPad){
-//                    if(mailFragment==null){
-//                        mailFragment = new MailFragment().newInstance("");
-//                        transaction.hb_add(R.id.content, mailFragment);
-//                    }
-//                    else {
-//                        transaction.show(mailFragment);
-//                    }
-//                }
-//                else {
                     if (messageFragment == null) {
                         messageFragment = new Wechat().newInstance("");
                         transaction.add(R.id.content, messageFragment);
                     } else {
                         transaction.show(messageFragment);
                     }
-             //   }
                 break;
             case R.id.rb_news:
                 StatusBarUtil.statusBarLightMode(this);
@@ -233,28 +210,23 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             case R.id.rb_address:
                 StatusBarUtil.statusBarLightMode(this);
 
-                if(BuildConfig.IsPad){
-                    /*if (address_Pad_Fragment == null) {
-                        address_Pad_Fragment = new Address_Pad_Fragment().newInstance("");
-                        transaction.hb_add(R.id.content, address_Pad_Fragment);
-                    } else {
-                        transaction.show(address_Pad_Fragment);
-                    }*/
+//                if(BuildConfig.IsPad){
+//
+//                    if (addressFragment == null) {
+//                        addressFragment = new AddressFragment().newInstance("");
+//                        transaction.add(R.id.content, addressFragment);
+//                    } else {
+//                        transaction.show(addressFragment);
+//                    }
+//                }
+//                else {
                     if (addressFragment == null) {
                         addressFragment = new AddressFragment().newInstance("");
                         transaction.add(R.id.content, addressFragment);
                     } else {
                         transaction.show(addressFragment);
                     }
-                }
-                else {
-                    if (addressFragment == null) {
-                        addressFragment = new AddressFragment().newInstance("");
-                        transaction.add(R.id.content, addressFragment);
-                    } else {
-                        transaction.show(addressFragment);
-                    }
-                }
+//                }
                 break;
             case R.id.rb_work:
                 StatusBarUtil.statusBarLightMode(this);
@@ -306,32 +278,6 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         ReminderManager.getInstance().updateContactUnreadNum(unread);
     }
 
-    //初始化未读红点动画
-    private void initUnreadCover() {
-//        DropManager.getInstance().init(this, (DropCover) findView(R.id.unread_cover),
-//                new DropCover.IDropCompletedListener() {
-//                    @Override
-//                    public void onCompleted(Object id, boolean explosive) {
-//                        if (id == null || !explosive) {
-//                            return;
-//                        }
-//
-//                        if (id instanceof RecentContact) {
-//                            RecentContact r = (RecentContact) id;
-//                            NIMClient.getService(MsgService.class).clearUnreadCount(r.getContactId(), r.getSessionType());
-//                            return;
-//                        }
-//
-//                        if (id instanceof String) {
-//                            if (((String) id).contentEquals("0")) {
-//                                NIMClient.getService(MsgService.class).clearAllUnreadCount();
-//                            } else if (((String) id).contentEquals("1")) {
-//                                NIMClient.getService(SystemMessageService.class).resetSystemMessageUnreadCount();
-//                            }
-//                        }
-//                    }
-//                });
-    }
 
     private void requestBasicPermission() {
         MPermission.printMPermissionResult(true, this, BASIC_PERMISSIONS);
@@ -343,15 +289,10 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     //未读消息数量观察者实现
     @Override
     public void onUnreadNumChanged(ReminderItem item) {
-//        MainTab tab = MainTab.fromReminderId(item.getId());
-//        if (tab != null) {
-//            tabs.updateTab(tab.tabIndex, item);
-//        }
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-     //   Toast.makeText(this,"11"+requestCode,Toast.LENGTH_SHORT).show();
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) {
             return;

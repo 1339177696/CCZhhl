@@ -55,33 +55,19 @@ import java.util.List;
  * UIKit自定义消息界面用法展示类
  */
 public class SessionHelper {
-
     private static final int ACTION_HISTORY_QUERY = 0;
-
     private static final int ACTION_SEARCH_MESSAGE = 1;
-
     private static final int ACTION_CLEAR_MESSAGE = 2;
-
     private static final int ACTION_CLEAR_P2P_MESSAGE = 3;
-
     private static SessionCustomization p2pCustomization;
-
     private static SessionCustomization normalTeamCustomization;
-
     private static SessionCustomization advancedTeamCustomization;
-
     private static SessionCustomization myP2pCustomization;
-
     private static SessionCustomization robotCustomization;
-
     private static RecentCustomization recentCustomization;
-
     private static NIMPopupMenu popupMenu;
-
     private static List<PopupMenuItem> menuItemList;
-
     public static final boolean USE_LOCAL_ANTISPAM = true;
-
 
     public static void init() {
         // 注册自定义消息附件解析器
@@ -140,7 +126,6 @@ public class SessionHelper {
                 @Override
                 public void onActivityResult(final Activity activity, int requestCode, int resultCode, Intent data) {
                     super.onActivityResult(activity, requestCode, resultCode, data);
-
                 }
 
                 @Override

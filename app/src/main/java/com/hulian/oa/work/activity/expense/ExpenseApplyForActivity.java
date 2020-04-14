@@ -227,7 +227,6 @@ public class ExpenseApplyForActivity extends BaseActivity {
         recycler_approver.setAdapter(approverAdapter);
 
         copyerAdapter = new ExpenseCopyerAdapter(mContext,onAddCopyer,onDeleteCopyer);
-//        FlowLayoutManager flowLayoutManager = new FlowLayoutManager(mContext,true);
         MyLayoutManager flowManager = new MyLayoutManager();
         //必须，防止recyclerview高度为wrap时测量item高度0
         flowManager.setAutoMeasureEnabled(true);

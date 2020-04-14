@@ -82,7 +82,6 @@ public class MeetReceiverFragment extends Fragment implements PullLoadMoreRecycl
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new MeetLaunchAdapter(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
@@ -123,7 +122,6 @@ public class MeetReceiverFragment extends Fragment implements PullLoadMoreRecycl
         params.put("participantId", userid);
         params.put("page1", mCount * 10 - 9 + "");
         params.put("page2", mCount * 10 + "");
-
         HttpRequest.postMyAttendMeeting(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -135,10 +133,8 @@ public class MeetReceiverFragment extends Fragment implements PullLoadMoreRecycl
                             }.getType());
                     if (mCount == 1 && memberList.size() == 0) {
                         emptyBg.setVisibility(View.VISIBLE);
-//                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
                     } else {
                         emptyBg.setVisibility(View.GONE);
-//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     }
                     mRecyclerViewAdapter.addAllData(memberList);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
@@ -153,22 +149,6 @@ public class MeetReceiverFragment extends Fragment implements PullLoadMoreRecycl
 
             }
         });
-
-
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                getActivity().runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        mRecyclerViewAdapter.addAllData(setList());
-//                        mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
-//                    }
-//                });
-//
-//            }
-//        }, 1000);
-
     }
 
 }

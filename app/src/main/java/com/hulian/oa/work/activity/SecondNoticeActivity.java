@@ -50,7 +50,6 @@ public class SecondNoticeActivity extends BaseActivity implements PullLoadMoreRe
     private int mCount = 1;
     private RecyclerView mRecyclerView;
     NoticeAdapter mRecyclerViewAdapter;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +59,6 @@ public class SecondNoticeActivity extends BaseActivity implements PullLoadMoreRe
     }
 
     private void initList() {
-
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
@@ -80,7 +78,6 @@ public class SecondNoticeActivity extends BaseActivity implements PullLoadMoreRe
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new NoticeAdapter(SecondNoticeActivity.this);
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
@@ -138,7 +135,6 @@ public class SecondNoticeActivity extends BaseActivity implements PullLoadMoreRe
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -155,7 +151,6 @@ public class SecondNoticeActivity extends BaseActivity implements PullLoadMoreRe
                 finish();
                 break;
             case R.id.tv_send:
-                // startActivity(new Intent(mContext, NoticeIssueActivity.class));
                 Intent intent = new Intent(mContext, NoticeIssueActivity.class);
                 startActivityForResult(intent, 1);
                 break;
@@ -166,7 +161,6 @@ public class SecondNoticeActivity extends BaseActivity implements PullLoadMoreRe
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
-//            onRefresh();
         }
     }
 

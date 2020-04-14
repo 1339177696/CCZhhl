@@ -17,7 +17,6 @@ public class L_ExpenseHistoryAdapter extends RecyclerView.Adapter <L_ExpenseHist
     private Context mContext;
     private List<Expense> dataList = new ArrayList<>();
 
-
     public void addAllData(List<Expense> dataList) {
         this.dataList.addAll(dataList);
         notifyDataSetChanged();
@@ -52,7 +51,6 @@ public class L_ExpenseHistoryAdapter extends RecyclerView.Adapter <L_ExpenseHist
     @Override
     public L_ExpenseHistoryAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.l_item_apply_launch_expense, parent, false);
-
         return new L_ExpenseHistoryAdapter.ViewHolder(v);
     }
 

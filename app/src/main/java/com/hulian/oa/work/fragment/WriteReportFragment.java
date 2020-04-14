@@ -19,16 +19,13 @@ import butterknife.Unbinder;
  * Describe:写汇报
  */
 public class WriteReportFragment extends Fragment {
-
     Unbinder unbinder;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view;
         view = inflater.inflate(R.layout.fragment_write_report, container, false);
         unbinder = ButterKnife.bind(this, view);
         return view;
-
     }
 
     @Override

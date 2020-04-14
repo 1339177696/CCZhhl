@@ -77,7 +77,6 @@ public class PostOrderActivity extends BaseActivity {
                 break;
             case R.id.rl_sel_people:
                 Intent intent=new Intent(PostOrderActivity.this, SubordpersonActivity2.class);
-//                intent.putExtra("partId", SPUtils.get(mContext, "deptId", "").toString());
                 startActivityForResult(intent,0x200);
                 break;
             case R.id.et_content:
@@ -112,7 +111,6 @@ public class PostOrderActivity extends BaseActivity {
 
                     @Override
                     public void onFailure(OkHttpException failuer) {
-                        //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                         Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
                     }
                 });

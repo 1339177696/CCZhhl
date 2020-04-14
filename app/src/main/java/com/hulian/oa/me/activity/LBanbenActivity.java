@@ -57,9 +57,7 @@ public class LBanbenActivity extends BaseActivity {
         setContentView(R.layout.lbanbenactivity);
         ButterKnife.bind(this);
         versioncodel = getLocalVersion(this);
-        versionname = getLocalVersionName(this);
-
-
+        versionname = getVersionName(this);
         appVersion.setText("Version "+versionname);
     }
     // 后台检测版本

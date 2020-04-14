@@ -81,7 +81,6 @@ public class LuncherActivity extends BaseActivity {
             public void run() {
                 if(SPUtils.contains(mContext,"userId")) {
                     if(BuildConfig.IsPad){
-                      //  PostKeyValueRequet(SPUtils.get(mContext,"username","-1").toString(),SPUtils.get(mContext,"password","-1").toString());
                         doLogin(SPUtils.get(mContext,"username","-1").toString(),SPUtils.get(mContext,"password","-1").toString());
                     }else {
                         doLogin(SPUtils.get(mContext,"username","-1").toString(),SPUtils.get(mContext,"password","-1").toString());
@@ -104,7 +103,6 @@ public class LuncherActivity extends BaseActivity {
 //         在这里直接使用同步到云信服务器的帐号和token登录。
 //         这里为了简便起见，demo就直接使用了密码的md5作为token。
 //         如果开发者直接使用这个demo，只更改appkey，然后就登入自己的账户体系的话，需要传入同步到云信服务器的token，而不是用户密码。
-   //     loadDialog.show();
         final String account = account1;
         final String token =token1;
         // 登录
@@ -196,7 +194,6 @@ public class LuncherActivity extends BaseActivity {
             }
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(LuncherActivity.this, "请求失败="+failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

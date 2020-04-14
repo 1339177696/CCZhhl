@@ -90,7 +90,6 @@ public class TaskCompletedDetailsActivity extends BaseActivity implements PullLo
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new L_DetailsCompletedTaskAdapter(this);
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
@@ -125,33 +124,6 @@ public class TaskCompletedDetailsActivity extends BaseActivity implements PullLo
         mRecyclerViewAdapter.clearData();
         mCount = 1;
     }
-//    private void getData() {
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        mRecyclerViewAdapter.addAllData(setList());
-//                        mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
-//                    }
-//                });
-//
-//            }
-//        }, 1000);
-//
-//    }
-
-//  private List<String> setList() {
-//        List<String> dataList = new ArrayList<>();
-//        int start = 20 * (mCount - 1);
-//        for (int i = start; i < 20 * mCount; i++) {
-//            dataList.hb_add("Frist" + i);
-//        }
-//        return dataList;
-//
-//    }
-
     private void getData() {
         RequestParams params = new RequestParams();
         params.put("id", id);
@@ -162,7 +134,6 @@ public class TaskCompletedDetailsActivity extends BaseActivity implements PullLo
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 //需要转化为实体对象
                 try {
-
                     JSONObject result = new JSONObject(responseObj.toString());
                     list = gson.fromJson(result.getJSONObject("data").getString("list"), new TypeToken<List<Hufu_bean>>() {
                     }.getType());
@@ -170,13 +141,11 @@ public class TaskCompletedDetailsActivity extends BaseActivity implements PullLo
                     }.getType());
                     String sum = result.getJSONObject("data").getString("sum");
                     huifu_bean_x.setSum(sum);
-
                     JSONObject jsonObject = new JSONObject(result.getJSONObject("data").getString("object"));
                     String a = jsonObject.getString("startTime");
                     laUnStartTime.setText(a.replace("-","/"));
                     String b = jsonObject.getString("endTime");
                     laUnStopTime.setText(b.replace("-","/"));
-
                     mRecyclerViewAdapter.addAllData(list, huifu_bean_x);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                 } catch (JSONException e) {
@@ -186,7 +155,6 @@ public class TaskCompletedDetailsActivity extends BaseActivity implements PullLo
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

@@ -28,8 +28,6 @@ import java.util.List;
 public class NewsCommentdapter extends RecyclerView.Adapter <NewsCommentdapter.ViewHolder>{
     private Context mContext;
     private List<JournalismComments> dataList = new ArrayList<>();
-
-
     public void addAllData(List<JournalismComments> dataList) {
         this.dataList.addAll(dataList);
         notifyDataSetChanged();

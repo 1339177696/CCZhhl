@@ -7,10 +7,8 @@ import com.netease.nim.uikit.common.util.file.FileUtil;
  * Created by zhoujianghua on 2015/7/8.
  */
 public class StickerAttachment extends CustomAttachment {
-
     private final String KEY_CATALOG = "catalog";
     private final String KEY_CHARTLET = "chartlet";
-
     private String catalog;
     private String chartlet;
 

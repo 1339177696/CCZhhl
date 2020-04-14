@@ -26,8 +26,6 @@ import java.util.List;
 public class NewsViewAdapter extends RecyclerView.Adapter <NewsViewAdapter.ViewHolder>{
     private Context mContext;
     private List<News> dataList = new ArrayList<>();
-
-
     public void addAllData(List<News> dataList) {
         this.dataList.addAll(dataList);
         notifyDataSetChanged();
@@ -68,16 +66,11 @@ public class NewsViewAdapter extends RecyclerView.Adapter <NewsViewAdapter.ViewH
             holder.tv_content.setText(Html.fromHtml(dataList.get(position).getJournalismContent()));
         }
         holder.tv_time.setText(TimeUtils.getDateToString(dataList.get(position).getCreateTime()));
-     //   holder.tv_dianzanCount.setText(TimeUtils.getDateToString(dataList.get(position).getCreateTime()));
-//        Glide.with(mContext).load( dataList.get(position).getJournalismImage()).into(holder.iv_head);
         holder.iv_head.setImageURI(dataList.get(position).getJournalismImage());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                Intent intent= new Intent(mContext, NewsActivityInfo.class);
-
-//               intent.putExtra("journalism",dataList.get(position));
-
                intent.putExtra("getIsCollect",dataList.get(position).getIsCollect());
                intent.putExtra("getJournalismId",dataList.get(position).getJournalismId());
                mContext.startActivity(intent);

@@ -45,7 +45,6 @@ public class L_ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     public L_ScheduleAdapter(Context context) {
-        //    titles = context.getResources().getStringArray(R.array.titles);
         this.context = context;
         layoutInflater = LayoutInflater.from(context);
     }
@@ -84,11 +83,6 @@ public class L_ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-         /*  String aa = dataList.get(position).getScheduleDate();
-        holder.tv_time.setText( com.hulian.oa.utils.TimeUtils.getDateToString2(aa));
-        holder.tv_title.setText(dataList.get(position).getScheduleContent());
-        holder.fl_content.setVisibility(View.GONE);*/
-
         if (holder instanceof ViewHolder_Top) {
             //设置数据 事件
             ViewHolder_Top viewHolder_top = ((ViewHolder_Top) holder);
@@ -136,9 +130,6 @@ public class L_ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             }
             if (dataList.get(position).isNow()) {
                 viewHolderList.tv_now.setVisibility(View.VISIBLE);
-               /* RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)   holder.tv_now_xian.getLayoutParams();
-                lp.setMargins(int left, int top, int right, int bottom)*/
-
                 viewHolderList.tv_now_xian.setVisibility(View.VISIBLE);
                 viewHolderList.tv_now_dian.setVisibility(View.VISIBLE);
                 viewHolderList.tv_now.setText(dataList.get(position).getTimeNow());

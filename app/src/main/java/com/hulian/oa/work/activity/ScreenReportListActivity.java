@@ -42,8 +42,6 @@ import butterknife.OnClick;
  * Describe: 汇报筛选列表
  */
 public class ScreenReportListActivity extends BaseActivity implements BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
-
-
     @BindView(R.id.listview)
     RecyclerView listview;
     @BindView(R.id.swipe_refresh_layout)
@@ -51,10 +49,8 @@ public class ScreenReportListActivity extends BaseActivity implements BaseQuickA
     @BindView(R.id.iv_back)
     RelativeLayout ivBack;
     private int mCount = 1;
-
     private WriteReportAdapter mAdapter;
     private List<Report> mData = new ArrayList<>();
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -126,7 +122,6 @@ public class ScreenReportListActivity extends BaseActivity implements BaseQuickA
                     }else {
                         mAdapter.loadMoreComplete();
                     }
-//                   mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -134,7 +129,6 @@ public class ScreenReportListActivity extends BaseActivity implements BaseQuickA
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(ScreenReportListActivity.this, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

@@ -10,23 +10,16 @@ import com.netease.nimlib.sdk.StatusBarNotificationConfig;
  * Created by jezhee on 2/20/15.
  */
 public class DemoCache {
-
     private static Context context;
-
     private static String account;
-
     private static StatusBarNotificationConfig notificationConfig;
-
     public static void clear() {
         account = null;
     }
-
     public static String getAccount() {
         return account;
     }
-
     private static boolean mainTaskLaunching;
-
     public static void setAccount(String account) {
         DemoCache.account = account;
        NimUIKit.setAccount(account);

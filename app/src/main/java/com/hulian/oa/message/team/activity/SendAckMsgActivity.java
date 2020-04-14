@@ -22,9 +22,7 @@ import com.netease.nim.uikit.common.activity.UI;
 public class SendAckMsgActivity extends UI {
     private static final String EXTRA_SESSIONID = "session_id";
     public static final String EXTRA_CONTENT = "extra_content";
-
     private String sessionId;
-
     private EditText msgEdit;
 
     public static void startActivity(Context context, String sessionId, int requestCode) {
@@ -43,9 +41,7 @@ public class SendAckMsgActivity extends UI {
         options.titleId = R.string.send_ack_msg;
         options.navigateId = R.mipmap.actionbar_dark_back_icon;
         setToolBar(R.id.toolbar, options);
-
         sessionId = getIntent().getStringExtra(EXTRA_SESSIONID);
-
         msgEdit = findView(R.id.ack_msg_edit_text);
         Button btn = findView(R.id.send_btn);
         btn.setOnClickListener(new View.OnClickListener() {

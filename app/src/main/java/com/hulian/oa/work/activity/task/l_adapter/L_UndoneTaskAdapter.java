@@ -48,8 +48,6 @@ public class L_UndoneTaskAdapter extends RecyclerView.Adapter <L_UndoneTaskAdapt
         void onButtonClick(View view, int position);
     }
 
-
-
     public void addAllData(List<Notice_x> dataList) {
         this.dataList.addAll(dataList);
         notifyDataSetChanged();
@@ -67,9 +65,7 @@ public class L_UndoneTaskAdapter extends RecyclerView.Adapter <L_UndoneTaskAdapt
         public TextView tv_title;
         public TextView tv_time;
         public TextView tv_deadline_time;
-        public TextView tv_deadline_week;
         public TextView tv_launch_task_person;
-//        public Button tv_transfer_task;
         public Button tv_completed;
         public ViewHolder(View itemView) {
             super(itemView);
@@ -78,7 +74,6 @@ public class L_UndoneTaskAdapter extends RecyclerView.Adapter <L_UndoneTaskAdapt
             tv_deadline_time = (TextView) itemView.findViewById(R.id.tv_deadline_time);
             tv_launch_task_person = (TextView) itemView.findViewById(R.id.tv_launch_task_person);
             tv_completed = (Button) itemView.findViewById(R.id.tv_completed);
-//            tv_transfer_task = (Button) itemView.findViewById(R.id.tv_undone_transfer_task);
         }
     }
 
@@ -91,29 +86,14 @@ public class L_UndoneTaskAdapter extends RecyclerView.Adapter <L_UndoneTaskAdapt
     @Override
     public void onBindViewHolder(L_UndoneTaskAdapter.ViewHolder holder, final int position) {
         holder.tv_title.setText(dataList.get(position).getTitle());
-
 //        开始时间
         String b = dataList.get(position).getStartTime();
         holder.tv_time.setText(b);
-
 //        截止时间
         String a = dataList.get(position).getEndTime();
         holder.tv_deadline_time.setText(a);
-
-
         holder.tv_launch_task_person.setText(dataList.get(position).getCreateBy());
         Log.e("i弟弟弟弟",dataList.get(position).getId());
-
-//        holder.tv_transfer_task.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                Intent intent = new Intent();
-//                intent.putExtra("ID",dataList.get(position).getId());
-//                intent.setClass(mContext, SelDepartmentActivity_xx.class);
-//                mContext.startActivity(intent);
-//            }
-//        });
 
         holder.tv_completed.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,7 +112,6 @@ public class L_UndoneTaskAdapter extends RecyclerView.Adapter <L_UndoneTaskAdapt
                 Intent intent = new Intent();
                 intent.putExtra("PORID",dataList.get(position).getProid());
                 intent.putExtra("ID",dataList.get(position).getId());
-
                 intent.setClass(mContext,TaskUndoneDetailsActivity.class);
                 mContext.startActivity(intent);
             }
@@ -177,45 +156,10 @@ public class L_UndoneTaskAdapter extends RecyclerView.Adapter <L_UndoneTaskAdapt
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private String getDataaa(String fromDate) {
-        String strTime = null;
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-        String toDate = df.format(curDate);
-        try {
-            //前的时间
-            Date fd = df.parse(fromDate);
-            //后的时间
-            Date td = df.parse(toDate);
-            //两时间差,精确到毫秒
-            long diff = td.getTime() - fd.getTime();
-            long day = diff / 86400000;                         //以天数为单位取整
-            long hour = diff % 86400000 / 3600000;               //以小时为单位取整
-            long min = diff % 86400000 % 3600000 / 60000;       //以分钟为单位取整
-            long seconds = diff % 86400000 % 3600000 % 60000 / 1000;   //以秒为单位取整
-
-            if (day<=0)
-            {
-                strTime = fromDate.substring(10,fromDate.length()-3);
-            }
-            else
-            {
-                System.out.println("两时间差---> " + day + "天" + hour + "小时" + min + "分" + seconds + "秒");
-                strTime = fromDate.substring(0,fromDate.length()-8);
-
-            }
-            return strTime;
-        } catch (ParseException e)
-        {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
 }

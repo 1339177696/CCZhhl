@@ -105,10 +105,6 @@ public class LeaveExamineAdapter extends
                         .centerCrop()
                         .placeholder(R.color.color_f6)
                         .diskCacheStrategy(DiskCacheStrategy.ALL);
-//                Glide.with(viewHolder.itemView.getContext())
-//                        .load(path)
-//                        .apply(options)
-//                        .into(viewHolder.mImg);
                     viewHolder.mImg.setImageURI(path);
             if (mItemClickListener != null) {
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {

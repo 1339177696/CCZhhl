@@ -58,7 +58,6 @@ public class UpcomAdapter extends RecyclerView.Adapter <UpcomAdapter.ViewHolder>
         mContext = context;
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
-      //  public ImageView iv_image;
         public TextView tv_title;
         public TextView tv_time;
         public TextView tv_content;
@@ -67,7 +66,6 @@ public class UpcomAdapter extends RecyclerView.Adapter <UpcomAdapter.ViewHolder>
         public TextView bt_1,bt_2;
         public ViewHolder(View itemView) {
             super(itemView);
-      //      iv_image=itemView.findViewById(R.id.iv_image);
             tv_title = (TextView) itemView.findViewById(R.id.tv_title);
             tv_time= (TextView) itemView.findViewById(R.id.tv_time);
             tv_content = (TextView) itemView.findViewById(R.id.tv_content);
@@ -105,8 +103,6 @@ public class UpcomAdapter extends RecyclerView.Adapter <UpcomAdapter.ViewHolder>
             holder.tv_des.setText(Html.fromHtml(text_content));
         }
 
-
-    //    holder.tv_des.setText(dataList.get(position).getDes());
         //0任务协同，1：公文流转2:指令安排3:会议安排 4 报销 5 请假
         switch (dataList.get(position).getType()) {
             case "0":
@@ -136,7 +132,6 @@ public class UpcomAdapter extends RecyclerView.Adapter <UpcomAdapter.ViewHolder>
                                         if (code.equals("0"))
                                         {
                                             EventBus.getDefault().post(new UpcomFragment());
-                                            //   EventBus.getDefault().post(new L_HascomFragment());
                                             Toast.makeText(mContext,msg,Toast.LENGTH_SHORT).show();
                                         }
                                         else
@@ -150,7 +145,6 @@ public class UpcomAdapter extends RecyclerView.Adapter <UpcomAdapter.ViewHolder>
 
                                 @Override
                                 public void onFailure(OkHttpException failuer) {
-                                    //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                                     Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -187,7 +181,6 @@ public class UpcomAdapter extends RecyclerView.Adapter <UpcomAdapter.ViewHolder>
                             }
                             @Override
                             public void onFailure(OkHttpException failuer) {
-                                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -220,7 +213,6 @@ public class UpcomAdapter extends RecyclerView.Adapter <UpcomAdapter.ViewHolder>
 
                             @Override
                             public void onFailure(OkHttpException failuer) {
-                                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -352,7 +344,6 @@ public class UpcomAdapter extends RecyclerView.Adapter <UpcomAdapter.ViewHolder>
                             }
                             @Override
                             public void onFailure(OkHttpException failuer) {
-                                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -382,7 +373,6 @@ public class UpcomAdapter extends RecyclerView.Adapter <UpcomAdapter.ViewHolder>
                             }
                             @Override
                             public void onFailure(OkHttpException failuer) {
-                                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -417,7 +407,6 @@ public class UpcomAdapter extends RecyclerView.Adapter <UpcomAdapter.ViewHolder>
                                 }
                                 @Override
                                 public void onFailure(OkHttpException failuer) {
-                                    //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                                     Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -447,7 +436,6 @@ public class UpcomAdapter extends RecyclerView.Adapter <UpcomAdapter.ViewHolder>
                             }
                             @Override
                             public void onFailure(OkHttpException failuer) {
-                                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -466,14 +454,6 @@ public class UpcomAdapter extends RecyclerView.Adapter <UpcomAdapter.ViewHolder>
                         intent.putExtra("ID",dataList.get(position).getId());
                         break;
                     case "1":
-
-//                        if(BuildConfig.IsPad) {
-//                            intent.setClass(mContext, PAD_gongwen_SP.class);
-//                        }
-//                        else {
-//                            intent.setClass(mContext,DocumentLotusActivity.class);
-//                        }
-//                        intent.putExtra("offId",dataList.get(position).getId());
                         break;
                     case "2":
                         if(dataList.get(position).getStatus().equals("1")){

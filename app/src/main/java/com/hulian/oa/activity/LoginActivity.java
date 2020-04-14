@@ -212,7 +212,6 @@ public class LoginActivity extends BaseActivity {
             }
             @Override
             public void onFailure(OkHttpException failuer) {
-             //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(LoginActivity.this, "请求失败="+failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

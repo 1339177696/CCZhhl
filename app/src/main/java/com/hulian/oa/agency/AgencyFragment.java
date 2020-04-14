@@ -36,19 +36,9 @@ import de.greenrobot.event.EventBus;
 public class AgencyFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-//    @BindView(R.id.my_tablayout)
-//    TabLayout myTablayout;
-//    @BindView(R.id.my_viewpager)
-//    ViewPager myViewpager;
     Unbinder unbinder;
     @BindView(R.id.tv_mengban)
     TextView tvMengban;
-//    @BindView(R.id.tv_agencyCount)
-//    TextView tvAgencyCount;
-//    @BindView(R.id.tv_finishCount)
-//    TextView tvFinishCount;
     @BindView(R.id.zx_qgl_img1)
     ImageView zxQglImg1;
     @BindView(R.id.lr_qgl_btn1)
@@ -65,9 +55,6 @@ public class AgencyFragment extends Fragment {
     TextView zxQglTxt2;
     @BindView(R.id.yiban_number)
     TextView yibanNumber;
-    private ArrayList<String> list_path;
-    private ArrayList<String> list_title;
-    private int mViewPagerIndex;
     private int pos = 0;
 
     private UpcomFragment l_upcomFragment;
@@ -88,9 +75,6 @@ public class AgencyFragment extends Fragment {
     public static AgencyFragment newInstance(String requestJson) {
         AgencyFragment fragment = new AgencyFragment();
         Bundle args = new Bundle();
-//        args.putString("requestJson", requestJson);
-//        args.putString("gid", gid);
-//        args.putString("idno", idno);
         fragment.setArguments(args);
         return fragment;
     }
@@ -99,8 +83,6 @@ public class AgencyFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-//            gid = getArguments().getString("gid");
-//            idno=getArguments().getString("idno");
         }
     }
 
@@ -114,44 +96,6 @@ public class AgencyFragment extends Fragment {
         return view;
 
     }
-
-//    private void init() {
-//        ArrayList<String> titleDatas = new ArrayList<>();
-//        titleDatas.hb_add("待办");
-//        titleDatas.hb_add("已办");
-//        ArrayList<Fragment> fragmentList = new ArrayList<Fragment>();
-//        fragmentList.hb_add(new L_UpcomFragment());
-//        fragmentList.hb_add(new L_HascomFragment());
-//        MyViewPageAdapter myViewPageAdapter = new MyViewPageAdapter(getActivity().getSupportFragmentManager(), titleDatas, fragmentList);
-//        //   myTablayout.setSelectedTabIndicator(0);
-//        myViewpager.setAdapter(myViewPageAdapter);
-//        myTablayout.setupWithViewPager(myViewpager);
-//        //        myTablayout.setTabsFromPagerAdapter(myViewPageAdapter);
-//        myViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//                pos = position;
-//                if (0 == position) {
-//                    tvAgencyCount.setTextColor(getActivity().getResources().getColor(R.color.white));
-//                    tvFinishCount.setTextColor(getActivity().getResources().getColor(R.color.color_xian));
-//                } else {
-//                    tvFinishCount.setTextColor(getActivity().getResources().getColor(R.color.white));
-//                    tvAgencyCount.setTextColor(getActivity().getResources().getColor(R.color.color_xian));
-//                }
-//            }
-//
-//            @Override
-//            public void onPageSelected(int position) {
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int state) {
-//                if (state == 2) {//state有三种状态下文会将，当手指刚触碰屏幕时state的值为1，我们就在这个时候给mViewPagerIndex 赋值。
-//                    //       mViewPagerIndex = myViewpager.getCurrentItem();
-//                }
-//            }
-//        });
-//    }
 
     @Override
     public void onDestroyView() {
@@ -186,23 +130,15 @@ public class AgencyFragment extends Fragment {
 
     public void onEventMainThread(AgencyCount event) {
         if (!"".equals(event.getAgencyCount())) {
-//            tvAgencyCount.setText(event.getAgencyCount());
             daibanNumber.setText(event.getAgencyCount());
         }
     }
 
     public void onEventMainThread(AgencyCountFinish event) {
         if (!"".equals(event.getAgencyCountFinish())) {
-//            tvFinishCount.setText(event.getAgencyCountFinish());
             yibanNumber.setText(event.getAgencyCountFinish());
         }
     }
-
-    //
-//    @OnClick(R.id.iv_news)
-//    public void onViewClicked() {
-//        startActivity(new Intent(getActivity(), NewsActivityInfo.class));
-//    }
     public void onViewClicked() {
         Intent intent = new Intent(getActivity(), ExpenseExamineActivity.class);
         intent.putExtra("type", "agency");

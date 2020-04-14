@@ -27,8 +27,6 @@ import de.greenrobot.event.EventBus;
 
 //指令反馈
 public class InstructBackActivity extends BaseActivity {
-
-
     @BindView(R.id.tv_back_instruct)
     TextView tv_back_instruct;
     @BindView(R.id.et_content)
@@ -63,7 +61,6 @@ public class InstructBackActivity extends BaseActivity {
     private void getData() {
         RequestParams params = new RequestParams();
         params.put("id", getIntent().getStringExtra("id"));
-
         HttpRequest.postInstructDetailsApi(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -81,7 +78,6 @@ public class InstructBackActivity extends BaseActivity {
                     e.printStackTrace();
                 }
             }
-
             @Override
             public void onFailure(OkHttpException failuer) {
 

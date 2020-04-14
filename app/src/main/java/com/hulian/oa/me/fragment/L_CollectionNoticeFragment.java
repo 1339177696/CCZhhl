@@ -48,7 +48,6 @@ public class L_CollectionNoticeFragment extends Fragment implements PullLoadMore
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.l_fra_collection_notice,null);
         unbinder = ButterKnife.bind(this, view);
         initList();
@@ -56,7 +55,6 @@ public class L_CollectionNoticeFragment extends Fragment implements PullLoadMore
     }
 
     private void initList() {
-
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
@@ -76,7 +74,6 @@ public class L_CollectionNoticeFragment extends Fragment implements PullLoadMore
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new L_CollectionNoticeAdapter(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
@@ -107,33 +104,6 @@ public class L_CollectionNoticeFragment extends Fragment implements PullLoadMore
         mRecyclerViewAdapter.clearData();
         mCount = 1;
     }
-//    private void getData() {
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                getActivity().runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        mRecyclerViewAdapter.addAllData(setList());
-//                        mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
-//                    }
-//                });
-//
-//            }
-//        }, 1000);
-//
-//    }
-
-    private List<String> setList() {
-        List<String> dataList = new ArrayList<>();
-        int start = 20 * (mCount - 1);
-        for (int i = start; i < 20 * mCount; i++) {
-            dataList.add("Frist" + i);
-        }
-        return dataList;
-
-    }
-
     private void getData() {
         String collectUserId = SPUtils.get(getActivity(),"userId","-1").toString();
         RequestParams params = new RequestParams();
@@ -161,7 +131,6 @@ public class L_CollectionNoticeFragment extends Fragment implements PullLoadMore
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

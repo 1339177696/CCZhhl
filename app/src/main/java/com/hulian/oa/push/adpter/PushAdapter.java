@@ -39,7 +39,6 @@ public class PushAdapter extends RecyclerView.Adapter <PushAdapter.ViewHolder>{
     private Context mContext;
     private List<MeBean> dataList = new ArrayList<>();
 
-
     public void addAllData(List<MeBean> dataList) {
         this.dataList.addAll(dataList);
         notifyDataSetChanged();
@@ -209,23 +208,7 @@ public class PushAdapter extends RecyclerView.Adapter <PushAdapter.ViewHolder>{
                 }else if (dataList.get(position).getType().equals("2")){
 //                    公文
                     if (dataList.get(position).getMsgType() == 0){
-//                        Intent intent = new Intent();
-//                        intent.putExtra("offId", dataList.get(position).getRelationId());
-//                        if (SPUtils.get(mContext, "isLead", "").equals("0")) {
-//                            if (BuildConfig.IsPad) {
-//                                intent.setClass(mContext, PAD_gongwen_SP.class);
-//                            } else {
-//                                intent.setClass(mContext, DocumentLotusActivity.class);
-//                            }
-//                        } else {
-//                            intent.setClass(mContext, DocumentLotusInfoActivity.class);
-//                        }
-//                        mContext.startActivity(intent);
                     }else {
-//                        Intent intent=new Intent();
-//                        intent.putExtra("offId",dataList.get(position).getRelationId());
-//                        intent.setClass(mContext, DocumentLotusInfoActivity.class);
-//                        mContext.startActivity(intent);
                     }
 
                 }else if (dataList.get(position).getType().equals("3")){
@@ -343,7 +326,6 @@ public class PushAdapter extends RecyclerView.Adapter <PushAdapter.ViewHolder>{
                         mind_setup_jvabean.setCCP(stringBuffer.toString());
                     }else {
                         mind_setup_jvabean.setCCP("");
-
                     }
                     if (jsonObject.getString("attachment")!=null&&!jsonObject.getString("attachment").equals("null")){
                         String jo = jsonObject.getString("attachment");
@@ -361,13 +343,9 @@ public class PushAdapter extends RecyclerView.Adapter <PushAdapter.ViewHolder>{
                         mContext.startActivity(intent);
                     }
 
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
-
             }
 
             @Override

@@ -23,18 +23,14 @@ import com.netease.nimlib.sdk.msg.model.IMMessage;
  * Created by huangjun on 2017/1/11.
  */
 public class DisplayMessageActivity extends UI implements ModuleProxy {
-
     private static String EXTRA_ANCHOR = "anchor";
-
     public static void start(Context context, IMMessage anchor) {
         Intent intent = new Intent();
         intent.setClass(context, DisplayMessageActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
         //search extra
         intent.putExtra(EXTRA_ANCHOR, anchor);
-
         context.startActivity(intent);
     }
 
@@ -48,15 +44,11 @@ public class DisplayMessageActivity extends UI implements ModuleProxy {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         View rootView = LayoutInflater.from(this).inflate(R.layout.message_history_activity, null);
         setContentView(rootView);
-
         ToolBarOptions options = new NimToolBarOptions();
         setToolBar(R.id.toolbar, options);
-
         onParseIntent();
-
         Container container = new Container(this, account, sessionType, this);
         messageListPanel = new MessageListPanelEx(container, rootView, anchor, true, false);
     }
@@ -64,7 +56,6 @@ public class DisplayMessageActivity extends UI implements ModuleProxy {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         messageListPanel.onDestroy();
     }
 
@@ -72,7 +63,6 @@ public class DisplayMessageActivity extends UI implements ModuleProxy {
         anchor = (IMMessage) getIntent().getSerializableExtra(EXTRA_ANCHOR);
         account = anchor.getSessionId();
         sessionType = anchor.getSessionType();
-
         setTitle(UserInfoHelper.getUserTitleName(account, sessionType));
     }
 

@@ -50,15 +50,6 @@ public class GridViewAdapter  extends BaseAdapter {
         fl_content=convertView.findViewById(R.id.fl_content);
         iv_add=convertView.findViewById(R.id.iv_add);
         bt_sel_peo.setText(list.get(position).getDeptName());
-//        if (position < list.size()) {
-//            bt_sel_peo.setText(list.get(position).getDeptName());
-//            fl_content.setVisibility(View.VISIBLE);
-//            iv_add.setVisibility(View.GONE);
-//
-//        }else{
-//            fl_content.setVisibility(View.GONE);
-//            iv_add.setVisibility(View.VISIBLE);
-//        }
         return convertView;
     }
 

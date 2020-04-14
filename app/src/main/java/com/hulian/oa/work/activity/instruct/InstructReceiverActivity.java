@@ -28,7 +28,6 @@ import de.greenrobot.event.EventBus;
 
 //指令接收
 public class InstructReceiverActivity extends BaseActivity {
-
     @BindView(R.id.tv_receiver_instruct)
     TextView tv_receiver_instruct;
     @BindView(R.id.details_img)
@@ -37,7 +36,6 @@ public class InstructReceiverActivity extends BaseActivity {
     TextView tvContent;
     @BindView(R.id.tv_time)
     TextView tvTime;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +47,6 @@ public class InstructReceiverActivity extends BaseActivity {
     private void getData() {
         RequestParams params = new RequestParams();
         params.put("id", getIntent().getStringExtra("id"));
-
         HttpRequest.postInstructDetailsApi(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -67,7 +64,6 @@ public class InstructReceiverActivity extends BaseActivity {
                     e.printStackTrace();
                 }
             }
-
             @Override
             public void onFailure(OkHttpException failuer) {
 

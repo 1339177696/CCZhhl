@@ -44,7 +44,6 @@ public class AttendrulesActivity extends BaseActivity {
     TextView dkTvAdress;
     @BindView(R.id.dk_tv_card)
     TextView dkTvCard;
-
     private String id = "";
     private String registerContent = "";
     private String upTime = "";
@@ -101,7 +100,6 @@ public class AttendrulesActivity extends BaseActivity {
         HttpRequest.PostClock_rules(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
-
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
                     if (result.optString("data") == "")
@@ -122,8 +120,6 @@ public class AttendrulesActivity extends BaseActivity {
                         dkTvAdress.setText(registerAddress+"附近"+distance+"米");
                         dkTvCard.setText(rxhRule+"");
                     }
-
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

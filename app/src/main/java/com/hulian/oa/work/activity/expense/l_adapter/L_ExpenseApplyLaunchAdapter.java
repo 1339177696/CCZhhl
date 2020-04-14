@@ -19,8 +19,6 @@ import java.util.List;
 public class L_ExpenseApplyLaunchAdapter extends RecyclerView.Adapter <L_ExpenseApplyLaunchAdapter.ViewHolder>{
     private Context mContext;
     private List<Expense> dataList = new ArrayList<>();
-
-
     public void addAllData(List<Expense> dataList) {
         this.dataList.addAll(dataList);
         notifyDataSetChanged();
@@ -45,14 +43,12 @@ public class L_ExpenseApplyLaunchAdapter extends RecyclerView.Adapter <L_Expense
         public TextView tv_state;
 
         //已审批
-//        public ImageView tv_pend;
         public ViewHolder(View itemView) {
             super(itemView);
             tv_title = (TextView) itemView.findViewById(R.id.tv_title);
             tv_time = (TextView) itemView.findViewById(R.id.tv_time);
             tv_expense_monkey = (TextView) itemView.findViewById(R.id.tv_expense_monkey);
             tv_state = (TextView) itemView.findViewById(R.id.tv_state);
-//            tv_pend = (ImageView) itemView.findViewById(R.id.tv_pend);
         }
     }
 
@@ -69,29 +65,17 @@ public class L_ExpenseApplyLaunchAdapter extends RecyclerView.Adapter <L_Expense
         holder.tv_time.setText(dataList.get(position).getCreateTime().split(" ")[0]);
         holder.tv_expense_monkey.setText(dataList.get(position).getMoney()+"元");
         if(dataList.get(position).getState().equals("0")){
-//            holder.tv_pend.setBackgroundColor(mContext.getResources().getColor(R.color.tab_color_true));
-//            holder.tv_pend.setText("待审批");
-//            qgl修改
-//            holder.tv_pend.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_daishenpi_icon_qgl));
             holder.tv_state.setText("待审批");
             holder.tv_state.setTextColor(ContextCompat.getColor(mContext,R.color.bg_yellow_a));
             holder.tv_state.setBackground(ContextCompat.getDrawable(mContext,R.drawable.baoxiao_state_yellow));
 
         }
         else if (dataList.get(position).getState().equals("1")){
-//            holder.tv_pend.setText("已审批");
-//            holder.tv_pend.setBackgroundColor(mContext.getResources().getColor(R.color.color_a_green));
-            //            qgl修改
-//            holder.tv_pend.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_shenpi_tongguo_icon_qgl));
             holder.tv_state.setText("已审批");
             holder.tv_state.setTextColor(ContextCompat.getColor(mContext,R.color.bg_blue_a));
             holder.tv_state.setBackground(ContextCompat.getDrawable(mContext,R.drawable.baoxiao_state_blue));
         }
         else {
-//            holder.tv_pend.setText("驳回");
-//            holder.tv_pend.setBackgroundColor(mContext.getResources().getColor(R.color.colorText));
-            //            qgl修改
-//            holder.tv_pend.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_bohui_icon_qgl));
             holder.tv_state.setText("驳回");
             holder.tv_state.setTextColor(ContextCompat.getColor(mContext,R.color.bg_red_a));
             holder.tv_state.setBackground(ContextCompat.getDrawable(mContext,R.drawable.baoxiao_state_red));

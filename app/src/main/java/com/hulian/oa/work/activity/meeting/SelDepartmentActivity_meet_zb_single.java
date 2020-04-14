@@ -311,13 +311,6 @@ public class SelDepartmentActivity_meet_zb_single extends BaseActivity {
                     expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
                         @Override
                         public boolean onGroupClick(ExpandableListView expandableListView, View view, int groupPosition, long id) {
-                            //如果分组被打开 直接关闭
-//                            if ( expandableListView.isGroupExpanded(groupPosition) ) {
-//                                expandableListView.collapseGroup(groupPosition);
-//                            }
-//                            else {
-//                             //    initPeopleData(groupArray.get(groupPosition).getDeptId(),groupPosition);
-//                            }
                             //返回false表示系统自己处理展开和关闭事件 返回true表示调用者自己处理展开和关闭事件
                             return false;
                         }
@@ -330,7 +323,6 @@ public class SelDepartmentActivity_meet_zb_single extends BaseActivity {
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -354,7 +346,6 @@ public class SelDepartmentActivity_meet_zb_single extends BaseActivity {
                             }.getType());
                     List<People> childModels = childArray.get(position);
                     childModels.addAll(memberList);
-                    //  expandableListView.expandGroup(position, true);
                     expandableListView.collapseGroup(position);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -363,7 +354,6 @@ public class SelDepartmentActivity_meet_zb_single extends BaseActivity {
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

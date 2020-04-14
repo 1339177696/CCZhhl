@@ -70,7 +70,6 @@ public class MapActivity extends AppCompatActivity {
     private AddressAdapter mAddressAdapter;
     private List<PoiItem> mList;
     private PoiItem userSelectPoiItem;
-
     private AMap mAMap;
     private Marker mMarker, mLocationGpsMarker, mSelectByListMarker;
     private UiSettings mUiSettings;
@@ -80,20 +79,15 @@ public class MapActivity extends AppCompatActivity {
     private int searchAllPageNum;//Poi搜索最大页数，可应用于上拉加载更多
     private int searchNowPageNum;//当前poi搜索页数
     private float zoom = 14;//地图缩放级别
-
     private AMapLocationClient locationClient = null;
     private AMapLocationClientOption locationOption = new AMapLocationClientOption();
     private AMapLocation location;
     private AMapLocationListener mAMapLocationListener;
-
     private onPoiSearchLintener mOnPoiSearchListener;
     private View.OnClickListener mOnClickListener;
     private GeocodeSearch.OnGeocodeSearchListener mOnGeocodeSearchListener;
-
     private Gson gson;
-
     private ObjectAnimator mTransAnimator;//地图中心标志动态
-
     private static final int SEARCHREQUESTCODE = 1001;
 
     // 要申请的权限
@@ -139,7 +133,6 @@ public class MapActivity extends AppCompatActivity {
                     isSearchData = false;
                     doSearchQuery(true, "", location.getCity(), userSelectPoiItem.getLatLonPoint());
                     moveMapCamera(userSelectPoiItem.getLatLonPoint().getLatitude(), userSelectPoiItem.getLatLonPoint().getLongitude());
-//                    refleshMark(userSelectPoiItem.getLatLonPoint().getLatitude(), userSelectPoiItem.getLatLonPoint().getLongitude());
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -193,7 +186,6 @@ public class MapActivity extends AppCompatActivity {
                     }
                     getAddressInfoByLatLong(cameraPosition.target.latitude, cameraPosition.target.longitude);
                     startTransAnimator();
-//                    doSearchQuery(true, "", location.getCity(), new LatLonPoint(cameraPosition.target.latitude, cameraPosition.target.longitude));
                 }
                 if (!isSearchData) {
                     isSearchData = true;
@@ -294,11 +286,9 @@ public class MapActivity extends AppCompatActivity {
                         finish();
                         break;
                     case R.id.iv_search:
-//                        Toast.makeText(MainActivity.this, "搜索", Toast.LENGTH_SHORT).show();
                         startActivityForResult(new Intent(MapActivity.this, SearchActivity.class), SEARCHREQUESTCODE);
                         break;
                     case R.id.iv_location:
-//                        Toast.makeText(MainActivity.this, "定位", Toast.LENGTH_SHORT).show();
                         mIvLocation.setImageResource(R.mipmap.location_gps_green);
                         if (null != mSelectByListMarker) {
                             mSelectByListMarker.setVisible(false);
@@ -318,7 +308,6 @@ public class MapActivity extends AppCompatActivity {
                                 position = mList.size();
                             }
                             PoiItem poiItem = mList.get(position);
-//                            Toast.makeText(MapActivity.this, "发送：" + poiItem.getTitle() + "  " + poiItem.getSnippet() + "  " + "纬度：" + poiItem.getLatLonPoint().getLatitude() + "  " + "经度：" + poiItem.getLatLonPoint().getLongitude(), Toast.LENGTH_SHORT).show();
                             Intent mIntent = new Intent();
                             mIntent.putExtra("addname", poiItem.getTitle());
                             mIntent.putExtra("weidu", poiItem.getLatLonPoint().getLatitude()+"");
@@ -357,7 +346,6 @@ public class MapActivity extends AppCompatActivity {
 
         mTransAnimator = ObjectAnimator.ofFloat(mIvCenterLocation, "translationY", 0f, -80f, 0f);
         mTransAnimator.setDuration(800);
-//        mTransAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
     }
 
     /**

@@ -26,12 +26,9 @@ import com.netease.nimlib.sdk.team.model.Team;
  * Created by hzxuwen on 2015/3/20.
  */
 public class AdvancedTeamJoinActivity extends UI implements View.OnClickListener {
-
     private static final String EXTRA_ID = "EXTRA_ID";
-
     private String teamId;
     private Team team;
-
     private TextView teamNameText;
     private TextView memberCountText;
     private TextView teamTypeText;
@@ -47,13 +44,10 @@ public class AdvancedTeamJoinActivity extends UI implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.nim_advanced_team_join_activity);
-
         ToolBarOptions options = new NimToolBarOptions();
         options.titleId = R.string.team_join;
         setToolBar(R.id.toolbar, options);
-
         findViews();
         parseIntentData();
         requestTeamInfo();

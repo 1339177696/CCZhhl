@@ -20,7 +20,6 @@ public class L_ExpenseApprovedAdapter extends RecyclerView.Adapter <L_ExpenseApp
     private Context mContext;
     private List<Expense> dataList = new ArrayList<>();
 
-
     public void addAllData(List<Expense> dataList) {
         this.dataList.addAll(dataList);
         notifyDataSetChanged();
@@ -65,23 +64,14 @@ public class L_ExpenseApprovedAdapter extends RecyclerView.Adapter <L_ExpenseApp
         holder.tv_time.setText(dataList.get(position).getCreateTime().split(" ")[0]);
         holder.tv_expense_monkey.setText(dataList.get(position).getMoney()+"元");
         if(dataList.get(position).getState().equals("0")){
-//            holder.tv_pend.setBackgroundColor(mContext.getResources().getColor(R.color.tab_color_true));
-//            holder.tv_pend.setText("待审批");
-//            qgl修改
             holder.tv_pend.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_daishenpi_icon_qgl));
 
         }
         else if (dataList.get(position).getState().equals("1")){
-//            holder.tv_pend.setText("已审批");
-//            holder.tv_pend.setBackgroundColor(mContext.getResources().getColor(R.color.color_a_green));
-//            qgl修改
             holder.tv_pend.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_shenpi_tongguo_icon_qgl));
 
         }
         else {
-//            holder.tv_pend.setText("驳回");
-//            holder.tv_pend.setBackgroundColor(mContext.getResources().getColor(R.color.colorText));
-//            qgl修改
             holder.tv_pend.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_bohui_icon_qgl));
 
         }

@@ -43,7 +43,6 @@ public class SelPeopleActivity_Leave_people extends BaseActivity {
         setContentView(R.layout.activity_sel_info);
         //初始化页面对象
         init();
-
         partId=getIntent().getStringExtra("partId");
         //将数据显示在页面上
         initDatas();
@@ -85,7 +84,6 @@ public class SelPeopleActivity_Leave_people extends BaseActivity {
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

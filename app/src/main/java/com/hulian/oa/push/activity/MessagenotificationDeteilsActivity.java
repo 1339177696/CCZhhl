@@ -88,7 +88,6 @@ public class MessagenotificationDeteilsActivity extends BaseActivity implements 
         qglTuisongadapter = new PushAdapter(MessagenotificationDeteilsActivity.this);
         mPullLoadMoreRecyclerView.setAdapter(qglTuisongadapter);
         mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
-
         getDatalist();
     }
 
@@ -132,9 +131,7 @@ public class MessagenotificationDeteilsActivity extends BaseActivity implements 
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
                     List<MeBean> memberList = gson.fromJson(result.getJSONArray("data").toString(), new TypeToken<List<MeBean>>() {}.getType());
-
                     qglTuisongadapter.addAllData(memberList);
-
                     //判断是否有数据
                     if (mCount == 1 && memberList.size() == 0) {
                         im_empty.setVisibility(View.VISIBLE);

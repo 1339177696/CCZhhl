@@ -53,7 +53,6 @@ public class LeavePendFragment extends Fragment implements PullLoadMoreRecyclerV
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.l_fra_collection_notice,null);
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
@@ -61,11 +60,9 @@ public class LeavePendFragment extends Fragment implements PullLoadMoreRecyclerV
         return view;
     }
     public void onEventMainThread(LeavePendFragment event) {
-
         onRefresh();
     }
     private void initList() {
-
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
@@ -85,7 +82,6 @@ public class LeavePendFragment extends Fragment implements PullLoadMoreRecyclerV
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new L_LeavePendAdapter(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
@@ -121,7 +117,6 @@ public class LeavePendFragment extends Fragment implements PullLoadMoreRecyclerV
         RequestParams params = new RequestParams();
         params.put("pageStart", mCount*10-9 + "");
         params.put("pageEnd", mCount * 10 + "");
-//        params.put("approver", SPUtils.get(getActivity(), "userId", "").toString());
         params.put("nowApprove", SPUtils.get(getActivity(), "userId", "").toString());
         params.put("state","0");
         HttpRequest.get_listWorkLeave(params, new ResponseCallback() {
@@ -137,10 +132,8 @@ public class LeavePendFragment extends Fragment implements PullLoadMoreRecyclerV
                     mRecyclerViewAdapter.addAllData(memberList);
                     if (mCount == 1 && memberList.size() == 0) {
                         emptyBg.setVisibility(View.VISIBLE);
-//                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
                     } else {
                         emptyBg.setVisibility(View.GONE);
-//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     }
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                 } catch (JSONException e) {
@@ -150,7 +143,6 @@ public class LeavePendFragment extends Fragment implements PullLoadMoreRecyclerV
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

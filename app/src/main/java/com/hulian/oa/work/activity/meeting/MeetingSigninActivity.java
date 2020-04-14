@@ -76,11 +76,6 @@ public class MeetingSigninActivity extends BaseActivity {
 
     @OnClick({R.id.tv_back_instruct, R.id.iv_back, R.id.rl_title,R.id.tv_part_lianx_phone})
     public void onViewClicked(View view) {
-//        Intent intent=new Intent(MeetingSigninActivity.this, MainActivity.class);
-//        intent.putExtra("isgowork", true);
-//        startActivity(intent);
-//        finish();
-
         switch (view.getId()) {
             case R.id.tv_back_instruct:
                 if (TextUtils.equals(tvBackInstruct.getText(), "签到")){
@@ -139,17 +134,11 @@ public class MeetingSigninActivity extends BaseActivity {
                         tvBackInstruct.setBackgroundResource(R.drawable.edit_background_order1);
                         tvBackInstruct.setVisibility(View.GONE);
                     }
-
                     et_title.setText(meeting.getMeetingTheme());
-//                    tv_part_time.setText(TimeUtils.getDateToString(meeting.getMeetingTimeBegin()));
-//                    tvPartTime2.setText(TimeUtils.getDateToString(meeting.getMeetingTimeEnd()));
                     String start_time = meeting.getMeetingTimeBegin();
                     String end_time = meeting.getMeetingTimeEnd();
                     tv_part_time.setText(start_time.substring(0,start_time.length()-3));
                     tvPartTime2.setText(end_time.substring(0,end_time.length()-3));
-
-
-
                     tvPartLianx.setText(result.getJSONObject("data").getString("meetingContacts"));
                     tvPartLianxPhone.setText(result.getJSONObject("data").getString("meetingContactsPhone"));
                     et_content.setText(result.getJSONObject("data").getString("meetingContent"));
@@ -163,7 +152,6 @@ public class MeetingSigninActivity extends BaseActivity {
                         }
                         if (meeting.getParticipants().get(i).getParticipantId().equals(SPUtils.get(mContext, "userId", "-1").toString())) {
                             if (meeting.getParticipants().get(i).getSignStatus().equals("1")) {
-//                                tvBackInstruct.setVisibility(View.GONE);
                                 tvBackInstruct.setText("已签到");
                                 tvBackInstruct.setBackgroundResource(R.drawable.edit_background_order1);
                             }
@@ -230,8 +218,6 @@ public class MeetingSigninActivity extends BaseActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-                //  sendData();
             }
         }
     }

@@ -16,13 +16,10 @@ import java.util.Map;
  * Tip类型消息ViewHolder
  */
 public class MsgViewHolderTip extends MsgViewHolderBase {
-
     protected TextView notificationTextView;
-
     public MsgViewHolderTip(BaseMultiItemFetchLoadAdapter adapter) {
         super(adapter);
     }
-
     @Override
     protected int getContentResId() {
         return com.netease.nim.uikit.R.layout.nim_message_item_notification;
@@ -44,7 +41,6 @@ public class MsgViewHolderTip extends MsgViewHolderBase {
         } else {
             text = message.getContent();
         }
-
         handleTextNotification(text);
     }
 

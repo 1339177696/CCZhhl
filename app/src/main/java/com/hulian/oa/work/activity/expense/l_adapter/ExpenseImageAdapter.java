@@ -40,10 +40,6 @@ public class ExpenseImageAdapter extends
     protected OnItemEditListener mItemEditListener;
     protected OnItemEditListener2 mItemEditListener2;
 
-//    public interface onAddPicClickListener {
-//        void onAddPicClick();
-//    }
-
     public ExpenseImageAdapter(Context mContext, OnItemClickListener mItemClickListener, OnItemEditListener mItemEditListener
                                 , OnItemEditListener2 mItemEditListener2, ExpenseSecondAdapter.onAddPicClickListener mOnAddPicClickListener,
                                ExpenseSecondAdapter.OnItemDeleteListener onItemDeleteListener) {
@@ -132,9 +128,7 @@ public class ExpenseImageAdapter extends
             holder.expenseAdapter = new ExpenseSecondAdapter(mContext, mOnAddPicClickListener,onItemDeleteListener,position);
             holder.expenseAdapter.setList(holder.listMedia);//设置数据
             FullyGridLayoutManager manager = new FullyGridLayoutManager(mContext, 4, GridLayoutManager.VERTICAL, false);
-//            manager.setOrientation(LinearLayoutManager.VERTICAL);
             holder.recycler_bill.setLayoutManager(manager);
-//            holder.recycler_bill.addItemDecoration();
             holder.recycler_bill.setAdapter(holder.expenseAdapter);
         } else {
             holder.expenseAdapter.setPosition(position);

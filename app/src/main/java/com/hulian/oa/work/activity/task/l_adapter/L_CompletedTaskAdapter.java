@@ -24,7 +24,6 @@ public class L_CompletedTaskAdapter extends RecyclerView.Adapter <L_CompletedTas
     private Context mContext;
     private List<Notice_x> dataList = new ArrayList<>();
 
-
     public void addAllData(List<Notice_x> dataList) {
         this.dataList.addAll(dataList);
         notifyDataSetChanged();
@@ -51,7 +50,6 @@ public class L_CompletedTaskAdapter extends RecyclerView.Adapter <L_CompletedTas
             tv_title = (TextView) itemView.findViewById(R.id.tv_comp_title);
             tv_time = (TextView) itemView.findViewById(R.id.tv_comp_time);
             tv_deadline_time = (TextView) itemView.findViewById(R.id.tv_comp_deadline_time);
-//            tv_deadline_week = (TextView) itemView.findViewById(R.id.tv_comp_deadline_week);
             tv_comp_launch_task_person = (TextView) itemView.findViewById(R.id.tv_comp_launch_task_person);
             qgl_zy_ysp_status = (TextView) itemView.findViewById(R.id.qgl_zy_ysp_status);
             iv_image=itemView.findViewById(R.id.iv_image);
@@ -71,18 +69,12 @@ public class L_CompletedTaskAdapter extends RecyclerView.Adapter <L_CompletedTas
         if (dataList.get(position).getCompletion().equals("2")){
             holder.qgl_zy_ysp_status.setVisibility(View.VISIBLE);
         }
-        //holder.tv_time.setText(dataList.get(position).getStartTime());
         //        开始时间
         String b = dataList.get(position).getStartTime();
-//        String c = getDataaa(b);
         holder.tv_time.setText(b);
-
-
         //   截止时间
         String a = dataList.get(position).getEndTime();
         holder.tv_deadline_time.setText(a);
-
-//        holder.tv_deadline_time.setText(dataList.get(position).getEndTime());
         holder.tv_comp_launch_task_person.setText(dataList.get(position).getCreateBy());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,41 +94,5 @@ public class L_CompletedTaskAdapter extends RecyclerView.Adapter <L_CompletedTas
     public int getItemCount() {
         return dataList.size();
     }
-
-    private String getDataaa(String fromDate) {
-        String strTime = null;
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-        String toDate = df.format(curDate);
-        try {
-            //前的时间
-            Date fd = df.parse(fromDate);
-            //后的时间
-            Date td = df.parse(toDate);
-            //两时间差,精确到毫秒
-            long diff = td.getTime() - fd.getTime();
-            long day = diff / 86400000;                         //以天数为单位取整
-            long hour = diff % 86400000 / 3600000;               //以小时为单位取整
-            long min = diff % 86400000 % 3600000 / 60000;       //以分钟为单位取整
-            long seconds = diff % 86400000 % 3600000 % 60000 / 1000;   //以秒为单位取整
-
-            if (day<=0)
-            {
-                strTime = fromDate.substring(10,fromDate.length()-3);
-            }
-            else
-            {
-                System.out.println("两时间差---> " + day + "天" + hour + "小时" + min + "分" + seconds + "秒");
-                strTime = fromDate.substring(0,fromDate.length()-8);
-
-            }
-            return strTime;
-        } catch (ParseException e)
-        {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
 
 }

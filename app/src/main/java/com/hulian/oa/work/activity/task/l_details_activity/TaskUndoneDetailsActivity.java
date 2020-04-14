@@ -58,8 +58,6 @@ import de.greenrobot.event.EventBus;
 
 //未完成详情 带回复
 public class TaskUndoneDetailsActivity extends BaseActivity implements PullLoadMoreRecyclerView.PullLoadMoreListener {
-//    @BindView(R.id.tv_send)
-//    TextView tv_send;
     @BindView(R.id.listview)
     PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
     private int mCount = 1;
@@ -69,34 +67,26 @@ public class TaskUndoneDetailsActivity extends BaseActivity implements PullLoadM
     private ArrayList<String> list_title;
     private String porid;
     private String id;
-
     @BindView(R.id.tv_task_undone_deta_activity_send)
     ImageView tv_task_undone_deta_activity_send;
-
     @BindView(R.id.mInput)
     EditText mInput;
     //照片选择最大值
     private int maxSelectNum = 1;
     private List<LocalMedia> selectList = new ArrayList<>();
-
     private String content = "";
-
     private Hufu_bean huifu_bean_x;
     private List<Hufu_bean>list = new ArrayList<>();
-
     @BindView(R.id.l_undone_rela_huifu)
     RelativeLayout l_undone_rela_huifu;
     @BindView(R.id.iv_back)
     FrameLayout iv_back;
-
     @BindView(R.id.la_un_start_time)
     TextView la_un_start_time;
     @BindView(R.id.la_un_stop_time)
     TextView la_un_stop_time;
-
     @BindView(R.id.iv_btn)
     ImageView iv_btn;
-
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -104,7 +94,6 @@ public class TaskUndoneDetailsActivity extends BaseActivity implements PullLoadM
         StatusBarUtil.statusBarLightMode_white(this);
         setContentView(R.layout.l_activity_undone_details_task);
         ButterKnife.bind(this);
-      //  porid = getIntent().getStringExtra("PORID");
         id = getIntent().getStringExtra("ID");
         mContext = this;
         initList();
@@ -214,20 +203,17 @@ public class TaskUndoneDetailsActivity extends BaseActivity implements PullLoadM
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 //需要转化为实体对象
                 try {
-
                     JSONObject result = new JSONObject(responseObj.toString());
                     list = gson.fromJson(result.getJSONObject("data").getString("list"), new TypeToken<List<Hufu_bean>>() {}.getType());
                     huifu_bean_x = gson.fromJson(result.getJSONObject("data").getString("object"), new TypeToken<Hufu_bean>(){}.getType());
                     porid=huifu_bean_x.getId();
                     String sum = result.getJSONObject("data").getString("sum");
                     huifu_bean_x.setSum(sum);
-
                     JSONObject jsonObject = new JSONObject(result.getJSONObject("data").getString("object"));
                     String a = jsonObject.getString("startTime");
                     la_un_start_time.setText(a.replace("-","/"));
                     String b = jsonObject.getString("endTime");
                     la_un_stop_time.setText(b.replace("-","/"));
-
                     mRecyclerViewAdapter.addAllData(list,huifu_bean_x);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                 } catch (JSONException e) {
@@ -237,7 +223,6 @@ public class TaskUndoneDetailsActivity extends BaseActivity implements PullLoadM
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -290,9 +275,6 @@ public class TaskUndoneDetailsActivity extends BaseActivity implements PullLoadM
                         Log.i("压缩图片-----》", new File(media.getCompressPath()).length()+"");
                         content="";
                         gethuifuData();
-//                        Bitmap bitmap = BitmapFactory.decodeFile(media.getCompressPath());
-//                        iv_document.setImageBitmap(bitmap);
-
                     }
                     break;
             }
@@ -328,7 +310,6 @@ public class TaskUndoneDetailsActivity extends BaseActivity implements PullLoadM
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -354,7 +335,6 @@ public class TaskUndoneDetailsActivity extends BaseActivity implements PullLoadM
                     if (code.equals("0"))
                     {
                         EventBus.getDefault().post(new UpcomFragment());
-                     //   EventBus.getDefault().post(new L_HascomFragment());
                         Toast.makeText(mContext,msg,Toast.LENGTH_SHORT).show();
                         l_undone_rela_huifu.setVisibility(View.GONE);
                         iv_btn.setVisibility(View.GONE);
@@ -370,7 +350,6 @@ public class TaskUndoneDetailsActivity extends BaseActivity implements PullLoadM
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

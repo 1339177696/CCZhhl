@@ -17,7 +17,6 @@ public class L_ExpenseApplyCopymeAdapter extends RecyclerView.Adapter <L_Expense
     private Context mContext;
     private List<Expense> dataList = new ArrayList<>();
 
-
     public void addAllData(List<Expense> dataList) {
         this.dataList.addAll(dataList);
         notifyDataSetChanged();

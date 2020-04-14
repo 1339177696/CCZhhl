@@ -59,16 +59,12 @@ public class ScheduleActivity extends BaseActivity {
     //顶部月
     @BindView(R.id.show_month_view)
     TextView tvMonth;
-    //    //折叠控件
-//    @BindView(R.id.content)
-//    CoordinatorLayout content;
     //日历
     @BindView(R.id.calendar_view)
     MonthPager monthPager;
     //日程列表
     @BindView(R.id.list)
-    //  CustListView rvToDoList;
-            RecyclerView rvToDoList;
+    RecyclerView rvToDoList;
     //添加日程
     @BindView(R.id.tv_add_schedule)
     LinearLayout tv_add_schedule;
