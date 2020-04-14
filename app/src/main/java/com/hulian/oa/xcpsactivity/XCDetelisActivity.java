@@ -2,6 +2,7 @@ package com.hulian.oa.xcpsactivity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.hulian.oa.BaseActivity;
 import com.hulian.oa.R;
@@ -63,13 +65,23 @@ public class XCDetelisActivity extends BaseActivity {
     DragFloatActionButton floatbutton;
     @BindView(R.id.xcd_img)
     ImageView xcd_img;
-
+    @BindView(R.id.tv_title)
+    TextView tv_title;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.xcdetelisactivity);
         ButterKnife.bind(this);
+        Intent intnet = getIntent();
+        int title_value = intnet.getIntExtra("title",-1);
+        if (title_value==1){
+          tv_title.setText("初审");
+        }else if(title_value==2){
+           tv_title.setText("复审");
+        }else if (title_value==3){
+            tv_title.setText("许可确认");
+        }
     }
 
 

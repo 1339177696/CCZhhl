@@ -26,6 +26,7 @@
             android:background="@mipmap/ic_left_white" />
 
         <TextView
+            android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"

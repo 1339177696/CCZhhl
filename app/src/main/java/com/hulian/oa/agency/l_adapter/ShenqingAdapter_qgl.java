@@ -23,6 +23,7 @@ import com.hulian.oa.R;
 import com.hulian.oa.agency.l_fragment.L_UpcomFragment;
 import com.hulian.oa.bean.Daiban_xin_qgl1;
 import com.hulian.oa.bean.SecondMail_bean_x;
+import com.hulian.oa.iac.activity.BacklogActivity;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
@@ -136,9 +137,16 @@ public class ShenqingAdapter_qgl extends RecyclerView.Adapter <ShenqingAdapter_q
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (position==0){
+                    Intent intent=new Intent();
+                    intent.setClass(mContext, BacklogActivity.class);
+                    mContext.startActivity(intent);
+                }else{
                 Intent intent=new Intent();
                 intent.setClass(mContext, XCDetelisActivity.class);
+                intent.putExtra("title",position);
                 mContext.startActivity(intent);
+                }
             }
         });
     }

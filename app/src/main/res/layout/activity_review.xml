@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="@color/background"
+    >
+    <include layout="@layout/title_layout"/>
+    <android.support.constraint.ConstraintLayout
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:paddingBottom="15dp"
+        android:background="@drawable/background_corners_1"
+        >
+
+        <!--<ImageView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--android:background="@mipmap/banner"-->
+            <!--/>-->
+        <TextView
+            android:id="@+id/tv_state_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:textSize="16sp"
+            android:textColor="@color/title_text"
+            android:layout_marginTop="16dp"
+            android:text="评审状态:"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/rg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:layout_marginLeft="30dp"
+            app:layout_constraintLeft_toRightOf="@id/tv_state_title"
+            app:layout_constraintTop_toTopOf="@id/tv_state_title"
+            app:layout_constraintBottom_toBottomOf="@id/tv_state_title"
+            >
+
+            <RadioButton
+                android:id="@+id/all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/select_checked1"
+                android:button="@null"
+                android:paddingLeft="15dp"
+                android:paddingTop="3dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="3dp"
+                android:text="　通过　"
+                android:textColor="@color/write"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/type_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/select_checked1"
+                android:button="@null"
+                android:paddingLeft="15dp"
+                android:paddingTop="3dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="3dp"
+                android:text="  未通过  "
+                android:textColor="@color/write"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/type_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/select_checked1"
+                android:button="@null"
+                android:paddingLeft="15dp"
+                android:paddingTop="3dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="3dp"
+                android:text="整改通过"
+                android:textColor="@color/write"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/type_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/select_checked1"
+                android:button="@null"
+                android:paddingLeft="15dp"
+                android:paddingTop="3dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="3dp"
+                android:text="　整改　"
+                android:textColor="@color/write"
+                android:textSize="14sp" />
+
+        </RadioGroup>
+        <TextView
+            android:id="@+id/tv_takephoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="现场拍摄:"
+            android:textColor="@color/title_text"
+            android:textSize="16sp"
+            android:layout_marginTop="26dp"
+            app:layout_constraintLeft_toLeftOf="@id/tv_state_title"
+            app:layout_constraintRight_toRightOf="@id/tv_state_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_state_title" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            app:layout_constraintTop_toTopOf="@id/tv_takephoto"
+            app:layout_constraintBottom_toBottomOf="@id/tv_takephoto"
+            app:layout_constraintLeft_toRightOf="@id/tv_takephoto"
+            android:overScrollMode="never"
+            android:layout_marginLeft="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+        </android.support.v7.widget.RecyclerView>
+        <TextView
+            android:id="@+id/tv_updatetime_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/title_text"
+            android:layout_marginTop="26dp"
+            android:text="整改时间:"
+            app:layout_constraintLeft_toLeftOf="@id/tv_takephoto"
+            app:layout_constraintRight_toRightOf="@id/tv_takephoto"
+            app:layout_constraintTop_toBottomOf="@id/tv_takephoto" />
+        <TextView
+            android:id="@+id/et_updatetime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="100dp"
+            android:background="@drawable/background_arc_3"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/tv_updatetime_title"
+            app:layout_constraintTop_toTopOf="@id/tv_updatetime_title"
+            app:layout_constraintBottom_toBottomOf="@id/tv_updatetime_title"
+            tools:text="代表人"
+            android:textColor="@color/title_text"
+            android:textSize="16sp"
+            android:padding="7dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_idea_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/title_text"
+            android:layout_marginTop="26dp"
+            android:text="评审意见:"
+            app:layout_constraintLeft_toLeftOf="@id/tv_updatetime_title"
+            app:layout_constraintRight_toRightOf="@id/tv_updatetime_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_updatetime_title" />
+        <EditText
+            android:id="@+id/et_idea"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:minHeight="130dp"
+            android:maxHeight="130dp"
+            android:background="@drawable/background_arc_3"
+            app:layout_constraintRight_toRightOf="@id/et_updatetime"
+            app:layout_constraintLeft_toRightOf="@id/tv_idea_title"
+            app:layout_constraintTop_toTopOf="@id/tv_idea_title"
+            tools:text="请您填写评审意见"
+            android:hint="请您填写评审意见"
+            android:textColorHint="@color/text_color_1"
+            android:gravity="start"
+            android:textColor="@color/title_text"
+            android:textSize="16sp"
+            android:padding="7dp"
+            />
+
+        <!--<TextView-->
+            <!--android:id="@+id/submit"-->
+            <!--android:layout_width="150dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:text="提交评审"-->
+            <!--android:textColor="@color/write"-->
+            <!--android:textSize="20sp"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/et_idea"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--android:gravity="center"-->
+            <!--android:background="@drawable/background_corners_2_2"-->
+            <!--android:layout_marginBottom="30dp"-->
+            <!--android:layout_marginTop="50dp"-->
+            <!--/>-->
+    </android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cl_2"
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:padding="7dp"
+        >
+        <TextView
+            android:id="@+id/submit"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:text="提交"
+            android:textColor="@color/write"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:gravity="center"
+            android:background="@drawable/background_corners_2_2"
+            android:visibility="visible"
+            />
+    </android.support.constraint.ConstraintLayout>
+</LinearLayout>

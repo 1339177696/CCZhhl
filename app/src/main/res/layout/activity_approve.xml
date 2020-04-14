@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
+    android:background="@color/background"
+    >
+    <include layout="@layout/title_layout"
+        android:id="@+id/title_ll"
+        />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_ll"
+        >
+
+        <EditText
+            android:id="@+id/et_approve_item"
+            android:enabled="false"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:layout_marginRight="100dp"
+            android:background="@null"
+            android:padding="7dp"
+            android:textColor="@color/title_text"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="认证项目" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="认证项目:"
+            android:textColor="@color/text_color_1"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/et_approve_item"
+            app:layout_constraintRight_toLeftOf="@+id/et_approve_item"
+            app:layout_constraintTop_toTopOf="@+id/et_approve_item" />
+
+        <EditText
+            android:id="@+id/et_approve_agency"
+            android:enabled="false"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="@+id/et_approve_item"
+            app:layout_constraintLeft_toLeftOf="@+id/et_approve_item"
+            app:layout_constraintTop_toBottomOf="@+id/et_approve_item"
+            android:layout_marginTop="10dp"
+            tools:text="认证机构"
+            android:textColor="@color/title_text"
+            android:textSize="16sp"
+            android:background="@null"
+            android:padding="7dp"
+            android:visibility="visible"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="认证机构:"
+            android:textSize="16sp"
+            android:textColor="@color/text_color_1"
+            app:layout_constraintRight_toLeftOf="@+id/et_approve_agency"
+            app:layout_constraintTop_toTopOf="@+id/et_approve_agency"
+            app:layout_constraintBottom_toBottomOf="@+id/et_approve_agency"
+            android:layout_marginRight="10dp"
+            />
+
+        <TextView
+            android:id="@+id/et_approve_date"
+            android:enabled="false"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="@+id/et_approve_agency"
+            app:layout_constraintLeft_toLeftOf="@+id/et_approve_agency"
+            app:layout_constraintTop_toBottomOf="@+id/et_approve_agency"
+            android:layout_marginTop="10dp"
+            tools:text="2019-13-13"
+            android:textColor="@color/title_text"
+            android:textSize="16sp"
+            android:background="@null"
+            android:padding="7dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="认证日期:"
+            android:textSize="16sp"
+            android:textColor="@color/text_color_1"
+            app:layout_constraintRight_toLeftOf="@+id/et_approve_date"
+            app:layout_constraintTop_toTopOf="@+id/et_approve_date"
+            app:layout_constraintBottom_toBottomOf="@+id/et_approve_date"
+            android:layout_marginRight="10dp"
+            />
+        <EditText
+            android:id="@+id/et_approve_exp_date"
+            android:enabled="false"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="@+id/et_approve_date"
+            app:layout_constraintLeft_toLeftOf="@+id/et_approve_date"
+            app:layout_constraintTop_toBottomOf="@+id/et_approve_date"
+            android:layout_marginTop="10dp"
+            tools:text="8000万"
+            android:textColor="@color/title_text"
+            android:textSize="16sp"
+            android:background="@null"
+            android:padding="7dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="认证有效期:"
+            android:textSize="16sp"
+            android:textColor="@color/text_color_1"
+            app:layout_constraintRight_toLeftOf="@+id/et_approve_exp_date"
+            app:layout_constraintTop_toTopOf="@+id/et_approve_exp_date"
+            app:layout_constraintBottom_toBottomOf="@+id/et_approve_exp_date"
+            android:layout_marginRight="10dp"
+            />
+
+
+    </android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/submit"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:text="提交"
+        android:textColor="@color/write"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="center"
+        android:background="@drawable/background_corners_3_2"
+        android:visibility="invisible"
+        android:layout_marginBottom="30dp"
+        />
+</android.support.constraint.ConstraintLayout>

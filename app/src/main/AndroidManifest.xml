@@ -385,8 +385,32 @@
           <activity android:name=".xcpsactivity.XCDetelisActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             ></activity>
-
-
+        <!--iac界面-->
+        <activity android:name=".iac.activity.BacklogActivity"/>
+        <activity android:name=".iac.activity.ApplyCompanyActivity"/>
+        <activity android:name=".iac.activity.ApplyAllowActivity"/>
+        <activity android:name=".iac.activity.ApplyUnitResouse"/>
+        <activity android:name=".iac.activity.ApproveActivity"/>
+        <activity android:name=".iac.activity.DepartmentsActivity"/>
+        <activity android:name=".iac.activity.InspectDeviceActivity"/>
+        <activity android:name=".iac.activity.ManageStaffActivity"/>
+        <activity android:name=".iac.activity.PramaryDeviceActivity"/>
+        <activity android:name=".iac.activity.ProduceActivity"/>
+        <activity android:name=".iac.activity.SelfCheckDeviceActivity"/>
+        <activity android:name=".iac.activity.SubcontractActivity"/>
+        <activity android:name=".iac.activity.ReviewActvity"></activity>
+        <activity android:name=".iac.activity_list.ApplyAllowListActivity"/>
+        <activity android:name=".iac.activity_list.CertificationListActivity"/>
+        <activity android:name=".iac.activity_list.InspectDeviceListActivity"/>
+        <activity android:name=".iac.activity_list.ManageStaffListActivity"/>
+        <activity android:name=".iac.activity_list.PramaryDeviceListActivity"/>
+        <activity android:name=".iac.activity_list.ProduceListActivity"/>
+        <activity android:name=".iac.activity_list.SelfCheckDeviceListActivity"/>
+        <activity android:name=".iac.activity_list.SubcontractListActivity"/>
+        <activity android:name=".iac.media.VideoPreviewActivity"></activity>
+        <activity android:name=".iac.media.PicturePreviewActivity"></activity>
+        <activity android:name=".iac.view.CameraActivity"></activity>
+        <!--iac end-->
     </application>
 
 </manifest>

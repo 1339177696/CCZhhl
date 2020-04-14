@@ -1,0 +1,927 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fitsSystemWindows="true"
+    >
+
+    <include layout="@layout/title_layout"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <ImageView
+            android:id="@+id/background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/iac_banner"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tv_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="企业基本信息"
+            android:textColor="@color/write"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/cl_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@drawable/background_corners_1"
+            android:padding="15dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_1"
+            >
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/company"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/information"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="申请单位基本信息"
+                    android:textColor="@color/title_text"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toRightOf="@+id/iv_1"
+                    app:layout_constraintTop_toTopOf="@+id/iv_1"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_1"
+                    android:layout_marginLeft="5dp"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/in_to"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/iv_1"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_1"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_1"
+                    android:layout_marginTop="15dp"
+                    >
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/iac_arrow"
+                            android:layout_centerVertical="true"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="申请单位:"
+                            android:textSize="16sp"
+                            android:textColor="@color/text_color_1"
+                            android:layout_marginLeft="15dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="长春市宏日新能源有限责任公司"
+                            android:textColor="@color/title_text"
+                            android:textSize="16sp"
+                            android:layout_marginLeft="110dp"
+                            />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/iac_arrow"
+                            android:layout_centerVertical="true"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="法定代表人:"
+                            android:textSize="16sp"
+                            android:textColor="@color/text_color_1"
+                            android:layout_marginLeft="15dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/legalPerson"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="洪浩"
+                            android:textColor="@color/title_text"
+                            android:textSize="16sp"
+                            android:layout_marginLeft="110dp"
+                            />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/iac_arrow"
+                            android:layout_centerVertical="true"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="所属行业:"
+                            android:textSize="16sp"
+                            android:textColor="@color/text_color_1"
+                            android:layout_marginLeft="15dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/industry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="电力、热力的生产和供应业"
+                            android:textColor="@color/title_text"
+                            android:textSize="16sp"
+                            android:layout_marginLeft="110dp"
+                            />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/iac_arrow"
+                            android:layout_centerVertical="true"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="成立日期:"
+                            android:textSize="16sp"
+                            android:textColor="@color/text_color_1"
+                            android:layout_marginLeft="15dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/establishment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="2010年02月03日"
+                            android:textColor="@color/title_text"
+                            android:textSize="16sp"
+                            android:layout_marginLeft="110dp"
+                            />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/iac_arrow"
+                            android:layout_centerVertical="true"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="固定资产:"
+                            android:textSize="16sp"
+                            android:textColor="@color/text_color_1"
+                            android:layout_marginLeft="15dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/assets"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="8000万元"
+                            android:textColor="@color/title_text"
+                            android:textSize="16sp"
+                            android:layout_marginLeft="110dp"
+                            />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/iac_arrow"
+                            android:layout_centerVertical="true"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="注册资金:"
+                            android:textSize="16sp"
+                            android:textColor="@color/text_color_1"
+                            android:layout_marginLeft="15dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/registeredCapital"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="1994.36万元"
+                            android:textColor="@color/title_text"
+                            android:textSize="16sp"
+                            android:layout_marginLeft="110dp"
+                            />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/iac_arrow"
+                            android:layout_centerVertical="true"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="单位地址:"
+                            android:textSize="16sp"
+                            android:textColor="@color/text_color_1"
+                            android:layout_marginLeft="15dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="吉林省长春市经济开发区兴隆综合保税区联检大楼405-6室"
+                            android:textColor="@color/title_text"
+                            android:textSize="16sp"
+                            android:lines="1"
+                            android:ellipsize="end"
+                            android:layout_marginLeft="110dp"
+                            />
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/apply_permission_sort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/company"
+                android:layout_marginTop="20dp"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/category"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="申请许可类别"
+                    android:textColor="@color/title_text"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toRightOf="@+id/iv_2"
+                    app:layout_constraintTop_toTopOf="@+id/iv_2"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_2"
+                    android:layout_marginLeft="5dp"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/in_to"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/iv_2"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_2"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_2"
+                    android:layout_marginTop="15dp"
+                    >
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/iac_arrow"
+                            android:layout_centerVertical="true"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="项目:"
+                            android:textSize="16sp"
+                            android:textColor="@color/text_color_1"
+                            android:layout_marginLeft="15dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/sort"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="承压蒸汽锅炉"
+                            android:textColor="@color/title_text"
+                            android:textSize="16sp"
+                            android:layout_marginLeft="110dp"
+                            />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/iac_arrow"
+                            android:layout_centerVertical="true"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="子项:"
+                            android:textSize="16sp"
+                            android:textColor="@color/text_color_1"
+                            android:layout_marginLeft="15dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/children"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="工业锅炉司炉"
+                            android:textColor="@color/title_text"
+                            android:textSize="16sp"
+                            android:layout_marginLeft="110dp"
+                            />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/iac_arrow"
+                            android:layout_centerVertical="true"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="级别:"
+                            android:textSize="16sp"
+                            android:textColor="@color/text_color_1"
+                            android:layout_marginLeft="15dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/level"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="D"
+                            android:textColor="@color/title_text"
+                            android:textSize="16sp"
+                            android:layout_marginLeft="110dp"
+                            />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/iac_arrow"
+                            android:layout_centerVertical="true"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="参数:"
+                            android:textSize="16sp"
+                            android:textColor="@color/text_color_1"
+                            android:layout_marginLeft="15dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="参数"
+                            android:lines="1"
+                            android:ellipsize="end"
+                            android:textColor="@color/title_text"
+                            android:textSize="16sp"
+                            android:layout_marginLeft="110dp"
+                            />
+
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="查看相关认证"
+                android:textColor="#13288A"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/apply_permission_sort"
+                android:textSize="16sp"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@+id/check"
+                app:layout_constraintRight_toLeftOf="@+id/check"
+                app:layout_constraintBottom_toBottomOf="@+id/check"
+                android:src="@mipmap/view"
+                android:layout_marginRight="5dp"
+                />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/operating_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/cl_1"
+            app:layout_constraintLeft_toLeftOf="@+id/cl_1"
+            android:layout_marginTop="15dp"
+            android:text="运营情况"
+            android:textColor="@color/title_text"
+            android:textSize="16sp"
+            />
+
+
+        <RelativeLayout
+            android:id="@+id/operating_rl_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@+id/cl_1"
+            app:layout_constraintTop_toBottomOf="@+id/operating_tv"
+            app:layout_constraintRight_toLeftOf="@+id/operating_rl_2"
+            android:background="@drawable/background_corners_1"
+            android:layout_marginTop="8dp"
+            android:padding="7dp"
+            android:layout_marginRight="20dp"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/produce"
+                android:layout_centerVertical="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="试生产(制造)情况"
+                android:textColor="@color/title_text"
+                android:layout_marginLeft="20dp"
+                />
+
+            <ImageView
+                android:id="@+id/operating_1_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/qualified"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/operating_rl_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/operating_tv"
+            app:layout_constraintLeft_toRightOf="@+id/operating_rl_1"
+            app:layout_constraintRight_toRightOf="@id/cl_1"
+            android:background="@drawable/background_corners_1"
+            android:layout_marginTop="8dp"
+            android:padding="7dp"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/subcontract"
+                android:layout_centerVertical="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="分包、外协情况"
+                android:textColor="@color/title_text"
+                android:layout_marginLeft="20dp"
+                />
+
+            <ImageView
+                android:id="@+id/operating_2_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/qualified"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/equipment_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/operating_rl_1"
+            app:layout_constraintLeft_toLeftOf="@+id/cl_1"
+            android:layout_marginTop="15dp"
+            android:text="设备情况"
+            android:textColor="@color/title_text"
+            android:textSize="16sp"
+            />
+
+        <RelativeLayout
+            android:id="@+id/equipment_rl_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@+id/cl_1"
+            app:layout_constraintTop_toBottomOf="@+id/equipment_tv"
+            app:layout_constraintRight_toLeftOf="@+id/equipment_rl_2"
+            android:background="@drawable/background_corners_1"
+            android:layout_marginTop="8dp"
+            android:padding="7dp"
+            android:layout_marginRight="20dp"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/instrument"
+                android:layout_centerVertical="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="自行校验仪器设备能力"
+                android:textColor="@color/title_text"
+                android:layout_marginLeft="20dp"
+                />
+
+            <ImageView
+                android:id="@+id/equipment_1_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/qualified"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/equipment_rl_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/equipment_tv"
+            app:layout_constraintLeft_toRightOf="@+id/equipment_rl_1"
+            app:layout_constraintRight_toRightOf="@id/cl_1"
+            android:background="@drawable/background_corners_1"
+            android:layout_marginTop="8dp"
+            android:padding="7dp"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/device"
+                android:layout_centerVertical="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="主要生产设备状况"
+                android:textColor="@color/title_text"
+                android:layout_marginLeft="20dp"
+                />
+
+            <ImageView
+                android:id="@+id/equipment_2_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/qualified"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/equipment_rl_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/equipment_rl_2"
+            app:layout_constraintLeft_toLeftOf="@+id/equipment_rl_1"
+            app:layout_constraintRight_toRightOf="@id/equipment_rl_2"
+            android:background="@drawable/background_corners_1"
+            android:layout_marginTop="8dp"
+            android:padding="7dp"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/device"
+                android:layout_centerVertical="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="主要检验与试验仪器设备状况"
+                android:textColor="@color/title_text"
+                android:layout_marginLeft="20dp"
+                />
+
+            <ImageView
+                android:id="@+id/equipment_3_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/qualified"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/personnel_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/equipment_rl_3"
+            app:layout_constraintLeft_toLeftOf="@+id/cl_1"
+            android:layout_marginTop="15dp"
+            android:text="人员组成"
+            android:textColor="@color/title_text"
+            android:textSize="16sp"
+            />
+
+
+        <RelativeLayout
+            android:id="@+id/personnel_rl_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@+id/cl_1"
+            app:layout_constraintTop_toBottomOf="@+id/personnel_tv"
+            app:layout_constraintRight_toLeftOf="@+id/personnel_rl_2"
+            android:background="@drawable/background_corners_1"
+            android:layout_marginTop="8dp"
+            android:padding="7dp"
+            android:layout_marginRight="20dp"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/personnel"
+                android:layout_centerVertical="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="管理、专业、作业人员情况"
+                android:textColor="@color/title_text"
+                android:layout_marginLeft="20dp"
+                />
+
+            <ImageView
+                android:id="@+id/personnel_1_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/qualified"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/personnel_rl_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/personnel_tv"
+            app:layout_constraintLeft_toRightOf="@+id/personnel_rl_1"
+            app:layout_constraintRight_toRightOf="@id/cl_1"
+            android:background="@drawable/background_corners_1"
+            android:layout_marginTop="8dp"
+            android:padding="7dp"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/departments"
+                android:layout_centerVertical="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="各部门人员组成"
+                android:textColor="@color/title_text"
+                android:layout_marginLeft="20dp"
+                />
+
+            <ImageView
+                android:id="@+id/personnel_2_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/qualified"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/application_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/personnel_rl_1"
+            app:layout_constraintLeft_toLeftOf="@+id/cl_1"
+            android:layout_marginTop="15dp"
+            android:text="申请单位资源"
+            android:textColor="@color/title_text"
+            android:textSize="16sp"
+            />
+
+
+        <RelativeLayout
+            android:id="@+id/application_rl_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@+id/cl_1"
+            app:layout_constraintTop_toBottomOf="@+id/application_tv"
+            app:layout_constraintRight_toRightOf="@+id/cl_1"
+            android:background="@drawable/background_corners_1"
+            android:layout_marginTop="8dp"
+            android:padding="7dp"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/application"
+                android:layout_centerVertical="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="申请单位资源"
+                android:textColor="@color/title_text"
+                android:layout_marginLeft="20dp"
+                />
+
+            <ImageView
+                android:id="@+id/application_1_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/qualified"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/review"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:text="评审"
+            android:textColor="@color/write"
+            android:textSize="20sp"
+            android:background="@drawable/background_corners_2_2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+
+</LinearLayout>
