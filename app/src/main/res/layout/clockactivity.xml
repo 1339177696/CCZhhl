@@ -8,26 +8,17 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/ll_top"
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:background="@drawable/baoxiao_bg"
-        android:orientation="vertical">
-
-    </LinearLayout>
-
-    <LinearLayout
+        android:background="@mipmap/bg_img"
         android:id="@+id/work_leave_list_liner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ll_top"
+        android:layout_height="@dimen/dp_170"
         android:orientation="vertical">
 
         <RelativeLayout
+            android:layout_marginTop="@dimen/dp_25"
             android:id="@+id/iv_back"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_53"
-            android:background="@drawable/baoxiao_bg"
             android:gravity="center_vertical">
 
             <ImageView
@@ -63,7 +54,6 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@mipmap/bg_img"
             android:paddingLeft="@dimen/dp_40"
             android:paddingRight="@dimen/dp_40">
 

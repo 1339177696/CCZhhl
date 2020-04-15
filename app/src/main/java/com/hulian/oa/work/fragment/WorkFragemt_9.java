@@ -177,7 +177,9 @@ public class WorkFragemt_9 extends Fragment {
                 break;
                 //报销
             case R.id.bt_baoxiao:
-                startActivity(new Intent(getActivity(),SecondExpenseActivity.class));
+                ToastHelper.showToast(getActivity(), "功能暂未开放");
+
+//                startActivity(new Intent(getActivity(),SecondExpenseActivity.class));
                 break;
             //公文流轉去掉了
 //            case R.id.bt_document:

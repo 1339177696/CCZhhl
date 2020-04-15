@@ -59,9 +59,6 @@ public class WorkFragment extends Fragment {
     public static WorkFragment newInstance(String requestJson) {
         WorkFragment fragment = new WorkFragment();
         Bundle args = new Bundle();
-//        args.putString("requestJson", requestJson);
-//        args.putString("gid", gid);
-//        args.putString("idno", idno);
         fragment.setArguments(args);
         return fragment;
     }
@@ -70,19 +67,15 @@ public class WorkFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-//            gid = getArguments().getString("gid");
-//            idno=getArguments().getString("idno");
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fra_work, container, false);
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
         tv_type.setText(SPUtils.get(getActivity(), "nickname", "").toString().substring(SPUtils.get(getActivity(), "nickname", "").toString().length()-2,SPUtils.get(getActivity(), "nickname", "").toString().length()));
-
         workFragemt_9=new WorkFragemt_9();
         workFragemt_list=new WorkFragemt_list();
         init9fragment();

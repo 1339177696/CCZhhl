@@ -6,9 +6,11 @@
                 android:minHeight="55dip">
 
     <RelativeLayout
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dip"
         android:id="@+id/head_layout"
-        android:layout_width="50dp"
-        android:layout_height="55dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:gravity="center">
 
@@ -19,19 +21,20 @@
 <!--            android:scaleType="centerCrop"/>-->
         <FrameLayout
             android:id="@+id/iv_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="40dp"
+            android:layout_height="40dp">
             <ImageView
-                android:layout_width="@dimen/dp_38"
+                android:layout_gravity="center"
+                android:layout_width="40dip"
                 android:background="@drawable/bg_head1_img"
-                android:layout_height="@dimen/dp_38" />
+                android:layout_height="40dip" />
             <TextView
                 android:id="@+id/tv_type_niu"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:textColor="@color/white"
                 android:text="报"
-                android:textSize="@dimen/sp_13"
+                android:textSize="14sp"
                 android:gravity="center"
                 android:layout_height="match_parent" />
         </FrameLayout>
@@ -39,6 +42,7 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:layout_marginLeft="8dp"
         android:id="@+id/contacts_item_name_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
