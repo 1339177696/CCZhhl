@@ -96,13 +96,26 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_100">
 
-            <ImageView
-                android:id="@+id/main2_img"
-                android:layout_width="@dimen/dp_40"
-                android:layout_height="@dimen/dp_40"
-                android:layout_centerVertical="true"
+            <FrameLayout
                 android:layout_marginLeft="@dimen/dp_17"
-                android:src="@mipmap/user_img_qgl" />
+                android:layout_marginTop="@dimen/dp_24"
+                android:id="@+id/iv_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:background="@mipmap/bg_head1_img"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tv_type"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center"
+                    android:textColor="#ffffff"
+                    android:text="报"
+                    android:textSize="@dimen/sp_12"
+                    android:gravity="center"
+                    android:layout_height="match_parent" />
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/main2_tv_name"
@@ -110,7 +123,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_marginTop="@dimen/dp_27"
-                android:layout_toRightOf="@+id/main2_img"
+                android:layout_toRightOf="@+id/iv_image"
                 android:text="王俊杰"
                 android:textColor="#ff313131"
                 android:textSize="@dimen/sp_11" />
@@ -134,7 +147,7 @@
                 android:layout_below="@+id/main2_tv_name"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_marginTop="@dimen/dp_6"
-                android:layout_toRightOf="@+id/main2_img"
+                android:layout_toRightOf="@+id/iv_image"
                 android:text="13756036991"
                 android:textColor="#ff313131"
                 android:textSize="@dimen/sp_10" />

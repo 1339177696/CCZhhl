@@ -127,6 +127,10 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     Button main2_outlogin;
     @BindView(R.id.menu_drawer)
     DrawerLayout menu_drawer;
+    @BindView(R.id.tv_type)
+    TextView tv_type;
+    @BindView(R.id.iv_image)
+    FrameLayout iv_image;
 
     //我的邮件
     @BindView(R.id.main2_rela_my_mail)
@@ -168,6 +172,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         requestBasicPermission();
 
         // 就收值
+        tv_type.setText(SPUtils.get(mContext, "nickname", "").toString().substring(SPUtils.get(mContext, "nickname", "").toString().length()-2,SPUtils.get(mContext, "nickname", "").toString().length()));
         main2_tv_name.setText(SPUtils.get(mContext, "nickname", "").toString());
         main2_tv_dept.setText(SPUtils.get(mContext, "deptname", "").toString());
         main2_tv_phone.setText(SPUtils.get(mContext, "username", "").toString());

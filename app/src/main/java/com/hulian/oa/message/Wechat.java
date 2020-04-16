@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import com.hulian.oa.MainActivity;
 import com.hulian.oa.R;
 import com.hulian.oa.me.MeActivity;
 import com.hulian.oa.message.session.search.GlobalSearchActivity;
+import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.views.PopWindow;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.api.model.contact.ContactChangedObserver;
@@ -80,7 +82,9 @@ public class Wechat extends TFragment {
     private TextView emptyHint;
     private  TextView tv_search;
 
-    private ImageView iv_gomine;
+//    private ImageView iv_gomine;
+    private FrameLayout iv_image;
+    private TextView tv_type;;
     private ImageView iv_more;
     // data
     private List<RecentContact> items;
@@ -140,8 +144,6 @@ public class Wechat extends TFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(com.netease.nim.uikit.R.layout.nim_recent_contacts, container, false);
-
-
     }
 
     private void notifyDataSetChanged() {
@@ -166,7 +168,11 @@ public class Wechat extends TFragment {
      */
     private void findViews() {
         iv_more=findView(com.netease.nim.uikit.R.id.iv_more);
-        iv_gomine=findView(com.netease.nim.uikit.R.id.iv_gomine);
+//        iv_gomine=findView(com.netease.nim.uikit.R.id.iv_gomine);
+        iv_image=findView(com.netease.nim.uikit.R.id.iv_image);
+        tv_type=findView(com.netease.nim.uikit.R.id.tv_type);
+        tv_type.setText(SPUtils.get(getActivity(), "nickname", "").toString().substring(SPUtils.get(getActivity(), "nickname", "").toString().length()-2,SPUtils.get(getActivity(), "nickname", "").toString().length()));
+
         tv_search=findView(com.netease.nim.uikit.R.id.tv_search);
         recyclerView = findView(com.netease.nim.uikit.R.id.recycler_view);
         emptyBg = findView(com.netease.nim.uikit.R.id.emptyBg);
@@ -179,7 +185,7 @@ public class Wechat extends TFragment {
 
             }
         });
-        findView(com.netease.nim.uikit.R.id.iv_gomine).setOnClickListener(new View.OnClickListener() {
+        findView(com.netease.nim.uikit.R.id.iv_image).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

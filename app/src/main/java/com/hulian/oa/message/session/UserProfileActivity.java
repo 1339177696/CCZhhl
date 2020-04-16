@@ -75,7 +75,8 @@ public class UserProfileActivity extends UI {
     private String account;
 
     // 基本信息
-    private HeadImageView headImageView;
+//    private HeadImageView headImageView;
+    private TextView tv_type;
     private TextView nameText;
     private ImageView genderImage;
     private TextView accountText;
@@ -186,7 +187,8 @@ public class UserProfileActivity extends UI {
     };
 
     private void findViews() {
-        headImageView = findView(R.id.user_head_image);
+//        headImageView = findView(R.id.user_head_image);
+        tv_type = findView(R.id.tv_type);
         nameText = findView(R.id.user_name);
         genderImage = findView(R.id.gender_img);
         accountText = findView(R.id.user_account);
@@ -277,7 +279,8 @@ public class UserProfileActivity extends UI {
     private void updateUserInfoView() {
         accountText.setText("帐号：" + account);
      //   headImageView.loadBuddyAvatar(account);
-        headImageView.setImageResource(R.drawable.nim_avatar_default);
+//        headImageView.setImageResource(R.drawable.nim_avatar_default);
+
         if (TextUtils.equals(account, DemoCache.getAccount())) {
             nameText.setText(UserInfoHelper.getUserName(account));
         }
@@ -406,6 +409,7 @@ public class UserProfileActivity extends UI {
             } else {
                 nickText.setVisibility(View.GONE);
                 nameText.setText(name);
+                tv_type.setText(name.substring(name.length()-2));
             }
         } else {
             aliasLayout.setVisibility(View.GONE);

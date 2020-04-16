@@ -9,13 +9,16 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.hulian.oa.MainActivity;
 import com.hulian.oa.R;
 import com.hulian.oa.me.CollectionActivity2;
 import com.hulian.oa.me.MeActivity;
+import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.work.file.admin.activity.task.l_fragment.CompletedTaskFragment;
 import com.hulian.oa.work.fragment.WorkFragemt_9;
 import com.hulian.oa.work.fragment.WorkFragemt_list;
@@ -36,12 +39,18 @@ public class WorkFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     Unbinder unbinder;
-    @BindView(R.id.iv_mine)
-    ImageView ivMine;
+//    @BindView(R.id.iv_mine)
+//    ImageView ivMine;
 //    @BindView(R.id.iv_news)
 //    ImageView ivNews;
     @BindView(R.id.fg_content)
     LinearLayout fgContent;
+    @BindView(R.id.iv_image)
+    FrameLayout iv_image;
+    @BindView(R.id.tv_type)
+    TextView tv_type;
+
+
     private ArrayList<String> list_path;
     private ArrayList<String> list_title;
     WorkFragemt_9 workFragemt_9;
@@ -89,6 +98,7 @@ public class WorkFragment extends Fragment {
 //        init9fragment();
 //        initListfragment();
         initrichengfragment();
+        tv_type.setText(SPUtils.get(getActivity(), "nickname", "").toString().substring(SPUtils.get(getActivity(), "nickname", "").toString().length()-2,SPUtils.get(getActivity(), "nickname", "").toString().length()));
         return view;
     }
 
@@ -125,10 +135,10 @@ public class WorkFragment extends Fragment {
         EventBus.getDefault().unregister(this);
     }
 
-    @OnClick({R.id.iv_mine})
+    @OnClick({R.id.iv_image})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.iv_mine:
+            case R.id.iv_image:
 //                startActivity(new Intent(getActivity(), MeActivity.class));
                 EventBus.getDefault().post(new MainActivity());
 
