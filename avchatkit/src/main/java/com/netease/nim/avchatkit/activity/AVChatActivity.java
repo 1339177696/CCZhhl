@@ -774,7 +774,12 @@ public class AVChatActivity extends UI implements AVChatVideoUI.TouchZoneCallbac
             FloatVideoWindowService.MyBinder binder = (FloatVideoWindowService.MyBinder) service;
             binder.getService();
 
-            binder.setTime(avChatVideoUI.getTime());
+            if (state == AVChatType.AUDIO.getValue()) {
+                binder.setTime(avChatAudioUI.getTime());
+            } else {
+                binder.setTime(avChatVideoUI.getTime());
+            }
+
         }
 
         @Override

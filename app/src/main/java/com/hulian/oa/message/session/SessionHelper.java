@@ -25,6 +25,8 @@ import com.netease.nim.uikit.api.model.session.SessionCustomization;
 import com.netease.nim.uikit.api.model.session.SessionEventListener;
 import com.netease.nim.uikit.api.wrapper.NimMessageRevokeObserver;
 import com.netease.nim.uikit.business.session.actions.BaseAction;
+import com.netease.nim.uikit.business.session.module.MsgForwardFilter;
+import com.netease.nim.uikit.business.session.module.MsgRevokeFilter;
 import com.netease.nim.uikit.business.team.model.TeamExtras;
 import com.netease.nim.uikit.business.team.model.TeamRequestCode;
 import com.netease.nim.uikit.common.ui.popupmenu.NIMPopupMenu;
@@ -39,12 +41,12 @@ import com.netease.nimlib.sdk.avchat.model.AVChatAttachment;
 import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.MsgServiceObserve;
 import com.netease.nimlib.sdk.msg.attachment.MsgAttachment;
-import com.netease.nimlib.sdk.msg.constant.MsgDirectionEnum;
 import com.netease.nimlib.sdk.msg.constant.MsgTypeEnum;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.netease.nimlib.sdk.msg.model.LocalAntiSpamResult;
 import com.netease.nimlib.sdk.msg.model.RecentContact;
+import com.netease.nimlib.sdk.robot.model.RobotAttachment;
 import com.netease.nimlib.sdk.team.constant.TeamTypeEnum;
 import com.netease.nimlib.sdk.team.model.Team;
 
@@ -188,7 +190,7 @@ public class SessionHelper {
 
                 @Override
                 public void onClick(Context context, View view, String sessionId) {
-                 //   MessageInfoActivity.startActivity(context, sessionId); //打开聊天信息
+                    //   MessageInfoActivity.startActivity(context, sessionId); //打开聊天信息
                 }
             };
             infoButton.iconId = R.drawable.ic_launcher_foreground;
@@ -260,7 +262,7 @@ public class SessionHelper {
             return true;
         }
         LocalAntiSpamResult result = NIMClient.getService(MsgService.class).checkLocalAntiSpam(message.getContent(),
-                                                                                               "**");
+                "**");
         int operator = result == null ? 0 : result.getOperator();
         switch (operator) {
             case 1: // 替换，允许发送
@@ -317,7 +319,7 @@ public class SessionHelper {
 //            robotCustomization.buttons = buttons;
 //        }
 //        return robotCustomization;
-        return  null;
+        return null;
     }
 
     private static RecentCustomization getRecentCustomization() {
@@ -374,7 +376,7 @@ public class SessionHelper {
 //            if (NIMRedPacketClient.isEnable()) {
 //                actions.hb_add(new RedPacketAction());
 //            }
-         //   actions.hb_add(new TipAction());
+            //   actions.hb_add(new TipAction());
             SessionTeamCustomization.SessionTeamCustomListener listener = new SessionTeamCustomization.SessionTeamCustomListener() {
 
                 @Override
@@ -500,7 +502,7 @@ public class SessionHelper {
             @Override
             public void onAckMsgClicked(Context context, IMMessage message) {
                 // 已读回执事件处理，用于群组的已读回执事件的响应，弹出消息已读详情
-            //    AckMsgInfoActivity.start(context, message);
+                //    AckMsgInfoActivity.start(context, message);
             }
         };
         NimUIKit.setSessionListener(listener);
@@ -511,45 +513,49 @@ public class SessionHelper {
      * 消息转发过滤器
      */
     private static void registerMsgForwardFilter() {
-//        NimUIKit.setMsgForwardFilter(new MsgForwardFilter() {
-//
-//            @Override
-//            public boolean shouldIgnore(IMMessage message) {
-//                if (message.getMsgType() == MsgTypeEnum.custom && message.getAttachment() != null &&
-//                    (message.getAttachment() instanceof SnapChatAttachment ||
-//                     message.getAttachment() instanceof RTSAttachment ||
-//                     message.getAttachment() instanceof RedPacketAttachment)) {
-//                    // 白板消息和阅后即焚消息，红包消息 不允许转发
-//                    return true;
-//                } else if (message.getMsgType() == MsgTypeEnum.robot && message.getAttachment() != null &&
-//                           ((RobotAttachment) message.getAttachment()).isRobotSend()) {
-//                    return true; // 如果是机器人发送的消息 不支持转发
-//                }
-//                return false;
-//            }
-//        });
+        NimUIKit.setMsgForwardFilter(new MsgForwardFilter() {
+
+            @Override
+            public boolean shouldIgnore(IMMessage message) {
+                if (message.getMsgType() == MsgTypeEnum.custom && message.getAttachment() != null
+//                        && (message.getAttachment() instanceof SnapChatAttachment ||
+//                        message.getAttachment() instanceof RTSAttachment ||
+//                        message.getAttachment() instanceof RedPacketAttachment)
+                        )
+                {
+                    // 白板消息和阅后即焚消息，红包消息 不允许转发
+                    return true;
+                } else if (message.getMsgType() == MsgTypeEnum.robot && message.getAttachment() != null &&
+                        ((RobotAttachment) message.getAttachment()).isRobotSend()) {
+                    return true; // 如果是机器人发送的消息 不支持转发
+                }
+                return false;
+            }
+        });
     }
 
     /**
      * 消息撤回过滤器
      */
     private static void registerMsgRevokeFilter() {
-//        NimUIKit.setMsgRevokeFilter(new MsgRevokeFilter() {
-//
-//            @Override
-//            public boolean shouldIgnore(IMMessage message) {
-//                if (message.getAttachment() != null && (message.getAttachment() instanceof AVChatAttachment ||
-//                                                        message.getAttachment() instanceof RTSAttachment ||
-//                                                        message.getAttachment() instanceof RedPacketAttachment)) {
-//                    // 视频通话消息和白板消息，红包消息 不允许撤回
-//                    return true;
-//                } else if (DemoCache.getAccount().equals(message.getSessionId())) {
-//                    // 发给我的电脑 不允许撤回
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
+        NimUIKit.setMsgRevokeFilter(new MsgRevokeFilter() {
+
+            @Override
+            public boolean shouldIgnore(IMMessage message) {
+                if (message.getAttachment() != null
+//                        && (message.getAttachment() instanceof AVChatAttachment ||
+//                        message.getAttachment() instanceof RTSAttachment ||
+//                        message.getAttachment() instanceof RedPacketAttachment)
+                ) {
+                    // 视频通话消息和白板消息，红包消息 不允许撤回
+                    return true;
+                } else if (DemoCache.getAccount().equals(message.getSessionId())) {
+                    // 发给我的电脑 不允许撤回
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     private static void registerMsgRevokeObserver() {
@@ -640,14 +646,14 @@ public class SessionHelper {
                                                         SessionTypeEnum sessionTypeEnum) {
         List<PopupMenuItem> moreMenuItems = new ArrayList<PopupMenuItem>();
         moreMenuItems.add(new PopupMenuItem(context, ACTION_HISTORY_QUERY, sessionId, sessionTypeEnum,
-                                            DemoCache.getContext().getString(R.string.message_history_query)));
+                DemoCache.getContext().getString(R.string.message_history_query)));
         moreMenuItems.add(new PopupMenuItem(context, ACTION_SEARCH_MESSAGE, sessionId, sessionTypeEnum,
-                                            DemoCache.getContext().getString(R.string.message_search_title)));
+                DemoCache.getContext().getString(R.string.message_search_title)));
         moreMenuItems.add(new PopupMenuItem(context, ACTION_CLEAR_MESSAGE, sessionId, sessionTypeEnum,
-                                            DemoCache.getContext().getString(R.string.message_clear)));
+                DemoCache.getContext().getString(R.string.message_clear)));
         if (sessionTypeEnum == SessionTypeEnum.P2P) {
             moreMenuItems.add(new PopupMenuItem(context, ACTION_CLEAR_P2P_MESSAGE, sessionId, sessionTypeEnum,
-                                                DemoCache.getContext().getString(R.string.message_p2p_clear)));
+                    DemoCache.getContext().getString(R.string.message_p2p_clear)));
         }
         return moreMenuItems;
     }
