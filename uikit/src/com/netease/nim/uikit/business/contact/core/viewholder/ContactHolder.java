@@ -2,6 +2,7 @@ package com.netease.nim.uikit.business.contact.core.viewholder;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -16,13 +17,15 @@ import com.netease.nimlib.sdk.team.model.Team;
 
 public class ContactHolder extends AbsContactViewHolder<ContactItem> {
 
-    protected HeadImageView head;
+//    protected HeadImageView head;
 
     protected TextView name;
 
     protected TextView desc;
 
-    protected RelativeLayout headLayout;
+//    protected RelativeLayout headLayout;
+    protected FrameLayout iv_image;
+    protected TextView tv_type;
 
     @Override
     public void refresh(ContactDataAdapter adapter, int position, final ContactItem item) {
@@ -30,13 +33,14 @@ public class ContactHolder extends AbsContactViewHolder<ContactItem> {
         final IContact contact = item.getContact();
         if (contact.getContactType() == IContact.Type.Friend) {
           //  head.loadBuddyAvatar(contact.getContactId());
-            head.setImageResource(R.drawable.nim_avatar_default);
+            //head.setImageResource(R.drawable.nim_avatar_default);
         } else {
             Team team = NimUIKit.getTeamProvider().getTeamById(contact.getContactId());
-            head.loadTeamIconByTeam(team);
+            //head.loadTeamIconByTeam(team);
         }
         name.setText(contact.getDisplayName());
-        headLayout.setOnClickListener(new View.OnClickListener() {
+        tv_type.setText(contact.getDisplayName().substring(contact.getDisplayName().length()-2));
+        iv_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (contact.getContactType() == IContact.Type.Friend) {
@@ -64,10 +68,12 @@ public class ContactHolder extends AbsContactViewHolder<ContactItem> {
     public View inflate(LayoutInflater inflater) {
         View view = inflater.inflate(R.layout.nim_contacts_item, null);
 
-        headLayout = (RelativeLayout) view.findViewById(R.id.head_layout);
-        head = (HeadImageView) view.findViewById(R.id.contacts_item_head);
+//        headLayout = (RelativeLayout) view.findViewById(R.id.head_layout);
+//        head = (HeadImageView) view.findViewById(R.id.contacts_item_head);
         name = (TextView) view.findViewById(R.id.contacts_item_name);
         desc = (TextView) view.findViewById(R.id.contacts_item_desc);
+        iv_image = (FrameLayout) view.findViewById(R.id.iv_image);
+        tv_type = (TextView) view.findViewById(R.id.tv_type_niu);
 
         return view;
     }
