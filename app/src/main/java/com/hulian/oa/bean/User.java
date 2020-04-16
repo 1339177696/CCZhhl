@@ -1,5 +1,7 @@
 package com.hulian.oa.bean;
 
+import java.util.List;
+
 public class User {
     String remark;
     private  String userName;
@@ -9,6 +11,23 @@ public class User {
     private String isLead;//权限状态（0：领导，1：职员，2：多岗位）
     private String deptId;
     private String email;
+    private List<Roles> roles;
+    private String rolesStr = "";
+    public List<Roles> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Roles> roles) {
+        this.roles = roles;
+    }
+
+    //所有权限字段拼接在一起
+    public String getRolesStr() {
+        for (Roles role : roles) {
+            rolesStr = rolesStr + role.getRoleKey();
+        }
+        return rolesStr;
+    }
 
     public String getEmail() {
         return email;

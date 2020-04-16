@@ -24,13 +24,28 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true">
 
-            <com.netease.nim.uikit.common.ui.imageview.HeadImageView
-                android:id="@+id/img_head"
-                android:layout_width="@dimen/avatar_size_default"
-                android:layout_height="@dimen/avatar_size_default"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="12dp"/>
+<!--            <com.netease.nim.uikit.common.ui.imageview.HeadImageView-->
+<!--                android:id="@+id/img_head"-->
+<!--                android:layout_width="@dimen/avatar_size_default"-->
+<!--                android:layout_height="@dimen/avatar_size_default"-->
+<!--                android:layout_gravity="center_vertical"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:layout_marginRight="12dp"/>-->
+
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="50dip"
+                android:background="@drawable/bg_head1_img"
+                android:layout_height="50dip" />
+            <TextView
+                android:id="@+id/type_miu"
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:text="报"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:layout_height="match_parent" />
         </FrameLayout>
 
         <TextView

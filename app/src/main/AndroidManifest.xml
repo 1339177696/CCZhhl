@@ -385,6 +385,9 @@
           <activity android:name=".xcpsactivity.XCDetelisActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             ></activity>
+<!--        打卡-->
+        <activity android:name=".work.file.admin.activity.attendance.ClockActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"></activity>
 
 
     </application>
