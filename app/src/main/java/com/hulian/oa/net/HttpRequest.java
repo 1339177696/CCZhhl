@@ -734,4 +734,31 @@ public class HttpRequest {
         RequestMode.postRequest(Urls.commUrls+"system/viewMsg/clearMsgByType", params, callback, null);
     }
 
+    /**
+     *上班打卡
+     * @param params
+     * @param callback
+     */
+    public static void OnClock(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/attenceInfo/android/saveRegister", params, callback, null);
+    }
+
+    /**
+     *查询打卡规则
+     * @param params
+     * @param callback
+     */
+    public static void PostClock_rules(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/attenceRule/android/getRuleInfo", params, callback, null);
+    }
+
+    /**
+     *查询打卡信息
+     * @param params
+     * @param callback
+     */
+    public static void OnClock_Type(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/attenceInfo/android/findRegisterDetail", params, callback, null);
+    }
+
 }

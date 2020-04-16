@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.TimeZone;
 
 public class TimeUtils {
     private static SimpleDateFormat sf = null;
@@ -500,6 +501,7 @@ public class TimeUtils {
         }
         return l+"";
     }
+
     /**
      * 比较两个时间
      *
@@ -507,25 +509,27 @@ public class TimeUtils {
      * @param endString 结束时间
      * @return 结束时间大于开始时间返回true，否则反之֮
      */
-    public static boolean compareTwoTime(String starTime, String endString) {
+    public static long compareTwoTime(String starTime, String endString) {
         boolean isDayu = false;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        long dif = 0;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
 
         try {
             Date parse = dateFormat.parse(starTime);
             Date parse1 = dateFormat.parse(endString);
 
-            long diff = parse1.getTime() - parse.getTime();
-            if (diff >= 0) {
-                isDayu = true;
-            } else {
-                isDayu = false;
-            }
+            dif = parse1.getTime() - parse.getTime();
+//            if (diff > 0) {
+//                isDayu = true;
+//            } else {
+//                isDayu = false;
+//            }
+
         } catch (ParseException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return isDayu;
+        return dif;
 
     }
 
@@ -603,5 +607,37 @@ public class TimeUtils {
         sf = new SimpleDateFormat("yyyy-MM-dd");
         Date d = new Date(convertTimeToLong(time));
         return sf.format(d);
+    }
+
+    /*时间戳转换成字符窜*/
+    public static String time_getDateToString(long time,String format) {
+        if(format == null || format.isEmpty()){
+            format = "yyyy-MM-dd HH:mm:ss";
+        }
+        Date d = new Date(time);
+        sf = new SimpleDateFormat(format);
+        return sf.format(d);
+    }
+
+    public static String getMway() {
+        final Calendar c = Calendar.getInstance();
+        c.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+        String mWay = String.valueOf(c.get(Calendar.DAY_OF_WEEK));
+        if ("1".equals(mWay)) {
+            mWay = "天";
+        } else if ("2".equals(mWay)) {
+            mWay = "一";
+        } else if ("3".equals(mWay)) {
+            mWay = "二";
+        } else if ("4".equals(mWay)) {
+            mWay = "三";
+        } else if ("5".equals(mWay)) {
+            mWay = "四";
+        } else if ("6".equals(mWay)) {
+            mWay = "五";
+        } else if ("7".equals(mWay)) {
+            mWay = "六";
+        }
+        return mWay;
     }
 }
