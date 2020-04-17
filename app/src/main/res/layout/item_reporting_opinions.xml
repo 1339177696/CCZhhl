@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    >
+    <TextView
+        android:id="@+id/opinion_people_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="意见人:"
+        android:textColor="@color/text"
+        android:textSize="16sp"
+        app:layout_constraintRight_toRightOf="@+id/opinion_time_tv"
+        />
+
+    <TextView
+        android:id="@+id/opinion_people"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="曹宇"
+        android:textColor="@color/text"
+        android:textSize="16sp"
+        app:layout_constraintTop_toTopOf="@+id/opinion_people_tv"
+        app:layout_constraintLeft_toRightOf="@+id/opinion_people_tv"
+        android:layout_marginLeft="5dp"
+        />
+
+    <TextView
+        android:id="@+id/opinion_time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="意见时间:"
+        android:textColor="@color/text"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/opinion_people_tv"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="8dp"
+        />
+
+    <TextView
+        android:id="@+id/opinion_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="2020-03-09"
+        android:textColor="@color/text"
+        android:textSize="16sp"
+        app:layout_constraintTop_toTopOf="@+id/opinion_time_tv"
+        app:layout_constraintLeft_toRightOf="@+id/opinion_time_tv"
+        android:layout_marginLeft="5dp"
+        />
+
+    <TextView
+        android:id="@+id/opinion_content_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="意见内容:"
+        android:textColor="@color/text"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/opinion_time_tv"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="8dp"
+        />
+
+    <TextView
+        android:layout_marginRight="10dp"
+        android:id="@+id/opinion_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="汇报写的及其简单，希望把工作内容写的详细些，有助 于检查工作情况，需要配合人员填写清楚。"
+        android:textColor="@color/text"
+        android:textSize="16sp"
+        app:layout_constraintTop_toTopOf="@+id/opinion_content_tv"
+        app:layout_constraintLeft_toRightOf="@+id/opinion_content_tv"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="5dp"
+        />
+
+</android.support.constraint.ConstraintLayout>

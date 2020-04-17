@@ -166,6 +166,7 @@ public class ClockActivity extends BaseActivity {
         setContentView(R.layout.clockactivity);
         EventBus.getDefault().register(this);
         ButterKnife.bind(this);
+        mcontext = ClockActivity.this;
         //个人信息赋值
         tvType.setText(SPUtils.get(ClockActivity.this, "nickname", "").toString().substring(SPUtils.get(ClockActivity.this, "nickname", "").toString().length() - 2));
         clockName.setText(SPUtils.get(ClockActivity.this, "nickname", "").toString());
@@ -213,16 +214,16 @@ public class ClockActivity extends BaseActivity {
             case R.id.permissions_no:
                 if (permi) {
                     // 跳转修改规则，值为空(领导)
-//                    Intent intent = new Intent(ClockActivity.this, AttendrulesmodifyActivity.class);
-//                    intent.putExtra("id", "");
-//                    intent.putExtra("registerContent", "");
-//                    intent.putExtra("upTime", "");
-//                    intent.putExtra("downTime", "");
-//                    intent.putExtra("registerAddress", "");
-//                    intent.putExtra("distance", "");
-//                    intent.putExtra("rxhRule", "");
-//                    intent.putExtra("jingwei", "");
-//                    startActivity(intent);
+                    Intent intent = new Intent(ClockActivity.this, AttendrulesmodifyActivity.class);
+                    intent.putExtra("id", "");
+                    intent.putExtra("registerContent", "");
+                    intent.putExtra("upTime", "");
+                    intent.putExtra("downTime", "");
+                    intent.putExtra("registerAddress", "");
+                    intent.putExtra("distance", "");
+                    intent.putExtra("rxhRule", "");
+                    intent.putExtra("jingwei", "");
+                    startActivity(intent);
                 } else {
                     Toast.makeText(ClockActivity.this, "请联系管理员", Toast.LENGTH_LONG).show();
                 }

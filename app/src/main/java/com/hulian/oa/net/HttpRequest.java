@@ -761,4 +761,91 @@ public class HttpRequest {
         RequestMode.postRequest(Urls.commUrls + "system/attenceInfo/android/findRegisterDetail", params, callback, null);
     }
 
+    /**
+     * 添加打卡规则
+     * @param params
+     * @param callback
+     */
+    public static void AddClock_rules(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/attenceRule/android/saveEdit", params, callback, null);
+    }
+
+    /**
+     *查询月打卡每日状态
+     * @param params
+     * @param callback
+     */
+    public static void OnClock_month(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/attenceInfo/android/findRegisterDayState", params, callback, null);
+    }
+
+    /**
+     * 查看汇报列表
+     *
+     * @param params
+     * @param callback
+     */
+    public static void getGetWorkReportList(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/reportInfo/android/list", params, callback, null);
+    }
+
+    /**
+     * 获取汇报详情
+     *
+     * @param params
+     * @param callback
+     */
+    public static void getGetWorkReport(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/reportInfo/android/selectById", params, callback, null);
+    }
+
+    /**
+     * 意见反馈
+     *
+     * @param params
+     * @param callback
+     */
+    public static void sendWorkReportOpinion(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/reportLog/android/add", params, callback, null);
+    }
+
+    /**
+     * 领导列表
+     *
+     * @param params
+     * @param callback
+     */
+    public static void getLeadershipList(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/reportInfo/android/findReportMaySelectPerson", params, callback, null);
+    }
+
+    /**
+     * 筛选列表
+     *
+     * @param params
+     * @param callback
+     */
+    public static void getScreenReportList(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/reportInfo/android/list1", params, callback, null);
+    }
+
+    /**
+     * 获取汇报接收人
+     *
+     * @param params
+     * @param callback
+     */
+    public static void getRecipient(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/reportInfo/android/getReportDefaultPerson", params, callback, null);
+    }
+
+    /**
+     * 添加汇报
+     *
+     * @param params
+     * @param callback
+     */
+    public static void postReport(RequestParams params, List<File> files, ResponseCallback callback) {
+        RequestMode.postMultipart(Urls.commUrls + "system/reportInfo/android/add", params, files, callback, null);
+    }
 }

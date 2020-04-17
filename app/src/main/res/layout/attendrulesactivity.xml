@@ -34,7 +34,7 @@
             <ImageView
                 android:id="@+id/im_back"
                 android:layout_width="@dimen/dp_15"
-                android:layout_height="@dimen/dp_15"
+                android:layout_height="@dimen/dp_12"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:background="@mipmap/ic_left_white" />

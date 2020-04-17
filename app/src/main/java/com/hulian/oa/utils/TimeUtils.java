@@ -640,4 +640,57 @@ public class TimeUtils {
         }
         return mWay;
     }
+
+    /**
+     * 判断2个时间大小
+     * yyyy-MM-dd HH:mm 格式（自己可以修改成想要的时间格式）
+     *
+     * @param startTime
+     * @param endTime
+     * @return
+     */
+    public static int timeCompare(String startTime, String endTime) {
+        int i = 0;
+        //注意：传过来的时间格式必须要和这里填入的时间格式相同
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        try {
+            Date date1 = dateFormat.parse(startTime);//开始时间
+            Date date2 = dateFormat.parse(endTime);//结束时间
+            // 1 结束时间小于开始时间 2 开始时间与结束时间相同 3 结束时间大于开始时间
+            if (date2.getTime() < date1.getTime()) {
+                //结束时间小于开始时间
+                i = 1;
+            } else if (date2.getTime() == date1.getTime()) {
+                //开始时间与结束时间相同
+                i = 2;
+            } else if (date2.getTime() > date1.getTime()) {
+                //结束时间大于开始时间
+                i = 3;
+            }
+        } catch (Exception e) {
+
+        }
+        return i;
+    }
+
+
+    public static String dateClearZero(String xq){
+        Integer year = Integer.parseInt(xq.substring(0, 4));
+        Integer month = Integer.parseInt(xq.substring(5, 7));
+        Integer day = Integer.parseInt(xq.substring(8, 10));
+        StringBuilder res = new StringBuilder();
+        if(year > 0){
+            res.append(year + ".");
+        }
+        if(month > 0){
+            res.append(month + ".");
+        }
+        if(day > 0){
+            res.append(day);
+        }
+        return res.toString();
+    }
+
+
+
 }

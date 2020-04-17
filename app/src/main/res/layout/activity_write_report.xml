@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EBEBEB"
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    >
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/ll_top"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="25dp"-->
+<!--        android:background="@drawable/baoxiao_bg"-->
+<!--        android:orientation="vertical"></LinearLayout>-->
+
+
+
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/work_leave_list_liner"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/ll_top"-->
+<!--        android:orientation="vertical">-->
+<!--        <RelativeLayout-->
+<!--            android:id="@+id/iv_back"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="@dimen/dp_53"-->
+<!--            android:gravity="center_vertical">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="@dimen/dp_15"-->
+<!--                android:layout_height="@dimen/dp_15"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:layout_marginLeft="@dimen/dp_10"-->
+<!--                android:background="@mipmap/ic_left_white" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/title_text"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:gravity="center"-->
+<!--                android:text="写日报"-->
+<!--                android:textColor="#ffffff"-->
+<!--                android:textSize="@dimen/dp_18" />-->
+
+
+<!--        </RelativeLayout>-->
+
+        <View
+            android:id="@+id/title"
+            android:background="#2D4BCA"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_10"/>
+        <RelativeLayout
+            android:layout_below="@+id/title"
+            android:id="@+id/iv_back"
+            android:layout_width="match_parent"
+            android:background="#2D4BCA"
+            android:gravity="center_vertical"
+            android:layout_height="@dimen/dp_40">
+            <ImageView
+                android:layout_marginLeft="@dimen/dp_15"
+                android:layout_width="@dimen/dp_12"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/ic_left_white"
+                android:layout_height="@dimen/dp_12" />
+            <TextView
+                android:id="@+id/title_text"
+                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="写日报"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_11" />
+        </RelativeLayout>
+
+
+
+<!--        <FrameLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@mipmap/bg_img"-->
+<!--            android:paddingLeft="@dimen/dp_40"-->
+<!--            android:paddingRight="@dimen/dp_40">-->
+
+
+<!--        </FrameLayout>-->
+
+<!--    </LinearLayout>-->
+
+
+    <ScrollView
+        android:layout_below="@+id/iv_back"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_frame_solid_1"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="15dp"
+            >
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                >
+                <ImageView
+                    android:id="@+id/iv_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@mipmap/complete"
+                    />
+                <TextView
+                    android:id="@+id/tv_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toRightOf="@+id/iv_1"
+                    android:text="今日完成工作"
+                    android:textColor="@color/text_title"
+                    app:layout_constraintTop_toTopOf="@+id/iv_1"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_1"
+                    android:layout_marginLeft="8dp"
+                    android:textSize="18sp"
+                    />
+
+                <EditText
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:id="@+id/finished_work"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="@+id/tv_1"
+                    android:background="@null"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_1"
+                    android:layout_marginTop="10dp"
+                    android:hint="请输入今日完成的工作内容"
+                    android:textSize="16sp"
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0.5dp"
+                    app:layout_constraintTop_toBottomOf="@+id/finished_work"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:background="@color/line_color"
+                    />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                >
+                <ImageView
+                    android:id="@+id/iv_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@mipmap/undone"
+                    />
+                <TextView
+                    android:id="@+id/tv_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toRightOf="@+id/iv_2"
+                    android:text="未完成的工作"
+                    android:textColor="@color/text_title"
+                    app:layout_constraintTop_toTopOf="@+id/iv_2"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_2"
+                    android:layout_marginLeft="8dp"
+                    android:textSize="18sp"
+                    />
+
+                <EditText
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:id="@+id/unfinished_work"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="@+id/tv_2"
+                    android:background="@null"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_2"
+                    android:layout_marginTop="10dp"
+                    android:hint="请输入未完成的工作内容"
+                    android:textSize="16sp"
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0.5dp"
+                    app:layout_constraintTop_toBottomOf="@+id/unfinished_work"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:background="@color/line_color"
+                    />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                >
+                <ImageView
+                    android:id="@+id/iv_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@mipmap/plan"
+                    />
+                <TextView
+                    android:id="@+id/tv_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toRightOf="@+id/iv_3"
+                    android:text="明日工作计划"
+                    android:textColor="@color/text_title"
+                    app:layout_constraintTop_toTopOf="@+id/iv_3"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_3"
+                    android:layout_marginLeft="8dp"
+                    android:textSize="18sp"
+                    />
+
+                <EditText
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:id="@+id/plan_work"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="@+id/tv_3"
+                    android:background="@null"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_3"
+                    android:layout_marginTop="10dp"
+                    android:hint="请输入明日工作计划内容"
+                    android:textSize="16sp"
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0.5dp"
+                    app:layout_constraintTop_toBottomOf="@+id/plan_work"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:background="@color/line_color"
+                    />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                >
+                <ImageView
+                    android:id="@+id/iv_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@mipmap/coordination"
+                    />
+                <TextView
+                    android:id="@+id/tv_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toRightOf="@+id/iv_4"
+                    android:text="需要协调的工作"
+                    android:textColor="@color/text_title"
+                    app:layout_constraintTop_toTopOf="@+id/iv_4"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_4"
+                    android:layout_marginLeft="8dp"
+                    android:textSize="18sp"
+                    />
+
+                <EditText
+                    android:id="@+id/coordinate_work"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="@+id/tv_4"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:background="@null"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_4"
+                    android:layout_marginTop="10dp"
+                    android:hint="请输入需要协调的工作内容"
+                    android:textSize="16sp"
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0.5dp"
+                    app:layout_constraintTop_toBottomOf="@+id/coordinate_work"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:background="@color/line_color"
+                    />
+
+            </android.support.constraint.ConstraintLayout>
+
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                >
+                <ImageView
+                    android:id="@+id/iv_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@mipmap/image"
+                    />
+                <TextView
+                    android:id="@+id/tv_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toRightOf="@+id/iv_5"
+                    android:text="图片"
+                    android:textColor="@color/text_title"
+                    app:layout_constraintTop_toTopOf="@+id/iv_5"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_5"
+                    android:layout_marginLeft="8dp"
+                    android:textSize="18sp"
+                    />
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="@+id/tv_5"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_5"
+                    android:layout_marginTop="10dp"
+                    android:overScrollMode="never"
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0.5dp"
+                    app:layout_constraintTop_toBottomOf="@+id/recycler"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:background="@color/line_color"
+                    />
+
+            </android.support.constraint.ConstraintLayout>
+
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                >
+                <ImageView
+                    android:id="@+id/iv_6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@mipmap/hb_add"
+                    />
+                <TextView
+                    android:id="@+id/tv_6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toRightOf="@+id/iv_6"
+                    android:text="汇报接收人"
+                    android:textColor="@color/text_title"
+                    app:layout_constraintTop_toTopOf="@+id/iv_6"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_6"
+                    android:layout_marginLeft="8dp"
+                    android:textSize="18sp"
+                    />
+
+                <TextView
+                    android:id="@+id/recipient"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="@+id/tv_6"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:background="@null"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_6"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16sp"
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0.5dp"
+                    app:layout_constraintTop_toBottomOf="@+id/recipient"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:background="@color/line_color"
+                    />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/submit"
+                android:layout_width="200dp"
+                android:layout_height="35dp"
+                android:text="提交"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:background="@drawable/background_frame_semicircle_2"
+                android:layout_marginTop="70dp"
+                android:layout_marginBottom="70dp"
+                />
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+</RelativeLayout>

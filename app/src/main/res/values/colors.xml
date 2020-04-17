@@ -44,5 +44,9 @@
     <color name="text_title">#101010</color>
     <color name="text">#99101010</color>
     <color name="line_color">#19000000</color>
+    <color name="line">#d1d1d1</color>
+    <color name="title1">#4a4a4a</color>
+    <color name="title2">#a2a2a2</color>
+    <color name="butten_green">#1AAC19</color>
 
 </resources>

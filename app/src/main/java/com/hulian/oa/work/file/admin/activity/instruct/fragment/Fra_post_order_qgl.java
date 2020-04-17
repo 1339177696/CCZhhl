@@ -26,6 +26,7 @@ import com.hulian.oa.views.fabVIew.OnFabClickListener;
 import com.hulian.oa.views.fabVIew.SuspensionFab_qgl;
 import com.hulian.oa.work.file.admin.activity.PostOrderActivity;
 import com.hulian.oa.work.file.admin.activity.SecondInstructActivity;
+import com.hulian.oa.work.file.admin.activity.WorkReportActivity;
 import com.hulian.oa.work.file.admin.activity.attendance.ClockActivity;
 import com.hulian.oa.work.file.admin.activity.leave.LeaveApplyforActivity;
 import com.hulian.oa.work.file.admin.activity.mail.MailWriteActivity;
@@ -115,11 +116,12 @@ public class Fra_post_order_qgl extends Fragment {
                 .setPressedTranslationZ(10)
                 .setTag(6)
                 .build();
-
-
-
 //添加菜单
-        fabTop.addFab(qingjia,renwu,email,collection,clock,report);
+        if (SPUtils.get(getActivity(), "roleKey", "").toString().contains("boss")) {//boss没有写日报权限
+            fabTop.addFab(qingjia,renwu,email,collection,clock);
+        }else {
+            fabTop.addFab(qingjia,renwu,email,collection,clock,report);
+        }
         //    fabTop.setAnimationManager(new FabAlphaAnimate(fabTop));
 //设置菜单点击事件
         fabTop.setFabClickListener(new OnFabClickListener() {
@@ -151,6 +153,7 @@ public class Fra_post_order_qgl extends Fragment {
                 }
                 else {
                     fabTop.closeAnimate();
+                    startActivity(new Intent(getActivity(), WorkReportActivity.class));
                 }
             }
         });
