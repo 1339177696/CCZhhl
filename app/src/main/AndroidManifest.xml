@@ -388,7 +388,8 @@
 <!--        打卡-->
         <activity android:name=".work.file.admin.activity.attendance.ClockActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"></activity>
-
+        <activity android:name=".work.file.admin.activity.attendance.AttendrulesActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"></activity>
 
     </application>
 
