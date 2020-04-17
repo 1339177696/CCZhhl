@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hulian.oa.BaseActivity;
@@ -31,8 +32,8 @@ import de.greenrobot.event.EventBus;
  * Describe: 考勤规则
  */
 public class AttendrulesActivity extends BaseActivity {
-    @BindView(R.id.im_back)
-    ImageView imBack;
+    @BindView(R.id.iv_back)
+    RelativeLayout iv_back;
     @BindView(R.id.tv_modify)
     TextView tv_modify;
     @BindView(R.id.dk_tv_time)
@@ -71,10 +72,10 @@ public class AttendrulesActivity extends BaseActivity {
         postRule();
     }
 
-    @OnClick({R.id.im_back, R.id.tv_modify})
+    @OnClick({R.id.iv_back, R.id.tv_modify})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.im_back:
+            case R.id.iv_back:
                 finish();
                 break;
             //修改

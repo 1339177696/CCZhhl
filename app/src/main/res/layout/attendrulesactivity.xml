@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,81 +10,114 @@
     android:focusable="true"
     android:focusableInTouchMode="true">
 
-    <LinearLayout
-        android:id="@+id/ll_top"
+    <View
+        android:id="@+id/title"
+        android:background="#2D4BCA"
         android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:background="@drawable/baoxiao_bg"
-        android:orientation="vertical">
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/work_leave_list_liner"
+        android:layout_height="@dimen/dp_10"/>
+    <RelativeLayout
+        android:id="@+id/iv_back"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ll_top"
-        android:orientation="vertical">
-
-        <RelativeLayout
+        android:background="#2D4BCA"
+        android:gravity="center_vertical"
+        android:layout_height="@dimen/dp_40">
+        <ImageView
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_width="@dimen/dp_12"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/ic_left_white"
+            android:layout_height="@dimen/dp_12" />
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_53"
-            android:background="@drawable/baoxiao_bg"
-            android:gravity="center_vertical">
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="考勤规则"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_11" />
 
-            <ImageView
-                android:id="@+id/im_back"
-                android:layout_width="@dimen/dp_15"
-                android:layout_height="@dimen/dp_12"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:background="@mipmap/ic_left_white" />
+        <TextView
+            android:id="@+id/tv_modify"
+            android:textSize="@dimen/sp_11"
+            android:textColor="@color/white"
+            android:layout_marginRight="@dimen/dp_15"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:text="修改"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
-            <TextView
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:id="@+id/title_text"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="考勤规则"
-                android:textColor="#ffffff"
-                android:textSize="@dimen/sp_18" />
+    </RelativeLayout>
+<!--    <LinearLayout-->
+<!--        android:id="@+id/ll_top"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="25dp"-->
+<!--        android:background="@drawable/baoxiao_bg"-->
+<!--        android:orientation="vertical">-->
+<!--    </LinearLayout>-->
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/work_leave_list_liner"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/ll_top"-->
+<!--        android:orientation="vertical">-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="@dimen/dp_53"-->
+<!--            android:background="@drawable/baoxiao_bg"-->
+<!--            android:gravity="center_vertical">-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/im_back"-->
+<!--                android:layout_width="@dimen/dp_15"-->
+<!--                android:layout_height="@dimen/dp_12"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:layout_marginLeft="@dimen/dp_10"-->
+<!--                android:background="@mipmap/ic_left_white" />-->
+
+<!--            <TextView-->
+<!--                android:layout_centerHorizontal="true"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:id="@+id/title_text"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:gravity="center"-->
+<!--                android:text="考勤规则"-->
+<!--                android:textColor="#ffffff"-->
+<!--                android:textSize="@dimen/sp_18" />-->
 
 
-            <TextView
-                android:id="@+id/tv_modify"
-                android:textSize="@dimen/sp_16"
-                android:textColor="@color/white"
-                android:layout_marginRight="@dimen/dp_15"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:text="修改"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+<!--            <TextView-->
+<!--                android:id="@+id/tv_modify"-->
+<!--                android:textSize="@dimen/sp_16"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:layout_marginRight="@dimen/dp_15"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:text="修改"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"/>-->
 
 
-        </RelativeLayout>
+<!--        </RelativeLayout>-->
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@mipmap/bg_img"
-            android:paddingLeft="@dimen/dp_40"
-            android:paddingRight="@dimen/dp_40">
+<!--        <FrameLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@mipmap/bg_img"-->
+<!--            android:paddingLeft="@dimen/dp_40"-->
+<!--            android:paddingRight="@dimen/dp_40">-->
 
 
-        </FrameLayout>
+<!--        </FrameLayout>-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/dp_90"
-        android:background="@drawable/background_frame_solid_1"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="15dp"
-        android:layout_marginRight="10dp">
+        android:background="@drawable/background_frame_solid_1">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -142,7 +175,7 @@
                     />
 
                 <TextView
-                    android:textSize="@dimen/sp_16"
+                    android:textSize="@dimen/sp_12"
                     android:layout_toRightOf="@+id/iv_m1"
                     android:id="@+id/tv_m2"
                     android:layout_width="wrap_content"
@@ -155,7 +188,7 @@
                 <TextView
                     android:layout_marginTop="@dimen/dp_10"
                     android:layout_below="@+id/tv_m2"
-                    android:textSize="@dimen/sp_14"
+                    android:textSize="@dimen/sp_11"
                     android:layout_toRightOf="@+id/iv_m1"
                     android:id="@+id/dk_tv_time"
                     android:layout_width="wrap_content"
@@ -189,7 +222,7 @@
                     android:src="@mipmap/kqgz_late" />
 
                 <TextView
-                    android:textSize="@dimen/sp_16"
+                    android:textSize="@dimen/sp_12"
                     android:layout_toRightOf="@+id/iv_m2"
                     android:id="@+id/tv_m4"
                     android:layout_width="wrap_content"
@@ -202,7 +235,7 @@
                 <TextView
                     android:layout_marginTop="@dimen/dp_10"
                     android:layout_below="@+id/tv_m4"
-                    android:textSize="@dimen/sp_14"
+                    android:textSize="@dimen/sp_11"
                     android:layout_toRightOf="@+id/iv_m2"
                     android:id="@+id/dk_tv_work"
                     android:layout_width="wrap_content"
@@ -213,7 +246,7 @@
                 <TextView
                     android:layout_marginTop="@dimen/dp_3"
                     android:layout_below="@+id/dk_tv_work"
-                    android:textSize="@dimen/sp_14"
+                    android:textSize="@dimen/sp_11"
                     android:layout_toRightOf="@+id/iv_m2"
                     android:id="@+id/dk_tv_after_work"
                     android:layout_width="wrap_content"
@@ -249,7 +282,7 @@
                     />
 
                 <TextView
-                    android:textSize="@dimen/sp_16"
+                    android:textSize="@dimen/sp_12"
                     android:layout_toRightOf="@+id/iv_m3"
                     android:id="@+id/tv_m7"
                     android:layout_width="wrap_content"
@@ -262,7 +295,7 @@
                 <TextView
                     android:layout_marginTop="@dimen/dp_10"
                     android:layout_below="@+id/tv_m7"
-                    android:textSize="@dimen/sp_14"
+                    android:textSize="@dimen/sp_11"
                     android:layout_toRightOf="@+id/iv_m3"
                     android:id="@+id/dk_tv_adress"
                     android:layout_width="match_parent"
@@ -297,7 +330,7 @@
                     />
 
                 <TextView
-                    android:textSize="@dimen/sp_16"
+                    android:textSize="@dimen/sp_12"
                     android:layout_toRightOf="@+id/iv_m4"
                     android:id="@+id/tv_m10"
                     android:layout_width="wrap_content"
@@ -310,7 +343,7 @@
                 <TextView
                     android:layout_marginTop="@dimen/dp_10"
                     android:layout_below="@+id/tv_m10"
-                    android:textSize="@dimen/sp_14"
+                    android:textSize="@dimen/sp_11"
                     android:layout_toRightOf="@+id/iv_m4"
                     android:id="@+id/dk_tv_card"
                     android:layout_width="match_parent"
@@ -337,4 +370,4 @@
 
     </ScrollView>
 
-</RelativeLayout>
+</LinearLayout>
