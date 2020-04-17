@@ -142,41 +142,41 @@
         <activity
             android:name=".message.session.AddFriendActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" /> <!-- 已读回执 -->
         <activity
             android:name=".team.activity.SendAckMsgActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".address.activity.SystemMessageActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".address.activity.TeamListActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
             android:name=".message.session.UserProfileActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" /> <!-- 消息历史搜索 -->
         <activity
             android:name=".message.session.search.SearchMessageActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/global_search_bg"
             android:windowSoftInputMode="adjustPan|stateUnspecified" />
         <activity
             android:name=".message.session.search.DisplayMessageActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize" /> <!-- 全局搜索 -->
         <activity
@@ -187,12 +187,12 @@
         <activity
             android:name="message.session.search.GlobalSearchDetailActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="message.session.search.GlobalSearchDetailActivity2"
             android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar" /> <!-- 云信ending -->
         <activity android:name=".work.file.admin.activity.SecondFileActicity"
             android:configChanges="screenSize|keyboardHidden|orientation" />
