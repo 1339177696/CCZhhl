@@ -324,6 +324,7 @@ public class ClockFragment extends Fragment {
         params.put("deptId", SPUtils.get(getActivity(), "deptId", "").toString());
         params.put("createTime", createTime);
         params.put("registerUpTime", sbTime.getText().toString());
+//        params.put("registerUpTime", "08:20");
         params.put("registerUpAddress", registerUpAddress);
         params.put("registerUpCoordinate", registerUpCoordinate);
         params.put("registerUpState", dk_time);

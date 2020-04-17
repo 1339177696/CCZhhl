@@ -61,7 +61,6 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="80dp"
-        android:visibility="gone"
         />
 
 

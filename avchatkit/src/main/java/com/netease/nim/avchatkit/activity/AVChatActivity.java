@@ -7,13 +7,11 @@ import android.content.ServiceConnection;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.os.PersistableBundle;
 import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.faceunity.FaceU;
@@ -26,6 +24,7 @@ import com.netease.nim.avchatkit.common.log.LogUtil;
 import com.netease.nim.avchatkit.constant.AVChatExitCode;
 import com.netease.nim.avchatkit.controll.AVChatController;
 import com.netease.nim.avchatkit.controll.AVChatSoundPlayer;
+import com.netease.nim.avchatkit.module.SxClickListener;
 import com.netease.nim.avchatkit.module.AVChatTimeoutObserver;
 import com.netease.nim.avchatkit.module.AVSwitchListener;
 import com.netease.nim.avchatkit.module.SimpleAVChatStateObserver;
@@ -62,7 +61,7 @@ import com.netease.nimlib.sdk.avchat.model.AVChatVideoFrame;
  * Created by winnie on 2017/12/10.
  */
 
-public class AVChatActivity extends UI implements AVChatVideoUI.TouchZoneCallback, AVSwitchListener {
+public class AVChatActivity extends UI implements AVChatVideoUI.TouchZoneCallback, AVSwitchListener , SxClickListener {
     // constant
     private static final String TAG = "AVChatActivity";
     private static final String KEY_IN_CALLING = "KEY_IN_CALLING";
@@ -100,7 +99,7 @@ public class AVChatActivity extends UI implements AVChatVideoUI.TouchZoneCallbac
     private AVChatAudioUI avChatAudioUI; // 音频界面
     private AVChatVideoUI avChatVideoUI; // 视频界面
 
-    private ImageView sx;
+
     // face unity
     private FaceU faceU;
 
@@ -165,14 +164,7 @@ public class AVChatActivity extends UI implements AVChatVideoUI.TouchZoneCallbac
         // face unity
         initFaceU();
 
-        sx = findViewById(R.id.sx);
 
-        sx.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startVideoService();
-            }
-        });
     }
 
     @Override
@@ -272,8 +264,8 @@ public class AVChatActivity extends UI implements AVChatVideoUI.TouchZoneCallbac
 
     private void initData() {
         avChatController = new AVChatController(this, avChatData);
-        avChatAudioUI = new AVChatAudioUI(this, root, displayName, avChatController, this);
-        avChatVideoUI = new AVChatVideoUI(this, root, avChatData, displayName, avChatController, this, this);
+        avChatAudioUI = new AVChatAudioUI(this, root, displayName, avChatController, this,this);
+        avChatVideoUI = new AVChatVideoUI(this, root, avChatData, displayName, avChatController, this, this,this);
     }
 
 
@@ -406,7 +398,6 @@ public class AVChatActivity extends UI implements AVChatVideoUI.TouchZoneCallbac
             if (state == AVChatType.AUDIO.getValue()) {
                 avChatAudioUI.showAudioInitLayout();
             } else {
-                sx.setVisibility(View.VISIBLE);
                 // 接通以后，自己是小屏幕显示图像，对方是大屏幕显示图像
                 avChatVideoUI.initSmallSurfaceView(AVChatKit.getAccount());
                 avChatVideoUI.showVideoInitLayout();
@@ -455,7 +446,7 @@ public class AVChatActivity extends UI implements AVChatVideoUI.TouchZoneCallbac
             if (info != null && info.getChatId() == ackInfo.getChatId()) {
                 if (ackInfo.getEvent() == AVChatEventType.CALLEE_ACK_BUSY) {
                     hangUpByOther(AVChatExitCode.PEER_BUSY);
-                    Toast.makeText(AVChatActivity.this,"对方正忙",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AVChatActivity.this, "对方正忙", Toast.LENGTH_SHORT).show();
                 } else if (ackInfo.getEvent() == AVChatEventType.CALLEE_ACK_REJECT) {
                     hangUpByOther(AVChatExitCode.REJECT);
                 } else if (ackInfo.getEvent() == AVChatEventType.CALLEE_ACK_AGREE) {
@@ -774,7 +765,12 @@ public class AVChatActivity extends UI implements AVChatVideoUI.TouchZoneCallbac
             FloatVideoWindowService.MyBinder binder = (FloatVideoWindowService.MyBinder) service;
             binder.getService();
 
-            binder.setTime(avChatVideoUI.getTime());
+            if (state == AVChatType.AUDIO.getValue()) {
+                binder.setTime(avChatAudioUI.getTime());
+            } else {
+                binder.setTime(avChatVideoUI.getTime());
+            }
+
         }
 
         @Override
@@ -782,4 +778,9 @@ public class AVChatActivity extends UI implements AVChatVideoUI.TouchZoneCallbac
         }
     };
 
+
+    @Override
+    public void sxClick() {
+        startVideoService();
+    }
 }

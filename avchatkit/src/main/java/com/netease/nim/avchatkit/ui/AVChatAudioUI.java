@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import com.netease.nim.avchatkit.constant.CallStateEnum;
 import com.netease.nim.avchatkit.controll.AVChatController;
 import com.netease.nim.avchatkit.module.AVChatControllerCallback;
 import com.netease.nim.avchatkit.module.AVSwitchListener;
+import com.netease.nim.avchatkit.module.SxClickListener;
 import com.netease.nimlib.sdk.avchat.AVChatCallback;
 import com.netease.nimlib.sdk.avchat.AVChatManager;
 import com.netease.nimlib.sdk.avchat.constant.AVChatControlCommand;
@@ -67,6 +69,8 @@ public class AVChatAudioUI implements View.OnClickListener, ToggleListener {
     private View recordTip;
     private View recordWarning;
 
+    private ImageView sx;//缩小
+
     // state
     private boolean init = false;
     private boolean isInSwitch = false;
@@ -79,13 +83,17 @@ public class AVChatAudioUI implements View.OnClickListener, ToggleListener {
     private AVSwitchListener avSwitchListener;
     private CallStateEnum callingState;
 
+    private SxClickListener sxClickListener;
+
     public AVChatAudioUI(Context context, View root, String displayName,
-                         AVChatController avChatController, AVSwitchListener avSwitchListener) {
+                         AVChatController avChatController, AVSwitchListener avSwitchListener,
+                         SxClickListener sxClickListener) {
         this.context = context;
         this.rootView = root;
         this.displayName = displayName;
         this.avChatController = avChatController;
         this.avSwitchListener = avSwitchListener;
+        this.sxClickListener = sxClickListener;
     }
 
     private void findViews() {
@@ -126,6 +134,15 @@ public class AVChatAudioUI implements View.OnClickListener, ToggleListener {
         recordWarning = rootView.findViewById(R.id.avchat_record_warning);
 
         init = true;
+
+        sx = rootView.findViewById(R.id.sx);
+
+        sx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sxClickListener.sxClick();
+            }
+        });
     }
 
     public void onDestroy() {
@@ -286,6 +303,10 @@ public class AVChatAudioUI implements View.OnClickListener, ToggleListener {
             time.setBase(avChatController.getTimeBase());
             time.start();
         }
+    }
+
+    public long getTime(){
+        return time.getBase();
     }
 
     // 隐藏界面文案
