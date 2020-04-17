@@ -135,6 +135,7 @@ public class TeamFloatVideoWindowService extends Service {
                 Intent localIntent = new Intent();
                 localIntent.setClass(TeamFloatVideoWindowService.this, TeamAVChatActivity.class);
                 localIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(localIntent);
 
 

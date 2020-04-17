@@ -882,7 +882,7 @@ public class MessageListPanelEx {
             // 4 delete
             longClickItemDelete(selectedItem, alertDialog);
             // 5 trans
-            longClickItemVoidToText(selectedItem, alertDialog, msgType);
+//            longClickItemVoidToText(selectedItem, alertDialog, msgType);
 
             if (!NimUIKitImpl.getMsgForwardFilter().shouldIgnore(selectedItem) && !recordOnly) {
                 // 6 forward to person

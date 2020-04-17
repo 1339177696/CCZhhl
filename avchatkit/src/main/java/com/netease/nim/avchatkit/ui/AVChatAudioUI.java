@@ -288,6 +288,10 @@ public class AVChatAudioUI implements View.OnClickListener, ToggleListener {
         }
     }
 
+    public long getTime(){
+        return time.getBase();
+    }
+
     // 隐藏界面文案
     private void hideNotify() {
         notifyTV.setVisibility(View.GONE);

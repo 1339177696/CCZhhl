@@ -161,4 +161,15 @@
         </RelativeLayout>
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/sx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sx"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="80dp"
+        android:visibility="gone"
+        />
 </RelativeLayout>
