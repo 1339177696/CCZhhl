@@ -30,6 +30,7 @@ import com.netease.nim.avchatkit.constant.AVChatExitCode;
 import com.netease.nim.avchatkit.controll.AVChatController;
 import com.netease.nim.avchatkit.module.AVChatControllerCallback;
 import com.netease.nim.avchatkit.module.AVSwitchListener;
+import com.netease.nim.avchatkit.module.SxClickListener;
 import com.netease.nimlib.sdk.avchat.AVChatManager;
 import com.netease.nimlib.sdk.avchat.constant.AVChatType;
 import com.netease.nimlib.sdk.avchat.constant.AVChatVideoScalingType;
@@ -136,6 +137,9 @@ public class AVChatVideoUI implements View.OnClickListener, ToggleListener {
     private AVSwitchListener avSwitchListener;
     private boolean isReleasedVideo = false;
 
+    private ImageView sx;//缩小
+    private SxClickListener sxClickListener;
+
     // touch zone
     public interface TouchZoneCallback {
         void onTouch();
@@ -143,7 +147,7 @@ public class AVChatVideoUI implements View.OnClickListener, ToggleListener {
 
     public AVChatVideoUI(Context context, View root, AVChatData avChatData, String displayName,
                          AVChatController avChatController, TouchZoneCallback touchZoneCallback,
-                         AVSwitchListener avSwitchListener) {
+                         AVSwitchListener avSwitchListener,SxClickListener sxClickListener) {
         this.context = context;
         this.root = root;
         this.avChatData = avChatData;
@@ -151,6 +155,7 @@ public class AVChatVideoUI implements View.OnClickListener, ToggleListener {
         this.avChatController = avChatController;
         this.touchZoneCallback = touchZoneCallback;
         this.avSwitchListener = avSwitchListener;
+        this.sxClickListener = sxClickListener;
         this.smallRender = new AVChatSurfaceViewRenderer(context);
         this.largeRender = new AVChatSurfaceViewRenderer(context);
     }
@@ -331,6 +336,15 @@ public class AVChatVideoUI implements View.OnClickListener, ToggleListener {
 
         permissionRoot = videoRoot.findViewById(R.id.avchat_video_permission_control);
         videoInit = true;
+
+        sx = videoRoot.findViewById(R.id.sx);
+
+        sx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sxClickListener.sxClick();
+            }
+        });
     }
 
     public void onResume() {

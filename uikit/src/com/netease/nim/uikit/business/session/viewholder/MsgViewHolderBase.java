@@ -285,11 +285,15 @@ public abstract class MsgViewHolderBase extends RecyclerViewHolder<BaseMultiItem
             shou.setVisibility(View.GONE);
 
         } else {
-            shou.setVisibility(View.VISIBLE);
-            //   show.loadBuddyAvatar(message);
-            Log.d("那麽",message.getFromNick()+"aa");
-            shou1.setText(message.getFromNick().substring(message.getFromNick().length()-2,message.getFromNick().length()));
+            try {
+                shou.setVisibility(View.VISIBLE);
+                //   show.loadBuddyAvatar(message);
+                Log.d("那麽",message.getFromNick()+"aa");
+                shou1.setText(message.getFromNick().substring(message.getFromNick().length()-2,message.getFromNick().length()));
 //            show.setImageResource(R.drawable.nim_avatar_default);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
 
     }
