@@ -478,6 +478,8 @@
         <activity android:name=".map.activity.SearchActivity" android:configChanges="screenSize|keyboardHidden|orientation"></activity>
 <!--        地图-->
         <activity android:name=".work.activity.attendance.MapActivity" android:configChanges="screenSize|keyboardHidden|orientation"></activity>
+<!--        考勤统计-->
+        <activity android:name=".work.activity.attendancestatistics.AttendancestatisticsActivity" android:configChanges="screenSize|keyboardHidden|orientation"></activity>
     </application>
 
 </manifest>
