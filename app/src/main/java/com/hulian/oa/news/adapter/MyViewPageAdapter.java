@@ -22,8 +22,8 @@ public class MyViewPageAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return fragmentList.size();
     }
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return titleList.get(position);
-    }
+//    @Override
+//    public CharSequence getPageTitle(int position) {
+//        return titleList.get(position);
+//    }
 }

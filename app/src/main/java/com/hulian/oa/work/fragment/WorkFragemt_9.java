@@ -25,6 +25,7 @@ import com.hulian.oa.work.activity.SecondTaskCoopActivity;
 import com.hulian.oa.work.activity.WorkReportActivity;
 import com.hulian.oa.work.activity.attendance.ClockActivity;
 import com.hulian.oa.work.activity.meeting.SelDepartmentActivity_meet_video;
+import com.hulian.oa.work.activity.video.VideoConferenceActivity;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.netease.nim.avchatkit.AVChatKit;
 import com.netease.nim.avchatkit.TeamAVChatProfile;
@@ -103,7 +104,8 @@ public class WorkFragemt_9 extends Fragment {
         switch (view.getId()) {
             //视频会议
             case R.id.bt_shipin:
-                startActivityForResult(new Intent(getActivity(), SelDepartmentActivity_meet_video.class), 0);
+                startActivity(new Intent(getActivity(), VideoConferenceActivity.class));
+//                startActivityForResult(new Intent(getActivity(), SelDepartmentActivity_meet_video.class), 0);
                 break;
                 //语音会议
             case R.id.bt_yuyin:
