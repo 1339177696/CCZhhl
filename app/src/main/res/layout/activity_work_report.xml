@@ -67,13 +67,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@mipmap/bg_img"
-            android:paddingLeft="@dimen/dp_40"
-            android:paddingRight="@dimen/dp_40">
+            >
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/my_tablayout"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_40"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 app:tabBackground="@android:color/transparent"
                 app:tabIndicatorColor="@color/colorwhite"

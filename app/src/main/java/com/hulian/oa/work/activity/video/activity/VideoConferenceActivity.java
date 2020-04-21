@@ -1,4 +1,4 @@
-package com.hulian.oa.work.activity.video;
+package com.hulian.oa.work.activity.video.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,15 +15,19 @@ import android.widget.TextView;
 
 import com.hulian.oa.R;
 import com.hulian.oa.activity.BaseActivity;
+import com.hulian.oa.listener.ListSizeListener;
 import com.hulian.oa.news.adapter.MyViewPageAdapter;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.work.activity.ScreenReportActivity;
 import com.hulian.oa.work.activity.WorkReportActivity;
+import com.hulian.oa.work.activity.video.fragment.MeetingListInMyFragment;
+import com.hulian.oa.work.activity.video.fragment.MeetingListOngoingFragment;
 import com.hulian.oa.work.fragment.ReadReportFragment;
 import com.hulian.oa.work.fragment.WriteReportFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,7 +37,7 @@ import butterknife.OnClick;
  * Created by 陈泽宇 on 2020/4/20
  * Describe:视频会议
  */
-public class VideoConferenceActivity extends BaseActivity {
+public class VideoConferenceActivity extends BaseActivity  {
 
 
     @BindView(R.id.my_tablayout)
@@ -43,9 +47,9 @@ public class VideoConferenceActivity extends BaseActivity {
     private Context mContext;
 
     private ArrayList<String> titleDatas = new ArrayList<>();
-    private ArrayList<Fragment> fragmentList = new ArrayList<Fragment>();
-    private ArrayList<Integer> imgList = new ArrayList<Integer>();
-    private 
+    private ArrayList<Fragment> fragmentList = new ArrayList<>();
+    private ArrayList<Integer> imgList = new ArrayList<>();
+    private List<TextView> numberList = new ArrayList<>();
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -56,10 +60,10 @@ public class VideoConferenceActivity extends BaseActivity {
         setContentView(R.layout.activity_work_report);
         ButterKnife.bind(this);
         mContext = this;
-        titleDatas.add("写汇报");
-        titleDatas.add("看汇报");
-        fragmentList.add(new WriteReportFragment());
-        fragmentList.add(new ReadReportFragment());
+        titleDatas.add("我参与会议");
+        titleDatas.add("进行中会议");
+        fragmentList.add(new MeetingListInMyFragment());
+        fragmentList.add(new MeetingListOngoingFragment());
 
         imgList.add(R.drawable.vc_pic_1);
         imgList.add(R.drawable.vc_pic_2);
@@ -77,6 +81,8 @@ public class VideoConferenceActivity extends BaseActivity {
             TextView title = myTablayout.getTabAt(i).getCustomView().findViewById(R.id.tv_title);
             ImageView imageView = myTablayout.getTabAt(i).getCustomView().findViewById(R.id.iv_pic);
             TextView number = myTablayout.getTabAt(i).getCustomView().findViewById(R.id.number);
+            //存储后方便赋值
+            numberList.add(number);
             title.setText(titleDatas.get(i));
             //标题左边选中和未选中的图片效果
             imageView.setBackground(ContextCompat.getDrawable(this, imgList.get(i)));
@@ -121,5 +127,9 @@ public class VideoConferenceActivity extends BaseActivity {
                 finish();
                 break;
         }
+    }
+
+    public void setListSize(int size, int position) {
+        numberList.get(position).setText(size + "");
     }
 }

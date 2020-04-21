@@ -1,6 +1,5 @@
-package com.hulian.oa.work.fragment;
+package com.hulian.oa.work.activity.video.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -22,8 +21,9 @@ import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
+import com.hulian.oa.work.activity.video.activity.VideoConferenceActivity;
 import com.hulian.oa.work.adapter.WriteReportAdapter;
-import com.hulian.oa.work.activity.ReadReportActivity;
+import com.hulian.oa.work.fragment.ReadReportFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,10 +37,10 @@ import butterknife.Unbinder;
 import de.greenrobot.event.EventBus;
 
 /**
- * Created by 陈泽宇 on 2020/3/10.
- * Describe: 汇报列表
+ * Created by 陈泽宇 on 2020/4/20
+ * Describe:视频会议列表 (进行中的)
  */
-public class ReadReportFragment extends Fragment implements  BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
+public class MeetingListOngoingFragment extends Fragment implements  BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
     @BindView(R.id.listview)
     RecyclerView mRecyclerView;
     @BindView(R.id.swipe_refresh_layout)
@@ -49,6 +49,10 @@ public class ReadReportFragment extends Fragment implements  BaseQuickAdapter.Re
     Unbinder unbinder;
     private WriteReportAdapter mAdapter;
     private List<Report> mData = new ArrayList<>();
+
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view;
@@ -70,14 +74,13 @@ public class ReadReportFragment extends Fragment implements  BaseQuickAdapter.Re
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(getActivity(), ReadReportActivity.class);
-                intent.putExtra("report", mData.get(position));
-                startActivity(intent);
+
             }
         });
         getData();
 
     }
+
 
 
     @Override
@@ -125,6 +128,7 @@ public class ReadReportFragment extends Fragment implements  BaseQuickAdapter.Re
                         mAdapter.loadMoreComplete();
                     }
                     mAdapter.notifyDataSetChanged();
+                    ((VideoConferenceActivity)getActivity()).setListSize(mData.size(),1);
 
 
                 } catch (JSONException e) {
