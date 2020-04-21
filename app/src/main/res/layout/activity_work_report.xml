@@ -7,30 +7,20 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/ll_top"
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:background="@drawable/baoxiao_bg"
-        android:orientation="vertical"></LinearLayout>
-
-
-
-
-    <LinearLayout
+        android:background="@mipmap/bg_img"
         android:id="@+id/work_leave_list_liner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ll_top"
+        android:layout_height="@dimen/dp_170"
         android:orientation="vertical">
 
 
 
 
         <RelativeLayout
+            android:layout_marginTop="@dimen/dp_25"
             android:id="@+id/iv_back"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_53"
-            android:background="@drawable/baoxiao_bg"
             android:gravity="center_vertical">
 
             <ImageView
@@ -66,7 +56,8 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@mipmap/bg_img"
+            android:paddingLeft="@dimen/dp_40"
+            android:paddingRight="@dimen/dp_40">
             >
 
             <android.support.design.widget.TabLayout
@@ -97,80 +88,12 @@
         android:background="@drawable/background_frame_solid_1"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp"
-        >
+        android:layout_marginRight="10dp">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/my_viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
-        <!--<LinearLayout-->
-
-
-        <!--android:layout_gravity="bottom|right"-->
-
-
-        <!--android:layout_marginRight="16dp"-->
-
-
-        <!--android:layout_marginBottom="14dp"-->
-
-
-        <!--android:gravity="center"-->
-
-
-        <!--android:background="@drawable/liner_yuan_qgl8"-->
-
-
-        <!--android:orientation="vertical"-->
-
-
-        <!--android:id="@+id/tv_apply"-->
-
-
-        <!--android:layout_width="@dimen/dp_50"-->
-
-
-        <!--android:layout_height="@dimen/dp_50">-->
-
-
-        <!--<ImageView-->
-
-
-        <!--android:src="@mipmap/shenqing_qgl"-->
-
-
-        <!--android:layout_width="wrap_content"-->
-
-
-        <!--android:layout_height="wrap_content" />-->
-
-
-        <!--<TextView-->
-
-
-        <!--android:layout_marginTop="@dimen/dp_2"-->
-
-
-        <!--android:text="申请"-->
-
-
-        <!--android:textColor="#ffffffff"-->
-
-
-        <!--android:textSize="8sp"-->
-
-
-        <!--android:layout_width="wrap_content"-->
-
-
-        <!--android:layout_height="wrap_content" />-->
-
-
-        <!--</LinearLayout>-->
-
-
     </FrameLayout>
 
 </RelativeLayout>

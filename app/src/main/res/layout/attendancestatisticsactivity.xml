@@ -1,6 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EBEBEB"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:background="@mipmap/bg_img"
+        android:id="@+id/work_leave_list_liner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_170"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_marginTop="@dimen/dp_25"
+            android:id="@+id/iv_back"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_53"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="@dimen/dp_15"
+                android:layout_height="@dimen/dp_15"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:background="@mipmap/ic_left_white" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="考勤统计"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/dp_18" />
+
+        </RelativeLayout>
+
+        <FrameLayout
+            android:visibility="gone"
+            android:id="@+id/attendan_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp_40"
+            android:paddingRight="@dimen/dp_40">
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/my_tablayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_gravity="center_horizontal"
+                app:tabBackground="@android:color/transparent"
+                app:tabIndicatorColor="@color/colorwhite"
+                app:tabIndicatorFullWidth="false"
+                app:tabMaxWidth="0dp"
+                app:tabMode="fixed"
+                app:tabRippleColor="@android:color/transparent"
+                app:tabSelectedTextColor="@color/colorwhite"
+                app:tabTextAppearance="@style/TabLayoutTextSize"
+                app:tabTextColor="#A0C2F3" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+<!--    使用view先占位-->
+    <View
+        android:id="@+id/view_zw"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"/>
+    <FrameLayout
+        android:layout_below="@+id/view_zw"
+        android:id="@+id/viewpager_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_85"
+        android:background="@drawable/background_frame_solid_1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/my_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
+
+
+</RelativeLayout>

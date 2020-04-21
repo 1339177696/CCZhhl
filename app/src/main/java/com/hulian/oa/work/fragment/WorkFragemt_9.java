@@ -8,14 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.hulian.oa.BuildConfig;
 import com.hulian.oa.DemoCache;
 import com.hulian.oa.R;
 import com.hulian.oa.bean.People;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.TimeUtils;
 import com.hulian.oa.utils.ToastHelper;
-import com.hulian.oa.work.activity.SecondExpenseActivity;
 import com.hulian.oa.work.activity.SecondInstructActivity;
 import com.hulian.oa.work.activity.SecondLeaveActivity;
 import com.hulian.oa.work.activity.SecondMailActivity;
@@ -24,6 +22,8 @@ import com.hulian.oa.work.activity.SecondNoticeActivity;
 import com.hulian.oa.work.activity.SecondTaskCoopActivity;
 import com.hulian.oa.work.activity.WorkReportActivity;
 import com.hulian.oa.work.activity.attendance.ClockActivity;
+import com.hulian.oa.work.activity.attendancestatistics.AnaestheticsActivity;
+import com.hulian.oa.work.activity.meeting.SelDepartmentActivity_meet_video;
 import com.hulian.oa.work.activity.video.activity.VideoConferenceActivity;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.netease.nim.avchatkit.AVChatKit;
@@ -98,7 +98,7 @@ public class WorkFragemt_9 extends Fragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.bt_shipin,R.id.bt_yuyin,R.id.bt_mail,R.id.bt_coop,R.id.bt_meeting,R.id.bt_notice,R.id.bt_time, R.id.bt_instruct ,R.id.bt_leave, R.id.bt_baoxiao,R.id.bt_Work_report})
+    @OnClick({R.id.bt_shipin,R.id.bt_yuyin,R.id.bt_mail,R.id.bt_coop,R.id.bt_meeting,R.id.bt_notice,R.id.bt_time, R.id.bt_instruct ,R.id.bt_leave, R.id.bt_baoxiao,R.id.bt_Work_report,R.id.bt_Work_statistical})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             //视频会议
@@ -142,15 +142,19 @@ public class WorkFragemt_9 extends Fragment {
                 break;
                 //报销
             case R.id.bt_baoxiao:
-                startActivity(new Intent(getActivity(),SecondExpenseActivity.class));
+//                startActivity(new Intent(getActivity(),SecondExpenseActivity.class));
+                ToastHelper.showToast(getActivity(), "功能暂未开放");
                 break;
             case R.id.bt_expense:
-
                 ToastHelper.showToast(getActivity(), "功能暂未开放");
                 break;
             //工作汇报
             case R.id.bt_Work_report:
                 startActivity(new Intent(getActivity(), WorkReportActivity.class));
+                break;
+                //考勤统计
+            case R.id.bt_Work_statistical:
+                startActivity(new Intent(getActivity(), AnaestheticsActivity.class));
                 break;
         }
     }
