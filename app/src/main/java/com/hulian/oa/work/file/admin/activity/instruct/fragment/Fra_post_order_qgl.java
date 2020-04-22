@@ -26,6 +26,8 @@ import com.hulian.oa.views.fabVIew.OnFabClickListener;
 import com.hulian.oa.views.fabVIew.SuspensionFab_qgl;
 import com.hulian.oa.work.file.admin.activity.PostOrderActivity;
 import com.hulian.oa.work.file.admin.activity.SecondInstructActivity;
+import com.hulian.oa.work.file.admin.activity.WorkReportActivity;
+import com.hulian.oa.work.file.admin.activity.attendance.ClockActivity;
 import com.hulian.oa.work.file.admin.activity.leave.LeaveApplyforActivity;
 import com.hulian.oa.work.file.admin.activity.mail.MailWriteActivity;
 import com.hulian.oa.work.file.admin.activity.meeting.MeetingSponsorActivity;
@@ -55,11 +57,18 @@ public class Fra_post_order_qgl extends Fragment {
         View view = inflater.inflate(R.layout.fra_order_post_qgl, container, false);
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
-        if (SPUtils.get(getActivity(), "isLead", "").equals("0")) {
-            llOrder.setVisibility(View.VISIBLE);
-        } else {
-            llOrder.setVisibility(View.GONE);
-        }
+//        if (SPUtils.get(getActivity(), "isLead", "").equals("0")) {
+////            llOrder.setVisibility(View.VISIBLE);
+//            llOrder.setVisibility(View.GONE);
+//        } else {
+//            llOrder.setVisibility(View.GONE);
+//        }
+//        if (SPUtils.get(getActivity(), "roleKey", "").toString().contains("boss")) {
+//            llOrder.setVisibility(View.GONE);
+//        }
+//        else {
+//            llOrder.setVisibility(View.VISIBLE);
+//        }
 
         fabTop = (SuspensionFab_qgl) view.findViewById(R.id.fab_top);
 //构建展开按钮属性
@@ -92,8 +101,27 @@ public class Fra_post_order_qgl extends Fragment {
                 .setTag(2)
                 .build();
 
+        FabAttributes clock = new FabAttributes.Builder()
+                .setBackgroundTint(Color.parseColor("#00B5B9"))
+                .setSrc(getResources().getDrawable(R.mipmap.daiban_huiyi_icon))
+                .setFabSize(FloatingActionButton.SIZE_NORMAL)
+                .setPressedTranslationZ(10)
+                .setTag(5)
+                .build();
+
+        FabAttributes report = new FabAttributes.Builder()
+                .setBackgroundTint(Color.parseColor("#00B5B9"))
+                .setSrc(getResources().getDrawable(R.mipmap.daiban_huiyi_icon))
+                .setFabSize(FloatingActionButton.SIZE_NORMAL)
+                .setPressedTranslationZ(10)
+                .setTag(6)
+                .build();
 //添加菜单
-        fabTop.addFab(qingjia,renwu,email,collection);
+        if (SPUtils.get(getActivity(), "roleKey", "").toString().contains("boss")) {//boss没有写日报权限
+            fabTop.addFab(qingjia,renwu,email,collection,clock);
+        }else {
+            fabTop.addFab(qingjia,renwu,email,collection,clock,report);
+        }
         //    fabTop.setAnimationManager(new FabAlphaAnimate(fabTop));
 //设置菜单点击事件
         fabTop.setFabClickListener(new OnFabClickListener() {
@@ -114,11 +142,18 @@ public class Fra_post_order_qgl extends Fragment {
 //                    EventBus.getDefault().post("任务协同");
                     startActivity(new Intent(getActivity(), TaskLauncherActivity.class));
 
-                } else {
+                } else if (Integer.parseInt(tag + "") == 4) {
                     fabTop.closeAnimate();
 //                    EventBus.getDefault().post("请假审批");
                     startActivity(new Intent(getActivity(), LeaveApplyforActivity.class));
-
+                }
+                else if (Integer.parseInt(tag + "") == 5) {
+                    fabTop.closeAnimate();
+                    startActivity(new Intent(getActivity(), ClockActivity.class));
+                }
+                else {
+                    fabTop.closeAnimate();
+                    startActivity(new Intent(getActivity(), WorkReportActivity.class));
                 }
             }
         });

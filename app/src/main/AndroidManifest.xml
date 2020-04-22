@@ -3,6 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.hulian.oa">
 
+    <!-- 地图SDK（包含其搜索功能）需要的基础权限 -->
+    <!-- 允许程序打开网络套接字 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- 允许程序设置内置sd卡的写权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!-- 允许程序获取网络状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!-- 允许程序访问WiFi网络信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <!-- 允许程序读写手机状态和身份 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!-- 用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!-- 用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <!-- 用于申请调用A-GPS模块 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <!-- 用于申请获取蓝牙信息进行室内定位 -->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -51,6 +74,13 @@
         android:networkSecurityConfig="@xml/network_config"
         android:theme="@style/AppTheme"
         tools:replace="label,allowBackup">
+        <!--        高德地图-->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="ab90db96c88060e4cd23d37899d9a580"/>
+
+        <!-- 高德地图定位 -->
+        <service android:name="com.amap.api.location.APSService"/>
         <!--qgl-->
         <service
             android:name=".socket.JWebSocketClientService"
@@ -142,41 +172,41 @@
         <activity
             android:name=".message.session.AddFriendActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" /> <!-- 已读回执 -->
         <activity
             android:name=".team.activity.SendAckMsgActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".address.activity.SystemMessageActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".address.activity.TeamListActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
             android:name=".message.session.UserProfileActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" /> <!-- 消息历史搜索 -->
         <activity
             android:name=".message.session.search.SearchMessageActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/global_search_bg"
             android:windowSoftInputMode="adjustPan|stateUnspecified" />
         <activity
             android:name=".message.session.search.DisplayMessageActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize" /> <!-- 全局搜索 -->
         <activity
@@ -187,12 +217,12 @@
         <activity
             android:name="message.session.search.GlobalSearchDetailActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="message.session.search.GlobalSearchDetailActivity2"
             android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar" /> <!-- 云信ending -->
         <activity android:name=".work.file.admin.activity.SecondFileActicity"
             android:configChanges="screenSize|keyboardHidden|orientation" />
@@ -385,6 +415,39 @@
           <activity android:name=".xcpsactivity.XCDetelisActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             ></activity>
+<!--        打卡-->
+        <activity android:name=".work.file.admin.activity.attendance.ClockActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity android:name=".work.file.admin.activity.attendance.CalendarActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+
+        <activity android:name=".work.file.admin.activity.attendance.AttendrulesActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity android:name=".work.file.admin.activity.attendance.MapActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity android:name=".gaode.SearchActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity android:name=".work.file.admin.activity.attendance.AttendrulesmodifyActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity android:name=".work.file.admin.activity.ReadReportActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity android:name=".work.file.admin.activity.WorkReportActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity android:name=".work.file.admin.activity.RadWorkReportActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity android:name=".work.file.admin.activity.WriteReportActivity"
+                    android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity android:name=".work.file.admin.activity.ScreenReportActivity"
+                    android:configChanges="screenSize|keyboardHidden|orientation"/>
+
+        <activity android:name=".work.file.admin.activity.ReportSelDepartmentActivity"
+                    android:configChanges="screenSize|keyboardHidden|orientation"/>
+
+    <activity android:name=".work.file.admin.activity.ScreenReportListActivity"
+                    android:configChanges="screenSize|keyboardHidden|orientation"/>
+
+
+
 
 
     </application>

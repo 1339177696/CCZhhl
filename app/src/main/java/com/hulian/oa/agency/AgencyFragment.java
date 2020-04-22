@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ import com.hulian.oa.bean.Fab;
 import com.hulian.oa.bean.Fab2;
 import com.hulian.oa.qglactivity.qglbean.StringBean1;
 import com.hulian.oa.qglactivity.qglbean.StringBean2;
+import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.work.file.admin.activity.expense.ExpenseExamineActivity;
 
 import butterknife.BindView;
@@ -39,8 +41,8 @@ public class AgencyFragment extends Fragment {
     Unbinder unbinder;
 //    @BindView(R.id.tv_mengban)
 //    TextView tvMengban;
-    @BindView(R.id.iv_mine)
-    ImageView iv_mine;
+    @BindView(R.id.iv_image)
+FrameLayout iv_image;
     @BindView(R.id.zx_qgl_img1)
     ImageView zxQglImg1;
     @BindView(R.id.zx_qgl_txt1)
@@ -69,6 +71,9 @@ public class AgencyFragment extends Fragment {
     private L_HascomFragment l_hascomFragment;
     private PingShenFragment l_pingshenFragment;
     private FragmentManager fManager;
+
+    @BindView(R.id.tv_type)
+    TextView tv_type;
 
     public AgencyFragment() {
         // Required empty public constructor
@@ -109,6 +114,8 @@ public class AgencyFragment extends Fragment {
         lrQglBtn3.performClick();//模拟一次点击，既进去后选择第一项
 //        lrQglBtn1.performClick();//模拟一次点击，既进去后选择第一项
 //        init();
+        tv_type.setText(SPUtils.get(getActivity(), "nickname", "").toString().substring(SPUtils.get(getActivity(), "nickname", "").toString().length()-2,SPUtils.get(getActivity(), "nickname", "").toString().length()));
+
         return view;
     }
 
@@ -197,7 +204,7 @@ public class AgencyFragment extends Fragment {
 //        EventBus.getDefault().post(fab2);
 //    }
 
-    @OnClick(R.id.iv_mine)
+    @OnClick(R.id.iv_image)
     public void ononViewClicked() {
         EventBus.getDefault().post(new MainActivity());
 

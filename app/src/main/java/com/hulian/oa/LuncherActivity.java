@@ -175,6 +175,7 @@ public class LuncherActivity extends BaseActivity {
                 SPUtils.put(mContext,"deptname",user.getDept().getDeptName());
                 SPUtils.put(mContext,"email",user.getEmail());
                 SPUtils.put(mContext, "password", token1);
+                SPUtils.put(mContext, "roleKey", user.getRolesStr());
                 initNotificationConfig();
                 Intent intent=new Intent(LuncherActivity.this,MainActivity.class);
                 startActivity(intent);

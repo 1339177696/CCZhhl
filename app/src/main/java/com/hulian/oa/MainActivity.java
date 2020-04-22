@@ -39,6 +39,10 @@ import com.hulian.oa.team.TeamCreateHelper;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.work.WorkFragment;
+import com.hulian.oa.work.file.admin.activity.RadWorkReportActivity;
+import com.hulian.oa.work.file.admin.activity.ReadReportActivity;
+import com.hulian.oa.work.file.admin.activity.attendance.CalendarActivity;
+import com.hulian.oa.work.file.admin.activity.attendance.ClockActivity;
 import com.hulian.oa.work.file.admin.activity.mail.pad.MailFragment;
 import com.luck.picture.lib.rxbus2.Subscribe;
 import com.netease.nim.uikit.business.contact.selector.activity.ContactSelectActivity;
@@ -127,10 +131,17 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     Button main2_outlogin;
     @BindView(R.id.menu_drawer)
     DrawerLayout menu_drawer;
+    @BindView(R.id.tv_type)
+    TextView tv_type;
+    @BindView(R.id.iv_image)
+    FrameLayout iv_image;
 
     //我的邮件
     @BindView(R.id.main2_rela_my_mail)
     RelativeLayout main2_rela_my_mail;
+ //我的打卡
+    @BindView(R.id.main2_rela_my_clock)
+    RelativeLayout main2_rela_my_clock;
 
     private FragmentTransaction transaction;
     private AddressFragment addressFragment;
@@ -168,6 +179,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         requestBasicPermission();
 
         // 就收值
+        tv_type.setText(SPUtils.get(mContext, "nickname", "").toString().substring(SPUtils.get(mContext, "nickname", "").toString().length()-2,SPUtils.get(mContext, "nickname", "").toString().length()));
         main2_tv_name.setText(SPUtils.get(mContext, "nickname", "").toString());
         main2_tv_dept.setText(SPUtils.get(mContext, "deptname", "").toString());
         main2_tv_phone.setText(SPUtils.get(mContext, "username", "").toString());
@@ -430,7 +442,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     }
 
     // 点击事件
-    @OnClick({R.id.main2_rela_program, R.id.main2_rela_collection,R.id.main2_outlogin,R.id.main2_rela_my_mail,R.id.main2_rela_my_meeting,R.id.main2_rela_my_task,R.id.main2_rela_my_leave})
+    @OnClick({R.id.main2_rela_program, R.id.main2_rela_collection,R.id.main2_outlogin,R.id.main2_rela_my_mail,R.id.main2_rela_my_meeting,R.id.main2_rela_my_task,R.id.main2_rela_my_leave,R.id.main2_rela_my_clock,R.id.main2_rela_my_report})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.main2_rela_program:
@@ -455,6 +467,12 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 break;
             case R.id.main2_rela_my_leave:
                 startActivity(new Intent(mContext, L_leaveActivity.class));
+                break;
+            case R.id.main2_rela_my_clock:
+                startActivity(new Intent(mContext, CalendarActivity.class));
+                break;
+            case R.id.main2_rela_my_report:
+                startActivity(new Intent(mContext, RadWorkReportActivity.class));
                 break;
         }
     }
