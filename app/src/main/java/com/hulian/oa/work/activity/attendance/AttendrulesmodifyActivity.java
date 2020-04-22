@@ -45,7 +45,6 @@ import de.greenrobot.event.EventBus;
  * Created by qgl on 2020/3/23 11:05.
  */
 public class AttendrulesmodifyActivity extends BaseActivity {
-
     @BindView(R.id.iv_back)
     RelativeLayout ivBack;
     @BindView(R.id.dk_tv_time)
@@ -69,8 +68,6 @@ public class AttendrulesmodifyActivity extends BaseActivity {
     private String id = "";
     private String jingwei = "";
     private String adress = "";
-
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -214,10 +211,7 @@ public class AttendrulesmodifyActivity extends BaseActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
             }
-
             @Override
             public void onFailure(OkHttpException failuer) {
                 Toast.makeText(AttendrulesmodifyActivity.this, "服务器请求失败", Toast.LENGTH_LONG).show();

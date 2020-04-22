@@ -4,8 +4,6 @@ package com.hulian.oa.bean;
  * Created by czy on 2019/8/1 17:12.
  */
 public class Instruct {
-
-
     private String searchValue;
     private String createBy;
     private String createTime;

@@ -22,7 +22,6 @@ import butterknife.ButterKnife;
 
 public class Messageadapter extends BaseAdapter {
     private String changeStr = "";
-    //
     private List<String> mlistdatas;
     private LayoutInflater mInflater;
     private Context mcontext;

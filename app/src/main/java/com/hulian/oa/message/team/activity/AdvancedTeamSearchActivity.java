@@ -24,9 +24,7 @@ import com.netease.nimlib.sdk.team.model.Team;
  * Created by hzxuwen on 2015/3/20.
  */
 public class AdvancedTeamSearchActivity extends UI {
-
     private ClearableEditTextWithIcon searchEditText;
-
     public static final void start(Context context) {
         Intent intent = new Intent();
         intent.setClass(context, AdvancedTeamSearchActivity.class);
@@ -38,11 +36,9 @@ public class AdvancedTeamSearchActivity extends UI {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nim_advanced_team_search_activity);
         setTitle(R.string.search_join_team);
-
         ToolBarOptions options = new NimToolBarOptions();
         options.titleId = R.string.search_join_team;
         setToolBar(R.id.toolbar, options);
-
         findViews();
         initActionbar();
     }

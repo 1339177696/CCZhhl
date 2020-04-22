@@ -15,11 +15,9 @@ import java.util.List;
  * Describe:
  */
 public class WriteReportAdapter extends BaseQuickAdapter<Report, BaseViewHolder> {
-
     public WriteReportAdapter(List<Report> mData){
         super(R.layout.item_read_report,mData);
     }
-
     @Override
     protected void convert(BaseViewHolder holder, Report report) {
         switch (report.getType()){

@@ -114,9 +114,6 @@ public class HascomAdapter extends RecyclerView.Adapter <HascomAdapter.ViewHolde
                         intent.putExtra("ID",dataList.get(position).getId());
                         break;
                     case "1":
-//                        intent.setClass(mContext, DocumentLotusInfoActivity.class);
-//                        intent.putExtra("source","0");
-//                        intent.putExtra("offId",dataList.get(position).getId());
                         break;
                     case "2":
                         intent.setClass(mContext, InstructDetailsActivity.class);

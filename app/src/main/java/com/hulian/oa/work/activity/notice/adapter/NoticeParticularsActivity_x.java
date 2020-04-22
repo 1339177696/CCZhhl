@@ -37,11 +37,9 @@ public class NoticeParticularsActivity_x extends BaseActivity {
     TextView tvContent;
     @BindView(R.id.tv_author)
     TextView tvAuthor;
-
     String noticeId;
     @BindView(R.id.bt_store)
     ImageView btStore;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +70,6 @@ public class NoticeParticularsActivity_x extends BaseActivity {
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

@@ -41,31 +41,24 @@ import de.greenrobot.event.EventBus;
  * Describe: 汇报列表
  */
 public class ReadReportFragment extends Fragment implements  BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
-
-
     @BindView(R.id.listview)
     RecyclerView mRecyclerView;
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
     private int mCount = 1;
     Unbinder unbinder;
-
     private WriteReportAdapter mAdapter;
     private List<Report> mData = new ArrayList<>();
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view;
         view = inflater.inflate(R.layout.fragment_read_report, container, false);
         unbinder = ButterKnife.bind(this, view);
-        EventBus.getDefault().register(this);
         initList();
         return view;
-
     }
 
     private void initList() {
-
         swipeRefreshLayout.setOnRefreshListener(this);
         mAdapter = new WriteReportAdapter(mData);
         mAdapter.openLoadAnimation();
@@ -74,7 +67,6 @@ public class ReadReportFragment extends Fragment implements  BaseQuickAdapter.Re
         mAdapter.setEmptyView(LayoutInflater.from(getContext()).inflate(R.layout.list_empty, null));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
-
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -88,16 +80,10 @@ public class ReadReportFragment extends Fragment implements  BaseQuickAdapter.Re
     }
 
 
-    // 刷新
-    public void onEventMainThread(ReadReportFragment event) {
-        onRefresh();
-    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -148,7 +134,6 @@ public class ReadReportFragment extends Fragment implements  BaseQuickAdapter.Re
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -159,6 +144,7 @@ public class ReadReportFragment extends Fragment implements  BaseQuickAdapter.Re
 
     @Override
     public void onLoadMoreRequested() {
+
         mCount = mCount + 1;
         getData();
     }

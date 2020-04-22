@@ -93,7 +93,6 @@ public class SearchAddressAdapter extends RecyclerView.Adapter<SearchAddressAdap
 
 
         holder.mTvMessage.setText(poiItem.getProvinceName() + poiItem.getCityName() + poiItem.getAdName() + poiItem.getSnippet());
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,7 +114,6 @@ public class SearchAddressAdapter extends RecyclerView.Adapter<SearchAddressAdap
         TextView mTvTitle;
         TextView mTvMessage;
         CheckBox mCheckBox;
-
 
         public MyHolder(View itemView) {
             super(itemView);

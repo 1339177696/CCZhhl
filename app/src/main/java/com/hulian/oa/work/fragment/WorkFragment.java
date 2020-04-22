@@ -58,8 +58,6 @@ public class WorkFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-//            gid = getArguments().getString("gid");
-//            idno=getArguments().getString("idno");
         }
     }
 
@@ -70,7 +68,6 @@ public class WorkFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
         tv_type.setText(SPUtils.get(getActivity(), "nickname", "").toString().substring(SPUtils.get(getActivity(), "nickname", "").toString().length()-2,SPUtils.get(getActivity(), "nickname", "").toString().length()));
-
         workFragemt_9=new WorkFragemt_9();
         init9fragment();
         return view;
@@ -83,7 +80,6 @@ public class WorkFragment extends Fragment {
     }
     private void initListfragment() {
         FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-//        fragmentTransaction.replace(R.id.fg_content,workFragemt_list);
         fragmentTransaction.commit();
     }
 
@@ -108,13 +104,5 @@ public class WorkFragment extends Fragment {
                 break;
         }
     }
-
-
-//
-//    @OnClick(R.id.iv_news)
-//    public void onViewClicked() {
-//        startActivity(new Intent(getActivity(), NewsActivityInfo.class));
-//    }
-
 
 }

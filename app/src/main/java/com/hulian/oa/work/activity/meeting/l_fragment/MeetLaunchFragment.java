@@ -131,10 +131,8 @@ public class MeetLaunchFragment extends Fragment implements PullLoadMoreRecycler
                             }.getType());
                     if (mCount == 1 && memberList.size() == 0) {
                         emptyBg.setVisibility(View.VISIBLE);
-//                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
                     } else {
                         emptyBg.setVisibility(View.GONE);
-//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     }
                     mRecyclerViewAdapter.addAllData(memberList);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();

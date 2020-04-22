@@ -12,11 +12,9 @@ import com.netease.nim.uikit.api.model.contact.ContactEventListener;
  * Created by huangjun on 2015/9/11.
  */
 public class ContactHelper {
-
     public static void init() {
         setContactEventListener();
     }
-
     private static void setContactEventListener() {
         NimUIKit.setContactEventListener(new ContactEventListener() {
             @Override

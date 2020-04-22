@@ -42,13 +42,9 @@ import com.netease.nimlib.sdk.search.model.MsgIndexRecord;
  * Created by huangjun on 2015/4/13.
  */
 public class GlobalSearchActivity extends UI implements OnItemClickListener {
-
     private ContactDataAdapter adapter;
-
     private ListView lvContacts;
-
     private SearchView searchView;
-
     public static final void start(Context context) {
         Intent intent = new Intent();
         intent.setClass(context, GlobalSearchActivity.class);
@@ -81,12 +77,10 @@ public class GlobalSearchActivity extends UI implements OnItemClickListener {
         });
 
         searchView = (SearchView) MenuItemCompat.getActionView(item);
-
         SearchView.SearchAutoComplete textView = (SearchView.SearchAutoComplete)searchView.findViewById(R.id.search_src_text);
         textView.setTextColor(getResources().getColor(R.color.white));
         textView.setHintTextColor(getResources().getColor(R.color.white));
         searchView.setOnQueryTextListener(new OnQueryTextListener() {
-
             @Override
             public boolean onQueryTextSubmit(String query) {
                 showKeyboard(false);
@@ -111,23 +105,18 @@ public class GlobalSearchActivity extends UI implements OnItemClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.global_search_result);
-
         ToolBarOptions options = new NimToolBarOptions();
         setToolBar(R.id.toolbar, options);
-
         lvContacts = (ListView) findViewById(R.id.searchResultList);
         lvContacts.setVisibility(View.GONE);
         SearchGroupStrategy searchGroupStrategy = new SearchGroupStrategy();
         IContactDataProvider dataProvider = new ContactDataProvider(ItemTypes.FRIEND, ItemTypes.TEAM, ItemTypes.MSG);
-
         adapter = new ContactDataAdapter(this, searchGroupStrategy, dataProvider);
         adapter.addViewHolder(ItemTypes.LABEL, LabelHolder.class);
         adapter.addViewHolder(ItemTypes.FRIEND, ContactHolder.class);
         adapter.addViewHolder(ItemTypes.TEAM, ContactHolder.class);
         adapter.addViewHolder(ItemTypes.MSG, MsgHolder.class);
-
         lvContacts.setAdapter(adapter);
         lvContacts.setOnItemClickListener(this);
         lvContacts.setOnScrollListener(new OnScrollListener() {

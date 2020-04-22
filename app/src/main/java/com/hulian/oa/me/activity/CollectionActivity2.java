@@ -46,22 +46,16 @@ public class CollectionActivity2 extends BaseActivity implements PullLoadMoreRec
     private int mCount = 1;
     private RecyclerView mRecyclerView;
     L_CollectionNewsAdapter mRecyclerViewAdapter;
-
-    private ArrayList<String> list_path;
-    private ArrayList<String> list_title;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_me_collection);
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
-
         initList();
     }
 
     private void initList() {
-
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
@@ -81,9 +75,7 @@ public class CollectionActivity2 extends BaseActivity implements PullLoadMoreRec
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
-
         mRecyclerViewAdapter = new L_CollectionNewsAdapter(this);
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
         getData();
@@ -99,8 +91,6 @@ public class CollectionActivity2 extends BaseActivity implements PullLoadMoreRec
     @Override
     public void onLoadMore() {
         Log.e("wxl", "onLoadMore");
-//        mCount = mCount + 1;
-//        getData();
     }
 
     private void setRefresh() {
@@ -144,7 +134,6 @@ public class CollectionActivity2 extends BaseActivity implements PullLoadMoreRec
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(CollectionActivity2.this, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

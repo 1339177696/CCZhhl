@@ -63,9 +63,6 @@ import de.greenrobot.event.EventBus;
  */
 public class LeaveApplyforActivity extends BaseActivity {
 
-    // 审批人
-//    @BindView(R.id.titleView)
-//    ImageView titleView;
     @BindView(R.id.iv)
     ImageView iv;
     @BindView(R.id.fl_content)
@@ -73,7 +70,6 @@ public class LeaveApplyforActivity extends BaseActivity {
     @BindView(R.id.tv_opreator)
     TextView tvOpreator;
     String tvOpreatorCode = "";
-
     //抄送人
     @BindView(R.id.title11)
     ImageView title11;
@@ -85,7 +81,6 @@ public class LeaveApplyforActivity extends BaseActivity {
     TextView copier;
     String copierCode = "";
     String approverName = "";
-
     private List<People> selectList2 = new ArrayList<>();
     private List<People_x> selectList2_x = new ArrayList<>();
     private OptionsPickerView reasonPicker;//时间;
@@ -110,7 +105,6 @@ public class LeaveApplyforActivity extends BaseActivity {
     TextView tvTimeEnd;
     @BindView(R.id.tv_day)
     EditText tvDay;
-
     @BindView(R.id.rl_duration)
     RelativeLayout rlDuration;
     @BindView(R.id.et_content)
@@ -127,8 +121,6 @@ public class LeaveApplyforActivity extends BaseActivity {
     TextView tvCopyPersonTitle;
     @BindView(R.id.ci_copy_pic)
     RelativeLayout ciCopyPic;
-    //    @BindView(R.id.tv_copy_person)
-//    TextView tvCopyPerson;
     @BindView(R.id.tv_back_instruct)
     TextView tvBackInstruct;
     private GridImageAdapter adapter;
@@ -146,9 +138,7 @@ public class LeaveApplyforActivity extends BaseActivity {
     private String jiaojiecode = "";
     @BindView(R.id.fl_content2)
     FrameLayout fl_content2;
-
     private List<Userqglbean>userqgllist = new ArrayList<>();
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -188,7 +178,6 @@ public class LeaveApplyforActivity extends BaseActivity {
         adapter.setList(selectList);
         adapter.setSelectMax(maxSelectNum);
         recyclerView.setAdapter(adapter);
-
         adapter.setOnItemClickListener(new GridImageAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position, View v) {
@@ -244,9 +233,6 @@ public class LeaveApplyforActivity extends BaseActivity {
                     for (LocalMedia media : selectList) {
                         Log.i("图片-----》", new File(media.getPath()).length() + "");
                         Log.i("压缩图片-----》", new File(media.getCompressPath()).length() + "");
-
-//                        Bitmap bitmap = BitmapFactory.decodeFile(media.getCompressPath());
-//                        iv_document.setImageBitmap(bitmap);
                         adapter.setList(selectList);
                         adapter.notifyDataSetChanged();
                     }
@@ -273,7 +259,6 @@ public class LeaveApplyforActivity extends BaseActivity {
             }
         }
     }
-//    R.id.iv, R.id.iv1,R.id.ci_approved_pic, R.id.ci_copy_pic,
     @OnClick({R.id.iv_back, R.id.rl_leave_reason, R.id.rl_start_time, R.id.rl_end_time, R.id.tv_back_instruct, R.id.ci_jiaojie_pic,R.id.iv2})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -293,14 +278,6 @@ public class LeaveApplyforActivity extends BaseActivity {
                 }
                 selectTime(tvTimeEnd);
                 break;
-//            case R.id.ci_approved_pic:
-//                Intent intent = new Intent(LeaveApplyforActivity.this, SelDepartmentActivity_meet_zb_single.class);
-//                startActivityForResult(intent, 110);
-//                break;
-//            case R.id.ci_copy_pic:
-//                Intent intent1 = new Intent(LeaveApplyforActivity.this, SelDepartmentActivity_meet_zb_single.class);
-//                startActivityForResult(intent1, 120);
-//                break;
                 // 交接人
             case R.id.ci_jiaojie_pic:
                 Intent intent = new Intent(LeaveApplyforActivity.this, PersonqglActivity.class);
@@ -309,15 +286,6 @@ public class LeaveApplyforActivity extends BaseActivity {
             case R.id.tv_back_instruct:
                 postData();
                 break;
-
-//            case R.id.iv:
-//                fl_content.setVisibility(View.GONE);
-//                tvOpreatorCode = "";
-//                break;
-//            case R.id.iv1:
-//                fl_content1.setVisibility(View.GONE);
-//                copierCode = "";
-//                break;
             case R.id.iv2:
                 fl_content2.setVisibility(View.GONE);
                 jiaojiecode = "";
@@ -407,11 +375,6 @@ public class LeaveApplyforActivity extends BaseActivity {
                     textView.setText(getTime(date));
                 }
                 if (!"请选择开始时间".equals(tvTimeStart.getText().toString().trim()) && !"请选择结束时间".equals(tvTimeEnd.getText().toString().trim())) {
-//                   if(!TimeUtils.compareTwoTime2(tvTimeStart.getText().toString().trim(),tvTimeEnd.getText().toString().trim())){
-//                       ToastHelper.showToast(mContext,"请选择不小于开始时间的结束时间");
-//                       tvDay.setText("");
-//                   }
-//                   else
                     if (TimeUtils.differentDaysByMillisecond(tvTimeStart.getText().toString().trim(), tvTimeEnd.getText().toString().trim()) < 0) {
                         ToastHelper.showToast(mContext, "请选择不小于开始时间的结束时间");
                         tvDay.setText("");

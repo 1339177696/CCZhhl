@@ -17,8 +17,6 @@ import java.util.List;
 public class L_FileBoxAdapter extends RecyclerView.Adapter <L_FileBoxAdapter.ViewHolder>{
     private Context mContext;
     private List<String> dataList = new ArrayList<>();
-
-
     public void addAllData(List<String> dataList) {
         this.dataList.addAll(dataList);
         notifyDataSetChanged();
@@ -45,7 +43,6 @@ public class L_FileBoxAdapter extends RecyclerView.Adapter <L_FileBoxAdapter.Vie
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.l_item_filebox, parent, false);
-
         return new ViewHolder(v);
     }
 

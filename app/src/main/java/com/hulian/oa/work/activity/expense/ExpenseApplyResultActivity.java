@@ -60,9 +60,6 @@ public class ExpenseApplyResultActivity extends BaseActivity {
     @BindView(R.id.tv_expense_money)
     TextView tv_expense_money;
     //报销时间
-//    @BindView(R.id.tv_expense_time)
-//    TextView tv_expense_time;
-    //报销时间
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     //查看他的历史记录
@@ -145,7 +142,6 @@ public class ExpenseApplyResultActivity extends BaseActivity {
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

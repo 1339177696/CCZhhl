@@ -26,7 +26,6 @@ import java.util.ArrayList;
  */
 
 public class SessionTeamCustomization extends SessionCustomization {
-
     public interface SessionTeamCustomListener extends Serializable {
         void initPopupWindow(Context context, View view, String sessionId, SessionTypeEnum sessionTypeEnum);
 
@@ -63,7 +62,6 @@ public class SessionTeamCustomization extends SessionCustomization {
         infoButton.iconId = R.drawable.nim_ic_message_actionbar_team;
         optionsButtons.add(cloudMsgButton);
         optionsButtons.add(infoButton);
-
         buttons = optionsButtons;
         withSticker = true;
     }

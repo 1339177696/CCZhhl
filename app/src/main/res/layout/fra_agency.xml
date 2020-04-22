@@ -3,181 +3,124 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
         android:layout_height="match_parent">
-    <LinearLayout
-        android:orientation="vertical"
-        android:background="@mipmap/agency_bannerbg"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_170">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:background="@mipmap/agency_bannerbg"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_170">
+                <TextView
+                    android:layout_marginTop="@dimen/dp_25"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_45"
+                    android:text="待办工作"
+                    android:textColor="#ffffff"
+                    android:textSize="@dimen/sp_17" />
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:id="@+id/lr_qgl_btn1"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_width="@dimen/dp_120"
+                        android:layout_height="@dimen/dp_30"
+                        android:background="@drawable/zx_xinwen_bg">
+                        <ImageView
+                            android:id="@+id/zx_qgl_img1"
+                            android:src="@mipmap/done"
+                            android:layout_width="@dimen/dp_15"
+                            android:layout_height="@dimen/dp_16" />
+                        <TextView
+                            android:id="@+id/zx_qgl_txt1"
+                            android:layout_marginLeft="@dimen/dp_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="待办事项"
+                            android:textColor="#FFFFFF"
+                            android:textSize="@dimen/sp_13"
+                            />
+
+                        <TextView
+                            android:id="@+id/daiban_number"
+                            android:textColor="#FFFFFF"
+                            android:layout_marginLeft="@dimen/dp_6"
+                            android:textSize="@dimen/sp_14"
+                            android:text=""
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lr_qgl_btn2"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="30dp"
+                        android:layout_width="@dimen/dp_120"
+                        android:layout_height="@dimen/dp_30"
+                        android:background="@drawable/zx_xinwen_bg">
+
+                        <ImageView
+                            android:id="@+id/zx_qgl_img2"
+                            android:src="@mipmap/done_default"
+                            android:layout_width="@dimen/dp_15"
+                            android:layout_height="@dimen/dp_16" />
+                        <TextView
+                            android:id="@+id/zx_qgl_txt2"
+                            android:layout_marginLeft="@dimen/dp_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="已办事项"
+                            android:textColor="#ccccd5"
+                            android:textSize="@dimen/sp_13"
+                            />
+                        <TextView
+                            android:id="@+id/yiban_number"
+                            android:textColor="#ccccd5"
+                            android:layout_marginLeft="@dimen/dp_6"
+                            android:textSize="@dimen/sp_14"
+                            android:text=""
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <FrameLayout
+                    android:id="@+id/qgl_fragment_daiban"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dp_130"/>
+        </RelativeLayout>
         <TextView
-            android:layout_marginTop="@dimen/dp_25"
-            android:gravity="center"
+            android:id="@+id/tv_mengban"
+            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_45"
-            android:text="待办工作"
-            android:textColor="#ffffff"
-            android:textSize="@dimen/sp_17" />
-        <!--<LinearLayout-->
-            <!--android:layout_marginTop="@dimen/dp_20"-->
-            <!--android:paddingLeft="@dimen/dp_55"-->
-            <!--android:paddingRight="@dimen/dp_55"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:orientation="vertical"-->
-            <!--android:layout_height="match_parent">-->
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_height="wrap_content">-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tv_agencyCount"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:textSize="31sp"-->
-                    <!--android:text=""-->
-                    <!--android:gravity="center"-->
-                    <!--android:textColor="#ffffff"-->
-                    <!--android:layout_height="wrap_content"/>-->
-                <!--<TextView-->
-                    <!--android:background="@color/white"-->
-                    <!--android:layout_width="@dimen/dp_0_5"-->
-                    <!--android:layout_gravity="center_vertical"-->
-                    <!--android:layout_height="25dp" />-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tv_finishCount"-->
-                    <!--android:gravity="center"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:textSize="31sp"-->
-                    <!--android:text=""-->
-                    <!--android:textColor="#ffffff"-->
-                    <!--android:layout_height="wrap_content" />-->
-            <!--</LinearLayout>-->
-            <!--<android.support.design.widget.TabLayout-->
-                <!--android:layout_marginTop="-15dp"-->
-                <!--android:layout_gravity="center_horizontal"-->
-                <!--android:id="@+id/my_tablayout"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="@dimen/dp_40"-->
-                <!--app:tabIndicatorFullWidth="false"-->
-                <!--app:tabMaxWidth="0dp"-->
-                <!--app:tabGravity="fill"-->
-                <!--app:tabBackground="@color/transparent"-->
-                <!--app:tabRippleColor="@color/transparent"-->
-                <!--app:tabMode="fixed"-->
-                <!--app:tabIndicatorColor="#ffffff"-->
-                <!--app:tabTextAppearance="@style/TabLayoutTextSize2"-->
-                <!--app:tabSelectedTextColor="@color/white"-->
-                <!--app:tabTextColor="@color/color_xian" />-->
-        <!--</LinearLayout>-->
-
-        <LinearLayout
-            android:layout_marginTop="@dimen/dp_20"
-            android:layout_width="match_parent"
+            android:background="#99ffffff"
+            android:layout_height="match_parent" />
+        <fragment
+            android:layout_marginRight="@dimen/dp_20"
+            android:layout_gravity="right|bottom"
+            android:id="@+id/fg_order"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-
-            <LinearLayout
-                android:id="@+id/lr_qgl_btn1"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_width="@dimen/dp_120"
-                android:layout_height="@dimen/dp_30"
-                android:background="@drawable/zx_xinwen_bg">
-                <ImageView
-                    android:id="@+id/zx_qgl_img1"
-                    android:src="@mipmap/done"
-                    android:layout_width="@dimen/dp_15"
-                    android:layout_height="@dimen/dp_16" />
-                <TextView
-                    android:id="@+id/zx_qgl_txt1"
-                    android:layout_marginLeft="@dimen/dp_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="待办事项"
-                    android:textColor="#FFFFFF"
-                    android:textSize="@dimen/sp_13"
-                    />
-
-                <TextView
-                    android:id="@+id/daiban_number"
-                    android:textColor="#FFFFFF"
-                    android:layout_marginLeft="@dimen/dp_6"
-                    android:textSize="@dimen/sp_14"
-                    android:text=""
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lr_qgl_btn2"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_marginLeft="30dp"
-                android:layout_width="@dimen/dp_120"
-                android:layout_height="@dimen/dp_30"
-                android:background="@drawable/zx_xinwen_bg">
-
-                <ImageView
-                    android:id="@+id/zx_qgl_img2"
-                    android:src="@mipmap/done_default"
-                    android:layout_width="@dimen/dp_15"
-                    android:layout_height="@dimen/dp_16" />
-                <TextView
-                    android:id="@+id/zx_qgl_txt2"
-                    android:layout_marginLeft="@dimen/dp_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="已办事项"
-                    android:textColor="#ccccd5"
-                    android:textSize="@dimen/sp_13"
-                    />
-                <TextView
-                    android:id="@+id/yiban_number"
-                    android:textColor="#ccccd5"
-                    android:layout_marginLeft="@dimen/dp_6"
-                    android:textSize="@dimen/sp_14"
-                    android:text=""
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </LinearLayout>
-        <!--<android.support.v4.view.ViewPager-->
-            <!--android:layout_marginTop="-25dp"-->
-            <!--android:id="@+id/my_viewpager"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent" />-->
-        <FrameLayout
-            android:id="@+id/qgl_fragment_daiban"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/dp_130"/>
-    </RelativeLayout>
-    <TextView
-        android:id="@+id/tv_mengban"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:background="#99ffffff"
-        android:layout_height="match_parent" />
-    <fragment
-        android:layout_marginRight="@dimen/dp_20"
-        android:layout_gravity="right|bottom"
-        android:id="@+id/fg_order"
-        android:layout_marginBottom="@dimen/dp_20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:name="com.hulian.oa.work.activity.instruct.fragment.Fra_post_order_qgl2"
-        />
-</FrameLayout>
+            android:name="com.hulian.oa.work.activity.instruct.fragment.Fra_post_order_qgl2"
+            />
+    </FrameLayout>
 </LinearLayout>

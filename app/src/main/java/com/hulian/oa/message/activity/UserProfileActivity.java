@@ -64,14 +64,11 @@ import java.util.List;
  * Created by huangjun on 2015/8/11.
  */
 public class UserProfileActivity extends UI {
-
     private static final String TAG = UserProfileActivity.class.getSimpleName();
-
     private final boolean FLAG_ADD_FRIEND_DIRECTLY = true; // 是否直接加为好友开关，false为需要好友申请
     private final String KEY_BLACK_LIST = "black_list";
     private final String KEY_MSG_NOTICE = "msg_notice";
     private final String KEY_RECENT_STICKY = "recent_contacts_sticky";
-
     private String account;
 
     // 基本信息
@@ -142,7 +139,6 @@ public class UserProfileActivity extends UI {
     @Override
     protected void onResume() {
         super.onResume();
-
         updateUserInfo();
         updateToggleView();
     }
@@ -188,7 +184,6 @@ public class UserProfileActivity extends UI {
     };
 
     private void findViews() {
-//        headImageView = findView(R.id.user_head_image);
         tex = findView(R.id.tv_type);
         tv_email = findView(R.id.tv_email);
         nameText = findView(R.id.user_name);
@@ -221,12 +216,6 @@ public class UserProfileActivity extends UI {
         chatBtn.setOnClickListener(onClickListener);
         removeFriendBtn.setOnClickListener(onClickListener);
         begin_phone.setOnClickListener(onClickListener);
-//        aliasLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                UserProfileEditItemActivity.startActivity(UserProfileActivity.this, UserConstant.KEY_ALIAS, account);
-//            }
-//        });
         begin_message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -243,20 +232,6 @@ public class UserProfileActivity extends UI {
         smsManager.sendTextMessage("123456","adfada","",null,null);
     }
     private void initActionbar() {
-//        TextView toolbarView = findView(R.id.action_bar_right_clickable_textview);
-//        if (!TextUtils.equals(account, DemoCache.getAccount())) {
-//            toolbarView.setVisibility(View.GONE);
-//            return;
-//        } else {
-//            toolbarView.setVisibility(View.VISIBLE);
-//        }
-//        toolbarView.setText(R.string.edit);
-//        toolbarView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                UserProfileSettingActivity.start(UserProfileActivity.this, account);
-//            }
-//        });
     }
 
     private void setToggleBtn(SwitchButton btn, boolean isChecked) {
@@ -280,14 +255,10 @@ public class UserProfileActivity extends UI {
 
     private void updateUserInfoView() {
         accountText.setText("帐号：" + account);
-
-     //   headImageView.loadBuddyAvatar(account);
-//        headImageView.setImageResource(R.drawable.nim_avatar_default);
         if (TextUtils.equals(account, DemoCache.getAccount())) {
             nameText.setText(UserInfoHelper.getUserName(account));
         }
           userInfo = (NimUserInfo) NimUIKit.getUserInfoProvider().getUserInfo(account);
-
         begin_phone.setText(userInfo.getAccount()+"");
 
         if (userInfo == null) {
@@ -356,24 +327,19 @@ public class UserProfileActivity extends UI {
             boolean notice = NIMClient.getService(FriendService.class).isNeedMessageNotify(account);
 
             if (blackSwitch == null) {
-            //    blackSwitch = addToggleItemView(KEY_BLACK_LIST, R.string.black_list, black);
             } else {
                 setToggleBtn(blackSwitch, black);
             }
 
             if (noticeSwitch == null) {
-              //  noticeSwitch = addToggleItemView(KEY_MSG_NOTICE, R.string.msg_notice, notice);
             } else {
-             //   setToggleBtn(noticeSwitch, notice);
             }
 
             if (NIMClient.getService(FriendService.class).isMyFriend(account)) {
                 RecentContact recentContact = NIMClient.getService(MsgService.class).queryRecentContact(account, SessionTypeEnum.P2P);
                 boolean isSticky = recentContact != null && CommonUtil.isTagSet(recentContact, RecentContactsFragment.RECENT_TAG_STICKY);
                 if (stickySwitch == null) {
-              //      stickySwitch = addToggleItemView(KEY_RECENT_STICKY, R.string.recent_sticky, isSticky);
                 } else {
-               //     setToggleBtn(stickySwitch, isSticky);
                 }
             }
             updateUserOperatorView();

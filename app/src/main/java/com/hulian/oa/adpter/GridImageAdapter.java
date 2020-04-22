@@ -103,7 +103,6 @@ public class GridImageAdapter extends
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
         //少于8张，显示继续添加的图标
         if (getItemViewType(position) == TYPE_CAMERA) {
-      //      viewHolder.mImg.setImageResource(R.drawable.addimg);
             String url = "res://com.hulian.oa/" + R.drawable.addimg;
             Uri uri = Uri.parse(url);
             viewHolder.mImg.setImageURI(uri);
@@ -142,10 +141,6 @@ public class GridImageAdapter extends
                         .centerCrop()
                         .placeholder(R.color.color_f6)
                         .diskCacheStrategy(DiskCacheStrategy.ALL);
-//                Glide.with(viewHolder.itemView.getContext())
-//                        .load(path)
-//                        .apply(options)
-//                        .into(viewHolder.mImg);
             Uri uri=Uri.parse(path);
             viewHolder.mImg.setImageURI(Uri.parse("file://"+path));
             //itemView 的点击事件

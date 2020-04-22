@@ -23,9 +23,6 @@ import de.greenrobot.event.EventBus;
 public class L_TaskRemindActivity extends BaseActivity {
     @BindView(R.id.tv_save)
     TextView tv_save;
-    //不提醒
-//    @BindView(R.id.tv_noremind)
-//    RadioButton rb_noremind;
     //提前15分钟
     @BindView(R.id.tv_remind1)
     RadioButton rb_remind1;

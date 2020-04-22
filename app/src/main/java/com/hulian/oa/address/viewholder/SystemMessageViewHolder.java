@@ -68,7 +68,6 @@ public class SystemMessageViewHolder extends TViewHolder {
                 return true;
             }
         });
-       // headImageView.loadBuddyAvatar(message.getFromAccount());
         headImageView.setImageResource(R.drawable.nim_avatar_default);
         fromAccountText.setText(UserInfoHelper.getUserDisplayNameEx(message.getFromAccount(), "我"));
         contentText.setText(MessageHelper.getVerifyNotificationText(message));

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -57,7 +58,6 @@ public class UndoneTaskFragment extends Fragment implements PullLoadMoreRecycler
         View view = inflater.inflate(R.layout.l_fra_collection_notice, null);
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
-
         initList();
         return view;
     }
@@ -144,11 +144,9 @@ public class UndoneTaskFragment extends Fragment implements PullLoadMoreRecycler
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                     if (mCount == 1 && memberList.size() == 0) {
                         emptyBg.setVisibility(View.VISIBLE);
-//                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
                     }
                     else {
                         emptyBg.setVisibility(View.GONE);
-//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -157,8 +155,7 @@ public class UndoneTaskFragment extends Fragment implements PullLoadMoreRecycler
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
-                //     Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
+                     Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
     }

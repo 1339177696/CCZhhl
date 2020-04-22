@@ -57,15 +57,12 @@ public class L_DetailsCompletedTaskAdapter extends RecyclerView.Adapter <Recycle
     public static final int ITEMTWO = 2;
     private Context mContext;
     private List<Hufu_bean> dataList = new ArrayList<>();
-
     private List<LocalMedia> selectList = new ArrayList<>();
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private static final OkHttpClient client = new OkHttpClient();
     private LeaveResultAdapter adapter;
     private String path_x = "";
-
-
     public void addAllData(List<Hufu_bean> dataList,Hufu_bean bean) {
         this.dataList.add(bean);
         this.dataList.addAll(dataList);
@@ -80,13 +77,10 @@ public class L_DetailsCompletedTaskAdapter extends RecyclerView.Adapter <Recycle
         mContext = context;
     }
 
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View inflate = null;
         RecyclerView.ViewHolder viewHolder = null;
-
         //根据i返回不同布局
         switch (viewType) {
             case ITEMONE:
@@ -106,14 +100,9 @@ public class L_DetailsCompletedTaskAdapter extends RecyclerView.Adapter <Recycle
             if (holder instanceof ViewHolder_Top){
                 //设置数据 事件
                 ViewHolder_Top viewHolderTop = ((ViewHolder_Top) holder);
-//                viewHolderTop.tv_title.setText(dataList.get(position).getTitle());
                 viewHolderTop.tv_launch_person.setText(dataList.get(position).getCreateBy()+"发起");
-//                viewHolderTop.tv_deadline.setText(dataList.get(position).getEndTime()+"截止");
-//                viewHolderTop.tv_launch_time.setText(dataList.get(position).getStartTime());
                 viewHolderTop.tv_operator_person.setText(dataList.get(position).getExecutor().substring(0,dataList.get(position).getExecutor().length()-1));
                 viewHolderTop.tv_completed_count.setText(dataList.get(position).getSum()+"完成");
-                //viewHolderTop.tv_task_details.setText("    "+dataList.get(position).getDetails());
-//                viewHolderTop.tv_undone_top_completed.setVisibility(View.GONE);
                 //图片信息适配
                 String aa = dataList.get(position).getFiles();
                 if (aa!=null&&aa!=""){
@@ -129,7 +118,6 @@ public class L_DetailsCompletedTaskAdapter extends RecyclerView.Adapter <Recycle
                             adapter = new LeaveResultAdapter(mContext);
                             adapter.setList(selectList);
                             viewHolderTop.recyclerView.setAdapter(adapter);
-
                             //图片信息大图预览
                             adapter.setOnItemClickListener(new LeaveResultAdapter.OnItemClickListener() {
                                 @Override
@@ -152,13 +140,9 @@ public class L_DetailsCompletedTaskAdapter extends RecyclerView.Adapter <Recycle
             }else if (holder instanceof ViewHolder_List){
                 ViewHolder_List viewHolderList = ((ViewHolder_List) holder);
                 viewHolderList.tv_name.setText(dataList.get(position).getRespondent());
-
                 String b = dataList.get(position).getCreateTime();
                 String c = getDataaa(b);
                 viewHolderList.tv_reply_time.setText(c);
-//                String a = dataList.get(position).getCreateTime().substring(0,dataList.get(position).getCreateTime().length()-3);
-//                viewHolderList.tv_reply_time.setText(a);
-
                 if (dataList.get(position).getContent()!=null)
                 {
                     viewHolderList.tv_content.setVisibility(View.VISIBLE);
@@ -189,30 +173,19 @@ public class L_DetailsCompletedTaskAdapter extends RecyclerView.Adapter <Recycle
 
     }
     public static class ViewHolder_Top extends RecyclerView.ViewHolder {
-//        TextView tv_title;
-//        TextView tv_deadline;
         TextView tv_launch_person;
-//        TextView tv_launch_time;
         TextView tv_operator_person;
         TextView tv_completed_count;
         TextView tv_task_details;
-//        TextView tv_undone_top_completed;
         RecyclerView recyclerView;
 
         public ViewHolder_Top(View itemView)
         {
             super(itemView);
-//            tv_title = ((TextView) itemView.findViewById(R.id.tv_title_x));
-//            tv_deadline = ((TextView) itemView.findViewById(R.id.tv_deadline_x));
             tv_launch_person = ((TextView) itemView.findViewById(R.id.tv_launch_person_x));
-//            tv_launch_time = ((TextView) itemView.findViewById(R.id.tv_launch_time_x));
             tv_operator_person = ((TextView) itemView.findViewById(R.id.tv_operator_person_x));
             tv_completed_count = ((TextView) itemView.findViewById(R.id.tv_completed_count_x));
-//            tv_task_details = ((TextView) itemView.findViewById(R.id.tv_task_details_x));
-//            tv_undone_top_completed = ((TextView) itemView.findViewById(R.id.tv_undone_top_completed));
             recyclerView = ((RecyclerView) itemView.findViewById(R.id.recyclerView));
-
-
         }
     }
     public static class ViewHolder_List extends RecyclerView.ViewHolder {

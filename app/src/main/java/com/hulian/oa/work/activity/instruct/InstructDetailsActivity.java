@@ -22,7 +22,6 @@ import butterknife.OnClick;
 
 //指令详情
 public class InstructDetailsActivity extends BaseActivity {
-
     @BindView(R.id.tv_name2)
     TextView tv_name2;
     @BindView(R.id.tv_feedback_content)
@@ -49,7 +48,6 @@ public class InstructDetailsActivity extends BaseActivity {
     private void getData() {
         RequestParams params = new RequestParams();
         params.put("id", getIntent().getStringExtra("id"));
-
         HttpRequest.postInstructDetailsApi(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -57,28 +55,6 @@ public class InstructDetailsActivity extends BaseActivity {
                     JSONObject result = new JSONObject(responseObj.toString()).getJSONObject("data");
                     String imgUrl = result.getString("image");
                     Glide.with(InstructDetailsActivity.this).load(imgUrl).into(details_img);
-//                    if(result.getString("content")!=null&&!result.getString("content").equals(""))
-//                    createCoontent.setText(result.getString("content"));
-//                    create_time.setText(TimeUtils.getDateToString(result.getString("createTime")));
-//                    if (TextUtils.equals(result.getString("receive"), "1")) {
-//                        tv_state.setText("已接收");
-//                        tv_state.setTextColor(getResources().getColor(R.color.color_a_blue));
-//                    } else {
-//                        llBottom.setVisibility(View.GONE);
-//                        tv_state.setText("未接收");
-//                    }
-//                    if (TextUtils.equals(result.getString("state"), "1")) {
-//                        tv_state2.setText("已完成领导指令");
-//                        tv_state2.setTextColor(getResources().getColor(R.color.colorAccent));
-//                    } else {
-//                        tv_state2.setText("未完成领导指令");
-//                    }
-//                    if(result.getString("receiveTime")!=null&&!result.getString("receiveTime").equals("null"))
-//                    tv_time.setText(result.getString("receiveTime"));
-//                    if(result.getString("feedbackTime")!=null&&!result.getString("feedbackTime").equals("null"))
-//                    tv_time2.setText(result.getString("feedbackTime"));
-//                    tv_name.setText(result.getString("receiver"));
-//                    tv_name2.setText(result.getString("receiver"));
                     create_time.setText(TimeUtils.getDateToString(result.getString("createTime")));
                     createCoontent.setText(getIntent().getStringExtra("content"));
                     tv_name2.setText(result.getString("receiver"));

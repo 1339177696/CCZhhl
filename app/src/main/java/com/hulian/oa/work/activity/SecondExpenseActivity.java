@@ -131,12 +131,11 @@ public class SecondExpenseActivity extends BaseActivity {
                 startActivity(new Intent(mContext, ExpenseApplyForActivity.class));
 //                startActivity(new Intent(mContext, ExpenseDetailsActivity.class));
                 break;
-//            case R.id.iv_back:
-//                this.finish();
-//                break;
-            case R.id.tv_baoxiao://报销管理标题
-//                startActivity(new Intent(mContext, ExpenseApplyForActivity.class));
-                this.finish();
+            case R.id.iv_back:
+                finish();
+                break;
+            case R.id.tv_baoxiao:
+                startActivity(new Intent(mContext, ExpenseApplyForActivity.class));
                 break;
         }
     }

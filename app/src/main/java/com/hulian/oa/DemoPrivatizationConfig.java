@@ -13,7 +13,6 @@ import org.json.JSONObject;
  * 网易云信私有化配置项
  */
 public class DemoPrivatizationConfig {
-
     /// BASIC
     private static final String KEY_APP_KEY = "appkey";
     private static final String KEY_MODULE = "module";
@@ -41,19 +40,11 @@ public class DemoPrivatizationConfig {
     private static final String SHARE_NAME = "nim_demo_private_config";
     private static final String KEY_CONFIG_ENABLE = "private_config_enable";
     private static final String KEY_CONFIG_JSON = "private_config_json";
-
-
     private static final String KEY_CHAT_ROOM_LIST_URL = "chatroomDemoListUrl";
-
-
     private static final String BUCKET_NAME_PLACE_HOLDER = "{bucket}";
     private static final String OBJECT_PLACE_HOLDER = "{object}";
-
-
     private static final String CONFIG_URL = "config_private_url";
-
     private static String appKey;
-
     public static String getAppKey(Context context) {
         if (isPrivateDisable(context)) {
             return null;

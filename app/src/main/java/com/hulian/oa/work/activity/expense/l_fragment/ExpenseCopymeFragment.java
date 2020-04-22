@@ -150,7 +150,6 @@ public class ExpenseCopymeFragment extends Fragment implements PullLoadMoreRecyc
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

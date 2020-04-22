@@ -70,7 +70,6 @@ public class ExpenseHistoryActivity extends BaseActivity implements PullLoadMore
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new L_ExpenseHistoryAdapter(mContext);
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
@@ -121,7 +120,6 @@ public class ExpenseHistoryActivity extends BaseActivity implements PullLoadMore
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

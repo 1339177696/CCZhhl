@@ -89,8 +89,6 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.MyHolder
         TextView mTvTitle;
         TextView mTvMessage;
         CheckBox mCheckBox;
-
-
         public MyHolder(View itemView) {
             super(itemView);
             mTvTitle = (TextView) itemView.findViewById(R.id.tv_title);

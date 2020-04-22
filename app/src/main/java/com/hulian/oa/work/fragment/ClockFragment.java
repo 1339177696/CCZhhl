@@ -111,7 +111,6 @@ public class ClockFragment extends Fragment {
     TextView xbDkchidao;
     @BindView(R.id.xb_dk_adress)
     TextView xbDkadress;
-
     private int[] cDate = CalendarUtil.getCurrentDate();
     private Context mcontext;
     private boolean type;  // 上班，下班
@@ -177,7 +176,7 @@ public class ClockFragment extends Fragment {
         currentTime.setText("" + cDate[0] + "-" + cDate[1] + "-" + cDate[2] + "   星期" + getMway());
         //权限判断
         permissions();
-        // 规则制定查询
+        //规则制定查询
         postRule();
         initListener();
         return view;
@@ -325,6 +324,7 @@ public class ClockFragment extends Fragment {
         params.put("deptId", SPUtils.get(getActivity(), "deptId", "").toString());
         params.put("createTime", createTime);
         params.put("registerUpTime", sbTime.getText().toString());
+//        params.put("registerUpTime", "08:20");
         params.put("registerUpAddress", registerUpAddress);
         params.put("registerUpCoordinate", registerUpCoordinate);
         params.put("registerUpState", dk_time);
@@ -447,20 +447,15 @@ public class ClockFragment extends Fragment {
 //                        // 判断上班打卡是否在规定时间内
                         if (TimeUtils.compareTwoTime(gz_sb_time, fw_time) > 0) {
                             reOnBtn.setBackgroundResource(R.drawable.clock_rela_bg_no);
-                            //dk_time = "1";
                         } else {
                             reOnBtn.setBackgroundResource(R.drawable.clock_rela_bg_yes);
-                           // dk_time = "0";
                         }
                         // 判断下班打卡是否在规定时间外
                         if (TimeUtils.compareTwoTime(fw_time, gz_xb_time) > 0) {
                             reNoBtn.setBackgroundResource(R.drawable.clock_rela_bg_no);
-                           // xb_dk_time = "1";
                         } else {
                             reNoBtn.setBackgroundResource(R.drawable.clock_rela_bg_yes);
-                            //xb_dk_time = "0";
                         }
-
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
@@ -476,13 +471,9 @@ public class ClockFragment extends Fragment {
                             }
                         }).start();
                     }
-
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
             }
 
             @Override
@@ -505,7 +496,6 @@ public class ClockFragment extends Fragment {
             public void onSuccess(Object responseObj) {
                 loadDialog.dismiss();
                 //需要转化为实体对象
-                Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
                     if (result.optString("data") != "") {
@@ -541,7 +531,6 @@ public class ClockFragment extends Fragment {
                             if (result.getJSONObject("data").getString("registerDownState").equals("0")) {
                                 xbDkchidao.setVisibility(View.GONE);
                                 if (result.getJSONObject("data").getString("regisgerDownType").equals("0")) {
-//                                    xbDkwaiqin.setVisibility(View.VISIBLE);
                                     xbDkwaiqin.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
                                     xbDkwaiqin.setText("正常");
                                 } else {
@@ -561,7 +550,6 @@ public class ClockFragment extends Fragment {
                         }
 
                     } else {
-
                         // 未打卡
                         reOnBtn.setVisibility(View.VISIBLE);
                         sbRelabtn.setVisibility(View.GONE);
@@ -571,9 +559,7 @@ public class ClockFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
-
             @Override
             public void onFailure(OkHttpException failuer) {
                 loadDialog.dismiss();
@@ -810,8 +796,6 @@ public class ClockFragment extends Fragment {
         Log.i("获取当前室内定位的楼层", location.getFloor());
         Log.i("获取GPS的当前状态", location.getGpsAccuracyStatus() + "");
         Log.i("poi", location.getPoiName());
-//        convertToDouble(f_jingdu, 0);
-//        convertToDouble(f_weigdu, 0);
         // 模拟器存在，获取经纬度没有地址的情况
         if (TextUtils.equals(location.getAddress(), "")) {
             if (loadDialog.isShowing())

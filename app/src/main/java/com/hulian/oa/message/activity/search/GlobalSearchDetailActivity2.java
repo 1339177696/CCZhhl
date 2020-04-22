@@ -36,27 +36,16 @@ import java.util.List;
  * Created by huangjun on 2016/6/28.
  */
 public class GlobalSearchDetailActivity2 extends UI implements OnItemClickListener {
-
     private static final String EXTRA_SESSION_TYPE = "EXTRA_SESSION_TYPE";
-
     private static final String EXTRA_SESSION_ID = "EXTRA_SESSION_ID";
-
     private static final String EXTRA_QUERY = "EXTRA_QUERY";
-
     private static final String EXTRA_RESULT_COUNT = "EXTRA_RESULT_COUNT";
-
     private ContactDataAdapter adapter;
-
     private AutoRefreshListView lvContacts;
-
     private String sessionId;
-
     private SessionTypeEnum sessionType;
-
     private String query;
-
     private int resultCount;
-
     public static final void start(Context context, MsgIndexRecord record) {
         Intent intent = new Intent();
         intent.setClass(context, GlobalSearchDetailActivity2.class);
@@ -64,18 +53,14 @@ public class GlobalSearchDetailActivity2 extends UI implements OnItemClickListen
         intent.putExtra(EXTRA_SESSION_ID, record.getSessionId());
         intent.putExtra(EXTRA_QUERY, record.getQuery());
         intent.putExtra(EXTRA_RESULT_COUNT, record.getCount());
-
         context.startActivity(intent);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         parseIntent();
-
         setContentView(R.layout.global_search_detail);
-
         // title name
         ToolBarOptions options = new NimToolBarOptions();
         if (sessionType == SessionTypeEnum.P2P) {
@@ -84,16 +69,13 @@ public class GlobalSearchDetailActivity2 extends UI implements OnItemClickListen
             options.titleString = TeamHelper.getTeamName(sessionId);
         }
         setToolBar(R.id.toolbar, options);
-
         // textView tip
         String tip = String.format("共%d条与\"%s\"相关的聊天记录", resultCount, query);
         TextView tipTextView = findView(R.id.search_result_tip);
         tipTextView.setText(tip);
-
         // listView adapter
         lvContacts = findView(R.id.search_result_list);
         IContactDataProvider dataProvider = new ContactDataProviderSearch(new ArrayList<AbsContactItem>(), ItemTypes.MSG);
-
         adapter = new ContactDataAdapter(this, null, dataProvider) {
             @Override
             protected void onPostLoad(boolean empty, String query, boolean all) {
@@ -103,7 +85,6 @@ public class GlobalSearchDetailActivity2 extends UI implements OnItemClickListen
         };
         adapter.addViewHolder(ItemTypes.LABEL, LabelHolder.class);
         adapter.addViewHolder(ItemTypes.MSG, MsgHolder.class);
-
         lvContacts.setMode(AutoRefreshListView.Mode.END);
         lvContacts.setAdapter(adapter);
         lvContacts.setOnItemClickListener(this);
@@ -133,9 +114,7 @@ public class GlobalSearchDetailActivity2 extends UI implements OnItemClickListen
     }
 
     private List<AbsContactItem> dataList;
-
     private class ContactDataProviderSearch extends ContactDataProvider {
-
         public ContactDataProviderSearch(List<AbsContactItem> data, int... itemTypes) {
             super(itemTypes);
             dataList = data;

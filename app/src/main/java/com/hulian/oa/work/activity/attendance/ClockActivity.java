@@ -38,10 +38,8 @@ public class ClockActivity extends BaseActivity {
     ViewPager myViewpager;
     @BindView(R.id.tv_close)
     TextView tVclose;
-
     ArrayList<String> titleDatas = new ArrayList<>();
     ArrayList<Fragment> fragmentList = new ArrayList<Fragment>();
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,7 +55,6 @@ public class ClockActivity extends BaseActivity {
         else {
             tVclose.setVisibility(View.GONE);
         }
-
         titleDatas.add("考勤打卡");
         titleDatas.add("打卡日历");
         fragmentList.add(new ClockFragment());
@@ -71,7 +68,6 @@ public class ClockActivity extends BaseActivity {
         myTablayout.setSelectedTabIndicator(0);
         myViewpager.setAdapter(myViewPageAdapter);
         myTablayout.setupWithViewPager(myViewpager);
-
         myTablayout.getTabAt(0).setCustomView(R.layout.item_bx_tab_f);
         myTablayout.getTabAt(1).setCustomView(R.layout.item_bx_tab_s);
         TextView textView = myTablayout.getTabAt(0).getCustomView().findViewById(R.id.tv_title);
@@ -89,7 +85,6 @@ public class ClockActivity extends BaseActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 tab.getCustomView().findViewById(R.id.tv_title).setSelected(true);
                 myViewpager.setCurrentItem(tab.getPosition());
-
             }
 
             @Override

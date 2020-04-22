@@ -48,7 +48,6 @@ public class CopymeTaskFragment extends Fragment implements PullLoadMoreRecycler
     private ArrayList<String> list_path;
     private ArrayList<String> list_title;
     Unbinder unbinder;
-
     private String type = "2"; // 0发起的任务；1执行的任务；2抄送的任务
 
     @Nullable
@@ -57,7 +56,6 @@ public class CopymeTaskFragment extends Fragment implements PullLoadMoreRecycler
         View view = inflater.inflate(R.layout.l_fra_collection_notice, null);
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
-
         initList();
         return view;
     }
@@ -114,23 +112,6 @@ public class CopymeTaskFragment extends Fragment implements PullLoadMoreRecycler
         mRecyclerViewAdapter.clearData();
         mCount = 1;
     }
-//    private void getData() {
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                getActivity().runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        mRecyclerViewAdapter.addAllData(setList());
-//                        mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
-//                    }
-//                });
-//
-//            }
-//        }, 1000);
-//
-//    }
-
     private void getData() {
         RequestParams params = new RequestParams();
         params.put("type", type);
@@ -150,11 +131,9 @@ public class CopymeTaskFragment extends Fragment implements PullLoadMoreRecycler
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                     if (mCount == 1 && memberList.size() == 0) {
                         emptyBg.setVisibility(View.VISIBLE);
-//                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
                     }
                     else {
                         emptyBg.setVisibility(View.GONE);
-//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -163,7 +142,6 @@ public class CopymeTaskFragment extends Fragment implements PullLoadMoreRecycler
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

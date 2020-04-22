@@ -65,8 +65,6 @@ public class SubordActivity extends BaseActivity {
     TextView currentTime;
     @BindView(R.id.iv_back)
     RelativeLayout ivBack;
-
-
     @BindView(R.id.s_dk_time)
     TextView sDKtime;
     @BindView(R.id.x_dk_time)
@@ -95,10 +93,7 @@ public class SubordActivity extends BaseActivity {
     TextView xbDkchidao;
     private int[] cDate = CalendarUtil.getCurrentDate();
     private String createTime = "";
-
     HashMap<String, String> markData = new HashMap<>();
-
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -161,7 +156,6 @@ public class SubordActivity extends BaseActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
             @Override
             public void onFailure(OkHttpException failuer) {
@@ -310,7 +304,6 @@ public class SubordActivity extends BaseActivity {
                         sbDkwaiqin.setVisibility(View.GONE);
                         xbDkwaiqin.setVisibility(View.GONE);
                     }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

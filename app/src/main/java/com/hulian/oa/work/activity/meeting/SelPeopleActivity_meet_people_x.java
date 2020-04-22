@@ -37,7 +37,6 @@ public class SelPeopleActivity_meet_people_x extends BaseActivity {
     private String partId;
     private TextView tv_title;
     private Button bt_commit;
-//    private CheckBox mMainCkb,ckb_leader,ckb_worker;
     private MyPeopleAdapter_x mMyAdapter;
     //监听来源
     public boolean mIsFromItem = false;
@@ -59,9 +58,6 @@ public class SelPeopleActivity_meet_people_x extends BaseActivity {
      */
     private void initView() {
         listView = (ListView) findViewById(R.id.list_main);
-//        mMainCkb = (CheckBox) findViewById(R.id.ckb_main);
-//        ckb_worker=findViewById(R.id.ckb_worker);
-//        ckb_leader=findViewById(R.id.ckb_leader);
         bt_commit=findViewById(R.id.bt_commit);
         bt_commit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,8 +86,6 @@ public class SelPeopleActivity_meet_people_x extends BaseActivity {
                      memberList = gson.fromJson(result.getJSONArray("data").toString(),
                             new TypeToken<List<People>>() {
                             }.getType());
-//                    adapter = new PeopleAdapter(memberList, mContext);
-//                    listView.setAdapter(adapter);
                     initViewOper(memberList);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -99,7 +93,6 @@ public class SelPeopleActivity_meet_people_x extends BaseActivity {
             }
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -112,73 +105,10 @@ public class SelPeopleActivity_meet_people_x extends BaseActivity {
             @Override
             public void onCheckedChanged(boolean b) {
                 //根据不同的情况对maincheckbox做处理
-//                if (!b && !mMainCkb.isChecked()) {
-//                    return;
-//                } else if (!b && mMainCkb.isChecked()) {
-//                    mIsFromItem = true;
-//                    mMainCkb.setChecked(false);
-//                } else if (b) {
-//                    mIsFromItem = true;
-//                    mMainCkb.setChecked(true);
-//                }
             }
         });
         listView.setAdapter(mMyAdapter);
         //全选的点击监听
-//        mMainCkb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-//                //当监听来源为点击item改变maincbk状态时不在监听改变，防止死循环
-//                if (mIsFromItem) {
-//                    mIsFromItem = false;
-//                    Log.e("mainCheckBox", "此时我不可以触发");
-//                    return;
-//                }
-//                //改变数据
-//                for (People model : models) {
-//                    model.setIscheck(b);
-//                }
-//                //刷新listview
-//                mMyAdapter.notifyDataSetChanged();
-//            }
-//        });
-//        ckb_leader.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-//                //当监听来源为点击item改变maincbk状态时不在监听改变，防止死循环
-//                if (mIsFromItem) {
-//                    mIsFromItem = false;
-//                    Log.e("mainCheckBox", "此时我不可以触发");
-//                    return;
-//                }
-//                //改变数据
-//                for (People model : models) {
-//                    if(model.getIsLead().equals("0"))
-//                    model.setIscheck(b);
-//                }
-//                //刷新listview
-//                mMyAdapter.notifyDataSetChanged();
-//            }
-//        });
-
-//        ckb_worker.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-//                //当监听来源为点击item改变maincbk状态时不在监听改变，防止死循环
-//                if (mIsFromItem) {
-//                    mIsFromItem = false;
-//                    Log.e("mainCheckBox", "此时我不可以触发");
-//                    return;
-//                }
-//                //改变数据
-//                for (People model : models) {
-//                    if(model.getIsLead().equals("1"))
-//                        model.setIscheck(b);
-//                }
-//                //刷新listview
-//                mMyAdapter.notifyDataSetChanged();
-//            }
-//        });
     }
     //对item导致maincheckbox改变做监听
     public interface AllCheckListener {

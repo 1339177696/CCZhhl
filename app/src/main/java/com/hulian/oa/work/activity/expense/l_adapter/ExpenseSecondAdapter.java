@@ -112,10 +112,6 @@ public class ExpenseSecondAdapter extends
 
         //少于8张，显示继续添加的图标
         if (getItemViewType(position) == TYPE_CAMERA) {
-      //      viewHolder.mImg.setImageResource(R.drawable.addimg);
-//            String url = "res://com.hulian.oa/" + R.drawable.addimg;
-//            Uri uri = Uri.parse(url);
-//            viewHolder.mImg.setImageURI(uri);
             Drawable drawable = ContextCompat.getDrawable(context,R.drawable.addimg);
             viewHolder.mImg.setBackground(drawable);
             viewHolder.mImg.setOnClickListener(new View.OnClickListener() {
@@ -126,8 +122,6 @@ public class ExpenseSecondAdapter extends
             });
             viewHolder.ll_del.setVisibility(View.INVISIBLE);
         } else {
-//            viewHolder.ll_del.setTag(position);
-//            viewHolder.mImg.setTag(position);
             viewHolder.ll_del.setVisibility(View.VISIBLE);
             viewHolder.ll_del.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -154,8 +148,6 @@ public class ExpenseSecondAdapter extends
             }
 
             if (!TextUtils.isEmpty(path)){
-//                Uri uri=Uri.parse(path);
-//                viewHolder.mImg.setImageURI(Uri.parse("file://"+path));
                 RequestOptions options = new RequestOptions()
                         .centerCrop()
                         .placeholder(R.color.color_f6)

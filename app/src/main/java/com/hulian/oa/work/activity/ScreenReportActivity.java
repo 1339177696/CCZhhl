@@ -42,12 +42,10 @@ import butterknife.OnClick;
  * Describe: 汇报筛选
  */
 public class ScreenReportActivity extends BaseActivity {
-
     List<People> mList = new ArrayList<People>();
     private String participantId;
     MeetGridViewAdapter adapter;
     AlertDialog myDialog;
-
     @BindView(R.id.gv_test)
     MyGridView gvTest;
     @BindView(R.id.start_time)
@@ -58,10 +56,8 @@ public class ScreenReportActivity extends BaseActivity {
     TextView tvUname;
     @BindView(R.id.hb_img)
     ImageView hbImg;
-
     private String startTimeStr = "";
     private String stopTimeStr = "";
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {

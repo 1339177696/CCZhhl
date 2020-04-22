@@ -26,9 +26,7 @@ import com.netease.nimlib.sdk.uinfo.model.NimUserInfo;
  * Created by huangjun on 2015/8/11.
  */
 public class AddFriendActivity extends UI {
-
     private ClearableEditTextWithIcon searchEdit;
-
     public static final void start(Context context) {
         Intent intent = new Intent();
         intent.setClass(context, AddFriendActivity.class);
@@ -39,11 +37,9 @@ public class AddFriendActivity extends UI {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_friend_activity);
-
         ToolBarOptions options = new NimToolBarOptions();
         options.titleId = R.string.add_buddy;
         setToolBar(R.id.toolbar, options);
-
         findViews();
         initActionbar();
     }

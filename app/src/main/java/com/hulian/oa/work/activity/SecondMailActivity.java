@@ -72,13 +72,6 @@ public class SecondMailActivity extends BaseActivity implements PullLoadMoreRecy
         super.onCreate(savedInstanceState);
         setContentView(R.layout.work_mail);
         ButterKnife.bind(this);
-//        mainDrawerLayout.setOnDragListener(new View.OnDragListener() {
-//            @Override
-//            public boolean onDrag(View view, DragEvent dragEvent) {
-//                if(dragEvent.)
-//                return false;
-//            }
-//        });
         initList();
         mainDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
@@ -113,15 +106,11 @@ public class SecondMailActivity extends BaseActivity implements PullLoadMoreRecy
                 startActivity(intent);
                 break;
             case R.id.tv_write_mail:
-                //     startActivity(new Intent(SecondMailActivity.this, MailWriteActivity.class));
                 mainDrawerLayout.openDrawer(Gravity.RIGHT);
                 break;
             case R.id.iv_back_x:
                 finish();
                 break;
-//            case R.id.main_right_drawer_layout:
-//                mainDrawerLayout.closeDrawer(Gravity.RIGHT);
-//                break;
             case R.id.liner_inbox:
                 type = 1;
                 mainDrawerLayout.closeDrawer(Gravity.RIGHT);
@@ -134,7 +123,6 @@ public class SecondMailActivity extends BaseActivity implements PullLoadMoreRecy
                 tv_title.setText("发件箱");
                 onRefresh();
                 break;
-
         }
 
     }
@@ -219,7 +207,6 @@ public class SecondMailActivity extends BaseActivity implements PullLoadMoreRecy
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(SecondMailActivity.this, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

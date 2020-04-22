@@ -56,12 +56,10 @@ import butterknife.OnClick;
  * Describe:日报详情页面
  */
 public class ReadReportActivity extends BaseActivity {
-
     @BindView(R.id.name)
     TextView name;
     @BindView(R.id.time)
     TextView time;
-
     @BindView(R.id.title_text)
     TextView titleText;
     @BindView(R.id.tv_1)
@@ -88,16 +86,13 @@ public class ReadReportActivity extends BaseActivity {
     TextView submit;//提交
     @BindView(R.id.input_comments)
     LinearLayout input_comments;//
-
     private String dialogText;
     private LeaveResultAdapter adapter;
     private List<LocalMedia> selectList = new ArrayList<>();
     private Report report;
     private boolean isMyReport;
-
     private OpinionAdapter opinionAdapter;
     private List<Opinion> opinionList = new ArrayList<>();
-
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -106,7 +101,6 @@ public class ReadReportActivity extends BaseActivity {
         StatusBarUtil.statusBarLightMode_white(this);
         setContentView(R.layout.activity_read_report);
         ButterKnife.bind(this);
-
         report = (Report) getIntent().getSerializableExtra("report");
         String type = report.getType();
         setTitleText(type);
@@ -229,16 +223,13 @@ public class ReadReportActivity extends BaseActivity {
                             input_comments.setVisibility(View.GONE);
                         }
                         Report report = gson.fromJson(data.getString("info"), Report.class);
-
                         name.setText(report.getName());
                         time.setText(report.getTime());
-
                         finishedWork.setText(report.getFinishWork());
                         unfinishedWork.setText(report.getUnFinishWork());
                         planWork.setText(report.getPlanWork());
                         coordinateWork.setText(report.getCoordinateWork());
                         recipient.setText(report.getReceivePersonName());
-
                         showImage(data.getJSONObject("info").getString("img"));
                     }
 
@@ -249,7 +240,6 @@ public class ReadReportActivity extends BaseActivity {
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -262,14 +252,9 @@ public class ReadReportActivity extends BaseActivity {
             List<String> c = Arrays.asList(imgList.split(","));
             for (int i = 0; i <= c.size() - 1; i++) {
                 // 初始化list
-//                if (getMIMEType(c.get(i)).equals("image/jpeg")||getMIMEType(c.get(i)).equals("image/png")||getMIMEType(c.get(i)).equals("image/gif")){
                 LocalMedia localMedia = new LocalMedia();
                 localMedia.setPath(c.get(i));
                 selectList.add(localMedia);
-
-
-//                }
-
             }
 
             adapter.notifyDataSetChanged();

@@ -157,14 +157,6 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         } else
             tv_count.setText("已选择" + data.getCount() + "人");
 
-//        if ( !use_default_indicator ) {
-//            ImageView iv_tip = ( ImageView ) view.findViewById(R.id.iv_tip);
-//            if ( isExpanded ) {
-//                iv_tip.setImageResource(R.mipmap.down);
-//            } else {
-//                iv_tip.setImageResource(R.mipmap.right);
-//            }
-//        }
         if (isVideo){
             checkBox.setVisibility(View.GONE);
         }
@@ -214,11 +206,9 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // ToastHelper.showToast(mContext,""+data.isIscheck());
                 boolean isChecked = !data.isIscheck();
 
 
-                //     notifyDataSetChanged();
                 int j = 0;
                 for (int i = 0; i < peopleList.size(); i++) {
                     if (peopleList.get(i).isIscheck()) {

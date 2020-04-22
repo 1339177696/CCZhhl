@@ -21,7 +21,6 @@ public class L_LeavePendAdapter extends RecyclerView.Adapter <L_LeavePendAdapter
     private Context mContext;
     private List<Leave> dataList = new ArrayList<>();
 
-
     public void addAllData(List<Leave> dataList) {
         this.dataList.addAll(dataList);
         notifyDataSetChanged();
@@ -62,7 +61,6 @@ public class L_LeavePendAdapter extends RecyclerView.Adapter <L_LeavePendAdapter
     @Override
     public L_LeavePendAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.l_item_pend_leave, parent, false);
-
         return new L_LeavePendAdapter.ViewHolder(v);
     }
 

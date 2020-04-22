@@ -4,26 +4,26 @@
     package="com.hulian.oa">
     <!-- 地图SDK（包含其搜索功能）需要的基础权限 -->
     <!-- 允许程序打开网络套接字 -->
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <!-- 允许程序设置内置sd卡的写权限 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 允许程序获取网络状态 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- 允许程序访问WiFi网络信息 -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <!-- 允许程序读写手机状态和身份 -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!-- 用于访问GPS定位 -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!-- 用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <!-- 用于申请调用A-GPS模块 -->
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <!-- 用于申请获取蓝牙信息进行室内定位 -->
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -64,26 +64,28 @@
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
-    <uses-permission android:name="org.apache.http.legacy" android:required="false" />
+    <uses-permission
+        android:name="org.apache.http.legacy"
+        android:required="false" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:name=".APP"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_me"
         android:label="工作桌面"
         android:largeHeap="true"
-        android:supportsRtl="true"
         android:networkSecurityConfig="@xml/network_config"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
         tools:replace="label,allowBackup">
-<!--        高德地图-->
+        <!--        高德地图-->
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="ab90db96c88060e4cd23d37899d9a580"/>
+            android:value="ab90db96c88060e4cd23d37899d9a580" />
 
         <!-- 高德地图定位 -->
-        <service android:name="com.amap.api.location.APSService"/>
+        <service android:name="com.amap.api.location.APSService" />
 
         <!--qgl-->
         <service
@@ -416,8 +418,6 @@
         <activity
             android:name=".work.activity.WorkSpaceActivity"
             android:configChanges="screenSize|keyboardHidden|orientation" />
-        <activity android:name=".pad.PAD_gongwen_SP" />
-        <activity android:name=".pad.PAD_zhiling_XF" />
         <activity
             android:name=".push.activity.MessagenotificationActivity"
             android:configChanges="screenSize|keyboardHidden|orientation" />
@@ -452,8 +452,8 @@
         <activity
             android:name=".work.activity.ReadReportActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
-            android:windowSoftInputMode="adjustPan"/> <!-- 新加的选择人员 -->
-    <activity
+            android:windowSoftInputMode="adjustPan" /> <!-- 新加的选择人员 -->
+        <activity
             android:name=".me.activity.LBanbenActivity"
             android:configChanges="screenSize|keyboardHidden|orientation" /> <!-- 新加的升级 -->
 
@@ -464,22 +464,46 @@
                 <action android:name="android.intent.action.PHONE_STATE" />
             </intent-filter>
         </receiver>
-        <activity android:name=".views.flowview.ExpenseDetailsActivity" android:configChanges="screenSize|keyboardHidden|orientation"></activity>
-<!--        考勤打卡-->
-        <activity android:name=".work.activity.attendance.ClockActivity" android:configChanges="screenSize|keyboardHidden|orientation"></activity>
-<!--        下属打卡选择人员-->
-        <activity android:name=".work.activity.attendance.SubordpersonActivity" android:configChanges="screenSize|keyboardHidden|orientation"></activity>
-        <activity android:name=".work.activity.SubordpersonActivity2" android:configChanges="screenSize|keyboardHidden|orientation"></activity>
+        <activity
+            android:name=".views.flowview.ExpenseDetailsActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <!--        考勤打卡-->
+        <activity
+            android:name=".work.activity.attendance.ClockActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <!--        下属打卡选择人员-->
+        <activity
+            android:name=".work.activity.attendance.SubordpersonActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity
+            android:name=".work.activity.SubordpersonActivity2"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
         <!--        下属打卡内容-->
-        <activity android:name=".work.activity.attendance.SubordActivity" android:configChanges="screenSize|keyboardHidden|orientation"></activity>
-<!--        考勤规则-->
-        <activity android:name=".work.activity.attendance.AttendrulesActivity" android:configChanges="screenSize|keyboardHidden|orientation"></activity>
+        <activity
+            android:name=".work.activity.attendance.SubordActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <!--        考勤规则-->
+        <activity
+            android:name=".work.activity.attendance.AttendrulesActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
         <!--        考勤规则修改-->
-        <activity android:name=".work.activity.attendance.AttendrulesmodifyActivity" android:configChanges="screenSize|keyboardHidden|orientation"></activity>
-<!--        地图搜索页-->
-        <activity android:name=".map.activity.SearchActivity" android:configChanges="screenSize|keyboardHidden|orientation"></activity>
-<!--        地图-->
-        <activity android:name=".work.activity.attendance.MapActivity" android:configChanges="screenSize|keyboardHidden|orientation"></activity>
+        <activity
+            android:name=".work.activity.attendance.AttendrulesmodifyActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <!--        地图搜索页-->
+        <activity
+            android:name=".map.activity.SearchActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <!--        地图-->
+        <activity
+            android:name=".work.activity.attendance.MapActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+
+         <activity
+            android:name=".work.activity.video.activity.VideoConferenceActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+
+
     </application>
 
 </manifest>

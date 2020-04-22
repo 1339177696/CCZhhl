@@ -142,15 +142,6 @@ public class ExpandablePadAdapter extends BaseExpandableListAdapter {
          }
          else
         tv_count.setText("已选择"+data.getCount()+"人");
-
-//        if ( !use_default_indicator ) {
-//            ImageView iv_tip = ( ImageView ) view.findViewById(R.id.iv_tip);
-//            if ( isExpanded ) {
-//                iv_tip.setImageResource(R.mipmap.down);
-//            } else {
-//                iv_tip.setImageResource(R.mipmap.right);
-//            }
-//        }
     }
 
     /**
@@ -176,7 +167,6 @@ public class ExpandablePadAdapter extends BaseExpandableListAdapter {
             @Override
             public void onClick(View v) {
                 boolean isChecked = checkBox.isChecked();
-           //     notifyDataSetChanged();
                 int j=0;
                 if(isChecked)
                 for(int i=0;i<mChildArray.size();i++){
@@ -192,12 +182,6 @@ public class ExpandablePadAdapter extends BaseExpandableListAdapter {
                     }
                 }
                 mDapart.setCount(j+"");
-//                if(j==peopleList.size()){
-//                    mDapart.setIscheck(true);
-//                }
-//                else {
-//                    mDapart.setIscheck(false);
-//                }
                 EventBus.getDefault().post(mChildArray);
                 notifyDataSetChanged();
             }

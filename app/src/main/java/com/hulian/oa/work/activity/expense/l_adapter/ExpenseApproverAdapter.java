@@ -135,36 +135,6 @@ public class ExpenseApproverAdapter extends
                 }
             });
             viewHolder.tv_name.setText(list.get(position));
-//            String path = "";
-//            LocalMedia media = list.get(position);
-//            if (media.isCompressed()) {
-//                // 压缩过
-//                path = media.getCompressPath();
-//            } else {
-//                // 原图
-//                path = media.getPath();
-//            }
-//            if (!TextUtils.isEmpty(path)){
-//                RequestOptions options = new RequestOptions()
-//                        .centerCrop()
-//                        .placeholder(R.color.color_f6)
-//                        .diskCacheStrategy(DiskCacheStrategy.ALL);
-//                Glide.with(viewHolder.itemView.getContext())
-//                        .load(path)
-//                        .apply(options)
-//                        .into(viewHolder.mImg);
-//
-//                //itemView 的点击事件
-//                if (mItemClickListener != null) {
-//                    viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            int adapterPosition = viewHolder.getAdapterPosition();
-//                            mItemClickListener.onItemClick(adapterPosition, v);
-//                        }
-//                    });
-//                }
-//            }
         }
     }
     public  void setPosition(int mPosition){

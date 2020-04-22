@@ -240,7 +240,6 @@ public class ExpenseApplyForActivity extends BaseActivity {
         recycler_approver.setAdapter(approverAdapter);
 
         copyerAdapter = new ExpenseCopyerAdapter(mContext,onAddCopyer,onDeleteCopyer);
-//        FlowLayoutManager flowLayoutManager = new FlowLayoutManager(mContext,true);
         MyLayoutManager flowManager = new MyLayoutManager();
         recycler_copyer.addItemDecoration(new ItemDecoration(DisplayUtils.dip2px(mContext,6)));
         //必须，防止recyclerview高度为wrap时测量item高度0

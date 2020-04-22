@@ -93,8 +93,6 @@ public class SelPeopleActivity_meet_people extends BaseActivity {
                      memberList = gson.fromJson(result.getJSONArray("data").toString(),
                             new TypeToken<List<People>>() {
                             }.getType());
-//                    adapter = new PeopleAdapter(memberList, mContext);
-//                    listView.setAdapter(adapter);
                     initViewOper(memberList);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -102,7 +100,6 @@ public class SelPeopleActivity_meet_people extends BaseActivity {
             }
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

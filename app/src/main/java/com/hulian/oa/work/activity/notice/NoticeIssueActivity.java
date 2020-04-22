@@ -71,9 +71,7 @@ public class NoticeIssueActivity extends BaseActivity {
     @BindView(R.id.recycler)
     RecyclerView recyclerView;
     private List<Department> mDatas = new ArrayList<>();
-    ;
     private List<Department> mDatasSel = new ArrayList<>();
-    ;
     private GridViewAdapter adapter;
 
     @Override
@@ -150,9 +148,6 @@ public class NoticeIssueActivity extends BaseActivity {
                     for (LocalMedia media : selectList) {
                         Log.i("图片-----》", new File(media.getPath()).length() + "");
                         Log.i("压缩图片-----》", new File(media.getCompressPath()).length() + "");
-
-//                        Bitmap bitmap = BitmapFactory.decodeFile(media.getCompressPath());
-//                        iv_document.setImageBitmap(bitmap);
                         adapterimage.setList(selectList);
                         adapterimage.notifyDataSetChanged();
                     }

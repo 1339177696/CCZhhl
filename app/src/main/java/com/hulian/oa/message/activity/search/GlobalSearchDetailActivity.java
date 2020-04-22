@@ -33,27 +33,16 @@ import com.netease.nimlib.sdk.search.model.MsgIndexRecord;
  * Created by huangjun on 2016/6/28.
  */
 public class GlobalSearchDetailActivity extends UI implements OnItemClickListener {
-
     private static final String EXTRA_SESSION_TYPE = "EXTRA_SESSION_TYPE";
-
     private static final String EXTRA_SESSION_ID = "EXTRA_SESSION_ID";
-
     private static final String EXTRA_QUERY = "EXTRA_QUERY";
-
     private static final String EXTRA_RESULT_COUNT = "EXTRA_RESULT_COUNT";
-
     private ContactDataAdapter adapter;
-
     private ListView lvContacts;
-
     private String sessionId;
-
     private SessionTypeEnum sessionType;
-
     private String query;
-
     private int resultCount;
-
     public static final void start(Context context, MsgIndexRecord record) {
         Intent intent = new Intent();
         intent.setClass(context, GlobalSearchDetailActivity.class);
@@ -61,18 +50,14 @@ public class GlobalSearchDetailActivity extends UI implements OnItemClickListene
         intent.putExtra(EXTRA_SESSION_ID, record.getSessionId());
         intent.putExtra(EXTRA_QUERY, record.getQuery());
         intent.putExtra(EXTRA_RESULT_COUNT, record.getCount());
-
         context.startActivity(intent);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         parseIntent();
-
         setContentView(R.layout.global_search_detail);
-
         // title name
         ToolBarOptions options = new NimToolBarOptions();
         if (sessionType == SessionTypeEnum.P2P) {
@@ -86,18 +71,14 @@ public class GlobalSearchDetailActivity extends UI implements OnItemClickListene
         String tip = String.format("共%d条与\"%s\"相关的聊天记录", resultCount, query);
         TextView tipTextView = findView(R.id.search_result_tip);
         tipTextView.setText(tip);
-
         // listView adapter
         lvContacts = findView(R.id.search_result_list);
         IContactDataProvider dataProvider = new ContactDataProvider(ItemTypes.MSG);
-
         adapter = new ContactDataAdapter(this, null, dataProvider);
         adapter.addViewHolder(ItemTypes.LABEL, LabelHolder.class);
         adapter.addViewHolder(ItemTypes.MSG, MsgHolder.class);
-
         lvContacts.setAdapter(adapter);
         lvContacts.setOnItemClickListener(this);
-
         // query data
         TextQuery textQuery = new TextQuery(query);
         textQuery.extra = new Object[]{sessionType, sessionId};

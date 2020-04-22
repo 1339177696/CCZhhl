@@ -64,7 +64,6 @@ public class SecondTaskCoopActivity extends BaseActivity {
         fragmentList.add(new CompletedTaskFragment());
         fragmentList.add(new CopymeTaskFragment());
         MyViewPageAdapter myViewPageAdapter = new MyViewPageAdapter(getSupportFragmentManager(), titleDatas, fragmentList);
-//        myTablayout.setSelectedTabIndicator(0);
         myViewpager.setAdapter(myViewPageAdapter);
         myTablayout.setupWithViewPager(myViewpager);
         myTablayout.setTabsFromPagerAdapter(myViewPageAdapter);

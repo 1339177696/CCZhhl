@@ -32,7 +32,6 @@ import butterknife.OnClick;
  * 请假历史
  */
 public class LeaveHistoryActivity extends BaseActivity implements PullLoadMoreRecyclerView.PullLoadMoreListener {
-
     @BindView(R.id.recyclerView)
     PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
     @BindView(R.id.iv_back)
@@ -70,7 +69,6 @@ public class LeaveHistoryActivity extends BaseActivity implements PullLoadMoreRe
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new L_LeaveHistoryAdapter(mContext);
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
@@ -121,7 +119,6 @@ public class LeaveHistoryActivity extends BaseActivity implements PullLoadMoreRe
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

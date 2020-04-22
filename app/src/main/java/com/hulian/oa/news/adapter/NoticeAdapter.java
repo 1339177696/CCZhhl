@@ -21,8 +21,6 @@ import java.util.List;
 public class NoticeAdapter extends RecyclerView.Adapter <NoticeAdapter.ViewHolder>{
     private Context mContext;
     private List<Notice> dataList = new ArrayList<>();
-
-
     public void addAllData(List<Notice> dataList) {
         this.dataList.addAll(dataList);
         notifyDataSetChanged();
@@ -64,7 +62,6 @@ public class NoticeAdapter extends RecyclerView.Adapter <NoticeAdapter.ViewHolde
         URLImageParser imageGetter = new URLImageParser(holder.tv_content);
         if (!dataList.get(position).getNoticeContent().equals("null"))
         holder.tv_content.setText(Html.fromHtml(dataList.get(position).getNoticeContent(), imageGetter, null));
-    //    holder.tv_content.setText(dataList.get(position).getNoticeContent());
         if(dataList.get(position).getCreateTime()!=null) {
             holder.tv_time.setText(TimeUtils.getDateToString3(dataList.get(position).getCreateTime()));
             holder.tv_time2.setText(TimeUtils.getDateToString4(dataList.get(position).getCreateTime()));

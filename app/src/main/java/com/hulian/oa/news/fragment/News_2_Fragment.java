@@ -77,7 +77,6 @@ public class News_2_Fragment extends Fragment implements PullLoadMoreRecyclerVie
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new NoticeAdapter(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
@@ -139,7 +138,6 @@ public class News_2_Fragment extends Fragment implements PullLoadMoreRecyclerVie
             public void onFailure(OkHttpException failuer) {
                 if (loadDialog.isShowing())
                     loadDialog.dismiss();
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

@@ -79,7 +79,6 @@ public class TaskLauncherActivity extends BaseActivity {
     // 截止时间name
     @BindView(R.id.tv_deadline)
     TextView tv_deadline;
-
     //抄送人
     @BindView(R.id.rl_copyperson)
     RelativeLayout rl_copyperson;
@@ -169,16 +168,9 @@ public class TaskLauncherActivity extends BaseActivity {
                 selectTime(tv_deadline);
                 break;
             case R.id.rl_opreator:
-//                Intent intent = new Intent(TaskLauncherActivity.this, SelDepartmentActivity_task.class);
-//                startActivityForResult(new Intent(TaskLauncherActivity.this, SelDepartmentActivity_meet_zb.class),0);
                 startActivityForResult(new Intent(TaskLauncherActivity.this, SelDepartmentActivity_meet_zb.class).putExtra("hasTop","0"), 0);
-
-//                startActivity(intent);
                 break;
             case R.id.iimmgg:
-//                Intent intent1 = new Intent(TaskLauncherActivity.this, SelDepartmentActivity_x.class);
-//                startActivity(intent1);
-
                 Intent intent = new Intent(TaskLauncherActivity.this, SelDepartmentActivity_meet_zb_single.class);
                 startActivityForResult(intent,110);
                 break;
@@ -210,17 +202,6 @@ public class TaskLauncherActivity extends BaseActivity {
                     return;
 
                 }
-//                抄送人可以不选
-//                else if (executor==null||copier.isEmpty())
-//                {
-//                    Toast.makeText(TaskLauncherActivity.this,"请选择抄送人",Toast.LENGTH_SHORT).show();
-//                    return;
-//
-//                }
-//                else if (selectList.size() <= 0) {
-//                    ToastHelper.showToast(mContext, "公文照片不能为空");
-//                    return;
-//                }
                 else
                 {
                     getData();
@@ -261,28 +242,9 @@ public class TaskLauncherActivity extends BaseActivity {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         return format.format(date);
     }
-
-    // 执行人
-//    public void onEventMainThread(  List<People>  event) {
-//        selectList2.clear();
-//        selectList2.addAll(event);
-//        String uids="";
-//        String uname="";
-//        for(People params1:selectList2)
-//        {
-//            uids+=params1.getUserId()+",";
-//            uname+=params1.getUserName()+",";
-//        }
-//        tv_opreator.setText(uname.substring(0,uname.length()-1));
-//        executor = uids.substring(0,uids.length()-1);
-//
-//   //     Toast.makeText(this, uids.substring(0,uids.length()-1), Toast.LENGTH_SHORT).show();
-//    }
-
     // 执行人
     public void onEventMainThread(  List<People>  event) {
         selectList2 .addAll(event);
-//        adapter2.notifyDataSetChanged();
         String uids="";
         String uname="";
         for(People params1:selectList2)
@@ -290,30 +252,11 @@ public class TaskLauncherActivity extends BaseActivity {
             uids+=params1.getUserId()+",";
             uname+=params1.getUserName()+",";
         }
-//        tv_opreator.setText(uname.substring(0,uname.length()-1));
         executor = uids.substring(0,uids.length()-1);
     }
-    // 抄送人
-//    public void onEventMainThread(People_x event_x) {
-//        selectList2_x.clear();
-//        selectList2_x.hb_add(event_x);
-//        String uids="";
-//        String uname="";
-//        for(People_x params_x1:selectList2_x)
-//        {
-//            uids+=params_x1.getUserId();
-//            uname+=params_x1.getUserName();
-//        }
-//        fl_content.setVisibility(View.VISIBLE);
-//        tv_copyperson.setText(uname);
-//        copier = uids;
-//    }
-
     //　提醒
     public void onEvent(MessageEvent_x event){
         tv_remind.setText(event.message);
-
-//        Toast.makeText(TaskLauncherActivity.this, event.message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -358,7 +301,6 @@ public class TaskLauncherActivity extends BaseActivity {
                         EventBus.getDefault().post(new UndoneTaskFragment());
                         EventBus.getDefault().post(new CompletedTaskFragment());
                         EventBus.getDefault().post(new CopymeTaskFragment());
-//                        setResult(1);
                         finish();
                     }
                     else
@@ -373,7 +315,6 @@ public class TaskLauncherActivity extends BaseActivity {
             @Override
             public void onFailure(OkHttpException failuer) {
                 loadDialog.dismiss();
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -396,7 +337,6 @@ public class TaskLauncherActivity extends BaseActivity {
 
         if (resultCode == 1 && requestCode == 0&&data!=null) {
             List<People> mList = (List<People>) data.getSerializableExtra("mList");
-            //   mList= TimeUtils.removeDuplicate(mList);
             if (mList.size() > 0) {
                 String name = "";
                 executor = "";
@@ -404,14 +344,11 @@ public class TaskLauncherActivity extends BaseActivity {
                     executor += params1.getUserId() + ",";
                     name += params1.getUserName() + ",";
                 }
-                //     tvPartPerson.setText(name.substring(0, name.length() - 1));
                 if(!executor.equals("")) executor = executor.substring(0, executor.length() - 1);
-
                 adapter = new MeetGridViewAdapter(TaskLauncherActivity.this, mList);
                 gvTest.setAdapter(adapter);
                 List<People> finalMList = mList;
                 gvTest.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view,
                                             int position, long id) {
@@ -505,12 +442,4 @@ public class TaskLauncherActivity extends BaseActivity {
         fileList = list;
         Log.v("EMAIL", "获取到数据-结束");
     }
-
-
-
-    //                else if (remind.isEmpty())
-//                {
-//
-//                    Toast.makeText(TaskLauncherActivity.this,"提醒",Toast.LENGTH_SHORT).show();
-//                }
 }

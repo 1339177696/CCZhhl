@@ -29,20 +29,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
-
     private ImageView mIvBack;
     private EditText mEtSearch;
     private RecyclerView mRecyclerView;
     private List<PoiItem> mList;
     private SearchAddressAdapter mSearchAddressAdapter;
-
     private PoiSearch mPoiSearch;
     private PoiSearch.Query mQuery;
     private PoiSearch.OnPoiSearchListener mOnPoiSearchListener;
-
     private View.OnClickListener mOnClickListener;
     private OnItemClickLisenter mOnItemClickLisenter;
-
     private Gson gson;
     public AMapLocation location;
 
@@ -95,12 +91,10 @@ public class SearchActivity extends AppCompatActivity {
         mSearchAddressAdapter = new SearchAddressAdapter(this, mList);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mSearchAddressAdapter);
-
         gson = new Gson();
     }
 
     private void initListener() {
-
         mOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -189,8 +183,6 @@ public class SearchActivity extends AppCompatActivity {
         mQuery = new PoiSearch.Query(keyWord, "", city);//第一个参数表示搜索字符串，第二个参数表示poi搜索类型，第三个参数表示poi搜索区域（空字符串代表全国）
         mQuery.setPageSize(20);// 设置每页最多返回多少条poiitem
         mQuery.setPageNum(0);// 设置查第一页
-
-
         mPoiSearch = new PoiSearch(this, mQuery);
         mPoiSearch.setOnPoiSearchListener(mOnPoiSearchListener);
         if (lpTemp != null) {

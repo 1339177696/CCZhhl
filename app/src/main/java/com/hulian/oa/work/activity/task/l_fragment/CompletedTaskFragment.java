@@ -48,14 +48,12 @@ public class CompletedTaskFragment extends Fragment implements PullLoadMoreRecyc
     private ArrayList<String> list_path;
     private ArrayList<String> list_title;
     Unbinder unbinder;
-
     private String type = "1"; // 0发起的任务；1执行的任务；2抄送的任务
     private String completion = "1"; //0未完成；1完成；空值为全部
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.l_fra_collection_notice, null);
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
@@ -64,7 +62,6 @@ public class CompletedTaskFragment extends Fragment implements PullLoadMoreRecyc
     }
 
     private void initList() {
-
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
@@ -84,7 +81,6 @@ public class CompletedTaskFragment extends Fragment implements PullLoadMoreRecyc
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new L_CompletedTaskAdapter(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
@@ -142,10 +138,8 @@ public class CompletedTaskFragment extends Fragment implements PullLoadMoreRecyc
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                     if (mCount == 1 && memberList.size() == 0) {
                         emptyBg.setVisibility(View.VISIBLE);
-//                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
                     } else {
                         emptyBg.setVisibility(View.GONE);
-//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -154,7 +148,6 @@ public class CompletedTaskFragment extends Fragment implements PullLoadMoreRecyc
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

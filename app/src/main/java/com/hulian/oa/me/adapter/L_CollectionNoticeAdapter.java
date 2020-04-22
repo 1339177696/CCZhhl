@@ -29,7 +29,6 @@ public class L_CollectionNoticeAdapter extends RecyclerView.Adapter <L_Collectio
     private Context mContext;
     private List<Bean_x> dataList = new ArrayList<>();
     AlertDialog myDialog;
-
     public void addAllData(List<Bean_x> dataList) {
         this.dataList.addAll(dataList);
         notifyDataSetChanged();
@@ -53,7 +52,6 @@ public class L_CollectionNoticeAdapter extends RecyclerView.Adapter <L_Collectio
             tv_title = (TextView) itemView.findViewById(R.id.tv_title);
             tv_time = (TextView) itemView.findViewById(R.id.tv_time);
             tv_show_person = (TextView) itemView.findViewById(R.id.tv_show_person);
-
             tv_delete = (TextView)itemView.findViewById(R.id.tv_delete);
         }
     }
@@ -133,7 +131,6 @@ public class L_CollectionNoticeAdapter extends RecyclerView.Adapter <L_Collectio
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

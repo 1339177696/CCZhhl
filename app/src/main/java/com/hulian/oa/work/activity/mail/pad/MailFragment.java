@@ -67,8 +67,6 @@ public class MailFragment extends Fragment implements PullLoadMoreRecyclerView.P
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-//            gid = getArguments().getString("gid");
-//            idno=getArguments().getString("idno");
         }
     }
 
@@ -77,14 +75,6 @@ public class MailFragment extends Fragment implements PullLoadMoreRecyclerView.P
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.work_mail_pad, container, false);
         unbinder = ButterKnife.bind(this, view);
-
-//        mainDrawerLayout.setOnDragListener(new View.OnDragListener() {
-//            @Override
-//            public boolean onDrag(View view, DragEvent dragEvent) {
-//                if(dragEvent.)
-//                return false;
-//            }
-//        });
         initList();
         mainDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
@@ -118,7 +108,6 @@ public class MailFragment extends Fragment implements PullLoadMoreRecyclerView.P
                 startActivity(new Intent(getContext(), MailWriteActivity.class));
                 break;
             case R.id.tv_write_mail:
-                //     startActivity(new Intent(SecondMailActivity.this, MailWriteActivity.class));
                 mainDrawerLayout.openDrawer(Gravity.RIGHT);
                 break;
             case R.id.main_right_drawer_layout:
@@ -149,7 +138,6 @@ public class MailFragment extends Fragment implements PullLoadMoreRecyclerView.P
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new L_MailReciveAdapter(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
@@ -196,7 +184,6 @@ public class MailFragment extends Fragment implements PullLoadMoreRecyclerView.P
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

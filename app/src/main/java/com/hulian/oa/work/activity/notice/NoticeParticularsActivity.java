@@ -43,13 +43,11 @@ public class NoticeParticularsActivity extends BaseActivity {
     TextView tvContent;
     @BindView(R.id.tv_author)
     TextView tvAuthor;
-
     String noticeId;
     String isCollect;
     @BindView(R.id.bt_store)
     ImageView btStore;
     private String Type = "";
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -93,7 +91,6 @@ public class NoticeParticularsActivity extends BaseActivity {
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

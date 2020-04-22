@@ -7,13 +7,10 @@ import com.netease.nimlib.sdk.msg.attachment.MsgAttachment;
  * Created by zhoujianghua on 2015/4/9.
  */
 public abstract class CustomAttachment implements MsgAttachment {
-
     protected int type;
-
     CustomAttachment(int type) {
         this.type = type;
     }
-
     public void fromJson(JSONObject data) {
         if (data != null) {
             parseData(data);

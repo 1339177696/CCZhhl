@@ -34,7 +34,6 @@ import cn.addapp.pickers.picker.TimePicker;
 
 //我的-》日程-》添加日程
 public class AddScheduleActivity extends BaseActivity {
-
     @BindView(R.id.tv_select_time)
     TextView tv_select_time;
     @BindView(R.id.tv_select_time2)
@@ -69,8 +68,6 @@ public class AddScheduleActivity extends BaseActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 swSelect.setChecked(isChecked);
                 if(isChecked){
-//                    time2="00:00";
-//                    time3="23:59";
                     time2="08:00";
                     time3="16:59";
                     tv_select_time.setText(time2);
@@ -131,7 +128,6 @@ public class AddScheduleActivity extends BaseActivity {
         HttpRequest.postSche_Tianjia(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
-
                 //需要转化为实体对象
                 try {
 
@@ -152,7 +148,6 @@ public class AddScheduleActivity extends BaseActivity {
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(AddScheduleActivity.this, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

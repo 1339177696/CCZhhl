@@ -24,7 +24,7 @@ import com.hulian.oa.work.activity.SecondNoticeActivity;
 import com.hulian.oa.work.activity.SecondTaskCoopActivity;
 import com.hulian.oa.work.activity.WorkReportActivity;
 import com.hulian.oa.work.activity.attendance.ClockActivity;
-import com.hulian.oa.work.activity.meeting.SelDepartmentActivity_meet_video;
+import com.hulian.oa.work.activity.video.activity.VideoConferenceActivity;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.netease.nim.avchatkit.AVChatKit;
 import com.netease.nim.avchatkit.TeamAVChatProfile;
@@ -58,9 +58,6 @@ public class WorkFragemt_9 extends Fragment {
     ImageView btMail;
     @BindView(R.id.bt_leave)
     ImageView btLeave;
-    // 公文流轉（去掉）
-//    @BindView(R.id.bt_document)
-//    ImageView btDocument;
     @BindView(R.id.bt_coop)
     ImageView btCoop;
     @BindView(R.id.bt_notice)
@@ -69,40 +66,29 @@ public class WorkFragemt_9 extends Fragment {
     ImageView btMeeting;
     @BindView(R.id.bt_instruct)
     ImageView btInstruct;
-//    @BindView(R.id.bt_expense)
-//    ImageView btExpense;
     int[] images = {R.mipmap.demo, R.mipmap.demo1, R.mipmap.demo2, R.mipmap.demo3, R.mipmap.demo4};
     //已经选择图片
     private List<LocalMedia> selectList = new ArrayList<>();
-//    @BindView(R.id.bt_list)
-//    Button btList;
-//    @BindView(R.id.bt_9)
-//    Button bt9;
-
     Unbinder unbinder;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view;
-        if (BuildConfig.IsPad) {
+//        if (BuildConfig.IsPad) {
+//            if (SPUtils.get(getActivity(), "isLead", "").equals("0")) {
+//                view = inflater.inflate(R.layout.fragment_work_fragemt_9_pad_lead, container, false);
+//            } else {
+//                view = inflater.inflate(R.layout.fragment_work_fragemt_9_pad, container, false);
+//            }
+//
+//        } else {
             if (SPUtils.get(getActivity(), "isLead", "").equals("0")) {
-                view = inflater.inflate(R.layout.fragment_work_fragemt_9_pad_lead, container, false);
-            } else {
-                view = inflater.inflate(R.layout.fragment_work_fragemt_9_pad, container, false);
-            }
-
-        } else {
-            if (SPUtils.get(getActivity(), "isLead", "").equals("0")) {
-//                view = inflater.inflate(R.layout.fragment_work_fragemt_9_lead, container, false);
                 view = inflater.inflate(R.layout.fragment_work_fragment_xin, container, false);
             } else {
-//                view = inflater.inflate(R.layout.fragment_work_fragemt_9, container, false);
                 view = inflater.inflate(R.layout.fragment_work_fragment_xin, container, false);
             }
-        }
+//        }
         unbinder = ButterKnife.bind(this, view);
-
-
         return view;
     }
 
@@ -112,14 +98,13 @@ public class WorkFragemt_9 extends Fragment {
         unbinder.unbind();
     }
 
-    //    , R.id.bt_list, R.id.bt_9
-//    R.id.bt_expense, R.id.bt_work_space,R.id.bt_work_attendance   R.id.bt_document,,R.id.bt_gengduo
     @OnClick({R.id.bt_shipin,R.id.bt_yuyin,R.id.bt_mail,R.id.bt_coop,R.id.bt_meeting,R.id.bt_notice,R.id.bt_time, R.id.bt_instruct ,R.id.bt_leave, R.id.bt_baoxiao,R.id.bt_Work_report})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             //视频会议
             case R.id.bt_shipin:
-                startActivityForResult(new Intent(getActivity(), SelDepartmentActivity_meet_video.class), 0);
+                startActivity(new Intent(getActivity(), VideoConferenceActivity.class));
+//                startActivityForResult(new Intent(getActivity(), SelDepartmentActivity_meet_video.class), 0);
                 break;
                 //语音会议
             case R.id.bt_yuyin:
@@ -128,16 +113,6 @@ public class WorkFragemt_9 extends Fragment {
                 //邮件收发
             case R.id.bt_mail:
                 startActivity(new Intent(getActivity(), SecondMailActivity.class));
-                 /*         if(BuildConfig.IsPad)//业务驾驶舱
-                {
-                    //tartActivity(new Intent(getActivity(), SecondMailActivity.class));
-                    init(images);
-                    Intent intent = new Intent(getActivity(), PicturePreviewActivity2.class);
-                    intent.putExtra(PictureConfig.EXTRA_PREVIEW_SELECT_LIST, (Serializable) selectList);
-                    intent.putExtra(PictureConfig.EXTRA_POSITION, 0);
-                    getActivity().startActivity(intent);
-                }
-                else*/
                 break;
 //                任务协同
             case R.id.bt_coop:
@@ -169,52 +144,10 @@ public class WorkFragemt_9 extends Fragment {
             case R.id.bt_baoxiao:
                 startActivity(new Intent(getActivity(),SecondExpenseActivity.class));
                 break;
-            //公文流轉去掉了
-//            case R.id.bt_document:
-//                startActivity(new Intent(getActivity(), SecondDocumentActivity.class));
-//                break;
-
-//            case R.id.bt_work_space:
-//                //20191129
-////                startActivity(new Intent(getActivity(), WorkSpaceActivity.class));
-//                //startActivity(new Intent(getActivity(), MessagenotificationActivity.class));
-//                ToastHelper.showToast(getActivity(), "功能暂未开放");
-//
-//                break;
-//            case R.id.bt_expense:
-////                qgl修改
-//
-////                    startActivity(new Intent(getActivity(), SecondExpenseActivity.class));
-//                ToastHelper.showToast(getActivity(), "功能暂未开放");
-//                break;
-//            case R.id.bt_work_attendance:
-//                ToastHelper.showToast(getActivity(), "功能暂未开放");
-//                break;
-            //case R.id.bt_work_space:
-                //20191129
-//                startActivity(new Intent(getActivity(), WorkSpaceActivity.class));
-                //startActivity(new Intent(getActivity(), MessagenotificationActivity.class));
-
-                //break;
             case R.id.bt_expense:
-//                qgl修改
 
-//                    startActivity(new Intent(getActivity(), SecondExpenseActivity.class));
-//                ToastHelper.showToast(getActivity(), "功能暂未开放");
-                //break;
                 ToastHelper.showToast(getActivity(), "功能暂未开放");
                 break;
-//            case R.id.bt_list:
-//                EventBus.getDefault().post(new WorkFragemt_9());
-//                break;
-//            case R.id.bt_9:
-//                break;
-
-
-//            case R.id.bt_gengduo:
-//                // 跳转更多
-//                startActivity(new Intent(getActivity(), Work_gd_Activity.class));
-//                break;
             //工作汇报
             case R.id.bt_Work_report:
                 startActivity(new Intent(getActivity(), WorkReportActivity.class));

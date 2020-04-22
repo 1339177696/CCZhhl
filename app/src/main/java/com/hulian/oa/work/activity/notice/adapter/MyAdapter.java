@@ -61,13 +61,6 @@ public class MyAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 CheckBox checkBox = hdFinal.checkBox;
-//                if (checkBox.isChecked()) {
-//                    checkBox.setChecked(false);
-//                    data.get(i).setIscheck(false);
-//                } else {
-//                    checkBox.setChecked(true);
-//                    data.get(i).setIscheck(true);
-//                }
                  checkBox.setChecked(checkBox.isChecked());
                  data.get(i).setIscheck(checkBox.isChecked());
 

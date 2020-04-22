@@ -94,15 +94,12 @@ public class MeetingSponsorActivity extends BaseActivity {
     private String signType = "1";
     MeetGridViewAdapter adapter;
     AlertDialog myDialog;
-
     private String meetingContacts = "";
     private String meetingContactsPhone = "";
-
     // 会议名称
     private String meetingRoomName = "";
     // 会议地点
     private String meetingRoomLocation = "";
-
     @BindView(R.id.sw_refres)
     SwipeRefreshLayout sw_refres;
     private String cd = "";
@@ -121,7 +118,6 @@ public class MeetingSponsorActivity extends BaseActivity {
         rdGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                //   ToastHelper.showToast(mContext, "" + i);
                 RadioButton radiobutton = (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId());
                 signType = radiobutton.getTag().toString();
 
@@ -133,7 +129,6 @@ public class MeetingSponsorActivity extends BaseActivity {
     }
 
     private void init() {
-
         tvPartTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -168,7 +163,6 @@ public class MeetingSponsorActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.ci_approved_pic:
-                //     startActivity(new Intent(MeetingSponsorActivity.this, SelDepartmentActivity_meet.class));
                 startActivityForResult(new Intent(MeetingSponsorActivity.this, SelDepartmentActivity_meet_zb.class), 0);
                 break;
             case R.id.tv_back_instruct:
@@ -236,7 +230,6 @@ public class MeetingSponsorActivity extends BaseActivity {
                     @Override
                     public void onFailure(OkHttpException failuer) {
                         loadDialog.dismiss();
-                        //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                         Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -267,7 +260,6 @@ public class MeetingSponsorActivity extends BaseActivity {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                             if (memberList.get(i).getMeetingContacts()!=null&&memberList.get(i).getMeetingContacts()!=""){
-//                                Toast.makeText(MeetingSponsorActivity.this,"会议室以占用",Toast.LENGTH_SHORT).show();
                                 // 拨打电话
                                 callPhone(memberList.get(i).getMeetingContactsPhone());
                             }else {
@@ -292,7 +284,6 @@ public class MeetingSponsorActivity extends BaseActivity {
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -344,7 +335,6 @@ public class MeetingSponsorActivity extends BaseActivity {
                 }
                 //设置时间
                 tvPartTime2.setText(getTime(date));
-                //    meetingTime = getTime(date);
                 meetingTimeEnd = tvPartTime2.getText().toString();
 
             }
@@ -365,7 +355,6 @@ public class MeetingSponsorActivity extends BaseActivity {
         if (resultCode == 1 && requestCode == 0&&data!=null) {
 
             List<People> mList1 = (List<People>) data.getSerializableExtra("mList");
-            //   mList= TimeUtils.removeDuplicate(mList);
             mList.addAll(mList1);
             mList = TimeUtils.removeDuplicateWithOrder(mList);
             tvPartCount.setText(mList.size() + " 人");
@@ -375,7 +364,6 @@ public class MeetingSponsorActivity extends BaseActivity {
 
                 // 替换了
                 cd = mList.size() + "";
-//              getData(mList.size() + "");
                 getData(cd);
                 String name = "";
                 participantId = "";
@@ -383,16 +371,12 @@ public class MeetingSponsorActivity extends BaseActivity {
                     participantId += params1.getUserId() + ",";
                     name += params1.getUserName() + ",";
                 }
-                //     tvPartPerson.setText(name.substring(0, name.length() - 1));
                 if (!participantId.equals(""))
                     participantId = participantId.substring(0, participantId.length() - 1);
-
-
                 adapter = new MeetGridViewAdapter(MeetingSponsorActivity.this, mList);
                 gvTest.setAdapter(adapter);
                 List<People> finalMList = mList;
                 gvTest.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view,
                                             int position, long id) {

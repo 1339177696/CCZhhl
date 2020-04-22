@@ -15,10 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.hulian.oa.BuildConfig;
 import com.hulian.oa.R;
 import com.hulian.oa.bean.Fab2;
-import com.hulian.oa.pad.PAD_zhiling_XF;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.views.fabVIew.FabAttributes;
 import com.hulian.oa.views.fabVIew.OnFabClickListener;
@@ -70,7 +68,7 @@ public class Fra_post_order extends Fragment  {
                 .build();
 //添加菜单
         fabTop.addFab(collection, email);
-    //    fabTop.setAnimationManager(new FabAlphaAnimate(fabTop));
+
 //设置菜单点击事件
         fabTop.setFabClickListener(new OnFabClickListener() {
             @Override
@@ -101,19 +99,18 @@ public class Fra_post_order extends Fragment  {
                             os.flush();
                             os.close();
                             llOrder.setVisibility(View.VISIBLE);
-//                            Intent intent1 = new Intent(getActivity(), PostOrderActivity.class);
-                            if (BuildConfig.IsPad)
-                            {
-                                Intent intent1 = new Intent(getActivity(), PAD_zhiling_XF.class);
-                                intent1.putExtra("file", filePath);
-                                getActivity().startActivity(intent1);
-                            }
-                            else
-                            {
+//                            if (BuildConfig.IsPad)
+//                            {
+//                                Intent intent1 = new Intent(getActivity(), PAD_zhiling_XF.class);
+//                                intent1.putExtra("file", filePath);
+//                                getActivity().startActivity(intent1);
+//                            }
+//                            else
+//                            {
                                 Intent intent1 = new Intent(getActivity(), PostOrderActivity.class);
                                 intent1.putExtra("file", filePath);
                                 getActivity().startActivity(intent1);
-                            }
+//                            }
                         } catch (Exception e) {
                         }
                     }

@@ -63,12 +63,6 @@ public class Admin_boxActivity extends BaseActivity {
                 dialog_list.show();
             }
         });
-//        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Toast.makeText(Admin_boxActivity.this,"ddd",Toast.LENGTH_SHORT).show();
-//            }
-//        });
     }
     private void initNum() {
         listnum.add("1号文件柜");

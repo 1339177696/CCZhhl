@@ -23,7 +23,6 @@ import butterknife.ButterKnife;
 
 public class Fileadapter extends BaseAdapter {
     private String changeStr = "";
-    //
     private List<String> mlistdatas;
     private LayoutInflater mInflater;
     private Context mcontext;

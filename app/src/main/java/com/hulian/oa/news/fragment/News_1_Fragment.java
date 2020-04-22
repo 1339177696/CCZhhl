@@ -123,7 +123,6 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
                 currentPosition++;
                 Log.d("recyclerBanner", currentPosition + " ");
                 mOverFlyingLayoutManager.scrollToPosition(currentPosition);
-                //  recyclerView.smoothScrollToPosition(currentPosition);
                 mHandler.postDelayed(this, 3000);
             }
         };
@@ -144,7 +143,6 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
 
     @Override
     public void OnBannerClick(int position) {
-        //   Toast.makeText(getActivity(), "你点了第" + (position + 1) + "张轮播图", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -178,7 +176,6 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
             public void onSuccess(Object responseObj) {
                 if (loadDialog.isShowing())
                      loadDialog.dismiss();
-
                 //需要转化为实体对象
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
@@ -204,7 +201,6 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
             public void onFailure(OkHttpException failuer) {
                 if (loadDialog.isShowing())
                 loadDialog.dismiss();
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

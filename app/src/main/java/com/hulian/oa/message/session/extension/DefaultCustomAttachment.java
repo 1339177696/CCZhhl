@@ -6,9 +6,7 @@ import com.alibaba.fastjson.JSONObject;
  * Created by zhoujianghua on 2015/4/10.
  */
 public class DefaultCustomAttachment extends CustomAttachment {
-
     private String content;
-
     public DefaultCustomAttachment() {
         super(0);
     }

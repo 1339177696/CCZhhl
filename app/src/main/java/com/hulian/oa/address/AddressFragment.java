@@ -38,8 +38,6 @@ public class AddressFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-//    @BindView(R.id.iv_mine)
-//    ImageView ivMine;
     @BindView(R.id.contact_fragment)
     LinearLayout contactFragment;
     private PersonAdapter mListAdapter;
@@ -68,9 +66,6 @@ public class AddressFragment extends Fragment {
     public static AddressFragment newInstance(String requestJson) {
         AddressFragment fragment = new AddressFragment();
         Bundle args = new Bundle();
-//        args.putString("requestJson", requestJson);
-//        args.putString("gid", gid);
-//        args.putString("idno", idno);
         fragment.setArguments(args);
         return fragment;
     }
@@ -79,8 +74,6 @@ public class AddressFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-//            gid = getArguments().getString("gid");
-//            idno=getArguments().getString("idno");
         }
     }
 
@@ -97,7 +90,6 @@ public class AddressFragment extends Fragment {
 
 
         fragment = new ContactsFragment();
-//        fragment.setContainerId(R.id.contact_fragment);
         transacction.replace(R.id.contact_fragment, fragment);
         //使用FragmentTransaction必须要commit
         transacction.commit();
@@ -118,17 +110,8 @@ public class AddressFragment extends Fragment {
                 FuncViewHolder.FuncItem.handle(getActivity(), item);
             }
         });
-
-
-//
         mListAdapter = new PersonAdapter(getActivity(), initData());
         listview.setAdapter(mListAdapter);
-    /*    listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                startActivity(new Intent(getActivity(), ActivityPerson.class));
-            }
-        });*/
         mListAdapter.notifyDataSetChanged();
         //meditText监听文本变化
         editText.addTextChangedListener(new TextWatcher() {

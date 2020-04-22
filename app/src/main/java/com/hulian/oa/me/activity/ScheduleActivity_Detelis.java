@@ -53,7 +53,6 @@ public class ScheduleActivity_Detelis extends BaseActivity {
     ImageView imgRemind;
     @BindView(R.id.btn_select_complete)
     Button btnSelectComplete;
-
     private String type = "";
     private String title = "";
     private String qu = "";
@@ -289,7 +288,6 @@ public class ScheduleActivity_Detelis extends BaseActivity {
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(ScheduleActivity_Detelis.this, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

@@ -45,35 +45,10 @@ public class FuncViewHolder extends AbsContactViewHolder<FuncViewHolder.FuncItem
 
     @Override
     public void refresh(ContactDataAdapter contactAdapter, int position, FuncItem item) {
-//        if (item == FuncItem.VERIFY) {
-//            funcName.setText("验证提醒");
-//            image.setImageResource(R.mipmap.icon_verify_remind);
-//            image.setScaleType(ImageView.ScaleType.FIT_XY);
-//            int unreadCount = SystemMessageUnreadManager.getInstance().getSysMsgUnreadCount();
-//            updateUnreadNum(unreadCount);
-//            ReminderManager.getInstance().registerUnreadNumChangedCallback(this);
-//            sUnreadCallbackRefs.hb_add(new WeakReference<ReminderManager.UnreadNumChangedCallback>(this));
-//        }
-//        else if (item == FuncItem.ROBOT) {
-//            funcName.setText("智能机器人");
-//            image.setImageResource(R.drawable.ic_robot);
-//        }
-        //else
        if (item == FuncItem.NORMAL_TEAM) {
             funcName.setText("讨论组");
             image.setImageResource(R.mipmap.ic_secretary);
         }
-//        else if (item == FuncItem.ADVANCED_TEAM) {
-//            funcName.setText("高级群");
-//            image.setImageResource(R.drawable.ic_advanced_team);
-//        } else if (item == FuncItem.BLACK_LIST) {
-//            funcName.setText("黑名单");
-//            image.setImageResource(R.drawable.ic_black_list);
-//        } else if (item == FuncItem.MY_COMPUTER) {
-//            funcName.setText("我的电脑");
-//            image.setImageResource(R.drawable.ic_my_computer);
-//        }
-
         if (item != FuncItem.VERIFY) {
             image.setScaleType(ImageView.ScaleType.FIT_XY);
             unreadNum.setVisibility(View.GONE);
@@ -110,12 +85,7 @@ public class FuncViewHolder extends AbsContactViewHolder<FuncViewHolder.FuncItem
 
     public final static class FuncItem extends AbsContactItem {
         static final FuncItem VERIFY = new FuncItem();
-      //  static final FuncItem ROBOT = new FuncItem();
         static final FuncItem NORMAL_TEAM = new FuncItem();
-      //  static final FuncItem ADVANCED_TEAM = new FuncItem();
-     //   static final FuncItem BLACK_LIST = new FuncItem();
-    //    static final FuncItem MY_COMPUTER = new FuncItem();
-
         @Override
         public int getItemType() {
             return ItemTypes.FUNC;
@@ -129,13 +99,7 @@ public class FuncViewHolder extends AbsContactViewHolder<FuncViewHolder.FuncItem
 
         public static List<AbsContactItem> provide() {
             List<AbsContactItem> items = new ArrayList<>();
-//            items.hb_add(VERIFY);
-            //items.hb_add(ROBOT);
             items.add(NORMAL_TEAM);
-//            items.hb_add(ADVANCED_TEAM);
-//            items.hb_add(BLACK_LIST);
-//            items.hb_add(MY_COMPUTER);
-
             return items;
         }
 
@@ -143,19 +107,9 @@ public class FuncViewHolder extends AbsContactViewHolder<FuncViewHolder.FuncItem
             if (item == VERIFY) {
                 SystemMessageActivity.start(context);
             }
-//            else if (item == ROBOT) {
-//                RobotListActivity.start(context);
-//            }
             else if (item == NORMAL_TEAM) {
                TeamListActivity.start(context, ItemTypes.TEAMS.NORMAL_TEAM);
             }
-//            else if (item == ADVANCED_TEAM) {
-//                TeamListActivity.start(context, ItemTypes.TEAMS.ADVANCED_TEAM);
-//            } else if (item == MY_COMPUTER) {
-//                SessionHelper.startP2PSession(context, DemoCache.getAccount());
-//            } else if (item == BLACK_LIST) {
-//                BlackListActivity.start(context);
-//            }
         }
     }
 }

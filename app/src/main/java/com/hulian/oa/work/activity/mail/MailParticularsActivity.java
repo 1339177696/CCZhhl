@@ -147,15 +147,7 @@ public class MailParticularsActivity extends BaseActivity {
             });
         } else {
         }
-        // 先注释
-//        state = account.getCollectState();
-//        if (state.equals("0")){
-//            Drawable top = getResources().getDrawable(R.mipmap.mail_collect_icon);
-//            tv_collection.setCompoundDrawablesWithIntrinsicBounds(null, top , null, null);
-//        }else {
-//            Drawable top = getResources().getDrawable(R.mipmap.ic_store_sel);
-//            tv_collection.setCompoundDrawablesWithIntrinsicBounds(null, top , null, null);
-//        }
+
     }
 
     //调用方法。先请求权限
@@ -188,7 +180,6 @@ public class MailParticularsActivity extends BaseActivity {
         BufferedSink bufferedSink = null;
         try {
             String mSDCardPath = Environment.getExternalStorageDirectory().getAbsolutePath();//SD卡路径
-            //String appPath= getApplicationContext().getFilesDir().getAbsolutePath();//此APP的files路径
             File dest = new File(mSDCardPath, url.substring(url.lastIndexOf("/") + 1));
             sink = Okio.sink(dest);
             bufferedSink = Okio.buffer(sink);
@@ -219,16 +210,11 @@ public class MailParticularsActivity extends BaseActivity {
         URLImageParser imageGetter = new URLImageParser( tv_mail_details);
         tv_mail_details.setText(Html.fromHtml(account.getContent(), imageGetter, null));
         tv_receive_person.setText(account.getRecipients()+ "");
-//        tv_receive_person.setText(account.getRecipients().split("<")[0] + "");
-//        tvReceivePerson2.setText("<" + (account.getRecipients().split("<")[1]+"").split(">")[0]+">");
-
         if(account.getCCP()==null||account.getCCP().equals("")){
             rlChaosong.setVisibility(View.GONE);
         }
         else {
             tvChaosongPerson.setText(account.getCCP()+ "");
-//            tvChaosongPerson.setText(account.getCCP().split("<")[0] + "");
-//            tvChaosongPerson2.setText("<" + account.getCCP().split("<")[1] + "".split("<")[0]);
         }
     }
 
@@ -394,7 +380,6 @@ public class MailParticularsActivity extends BaseActivity {
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(MailParticularsActivity.this, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

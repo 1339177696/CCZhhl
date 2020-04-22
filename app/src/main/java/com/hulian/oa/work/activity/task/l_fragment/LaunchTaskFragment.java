@@ -125,11 +125,9 @@ public class LaunchTaskFragment extends Fragment implements PullLoadMoreRecycler
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                     if (mCount == 1 && memberList.size() == 0) {
                         emptyBg.setVisibility(View.VISIBLE);
-//                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
                     }
                     else {
                         emptyBg.setVisibility(View.GONE);
-//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -138,7 +136,6 @@ public class LaunchTaskFragment extends Fragment implements PullLoadMoreRecycler
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
                 Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

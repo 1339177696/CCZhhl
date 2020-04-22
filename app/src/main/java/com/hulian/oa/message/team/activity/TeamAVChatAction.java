@@ -45,13 +45,8 @@ import java.util.List;
  */
 
 public class TeamAVChatAction extends AVChatAction {
-
     private static final int MAX_INVITE_NUM = 8;
-
-    // private String teamID;
-
     private LaunchTransaction transaction;
-
     public TeamAVChatAction(AVChatType avChatType) {
         super(avChatType);
     }

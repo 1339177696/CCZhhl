@@ -109,7 +109,6 @@ public class UpcomFragment extends Fragment implements PullLoadMoreRecyclerView.
         if (stringBean1.getDaiban().equals("1")){
             dataBean.clear();
             for (int i = 0;i<memberList.size();i++) {
-
                 if (memberList.get(i).getType().equals("1")) {
                     //公文
                     dataBean.add(memberList.get(i));
@@ -217,96 +216,96 @@ public class UpcomFragment extends Fragment implements PullLoadMoreRecyclerView.
         });
     }
 
-    private List<AgencyNew> newData(Agency agency) {
-        List<AgencyNew> agencyNewslist = new ArrayList<>();
-        if (agency.getWorkCoordinationReleaseList() != null) {
-            for (WorkCoordinationReleaseList mWorkCoordinationReleaseList : agency.getWorkCoordinationReleaseList()) {
-                AgencyNew mAgencyNew = new AgencyNew();
-                mAgencyNew.setType("0");
-                mAgencyNew.setTime(mWorkCoordinationReleaseList.getTime());
-                mAgencyNew.setTitile(mWorkCoordinationReleaseList.getTitle());
-                mAgencyNew.setContent("发起人 " + mWorkCoordinationReleaseList.getCreateBy());
-                mAgencyNew.setDes("协同人 " + mWorkCoordinationReleaseList.getPersonSum());
-                mAgencyNew.setId(mWorkCoordinationReleaseList.getId());
-                agencyNewslist.add(mAgencyNew);
-            }
-        }
-        if (agency.getOfficialDocumentList() != null) {
-            for (OfficialDocumentList mOfficialDocumentList : agency.getOfficialDocumentList()) {
-                AgencyNew mAgencyNew = new AgencyNew();
-                mAgencyNew.setType("1");
-                mAgencyNew.setTime(mOfficialDocumentList.getTime());
-                mAgencyNew.setTitile(mOfficialDocumentList.getTitle());
-                mAgencyNew.setContent("发起人 " + mOfficialDocumentList.getReleasePerson());
-                mAgencyNew.setDes("审批人 " + mOfficialDocumentList.getApproveNames());
-                mAgencyNew.setId(mOfficialDocumentList.getId());
-                agencyNewslist.add(mAgencyNew);
-            }
-        }
-        if (agency.getInstructionsList() != null) {
-            for (InstructionsList mInstructionsList : agency.getInstructionsList()) {
-                AgencyNew mAgencyNew = new AgencyNew();
-                mAgencyNew.setType("2");
-                mAgencyNew.setTime(mInstructionsList.getTime());
-                mAgencyNew.setTitile(mInstructionsList.getTitle());
-                mAgencyNew.setStatus(mInstructionsList.getReceiveStatus());
-                mAgencyNew.setContent("");
-                mAgencyNew.setDes("");
-                mAgencyNew.setId(mInstructionsList.getId());
-                agencyNewslist.add(mAgencyNew);
-            }
-        }
-        if (agency.getMeetingList() != null) {
-            for (MeetingList mMeetingList : agency.getMeetingList()) {
-                AgencyNew mAgencyNew = new AgencyNew();
-                mAgencyNew.setType("3");
-                mAgencyNew.setTime(mMeetingList.getTime());
-                mAgencyNew.setTitile(mMeetingList.getTitle());
-                mAgencyNew.setContent("地点 " + mMeetingList.getMeetingAddress());
-                mAgencyNew.setDes("时间 " + mMeetingList.getMeetingTime());
-                mAgencyNew.setId(mMeetingList.getId());
-                agencyNewslist.add(mAgencyNew);
-            }
-        }
-        if (agency.getWorkReimbursementList() != null) {
-            for (WorkReimbursementList mWorkReimbursementList : agency.getWorkReimbursementList()) {
-                AgencyNew mAgencyNew = new AgencyNew();
-                mAgencyNew.setType("4");
-                mAgencyNew.setTime(mWorkReimbursementList.getTime());
-                mAgencyNew.setCreateBy(mWorkReimbursementList.getCreateBy());
-                mAgencyNew.setTitile(mWorkReimbursementList.getTitle());
-                mAgencyNew.setContent("事由 " + mWorkReimbursementList.getCause());
-                mAgencyNew.setDes("金额 " + mWorkReimbursementList.getMoney());
-                mAgencyNew.setId(mWorkReimbursementList.getId());
-                agencyNewslist.add(mAgencyNew);
-            }
-        }
-        if (agency.getWorkLeaveList() != null) {
-            for (WorkLeaveList mWorkLeaveList : agency.getWorkLeaveList()) {
-                AgencyNew mAgencyNew = new AgencyNew();
-                mAgencyNew.setType("5");
-                mAgencyNew.setCreateBy(mWorkLeaveList.getCreateBy());
-                mAgencyNew.setTime(mWorkLeaveList.getTime());
-                mAgencyNew.setTitile(mWorkLeaveList.getTitle());
-                mAgencyNew.setContent("事由 " + mWorkLeaveList.getCause());
-                mAgencyNew.setDes("时长 " + mWorkLeaveList.getDuration() + "天");
-                mAgencyNew.setId(mWorkLeaveList.getId());
-                agencyNewslist.add(mAgencyNew);
-            }
-        }
-        AgencyCount mAgencyCount = new AgencyCount();
-        mAgencyCount.setAgencyCount(agencyNewslist.size() + "");
-        EventBus.getDefault().post(mAgencyCount);
-        if(agencyNewslist.size()==0){
-            emptyBg.setVisibility(View.VISIBLE);
-//            qgl改的
-//            mPullLoadMoreRecyclerView.setVisibility(View.GONE);
-        }
-        else {
-            //            qgl改的
-            emptyBg.setVisibility(View.GONE);
-//            mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
-        }
-        return agencyNewslist;
-    }
+//    private List<AgencyNew> newData(Agency agency) {
+//        List<AgencyNew> agencyNewslist = new ArrayList<>();
+//        if (agency.getWorkCoordinationReleaseList() != null) {
+//            for (WorkCoordinationReleaseList mWorkCoordinationReleaseList : agency.getWorkCoordinationReleaseList()) {
+//                AgencyNew mAgencyNew = new AgencyNew();
+//                mAgencyNew.setType("0");
+//                mAgencyNew.setTime(mWorkCoordinationReleaseList.getTime());
+//                mAgencyNew.setTitile(mWorkCoordinationReleaseList.getTitle());
+//                mAgencyNew.setContent("发起人 " + mWorkCoordinationReleaseList.getCreateBy());
+//                mAgencyNew.setDes("协同人 " + mWorkCoordinationReleaseList.getPersonSum());
+//                mAgencyNew.setId(mWorkCoordinationReleaseList.getId());
+//                agencyNewslist.add(mAgencyNew);
+//            }
+//        }
+//        if (agency.getOfficialDocumentList() != null) {
+//            for (OfficialDocumentList mOfficialDocumentList : agency.getOfficialDocumentList()) {
+//                AgencyNew mAgencyNew = new AgencyNew();
+//                mAgencyNew.setType("1");
+//                mAgencyNew.setTime(mOfficialDocumentList.getTime());
+//                mAgencyNew.setTitile(mOfficialDocumentList.getTitle());
+//                mAgencyNew.setContent("发起人 " + mOfficialDocumentList.getReleasePerson());
+//                mAgencyNew.setDes("审批人 " + mOfficialDocumentList.getApproveNames());
+//                mAgencyNew.setId(mOfficialDocumentList.getId());
+//                agencyNewslist.add(mAgencyNew);
+//            }
+//        }
+//        if (agency.getInstructionsList() != null) {
+//            for (InstructionsList mInstructionsList : agency.getInstructionsList()) {
+//                AgencyNew mAgencyNew = new AgencyNew();
+//                mAgencyNew.setType("2");
+//                mAgencyNew.setTime(mInstructionsList.getTime());
+//                mAgencyNew.setTitile(mInstructionsList.getTitle());
+//                mAgencyNew.setStatus(mInstructionsList.getReceiveStatus());
+//                mAgencyNew.setContent("");
+//                mAgencyNew.setDes("");
+//                mAgencyNew.setId(mInstructionsList.getId());
+//                agencyNewslist.add(mAgencyNew);
+//            }
+//        }
+//        if (agency.getMeetingList() != null) {
+//            for (MeetingList mMeetingList : agency.getMeetingList()) {
+//                AgencyNew mAgencyNew = new AgencyNew();
+//                mAgencyNew.setType("3");
+//                mAgencyNew.setTime(mMeetingList.getTime());
+//                mAgencyNew.setTitile(mMeetingList.getTitle());
+//                mAgencyNew.setContent("地点 " + mMeetingList.getMeetingAddress());
+//                mAgencyNew.setDes("时间 " + mMeetingList.getMeetingTime());
+//                mAgencyNew.setId(mMeetingList.getId());
+//                agencyNewslist.add(mAgencyNew);
+//            }
+//        }
+//        if (agency.getWorkReimbursementList() != null) {
+//            for (WorkReimbursementList mWorkReimbursementList : agency.getWorkReimbursementList()) {
+//                AgencyNew mAgencyNew = new AgencyNew();
+//                mAgencyNew.setType("4");
+//                mAgencyNew.setTime(mWorkReimbursementList.getTime());
+//                mAgencyNew.setCreateBy(mWorkReimbursementList.getCreateBy());
+//                mAgencyNew.setTitile(mWorkReimbursementList.getTitle());
+//                mAgencyNew.setContent("事由 " + mWorkReimbursementList.getCause());
+//                mAgencyNew.setDes("金额 " + mWorkReimbursementList.getMoney());
+//                mAgencyNew.setId(mWorkReimbursementList.getId());
+//                agencyNewslist.add(mAgencyNew);
+//            }
+//        }
+//        if (agency.getWorkLeaveList() != null) {
+//            for (WorkLeaveList mWorkLeaveList : agency.getWorkLeaveList()) {
+//                AgencyNew mAgencyNew = new AgencyNew();
+//                mAgencyNew.setType("5");
+//                mAgencyNew.setCreateBy(mWorkLeaveList.getCreateBy());
+//                mAgencyNew.setTime(mWorkLeaveList.getTime());
+//                mAgencyNew.setTitile(mWorkLeaveList.getTitle());
+//                mAgencyNew.setContent("事由 " + mWorkLeaveList.getCause());
+//                mAgencyNew.setDes("时长 " + mWorkLeaveList.getDuration() + "天");
+//                mAgencyNew.setId(mWorkLeaveList.getId());
+//                agencyNewslist.add(mAgencyNew);
+//            }
+//        }
+//        AgencyCount mAgencyCount = new AgencyCount();
+//        mAgencyCount.setAgencyCount(agencyNewslist.size() + "");
+//        EventBus.getDefault().post(mAgencyCount);
+//        if(agencyNewslist.size()==0){
+//            emptyBg.setVisibility(View.VISIBLE);
+////            qgl改的
+////            mPullLoadMoreRecyclerView.setVisibility(View.GONE);
+//        }
+//        else {
+//            //            qgl改的
+//            emptyBg.setVisibility(View.GONE);
+////            mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
+//        }
+//        return agencyNewslist;
+//    }
 }

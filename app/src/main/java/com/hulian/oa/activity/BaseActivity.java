@@ -159,20 +159,30 @@ public class BaseActivity extends FragmentActivity  {
         return localVersion;
     }
 
+
     /**
-     * 获取本地软件版本号名称
+     * 获取版本名称
+     *
+     * @param context 上下文
+     *
+     * @return 版本名称
      */
-    public static String getLocalVersionName(Context ctx) {
-        String localVersion = "";
+    public static String getVersionName(Context context) {
+
+        //获取包管理器
+        PackageManager pm = context.getPackageManager();
+        //获取包信息
         try {
-            PackageInfo packageInfo = ctx.getApplicationContext()
-                    .getPackageManager()
-                    .getPackageInfo(ctx.getPackageName(), 0);
-            localVersion = packageInfo.versionName;
+            PackageInfo packageInfo = pm.getPackageInfo(context.getPackageName(), 0);
+            //返回版本号
+            return packageInfo.versionName;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        return localVersion;
+
+        return null;
+
     }
+
 
 }
