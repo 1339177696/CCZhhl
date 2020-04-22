@@ -106,7 +106,7 @@ public class ExpenseLaunchFragment extends Fragment implements PullLoadMoreRecyc
 
     @Override
     public void onRefresh() {
-        Log.e("wxl", "onRefresh");
+        Log.e("我发起的报销管理", "onRefresh");
         setRefresh();
         getData();
     }
@@ -122,6 +122,7 @@ public class ExpenseLaunchFragment extends Fragment implements PullLoadMoreRecyc
         mCount = 1;
     }
     private void getData() {
+        Log.e("我发起的报销管理", "getData");
         RequestParams params = new RequestParams();
         params.put("pageStart", mCount*10-9 + "");
         params.put("pageEnd", mCount * 10 + "");

@@ -11,17 +11,22 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.hulian.oa.activity.BaseActivity;
 import com.hulian.oa.bean.ExpenseBean;
+import com.hulian.oa.utils.gallery.DisplayUtils;
+import com.hulian.oa.views.flowview.ItemDecoration;
 import com.hulian.oa.views.flowview.MyLayoutManager;
 import com.hulian.oa.views.flowview.MyLinearLayoutManager;
 import com.hulian.oa.views.flowview.NoScrollRecyclerView;
 import com.hulian.oa.R;
 import com.hulian.oa.utils.StatusBarUtil;
+import com.hulian.oa.work.activity.attendance.ClockActivity;
+import com.hulian.oa.work.activity.attendance.SubordpersonActivity;
 import com.hulian.oa.work.activity.expense.l_adapter.ExpenseApproverAdapter;
 import com.hulian.oa.work.activity.expense.l_adapter.ExpenseCopyerAdapter;
 import com.hulian.oa.work.activity.expense.l_adapter.ExpenseImageAdapter;
@@ -52,6 +57,8 @@ public class ExpenseApplyForActivity extends BaseActivity {
     RecyclerView recycler_approver;//审批人
     @BindView(R.id.recycler_copyer)
     RecyclerView recycler_copyer;//抄送人
+    @BindView(R.id.iv_back)
+    RelativeLayout iv_back;
     //已经选择图片
     private List<LocalMedia> selectList = new ArrayList<>();
     List<String> reasonlist = new ArrayList<>();//报销事由
@@ -59,6 +66,7 @@ public class ExpenseApplyForActivity extends BaseActivity {
     String reason = "";
     //审批人
     private List<String> approverList = new ArrayList<>();
+    //抄送人
     private List<String> copyerList = new ArrayList<>();
     private int count1 = 0;
     public  int count2 = 0;
@@ -82,7 +90,7 @@ public class ExpenseApplyForActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.tv_addItem,R.id.tv_sum})
+    @OnClick({R.id.tv_addItem,R.id.tv_sum,R.id.iv_back})
     public void onClickView(View view){
         switch (view.getId()){
             case R.id.tv_addItem:
@@ -90,6 +98,9 @@ public class ExpenseApplyForActivity extends BaseActivity {
                 addItem();
                 break;
             case R.id.tv_sum:
+                break;
+            case R.id.iv_back:
+                this.finish();
                 break;
         }
     }
@@ -169,6 +180,7 @@ public class ExpenseApplyForActivity extends BaseActivity {
     public ExpenseApproverAdapter.onAddPicClickListener onAddExpenseClickListener = new ExpenseApproverAdapter.onAddPicClickListener() {
         @Override
         public void onAddPicClick(int position, View view) {
+            startActivity(new Intent(mContext, SubordpersonActivity.class));
             count1++;
             approverList.add("大老板"+count1);
             approverAdapter.notifyItemInserted(approverList.size());
@@ -220,6 +232,7 @@ public class ExpenseApplyForActivity extends BaseActivity {
         approverAdapter = new ExpenseApproverAdapter(mContext,onAddExpenseClickListener,onItemCopyerDeleteListener);
 //        FlowLayoutManager flowLayoutManager = new FlowLayoutManager(mContext,true);
         MyLayoutManager flowLayoutManager = new MyLayoutManager();
+        recycler_approver.addItemDecoration(new ItemDecoration(DisplayUtils.dip2px(mContext,6)));
         //必须，防止recyclerview高度为wrap时测量item高度0
         flowLayoutManager.setAutoMeasureEnabled(true);
         approverAdapter.setList(approverList);
@@ -229,6 +242,7 @@ public class ExpenseApplyForActivity extends BaseActivity {
         copyerAdapter = new ExpenseCopyerAdapter(mContext,onAddCopyer,onDeleteCopyer);
 //        FlowLayoutManager flowLayoutManager = new FlowLayoutManager(mContext,true);
         MyLayoutManager flowManager = new MyLayoutManager();
+        recycler_copyer.addItemDecoration(new ItemDecoration(DisplayUtils.dip2px(mContext,6)));
         //必须，防止recyclerview高度为wrap时测量item高度0
         flowManager.setAutoMeasureEnabled(true);
         copyerAdapter.setList(copyerList);

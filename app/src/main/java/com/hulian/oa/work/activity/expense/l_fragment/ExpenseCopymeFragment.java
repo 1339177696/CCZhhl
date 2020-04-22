@@ -103,7 +103,7 @@ public class ExpenseCopymeFragment extends Fragment implements PullLoadMoreRecyc
 
     @Override
     public void onRefresh() {
-        Log.e("wxl", "onRefresh");
+        Log.e("报销管理抄送我的", "onRefresh");
         setRefresh();
         getData();
     }
@@ -119,6 +119,7 @@ public class ExpenseCopymeFragment extends Fragment implements PullLoadMoreRecyc
         mCount = 1;
     }
     private void getData() {
+        Log.e("报销管理抄送我的", "getData");
         RequestParams params = new RequestParams();
         params.put("pageStart", mCount*10-9 + "");
         params.put("pageEnd", mCount * 10 + "");
