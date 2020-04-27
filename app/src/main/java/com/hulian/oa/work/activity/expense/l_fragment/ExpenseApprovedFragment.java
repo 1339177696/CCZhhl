@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -48,7 +49,8 @@ public class ExpenseApprovedFragment extends Fragment implements PullLoadMoreRec
     private ArrayList<String> list_path;
     private ArrayList<String> list_title;
     Unbinder unbinder;
-
+    @BindView(R.id.emptyBg)
+    RelativeLayout emptyBg;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -115,6 +117,7 @@ public class ExpenseApprovedFragment extends Fragment implements PullLoadMoreRec
         mCount = 1;
     }
     private void getData() {
+        Log.e("报销管理待审批", "getData");
         RequestParams params = new RequestParams();
         params.put("pageStart", mCount*10-9 + "");
         params.put("pageEnd", mCount * 10 + "");
@@ -130,6 +133,13 @@ public class ExpenseApprovedFragment extends Fragment implements PullLoadMoreRec
                     List<Expense> memberList = gson.fromJson(result.getJSONArray("data").toString(),
                             new TypeToken<List<Expense>>() {
                             }.getType());
+                    if (mCount == 1 && memberList.size() == 0) {
+                        emptyBg.setVisibility(View.VISIBLE);
+                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
+                    }else{
+                        emptyBg.setVisibility(View.GONE);
+                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
+                    }
                     mRecyclerViewAdapter.addAllData(memberList);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                 } catch (JSONException e) {

@@ -24,13 +24,13 @@
         android:layout_height="wrap_content"
         >
         <RelativeLayout
-            android:id="@+id/iv_back"
             android:layout_width="match_parent"
             android:gravity="center_vertical"
             android:layout_height="@dimen/dp_53"
             android:background="@drawable/baoxiao_bg"
             >
             <ImageView
+                android:id="@+id/iv_back"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_width="@dimen/dp_15"
                 android:layout_centerVertical="true"

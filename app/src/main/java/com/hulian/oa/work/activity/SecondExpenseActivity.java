@@ -33,6 +33,8 @@ import butterknife.OnClick;
  * 报销审批
  */
 public class SecondExpenseActivity extends BaseActivity {
+
+
     @BindView(R.id.my_tablayout)
     TabLayout myTablayout;
     @BindView(R.id.my_viewpager)
@@ -44,6 +46,7 @@ public class SecondExpenseActivity extends BaseActivity {
     private ArrayList<String> list_title;
     ArrayList<String> titleDatas   = new ArrayList<>();;
     ArrayList<Fragment> fragmentList = new ArrayList<Fragment>();
+
     @BindView(R.id.tv_baoxiao)
     TextView tv_baoxiao;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -55,24 +58,31 @@ public class SecondExpenseActivity extends BaseActivity {
         ButterKnife.bind(this);
         mContext = this;
         //领导
-        if (SPUtils.get(mContext, "isLead", "").equals("0")) {
+        String isLeader = (String) SPUtils.get(mContext, "isLead", "");
+        isLeader = "1";
+        if (isLeader.equals("0")) {
+//            tv_apply.setVisibility(View.GONE);
             tv_apply.setVisibility(View.VISIBLE);
-            titleDatas.add("待审批");
-            titleDatas.add("已审批");
+//            titleDatas.add("待审批");
+//            titleDatas.add("已审批");
+//            titleDatas.hb_add("我发起的");
+//            titleDatas.hb_add("我审批的");
+//            titleDatas.hb_add("抄送我的");
             fragmentList.add(new ExpenseLaunchFragment());
+//            fragmentList.hb_add(new ExpensePendFragment());
             fragmentList.add(new ExpenseApprovedFragment());
         }
         //员工
         else {
-            titleDatas.add("我发起的");
-            titleDatas.add("抄送我的");
+//            titleDatas.add("我发起的");
+//            titleDatas.add("抄送我的");
             tv_apply.setVisibility(View.VISIBLE);
             fragmentList.add(new ExpenseLaunchFragment());
             fragmentList.add(new ExpenseCopymeFragment());
         }
-        init();
+        init(isLeader);
     }
-    private void init() {
+    private void init(String isLeader) {
         MyViewPageAdapter myViewPageAdapter = new MyViewPageAdapter(getSupportFragmentManager(), titleDatas, fragmentList);
         myTablayout.setSelectedTabIndicator(0);
         myViewpager.setAdapter(myViewPageAdapter);
@@ -85,8 +95,13 @@ public class SecondExpenseActivity extends BaseActivity {
         ImageView imageView = myTablayout.getTabAt(0).getCustomView().findViewById(R.id.iv_pic);
         TextView textView1 = myTablayout.getTabAt(1).getCustomView().findViewById(R.id.tv_title);
         ImageView imageView1 = myTablayout.getTabAt(1).getCustomView().findViewById(R.id.iv_pic);
-        textView.setText("我发起的");
-        textView1.setText("抄送我的");
+        if (isLeader.equals("0")){//0 代表领导
+            textView.setText("待审批");
+            textView1.setText("已审批");
+        }else{
+            textView.setText("我发起的");
+            textView1.setText("抄送我的");
+        }
         //标题左边选中和未选中的图片效果
         imageView.setBackground(ContextCompat.getDrawable(this,R.drawable.baoxiao_pic_f));
         imageView1.setBackground(ContextCompat.getDrawable(this,R.drawable.baoxiao_pic_s));
@@ -114,6 +129,7 @@ public class SecondExpenseActivity extends BaseActivity {
         switch (view.getId()){
             case R.id.tv_apply://报销申请
                 startActivity(new Intent(mContext, ExpenseApplyForActivity.class));
+//                startActivity(new Intent(mContext, ExpenseDetailsActivity.class));
                 break;
             case R.id.iv_back:
                 finish();

@@ -57,5 +57,4 @@ public class MyLayoutManager extends RecyclerView.LayoutManager {
         }
 
     }
-
 }
