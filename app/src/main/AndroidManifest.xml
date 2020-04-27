@@ -503,6 +503,16 @@
             android:name=".work.activity.video.activity.VideoConferenceActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"/>
 
+        <activity
+            android:name=".work.activity.attendancestatistics.activity.AnaestheticsActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+
+        <activity android:name=".work.activity.attendancestatistics.activity.ClockDetailsActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+
+        <activity android:name=".socket.activity.NoticeActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+
 
     </application>
 

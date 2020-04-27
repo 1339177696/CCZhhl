@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="@dimen/dp_15"
+    android:paddingLeft="@dimen/dp_20"
+    android:paddingRight="@dimen/dp_20"
+    android:background="#F2F5FF">
+
+
+        <TextView
+            android:id="@+id/att_tv_date"
+            android:layout_marginLeft="@dimen/dp_8"
+            app:layout_constraintTop_toTopOf="@+id/iv_remind"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_remind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2020-02-13      星期一"
+            app:layout_constraintLeft_toRightOf="@+id/iv_remind"
+            />
+
+        <TextView
+            android:id="@+id/att_clock_time"
+            app:layout_constraintTop_toTopOf="@+id/att_tv_date"
+            app:layout_constraintBottom_toBottomOf="@+id/att_tv_date"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="上班 08:01   下班 17:48"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/att_clock_time"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@color/line_color"
+            />
+
+</android.support.constraint.ConstraintLayout>

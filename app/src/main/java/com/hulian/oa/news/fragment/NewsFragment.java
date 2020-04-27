@@ -39,8 +39,6 @@ public class NewsFragment extends Fragment {
     ViewPager myViewpager;
     @BindView(R.id.tv_type)
     TextView tv_type;
-    private ArrayList<String> list_path;
-    private ArrayList<String> list_title;
 
     public NewsFragment() {
         // Required empty public constructor
@@ -69,13 +67,11 @@ public class NewsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fra_news, container, false);
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
         tv_type.setText(SPUtils.get(getActivity(), "nickname", "").toString().substring(SPUtils.get(getActivity(), "nickname", "").toString().length()-2,SPUtils.get(getActivity(), "nickname", "").toString().length()));
-
         ArrayList<String> titleDatas = new ArrayList<>();
         titleDatas.add("新闻");
         titleDatas.add("通告");

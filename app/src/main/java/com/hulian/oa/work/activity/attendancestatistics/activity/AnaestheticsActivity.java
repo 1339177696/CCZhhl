@@ -1,4 +1,4 @@
-package com.hulian.oa.work.activity.attendancestatistics;
+package com.hulian.oa.work.activity.attendancestatistics.activity;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -10,7 +10,6 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.hulian.oa.R;
@@ -18,8 +17,10 @@ import com.hulian.oa.activity.BaseActivity;
 import com.hulian.oa.news.adapter.MyViewPageAdapter;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.StatusBarUtil;
-import com.hulian.oa.work.fragment.DepartmentattendanceFragment;
-import com.hulian.oa.work.fragment.MaintenanceFragment;
+import com.hulian.oa.work.activity.attendancestatistics.fragment.DepartmentattendanceFragment;
+import com.hulian.oa.work.activity.attendancestatistics.fragment.MaintenanceFragment;
+import com.hulian.oa.work.activity.attendancestatistics.fragment.UnitAttendanceFragment;
+
 import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,7 +54,7 @@ public class AnaestheticsActivity extends BaseActivity {
         setContentView(R.layout.attendancestatisticsactivity);
         ButterKnife.bind(this);
         //如果身份是普通员工不显示二级滑动
-        if (SPUtils.get(this, "roleKey", "").toString().contains("common")){
+        if (SPUtils.get(this, "roleKey", "").toString().equals("common")){
             view_zw.setVisibility(View.GONE);
             attendanFrame.setVisibility(View.GONE);
             type = true;
@@ -67,9 +68,9 @@ public class AnaestheticsActivity extends BaseActivity {
         if (SPUtils.get(this, "roleKey", "").toString().contains("boss")||
                 SPUtils.get(this, "roleKey", "").toString().contains("synthesizeLead")){
             titleDatas.add("单位考勤");
-            fragmentList.add(new DepartmentattendanceFragment());
+            fragmentList.add(new UnitAttendanceFragment());
         }else if (SPUtils.get(this, "roleKey", "").toString().contains("eachLead")){
-            titleDatas.add("单位考勤");
+            titleDatas.add("部门考勤");
             fragmentList.add(new DepartmentattendanceFragment());
         }
         init();
@@ -90,9 +91,10 @@ public class AnaestheticsActivity extends BaseActivity {
             textView.setText("我的考勤");
             if (SPUtils.get(this, "roleKey", "").toString().contains("boss")||
                     SPUtils.get(this, "roleKey", "").toString().contains("synthesizeLead")){
+
                 textView1.setText("单位考勤");
             }else if (SPUtils.get(this, "roleKey", "").toString().contains("eachLead")){
-                textView1.setText("单位考勤");
+                textView1.setText("部门考勤");
             }
             //标题左边选中和未选中的图片效果
             imageView.setBackground(ContextCompat.getDrawable(this, R.drawable.kaoqin_tj_me));

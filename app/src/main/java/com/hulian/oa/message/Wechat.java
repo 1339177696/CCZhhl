@@ -156,7 +156,6 @@ public class Wechat extends TFragment {
         iv_people=findView(com.netease.nim.uikit.R.id.iv_people);
         tv_type=findView(com.netease.nim.uikit.R.id.tv_type);
         tv_type.setText(SPUtils.get(getActivity(), "nickname", "").toString().substring(SPUtils.get(getActivity(), "nickname", "").toString().length()-2,SPUtils.get(getActivity(), "nickname", "").toString().length()));
-
         iv_people.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

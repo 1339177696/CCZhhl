@@ -28,6 +28,7 @@ import de.greenrobot.event.EventBus;
 
 /**
  * Created by qgl on 2020/3/20 16:10.
+ * 考勤规则
  */
 public class AttendrulesActivity extends BaseActivity {
     @BindView(R.id.im_back)

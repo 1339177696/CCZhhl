@@ -231,7 +231,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             case R.id.rb_work:
                 StatusBarUtil.statusBarLightMode(this);
                 if (workFragment == null) {
-                    workFragment = new WorkFragment().newInstance("");
+                    workFragment =  WorkFragment.newInstance("");
                     transaction.add(R.id.content, workFragment);
                 } else {
                     transaction.show(workFragment);

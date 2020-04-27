@@ -23,6 +23,7 @@ import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.socket.JWebSocketClientService;
+import com.hulian.oa.socket.activity.NoticeActivity;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.utils.ToastHelper;
@@ -182,6 +183,7 @@ public class LuncherActivity extends BaseActivity {
                 SPUtils.put(mContext, "roleKey", user.getRolesStr());
                 initNotificationConfig();
                 Intent intent=new Intent(LuncherActivity.this, MainActivity.class);
+//                Intent intent=new Intent(LuncherActivity.this, NoticeActivity.class);
                 startActivity(intent);
                 /*******************************新加的开启Socket**/
 

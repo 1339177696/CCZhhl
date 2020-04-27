@@ -22,6 +22,7 @@ import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
+import com.hulian.oa.work.activity.SecondLeaveActivity;
 import com.hulian.oa.work.activity.leave.l_adapter.L_LeaveApprovedAdapter;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
@@ -140,6 +141,8 @@ public class LeaveApprovedFragment extends Fragment implements PullLoadMoreRecyc
                         emptyBg.setVisibility(View.GONE);
                     }
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
+                    ((SecondLeaveActivity)getActivity()).setListSize(memberList.size(),2);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

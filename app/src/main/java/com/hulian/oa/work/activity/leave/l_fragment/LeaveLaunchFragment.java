@@ -22,7 +22,9 @@ import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
+import com.hulian.oa.work.activity.SecondLeaveActivity;
 import com.hulian.oa.work.activity.leave.l_adapter.L_LeaveApplyLaunchAdapter;
+import com.hulian.oa.work.activity.video.activity.VideoConferenceActivity;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
 import org.json.JSONException;
@@ -137,6 +139,7 @@ public class LeaveLaunchFragment extends Fragment implements PullLoadMoreRecycle
                         emptyBg.setVisibility(View.GONE);
                     }
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
+                    ((SecondLeaveActivity)getActivity()).setListSize(memberList.size(),0);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

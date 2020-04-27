@@ -195,7 +195,6 @@
                             />
                     </LinearLayout>
                 </RelativeLayout>
-
                 <RelativeLayout
                     android:visibility="gone"
                     android:id="@+id/re_on_btn"

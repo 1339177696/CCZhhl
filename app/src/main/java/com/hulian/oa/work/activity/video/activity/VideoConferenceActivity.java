@@ -97,10 +97,11 @@ public class VideoConferenceActivity extends BaseActivity  {
 //                tab.getCustomView().findViewById(R.id.tv_title).setSelected(true);
 //                myViewpager.setCurrentItem(tab.getPosition());
 //                switch (tab.getPosition()) {
+
 //                    case 0:
 //                        tv_apply.setVisibility(View.INVISIBLE);
 //                        break;
-//
+////
 //                    case 1:
 //                        tv_apply.setVisibility(View.VISIBLE);
 //                        break;

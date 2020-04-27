@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/background_frame_solid_2"
+    >
 
     <LinearLayout
         android:background="@drawable/background_frame_solid_1"
@@ -13,8 +15,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_15"
-            android:layout_marginBottom="@dimen/dp_15">
+            android:layout_marginTop="@dimen/dp_13"
+            android:layout_marginBottom="@dimen/dp_13">
 
             <FrameLayout
                 android:id="@+id/iv_image"
@@ -64,17 +66,38 @@
                 android:textColor="#ff37447a"
                 android:textSize="@dimen/sp_12" />
 
-            <TextView
-                android:id="@+id/current_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <LinearLayout
+                android:id="@+id/current_time_liner"
+                android:background="@drawable/maintenance_liner_bg"
+                android:layout_marginRight="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_5"
                 android:layout_alignTop="@+id/iv_image"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="@dimen/dp_5"
-                android:layout_marginRight="@dimen/dp_30"
-                android:text="2020-02"
-                android:textColor="#ff37447a"
-                android:textSize="@dimen/sp_12" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/dp_4"
+                android:paddingLeft="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_8"
+                android:paddingBottom="@dimen/dp_4">
+
+                <TextView
+
+                    android:id="@+id/current_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2020-02"
+                    android:textColor="#ff37447a"
+                    android:textSize="@dimen/sp_12" />
+
+                <ImageView
+                    android:id="@+id/current_time_img"
+                    android:layout_marginLeft="@dimen/dp_8"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/return_down"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
         </RelativeLayout>
         <View
             android:layout_width="match_parent"
@@ -91,6 +114,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:layout_marginRight="@dimen/dp_6"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -101,7 +125,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:text="8小时40分钟"
                     android:textColor="#ffffffff"
                     android:textSize="@dimen/sp_14" />
@@ -110,7 +134,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginBottom="10dp"
                     android:text="今日打卡时长"
                     android:textColor="#ffffffff"
                     android:textSize="@dimen/sp_12" />
@@ -118,9 +142,10 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginRight="@dimen/dp_6"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="12dp"
+                android:layout_marginLeft="@dimen/dp_6"
                 android:layout_weight="1"
                 android:background="@drawable/maintenanceliner_bg2"
                 android:gravity="center"
@@ -130,7 +155,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:text="8小时40分钟"
                     android:textColor="#ffffffff"
                     android:textSize="@dimen/sp_14" />
@@ -139,7 +164,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginBottom="10dp"
                     android:text="本月打卡时长"
                     android:textColor="#ffffffff"
                     android:textSize="@dimen/sp_12" />
@@ -149,7 +174,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="12dp"
+                android:layout_marginLeft="@dimen/dp_6"
                 android:layout_weight="1"
                 android:background="@drawable/maintenanceliner_bg3"
                 android:gravity="center"
@@ -159,7 +184,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:text="8小时40分钟"
                     android:textColor="#ffffffff"
                     android:textSize="@dimen/sp_14" />
@@ -168,7 +193,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginBottom="10dp"
                     android:text="本月平均工时"
                     android:textColor="#ffffffff"
                     android:textSize="@dimen/sp_12" />
@@ -179,28 +204,37 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="15dp"
             android:orientation="horizontal">
 
             <FrameLayout
+                android:paddingLeft="@dimen/dp_30"
+                android:paddingRight="@dimen/dp_30"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <android.support.design.widget.TabLayout
-                    android:layout_gravity="center_horizontal"
                     android:id="@+id/my_tablayout"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_40"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     app:tabIndicatorFullWidth="false"
+                    app:tabIndicatorHeight="2dp"
                     app:tabMaxWidth="0dp"
-                    app:tabMode="fixed"
-                    app:tabIndicatorColor="@color/colorwhite"
-                    app:tabTextAppearance="@style/TabLayoutTextSize4"
-                    app:tabSelectedTextColor="@color/colorwhite"
-                    app:tabTextColor="#A0C2F3" />
+                    app:tabMode="scrollable"
+                    app:tabSelectedTextColor="@color/powder" />
             </FrameLayout>
+
+
 
         </LinearLayout>
     </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:background="@drawable/background_frame_solid_1"
+        android:layout_marginTop="10dp"
+        android:id="@+id/main_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

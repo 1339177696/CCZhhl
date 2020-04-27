@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EBEBEB"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_top"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:background="@drawable/baoxiao_bg"
+        android:orientation="vertical"></LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/work_leave_list_liner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_top"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/iv_back"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_53"
+            android:background="@drawable/baoxiao_bg"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="@dimen/dp_15"
+                android:layout_height="@dimen/dp_15"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:background="@mipmap/ic_left_white" />
+
+            <TextView
+                android:id="@+id/title_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="考勤统计"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/sp_18" />
+
+        </RelativeLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/bg_img"
+            android:paddingLeft="@dimen/dp_40"
+            android:paddingRight="@dimen/dp_40">
+
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="@dimen/dp_90"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/background_frame_solid_1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginRight="@dimen/dp_15"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_13"
+                android:layout_marginBottom="@dimen/dp_13">
+
+                <FrameLayout
+                    android:id="@+id/iv_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="@dimen/dp_15">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_45"
+                        android:layout_height="@dimen/dp_45"
+                        android:background="@mipmap/bg_agency_head" />
+
+                    <TextView
+                        android:id="@+id/tv_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="报"
+                        android:textColor="#0054CC"
+                        android:textSize="@dimen/sp_16" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/clock_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/iv_image"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_toRightOf="@+id/iv_image"
+                    android:text="王俊杰"
+                    android:textColor="#ff101010"
+                    android:textSize="@dimen/sp_16" />
+
+                <TextView
+                    android:id="@+id/clock_department"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/clock_name"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_toRightOf="@+id/iv_image"
+                    android:text="设计部"
+                    android:textColor="#ff37447a"
+                    android:textSize="@dimen/sp_12" />
+
+                <LinearLayout
+                    android:id="@+id/current_time_liner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/iv_image"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:background="@drawable/maintenance_liner_bg"
+                    android:paddingLeft="@dimen/dp_8"
+                    android:paddingTop="@dimen/dp_4"
+                    android:paddingRight="@dimen/dp_8"
+                    android:paddingBottom="@dimen/dp_4">
+
+                    <TextView
+                        android:id="@+id/current_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2020-02"
+                        android:textColor="#ff37447a"
+                        android:textSize="@dimen/sp_12" />
+
+                    <ImageView
+                        android:id="@+id/current_time_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/dp_8"
+                        android:src="@mipmap/return_down" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/line_color" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_remind"
+                    android:layout_width="@dimen/dp_9"
+                    android:layout_height="@dimen/dp_9"
+                    android:layout_marginTop="@dimen/dp_17"
+                    android:layout_marginBottom="@dimen/dp_17"
+                    android:background="@drawable/liner_yuan_qgl1" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp_7"
+                    android:layout_toRightOf="@+id/iv_remind"
+                    android:text="平均工时"
+                    android:textColor="#ff37447a"
+                    android:textSize="@dimen/sp_14" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="8小时40分钟"
+                    android:textColor="#ff37447a"
+                    android:textSize="@dimen/sp_12" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/line_color" />
+
+            <ExpandableListView
+                android:scrollbars="none"
+                android:id="@+id/exlistview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"
+                android:listSelector="@android:color/transparent">
+
+            </ExpandableListView>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
