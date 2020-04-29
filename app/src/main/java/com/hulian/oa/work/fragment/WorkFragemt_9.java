@@ -23,6 +23,7 @@ import com.hulian.oa.work.activity.SecondTaskCoopActivity;
 import com.hulian.oa.work.activity.WorkReportActivity;
 import com.hulian.oa.work.activity.attendance.ClockActivity;
 import com.hulian.oa.work.activity.attendancestatistics.activity.AnaestheticsActivity;
+import com.hulian.oa.work.activity.statistical.ExpenseStatisticalActivity;
 import com.hulian.oa.work.activity.video.activity.VideoConferenceActivity;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.netease.nim.avchatkit.AVChatKit;
@@ -97,7 +98,7 @@ public class WorkFragemt_9 extends Fragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.bt_shipin,R.id.bt_yuyin,R.id.bt_mail,R.id.bt_coop,R.id.bt_meeting,R.id.bt_notice,R.id.bt_time, R.id.bt_instruct ,R.id.bt_leave, R.id.bt_baoxiao,R.id.bt_Work_report,R.id.bt_Work_statistical})
+    @OnClick({R.id.bt_shipin,R.id.bt_yuyin,R.id.bt_mail,R.id.bt_coop,R.id.bt_meeting,R.id.bt_notice,R.id.bt_time, R.id.bt_instruct ,R.id.bt_leave, R.id.bt_baoxiao,R.id.bt_Work_report,R.id.bt_Work_statistical,R.id.bt_Work_account})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             //视频会议
@@ -154,6 +155,10 @@ public class WorkFragemt_9 extends Fragment {
                 //考勤统计
             case R.id.bt_Work_statistical:
                 startActivity(new Intent(getActivity(), AnaestheticsActivity.class));
+                break;
+
+            case R.id.bt_Work_account:
+                startActivity(new Intent(getActivity(), ExpenseStatisticalActivity.class));
                 break;
         }
     }

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:background="@drawable/background_frame_hollow_3"
+        android:id="@+id/iv_image"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="@dimen/dp_60"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="20dp"
+        android:layout_marginBottom="20dp"
+        >
+
+        <TextView
+            android:id="@+id/day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            tools:text="09"
+            android:textColor="#4768F3"
+            android:textSize="@dimen/sp_20" />
+
+        <TextView
+            android:id="@+id/month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            tools:text="12月"
+            android:textColor="#4768F3"
+            android:textSize="@dimen/sp_14" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="王俊杰发起的会议"
+        android:textColor="#101010"
+        android:maxLines="1"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toRightOf="@+id/iv_image"
+        app:layout_constraintTop_toTopOf="@+id/iv_image"
+        android:layout_marginLeft="20dp"
+        />
+
+    <TextView
+        android:id="@+id/meeting_state_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:text="会议进行中"
+        android:textSize="12sp"
+        android:background="@drawable/background_frame_semicircle_7"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="2dp"
+        android:paddingTop="2dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/title"
+        app:layout_constraintTop_toTopOf="@+id/title"
+        app:layout_constraintBottom_toBottomOf="@+id/title"
+        android:visibility="gone"
+        />
+
+
+    <TextView
+        android:textSize="14sp"
+        android:layout_marginTop="@dimen/dp_8"
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:text="会议号"
+        android:layout_height="wrap_content"
+        android:textColor="#99101010"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintLeft_toLeftOf="@+id/title"
+        />
+    <TextView
+        android:textSize="14sp"
+        android:layout_marginTop="@dimen/dp_5"
+        android:id="@+id/tv_des"
+        android:layout_width="wrap_content"
+        android:text="会议时间"
+        android:layout_height="wrap_content"
+        android:textColor="#99101010"
+        app:layout_constraintTop_toBottomOf="@+id/tv_content"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_content"
+        />
+
+    <TextView
+        android:id="@+id/meeting_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_content"
+        app:layout_constraintLeft_toRightOf="@+id/tv_content"
+        android:textSize="14sp"
+        android:layout_marginLeft="20dp"
+        android:textColor="#101010"
+        tools:text="000898972"
+        />
+
+    <TextView
+        android:id="@+id/meeting_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_des"
+        app:layout_constraintLeft_toLeftOf="@+id/meeting_num"
+        android:textSize="14sp"
+        android:textColor="#101010"
+        tools:text="9:30 - 10:30"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_frame_hollow_4"
+        android:text="申请加入会议"
+        android:textColor="#FEA800"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_des"
+        android:layout_marginRight="8dp"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#1a000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        />
+
+</android.support.constraint.ConstraintLayout>

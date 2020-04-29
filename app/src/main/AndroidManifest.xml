@@ -452,8 +452,8 @@
         <activity
             android:name=".work.activity.ReadReportActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
-            android:windowSoftInputMode="adjustPan"/> <!-- 新加的选择人员 -->
-    <activity
+            android:windowSoftInputMode="adjustPan" /> <!-- 新加的选择人员 -->
+        <activity
             android:name=".me.activity.LBanbenActivity"
             android:configChanges="screenSize|keyboardHidden|orientation" /> <!-- 新加的升级 -->
 
@@ -501,6 +501,10 @@
 
          <activity
             android:name=".work.activity.video.activity.VideoConferenceActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+
+   <activity
+            android:name=".work.activity.statistical.ExpenseStatisticalActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"/>
 
         <activity

@@ -154,5 +154,6 @@ dependencies {
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
     implementation project(':calendarview')
     implementation 'com.allenliu.versionchecklib:library:2.0.9'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
     implementation files('libs/AMap2DMap_5.2.0_AMapSearch_5.7.0_AMapLocation_3.7.0_20171229.jar')
 }

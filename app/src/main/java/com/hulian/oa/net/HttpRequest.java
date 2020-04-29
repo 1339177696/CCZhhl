@@ -953,6 +953,16 @@ public class HttpRequest {
     }
 
 
+/**
+     *创建视频会议
+     * @param params
+     * @param callback
+     */
+    public static void createVideoRoom(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/videoConferencing/addVideoConferencing", params, callback, null);
+    }
+
+
 
 
 

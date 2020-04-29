@@ -16,12 +16,14 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.R;
 import com.hulian.oa.bean.Report;
+import com.hulian.oa.bean.VideoMeeting;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.work.activity.video.activity.VideoConferenceActivity;
+import com.hulian.oa.work.activity.video.adapter.MeetingInMyAdapter;
 import com.hulian.oa.work.adapter.WriteReportAdapter;
 import com.hulian.oa.work.fragment.ReadReportFragment;
 
@@ -47,8 +49,8 @@ public class MeetingListInMyFragment extends Fragment implements  BaseQuickAdapt
     SwipeRefreshLayout swipeRefreshLayout;
     private int mCount = 1;
     Unbinder unbinder;
-    private WriteReportAdapter mAdapter;
-    private List<Report> mData = new ArrayList<>();
+    private MeetingInMyAdapter mAdapter;
+    private List<VideoMeeting> mData = new ArrayList<>();
 
 
 
@@ -64,7 +66,7 @@ public class MeetingListInMyFragment extends Fragment implements  BaseQuickAdapt
 
     private void initList() {
         swipeRefreshLayout.setOnRefreshListener(this);
-        mAdapter = new WriteReportAdapter(mData);
+        mAdapter = new MeetingInMyAdapter(mData);
         mAdapter.openLoadAnimation();
         mAdapter.setEnableLoadMore(true);
         mAdapter.setOnLoadMoreListener(this,mRecyclerView);
@@ -104,46 +106,69 @@ public class MeetingListInMyFragment extends Fragment implements  BaseQuickAdapt
     }
 
     private void getData() {
-        RequestParams params = new RequestParams();
-        params.put("pageStart", mCount*10-10 + "");
-        params.put("pageEnd", mCount * 10 + "");
-        params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
-        params.put("receivePerson", SPUtils.get(getActivity(), "userId", "").toString());
-        HttpRequest.getGetWorkReportList(params, new ResponseCallback() {
-            @Override
-            public void onSuccess(Object responseObj) {
-                swipeRefreshLayout.setRefreshing(false);
-                //需要转化为实体对象
-                Gson gson = new GsonBuilder().serializeNulls().create();
+//        RequestParams params = new RequestParams();
+//        params.put("pageStart", mCount*10-10 + "");
+//        params.put("pageEnd", mCount * 10 + "");
+//        params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
+//        params.put("receivePerson", SPUtils.get(getActivity(), "userId", "").toString());
+//        HttpRequest.getGetWorkReportList(params, new ResponseCallback() {
+//            @Override
+//            public void onSuccess(Object responseObj) {
+//                swipeRefreshLayout.setRefreshing(false);
+//                //需要转化为实体对象
+//                Gson gson = new GsonBuilder().serializeNulls().create();
+//
+//                try {
+//                    JSONObject result = new JSONObject(responseObj.toString());
+//                    List<VideoMeeting> memberList = gson.fromJson(result.getJSONArray("data").toString(),
+//                            new TypeToken<List<Report>>() {
+//                            }.getType());
+//                    mData.addAll(memberList);
+//                    if (memberList.size()<10){
+//                        mAdapter.loadMoreEnd();
+//                    }else {
+//                        mAdapter.loadMoreComplete();
+//                    }
+//                    mAdapter.notifyDataSetChanged();
+//
+//                    ((VideoConferenceActivity)getActivity()).setListSize(mData.size(),0);
+//
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(OkHttpException failuer) {
+//                Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
-                try {
-                    JSONObject result = new JSONObject(responseObj.toString());
-                    List<Report> memberList = gson.fromJson(result.getJSONArray("data").toString(),
-                            new TypeToken<List<Report>>() {
-                            }.getType());
-                    mData.addAll(memberList);
-                    if (memberList.size()<10){
-                        mAdapter.loadMoreEnd();
-                    }else {
-                        mAdapter.loadMoreComplete();
-                    }
-                    mAdapter.notifyDataSetChanged();
+        VideoMeeting videoMeeting = new VideoMeeting();
+        videoMeeting.setDay("15");
+        videoMeeting.setMonth("04月");
+        videoMeeting.setTitle("王俊杰发起会议");
+        videoMeeting.setNumber("00089872");
+        videoMeeting.setStartTime("9:30");
+        videoMeeting.setStopTime("10:03");
+        videoMeeting.setState("1");
+        mData.add(videoMeeting);
 
-                    ((VideoConferenceActivity)getActivity()).setListSize(mData.size(),0);
+        VideoMeeting videoMeeting2 = new VideoMeeting();
+        videoMeeting2.setDay("15");
+        videoMeeting2.setMonth("04月");
+        videoMeeting2.setTitle("王俊杰发起会议");
+        videoMeeting2.setNumber("00089872");
+        videoMeeting2.setStartTime("9:30");
+        videoMeeting2.setStopTime("10:03");
+        videoMeeting2.setState("2");
+        mData.add(videoMeeting2);
 
+        mAdapter.loadMoreEnd();
+        mAdapter.notifyDataSetChanged();
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(OkHttpException failuer) {
-                Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
+        ((VideoConferenceActivity)getActivity()).setListSize(mData.size(),0);
     }
 
 

@@ -16,12 +16,14 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.R;
 import com.hulian.oa.bean.Report;
+import com.hulian.oa.bean.VideoMeeting;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.work.activity.video.activity.VideoConferenceActivity;
+import com.hulian.oa.work.activity.video.adapter.MeetingOngoingAdapter;
 import com.hulian.oa.work.adapter.WriteReportAdapter;
 import com.hulian.oa.work.fragment.ReadReportFragment;
 
@@ -40,17 +42,15 @@ import de.greenrobot.event.EventBus;
  * Created by 陈泽宇 on 2020/4/20
  * Describe:视频会议列表 (进行中的)
  */
-public class MeetingListOngoingFragment extends Fragment implements  BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
+public class MeetingListOngoingFragment extends Fragment implements BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
     @BindView(R.id.listview)
     RecyclerView mRecyclerView;
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
     private int mCount = 1;
     Unbinder unbinder;
-    private WriteReportAdapter mAdapter;
-    private List<Report> mData = new ArrayList<>();
-
-
+    private MeetingOngoingAdapter mAdapter;
+    private List<VideoMeeting> mData = new ArrayList<>();
 
 
     @Override
@@ -64,10 +64,10 @@ public class MeetingListOngoingFragment extends Fragment implements  BaseQuickAd
 
     private void initList() {
         swipeRefreshLayout.setOnRefreshListener(this);
-        mAdapter = new WriteReportAdapter(mData);
+        mAdapter = new MeetingOngoingAdapter(mData);
         mAdapter.openLoadAnimation();
         mAdapter.setEnableLoadMore(true);
-        mAdapter.setOnLoadMoreListener(this,mRecyclerView);
+        mAdapter.setOnLoadMoreListener(this, mRecyclerView);
         mAdapter.setEmptyView(LayoutInflater.from(getContext()).inflate(R.layout.list_empty, null));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
@@ -80,7 +80,6 @@ public class MeetingListOngoingFragment extends Fragment implements  BaseQuickAd
         getData();
 
     }
-
 
 
     @Override
@@ -104,45 +103,68 @@ public class MeetingListOngoingFragment extends Fragment implements  BaseQuickAd
     }
 
     private void getData() {
-        RequestParams params = new RequestParams();
-        params.put("pageStart", mCount*10-10 + "");
-        params.put("pageEnd", mCount * 10 + "");
-        params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
-        params.put("receivePerson", SPUtils.get(getActivity(), "userId", "").toString());
-        HttpRequest.getGetWorkReportList(params, new ResponseCallback() {
-            @Override
-            public void onSuccess(Object responseObj) {
-                swipeRefreshLayout.setRefreshing(false);
-                //需要转化为实体对象
-                Gson gson = new GsonBuilder().serializeNulls().create();
+//        RequestParams params = new RequestParams();
+//        params.put("pageStart", mCount * 10 - 10 + "");
+//        params.put("pageEnd", mCount * 10 + "");
+//        params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
+//        params.put("receivePerson", SPUtils.get(getActivity(), "userId", "").toString());
+//        HttpRequest.getGetWorkReportList(params, new ResponseCallback() {
+//            @Override
+//            public void onSuccess(Object responseObj) {
+//                swipeRefreshLayout.setRefreshing(false);
+//                //需要转化为实体对象
+//                Gson gson = new GsonBuilder().serializeNulls().create();
+//
+//                try {
+//                    JSONObject result = new JSONObject(responseObj.toString());
+//                    List<VideoMeeting> memberList = gson.fromJson(result.getJSONArray("data").toString(),
+//                            new TypeToken<List<Report>>() {
+//                            }.getType());
+//                    mData.addAll(memberList);
+//                    if (memberList.size() < 10) {
+//                        mAdapter.loadMoreEnd();
+//                    } else {
+//                        mAdapter.loadMoreComplete();
+//                    }
+//                    mAdapter.notifyDataSetChanged();
+//                    ((VideoConferenceActivity) getActivity()).setListSize(mData.size(), 1);
+//
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(OkHttpException failuer) {
+//                Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
-                try {
-                    JSONObject result = new JSONObject(responseObj.toString());
-                    List<Report> memberList = gson.fromJson(result.getJSONArray("data").toString(),
-                            new TypeToken<List<Report>>() {
-                            }.getType());
-                    mData.addAll(memberList);
-                    if (memberList.size()<10){
-                        mAdapter.loadMoreEnd();
-                    }else {
-                        mAdapter.loadMoreComplete();
-                    }
-                    mAdapter.notifyDataSetChanged();
-                    ((VideoConferenceActivity)getActivity()).setListSize(mData.size(),1);
+        VideoMeeting videoMeeting = new VideoMeeting();
+        videoMeeting.setDay("15");
+        videoMeeting.setMonth("04月");
+        videoMeeting.setTitle("王俊杰发起会议");
+        videoMeeting.setNumber("00089872");
+        videoMeeting.setStartTime("9:30");
+        videoMeeting.setStopTime("10:03");
+        videoMeeting.setState("1");
+        mData.add(videoMeeting);
 
+        VideoMeeting videoMeeting2 = new VideoMeeting();
+        videoMeeting2.setDay("15");
+        videoMeeting2.setMonth("04月");
+        videoMeeting2.setTitle("王俊杰发起会议");
+        videoMeeting2.setNumber("00089872");
+        videoMeeting2.setStartTime("9:30");
+        videoMeeting2.setStopTime("10:03");
+        videoMeeting2.setState("2");
+        mData.add(videoMeeting2);
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
+        mAdapter.loadMoreEnd();
+        mAdapter.notifyDataSetChanged();
 
-            @Override
-            public void onFailure(OkHttpException failuer) {
-                Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
+        ((VideoConferenceActivity) getActivity()).setListSize(mData.size(), 1);
     }
 
 
