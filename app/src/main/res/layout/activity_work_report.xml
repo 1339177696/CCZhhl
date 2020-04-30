@@ -54,8 +54,9 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/dp_40"
-            android:paddingRight="@dimen/dp_40">
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingRight="@dimen/dp_20"
+            >
             >
 
             <android.support.design.widget.TabLayout
@@ -63,8 +64,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 app:tabBackground="@android:color/transparent"
                 app:tabIndicatorColor="@color/colorwhite"
                 app:tabIndicatorFullWidth="false"

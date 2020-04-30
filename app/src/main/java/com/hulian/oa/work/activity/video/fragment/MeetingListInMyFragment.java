@@ -106,69 +106,44 @@ public class MeetingListInMyFragment extends Fragment implements  BaseQuickAdapt
     }
 
     private void getData() {
-//        RequestParams params = new RequestParams();
-//        params.put("pageStart", mCount*10-10 + "");
-//        params.put("pageEnd", mCount * 10 + "");
-//        params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
-//        params.put("receivePerson", SPUtils.get(getActivity(), "userId", "").toString());
-//        HttpRequest.getGetWorkReportList(params, new ResponseCallback() {
-//            @Override
-//            public void onSuccess(Object responseObj) {
-//                swipeRefreshLayout.setRefreshing(false);
-//                //需要转化为实体对象
-//                Gson gson = new GsonBuilder().serializeNulls().create();
-//
-//                try {
-//                    JSONObject result = new JSONObject(responseObj.toString());
-//                    List<VideoMeeting> memberList = gson.fromJson(result.getJSONArray("data").toString(),
-//                            new TypeToken<List<Report>>() {
-//                            }.getType());
-//                    mData.addAll(memberList);
-//                    if (memberList.size()<10){
-//                        mAdapter.loadMoreEnd();
-//                    }else {
-//                        mAdapter.loadMoreComplete();
-//                    }
-//                    mAdapter.notifyDataSetChanged();
-//
-//                    ((VideoConferenceActivity)getActivity()).setListSize(mData.size(),0);
-//
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(OkHttpException failuer) {
-//                Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        RequestParams params = new RequestParams();
+        params.put("pageStart", mCount*10-10 + "");
+        params.put("pageEnd", mCount * 10 + "");
+        params.put("initiator", SPUtils.get(getActivity(), "username", "").toString());
+        HttpRequest.getVideoRoomList(params, new ResponseCallback() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                swipeRefreshLayout.setRefreshing(false);
+                //需要转化为实体对象
+                Gson gson = new GsonBuilder().serializeNulls().create();
 
-        VideoMeeting videoMeeting = new VideoMeeting();
-        videoMeeting.setDay("15");
-        videoMeeting.setMonth("04月");
-        videoMeeting.setTitle("王俊杰发起会议");
-        videoMeeting.setNumber("00089872");
-        videoMeeting.setStartTime("9:30");
-        videoMeeting.setStopTime("10:03");
-        videoMeeting.setState("1");
-        mData.add(videoMeeting);
+                try {
+                    JSONObject result = new JSONObject(responseObj.toString());
+                    List<VideoMeeting> memberList = gson.fromJson(result.getJSONArray("data").toString(),
+                            new TypeToken<List<Report>>() {
+                            }.getType());
+                    mData.addAll(memberList);
+                    if (memberList.size()<10){
+                        mAdapter.loadMoreEnd();
+                    }else {
+                        mAdapter.loadMoreComplete();
+                    }
+                    mAdapter.notifyDataSetChanged();
 
-        VideoMeeting videoMeeting2 = new VideoMeeting();
-        videoMeeting2.setDay("15");
-        videoMeeting2.setMonth("04月");
-        videoMeeting2.setTitle("王俊杰发起会议");
-        videoMeeting2.setNumber("00089872");
-        videoMeeting2.setStartTime("9:30");
-        videoMeeting2.setStopTime("10:03");
-        videoMeeting2.setState("2");
-        mData.add(videoMeeting2);
+                    ((VideoConferenceActivity)getActivity()).setListSize(mData.size(),0);
 
-        mAdapter.loadMoreEnd();
-        mAdapter.notifyDataSetChanged();
 
-        ((VideoConferenceActivity)getActivity()).setListSize(mData.size(),0);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(OkHttpException failuer) {
+                Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
 

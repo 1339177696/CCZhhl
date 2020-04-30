@@ -1,5 +1,7 @@
 package com.hulian.oa.bean;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by 陈泽宇 on 2020/4/21
  * Describe: 会议
@@ -13,13 +15,34 @@ public class VideoMeeting {
     private String startTime;//会议开始时间
     private String stopTime;//会议结束时间
     private String state;//会议状态
+    @SerializedName("starttime")
+    private String startTimeStr;//会议开始时间字符串
+    @SerializedName("endtime")
+    private String stopTimeStr;//会议结束时间字符串
+
+    public String getStartTimeStr() {
+        return startTimeStr;
+    }
+
+    public void setStartTimeStr(String startTimeStr) {
+        this.startTimeStr = startTimeStr;
+    }
+
+    public String getStopTimeStr() {
+        return stopTimeStr;
+    }
+
+    public void setStopTimeStr(String stopTimeStr) {
+        this.stopTimeStr = stopTimeStr;
+    }
 
     public String getMonth() {
         return month;
     }
 
     public void setMonth(String month) {
-        this.month = month;
+
+        this.month = getMouth(getStartTimeStr());
     }
 
     public String getDay() {
@@ -68,5 +91,10 @@ public class VideoMeeting {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    private String getMouth(String startTimeStr){
+
+        return "";
     }
 }

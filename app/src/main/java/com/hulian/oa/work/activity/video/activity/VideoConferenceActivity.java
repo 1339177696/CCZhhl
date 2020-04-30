@@ -9,6 +9,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +19,10 @@ import com.hulian.oa.R;
 import com.hulian.oa.activity.BaseActivity;
 import com.hulian.oa.bean.People;
 import com.hulian.oa.listener.ListSizeListener;
+import com.hulian.oa.net.HttpRequest;
+import com.hulian.oa.net.OkHttpException;
+import com.hulian.oa.net.RequestParams;
+import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.news.adapter.MyViewPageAdapter;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.StatusBarUtil;
@@ -143,7 +148,6 @@ public class VideoConferenceActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_launch://发起视频会议
-                //调创建接口 传入创建人 参与人
                 startActivityForResult(new Intent(VideoConferenceActivity.this, SelDepartmentActivity_meet_video.class), 0);
                 break;
         }
@@ -155,7 +159,8 @@ public class VideoConferenceActivity extends BaseActivity {
         if (resultCode == 1 && requestCode == 0 && data != null) {
             List<People> peopleList = (List<People>) data.getSerializableExtra("mList");
             ArrayList<String> accounts = new ArrayList<>();
-            String roomName = TimeUtils.getNowTime();
+            String userName = SPUtils.get(mContext, "nickname", "").toString();
+            String roomName = userName + TimeUtils.getNowTime();
             for (People people : peopleList) {
                 accounts.add(people.getLoginName());
             }
@@ -171,7 +176,8 @@ public class VideoConferenceActivity extends BaseActivity {
             public void onSuccess(AVChatChannelInfo avChatChannelInfo) {
                 LogUtil.ui("create room " + roomName + " success !");
                 onCreateRoomSuccess(roomName, accounts);
-
+                //调创建接口 传入创建人 参与人
+                createVideoRoom(roomName,getParticipantId(accounts));
 
                 TeamAVChatProfile.sharedInstance().setTeamAVChatting(true);
                 AVChatKit.outgoingTeamCall(VideoConferenceActivity.this, false, "", roomName, accounts, roomName);
@@ -217,14 +223,29 @@ public class VideoConferenceActivity extends BaseActivity {
     }
 
 
-    private void createVideoRoom(){
+    private void createVideoRoom(String roomName,String participant){
 
+        RequestParams params = new RequestParams();
+        params.put("initiator",SPUtils.get(mContext, "username", "").toString());
+        params.put("participant",participant);
+        params.put("meetinglName",roomName);
+        HttpRequest.createVideoRoom(params, new ResponseCallback() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                Log.e("创建房间",responseObj.toString());
+            }
+
+            @Override
+            public void onFailure(OkHttpException failuer) {
+
+            }
+        });
     }
 
-    private String getParticipantId(List<People> mList) {
+    private String getParticipantId(List<String> mList) {
         String participantId = "";
-        for (People params1 : mList) {
-            participantId += params1.getUserId() + ",";
+        for (String params1 : mList) {
+            participantId += params1 + ";";
         }
         if (!participantId.equals(""))
             participantId = participantId.substring(0, participantId.length() - 1);

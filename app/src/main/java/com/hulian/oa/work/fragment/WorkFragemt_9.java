@@ -179,7 +179,8 @@ public class WorkFragemt_9 extends Fragment {
         if (resultCode == 1 && requestCode == 0 && data != null) {
             List<People> peopleList = (List<People>) data.getSerializableExtra("mList");
             ArrayList<String> accounts = new ArrayList<>();
-            String roomName = TimeUtils.getNowTime();
+            String userName = SPUtils.get(getActivity(), "username", "").toString();
+            String roomName = userName + TimeUtils.getNowTime();
             for (People people : peopleList) {
                 accounts.add(people.getLoginName());
             }
