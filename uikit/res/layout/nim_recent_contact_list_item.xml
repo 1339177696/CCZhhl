@@ -7,9 +7,11 @@
               android:orientation="vertical">
 
     <View
+        android:layout_marginRight="10dip"
+        android:layout_marginLeft="15dip"
         android:id="@+id/top_line"
         style="@style/horizontal_light_thin_divider"
-        android:layout_marginLeft="70dip"/>
+        />
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -138,8 +140,9 @@
     </RelativeLayout>
 
     <View
+        android:layout_marginRight="10dip"
         android:id="@+id/bottom_line"
         style="@style/horizontal_light_thin_divider"
-        android:layout_marginLeft="70dip"/>
+        android:layout_marginLeft="15dip"/>
 
 </LinearLayout>

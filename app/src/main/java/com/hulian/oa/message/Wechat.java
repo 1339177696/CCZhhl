@@ -10,11 +10,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import com.hulian.oa.bean.Report;
 import com.hulian.oa.me.activity.MeActivity;
 import com.hulian.oa.message.activity.search.GlobalSearchActivity;
+import com.hulian.oa.net.HttpRequest;
+import com.hulian.oa.net.OkHttpException;
+import com.hulian.oa.net.RequestParams;
+import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.views.PopWindow;
+import com.hulian.oa.work.activity.attendancestatistics.fragment.DepartListFragment;
+import com.hulian.oa.work.activity.attendancestatistics.fragment.DepartmentattendanceFragment;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.api.model.contact.ContactChangedObserver;
 import com.netease.nim.uikit.api.model.main.OnlineStateChangeObserver;
@@ -50,6 +61,8 @@ import com.netease.nimlib.sdk.msg.model.QueryDirectionEnum;
 import com.netease.nimlib.sdk.msg.model.RecentContact;
 import com.netease.nimlib.sdk.team.model.Team;
 import com.netease.nimlib.sdk.team.model.TeamMember;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -123,6 +136,8 @@ public class Wechat extends TFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // 获取
+        getData();
         return inflater.inflate(com.netease.nim.uikit.R.layout.nim_recent_contacts, container, false);
     }
 
@@ -758,5 +773,34 @@ public class Wechat extends TFragment {
 
     }
 
+// 模拟推送数据
+    private void getData() {
+        RequestParams params = new RequestParams();
+        params.put("pageStart", 1 * 10 - 10 + "");
+        params.put("pageEnd", 1 * 10 + "");
+        params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
+        params.put("receivePerson", SPUtils.get(getActivity(), "userId", "").toString());
+        HttpRequest.getGetWorkReportList(params, new ResponseCallback() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                //需要转化为实体对象
+                Gson gson = new GsonBuilder().serializeNulls().create();
+                try {
+                    JSONObject result = new JSONObject(responseObj.toString());
+                    List<Report> memberList = gson.fromJson(result.getJSONArray("data").toString(),
+                            new TypeToken<List<Report>>() {
+                            }.getType());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
+            @Override
+            public void onFailure(OkHttpException failuer) {
+                Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
 }

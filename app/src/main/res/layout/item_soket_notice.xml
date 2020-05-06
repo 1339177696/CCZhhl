@@ -68,6 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:layout_gravity="right"
                 android:id="@+id/socked_tv1"
                 android:text="补卡原因"
                 android:layout_width="wrap_content"
@@ -144,6 +145,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/socked_tv_five"
             android:layout_marginBottom="@dimen/dp_18"
             android:background="@drawable/item_socked_tv_bg1"
             android:layout_gravity="right"

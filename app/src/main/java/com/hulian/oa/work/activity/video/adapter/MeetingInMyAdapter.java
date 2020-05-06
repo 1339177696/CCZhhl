@@ -23,19 +23,25 @@ public class MeetingInMyAdapter extends BaseQuickAdapter<VideoMeeting, BaseViewH
     protected void convert(BaseViewHolder holder, VideoMeeting videoMeeting) {
 
         holder.setText(R.id.day, videoMeeting.getDay());
-        holder.setText(R.id.month, videoMeeting.getMonth());
-        holder.setText(R.id.title, videoMeeting.getTitle());
+        holder.setText(R.id.month, videoMeeting.getMonth()+"月");
+        holder.setText(R.id.title, videoMeeting.getTitle()+"发起会议");
         holder.setText(R.id.meeting_num, videoMeeting.getNumber());
-        holder.setText(R.id.meeting_time, videoMeeting.getStartTime() + "-" + videoMeeting.getStopTime());
+        String endTime = "";
+        if (!videoMeeting.getStopTime().equals("")){
+            endTime = "-" + videoMeeting.getStopTime();
+        }else {
+            endTime = "";
+        }
+        holder.setText(R.id.meeting_time, videoMeeting.getStartTime() + endTime);
 
         switch (videoMeeting.getState()) {
-            case "1":
+            case "0":
                 holder.getView(R.id.meeting_state_1).setVisibility(View.VISIBLE);
                 holder.getView(R.id.meeting_state_2).setVisibility(View.GONE);
                 holder.getView(R.id.ll).setVisibility(View.VISIBLE);
                 break;
 
-            case "2":
+            case "1":
                 holder.getView(R.id.meeting_state_2).setVisibility(View.VISIBLE);
                 holder.getView(R.id.meeting_state_1).setVisibility(View.GONE);
                 holder.getView(R.id.ll).setVisibility(View.GONE);

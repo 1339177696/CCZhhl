@@ -1,11 +1,13 @@
 package com.hulian.oa.socket.activity;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -19,8 +21,9 @@ import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
-import com.hulian.oa.socket.adapter.NoticeAdaoter;
+import com.hulian.oa.socket.adapter.NoticeWorkAdaoter;
 import com.hulian.oa.utils.SPUtils;
+import com.hulian.oa.views.MyDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,28 +37,31 @@ import butterknife.OnClick;
 
 /**
  * 作者：qgl 时间： 2020/4/27 10:34
- * Describe: 各种通知
+ * Describe: 工作通知
  */
-public class NoticeActivity extends BaseActivity implements BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
+public class NoticeWorkActivity extends BaseActivity implements BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
     @BindView(R.id.listview)
     RecyclerView mRecyclerView;
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.notice_tv_title)
+    TextView notice_tv_title;
+
     private int mCount = 1;
-    private NoticeAdaoter mAdapter;
+    private NoticeWorkAdaoter mAdapter;
     private List<Report> mData = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.noticeactivity);
+        setContentView(R.layout.noticeworkactivity);
         ButterKnife.bind(this);
         initList();
     }
 
     private void initList() {
         swipeRefreshLayout.setOnRefreshListener(this);
-        mAdapter = new NoticeAdaoter(mData);
+        mAdapter = new NoticeWorkAdaoter(mData);
         mAdapter.openLoadAnimation();
         mAdapter.setEnableLoadMore(true);
         mAdapter.setOnLoadMoreListener(this, mRecyclerView);
@@ -76,9 +82,7 @@ public class NoticeActivity extends BaseActivity implements BaseQuickAdapter.Req
         swipeRefreshLayout.setRefreshing(true);
         setRefresh();
         getData();
-
     }
-
 
     private void setRefresh() {
         mData.clear();
@@ -117,13 +121,12 @@ public class NoticeActivity extends BaseActivity implements BaseQuickAdapter.Req
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                Toast.makeText(NoticeActivity.this, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(NoticeWorkActivity.this, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
 
 
     }
-
 
     @Override
     public void onLoadMoreRequested() {
@@ -131,8 +134,55 @@ public class NoticeActivity extends BaseActivity implements BaseQuickAdapter.Req
         getData();
     }
 
-    @OnClick(R.id.iv_back)
-    public void onViewClicked() {
-        finish();
+    @OnClick({R.id.iv_back,R.id.notice_im_screen})
+    public void onViewClicked(View view) {
+        switch (view.getId()){
+            case R.id.iv_back:
+                finish();
+                break;
+            case R.id.notice_im_screen:
+                shouDialog();
+                break;
+        }
+    }
+
+    public void shouDialog(){
+        View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_notice_work, null);
+        TextView tv_Document = view.findViewById(R.id.dialog_not_tv_gw);
+        TextView tv_leave = view.findViewById(R.id.dialog_not_tv_qj);
+        TextView tv_ReiBurs = view.findViewById(R.id.dialog_not_tv_bx);
+        TextView tv_task = view.findViewById(R.id.dialog_not_tv_rw);
+        Dialog dialog = new MyDialog(NoticeWorkActivity.this, true, true, (float) 0.7).setNewView(view);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+        tv_Document.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                notice_tv_title.setText("公文推送");
+            }
+        });
+        tv_leave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                notice_tv_title.setText("请假推送");
+            }
+        });
+        tv_ReiBurs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                notice_tv_title.setText("报销推送");
+            }
+        });
+        tv_task.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                notice_tv_title.setText("任务推送");
+            }
+        });
+
     }
 }
