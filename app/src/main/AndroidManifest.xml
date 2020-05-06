@@ -315,7 +315,13 @@
             android:name=".work.activity.expense.ExpenseApplyForActivity"
             android:configChanges="screenSize|keyboardHidden|orientation" />
         <activity
+            android:name=".work.activity.expense.SelDepartmentActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation" />
+        <activity
             android:name=".work.activity.expense.ExpenseExamineActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation" />
+        <activity
+            android:name=".work.activity.expense.ExpenseExamineActivityS"
             android:configChanges="screenSize|keyboardHidden|orientation" />
         <activity
             android:name=".work.activity.expense.ExpenseHistoryActivity"
@@ -406,6 +412,9 @@
         <activity
             android:name=".work.activity.notice.adapter.NoticeParticularsActivity_x"
             android:configChanges="screenSize|keyboardHidden|orientation" /> <!-- 新加的选择部门 -->
+        <activity
+            android:name=".me.activity.SelPeopleActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation" /> <!-- 新加的选择部门2 -->
         <activity
             android:name=".me.activity.SelPeopleActivity_x"
             android:configChanges="screenSize|keyboardHidden|orientation" /> <!-- 新加的选择部门2 -->
