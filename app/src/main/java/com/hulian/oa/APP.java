@@ -33,6 +33,7 @@ import com.netease.nimlib.sdk.util.NIMUtil;
 
 public class APP extends Application {
     public static Context context;
+    // 提交给李俊鹏
     @Override
     public void onCreate() {
         super.onCreate();
