@@ -58,10 +58,7 @@ public class MeetingListInMyFragment extends Fragment implements  BaseQuickAdapt
     Unbinder unbinder;
     private MeetingInMyAdapter mAdapter;
     private List<VideoMeeting> mData = new ArrayList<>();
-
-
-
-
+    // 提交到李俊鹏
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view;
