@@ -586,7 +586,14 @@ public class HttpRequest {
     public static void post_sendExpense(RequestParams params, List<File> files, ResponseCallback callback) {
         RequestMode.postMultipart(Urls.commUrls + "system/workReimbursement/add", params, files, callback, null);
     }
-
+    /**
+     * 申请报销2
+     * @param params
+     * @param callback
+     */
+    public static void post_sendExpense2(RequestParams params, List<File> files, ResponseCallback callback) {
+        RequestMode.postMultipart(Urls.commUrls + "system/expenseReport/android/add", params, files, callback, null);
+    }
     /**
      * 报销列表
      *
@@ -614,6 +621,15 @@ public class HttpRequest {
      * @param callback
      */
     public static void get_WorkExpense_edit(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/workReimbursement/edit", params, callback, null);
+    }
+    /**
+     * 报销历史
+     *
+     * @param params
+     * @param callback
+     */
+    public static void get_WorkExpense_history(RequestParams params, ResponseCallback callback) {
         RequestMode.postRequest(Urls.commUrls + "system/workReimbursement/edit", params, callback, null);
     }
 

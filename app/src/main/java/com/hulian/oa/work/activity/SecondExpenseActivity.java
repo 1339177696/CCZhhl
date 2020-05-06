@@ -59,7 +59,7 @@ public class SecondExpenseActivity extends BaseActivity {
         mContext = this;
         //领导
         String isLeader = (String) SPUtils.get(mContext, "isLead", "");
-        isLeader = "1";
+        isLeader = "0";
         if (isLeader.equals("0")) {
 //            tv_apply.setVisibility(View.GONE);
             tv_apply.setVisibility(View.VISIBLE);
@@ -131,11 +131,12 @@ public class SecondExpenseActivity extends BaseActivity {
                 startActivity(new Intent(mContext, ExpenseApplyForActivity.class));
 //                startActivity(new Intent(mContext, ExpenseDetailsActivity.class));
                 break;
-            case R.id.iv_back:
-                finish();
-                break;
-            case R.id.tv_baoxiao:
-                startActivity(new Intent(mContext, ExpenseApplyForActivity.class));
+//            case R.id.iv_back:
+//                this.finish();
+//                break;
+            case R.id.tv_baoxiao://报销管理标题
+//                startActivity(new Intent(mContext, ExpenseApplyForActivity.class));
+                this.finish();
                 break;
         }
     }

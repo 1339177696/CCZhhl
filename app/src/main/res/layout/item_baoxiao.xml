@@ -55,6 +55,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:textColor="@color/color_b_black"
+                    android:drawableRight="@mipmap/return_down"
+                    android:drawablePadding="@dimen/dp_5"
                     />
             </RelativeLayout>
             <View
@@ -213,6 +215,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@null"
+                        android:hint="请输入费用明细"
                         android:padding="@dimen/dp_3"
                         android:gravity="top"
                         android:textSize="@dimen/dp_12"

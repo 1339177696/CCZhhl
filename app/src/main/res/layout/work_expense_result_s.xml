@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -80,6 +81,7 @@
                 android:layout_marginLeft="@dimen/dp_10"
                 >
                 <TextView
+                    android:id="@+id/tv_applicant"
                     android:text="申请人"
                     android:textSize="@dimen/dp_14"
                     android:layout_width="wrap_content"
@@ -93,12 +95,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:id="@+id/tv_reject_reson"
+                        android:id="@+id/tv_reject_reson_title"
                         android:text="驳回原因"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
-                        android:layout_toRightOf="@id/tv_reject_reson"
+                        android:id="@+id/tv_reject_reson"
+                        android:layout_toRightOf="@id/tv_reject_reson_title"
                         android:text="驳回原因"
                         android:layout_marginLeft="@dimen/dp_5"
                         android:layout_width="wrap_content"
@@ -108,12 +111,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/tv_reject_time"
+                    android:id="@+id/tv_reject_time_title"
                     android:text="驳回时间"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
-                    android:layout_toRightOf="@id/tv_reject_time"
+                    android:layout_toRightOf="@id/tv_reject_time_title"
+                    android:id="@+id/tv_reject_time"
                     android:text="2020-12-12 12:40"
                     android:layout_marginLeft="@dimen/dp_5"
                     android:layout_width="wrap_content"
@@ -121,6 +125,7 @@
                 </RelativeLayout>
             </LinearLayout>
                 <ImageView
+                    android:id="@+id/iv_state"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:background="@mipmap/passed"
@@ -141,6 +146,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/tv_expense_title"
                     android:text="谁谁的报销申请"
                     android:textSize="@dimen/dp_14"
                     android:textColor="@color/color_b_black"
@@ -150,6 +156,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:id="@+id/tv_expense_time"
                     android:layout_marginTop="@dimen/dp_10"
                     android:layout_marginRight="@dimen/dp_20"
                     android:text="2020-12-12 14-12"
@@ -208,6 +215,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:id="@+id/tv_expense_money"
                     android:text="13000元"
                     android:textColor="@color/color_b_black"
                     app:layout_constraintLeft_toLeftOf="@id/tv_bill_count"
@@ -239,15 +247,31 @@
                     <!--android:layout_width="wrap_content"-->
                     <!--android:layout_height="wrap_content" />-->
             </android.support.constraint.ConstraintLayout>
-            <LinearLayout
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical"-->
+<!--                >-->
+<!--                <include layout="@layout/item_work_expense_result_s"></include>-->
+<!--                <include layout="@layout/item_work_expense_result_s"></include>-->
+<!--                <include layout="@layout/item_work_expense_result_s"></include>-->
+<!--            </LinearLayout>-->
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/mSwipeRefreshLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 >
-                <include layout="@layout/item_work_expense_result_s"></include>
-                <include layout="@layout/item_work_expense_result_s"></include>
-                <include layout="@layout/item_work_expense_result_s"></include>
-            </LinearLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycleview_expense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_work_expense_result_s"
+                    >
+
+                </android.support.v7.widget.RecyclerView>
+            </android.support.v4.widget.SwipeRefreshLayout>
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -112,7 +112,7 @@ public class ExpenseSecondAdapter extends
 
         //少于8张，显示继续添加的图标
         if (getItemViewType(position) == TYPE_CAMERA) {
-            Drawable drawable = ContextCompat.getDrawable(context,R.drawable.addimg);
+            Drawable drawable = ContextCompat.getDrawable(context,R.mipmap.upload);
             viewHolder.mImg.setBackground(drawable);
             viewHolder.mImg.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -1,16 +1,21 @@
 package com.hulian.oa.work.activity.expense;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.print.PageRange;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
@@ -18,19 +23,29 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.hulian.oa.activity.BaseActivity;
 import com.hulian.oa.bean.ExpenseBean;
+import com.hulian.oa.bean.People;
+import com.hulian.oa.net.HttpRequest;
+import com.hulian.oa.net.OkHttpException;
+import com.hulian.oa.net.RequestParams;
+import com.hulian.oa.net.ResponseCallback;
+import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.gallery.DisplayUtils;
+import com.hulian.oa.views.MyDialog;
 import com.hulian.oa.views.flowview.ItemDecoration;
 import com.hulian.oa.views.flowview.MyLayoutManager;
 import com.hulian.oa.views.flowview.MyLinearLayoutManager;
 import com.hulian.oa.views.flowview.NoScrollRecyclerView;
 import com.hulian.oa.R;
 import com.hulian.oa.utils.StatusBarUtil;
+import com.hulian.oa.work.activity.ReadReportActivity;
 import com.hulian.oa.work.activity.attendance.ClockActivity;
 import com.hulian.oa.work.activity.attendance.SubordpersonActivity;
 import com.hulian.oa.work.activity.expense.l_adapter.ExpenseApproverAdapter;
 import com.hulian.oa.work.activity.expense.l_adapter.ExpenseCopyerAdapter;
 import com.hulian.oa.work.activity.expense.l_adapter.ExpenseImageAdapter;
 import com.hulian.oa.work.activity.expense.l_adapter.ExpenseSecondAdapter;
+import com.hulian.oa.work.activity.meeting.MeetingSponsorActivity;
+import com.hulian.oa.work.activity.meeting.SelDepartmentActivity_meet_zb;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
@@ -43,6 +58,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 
 public class ExpenseApplyForActivity extends BaseActivity {
     @BindView(R.id.tv_addItem)
@@ -59,6 +75,14 @@ public class ExpenseApplyForActivity extends BaseActivity {
     RecyclerView recycler_copyer;//抄送人
     @BindView(R.id.iv_back)
     RelativeLayout iv_back;
+    @BindView(R.id.et_sub_money)
+    EditText et_sub_money;
+    @BindView(R.id.tv_sqr)
+    TextView tv_sqr;
+    @BindView(R.id.tv_sqbm)
+    TextView tv_sqbm;
+    @BindView(R.id.tv_bill_count)
+    TextView tv_bill_count;
     //已经选择图片
     private List<LocalMedia> selectList = new ArrayList<>();
     List<String> reasonlist = new ArrayList<>();//报销事由
@@ -67,7 +91,7 @@ public class ExpenseApplyForActivity extends BaseActivity {
     //审批人
     private List<String> approverList = new ArrayList<>();
     //抄送人
-    private List<String> copyerList = new ArrayList<>();
+    private List<People> copyerList = new ArrayList<>();
     private int count1 = 0;
     public  int count2 = 0;
     List<ExpenseBean> list = new ArrayList<>();
@@ -84,9 +108,18 @@ public class ExpenseApplyForActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         StatusBarUtil.statusBarLightMode_white(this);
         setContentView(R.layout.work_expense_applyfor_s);
+        EventBus.getDefault().register(this);
         ButterKnife.bind(this);
         init();
+        initData();
         addItem();
+    }
+
+    private void initData() {
+        //申请人姓名
+        //nickname是姓名  username是账号
+        tv_sqr.setText(SPUtils.get(ExpenseApplyForActivity.this, "nickname", "").toString());
+        tv_sqbm.setText(SPUtils.get(ExpenseApplyForActivity.this, "deptname", "").toString());
     }
 
 
@@ -98,11 +131,53 @@ public class ExpenseApplyForActivity extends BaseActivity {
                 addItem();
                 break;
             case R.id.tv_sum:
+                submint();
+
+//                startActivity(new Intent(ExpenseApplyForActivity.this,ExpenseExamineActivityS.class));
                 break;
             case R.id.iv_back:
                 this.finish();
                 break;
         }
+    }
+
+    private void submint() {
+        RequestParams params = new RequestParams();
+        //创建人id
+        params.put("createBy", SPUtils.get(mContext, "userId", "").toString());
+        //创建人名称
+        params.put("createName",SPUtils.get(ExpenseApplyForActivity.this, "nickname", "").toString());
+        //部门id
+        params.put("deptId", SPUtils.get(ExpenseApplyForActivity.this, "deptId", "").toString());
+        //部门名称
+        params.put("deptName", SPUtils.get(ExpenseApplyForActivity.this, "deptname", "").toString());
+        //创建时间
+        params.put("createTime",tv_time_content.getText().toString().trim());
+        //	单据张数
+        params.put("receiptSum", tv_bill_count.getText().toString().trim());
+        //	总金额
+        params.put("money",et_sub_money.getText().toString().trim());
+        //审批人id
+//        params.put("approver", approverList.get(0));
+        //审批人名称
+//        params.put("approverName", approverList.get(0));
+        //抄送人id
+//        params.put("copier", copyerList.get(0).getUserId());
+        //抄送人名称
+//        params.put("copierName", copyerList.get(0).getUserName());
+        List<File> list = new ArrayList<>();
+        HttpRequest.post_sendExpense2(params, list, new ResponseCallback() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                Log.e("报销申请","请求成功");
+                showDialog();
+            }
+
+            @Override
+            public void onFailure(OkHttpException failuer) {
+                Log.e("报销申请","请求失败");
+            }
+        });
     }
 
     private void addItem() {
@@ -123,6 +198,13 @@ public class ExpenseApplyForActivity extends BaseActivity {
                 case R.id.iv_delete:
                     Log.e("删除条目:","外层位置："+position);
                     adapter.removeItem(position);
+                    int money = 0;
+                    for (int i=0;i<list.size();i++){
+                        if (!TextUtils.isEmpty(list.get(i).getExpense_money())){
+                            money +=Integer.parseInt(list.get(i).getExpense_money());
+                        }
+                    }
+                    et_sub_money.setText(money+"");
                     break;
                 case R.id.tv_expense_reason:
                     Log.e("报销事由:","外层位置："+position);
@@ -138,6 +220,13 @@ public class ExpenseApplyForActivity extends BaseActivity {
         @Override
         public void onEditItem(int position, CharSequence charSequence) {//position为外层位置
             list.get(position).setExpense_money(charSequence+"");
+            int money = 0;
+            for (int i=0;i<list.size();i++){
+                if (!TextUtils.isEmpty(list.get(i).getExpense_money())){
+                    money +=Integer.parseInt(list.get(i).getExpense_money());
+                }
+            }
+            et_sub_money.setText(money+"");
             Log.e("编辑金额:","外层位置："+position+"输出的结果:"+charSequence);
         }
     };
@@ -180,10 +269,11 @@ public class ExpenseApplyForActivity extends BaseActivity {
     public ExpenseApproverAdapter.onAddPicClickListener onAddExpenseClickListener = new ExpenseApproverAdapter.onAddPicClickListener() {
         @Override
         public void onAddPicClick(int position, View view) {
-            startActivity(new Intent(mContext, SubordpersonActivity.class));
-            count1++;
-            approverList.add("大老板"+count1);
-            approverAdapter.notifyItemInserted(approverList.size());
+//            startActivity(new Intent(mContext, SubordpersonActivity.class));
+//            startActivity(new Intent(mContext, SelDepartmentActivity.class));
+//            count1++;
+//            approverList.add("大老板"+count1);
+//            approverAdapter.notifyItemInserted(approverList.size());
 
         }
     };
@@ -198,9 +288,8 @@ public class ExpenseApplyForActivity extends BaseActivity {
     public ExpenseCopyerAdapter.onAddPicClickListener onAddCopyer = new ExpenseCopyerAdapter.onAddPicClickListener() {
         @Override
         public void onAddPicClick(int position, View view) {
-            count2++;
-            copyerList.add("老板"+count2);
-            copyerAdapter.notifyItemInserted(copyerList.size());
+//            count2++;
+            startActivityForResult(new Intent(mContext, SelDepartmentActivity_meet_zb.class), 0);
 
         }
     };
@@ -298,6 +387,14 @@ public class ExpenseApplyForActivity extends BaseActivity {
                     break;
             }
         }
+        if (resultCode == 1 && requestCode == 0){
+            List<People> mList1 = (List<People>) data.getSerializableExtra("mList");
+            copyerList.clear();
+            for (int i=0;i<mList1.size();i++){
+                copyerList.add(mList1.get(i));
+            }
+            copyerAdapter.notifyItemInserted(copyerList.size());
+        }
     }
 
     private void initReason() {
@@ -319,5 +416,29 @@ public class ExpenseApplyForActivity extends BaseActivity {
             }
         }).setTitleText("报销类别").setContentTextSize(22).setTitleSize(22).setSubCalSize(21).build();
         reasonPicker.setPicker(reasonlist);
+    }
+    public void onEventMainThread(People event) {
+        showToast(event.getUserName());
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+    private void showDialog() {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_submit, null);
+        TextView textView = view.findViewById(R.id.tv_text);
+        textView.setText("报销申请成功");
+        TextView submit = view.findViewById(R.id.confirm);
+
+        Dialog dialog = new MyDialog(ExpenseApplyForActivity.this, true, true, (float) 0.7)
+                .setNewView(view);
+        dialog.show();
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
     }
 }

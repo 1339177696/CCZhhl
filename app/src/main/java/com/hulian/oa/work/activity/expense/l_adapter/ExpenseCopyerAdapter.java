@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hulian.oa.R;
+import com.hulian.oa.bean.People;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ public class ExpenseCopyerAdapter extends
     public static final int TYPE_CAMERA = 1;
     public static final int TYPE_PICTURE = 2;
     private LayoutInflater mInflater;
-    private List<String> list = new ArrayList<>();
+    private List<People> list = new ArrayList<>();
     private int selectMax = 9;
     private Context context;
     private int mPosition;
@@ -47,7 +48,7 @@ public class ExpenseCopyerAdapter extends
         this.selectMax = selectMax;
     }
 
-    public void setList(List<String> list) {
+    public void setList(List<People> list) {
         this.list = list;
     }
 
@@ -134,7 +135,7 @@ public class ExpenseCopyerAdapter extends
                     }
                 }
             });
-            viewHolder.tv_name.setText(list.get(position));
+            viewHolder.tv_name.setText(list.get(position).getUserName());
 //            String path = "";
 //            LocalMedia media = list.get(position);
 //            if (media.isCompressed()) {

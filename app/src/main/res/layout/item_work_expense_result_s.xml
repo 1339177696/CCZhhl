@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    >
     <android.support.constraint.ConstraintLayout
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -48,6 +49,7 @@
                 android:layout_height="wrap_content" />
 
             <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_bill_pic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toRightOf="@id/tv_bill_msg_title"
@@ -101,6 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:id="@+id/tv_invoice_date"
             android:text="2020年1月12日"
             android:textColor="@color/color_b_black"
             app:layout_constraintLeft_toLeftOf="@id/tv_amount_sub"
@@ -116,7 +119,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/tv_expenses"
+            android:id="@+id/tv_fee_description"
             android:text="2020年1月12日"
             android:textColor="@color/color_b_black"
             app:layout_constraintLeft_toLeftOf="@id/tv_expenses_title"
@@ -132,7 +135,7 @@
             android:background="@color/color_c_black"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginTop="@dimen/dp_12"
-            app:layout_constraintTop_toBottomOf="@id/tv_expenses"
+            app:layout_constraintTop_toBottomOf="@id/tv_fee_description"
             android:layout_marginLeft="@dimen/dp_20"
             android:layout_marginRight="@dimen/dp_20"
             />
