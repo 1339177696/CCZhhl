@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="@dimen/dp_20"
+    android:paddingLeft="@dimen/dp_15"
+    android:background="@drawable/background_frame_solid_1">
+
+
+    <TextView
+        android:id="@+id/dialog_not_tv"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="选择需要筛选的推送"
+        android:textSize="12sp"
+        />
+
+    <TextView
+        android:layout_marginTop="@dimen/dp_7"
+        android:paddingBottom="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:textSize="14sp"
+        android:id="@+id/dialog_not_tv_gw"
+        android:textColor="#010101"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_not_tv"
+        android:text="公文推送"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:paddingBottom="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:textSize="14sp"
+        android:id="@+id/dialog_not_tv_qj"
+        android:textColor="#010101"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_not_tv_gw"
+        android:text="请假推送"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:paddingBottom="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:textSize="14sp"
+        android:id="@+id/dialog_not_tv_bx"
+        android:textColor="#010101"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_not_tv_qj"
+        android:text="报销推送"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:paddingBottom="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="@dimen/dp_40"
+        android:textSize="14sp"
+        android:id="@+id/dialog_not_tv_rw"
+        android:textColor="#010101"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_not_tv_bx"
+        android:text="任务推送"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</android.support.constraint.ConstraintLayout>

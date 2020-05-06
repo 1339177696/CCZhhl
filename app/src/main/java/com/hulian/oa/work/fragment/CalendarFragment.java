@@ -344,10 +344,13 @@ public class CalendarFragment extends Fragment {
                         sDKtime.setText("打卡时间   "+result.getJSONObject("data").getString("registerUpTime"));
                         sDkadress.setText(result.getJSONObject("data").getString("registerUpAddress"));
                         Sliner.setVisibility(View.VISIBLE);
+                        //根据状态显示 registerUpState--> 0 正常,1 迟到
                         if (result.getJSONObject("data").getString("registerUpState").equals("0"))
                         {
                             sbDkchidao.setVisibility(View.GONE);
+                            // regisgerUpType ---> 0 正常,1 外勤
                             if (result.getJSONObject("data").getString("regisgerUpType").equals("0")){
+                                // 外勤改成正常，换背景颜色
                                 sbDkwaiqin.setVisibility(View.VISIBLE);
                                 sbDkwaiqin.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
                                 sbDkwaiqin.setText("正常");

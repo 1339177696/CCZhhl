@@ -7,30 +7,20 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/ll_top"
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:background="@drawable/baoxiao_bg"
-        android:orientation="vertical"></LinearLayout>
-
-
-
-
-    <LinearLayout
+        android:background="@mipmap/bg_img"
         android:id="@+id/work_leave_list_liner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ll_top"
+        android:layout_height="@dimen/dp_170"
         android:orientation="vertical">
 
 
 
 
         <RelativeLayout
+            android:layout_marginTop="@dimen/dp_25"
             android:id="@+id/iv_back"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_53"
-            android:background="@drawable/baoxiao_bg"
             android:gravity="center_vertical">
 
             <ImageView
@@ -56,17 +46,17 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp_10"
                 android:src="@mipmap/filter"
-                android:visibility="invisible"
-                />
+                android:visibility="invisible" />
 
         </RelativeLayout>
-
 
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@mipmap/bg_img"
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingRight="@dimen/dp_20"
+            >
             >
 
             <android.support.design.widget.TabLayout
@@ -77,8 +67,11 @@
                 app:tabBackground="@android:color/transparent"
                 app:tabIndicatorColor="@color/colorwhite"
                 app:tabIndicatorFullWidth="false"
-                app:tabMaxWidth="0dp"
+                app:tabMaxWidth="200dp"
+                app:tabMinWidth="10dp"
                 app:tabMode="fixed"
+                app:tabPaddingEnd="8dp"
+                app:tabPaddingStart="8dp"
                 app:tabRippleColor="@android:color/transparent"
                 app:tabSelectedTextColor="@color/colorwhite"
                 app:tabTextAppearance="@style/TabLayoutTextSize"
@@ -89,88 +82,51 @@
     </LinearLayout>
 
 
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/dp_125"
-        android:background="@drawable/background_frame_solid_1"
         android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="@dimen/dp_125"
         android:layout_marginRight="10dp"
-        >
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/background_frame_solid_1">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/my_viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <!--<LinearLayout-->
 
+        <LinearLayout
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="14dp"
+            android:gravity="center"
+            android:background="@drawable/liner_yuan_qgl8"
+            android:orientation="vertical"
+            android:id="@+id/tv_launch"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50">
 
-        <!--android:layout_gravity="bottom|right"-->
+            <ImageView
+                android:src="@mipmap/icon_faqi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
+            <TextView
+                android:layout_marginTop="@dimen/dp_2"
+                android:text="发起"
+                android:textColor="#ffffffff"
+                android:textSize="8sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-        <!--android:layout_marginRight="16dp"-->
-
-
-        <!--android:layout_marginBottom="14dp"-->
-
-
-        <!--android:gravity="center"-->
-
-
-        <!--android:background="@drawable/liner_yuan_qgl8"-->
-
-
-        <!--android:orientation="vertical"-->
-
-
-        <!--android:id="@+id/tv_apply"-->
-
-
-        <!--android:layout_width="@dimen/dp_50"-->
-
-
-        <!--android:layout_height="@dimen/dp_50">-->
-
-
-        <!--<ImageView-->
-
-
-        <!--android:src="@mipmap/shenqing_qgl"-->
-
-
-        <!--android:layout_width="wrap_content"-->
-
-
-        <!--android:layout_height="wrap_content" />-->
-
-
-        <!--<TextView-->
-
-
-        <!--android:layout_marginTop="@dimen/dp_2"-->
-
-
-        <!--android:text="申请"-->
-
-
-        <!--android:textColor="#ffffffff"-->
-
-
-        <!--android:textSize="8sp"-->
-
-
-        <!--android:layout_width="wrap_content"-->
-
-
-        <!--android:layout_height="wrap_content" />-->
-
-
-        <!--</LinearLayout>-->
-
+        </LinearLayout>
 
     </FrameLayout>
+
+
+
+
 
 </RelativeLayout>

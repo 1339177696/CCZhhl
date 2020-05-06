@@ -23,6 +23,8 @@ import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.socket.JWebSocketClientService;
+import com.hulian.oa.socket.activity.NoticeMeetingActivity;
+import com.hulian.oa.socket.activity.NoticeWorkActivity;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.utils.ToastHelper;
@@ -44,6 +46,7 @@ public class LuncherActivity extends BaseActivity {
     private AbortableFuture<LoginInfo> loginRequest;
 //    private JWebSocketClientService.JWebSocketClientBinder binder;
 //    private JWebSocketClientService jWebSClientService;
+    private Intent login;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +60,7 @@ public class LuncherActivity extends BaseActivity {
             }
         }
         setContentView(R.layout.activity_luncher);
+        login=new Intent(LuncherActivity.this, LoginActivity.class);
 //        new Thread( new Runnable( ) {
 //            @Override
 //            public void run() {
@@ -124,6 +128,9 @@ public class LuncherActivity extends BaseActivity {
                 } else {
                     ToastHelper.showToast(LuncherActivity.this, "登录失败: " + code);
                 }
+
+                // 跳转登录页
+                startActivity(login);
             }
 
             @Override
@@ -131,6 +138,8 @@ public class LuncherActivity extends BaseActivity {
                 loadDialog.dismiss();
                 ToastHelper.showToast(LuncherActivity.this, "登录失败");
                 onLoginDone();
+                // 跳转登录页
+                startActivity(login);
             }
         });
 
@@ -182,6 +191,8 @@ public class LuncherActivity extends BaseActivity {
                 SPUtils.put(mContext, "roleKey", user.getRolesStr());
                 initNotificationConfig();
                 Intent intent=new Intent(LuncherActivity.this, MainActivity.class);
+//                Intent intent=new Intent(LuncherActivity.this, NoticeMeetingActivity.class);
+//                Intent intent=new Intent(LuncherActivity.this, NoticeWorkActivity.class);
                 startActivity(intent);
                 /*******************************新加的开启Socket**/
 
@@ -195,6 +206,8 @@ public class LuncherActivity extends BaseActivity {
             @Override
             public void onFailure(OkHttpException failuer) {
                 Toast.makeText(LuncherActivity.this, "请求失败="+failuer.getEmsg(), Toast.LENGTH_SHORT).show();
+                // 跳转登录页
+                startActivity(login);
             }
         });
 

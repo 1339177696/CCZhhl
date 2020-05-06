@@ -6,9 +6,10 @@
                 android:minHeight="55dip">
 
     <RelativeLayout
+        android:layout_centerVertical="true"
         android:id="@+id/head_layout"
-        android:layout_width="50dp"
-        android:layout_height="55dp"
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="@dimen/dp_55"
         android:layout_alignParentLeft="true"
         android:gravity="center">
 

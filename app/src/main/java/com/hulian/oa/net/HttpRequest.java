@@ -912,7 +912,7 @@ public class HttpRequest {
         RequestMode.postRequest(Urls.commUrls + "system/reportInfo/android/findReportMaySelectPerson", params, callback, null);
     }
 
-     /**
+    /**
      * 升级
      *
      * @param params
@@ -922,8 +922,9 @@ public class HttpRequest {
         RequestMode.postRequest(Urls.commUrls + "system/apkVersion/android/apkInfo", params, callback, null);
     }
 
-  /**
+    /**
      * 添加打卡规则
+     *
      * @param params
      * @param callback
      */
@@ -931,8 +932,9 @@ public class HttpRequest {
         RequestMode.postRequest(Urls.commUrls + "system/attenceRule/android/saveEdit", params, callback, null);
     }
 
- /**
-     *查询打卡规则
+    /**
+     * 查询打卡规则
+     *
      * @param params
      * @param callback
      */
@@ -940,8 +942,9 @@ public class HttpRequest {
         RequestMode.postRequest(Urls.commUrls + "system/attenceRule/android/getRuleInfo", params, callback, null);
     }
 
- /**
-     *上班打卡
+    /**
+     * 上班打卡
+     *
      * @param params
      * @param callback
      */
@@ -950,7 +953,8 @@ public class HttpRequest {
     }
 
     /**
-     *查询打卡信息
+     * 查询打卡信息
+     *
      * @param params
      * @param callback
      */
@@ -959,8 +963,9 @@ public class HttpRequest {
     }
 
 
-  /**
-     *查询月打卡每日状态
+    /**
+     * 查询月打卡每日状态
+     *
      * @param params
      * @param callback
      */
@@ -969,7 +974,25 @@ public class HttpRequest {
     }
 
 
+    /**
+     * 创建视频会议
+     *
+     * @param params
+     * @param callback
+     */
+    public static void createVideoRoom(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/videoConferencing/addVideoConferencing", params, callback, null);
+    }
 
+/**
+     * 视频会议列表
+     *
+     * @param params
+     * @param callback
+     */
+    public static void getVideoRoomList(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/videoConferencing/list", params, callback, null);
+    }
 
 
 }

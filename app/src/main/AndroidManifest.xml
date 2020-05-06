@@ -456,9 +456,6 @@
             android:configChanges="screenSize|keyboardHidden|orientation" />
 
         <activity
-            android:name=".work.activity.Work_gd_Activity"
-            android:configChanges="screenSize|keyboardHidden|orientation" /> <!-- 新加的选择人员 -->
-        <activity
             android:name=".work.activity.ReadReportActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:windowSoftInputMode="adjustPan" /> <!-- 新加的选择人员 -->
@@ -510,6 +507,23 @@
 
          <activity
             android:name=".work.activity.video.activity.VideoConferenceActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+
+   <activity
+            android:name=".work.activity.statistical.ExpenseStatisticalActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+
+        <activity
+            android:name=".work.activity.attendancestatistics.activity.AnaestheticsActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+
+        <activity android:name=".work.activity.attendancestatistics.activity.ClockDetailsActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+
+        <activity android:name=".socket.activity.NoticeWorkActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+
+        <activity android:name=".socket.activity.NoticeMeetingActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"/>
 
 
