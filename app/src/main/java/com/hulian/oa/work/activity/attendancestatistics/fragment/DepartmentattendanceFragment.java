@@ -6,18 +6,28 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.hulian.oa.R;
+import com.hulian.oa.net.HttpRequest;
+import com.hulian.oa.net.OkHttpException;
+import com.hulian.oa.net.RequestParams;
+import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.news.adapter.MyViewPageAdapter;
+import com.hulian.oa.utils.SPUtils;
 import com.othershe.calendarview.utils.CalendarUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,10 +48,14 @@ public class DepartmentattendanceFragment extends Fragment {
     TextView currentTime;
     @BindView(R.id.current_time_liner)
     LinearLayout currentTimeLiner;
+    @BindView(R.id.depart_month_avg)
+    TextView departMonthAvg;
     private View view;
     private Unbinder unbinder;
     @BindView(R.id.my_tablayout)
     TabLayout myTablayout;
+    @BindView(R.id.depart_person_num)
+    TextView depart_person_num;
     @BindView(R.id.main_viewpager)
     ViewPager mainViewpager;
     private ArrayList<String> titleDatas = new ArrayList<>();
@@ -56,26 +70,37 @@ public class DepartmentattendanceFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.departmentattendancefragment, container, false);
         unbinder = ButterKnife.bind(this, view);
-        currentTime.setText("" + cDate[0] + "-" + cDate[1]);
+        if (cDate[1]<10)
+        {
+            currentTime.setText("" + cDate[0] + "-" + "0"+cDate[1]);
+        }else {
+            currentTime.setText("" + cDate[0] + "-" + cDate[1]);
+        }
 
-        titleDatas.add("正常");
-        titleDatas.add("外勤");
-        titleDatas.add("迟到");
-        titleDatas.add("缺卡");
-        titleDatas.add("请假");
-        titleDatas.add("早退");
-        fragmentList.add(DepartListFragment.newInstance("0"));
-        fragmentList.add(DepartListFragment.newInstance("1"));
-        fragmentList.add(DepartListFragment.newInstance("2"));
-        fragmentList.add(DepartListFragment.newInstance("3"));
-        fragmentList.add(DepartListFragment.newInstance("4"));
-        fragmentList.add(DepartListFragment.newInstance("5"));
         init();
+        getData();
         return view;
 
     }
 
     private void init() {
+        titleDatas.clear();
+        fragmentList.clear();
+        numberList.clear();
+        titleDatas.add("正常");
+        titleDatas.add("迟到");
+        titleDatas.add("早退");
+        titleDatas.add("加班");
+        titleDatas.add("请假");
+        titleDatas.add("缺勤");
+        titleDatas.add("外勤");
+        fragmentList.add(DepartListFragment.newInstance("0",currentTime.getText().toString()));
+        fragmentList.add(DepartListFragment.newInstance("1",currentTime.getText().toString()));
+        fragmentList.add(DepartListFragment.newInstance("2",currentTime.getText().toString()));
+        fragmentList.add(DepartListFragment.newInstance("3",currentTime.getText().toString()));
+        fragmentList.add(DepartListFragment.newInstance("4",currentTime.getText().toString()));
+        fragmentList.add(DepartListFragment.newInstance("5",currentTime.getText().toString()));
+        fragmentList.add(DepartListFragment.newInstance("6",currentTime.getText().toString()));
         // 在fragment中嵌套fragment使用getChildFragmentManager();
         MyViewPageAdapter myViewPageAdapter = new MyViewPageAdapter(getChildFragmentManager(), titleDatas, fragmentList);
         myTablayout.setSelectedTabIndicator(0);
@@ -116,6 +141,8 @@ public class DepartmentattendanceFragment extends Fragment {
                 currentTime.setText(getTime(date));
                 startTimeStr = currentTime.getText().toString();
                 btn = true;
+                init();
+                getData();
             }
         }).setType(new boolean[]{true, true, false, false, false, false})
                 .setLabel("年", "月", "日", "时", "分", "秒")
@@ -127,4 +154,33 @@ public class DepartmentattendanceFragment extends Fragment {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
         return format.format(date);
     }
+
+    public void setUnit_text(int number){
+        depart_person_num.setText("考勤人数 "+number+" 人");
+    }
+    private void getData() {
+        RequestParams params = new RequestParams();
+        params.put("deptId", SPUtils.get(getActivity(), "deptId", "").toString());
+        params.put("createTime", currentTime.getText().toString());
+        HttpRequest.getClock_Timer(params, new ResponseCallback() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                try {
+                    JSONObject result = new JSONObject(responseObj.toString());
+                    if (!TextUtils.equals(result.getJSONObject("data").getString("avg"), "")) {
+                        departMonthAvg.setText(result.getJSONObject("data").getString("avg"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(OkHttpException failuer) {
+                //   Log.e("TAG", "请求失败=" + failuer.getEmsg());
+                Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }

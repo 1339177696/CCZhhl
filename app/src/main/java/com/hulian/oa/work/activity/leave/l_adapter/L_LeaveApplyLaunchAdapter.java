@@ -75,7 +75,7 @@ public class L_LeaveApplyLaunchAdapter extends RecyclerView.Adapter <L_LeaveAppl
         holder.tv_time.setText(TimeUtils.getDateToString(dataList.get(position).getCreateTime()));
         holder.tv_leave_reason.setText(dataList.get(position).getCause());
         holder.tv_duration.setText(dataList.get(position).getDuration()+"天");
-        holder.l_item_time.setText("请假时间"+dataList.get(position).getStartTime()+"--"+dataList.get(position).getEndTime());
+        holder.l_item_time.setText(dataList.get(position).getStartTime()+"--"+dataList.get(position).getEndTime());
         if(dataList.get(position).getState().equals("0")){
             holder.tv_pend.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_daishenpi_icon_qgl));
         }

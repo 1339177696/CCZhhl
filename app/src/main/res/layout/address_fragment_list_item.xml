@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        style="@style/TopBg"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textColor="#7C8389"
+            android:id="@+id/catalog"
+            style="@style/TopTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="3dip"
+            android:paddingLeft="10dip"
+            android:paddingTop="3dip"
+            android:text="A" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+
+        <FrameLayout
+            android:layout_marginLeft="10dp"
+            android:id="@+id/iv_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="@dimen/dp_30"
+                android:background="@mipmap/bg_head1_img"
+                android:layout_height="@dimen/dp_30" />
+            <TextView
+                android:id="@+id/tv_type"
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:textColor="#ffffff"
+                android:text="报"
+                android:textSize="@dimen/sp_10"
+                android:gravity="center"
+                android:layout_height="match_parent" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tv_user_item_name"
+            style="@style/TextColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dip"
+            android:text="毛楠楠"
+            android:textSize="@dimen/sp_15" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/xian"
+        android:background="#E3E3E3"
+        android:layout_marginLeft="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
+</LinearLayout>

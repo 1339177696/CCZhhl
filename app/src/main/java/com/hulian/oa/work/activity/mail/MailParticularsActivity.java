@@ -93,8 +93,6 @@ public class MailParticularsActivity extends BaseActivity {
     //文件名
     @BindView(R.id.work_mail_par_listview)
     MyListView tv_file_name;
-    @BindView(R.id.iv_back)
-    FrameLayout iv_back;
     @BindView(R.id.tv_send_person2)
     TextView tvSendPerson2;
     @BindView(R.id.tv_receive_person2)

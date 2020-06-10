@@ -4,21 +4,25 @@
     android:layout_height="match_parent"
     android:background="@color/bg_all"
     android:orientation="vertical">
-
     <RelativeLayout
-        android:id="@+id/iv_back"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_53"
         android:background="#FFFFFF"
         android:gravity="center_vertical">
-
-        <ImageView
-            android:layout_width="@dimen/dp_15"
-            android:layout_height="@dimen/dp_15"
+        <RelativeLayout
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dp_15"
-            android:background="@mipmap/ic_left" />
-
+            android:background="@drawable/relatout_bg1"
+            android:padding="@dimen/dp_12">
+            <ImageView
+                android:layout_width="@dimen/dp_15"
+                android:layout_height="@dimen/dp_15"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/ic_left" />
+        </RelativeLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -28,19 +32,15 @@
             android:text="意见反馈"
             android:textColor="#ff313131"
             android:textSize="@dimen/sp_17" />
-
     </RelativeLayout>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -49,7 +49,6 @@
                 android:text="您的意见或者建议"
                 android:textColor="#313131"
                 android:textSize="@dimen/sp_14" />
-
             <EditText
                 android:id="@+id/et_content"
                 android:layout_width="match_parent"
@@ -60,7 +59,6 @@
                 android:hint="输入个人反馈意见,200字以内"
                 android:padding="@dimen/dp_15"
                 android:textSize="@dimen/sp_14" />
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -69,7 +67,6 @@
                 android:text="上传图片"
                 android:textColor="#313131"
                 android:textSize="@dimen/sp_14" />
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -80,15 +77,13 @@
                 android:background="@color/colorwhite">
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler"
-                    android:layout_marginLeft="@dimen/dp_7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_7"
                     android:layout_marginTop="@dimen/dp_10"
                     android:layout_marginBottom="@dimen/dp_10"
                     android:overScrollMode="never" />
             </RelativeLayout>
-
-
             <Button
                 android:id="@+id/tv_send"
                 android:layout_width="@dimen/dp_220"
@@ -104,7 +99,5 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp_14" />
         </LinearLayout>
-
     </ScrollView>
-
 </LinearLayout>

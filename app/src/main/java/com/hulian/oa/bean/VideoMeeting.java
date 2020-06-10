@@ -29,6 +29,16 @@ public class VideoMeeting {
     @SerializedName("endtime")
     private String stopTimeStr = "";//会议结束时间字符串
     private String participant; // 参会人
+    private String meetinglName; // 房间号
+
+    public String getMeetinglName() {
+        return meetinglName;
+    }
+
+    public void setMeetinglName(String meetinglName) {
+        this.meetinglName = meetinglName;
+    }
+
 
     public String getParticipant() {
         return participant;

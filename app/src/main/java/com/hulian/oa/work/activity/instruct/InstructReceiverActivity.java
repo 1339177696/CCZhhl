@@ -71,13 +71,13 @@ public class InstructReceiverActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.tv_receiver_instruct, R.id.rl_title})
+    @OnClick({R.id.tv_receiver_instruct, R.id.iv_back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_receiver_instruct:
                 sendData();
                 break;
-            case R.id.rl_title:
+            case R.id.iv_back:
                 finish();
                 break;
 

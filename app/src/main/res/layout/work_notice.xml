@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:orientation="vertical" android:layout_width="match_parent"
-android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <RelativeLayout
         android:id="@+id/rl_title"
         android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"
         android:background="#ffffff"
-        android:gravity="center_vertical"
-        android:layout_height="@dimen/dp_45">
-        <ImageView
-            android:layout_marginLeft="@dimen/dp_15"
-            android:layout_width="@dimen/dp_15"
+        android:gravity="center_vertical">
+
+        <RelativeLayout
             android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:background="@mipmap/ic_left"
-            android:layout_height="@dimen/dp_15" />
+            android:background="@drawable/relatout_bg1"
+            android:padding="@dimen/dp_12">
+
+            <ImageView
+                android:layout_width="@dimen/dp_15"
+                android:layout_height="@dimen/dp_15"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/ic_left" />
+
+        </RelativeLayout>
+
 
         <TextView
             android:layout_width="match_parent"
@@ -27,81 +40,85 @@ android:layout_height="match_parent">
             android:textSize="@dimen/sp_16" />
 
         <TextView
-            android:layout_marginRight="@dimen/dp_15"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/zz_btn_bg_qgl"
+            android:layout_width="@dimen/dp_46"
+            android:layout_height="@dimen/dp_21"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-       android:visibility="gone"
+            android:layout_marginRight="@dimen/dp_15"
+            android:background="@drawable/zz_btn_bg_qgl"
             android:gravity="center"
-            android:layout_width="@dimen/dp_46"
             android:text="发布"
+            android:textColor="#FFFFFF"
             android:textSize="12sp"
-            android:layout_height="@dimen/dp_21" />
+            android:visibility="gone" />
     </RelativeLayout>
+
     <TextView
-        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
+        android:layout_marginTop="5dp"
         android:background="#dddddd" />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView
-        android:id="@+id/listview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+
+        <com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
         <RelativeLayout
-            android:visibility="gone"
             android:id="@+id/emptyBg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginBottom="50dp"
-            >
+            android:visibility="gone">
+
             <ImageView
                 android:id="@+id/emptyBg1"
                 android:layout_width="@dimen/dp_260"
                 android:layout_height="@dimen/dp_150"
                 android:layout_centerInParent="true"
                 android:contentDescription="@string/empty"
-                android:src="@mipmap/ic_bg_empty"/>
+                android:src="@mipmap/ic_bg_empty" />
 
             <TextView
                 android:id="@+id/message_list_empty_hint"
                 android:layout_width="fill_parent"
-                android:text="暂无数据"
-                android:textSize="@dimen/sp_15"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/emptyBg1"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dip"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:text="暂无数据"
+                android:textSize="@dimen/sp_15" />
         </RelativeLayout>
 
-    <LinearLayout
-        android:layout_gravity="bottom|right"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="14dp"
-        android:gravity="center"
-        android:background="@drawable/liner_yuan_qgl8"
-        android:orientation="vertical"
-        android:id="@+id/tv_send"
-        android:layout_width="@dimen/dp_50"
-        android:layout_height="@dimen/dp_50">
+        <LinearLayout
+            android:id="@+id/tv_send"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="14dp"
+            android:background="@drawable/liner_yuan_qgl8"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <ImageView
-            android:src="@mipmap/shenqing_qgl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/shenqing_qgl" />
 
-        <TextView
-            android:layout_marginTop="@dimen/dp_2"
-            android:text="发布"
-            android:textColor="#ffffffff"
-            android:textSize="8sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_2"
+                android:text="发布"
+                android:textColor="#ffffffff"
+                android:textSize="8sp" />
+        </LinearLayout>
     </FrameLayout>
 </LinearLayout>

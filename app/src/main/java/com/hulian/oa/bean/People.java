@@ -8,6 +8,16 @@ public class People implements Serializable {
     private boolean ischeck;
     private String isLead;
     private String loginName;
+    private String phonenumber;
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
+    }
+
 
     public String getDeptId() {
         return deptId;

@@ -10,8 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hulian.oa.R;
-import com.hulian.oa.bean.Department;
-import com.hulian.oa.bean.People;
+import com.hulian.oa.bean.ClockBean;
+import com.hulian.oa.bean.ClockDetaTypeBean;
+import com.hulian.oa.utils.TimeUtils;
 
 import java.util.List;
 
@@ -25,8 +26,8 @@ public class ClockDetaAdapter extends BaseExpandableListAdapter {
     private Context mContext;
     private int mExpandedGroupLayout;
     private int mChildLayout;
-    private List<Department> mGroupArray;
-    private List<List<People>> mChildArray;
+    private List<ClockDetaTypeBean> mGroupArray;
+    private List<List<ClockBean>> mChildArray;
     TextView tv_count;
     private boolean isVideo = false;
     /**
@@ -38,8 +39,8 @@ public class ClockDetaAdapter extends BaseExpandableListAdapter {
      * @param childData
      * @param childLayout         详情视图布局
      */
-    public ClockDetaAdapter(Context context, List<Department> groupData, int expandedGroupLayout,
-                            List<List<People>> childData, int childLayout) {
+    public ClockDetaAdapter(Context context, List<ClockDetaTypeBean> groupData, int expandedGroupLayout,
+                            List<List<ClockBean>> childData, int childLayout) {
         mContext = context;
         mExpandedGroupLayout = expandedGroupLayout;
         mChildLayout = childLayout;
@@ -49,8 +50,8 @@ public class ClockDetaAdapter extends BaseExpandableListAdapter {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    public ClockDetaAdapter(Context context, List<Department> groupData, int expandedGroupLayout,
-                            List<List<People>> childData, int childLayout, boolean isVideo) {
+    public ClockDetaAdapter(Context context, List<ClockDetaTypeBean> groupData, int expandedGroupLayout,
+                            List<List<ClockBean>> childData, int childLayout, boolean isVideo) {
         mContext = context;
         mExpandedGroupLayout = expandedGroupLayout;
         mChildLayout = childLayout;
@@ -125,12 +126,16 @@ public class ClockDetaAdapter extends BaseExpandableListAdapter {
      * @param isExpanded
      * @param groupPosition
      */
-    private void bindGroupView(View view, Department data, boolean isExpanded, int groupPosition) {
+    private void bindGroupView(View view, ClockDetaTypeBean data, boolean isExpanded, int groupPosition) {
         // 绑定组视图的数据 当然这些都是模拟的
         TextView tv_title = (TextView) view.findViewById(R.id.group_title);
-        tv_title.setText(data.getDeptName());
+        tv_title.setText(data.getTypeName());
         TextView tv_count = view.findViewById(R.id.tv_count);
-        tv_count.setText(mChildArray.get(groupPosition).size() + "天");
+        if (data.getType().equals("4")||data.getType().equals("5")){
+            tv_count.setText(data.getSize()+ "天");
+        } else {
+            tv_count.setText(getChildrenCount(groupPosition)+ "天");
+        }
         ImageView group_state = view.findViewById(R.id.group_state);
         //如果是展开状态，
         if (isExpanded){
@@ -147,11 +152,27 @@ public class ClockDetaAdapter extends BaseExpandableListAdapter {
      * @param data
      * @param peopleList
      */
-    private void bindChildView(View view, People data, List<People> peopleList, Department mDapart) {
+    private void bindChildView(View view, ClockBean data, List<ClockBean> peopleList, ClockDetaTypeBean mDapart) {
         // 绑定组视图的数据 当然这些都是模拟的
         TextView att_tv_date = (TextView) view.findViewById(R.id.att_tv_date);
         TextView att_clock_time = (TextView) view.findViewById(R.id.att_clock_time);
-
+        if (data.getType().equals("4")){
+            att_tv_date.setText(data.getStartTime()+"---"+data.getEndTime());
+            att_clock_time.setText("共"+data.getDuration()+"天");
+        }else if (data.getType().equals("5")){
+            att_tv_date.setText(data.getCreateTime());
+            if (("2").equals(data.getRegisterUpState())|| TimeUtils.compareTwoTime((String) data.getRegisterUpTime(), "17:30") <= 0)
+            {
+                att_clock_time.setText("全天");
+            }else if (TimeUtils.compareTwoTime((String) data.getRegisterDownTime(), "11:30") >= 0){
+                att_clock_time.setText("下午");
+            }else if (TimeUtils.compareTwoTime((String) data.getRegisterUpTime(), "13:30") <= 0){
+                att_clock_time.setText("上午");
+            }
+        }else {
+            att_tv_date.setText(data.getCreateTime());
+            att_clock_time.setText("上班"+data.getRegisterUpTime()+"下班"+data.getRegisterDownTime());
+        }
     }
 
     /**

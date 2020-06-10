@@ -50,10 +50,29 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="工作汇报" />
+            android:text="报销统计" />
 
 
     </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:layout_marginTop="15dp"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:drawableRight="@mipmap/down"
+        android:drawablePadding="10dp"
+        android:text="我的"
+        android:background="@drawable/background_frame_semicircle_9"
+        app:layout_constraintTop_toBottomOf="@+id/cl_1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/tv_me"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toLeftOf="@+id/year"/>
 
 
     <TextView
@@ -61,9 +80,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/background_frame_semicircle_9"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cl_1"
         app:layout_constraintRight_toLeftOf="@+id/mouth"
+        app:layout_constraintLeft_toRightOf="@+id/tv_me"
         android:layout_marginTop="15dp"
         android:text="2020"
         android:textSize="18sp"
@@ -109,38 +128,42 @@
         android:textSize="30sp"
         />
 
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/statistical_num"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/background_frame_semicircle_10"
-        >
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/statistical_num"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="8dp"
             android:orientation="vertical"
-
+            android:background="@drawable/background_frame_semicircle_10"
             >
 
             <com.github.mikephil.charting.charts.PieChart
+                android:layout_gravity="center"
                 android:id="@+id/pie_chart"
-                android:padding="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"/>
+                android:layout_height="250dp"/>
 
+            <View
+                android:background="#E3E3E3"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_0_5"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/statis_listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
 
         </LinearLayout>
 
-
-    </ScrollView>
 
 
 </android.support.constraint.ConstraintLayout>

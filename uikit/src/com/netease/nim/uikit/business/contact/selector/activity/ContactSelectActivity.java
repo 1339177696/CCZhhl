@@ -12,6 +12,7 @@ import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -44,6 +45,7 @@ import com.netease.nim.uikit.common.activity.ToolBarOptions;
 import com.netease.nim.uikit.common.activity.UI;
 import com.netease.nim.uikit.common.ui.liv.LetterIndexView;
 import com.netease.nim.uikit.common.ui.liv.LivIndex;
+import com.netease.nim.uikit.common.util.StatusBarUtil;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -241,11 +243,11 @@ public class ContactSelectActivity extends UI implements View.OnClickListener, a
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        StatusBarUtil.statusBarLightMode(this);
         setContentView(R.layout.nim_contacts_select);
-
         ToolBarOptions options = new NimToolBarOptions();
         setToolBar(R.id.toolbar, options);
-
         parseIntentData();
         initAdapter();
         initListView();

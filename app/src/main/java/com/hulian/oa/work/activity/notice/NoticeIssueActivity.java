@@ -52,8 +52,6 @@ import butterknife.OnClick;
  * 发布通知
  */
 public class NoticeIssueActivity extends BaseActivity {
-    @BindView(R.id.iv_back)
-    ImageView ivBack;
     @BindView(R.id.gv_test)
       MyGridView gvTest;
     @BindView(R.id.bt_comment)
@@ -154,7 +152,7 @@ public class NoticeIssueActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.rl_title, R.id.bt_comment,R.id.ci_approved_pic})
+    @OnClick({R.id.iv_back, R.id.bt_comment,R.id.ci_approved_pic})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ci_approved_pic:
@@ -162,7 +160,7 @@ public class NoticeIssueActivity extends BaseActivity {
                 intent.putExtra("partment", (Serializable) mDatas);
                 startActivityForResult(intent, 1);
                 break;
-            case R.id.rl_title:
+            case R.id.iv_back:
                 finish();
                 break;
             case R.id.bt_comment:

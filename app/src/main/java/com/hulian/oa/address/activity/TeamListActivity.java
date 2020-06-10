@@ -3,6 +3,7 @@ package com.hulian.oa.address.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -51,27 +52,21 @@ public class TeamListActivity extends UI implements AdapterView.OnItemClickListe
         Intent intent = new Intent();
         intent.setClass(context, TeamListActivity.class);
         intent.putExtra(EXTRA_DATA_ITEM_TYPES, teamItemTypes);
-
         context.startActivity(intent);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         itemType = getIntent().getIntExtra(EXTRA_DATA_ITEM_TYPES, ItemTypes.TEAMS.ADVANCED_TEAM);
-
         setContentView(R.layout.group_list_activity);
-
         ToolBarOptions options = new NimToolBarOptions();
-        options.titleId = itemType == ItemTypes.TEAMS.ADVANCED_TEAM ? R.string.advanced_team : R.string.normal_team;
+//        options.titleId = itemType == ItemTypes.TEAMS.ADVANCED_TEAM ? R.string.advanced_team : R.string.normal_team;
+        options.titleId = itemType == ItemTypes.TEAMS.ADVANCED_TEAM ? R.string.advanced_team : R.string.normal_qunzu;
         setToolBar(R.id.toolbar, options);
-
         lvContacts = (ListView) findViewById(R.id.group_list);
-
         GroupStrategy groupStrategy = new GroupStrategy();
         IContactDataProvider dataProvider = new ContactDataProvider(itemType);
-
         adapter = new ContactDataAdapter(this, groupStrategy, dataProvider) {
             @Override
             protected List<AbsContactItem> onNonDataItems() {

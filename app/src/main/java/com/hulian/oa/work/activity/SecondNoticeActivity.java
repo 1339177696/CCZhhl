@@ -42,7 +42,7 @@ public class SecondNoticeActivity extends BaseActivity implements PullLoadMoreRe
     @BindView(R.id.listview)
     PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
     @BindView(R.id.iv_back)
-    ImageView ivBack;
+    RelativeLayout ivBack;
     @BindView(R.id.tv_send)
     LinearLayout tvSend;
     @BindView(R.id.emptyBg)
@@ -141,12 +141,9 @@ public class SecondNoticeActivity extends BaseActivity implements PullLoadMoreRe
 
     }
 
-    @OnClick({R.id.iv_back, R.id.tv_send, R.id.rl_title})
+    @OnClick({R.id.iv_back, R.id.tv_send})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.rl_title:
-                finish();
-                break;
             case R.id.iv_back:
                 finish();
                 break;

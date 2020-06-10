@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="@dimen/sp_15"
+    android:paddingRight="@dimen/dp_15"
+    android:paddingLeft="@dimen/dp_15">
+
+
+    <ImageView
+        android:id="@+id/not_rect_item_img"
+        android:src="@mipmap/app_mail"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="50dp"
+        android:layout_height="50dp"/>
+
+    <TextView
+        android:textSize="@dimen/sp_14"
+        android:textColor="#101010"
+        android:layout_marginTop="@dimen/dp_3"
+        android:id="@+id/not_rect_item_title"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="@dimen/dp_10"
+        app:layout_constraintLeft_toRightOf="@+id/not_rect_item_img"
+        android:text="邮件通知"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/not_rect_item_content"
+        android:textColor="#37447A"
+        android:textSize="@dimen/sp_12"
+        android:layout_marginBottom="@dimen/dp_3"
+        app:layout_constraintBottom_toBottomOf="@+id/not_rect_item_img"
+        android:layout_marginLeft="@dimen/dp_10"
+        app:layout_constraintLeft_toRightOf="@+id/not_rect_item_img"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:text="关于某某"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/not_rect_item_time"
+        app:layout_constraintTop_toTopOf="@+id/not_rect_item_title"
+        android:text="2020-05-20"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/not_rect_item_num"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        app:layout_constraintTop_toTopOf="@+id/not_rect_item_content"
+        android:background="@drawable/test_yuan_red"
+        android:text="1"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:layout_marginTop="@dimen/dp_15"
+        app:layout_constraintTop_toBottomOf="@+id/not_rect_item_img"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="#E3E3E3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"/>
+
+</android.support.constraint.ConstraintLayout>

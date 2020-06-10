@@ -15,19 +15,24 @@
             android:layout_width="match_parent"
             android:gravity="center_vertical"
             android:layout_height="@dimen/dp_53">
-            <FrameLayout
-                android:id="@+id/iv_back"
-                android:layout_width="@dimen/dp_53"
-                android:layout_height="@dimen/dp_53">
-                <ImageView
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/dp_15"
-                    android:layout_width="@dimen/dp_15"
 
+            <RelativeLayout
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/relatout_bg2"
+                android:padding="@dimen/dp_12">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_15"
+                    android:layout_height="@dimen/dp_15"
+                    android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:background="@mipmap/ic_left_white"
-                    android:layout_height="@dimen/dp_15" />
-            </FrameLayout>
+                    android:background="@mipmap/ic_left_white" />
+
+            </RelativeLayout>
+
 
             <TextView
                 android:layout_width="match_parent"

@@ -1,5 +1,4 @@
 package com.hulian.oa;
-
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -29,11 +28,8 @@ import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.uinfo.UserInfoProvider;
 import com.netease.nimlib.sdk.uinfo.model.UserInfo;
 import com.netease.nimlib.sdk.util.NIMUtil;
-
-
 public class APP extends Application {
     public static Context context;
-    // 提交给李俊鹏
     @Override
     public void onCreate() {
         super.onCreate();

@@ -34,8 +34,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * 请假审批
- * 领导页面
+ * 请假总界面
  */
 public class SecondLeaveActivity extends BaseActivity {
     @BindView(R.id.my_tablayout)

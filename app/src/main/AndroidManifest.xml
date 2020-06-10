@@ -111,10 +111,15 @@
             android:name=".news.activity.NewsActivityInfo"
             android:configChanges="screenSize|keyboardHidden|orientation" />
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".activity.LoginActivity_ceshi"
             android:configChanges="screenSize|keyboardHidden|orientation">
 
         </activity>
+<!--        <activity-->
+<!--            android:name=".activity.LoginActivity"-->
+<!--            android:configChanges="screenSize|keyboardHidden|orientation">-->
+
+<!--        </activity>-->
         <activity
             android:name=".activity.MainActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
@@ -526,6 +531,23 @@
         <activity android:name=".socket.activity.NoticeMeetingActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"/>
 
+        <activity android:name=".AddresFragmentDetelis"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+
+        <activity android:name=".socket.activity.NoticActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+
+        <activity android:name=".address.activity.OrganizationActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+
+        <activity android:name=".me.activity.MePersonalActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+
+        <activity android:name=".me.activity.MeSavePersonalActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+
+         <activity android:name=".me.activity.MeForgetPassActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
 
     </application>
 

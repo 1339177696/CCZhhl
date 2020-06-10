@@ -43,7 +43,7 @@ public class CommonOkHttpClient {
    */
   static {
     //获取缓存路径
-    File cacheDir = APP.context.getExternalCacheDir();
+    File cacheDir =   APP.context.getExternalCacheDir();
 
     //设置缓存的大小
     int cacheSize = 10 * 1024 * 1024;
@@ -76,9 +76,9 @@ public class CommonOkHttpClient {
     mOkHttpClient = okHttpBuilder.build();
   }
 
-  /**
-   * 发送具体的HTTP以及Https请求
-   */
+    /**
+     * 发送具体的HTTP以及Https请求
+     */
   public static Call sendRequest(Request request, CommonJsonCallback commonCallback) {
     Call call = mOkHttpClient.newCall(request);
     call.enqueue(commonCallback);

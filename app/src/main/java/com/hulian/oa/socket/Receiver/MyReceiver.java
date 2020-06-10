@@ -1,9 +1,12 @@
 package com.hulian.oa.socket.Receiver;
 
+import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
+
+import com.hulian.oa.activity.MainActivity;
 
 /**
  * Created by qgl on 2019/12/4 17:20.
@@ -17,7 +20,6 @@ public class MyReceiver extends BroadcastReceiver {
         Toast.makeText(context, intent.getStringExtra("hello"), Toast.LENGTH_SHORT).show();
         //调用Message接口的方法
         message.getMsg(" world");
-
     }
 
     interface Message {

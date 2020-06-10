@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.view.Window;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
@@ -18,6 +19,7 @@ import android.widget.ListView;
 
 import com.hulian.oa.R;
 import com.hulian.oa.message.helper.SessionHelper;
+import com.hulian.oa.utils.StatusBarUtil;
 import com.netease.nim.uikit.api.wrapper.NimToolBarOptions;
 import com.netease.nim.uikit.business.contact.core.item.AbsContactItem;
 import com.netease.nim.uikit.business.contact.core.item.ContactItem;
@@ -78,8 +80,8 @@ public class GlobalSearchActivity extends UI implements OnItemClickListener {
 
         searchView = (SearchView) MenuItemCompat.getActionView(item);
         SearchView.SearchAutoComplete textView = (SearchView.SearchAutoComplete)searchView.findViewById(R.id.search_src_text);
-        textView.setTextColor(getResources().getColor(R.color.white));
-        textView.setHintTextColor(getResources().getColor(R.color.white));
+        textView.setTextColor(getResources().getColor(R.color.black));
+        textView.setHintTextColor(getResources().getColor(R.color.black));
         searchView.setOnQueryTextListener(new OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -105,6 +107,8 @@ public class GlobalSearchActivity extends UI implements OnItemClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        StatusBarUtil.statusBarLightMode(this);
         setContentView(R.layout.global_search_result);
         ToolBarOptions options = new NimToolBarOptions();
         setToolBar(R.id.toolbar, options);

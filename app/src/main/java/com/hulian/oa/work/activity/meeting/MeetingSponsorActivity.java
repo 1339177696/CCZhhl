@@ -62,8 +62,6 @@ public class MeetingSponsorActivity extends BaseActivity {
     MyGridView gvTest;
     @BindView(R.id.lv_meet)
     MyListView lv_meet;
-    @BindView(R.id.iv_back)
-    ImageView ivBack;
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.et_title)
@@ -153,13 +151,10 @@ public class MeetingSponsorActivity extends BaseActivity {
         startActivity(new Intent(MeetingSponsorActivity.this, MeetingAmendActivity.class));
     }
 
-    @OnClick({R.id.iv_back,R.id.rl_title, R.id.ci_approved_pic, R.id.tv_part_count_title, R.id.tv_back_instruct})
+    @OnClick({R.id.iv_back, R.id.ci_approved_pic, R.id.tv_part_count_title, R.id.tv_back_instruct})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
-                finish();
-                break;
-            case R.id.rl_title:
                 finish();
                 break;
             case R.id.ci_approved_pic:

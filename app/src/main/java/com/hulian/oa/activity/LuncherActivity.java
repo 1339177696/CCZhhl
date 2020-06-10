@@ -60,7 +60,8 @@ public class LuncherActivity extends BaseActivity {
             }
         }
         setContentView(R.layout.activity_luncher);
-        login=new Intent(LuncherActivity.this, LoginActivity.class);
+//        login=new Intent(LuncherActivity.this, LoginActivity.class);
+        login=new Intent(LuncherActivity.this, LoginActivity_ceshi.class);
 //        new Thread( new Runnable( ) {
 //            @Override
 //            public void run() {
@@ -91,7 +92,7 @@ public class LuncherActivity extends BaseActivity {
                     }
                 }
                 else {
-                    Intent intent = new Intent(LuncherActivity.this, LoginActivity.class);
+                    Intent intent = new Intent(LuncherActivity.this, LoginActivity_ceshi.class);
                     startActivity(intent);
                     LuncherActivity.this.finish();
                 }
@@ -182,6 +183,9 @@ public class LuncherActivity extends BaseActivity {
                 SPUtils.clear(mContext);
                 SPUtils.put(mContext, "userId", user.getUserId());
                 SPUtils.put(mContext, "username", account1);
+                SPUtils.put(mContext, "loginName", user.getLoginName());
+                SPUtils.put(mContext, "phonenumber", user.getPhonenumber());
+                SPUtils.put(mContext, "sex", user.getSex());
                 SPUtils.put(mContext,"nickname",user.getUserName());
                 SPUtils.put(mContext,"isLead",user.getIsLead());
                 SPUtils.put(mContext, "deptId", user.getDeptId());

@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -48,6 +50,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -62,7 +65,6 @@ import de.greenrobot.event.EventBus;
  * 请假申请
  */
 public class LeaveApplyforActivity extends BaseActivity {
-
     @BindView(R.id.iv)
     ImageView iv;
     @BindView(R.id.fl_content)
@@ -139,6 +141,14 @@ public class LeaveApplyforActivity extends BaseActivity {
     @BindView(R.id.fl_content2)
     FrameLayout fl_content2;
     private List<Userqglbean>userqgllist = new ArrayList<>();
+    // 选择半天式
+    private OptionsPickerView daypickerview;//时间;
+    List<String> day = new ArrayList<>();
+    private int startType;
+    private int endType;
+    private String meetingTimeEnd = "";
+    private String meetingTime = "";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -171,7 +181,6 @@ public class LeaveApplyforActivity extends BaseActivity {
     }
 
     private void init() {
-
         FullyGridLayoutManager manager = new FullyGridLayoutManager(mContext, 4, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
         adapter = new GridImageAdapter(mContext, onAddPicClickListener);
@@ -269,14 +278,14 @@ public class LeaveApplyforActivity extends BaseActivity {
                 reasonPicker.show();
                 break;
             case R.id.rl_start_time:
-                selectTime(tvTimeStart);
+                selectTime();
                 break;
             case R.id.rl_end_time:
-                if (TextUtils.isEmpty(tvTimeStart.getText().toString().trim())) {
+                if (tvTimeStart.getText().toString().trim().equals("请选择开始时间")||TextUtils.isEmpty(tvTimeStart.getText().toString().trim())) {
                     ToastHelper.showToast(mContext, "请先选择开始时间");
                     return;
                 }
-                selectTime(tvTimeEnd);
+                selectTime2();
                 break;
                 // 交接人
             case R.id.ci_jiaojie_pic:
@@ -328,7 +337,7 @@ public class LeaveApplyforActivity extends BaseActivity {
         params.put("approver", tvOpreatorCode);
         params.put("approverName", approverName);
         params.put("describe", etContent.getText().toString());
-        params.put("duration", tvDay.getText().toString());
+        params.put("duration", tvDay.getText().toString().substring(0,tvDay.getText().toString().length()-1));
         params.put("startTime", tvTimeStart.getText().toString());
         params.put("endTime", tvTimeEnd.getText().toString());
         params.put("cause", tvReaseon.getText().toString());
@@ -363,26 +372,48 @@ public class LeaveApplyforActivity extends BaseActivity {
         });
     }
 
-    private void selectTime(TextView textView) {
+    private void selectTime() {
         TimePickerView pvTime = new TimePickerBuilder(mContext, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
+                //设置时间
+                if(!meetingTimeEnd.equals(""))
+                {
+                     if(TimeUtils.timeCompare2(meetingTimeEnd,getTime(date))==3){
+                        ToastHelper.showToast(mContext, "开始时间不能大于结束时间");
+                        return;
+                    }
+                }
+                iniStartType(getTime(date));
+                daypickerview.show();
                 //判断选择开始时间是否大于当前时间
-                if(TimeUtils.timeCompare(TimeUtils.getNowTime1(),getTime(date))==1){
-                    ToastHelper.showToast(mContext, "请选择当前时间之后");
-                }else {
-                    //设置时间
-                    textView.setText(getTime(date));
+//                if(TimeUtils.timeCompare2(TimeUtils.getNowhousr(),getTime(date))==1){
+//                    ToastHelper.showToast(mContext, "请选择当前时间之后");
+//                }else {
+//                    iniStartType(getTime(date));
+//                    daypickerview.show();
+//                }
+            }
+        }).setType(new boolean[]{true, true, true, false, false, false})
+                .setLabel("年", "月", "日", "时", "分", "秒")
+                .build();
+        pvTime.show();
+    }
+
+    private void selectTime2() {
+        TimePickerView pvTime = new TimePickerBuilder(mContext, new OnTimeSelectListener() {
+            @Override
+            public void onTimeSelect(Date date, View v) {
+                if(!meetingTime.equals(""))
+                {
+                    if(TimeUtils.differentDaysByMillisecond(meetingTime,getTime(date))<0){
+                    ToastHelper.showToast(mContext, "请选择不小于开始时间的结束时间");
+                    return;
                 }
-                if (!"请选择开始时间".equals(tvTimeStart.getText().toString().trim()) && !"请选择结束时间".equals(tvTimeEnd.getText().toString().trim())) {
-                    if (TimeUtils.differentDaysByMillisecond(tvTimeStart.getText().toString().trim(), tvTimeEnd.getText().toString().trim()) < 0) {
-                        ToastHelper.showToast(mContext, "请选择不小于开始时间的结束时间");
-                        tvDay.setText("");
-                    } else
-                        tvDay.setText((1 + TimeUtils.differentDaysByMillisecond(tvTimeStart.getText().toString().trim(), tvTimeEnd.getText().toString().trim())) + "");
-                        // 天数换算成功之后请求接口
-                        getPerson((1 + TimeUtils.differentDaysByMillisecond(tvTimeStart.getText().toString().trim(), tvTimeEnd.getText().toString().trim())) + "",SPUtils.get(mContext, "userId", "").toString(),SPUtils.get(mContext, "deptId", "").toString());
+                    iniStartType2(getTime(date));
+                    daypickerview.show();
                 }
+
             }
         }).setType(new boolean[]{true, true, true, false, false, false})
                 .setLabel("年", "月", "日", "时", "分", "秒")
@@ -452,4 +483,76 @@ public class LeaveApplyforActivity extends BaseActivity {
 
     }
 
+
+    // 请求天数，剔除节假日
+    private void postDay(String startTime,int startType,String endTime,int endType){
+        RequestParams params = new RequestParams();
+        params.put("startTime",startTime.substring(0,startTime.length()-2));
+        params.put("startType",String.valueOf(startType));
+        params.put("endTime",endTime.substring(0,startTime.length()-2));
+        params.put("endType",String.valueOf(endType));
+        HttpRequest.getDay(params, new ResponseCallback() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                try {
+                    JSONObject result = new JSONObject(responseObj.toString());
+                    JSONObject data = result.getJSONObject("data");
+                    String dday = "";
+                    if (data.getString("leaveDays").lastIndexOf(".0") != -1)
+                    {
+                        dday = data.getString("leaveDays").substring(0,data.getString("leaveDays").length()-2);
+                    }else {
+                        dday = data.getString("leaveDays");
+                    }
+                    tvDay.setText(dday+"天");
+                    getPerson( dday + "",SPUtils.get(mContext, "userId", "").toString(),SPUtils.get(mContext, "deptId", "").toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(OkHttpException failuer) {
+
+            }
+        });
+    }
+
+    // 上午
+    private void iniStartType(String time){
+        day = new ArrayList<>();
+        day.add("上午");
+        day.add("下午");
+        daypickerview = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                    startType = options1;
+                    tvTimeStart.setText(time+" "+day.get(options1));
+                    meetingTime = time;
+                if(!meetingTimeEnd.equals(""))
+                {
+                    postDay(tvTimeStart.getText().toString().trim(),startType,tvTimeEnd.getText().toString().trim(),endType);
+                }
+            }
+        }).setTitleText("").setContentTextSize(22).setTitleSize(22).setSubCalSize(21).build();
+        daypickerview.setPicker(day);
+    }
+
+    private void iniStartType2(String time){
+        day = new ArrayList<>();
+        day.add("上午");
+        day.add("下午");
+        daypickerview = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                    endType = options1;
+                    tvTimeEnd.setText(time+" "+day.get(options1));
+                    meetingTimeEnd = time;
+                    //请求天数
+                    postDay(tvTimeStart.getText().toString().trim(),startType,tvTimeEnd.getText().toString().trim(),endType);
+
+            }
+        }).setTitleText("").setContentTextSize(22).setTitleSize(22).setSubCalSize(21).build();
+        daypickerview.setPicker(day);
+    }
 }

@@ -37,8 +37,6 @@ import butterknife.OnClick;
  * 描述： 版本升级页面
  */
 public class LBanbenActivity extends BaseActivity {
-    @BindView(R.id.rl_title)
-    RelativeLayout rlTitle;
     @BindView(R.id.app_version)
     TextView appVersion;
     @BindView(R.id.rela_r1)
@@ -72,7 +70,12 @@ public class LBanbenActivity extends BaseActivity {
                     String code = result.getJSONObject("data").getString("versionNum");
                     if (Integer.valueOf(code)>v){
                         Toast.makeText(LBanbenActivity.this,"温馨提示，为节省您的流量请在WiFi情况下载",Toast.LENGTH_LONG).show();
-                        Version_context = "1.考勤打卡Bug修复0。";
+                        Version_context = "主要更新：\n" +
+                                "l. 我的中增加个人信息修改功能，密码也可以进行修改\n" +
+                                "2. 通讯录增加组织机构\n" +
+                                "3. 工作中心视频会议可以进行正常召开\n" +
+                                "4. 工作中心考勤打卡功能优化，解决打卡失败问题\n" +
+                                "5. 增加统计分析模块考勤统计功能，可以查看自己的考勤记录";
                         Version_url = result.getJSONObject("data").getString("phoneUri");
                         sendRequest();
                         // 开启下载
@@ -92,10 +95,10 @@ public class LBanbenActivity extends BaseActivity {
             }
         });
     }
-    @OnClick({R.id.rl_title, R.id.rela_r1})
+    @OnClick({R.id.iv_back, R.id.rela_r1})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.rl_title:
+            case R.id.iv_back:
                 finish();
                 break;
             case R.id.rela_r1:

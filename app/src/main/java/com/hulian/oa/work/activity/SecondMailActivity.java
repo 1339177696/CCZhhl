@@ -45,8 +45,6 @@ public class SecondMailActivity extends BaseActivity implements PullLoadMoreRecy
     TextView tv_write_mail;
     @BindView(R.id.lv_mail)
     PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
-    @BindView(R.id.iv_back_x)
-    FrameLayout iv_back_x;
     @BindView(R.id.main_drawer_layout)
     DrawerLayout mainDrawerLayout;
     @BindView(R.id.tv_receiver)
@@ -97,7 +95,7 @@ public class SecondMailActivity extends BaseActivity implements PullLoadMoreRecy
         });
     }
 
-    @OnClick({R.id.tv_apply, R.id.iv_back_x, R.id.tv_write_mail, R.id.main_right_drawer_layout,R.id.liner_inbox,R.id.liner_outbox})
+    @OnClick({R.id.tv_apply, R.id.iv_back, R.id.tv_write_mail, R.id.main_right_drawer_layout,R.id.liner_inbox,R.id.liner_outbox})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_apply:
@@ -108,7 +106,7 @@ public class SecondMailActivity extends BaseActivity implements PullLoadMoreRecy
             case R.id.tv_write_mail:
                 mainDrawerLayout.openDrawer(Gravity.RIGHT);
                 break;
-            case R.id.iv_back_x:
+            case R.id.iv_back:
                 finish();
                 break;
             case R.id.liner_inbox:

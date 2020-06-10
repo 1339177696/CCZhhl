@@ -112,7 +112,8 @@ public class LeaveApplyResultActivity extends BaseActivity {
                     if (status.equals("1")) {
                         liucheng_img_my.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.liucheng_icon_qgl2));
                         tv_shenqing_time_qgl.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("startTime"));
-                        tv_shenqingren_qgl.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("nowApproveName"));
+                        // 修改过一次
+                        tv_shenqingren_qgl.setText(result.getJSONObject("data").getJSONObject("workLeave").getString("approverName"));
                         tv_wancheng_qgl.setTextColor(Color.parseColor("#ff313131"));
                         tv_wanzcheng_time_qgl.setVisibility(View.VISIBLE);
                         String a = result.getJSONObject("data").getJSONObject("workLeave").getString("approvalTime");

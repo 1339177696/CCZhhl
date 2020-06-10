@@ -79,8 +79,6 @@ public class TaskUndoneDetailsActivity extends BaseActivity implements PullLoadM
     private List<Hufu_bean>list = new ArrayList<>();
     @BindView(R.id.l_undone_rela_huifu)
     RelativeLayout l_undone_rela_huifu;
-    @BindView(R.id.iv_back)
-    FrameLayout iv_back;
     @BindView(R.id.la_un_start_time)
     TextView la_un_start_time;
     @BindView(R.id.la_un_stop_time)

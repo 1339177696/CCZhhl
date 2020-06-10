@@ -6,18 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.hulian.oa.R;
-import com.hulian.oa.bean.Department;
-import com.hulian.oa.bean.People;
-
+import com.hulian.oa.bean.ClockDepartBean;
+import com.hulian.oa.bean.UnitLisFragmentBean;
 import java.util.List;
-
-import de.greenrobot.event.EventBus;
-
 /**
  * 作者：qgl 时间： 2020/4/22 11:20
  * Describe:
@@ -28,8 +22,8 @@ public class UnitListAdapter extends BaseExpandableListAdapter {
     private Context mContext;
     private int mExpandedGroupLayout;
     private int mChildLayout;
-    private List<Department> mGroupArray;
-    private List<List<People>> mChildArray;
+    private List<UnitLisFragmentBean> mGroupArray;
+    private List<List<ClockDepartBean>> mChildArray;
     TextView tv_count;
     private boolean isVideo = false;
     /**
@@ -41,8 +35,8 @@ public class UnitListAdapter extends BaseExpandableListAdapter {
      * @param childData
      * @param childLayout         详情视图布局
      */
-    public UnitListAdapter(Context context, List<Department> groupData, int expandedGroupLayout,
-                                   List<List<People>> childData, int childLayout) {
+    public UnitListAdapter(Context context, List<UnitLisFragmentBean> groupData, int expandedGroupLayout,
+                                   List<List<ClockDepartBean>> childData, int childLayout) {
         mContext = context;
         mExpandedGroupLayout = expandedGroupLayout;
         mChildLayout = childLayout;
@@ -52,8 +46,8 @@ public class UnitListAdapter extends BaseExpandableListAdapter {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    public UnitListAdapter(Context context, List<Department> groupData, int expandedGroupLayout,
-                                   List<List<People>> childData, int childLayout,boolean isVideo) {
+    public UnitListAdapter(Context context, List<UnitLisFragmentBean> groupData, int expandedGroupLayout,
+                                   List<List<ClockDepartBean>> childData, int childLayout,boolean isVideo) {
         mContext = context;
         mExpandedGroupLayout = expandedGroupLayout;
         mChildLayout = childLayout;
@@ -128,7 +122,7 @@ public class UnitListAdapter extends BaseExpandableListAdapter {
      * @param isExpanded
      * @param groupPosition
      */
-    private void bindGroupView(View view, Department data, boolean isExpanded, int groupPosition) {
+    private void bindGroupView(View view, UnitLisFragmentBean data, boolean isExpanded, int groupPosition) {
         // 绑定组视图的数据 当然这些都是模拟的
         TextView tv_title = (TextView) view.findViewById(R.id.group_title);
         tv_title.setText(data.getDeptName());
@@ -150,19 +144,20 @@ public class UnitListAdapter extends BaseExpandableListAdapter {
      * @param data
      * @param peopleList
      */
-    private void bindChildView(View view, People data, List<People> peopleList, Department mDapart) {
+    private void bindChildView(View view, ClockDepartBean data, List<ClockDepartBean> peopleList, UnitLisFragmentBean mDapart) {
         // 绑定组视图的数据 当然这些都是模拟的
         TextView tv_name = (TextView) view.findViewById(R.id.depart_clock_name);
         TextView tv_type = (TextView) view.findViewById(R.id.tv_type);
         TextView tv_depart = (TextView) view.findViewById(R.id.tv_depart);
+        TextView group_day = (TextView) view.findViewById(R.id.group_day);
         tv_name.setText(data.getUserName());
+        group_day.setText(data.getSeveralDay()+"天");
         tv_type.setText(data.getUserName().substring(data.getUserName().length()-2));
-        tv_depart.setText(mDapart.getDeptName());
+        tv_depart.setText(data.getDeptName());
     }
 
     /**
      * 创建新的组视图
-     *
      * @param parent
      * @return
      */
@@ -172,7 +167,6 @@ public class UnitListAdapter extends BaseExpandableListAdapter {
 
     /**
      * 创建新的子视图
-     *
      * @param parent
      * @return
      */

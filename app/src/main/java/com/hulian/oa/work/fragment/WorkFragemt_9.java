@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import com.hulian.oa.DemoCache;
 import com.hulian.oa.R;
 import com.hulian.oa.bean.People;
+import com.hulian.oa.socket.activity.NoticActivity;
+import com.hulian.oa.socket.activity.NoticeWorkActivity;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.TimeUtils;
 import com.hulian.oa.utils.ToastHelper;
@@ -66,7 +68,11 @@ public class WorkFragemt_9 extends Fragment {
     ImageView btMeeting;
     @BindView(R.id.bt_instruct)
     ImageView btInstruct;
+    @BindView(R.id.bt_Work_notfit)
+    ImageView btWorkNotfit;
+
     int[] images = {R.mipmap.demo, R.mipmap.demo1, R.mipmap.demo2, R.mipmap.demo3, R.mipmap.demo4};
+
     //已经选择图片
     private List<LocalMedia> selectList = new ArrayList<>();
     Unbinder unbinder;
@@ -82,11 +88,11 @@ public class WorkFragemt_9 extends Fragment {
 //            }
 //
 //        } else {
-            if (SPUtils.get(getActivity(), "isLead", "").equals("0")) {
-                view = inflater.inflate(R.layout.fragment_work_fragment_xin, container, false);
-            } else {
-                view = inflater.inflate(R.layout.fragment_work_fragment_xin, container, false);
-            }
+        if (SPUtils.get(getActivity(), "isLead", "").equals("0")) {
+            view = inflater.inflate(R.layout.fragment_work_fragment_xin, container, false);
+        } else {
+            view = inflater.inflate(R.layout.fragment_work_fragment_xin, container, false);
+        }
 //        }
         unbinder = ButterKnife.bind(this, view);
         return view;
@@ -98,7 +104,7 @@ public class WorkFragemt_9 extends Fragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.bt_shipin,R.id.bt_yuyin,R.id.bt_mail,R.id.bt_coop,R.id.bt_meeting,R.id.bt_notice,R.id.bt_time, R.id.bt_instruct ,R.id.bt_leave, R.id.bt_baoxiao,R.id.bt_Work_report,R.id.bt_Work_statistical,R.id.bt_Work_account})
+    @OnClick({R.id.bt_shipin, R.id.bt_yuyin, R.id.bt_mail, R.id.bt_coop, R.id.bt_meeting, R.id.bt_notice, R.id.bt_time, R.id.bt_instruct, R.id.bt_leave, R.id.bt_baoxiao, R.id.bt_Work_report, R.id.bt_Work_statistical, R.id.bt_Work_account,R.id.bt_Work_notfit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             //视频会议
@@ -106,11 +112,11 @@ public class WorkFragemt_9 extends Fragment {
                 startActivity(new Intent(getActivity(), VideoConferenceActivity.class));
 //                startActivityForResult(new Intent(getActivity(), SelDepartmentActivity_meet_video.class), 0);
                 break;
-                //语音会议
+            //语音会议
             case R.id.bt_yuyin:
                 ToastHelper.showToast(getActivity(), "功能暂未开放");
                 break;
-                //邮件收发
+            //邮件收发
             case R.id.bt_mail:
                 startActivity(new Intent(getActivity(), SecondMailActivity.class));
                 break;
@@ -118,21 +124,21 @@ public class WorkFragemt_9 extends Fragment {
             case R.id.bt_coop:
                 startActivity(new Intent(getActivity(), SecondTaskCoopActivity.class));
                 break;
-                //会议安排
+            //会议安排
             case R.id.bt_meeting:
                 startActivity(new Intent(getActivity(), SecondMeetingActivity.class));
                 break;
-                //通告通知
+            // 通告通知
             case R.id.bt_notice:
                 startActivity(new Intent(getActivity(), SecondNoticeActivity.class));
                 break;
-                //考勤打卡
+            //考勤打卡
             case R.id.bt_time:
                 startActivity(new Intent(getActivity(), ClockActivity.class));
                 // 此处修改部分手机闪屏上一个界面问题
                 getActivity().overridePendingTransition(0, 0);
                 break;
-                //指令安排
+            //指令安排
             case R.id.bt_instruct:
                 startActivity(new Intent(getActivity(), SecondInstructActivity.class));
                 break;
@@ -140,7 +146,7 @@ public class WorkFragemt_9 extends Fragment {
                 //跳转到请假人申请列表
                 startActivity(new Intent(getActivity(), SecondLeaveActivity.class));
                 break;
-                //报销
+            //报销
             case R.id.bt_baoxiao:
 //                startActivity(new Intent(getActivity(),SecondExpenseActivity.class));
                 ToastHelper.showToast(getActivity(), "功能暂未开放");
@@ -152,13 +158,22 @@ public class WorkFragemt_9 extends Fragment {
             case R.id.bt_Work_report:
                 startActivity(new Intent(getActivity(), WorkReportActivity.class));
                 break;
-                //考勤统计
+            //考勤统计
             case R.id.bt_Work_statistical:
                 startActivity(new Intent(getActivity(), AnaestheticsActivity.class));
                 break;
 
             case R.id.bt_Work_account:
-                startActivity(new Intent(getActivity(), ExpenseStatisticalActivity.class));
+//                startActivity(new Intent(getActivity(), ExpenseStatisticalActivity.class));
+                ToastHelper.showToast(getActivity(), "功能暂未开放");
+
+                break;
+
+
+            case R.id.bt_Work_notfit:
+//                startActivity(new Intent(getActivity(), NoticActivity.class));
+                ToastHelper.showToast(getActivity(), "功能暂未开放");
+
                 break;
         }
     }
@@ -244,7 +259,6 @@ public class WorkFragemt_9 extends Fragment {
             NIMClient.getService(MsgService.class).sendCustomNotification(command);
         }
     }
-
 
 
 }

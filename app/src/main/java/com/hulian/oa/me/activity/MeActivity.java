@@ -3,6 +3,7 @@ package com.hulian.oa.me.activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -48,6 +49,8 @@ public class MeActivity extends BaseActivity {
     TextView tvDept;
     @BindView(R.id.tv_type)
     TextView tv_type;
+    @BindView(R.id.min_rela)
+    RelativeLayout min_rela;
 
     private JWebSocketClientService jWebSClientService;
 
@@ -58,14 +61,17 @@ public class MeActivity extends BaseActivity {
         StatusBarUtil.statusBarLightMode_white(this);
         setContentView(R.layout.activity_andmin_me);
         ButterKnife.bind(this);
+        init();
+    }
+
+    public void init(){
         tv_type.setText(SPUtils.get(mContext, "nickname", "").toString().substring(SPUtils.get(mContext, "nickname", "").toString().length()-2,SPUtils.get(mContext, "nickname", "").toString().length()));
         tvName.setText(SPUtils.get(mContext, "nickname", "").toString());
         tvDept.setText(SPUtils.get(mContext, "deptname", "").toString());
         mine_phone.setText(SPUtils.get(mContext, "username", "").toString());
-
     }
 
-    @OnClick({R.id.rl_mine_program, R.id.rl_mine_file, R.id.rl_mine_collection, R.id.rl_mine_set, R.id.iv_back, R.id.mine_out_login,R.id.main2_outlogin,R.id.rl_mine_banben})
+    @OnClick({R.id.rl_mine_program, R.id.rl_mine_file, R.id.rl_mine_collection, R.id.rl_mine_set, R.id.iv_back, R.id.mine_out_login,R.id.main2_outlogin,R.id.rl_mine_banben,R.id.min_rela})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_mine_program:
@@ -91,11 +97,25 @@ public class MeActivity extends BaseActivity {
             case R.id.rl_mine_banben:
                 startActivity(new Intent(mContext, LBanbenActivity.class));
                 break;
+            case R.id.min_rela:
+                startActivityForResult(new Intent(mContext, MePersonalActivity.class),1);
+
+                break;
         }
     }
 
     @OnClick(R.id.rl_mine_suggess)
     public void onViewClicked() {
         startActivity(new Intent(mContext, MeSuggestBackActivity.class));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case 1:
+                init();
+                break;
+        }
     }
 }

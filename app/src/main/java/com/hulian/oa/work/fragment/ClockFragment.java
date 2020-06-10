@@ -112,6 +112,15 @@ public class ClockFragment extends Fragment {
     TextView xbDkchidao;
     @BindView(R.id.xb_dk_adress)
     TextView xbDkadress;
+     @BindView(R.id.sb_dk_remark)
+    TextView sbDkremark;
+     @BindView(R.id.sb_dk_liner)
+    LinearLayout sbDkliner;
+    @BindView(R.id.xb_dk_remark)
+    TextView xbDkremark;
+    @BindView(R.id.liner_m2)
+    LinearLayout linerM2;
+
     private int[] cDate = CalendarUtil.getCurrentDate();
     private Context mcontext;
     private boolean type;  // 上班，下班
@@ -161,6 +170,19 @@ public class ClockFragment extends Fragment {
         }
     };
     private Long timer;
+    //上班打卡之成功回显数据
+    private String sb_state = ""; //0 正常，1 迟到，2 缺勤，3 加班
+    private String sb_uapdata = ""; //0 正常，1 外勤
+    private String sb_timer = ""; // 打卡时间
+    private String sb_adressr = ""; //打卡地址
+    private String sb_remark = ""; //打卡外勤备注
+
+    //下班打卡之成功回显数据
+    private String xb_state = "";
+    private String xb_uapdata = "";
+    private String xb_timer = "";
+    private String xb_adressr = "";
+    private String xb_remark = "";
 
     @Nullable
     @Override
@@ -178,8 +200,7 @@ public class ClockFragment extends Fragment {
         currentTime.setText("" + cDate[0] + "-" + cDate[1] + "-" + cDate[2] + "   星期" + getMway());
         //权限判断
         permissions();
-        //规则制定查询
-        postRule();
+
         initListener();
         return view;
     }
@@ -322,7 +343,8 @@ public class ClockFragment extends Fragment {
         RequestParams params = new RequestParams();
         params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
         params.put("deptId", SPUtils.get(getActivity(), "deptId", "").toString());
-        params.put("createTime", f_createTime);
+        params.put("id", dk_id);
+//        params.put("createTime", f_createTime);
         params.put("registerUpTime", sbTime.getText().toString());
         params.put("registerUpAddress", registerUpAddress);
         params.put("registerUpCoordinate", registerUpCoordinate);
@@ -339,8 +361,15 @@ public class ClockFragment extends Fragment {
                     if (result.getString("code").equals("500")) {
                         Toast.makeText(getActivity(), "打卡失败", Toast.LENGTH_LONG).show();
                     } else {
-                        // 这个是上班打卡之后出现的打卡ID
-                        dk_id = result.getString("msg");
+                        sb_state = result.getJSONObject("data").getString("registerUpState");
+                        sb_adressr = result.getJSONObject("data").getString("registerUpAddress");
+                        sb_timer = result.getJSONObject("data").getString("registerUpTime");
+                        sb_uapdata = result.getJSONObject("data").getString("regisgerUpType");
+                        if (TextUtils.equals(result.getJSONObject("data").getString("registerUpRemark")," ")){
+                            sb_remark = "";
+                        }else {
+                            sb_remark = result.getJSONObject("data").getString("registerUpRemark");
+                        }
                         showDialog();
                     }
                 } catch (JSONException e) {
@@ -386,6 +415,15 @@ public class ClockFragment extends Fragment {
                     if (result.getString("code").equals("500")) {
                         Toast.makeText(getActivity(), "打卡失败", Toast.LENGTH_LONG).show();
                     } else {
+                        xb_state = result.getJSONObject("data").getString("registerDownState");
+                        xb_uapdata = result.getJSONObject("data").getString("regisgerDownType");
+                        xb_adressr = result.getJSONObject("data").getString("registerDownAddress");
+                        xb_timer = result.getJSONObject("data").getString("registerDownTime");
+                        if (TextUtils.equals(result.getJSONObject("data").getString("registerDownRemark")," ")){
+                            xb_remark = "";
+                        }else {
+                            xb_remark = result.getJSONObject("data").getString("registerDownRemark");
+                        }
                         showDialog();
                     }
                 } catch (JSONException e) {
@@ -482,14 +520,29 @@ public class ClockFragment extends Fragment {
                 //需要转化为实体对象
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-                    if (result.optString("data") != "") {
+                    //获取打卡ID，判断data是否存在
+                    if (result.optString("data") != ""){
+                        dk_id = result.getJSONObject("data").getString("id");
+                    }else {
+                        dk_id = "";
+                    }
+                    if (result.optString("data") == "" || TextUtils.equals(result.getJSONObject("data").getString("registerUpState"),"2")){
+                        // 未打卡,显示打卡按钮，隐藏打卡信息布局
+                        reOnBtn.setVisibility(View.VISIBLE);
+                        sbRelabtn.setVisibility(View.GONE);
+                    }else {
                         // 有打卡记录，隐藏上班打卡按钮
                         reOnBtn.setVisibility(View.GONE);
                         sbRelabtn.setVisibility(View.VISIBLE);
                         sbDktime.setText("打卡时间" + result.getJSONObject("data").getString("registerUpTime"));
                         sbDkadress.setText(result.getJSONObject("data").getString("registerUpAddress"));
-                        dk_id = result.getJSONObject("data").getString("id");
-                        //根据状态显示 registerUpState--> 0 正常,1 迟到
+                        if (TextUtils.equals(result.getJSONObject("data").getString("registerUpRemark")," ")){
+                            sbDkliner.setVisibility(View.GONE);
+                        }else {
+                            sbDkliner.setVisibility(View.VISIBLE);
+                            sbDkremark.setText(result.getJSONObject("data").getString("registerUpRemark"));
+                        }
+                        //根据状态显示 registerUpState--> 0 正常,1 迟到,3 加班
                         if (result.getJSONObject("data").getString("registerUpState").equals("0")) {
                             sbDkchidao.setVisibility(View.GONE);
                             // regisgerUpType ---> 0 正常,1 外勤
@@ -503,7 +556,7 @@ public class ClockFragment extends Fragment {
                                 sbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
                                 sbDkwaiqin.setText("外勤");
                             }
-                        } else {
+                        } else if (result.getJSONObject("data").getString("registerUpState").equals("1")){
                             sbDkchidao.setVisibility(View.VISIBLE);
                             if (result.getJSONObject("data").getString("regisgerUpType").equals("0")) {
                                 sbDkwaiqin.setVisibility(View.GONE);
@@ -512,13 +565,32 @@ public class ClockFragment extends Fragment {
                                 sbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
                                 sbDkwaiqin.setText("外勤");
                             }
+                        }else {
+                            sbDkchidao.setVisibility(View.VISIBLE);
+                            sbDkchidao.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
+                            sbDkchidao.setText("加班");
+                            if (result.getJSONObject("data").getString("regisgerUpType").equals("0")) {
+                                sbDkwaiqin.setVisibility(View.GONE);
+                            } else {
+                                sbDkwaiqin.setVisibility(View.VISIBLE);
+                                sbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
+                                sbDkwaiqin.setText("外勤");
+                            }
+
                         }
+
                         // 如果有下班打卡时间，隐藏按钮
                         if (!TextUtils.equals(result.getJSONObject("data").getString("registerDownTime"), "null")) {
                             reNoBtn.setVisibility(View.GONE);
                             xbRelabtn.setVisibility(View.VISIBLE);
                             xbDktime.setText("打卡时间" + result.getJSONObject("data").getString("registerDownTime"));
                             xbDkadress.setText(result.getJSONObject("data").getString("registerDownAddress"));
+                            if (TextUtils.equals(result.getJSONObject("data").getString("registerDownRemark")," ")){
+                                linerM2.setVisibility(View.GONE);
+                            }else {
+                                linerM2.setVisibility(View.VISIBLE);
+                                xbDkremark.setText(result.getJSONObject("data").getString("registerDownRemark"));
+                            }
                             //registerDownState --> 0 正常,1早退
                             if (result.getJSONObject("data").getString("registerDownState").equals("0")) {
                                 xbDkchidao.setVisibility(View.GONE);
@@ -532,8 +604,19 @@ public class ClockFragment extends Fragment {
                                     xbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
                                     xbDkwaiqin.setText("外勤");
                                 }
-                            } else {
+                            } else if (result.getJSONObject("data").getString("registerDownState").equals("1")){
                                 xbDkchidao.setVisibility(View.VISIBLE);
+                                if (result.getJSONObject("data").getString("regisgerDownType").equals("0")) {
+                                    xbDkwaiqin.setVisibility(View.GONE);
+                                } else {
+                                    xbDkwaiqin.setVisibility(View.VISIBLE);
+                                    xbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
+                                    xbDkwaiqin.setText("外勤");
+                                }
+                            }else {
+                                xbDkchidao.setVisibility(View.VISIBLE);
+                                xbDkchidao.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
+                                xbDkchidao.setText("加班");
                                 if (result.getJSONObject("data").getString("regisgerDownType").equals("0")) {
                                     xbDkwaiqin.setVisibility(View.GONE);
                                 } else {
@@ -546,12 +629,77 @@ public class ClockFragment extends Fragment {
                             // 未打下班卡
                             reNoBtn.setVisibility(View.VISIBLE);
                         }
-
-                    } else {
-                        // 未打卡,显示打卡按钮，隐藏打卡信息布局
-                        reOnBtn.setVisibility(View.VISIBLE);
-                        sbRelabtn.setVisibility(View.GONE);
                     }
+//                    if (result.optString("data") != "") {
+//                        // 有打卡记录，隐藏上班打卡按钮
+//                        reOnBtn.setVisibility(View.GONE);
+//                        sbRelabtn.setVisibility(View.VISIBLE);
+//                        sbDktime.setText("打卡时间" + result.getJSONObject("data").getString("registerUpTime"));
+//                        sbDkadress.setText(result.getJSONObject("data").getString("registerUpAddress"));
+//                        dk_id = result.getJSONObject("data").getString("id");
+//                        //根据状态显示 registerUpState--> 0 正常,1 迟到
+//                        if (result.getJSONObject("data").getString("registerUpState").equals("0")) {
+//                            sbDkchidao.setVisibility(View.GONE);
+//                            // regisgerUpType ---> 0 正常,1 外勤
+//                            if (result.getJSONObject("data").getString("regisgerUpType").equals("0")) {
+//                                // 外勤改成正常，换背景颜色
+//                                sbDkwaiqin.setVisibility(View.VISIBLE);
+//                                sbDkwaiqin.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
+//                                sbDkwaiqin.setText("正常");
+//                            } else {
+//                                sbDkwaiqin.setVisibility(View.VISIBLE);
+//                                sbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
+//                                sbDkwaiqin.setText("外勤");
+//                            }
+//                        } else {
+//                            sbDkchidao.setVisibility(View.VISIBLE);
+//                            if (result.getJSONObject("data").getString("regisgerUpType").equals("0")) {
+//                                sbDkwaiqin.setVisibility(View.GONE);
+//                            } else {
+//                                sbDkwaiqin.setVisibility(View.VISIBLE);
+//                                sbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
+//                                sbDkwaiqin.setText("外勤");
+//                            }
+//                        }
+//                        // 如果有下班打卡时间，隐藏按钮
+//                        if (!TextUtils.equals(result.getJSONObject("data").getString("registerDownTime"), "null")) {
+//                            reNoBtn.setVisibility(View.GONE);
+//                            xbRelabtn.setVisibility(View.VISIBLE);
+//                            xbDktime.setText("打卡时间" + result.getJSONObject("data").getString("registerDownTime"));
+//                            xbDkadress.setText(result.getJSONObject("data").getString("registerDownAddress"));
+//                            //registerDownState --> 0 正常,1早退
+//                            if (result.getJSONObject("data").getString("registerDownState").equals("0")) {
+//                                xbDkchidao.setVisibility(View.GONE);
+//                                //regisgerDownType --> 0 正常,1 外勤
+//                                if (result.getJSONObject("data").getString("regisgerDownType").equals("0")) {
+//                                    xbDkwaiqin.setVisibility(View.VISIBLE);
+//                                    xbDkwaiqin.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
+//                                    xbDkwaiqin.setText("正常");
+//                                } else {
+//                                    xbDkwaiqin.setVisibility(View.VISIBLE);
+//                                    xbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
+//                                    xbDkwaiqin.setText("外勤");
+//                                }
+//                            } else {
+//                                xbDkchidao.setVisibility(View.VISIBLE);
+//                                if (result.getJSONObject("data").getString("regisgerDownType").equals("0")) {
+//                                    xbDkwaiqin.setVisibility(View.GONE);
+//                                } else {
+//                                    xbDkwaiqin.setVisibility(View.VISIBLE);
+//                                    xbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
+//                                    xbDkwaiqin.setText("外勤");
+//                                }
+//                            }
+//                        } else {
+//                            // 未打下班卡
+//                            reNoBtn.setVisibility(View.VISIBLE);
+//                        }
+//
+//                    } else {
+//                        // 未打卡,显示打卡按钮，隐藏打卡信息布局
+//                        reOnBtn.setVisibility(View.VISIBLE);
+//                        sbRelabtn.setVisibility(View.GONE);
+//                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -610,13 +758,18 @@ public class ClockFragment extends Fragment {
 
     // 上班回显数据
     public void sb_iniData() {
-        sbDktime.setText("打卡时间" + sbTime.getText().toString());
-        sbDkadress.setText(registerUpAddress);
-        // 打卡状态 0 正常,1 迟到
-        if (dk_time.equals("0")){
+        sbDktime.setText("打卡时间" + sb_timer);
+        sbDkadress.setText(sb_adressr);
+        if (TextUtils.equals(sb_remark,"")){
+            sbDkliner.setVisibility(View.GONE);
+        }else {
+            sbDkliner.setVisibility(View.VISIBLE);
+            sbDkremark.setText(sb_remark);
+        }
+        if (sb_state.equals("0")){
             sbDkchidao.setVisibility(View.GONE);
             // 打卡距离 0 正常,1 外勤
-            if (dk_type.equals("0")){
+            if (sb_uapdata.equals("0")){
                 // 外勤改成正常，换背景颜色
                 sbDkwaiqin.setVisibility(View.VISIBLE);
                 sbDkwaiqin.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
@@ -626,9 +779,9 @@ public class ClockFragment extends Fragment {
                 sbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
                 sbDkwaiqin.setText("外勤");
             }
-        }else {
+        }else if (sb_state.equals("1")){
             sbDkchidao.setVisibility(View.VISIBLE);
-            if (dk_type.equals("0")){
+            if (sb_uapdata.equals("0")){
                 sbDkwaiqin.setVisibility(View.GONE);
             }else {
                 sbDkwaiqin.setVisibility(View.VISIBLE);
@@ -636,35 +789,62 @@ public class ClockFragment extends Fragment {
                 sbDkwaiqin.setText("外勤");
             }
         }
-//        if (dk_type.equals("0")) {
-//            sbDkwaiqin.setVisibility(View.GONE);
-//            if (dk_time.equals("0")) {
-//                sbDkchidao.setVisibility(View.GONE);
+        else if (sb_state.equals("3")){
+            // 外勤改成正常，换背景颜色
+            sbDkchidao.setVisibility(View.VISIBLE);
+            sbDkchidao.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
+            sbDkchidao.setText("加班");
+            if (sb_uapdata.equals("0")){
+                sbDkwaiqin.setVisibility(View.GONE);
+            }else {
+                sbDkwaiqin.setVisibility(View.VISIBLE);
+                sbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
+                sbDkwaiqin.setText("外勤");
+            }
+        }
+//        sbDktime.setText("打卡时间" + sbTime.getText().toString());
+//        sbDkadress.setText(registerUpAddress);
+//        // 打卡状态 0 正常,1 迟到
+//        if (dk_time.equals("0")){
+//            sbDkchidao.setVisibility(View.GONE);
+//            // 打卡距离 0 正常,1 外勤
+//            if (dk_type.equals("0")){
+//                // 外勤改成正常，换背景颜色
 //                sbDkwaiqin.setVisibility(View.VISIBLE);
-//                sbDkwaiqin.setText("正常");
 //                sbDkwaiqin.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
+//                sbDkwaiqin.setText("正常");
 //            } else {
-//                sbDkchidao.setVisibility(View.VISIBLE);
+//                sbDkwaiqin.setVisibility(View.VISIBLE);
+//                sbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
+//                sbDkwaiqin.setText("外勤");
 //            }
-//        } else {
-//            sbDkwaiqin.setVisibility(View.VISIBLE);
-//            if (dk_time.equals("0")) {
-//                sbDkchidao.setVisibility(View.GONE);
-//            } else {
-//                sbDkchidao.setVisibility(View.VISIBLE);
+//        }else {
+//            sbDkchidao.setVisibility(View.VISIBLE);
+//            if (dk_type.equals("0")){
+//                sbDkwaiqin.setVisibility(View.GONE);
+//            }else {
+//                sbDkwaiqin.setVisibility(View.VISIBLE);
+//                sbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
+//                sbDkwaiqin.setText("外勤");
 //            }
 //        }
     }
 
     //下班回显数据
     public void xb_iniData() {
-        xbDktime.setText("打卡时间" + xbTime.getText().toString());
-        xbDkadress.setText(registerUpAddress);
+        xbDktime.setText("打卡时间" + xb_timer);
+        xbDkadress.setText(xb_adressr);
+        if (TextUtils.equals(xb_remark,"")){
+            linerM2.setVisibility(View.GONE);
+        }else {
+            linerM2.setVisibility(View.VISIBLE);
+            xbDkremark.setText(xb_remark);
+        }
         // 下班时间 0 正常,1 早退
-        if (xb_dk_time.equals("0")){
+        if (xb_state.equals("0")){
             xbDkchidao.setVisibility(View.GONE);
             // 下班距离 0 正常,1 外勤
-            if (dk_type.equals("0")){
+            if (xb_uapdata.equals("0")){
                 xbDkwaiqin.setVisibility(View.VISIBLE);
                 xbDkwaiqin.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
                 xbDkwaiqin.setText("正常");
@@ -673,9 +853,20 @@ public class ClockFragment extends Fragment {
                 xbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
                 xbDkwaiqin.setText("外勤");
             }
-        }else {
+        }else if (xb_state.equals("1")){
             xbDkchidao.setVisibility(View.VISIBLE);
-            if (dk_type.equals("0")){
+            if (xb_uapdata.equals("0")){
+                xbDkwaiqin.setVisibility(View.GONE);
+            }else {
+                xbDkwaiqin.setVisibility(View.VISIBLE);
+                xbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
+                xbDkwaiqin.setText("外勤");
+            }
+        }else if (xb_state.equals("3")){
+            xbDkchidao.setVisibility(View.VISIBLE);
+            xbDkchidao.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
+            xbDkchidao.setText("加班");
+            if (xb_uapdata.equals("0")){
                 xbDkwaiqin.setVisibility(View.GONE);
             }else {
                 xbDkwaiqin.setVisibility(View.VISIBLE);
@@ -683,24 +874,6 @@ public class ClockFragment extends Fragment {
                 xbDkwaiqin.setText("外勤");
             }
         }
-//        if (dk_type.equals("0")) {
-//            xbDkwaiqin.setVisibility(View.GONE);
-//            if (xb_dk_time.equals("0")) {
-//                xbDkchidao.setVisibility(View.GONE);
-//                xbDkwaiqin.setVisibility(View.VISIBLE);
-//                xbDkwaiqin.setText("正常");
-//                xbDkwaiqin.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
-//            } else {
-//                xbDkchidao.setVisibility(View.VISIBLE);
-//            }
-//        } else {
-//            xbDkwaiqin.setVisibility(View.VISIBLE);
-//            if (xb_dk_time.equals("0")) {
-//                xbDkchidao.setVisibility(View.GONE);
-//            } else {
-//                xbDkchidao.setVisibility(View.VISIBLE);
-//            }
-//        }
     }
     /********************高德定位************/
     /**
@@ -920,4 +1093,10 @@ public class ClockFragment extends Fragment {
         Toast.makeText(getActivity(), tips, Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        //规则制定查询
+        postRule();
+    }
 }

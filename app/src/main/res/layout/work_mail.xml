@@ -16,18 +16,23 @@
             android:layout_height="@dimen/dp_45"
             android:background="#ffffff"
             android:gravity="center_vertical">
-            <FrameLayout
-                android:id="@+id/iv_back_x"
-                android:layout_width="@dimen/dp_45"
-                android:layout_height="@dimen/dp_45">
-            <ImageView
-                android:layout_gravity="center_vertical|left"
-                android:layout_marginLeft="@dimen/dp_15"
-                android:layout_width="@dimen/dp_15"
+
+            <RelativeLayout
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:background="@mipmap/ic_left"
-                android:layout_height="@dimen/dp_15" />
-            </FrameLayout>
+                android:background="@drawable/relatout_bg1"
+                android:padding="@dimen/dp_12">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_15"
+                    android:layout_height="@dimen/dp_15"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:background="@mipmap/ic_left" />
+            </RelativeLayout>
+
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
@@ -59,10 +64,10 @@
             android:background="@android:color/transparent">
 
             <LinearLayout
-                android:focusable="true"
-                android:focusableInTouchMode="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -91,61 +96,62 @@
 
                     <com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView
                         android:id="@+id/lv_mail"
-                        android:layout_marginTop="-10dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="-10dp"
                         android:layout_marginBottom="@dimen/dp_10" />
+
                     <RelativeLayout
-                        android:visibility="gone"
                         android:id="@+id/emptyBg"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginBottom="50dp"
-                        >
+                        android:visibility="gone">
+
                         <ImageView
                             android:id="@+id/emptyBg1"
                             android:layout_width="@dimen/dp_260"
                             android:layout_height="@dimen/dp_150"
                             android:layout_centerInParent="true"
                             android:contentDescription="@string/empty"
-                            android:src="@mipmap/ic_bg_empty"/>
+                            android:src="@mipmap/ic_bg_empty" />
 
                         <TextView
                             android:id="@+id/message_list_empty_hint"
                             android:layout_width="fill_parent"
-                            android:text="暂无数据"
-                            android:textSize="@dimen/sp_15"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/emptyBg1"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="5dip"
-                            android:gravity="center"/>
+                            android:gravity="center"
+                            android:text="暂无数据"
+                            android:textSize="@dimen/sp_15" />
                     </RelativeLayout>
 
                     <LinearLayout
+                        android:id="@+id/tv_apply"
+                        android:layout_width="@dimen/dp_50"
+                        android:layout_height="@dimen/dp_50"
                         android:layout_gravity="bottom|right"
                         android:layout_marginRight="16dp"
                         android:layout_marginBottom="14dp"
-                        android:gravity="center"
                         android:background="@drawable/liner_yuan_qgl8"
-                        android:orientation="vertical"
-                        android:id="@+id/tv_apply"
-                        android:layout_width="@dimen/dp_50"
-                        android:layout_height="@dimen/dp_50">
+                        android:gravity="center"
+                        android:orientation="vertical">
 
                         <ImageView
-                            android:src="@mipmap/shenqing_qgl"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/shenqing_qgl" />
 
                         <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_2"
                             android:text="写邮件"
                             android:textColor="#ffffffff"
-                            android:textSize="8sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:textSize="8sp" />
 
                     </LinearLayout>
                 </FrameLayout>
@@ -153,173 +159,194 @@
             <!-- 右侧滑动栏 -->
 
             <LinearLayout
-                android:layout_gravity="end"
                 android:id="@+id/main_right_drawer_layout"
                 android:layout_width="@dimen/dp_200"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:background="@color/white">
+                android:layout_gravity="end"
+                android:background="@color/white"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/liner_inbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_58"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/dp_18"
-                    android:paddingRight="@dimen/dp_18"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_58">
-                <ImageView
-                    android:background="@mipmap/mail_inbox_icon"
-                    android:layout_width="@dimen/dp_22"
-                    android:layout_height="@dimen/dp_22" />
+                    android:paddingRight="@dimen/dp_18">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_22"
+                        android:layout_height="@dimen/dp_22"
+                        android:background="@mipmap/mail_inbox_icon" />
+
                     <TextView
-                        android:layout_marginLeft="@dimen/dp_10"
                         android:layout_width="wrap_content"
-                        android:textSize="@dimen/sp_17"
-                        android:text="收件箱"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/dp_10"
                         android:gravity="center_vertical"
+                        android:text="收件箱"
                         android:textColor="#313131"
-                        android:layout_height="match_parent" />
+                        android:textSize="@dimen/sp_17" />
+
                     <TextView
                         android:id="@+id/tv_receiver"
                         android:layout_width="wrap_content"
-                        android:gravity="center_vertical"
-                        android:textSize="12sp"
+                        android:layout_height="match_parent"
                         android:layout_marginLeft="@dimen/dp_60"
+                        android:gravity="center_vertical"
                         android:text="0"
                         android:textColor="#085DD6"
-                        android:layout_height="match_parent" />
+                        android:textSize="12sp" />
                     <!--<ImageView-->
-                        <!--android:layout_gravity="right|center_vertical"-->
-                        <!--android:layout_marginLeft="@dimen/dp_5"-->
-                        <!--android:background="@mipmap/ic_right"-->
-                        <!--android:layout_width="@dimen/dp_12"-->
-                        <!--android:layout_height="@dimen/dp_12" />-->
+                    <!--android:layout_gravity="right|center_vertical"-->
+                    <!--android:layout_marginLeft="@dimen/dp_5"-->
+                    <!--android:background="@mipmap/ic_right"-->
+                    <!--android:layout_width="@dimen/dp_12"-->
+                    <!--android:layout_height="@dimen/dp_12" />-->
                 </LinearLayout>
+
                 <TextView
                     android:layout_width="match_parent"
-                    android:background="@color/color_xian"
-                    android:layout_height="@dimen/dp_0_5" />
+                    android:layout_height="@dimen/dp_0_5"
+                    android:background="@color/color_xian" />
+
                 <LinearLayout
                     android:id="@+id/liner_outbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_58"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/dp_18"
-                    android:paddingRight="@dimen/dp_18"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_58">
+                    android:paddingRight="@dimen/dp_18">
+
                     <ImageView
-                        android:background="@mipmap/mail_sent_icon"
                         android:layout_width="@dimen/dp_22"
-                        android:layout_height="@dimen/dp_22" />
+                        android:layout_height="@dimen/dp_22"
+                        android:background="@mipmap/mail_sent_icon" />
+
                     <TextView
-                        android:layout_marginLeft="@dimen/dp_10"
                         android:layout_width="wrap_content"
-                        android:textSize="@dimen/sp_17"
-                        android:text="已发送"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/dp_10"
                         android:gravity="center_vertical"
+                        android:text="已发送"
                         android:textColor="#313131"
-                        android:layout_height="match_parent" />
+                        android:textSize="@dimen/sp_17" />
+
                     <TextView
                         android:id="@+id/tv_outbox_num"
                         android:layout_width="wrap_content"
-                        android:gravity="center_vertical"
-                        android:textSize="12sp"
-                        android:text="0"
+                        android:layout_height="match_parent"
                         android:layout_marginLeft="@dimen/dp_60"
+                        android:gravity="center_vertical"
+                        android:text="0"
                         android:textColor="#085DD6"
-                        android:layout_height="match_parent" />
+                        android:textSize="12sp" />
                     <!--<ImageView-->
-                        <!--android:layout_gravity="right|center_vertical"-->
-                        <!--android:layout_marginLeft="@dimen/dp_5"-->
-                        <!--android:background="@mipmap/ic_right"-->
-                        <!--android:layout_width="@dimen/dp_12"-->
-                        <!--android:layout_height="@dimen/dp_12" />-->
+                    <!--android:layout_gravity="right|center_vertical"-->
+                    <!--android:layout_marginLeft="@dimen/dp_5"-->
+                    <!--android:background="@mipmap/ic_right"-->
+                    <!--android:layout_width="@dimen/dp_12"-->
+                    <!--android:layout_height="@dimen/dp_12" />-->
                 </LinearLayout>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:background="@color/color_xian"
-                    android:layout_height="@dimen/dp_0_5" />
-                <LinearLayout
-                    android:visibility="gone"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/dp_18"
-                    android:paddingRight="@dimen/dp_18"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_58">
-                    <ImageView
-                        android:background="@mipmap/mail_collection_icon"
-                        android:layout_width="@dimen/dp_22"
-                        android:layout_height="@dimen/dp_22" />
-                    <TextView
-                        android:layout_marginLeft="@dimen/dp_10"
-                        android:layout_width="wrap_content"
-                        android:textSize="14sp"
-                        android:text="收藏夹"
-                        android:gravity="center_vertical"
-                        android:textColor="#313131"
-                        android:layout_height="match_parent" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:gravity="center_vertical"
-                        android:textSize="12sp"
-                        android:layout_marginLeft="@dimen/dp_70"
-                        android:text="0"
-                        android:textColor="#085DD6"
-                        android:layout_height="match_parent" />
-                    <ImageView
-                        android:layout_gravity="right|center_vertical"
-                        android:layout_marginLeft="@dimen/dp_5"
-                        android:background="@mipmap/ic_right"
-                        android:layout_width="@dimen/dp_12"
-                        android:layout_height="@dimen/dp_12" />
-                </LinearLayout>
-                <TextView
-                    android:visibility="gone"
-                    android:layout_width="match_parent"
-                    android:background="@color/color_xian"
-                    android:layout_height="@dimen/dp_0_5" />
-                <LinearLayout
-                    android:visibility="gone"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/dp_18"
-                    android:paddingRight="@dimen/dp_18"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_58">
-                    <ImageView
-                        android:background="@mipmap/mail_draftbox_icon"
-                        android:layout_width="@dimen/dp_24"
-                        android:layout_height="@dimen/dp_24" />
-                    <TextView
-                        android:layout_marginLeft="@dimen/dp_10"
-                        android:layout_width="wrap_content"
-                        android:textSize="14sp"
-                        android:text="草稿箱"
-                        android:gravity="center_vertical"
-                        android:textColor="#313131"
-                        android:layout_height="match_parent" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:gravity="center_vertical"
-                        android:textSize="12sp"
 
-                        android:layout_marginLeft="@dimen/dp_70"
-                        android:textColor="#085DD6"
-                        android:layout_height="match_parent" />
-                    <ImageView
-                        android:layout_gravity="right|center_vertical"
-                        android:layout_marginLeft="@dimen/dp_5"
-                        android:text="0"
-                        android:background="@mipmap/ic_right"
-                        android:layout_width="@dimen/dp_12"
-                        android:layout_height="@dimen/dp_12" />
-                </LinearLayout>
                 <TextView
                     android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_0_5"
+                    android:background="@color/color_xian" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_58"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dp_18"
+                    android:paddingRight="@dimen/dp_18"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_22"
+                        android:layout_height="@dimen/dp_22"
+                        android:background="@mipmap/mail_collection_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:gravity="center_vertical"
+                        android:text="收藏夹"
+                        android:textColor="#313131"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/dp_70"
+                        android:gravity="center_vertical"
+                        android:text="0"
+                        android:textColor="#085DD6"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_12"
+                        android:layout_height="@dimen/dp_12"
+                        android:layout_gravity="right|center_vertical"
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:background="@mipmap/ic_right" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_0_5"
                     android:background="@color/color_xian"
-                    android:layout_height="@dimen/dp_0_5" />
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_58"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dp_18"
+                    android:paddingRight="@dimen/dp_18"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_24"
+                        android:layout_height="@dimen/dp_24"
+                        android:background="@mipmap/mail_draftbox_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:gravity="center_vertical"
+                        android:text="草稿箱"
+                        android:textColor="#313131"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/dp_70"
+
+                        android:gravity="center_vertical"
+                        android:textColor="#085DD6"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_12"
+                        android:layout_height="@dimen/dp_12"
+                        android:layout_gravity="right|center_vertical"
+                        android:layout_marginLeft="@dimen/dp_5"
+                        android:background="@mipmap/ic_right"
+                        android:text="0" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_0_5"
+                    android:background="@color/color_xian" />
             </LinearLayout>
         </android.support.v4.widget.DrawerLayout>
     </LinearLayout>

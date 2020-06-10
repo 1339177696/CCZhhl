@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @SuppressWarnings({"unused", "RedundantIfStatement"})
 public class RequestParams {
-    //线程安全的HashMap
+        //线程安全的HashMap
     public ConcurrentHashMap<String, String> urlParams = new ConcurrentHashMap<>();
     public ConcurrentHashMap<String, Object> fileParams = new ConcurrentHashMap<>();
 

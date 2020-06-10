@@ -78,16 +78,16 @@ public class VideoConferenceActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StatusBarUtil.statusBarLightMode_white(this);
-        setContentView(R.layout.activity_work_report);
+        setContentView(R.layout.activity_work_video);
         ButterKnife.bind(this);
         mContext = this;
         titleDatas.add("我参与会议");
-        titleDatas.add("进行中会议");
+//        titleDatas.add("进行中会议");
         fragmentList.add(new MeetingListInMyFragment());
-        fragmentList.add(new MeetingListOngoingFragment());
+//        fragmentList.add(new MeetingListOngoingFragment());
 
         imgList.add(R.drawable.vc_pic_1);
-        imgList.add(R.drawable.vc_pic_2);
+//        imgList.add(R.drawable.vc_pic_2);
         init();
     }
 
@@ -109,35 +109,6 @@ public class VideoConferenceActivity extends BaseActivity {
             imageView.setBackground(ContextCompat.getDrawable(this, imgList.get(i)));
 
         }
-
-
-//        myTablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-//            @Override
-//            public void onTabSelected(TabLayout.Tab tab) {
-//                tab.getCustomView().findViewById(R.id.tv_title).setSelected(true);
-//                myViewpager.setCurrentItem(tab.getPosition());
-//                switch (tab.getPosition()) {
-
-//                    case 0:
-//                        tv_apply.setVisibility(View.INVISIBLE);
-//                        break;
-////
-//                    case 1:
-//                        tv_apply.setVisibility(View.VISIBLE);
-//                        break;
-//                }
-//            }
-//
-//            @Override
-//            public void onTabUnselected(TabLayout.Tab tab) {
-//                tab.getCustomView().findViewById(R.id.tv_title).setSelected(false);
-//            }
-//
-//            @Override
-//            public void onTabReselected(TabLayout.Tab tab) {
-//
-//            }
-//        });
 
     }
 

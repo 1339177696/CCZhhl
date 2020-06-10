@@ -51,8 +51,6 @@ import de.greenrobot.event.EventBus;
 public class NewsActivityInfo extends BaseActivity {
     @BindView(R.id.tv_mengban)
     TextView tvMengban;
-    @BindView(R.id.iv_back)
-    ImageView ivBack;
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.tv_dis)
@@ -216,16 +214,12 @@ public class NewsActivityInfo extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.bt_comment, R.id.bt_top, R.id.bt_store,R.id.iv_back,R.id.rl_title})
+    @OnClick({R.id.bt_comment, R.id.bt_top, R.id.bt_store,R.id.iv_back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
                 EventBus.getDefault().post(new News_1_Fragment());
                 EventBus.getDefault().post(new CollectionActivity2());
-                finish();
-                break;
-            case R.id.rl_title:
-                EventBus.getDefault().post(new News_1_Fragment());
                 finish();
                 break;
             case R.id.bt_comment:

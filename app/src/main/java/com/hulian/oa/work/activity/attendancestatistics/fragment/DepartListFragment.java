@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.R;
+import com.hulian.oa.bean.ClockBean;
+import com.hulian.oa.bean.ClockDepartBean;
 import com.hulian.oa.bean.Report;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
@@ -47,13 +50,16 @@ public class DepartListFragment extends Fragment implements  BaseQuickAdapter.Re
     private int mCount = 1;
     Unbinder unbinder;
     private DepartListAdapter mAdapter;
-    private List<Report> mData = new ArrayList<>();
+    private List<ClockDepartBean> mData = new ArrayList<>();
     private int cd = 0;
+    private static String timer = "";
     // TODO: Rename and change types and number of parameters
-    public  static DepartListFragment newInstance(String code) {
+    public  static DepartListFragment newInstance(String code,String time) {
         DepartListFragment fragment = new DepartListFragment();
         Bundle args = new Bundle();
         args.putString("param", code);
+        args.putString("time", time);
+        timer = time;
         fragment.setArguments(args);
         return fragment;
     }
@@ -81,12 +87,16 @@ public class DepartListFragment extends Fragment implements  BaseQuickAdapter.Re
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(getActivity(), ClockDetailsActivity.class));
+                Intent intent = new Intent(getActivity(),ClockDetailsActivity.class);
+                intent.putExtra("username",mData.get(position).getUserName());
+                intent.putExtra("deptname",mData.get(position).getDeptName());
+                intent.putExtra("userid",mData.get(position).getCreateBy());
+                intent.putExtra("time",timer);
+                startActivity(intent);
             }
         });
         mData.clear();
         getData();
-
     }
 
 
@@ -111,12 +121,12 @@ public class DepartListFragment extends Fragment implements  BaseQuickAdapter.Re
 
     private void getData() {
         RequestParams params = new RequestParams();
-        params.put("pageStart", mCount * 10 - 10 + "");
+        params.put("pageStart", mCount*10-9 + "");
         params.put("pageEnd", mCount * 10 + "");
-        params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
-        params.put("receivePerson", SPUtils.get(getActivity(), "userId", "").toString());
-        params.put("ok",String.valueOf(cd));
-        HttpRequest.getGetWorkReportList(params, new ResponseCallback() {
+        params.put("deptId", SPUtils.get(getActivity(), "deptId", "").toString());
+        params.put("type",String.valueOf(cd));
+        params.put("createTime",timer);
+        HttpRequest.getAttece_List(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
                 swipeRefreshLayout.setRefreshing(false);
@@ -124,10 +134,11 @@ public class DepartListFragment extends Fragment implements  BaseQuickAdapter.Re
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-                    List<Report> memberList = gson.fromJson(result.getJSONArray("data").toString(),
-                            new TypeToken<List<Report>>() {
+                    List<ClockDepartBean> memberList = gson.fromJson(result.getJSONArray("data").toString(),
+                            new TypeToken<List<ClockDepartBean>>() {
                             }.getType());
                     mData.addAll(memberList);
+                    Log.d("长度",memberList.size()+"");
                     if (memberList.size() < 10) {
                         mAdapter.loadMoreEnd();
                     } else {
@@ -135,6 +146,7 @@ public class DepartListFragment extends Fragment implements  BaseQuickAdapter.Re
                     }
                     mAdapter.notifyDataSetChanged();
                     ((DepartmentattendanceFragment) (DepartListFragment.this.getParentFragment())).setListSize(mData.size(),cd);
+                    ((DepartmentattendanceFragment) (DepartListFragment.this.getParentFragment())).setUnit_text(mData.size());
 
                 } catch (Exception e) {
                     e.printStackTrace();

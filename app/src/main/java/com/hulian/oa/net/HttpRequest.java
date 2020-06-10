@@ -586,14 +586,17 @@ public class HttpRequest {
     public static void post_sendExpense(RequestParams params, List<File> files, ResponseCallback callback) {
         RequestMode.postMultipart(Urls.commUrls + "system/workReimbursement/add", params, files, callback, null);
     }
+
     /**
      * 申请报销2
+     *
      * @param params
      * @param callback
      */
     public static void post_sendExpense2(RequestParams params, List<File> files, ResponseCallback callback) {
         RequestMode.postMultipart(Urls.commUrls + "system/expenseReport/android/add", params, files, callback, null);
     }
+
     /**
      * 报销列表
      *
@@ -623,6 +626,7 @@ public class HttpRequest {
     public static void get_WorkExpense_edit(RequestParams params, ResponseCallback callback) {
         RequestMode.postRequest(Urls.commUrls + "system/workReimbursement/edit", params, callback, null);
     }
+
     /**
      * 报销历史
      *
@@ -984,7 +988,7 @@ public class HttpRequest {
         RequestMode.postRequest(Urls.commUrls + "system/videoConferencing/addVideoConferencing", params, callback, null);
     }
 
-/**
+    /**
      * 视频会议列表
      *
      * @param params
@@ -993,6 +997,99 @@ public class HttpRequest {
     public static void getVideoRoomList(RequestParams params, ResponseCallback callback) {
         RequestMode.postRequest(Urls.commUrls + "system/videoConferencing/list", params, callback, null);
     }
+
+
+    /**
+     * 考勤统计打卡时长
+     *
+     * @param params
+     * @param callback
+     */
+    public static void getClock_Timer(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/attenceCount/ygdksc", params, callback, null);
+    }
+
+
+    /**
+     * 查询员工考勤列表
+     *
+     * @param params
+     * @param callback
+     */
+    public static void getAttece_List(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/attenceCount/list", params, callback, null);
+    }
+
+
+    /**
+     * 员工考勤统计最外层
+     *
+     * @param params
+     * @param callback
+     */
+    public static void getYgkqtj(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/attenceCount/ygkqtj", params, callback, null);
+    }
+
+    /**
+     * 单位考勤
+     *
+     * @param params
+     * @param callback
+     */
+    public static void getDwkqtj(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/attenceCount/dwkqtj", params, callback, null);
+    }
+
+
+    /**
+     * 通讯录列表
+     *
+     * @param params
+     * @param callback
+     */
+    public static void getAddress_list(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/friendController/list", params, callback, null);
+    }
+
+    /**
+     * 通讯录列表
+     *
+     * @param params
+     * @param callback
+     */
+    public static void getDay(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/workLeave/leaveDays", params, callback, null);
+    }
+
+    /**
+     * 个人信息保存
+     * @param params
+     * @param callback
+     */
+    public static void getPerson_information(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/user/update", params, callback, null);
+    }
+
+    /**
+     * 修改密码
+     * @param params
+     * @param callback
+     */
+    public static void getChange_PassWord(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/user/resetPassword", params, callback, null);
+    }
+
+    /**
+     * 忘记密码
+     * @param params
+     * @param callback
+     */
+    public static void getForget_PassWord(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/workLeave/leaveDays", params, callback, null);
+    }
+
+
 
 
 }

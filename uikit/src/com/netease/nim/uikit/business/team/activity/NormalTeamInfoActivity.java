@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -143,17 +144,14 @@ public class NormalTeamInfoActivity extends UI implements OnClickListener, TAdap
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nim_team_info_activity);
-
         ToolBarOptions options = new NimToolBarOptions();
         setToolBar(R.id.toolbar, options);
-
         parseIntentData();
         initToggleBtn();
         loadTeamInfo();
         initAdapter();
         findViews();
         requestMembers();
-
         registerObservers(true);
     }
 
@@ -246,6 +244,7 @@ public class NormalTeamInfoActivity extends UI implements OnClickListener, TAdap
             // 标记创建者（群主）
             if (member.getType() == TeamMemberType.Owner) {
                 creator = member.getAccount();
+
                 if (creator.equals(NimUIKit.getAccount())) {
                     isSelfAdmin = true;
                 }
@@ -415,6 +414,9 @@ public class NormalTeamInfoActivity extends UI implements OnClickListener, TAdap
         nameView.setOnClickListener(this);
         TextView nameLabel = (TextView) nameView.findViewById(R.id.item_title);
         nameLabel.setText(R.string.normal_team_name);
+
+
+
 
         // talk button
         Button quitBtn = (Button) findViewById(R.id.quit_team);

@@ -25,8 +25,7 @@ import com.netease.nim.uikit.business.team.helper.TeamHelper;
 public class PopWindow extends PopupWindow{
     private View conentView;
     public PopWindow(final Activity context){
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         conentView = inflater.inflate(R.layout.popup_window, null);
         int h = context.getWindowManager().getDefaultDisplay().getHeight();
         int w = context.getWindowManager().getDefaultDisplay().getWidth();

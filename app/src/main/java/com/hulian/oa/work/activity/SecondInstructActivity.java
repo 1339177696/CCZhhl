@@ -91,13 +91,10 @@ public class SecondInstructActivity extends BaseActivity implements PullLoadMore
     }
 
 
-    @OnClick({R.id.iv_back, R.id.rl_title})
+    @OnClick(R.id.iv_back)
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
-                finish();
-                break;
-            case R.id.rl_title:
                 finish();
                 break;
         }

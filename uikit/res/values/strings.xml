@@ -154,6 +154,7 @@
     <string name="team_apply_to_join">申请加入</string>
     <string name="advanced_team">高级群</string>
     <string name="normal_team">讨论组</string>
+    <string name="normal_qunzu">群组</string>
     <string name="team_name_toast">群名称不能为空</string>
     <string name="not_allow_empty">不能为空</string>
     <string name="team_settings_name">设置名称</string>

@@ -1,5 +1,6 @@
 package com.hulian.oa.work.activity.attendancestatistics.activity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -18,12 +19,15 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.R;
 import com.hulian.oa.activity.BaseActivity;
+import com.hulian.oa.bean.ClockBean;
+import com.hulian.oa.bean.ClockDetaTypeBean;
 import com.hulian.oa.bean.Department;
 import com.hulian.oa.bean.People;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
+import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.work.adapter.ClockDetaAdapter;
 import com.hulian.oa.work.adapter.UnitListAdapter;
@@ -61,17 +65,19 @@ public class ClockDetailsActivity extends BaseActivity {
     ExpandableListView exlistview;
     @BindView(R.id.current_time)
     TextView currentTime;
+    @BindView(R.id.kq_tj_timr)
+    TextView kq_tj_timr;
     private String startTimeStr = "";
     private boolean btn = true;
     private int[] cDate = CalendarUtil.getCurrentDate();
 
     private View view;
     //最外面一层 分组下面的详情
-    private List<List<People>> childArray;
+    private List<List<ClockBean>> childArray;
     //最外面一层 分组名
-    private List<Department> groupArray;
-    List<People> memberList = new ArrayList<>();
-    List<Department> departmentList = new ArrayList<>();
+    private List<ClockDetaTypeBean> groupArray;
+    List<ClockBean> memberList = new ArrayList<>();
+    List<ClockDetaTypeBean> departmentList = new ArrayList<>();
     private ClockDetaAdapter clockDetaAdapter;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -80,7 +86,18 @@ public class ClockDetailsActivity extends BaseActivity {
         StatusBarUtil.statusBarLightMode_white(this);
         setContentView(R.layout.clockdetailsactivity);
         ButterKnife.bind(this);
-        currentTime.setText("" + cDate[0] + "-" + cDate[1]);
+//        if (cDate[1]<10)
+//        {
+            currentTime.setText(getIntent().getStringExtra("time"));
+//        }else {
+//            currentTime.setText("" + cDate[0] + "-" + cDate[1]);
+//        }
+
+
+
+        clockName.setText(getIntent().getStringExtra("username"));
+        clockDepartment.setText(getIntent().getStringExtra("deptname"));
+        tvType.setText(getIntent().getStringExtra("username").substring(getIntent().getStringExtra("username").length() - 2));
         init();
     }
 
@@ -110,25 +127,27 @@ public class ClockDetailsActivity extends BaseActivity {
 
     private void getDepartMent(){
         RequestParams params = new RequestParams();
-        HttpRequest.postDepartmentListApi(params, new ResponseCallback() {
+        params.put("createBy", getIntent().getStringExtra("userid"));
+        params.put("createTime",currentTime.getText().toString());
+        HttpRequest.getYgkqtj(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
                 //需要转化为实体对象
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     departmentList.clear();
+                    groupArray.clear();
                     JSONObject result = new JSONObject(responseObj.toString());
-                    departmentList = gson.fromJson(result.getJSONArray("data").toString(),
-                            new TypeToken<List<Department>>() {
+                    kq_tj_timr.setText(result.getJSONObject("data").getString("avg"));
+                    departmentList = gson.fromJson(result.getJSONObject("data").getJSONArray("kaoqin").toString(),
+                            new TypeToken<List<ClockDetaTypeBean>>() {
                             }.getType());
-
                     groupArray.addAll(departmentList);
                     for (int i = 0; i < departmentList.size(); i++) {
-                        List<People> temPeople = new ArrayList<>();
+                        List<ClockBean> temPeople = new ArrayList<>();
                         childArray.add(temPeople);
-                        initPeopleData(departmentList.get(i).getDeptId(), i);
+                        initPeopleData(departmentList.get(i).getType(), i);
                     }
-
                     exlistview.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
                         @Override
                         public boolean onGroupClick(ExpandableListView expandableListView, View view, int groupPosition, long id) {
@@ -150,10 +169,12 @@ public class ClockDetailsActivity extends BaseActivity {
         });
     }
 
-    private void initPeopleData(String partId, int position) {
+    private void initPeopleData(String type, int position) {
         RequestParams params = new RequestParams();
-        params.put("deptId", partId);
-        HttpRequest.postUserInfoByDeptId(params, new ResponseCallback() {
+        params.put("type", type);
+        params.put("createTime",currentTime.getText().toString());
+        params.put("createBy",getIntent().getStringExtra("userid"));
+        HttpRequest.getAttece_List(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
                 //需要转化为实体对象
@@ -164,9 +185,9 @@ public class ClockDetailsActivity extends BaseActivity {
                     childArray.get(position).clear();
                     JSONObject result = new JSONObject(responseObj.toString());
                     memberList = gson.fromJson(result.getJSONArray("data").toString(),
-                            new TypeToken<List<People>>() {
+                            new TypeToken<List<ClockBean>>() {
                             }.getType());
-                    List<People> childModels = childArray.get(position);
+                    List<ClockBean> childModels = childArray.get(position);
                     childModels.addAll(memberList);
                     exlistview.collapseGroup(position);
                     clockDetaAdapter.notifyDataSetChanged();
@@ -190,6 +211,7 @@ public class ClockDetailsActivity extends BaseActivity {
                 currentTime.setText(getTime(date));
                 startTimeStr = currentTime.getText().toString();
                 btn = true;
+                getDepartMent();
             }
         }).setType(new boolean[]{true, true, false, false, false, false})
                 .setLabel("年", "月", "日", "时", "分", "秒")

@@ -115,41 +115,41 @@ public class CommonJsonCallback implements Callback {
 
     try {
       JSONObject result = new JSONObject(responseObj.toString());
-      if (result.has(RESULT_CODE)) {
-        //从JSON对象中取出我们的响应码，如果为0，则是正确的响应 (实际情况按你们接口文档)
-        if (result.getInt(RESULT_CODE) == RESULT_CODE_VALUE) {
-          if (mClass == null) {
-            mListener.onSuccess(responseObj);
-          } else {
-            //需要转化为实体对象
-            Gson gson = new GsonBuilder().serializeNulls().create();
-
-            Object json = new JSONTokener(result.getString("data")).nextValue();
-            Object obj;
-            if(json instanceof JSONObject) {
-               obj = gson.fromJson(String.valueOf(result.getJSONObject("data")), mClass);
-            }
-            else {
-//              obj = gson.fromJson(String.valueOf(result.getJSONArray("data")),   new TypeToken<List<mClass>>() {
-//              }.getType());
-              obj=null;
-            }
-            if (obj != null) {
-              mListener.onSuccess(obj);
+        if (result.has(RESULT_CODE)) {
+          //从JSON对象中取出我们的响应码，如果为0，则是正确的响应 (实际情况按你们接口文档)
+          if (result.getInt(RESULT_CODE) == RESULT_CODE_VALUE) {
+            if (mClass == null) {
+              mListener.onSuccess(responseObj);
             } else {
-              mListener.onFailure(new OkHttpException(JSON_ERROR, JSON_MSG));
-            }
-          }
+              //需要转化为实体对象
+              Gson gson = new GsonBuilder().serializeNulls().create();
 
+              Object json = new JSONTokener(result.getString("data")).nextValue();
+              Object obj;
+              if(json instanceof JSONObject) {
+                 obj = gson.fromJson(String.valueOf(result.getJSONObject("data")), mClass);
+              }
+              else {
+  //              obj = gson.fromJson(String.valueOf(result.getJSONArray("data")),   new TypeToken<List<mClass>>() {
+  //              }.getType());
+                obj=null;
+              }
+              if (obj != null) {
+                mListener.onSuccess(obj);
+              } else {
+                mListener.onFailure(new OkHttpException(JSON_ERROR, JSON_MSG));
+              }
+            }
+
+          }
+          else if(result.getInt(RESULT_CODE)==500){
+            mListener.onSuccess(responseObj);
+          }
+          else { //将服务端返回的异常回调到应用层去处理
+            mListener.onFailure(new OkHttpException(OTHER_ERROR, result.get(ERROR_MSG) + ""));
+            Log.e("TAG","onResponse处理失败");
+          }
         }
-        else if(result.getInt(RESULT_CODE)==500){
-          mListener.onSuccess(responseObj);
-        }
-        else { //将服务端返回的异常回调到应用层去处理
-          mListener.onFailure(new OkHttpException(OTHER_ERROR, result.get(ERROR_MSG) + ""));
-          Log.e("TAG","onResponse处理失败");
-        }
-      }
     } catch (Exception e) {
       e.printStackTrace();
             mListener.onFailure(new OkHttpException(OTHER_ERROR, e.getMessage()));

@@ -18,17 +18,27 @@
 
         <RelativeLayout
             android:layout_marginTop="@dimen/dp_25"
-            android:id="@+id/iv_back"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_53"
             android:gravity="center_vertical">
 
-            <ImageView
-                android:layout_width="@dimen/dp_15"
-                android:layout_height="@dimen/dp_15"
+            <RelativeLayout
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:background="@mipmap/ic_left_white" />
+                android:background="@drawable/relatout_bg2"
+                android:padding="@dimen/dp_12">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_15"
+                    android:layout_height="@dimen/dp_15"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:background="@mipmap/ic_left_white" />
+
+            </RelativeLayout>
+
 
             <TextView
                 android:layout_width="match_parent"
@@ -57,7 +67,7 @@
             android:paddingLeft="@dimen/dp_20"
             android:paddingRight="@dimen/dp_20"
             >
-            >
+
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/my_tablayout"
@@ -97,31 +107,7 @@
             android:layout_height="match_parent" />
 
 
-        <LinearLayout
-            android:layout_gravity="bottom|right"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="14dp"
-            android:gravity="center"
-            android:background="@drawable/liner_yuan_qgl8"
-            android:orientation="vertical"
-            android:id="@+id/tv_launch"
-            android:layout_width="@dimen/dp_50"
-            android:layout_height="@dimen/dp_50">
 
-            <ImageView
-                android:src="@mipmap/icon_faqi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:layout_marginTop="@dimen/dp_2"
-                android:text="发起"
-                android:textColor="#ffffffff"
-                android:textSize="8sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
 
     </FrameLayout>
 

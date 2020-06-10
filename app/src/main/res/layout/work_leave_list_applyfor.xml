@@ -14,17 +14,28 @@
         android:layout_height="@dimen/dp_170">
 
         <RelativeLayout
-            android:id="@+id/iv_back"
             android:layout_marginTop="@dimen/dp_25"
             android:layout_width="match_parent"
             android:gravity="center_vertical"
             android:layout_height="@dimen/dp_53">
-            <ImageView
-                android:layout_marginLeft="@dimen/dp_15"
-                android:layout_width="@dimen/dp_15"
+
+            <RelativeLayout
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:background="@mipmap/ic_left_white"
-                android:layout_height="@dimen/dp_15" />
+                android:background="@drawable/relatout_bg2"
+                android:padding="@dimen/dp_12">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_15"
+                    android:layout_height="@dimen/dp_15"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:background="@mipmap/ic_left_white" />
+
+            </RelativeLayout>
+
 
             <TextView
                 android:layout_width="match_parent"
@@ -66,7 +77,6 @@
         android:layout_height="@dimen/dp_45"/>
     <FrameLayout
         android:layout_below="@+id/view_zw"
-        android:background="@drawable/background_frame_solid_1"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="10dp"
         android:layout_marginRight="10dp"

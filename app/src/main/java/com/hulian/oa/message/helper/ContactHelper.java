@@ -20,6 +20,7 @@ public class ContactHelper {
             @Override
             public void onItemClick(Context context, String account) {
                 UserProfileActivity.start(context, account);
+
             }
 
             @Override

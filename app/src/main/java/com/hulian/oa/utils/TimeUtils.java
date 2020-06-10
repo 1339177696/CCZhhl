@@ -59,7 +59,7 @@ public class TimeUtils {
         String hour = thanTen(time.hour);
         String minute = thanTen(time.minute);
 
-        timeString = hour + ":" + minute;
+        timeString = year + "-" + month + "-" +  monthDay  ;
         // System.out.println("-------timeString----------" + timeString);
         return timeString;
     }
@@ -243,7 +243,6 @@ public class TimeUtils {
 
     public static int differentDaysByMillisecond2(String date1, String date2) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM:dd");
-
         int days = 0;
         try {
             days = (int) ((dateFormat.parse(date2).getTime() - dateFormat.parse(date1).getTime()) / (1000 * 3600 * 24));
@@ -669,6 +668,30 @@ public class TimeUtils {
         int i = 0;
         //注意：传过来的时间格式必须要和这里填入的时间格式相同
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        try {
+            Date date1 = dateFormat.parse(startTime);//开始时间
+            Date date2 = dateFormat.parse(endTime);//结束时间
+            // 1 结束时间小于开始时间 2 开始时间与结束时间相同 3 结束时间大于开始时间
+            if (date2.getTime() < date1.getTime()) {
+                //结束时间小于开始时间
+                i = 1;
+            } else if (date2.getTime() == date1.getTime()) {
+                //开始时间与结束时间相同
+                i = 2;
+            } else if (date2.getTime() > date1.getTime()) {
+                //结束时间大于开始时间
+                i = 3;
+            }
+        } catch (Exception e) {
+
+        }
+        return i;
+    }
+
+    public static int timeCompare2(String startTime, String endTime) {
+        int i = 0;
+        //注意：传过来的时间格式必须要和这里填入的时间格式相同
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date date1 = dateFormat.parse(startTime);//开始时间
             Date date2 = dateFormat.parse(endTime);//结束时间

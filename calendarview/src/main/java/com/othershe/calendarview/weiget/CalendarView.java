@@ -182,7 +182,7 @@ public class CalendarView extends ViewPager {
             //单选时，如果设置切换月份不选中上次选中的日期但如果切换回有选中日期的页则需要刷新选中，或者切换选中开启则需要刷新选中
             boolean flag = (!mAttrsBean.isSwitchChoose() && lastClickDate[0] == position)
                     || mAttrsBean.isSwitchChoose();
-            monthView.refresh(lastClickDate[1], flag);
+                monthView.refresh(lastClickDate[1], flag);
         }
     }
 

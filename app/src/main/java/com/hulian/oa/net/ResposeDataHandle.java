@@ -2,7 +2,7 @@ package com.hulian.oa.net;
 
 /**
  * 创建： zb
- * 描述：封装回调接口和要转换的实体对象
+     * 描述：封装回调接口和要转换的实体对象
  */
 
 public class ResposeDataHandle {

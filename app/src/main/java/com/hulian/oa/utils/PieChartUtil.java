@@ -9,6 +9,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.hulian.oa.bean.ExpenseStaBean;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -35,8 +36,8 @@ public class PieChartUtil {
 
 
 
-
-    public void setPieChart(PieChart pieChart, Map<String, Float> pieValues, String title, boolean showLegend,int[]  PIE_COLORS) {
+//Map<String, Float> pieValues
+    public void setPieChart(PieChart pieChart, List<ExpenseStaBean>expenseStaBeans , String title, boolean showLegend, int[]  PIE_COLORS) {
         pieChart.setUsePercentValues(true);//设置使用百分比（后续有详细介绍）
         pieChart.getDescription().setEnabled(false);//设置描述
         pieChart.setRotationEnabled(false);//是否可以旋转
@@ -46,8 +47,9 @@ public class PieChartUtil {
         //这个方法为true就是环形图，为false就是饼图
         pieChart.setDrawHoleEnabled(true);//环形
 
-
-        pieChart.setExtraOffsets(0, 0, 0, 0); //设置边距
+        pieChart.setEntryLabelColor(Color.BLACK); //描述文字的颜色
+        pieChart.setEntryLabelTextSize(12);//描述文字的大小
+        pieChart.setExtraOffsets(30, 0, 30, 0); //设置边距
         // 0表示摩擦最大，基本上一滑就停
         // 1表示没有摩擦，会自动转化为0.9999,及其顺滑
         pieChart.setDragDecelerationFrictionCoef(0.5f);//设置滑动时的摩擦系数（值越小摩擦系数越大）
@@ -78,22 +80,26 @@ public class PieChartUtil {
         }
 
         //设置饼图数据
-        setPieChartData(pieChart, pieValues,PIE_COLORS);
+        setPieChartData(pieChart, expenseStaBeans,PIE_COLORS);
 
         pieChart.animateX(1500, Easing.EasingOption.EaseInOutQuad);//数据显示动画
 
     }
+//
     //设置饼图数据
-    private void setPieChartData(PieChart pieChart, Map<String, Float> pieValues,int[]  PIE_COLORS) {
+    private void setPieChartData(PieChart pieChart,List<ExpenseStaBean>expenseStaBeans ,int[]  PIE_COLORS) {
         //遍历HashMap
-        Set set = pieValues.entrySet();
-        Iterator it = set.iterator();//得到适配器
+//        Set set = pieValues.entrySet();
+//        Iterator it = set.iterator();//得到适配器
         entries=new ArrayList<>();
-        while (it.hasNext()) {
-            Map.Entry entry = (Map.Entry) it.next();
-            entries.add(new PieEntry(Float.valueOf(entry.getValue().toString()), entry.getKey().toString()));
-        }
+//        while (it.hasNext()) {
+//            Map.Entry entry = (Map.Entry) it.next();
+//            entries.add(new PieEntry(Float.valueOf(entry.getValue().toString()), entry.getKey().toString()));
+//        }
 
+        for (int i = 0;i<expenseStaBeans.size();i++){
+           entries.add(new PieEntry(Float.valueOf(expenseStaBeans.get(i).getNum()), expenseStaBeans.get(i).getState()));
+        }
         PieDataSet dataSet = new PieDataSet(entries, "");
         dataSet.setSliceSpace(3f);//设置饼块之间的间隔
         dataSet.setSelectionShift(10f);//设置饼块选中时偏离饼图中心的距离
@@ -109,7 +115,7 @@ public class PieChartUtil {
         PieData pieData = new PieData(dataSet);
         pieData.setValueFormatter(new PercentFormatter());
         pieData.setValueTextSize(11f);
-        pieData.setValueTextColor(Color.DKGRAY);
+        pieData.setValueTextColor(Color.WHITE); // 饼状图内的字体颜色
 
         pieChart.setData(pieData);
         pieChart.highlightValues(null);

@@ -24,8 +24,7 @@ import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.views.PopWindow;
-import com.hulian.oa.work.activity.attendancestatistics.fragment.DepartListFragment;
-import com.hulian.oa.work.activity.attendancestatistics.fragment.DepartmentattendanceFragment;
+import com.hulian.oa.work.fragment.WorkFragment;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.api.model.contact.ContactChangedObserver;
 import com.netease.nim.uikit.api.model.main.OnlineStateChangeObserver;
@@ -73,6 +72,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import de.greenrobot.event.EventBus;
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 public class Wechat extends TFragment {
@@ -138,7 +138,9 @@ public class Wechat extends TFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // 获取
         getData();
+        EventBus.getDefault().register(this);
         return inflater.inflate(com.netease.nim.uikit.R.layout.nim_recent_contacts, container, false);
+
     }
 
     private void notifyDataSetChanged() {
@@ -156,6 +158,8 @@ public class Wechat extends TFragment {
         registerDropCompletedListener(false);
         registerOnlineStateChangeListener(false);
         DropManager.getInstance().setDropListener(null);
+        EventBus.getDefault().unregister(this);
+
     }
 
     /**
@@ -170,7 +174,7 @@ public class Wechat extends TFragment {
         emptyHint = findView(com.netease.nim.uikit.R.id.message_list_empty_hint);
         iv_people=findView(com.netease.nim.uikit.R.id.iv_people);
         tv_type=findView(com.netease.nim.uikit.R.id.tv_type);
-        tv_type.setText(SPUtils.get(getActivity(), "nickname", "").toString().substring(SPUtils.get(getActivity(), "nickname", "").toString().length()-2,SPUtils.get(getActivity(), "nickname", "").toString().length()));
+        initView();
         iv_people.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -211,7 +215,12 @@ public class Wechat extends TFragment {
             }
         });
     }
-
+    public void initView(){
+        tv_type.setText(SPUtils.get(getActivity(), "nickname", "").toString().substring(SPUtils.get(getActivity(), "nickname", "").toString().length()-2,SPUtils.get(getActivity(), "nickname", "").toString().length()));
+    }
+    public void onEventMainThread(Wechat event) {
+        initView();
+    }
     /**
      * 初始化消息列表
      */

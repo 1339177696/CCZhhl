@@ -91,7 +91,7 @@ public class MailWriteActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.tv_send, R.id.et_annex, R.id.work_mail_shoujianren, R.id.my_img1, R.id.my_img2, R.id.rl_title})
+    @OnClick({R.id.tv_send, R.id.et_annex, R.id.work_mail_shoujianren, R.id.my_img1, R.id.my_img2, R.id.iv_back})
     public void onViewClicked(View view) {
         zhuti = tv_theme.getText().toString().trim();
         neirong = et_content.getText().toString().trim();
@@ -122,8 +122,9 @@ public class MailWriteActivity extends BaseActivity {
             case R.id.my_img2:
                 startActivityForResult(new Intent(MailWriteActivity.this, SelDepartmentActivity_meet_zb.class).putExtra("hasTop","0"), 1);
                 break;
-            case R.id.rl_title:
+            case R.id.iv_back:
                 finish();
+                break;
         }
 
     }

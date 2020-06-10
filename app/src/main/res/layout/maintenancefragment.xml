@@ -81,7 +81,6 @@
                 android:paddingBottom="@dimen/dp_4">
 
                 <TextView
-
                     android:id="@+id/current_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -123,12 +122,12 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/mainten_today"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="8小时40分钟"
                     android:textColor="#ffffffff"
-                    android:textSize="@dimen/sp_14" />
+                    android:textSize="@dimen/sp_13" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -153,12 +152,12 @@
 
 
                 <TextView
+                    android:id="@+id/mainten_month"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="8小时40分钟"
                     android:textColor="#ffffffff"
-                    android:textSize="@dimen/sp_14" />
+                    android:textSize="@dimen/sp_13" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -182,12 +181,12 @@
 
 
                 <TextView
+                    android:id="@+id/mainten_month_avg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="8小时40分钟"
                     android:textColor="#ffffffff"
-                    android:textSize="@dimen/sp_14" />
+                    android:textSize="@dimen/sp_13" />
 
                 <TextView
                     android:layout_width="wrap_content"

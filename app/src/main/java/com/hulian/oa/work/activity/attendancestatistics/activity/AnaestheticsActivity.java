@@ -7,11 +7,14 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.hulian.oa.R;
 import com.hulian.oa.activity.BaseActivity;
 import com.hulian.oa.news.adapter.MyViewPageAdapter;
@@ -53,6 +56,11 @@ public class AnaestheticsActivity extends BaseActivity {
         StatusBarUtil.statusBarLightMode_white(this);
         setContentView(R.layout.attendancestatisticsactivity);
         ButterKnife.bind(this);
+        if (TextUtils.isEmpty(SPUtils.get(this, "roleKey", "").toString()))
+        {
+            Toast.makeText(AnaestheticsActivity.this,"没有角色，请联系管理员！",Toast.LENGTH_LONG).show();
+            return;
+        }
         //如果身份是普通员工不显示二级滑动
         if (SPUtils.get(this, "roleKey", "").toString().equals("common")){
             view_zw.setVisibility(View.GONE);

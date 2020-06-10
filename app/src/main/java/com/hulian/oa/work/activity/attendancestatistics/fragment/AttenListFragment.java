@@ -1,10 +1,13 @@
 package com.hulian.oa.work.activity.attendancestatistics.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +18,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.R;
-import com.hulian.oa.bean.Report;
+import com.hulian.oa.bean.ClockBean;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.work.adapter.AttenListAdapter;
-import com.hulian.oa.work.adapter.WriteReportAdapter;
 
 import org.json.JSONObject;
 
@@ -32,6 +34,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import de.greenrobot.event.EventBus;
 
 /**
  * 作者：qgl 时间： 2020/4/21 09:17
@@ -45,13 +48,18 @@ public class AttenListFragment extends Fragment implements  BaseQuickAdapter.Req
     private int mCount = 1;
     Unbinder unbinder;
     private AttenListAdapter mAdapter;
-    private List<Report> mData = new ArrayList<>();
-    private int cd = 0;
+    private List<ClockBean> mData = new ArrayList<>();
+    private int cd = 0; // 0正常，1迟到，2早退，3加班，4请假，5缺勤，6外勤
+    private static String a = "";
+
     // TODO: Rename and change types and number of parameters
-    public  static AttenListFragment newInstance(String code) {
+    public static AttenListFragment newInstance1(String code,String time) {
         AttenListFragment fragment = new AttenListFragment();
         Bundle args = new Bundle();
         args.putString("param", code);
+        args.putString("timera", time);
+        Log.d("b---->",time);
+        a = time;
         fragment.setArguments(args);
         return fragment;
     }
@@ -99,7 +107,6 @@ public class AttenListFragment extends Fragment implements  BaseQuickAdapter.Req
         swipeRefreshLayout.setRefreshing(true);
         setRefresh();
         getData();
-
     }
 
 
@@ -110,21 +117,21 @@ public class AttenListFragment extends Fragment implements  BaseQuickAdapter.Req
 
     private void getData() {
         RequestParams params = new RequestParams();
-        params.put("pageStart", mCount * 10 - 10 + "");
+        params.put("pageStart", mCount*10-10 + "");
         params.put("pageEnd", mCount * 10 + "");
         params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
-        params.put("receivePerson", SPUtils.get(getActivity(), "userId", "").toString());
-        params.put("ok",String.valueOf(cd));
-        HttpRequest.getGetWorkReportList(params, new ResponseCallback() {
+        params.put("type",String.valueOf(cd));
+        params.put("createTime",a);
+        HttpRequest.getAttece_List(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
                 swipeRefreshLayout.setRefreshing(false);
                 //需要转化为实体对象
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
-                    JSONObject result = new JSONObject(responseObj.toString());
-                    List<Report> memberList = gson.fromJson(result.getJSONArray("data").toString(),
-                            new TypeToken<List<Report>>() {
+                     JSONObject result = new JSONObject(responseObj.toString());
+                    List<ClockBean> memberList = gson.fromJson(result.getJSONArray("data").toString(),
+                            new TypeToken<List<ClockBean>>() {
                             }.getType());
                     mData.addAll(memberList);
                     if (memberList.size() < 10) {
@@ -134,7 +141,6 @@ public class AttenListFragment extends Fragment implements  BaseQuickAdapter.Req
                     }
                     mAdapter.notifyDataSetChanged();
                     ((MaintenanceFragment) (AttenListFragment.this.getParentFragment())).setListSize(mData.size(),cd);
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

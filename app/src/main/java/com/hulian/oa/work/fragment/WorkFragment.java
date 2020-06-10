@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.hulian.oa.R;
 import com.hulian.oa.me.activity.MeActivity;
 import com.hulian.oa.utils.SPUtils;
+import com.hulian.oa.work.activity.leave.l_fragment.LeaveLaunchFragment;
 
 import java.util.ArrayList;
 
@@ -62,15 +63,17 @@ public class WorkFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fra_work, container, false);
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
-        tv_type.setText(SPUtils.get(getActivity(), "nickname", "").toString().substring(SPUtils.get(getActivity(), "nickname", "").toString().length()-2,SPUtils.get(getActivity(), "nickname", "").toString().length()));
+        initView();
         workFragemt_9=new WorkFragemt_9();
         init9fragment();
         return view;
+    }
+    public void initView(){
+        tv_type.setText(SPUtils.get(getActivity(), "nickname", "").toString().substring(SPUtils.get(getActivity(), "nickname", "").toString().length()-2,SPUtils.get(getActivity(), "nickname", "").toString().length()));
     }
 
     private void init9fragment() {
@@ -103,6 +106,10 @@ public class WorkFragment extends Fragment {
             default:
                 break;
         }
+    }
+
+    public void onEventMainThread(WorkFragment event) {
+        initView();
     }
 
 }

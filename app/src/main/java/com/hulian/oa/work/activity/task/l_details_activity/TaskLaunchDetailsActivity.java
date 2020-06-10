@@ -89,8 +89,6 @@ public class TaskLaunchDetailsActivity extends BaseActivity implements PullLoadM
     private List<LocalMedia> selectList = new ArrayList<>();
     @BindView(R.id.launch_rela_huifu)
     RelativeLayout launch_rela_huifu;
-    @BindView(R.id.iv_back)
-    FrameLayout iv_back;
     @BindView(R.id.tv_off)
     TextView tv_off;
     private List<String> selectList1 = new ArrayList<>();

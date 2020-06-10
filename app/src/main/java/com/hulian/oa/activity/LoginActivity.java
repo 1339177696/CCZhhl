@@ -191,6 +191,9 @@ public class LoginActivity extends BaseActivity {
                 SPUtils.clear(mContext);
                 SPUtils.put(mContext, "userId", user.getUserId());
                 SPUtils.put(mContext, "username", account1);
+                SPUtils.put(mContext, "loginName", user.getLoginName());
+                SPUtils.put(mContext, "phonenumber", user.getPhonenumber());
+                SPUtils.put(mContext, "sex", user.getSex());
                 SPUtils.put(mContext,"nickname",user.getUserName());
                 SPUtils.put(mContext,"isLead",user.getIsLead());
                 SPUtils.put(mContext, "deptId", user.getDeptId());

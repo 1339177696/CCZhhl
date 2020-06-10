@@ -111,7 +111,6 @@ public class ContactsFragment extends TFragment {
 
     private void initAdapter() {
         IContactDataProvider dataProvider = new ContactDataProvider(ItemTypes.FRIEND);
-
         adapter = new ContactDataAdapter(getActivity(), new ContactsGroupStrategy(), dataProvider) {
             @Override
             protected List<AbsContactItem> onNonDataItems() {
@@ -191,8 +190,7 @@ public class ContactsFragment extends TFragment {
     private final class ContactItemClickListener implements OnItemClickListener, OnItemLongClickListener {
 
         @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position,
-                                long id) {
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             AbsContactItem item = (AbsContactItem) adapter.getItem(position);
             if (item == null) {
                 return;
@@ -211,8 +209,7 @@ public class ContactsFragment extends TFragment {
         }
 
         @Override
-        public boolean onItemLongClick(AdapterView<?> parent, View view,
-                                       int position, long id) {
+        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
             AbsContactItem item = (AbsContactItem) adapter.getItem(position);
             if (item == null) {
                 return false;

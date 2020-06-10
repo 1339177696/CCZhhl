@@ -23,15 +23,15 @@ import okhttp3.ResponseBody;
 
 public class RequetInterceptor implements Interceptor {
 
-  /**
-   * 这个chain里面包含了request和response，所以你要什么都可以从这里拿
-   */
+    /**
+     * 这个chain里面包含了request和response，所以你要什么都可以从这里拿
+     */
   @Override
   public Response intercept(Chain chain) throws IOException {
 
-    /**
-     * 可以添加公共头部参数如token
-     */
+      /**
+       * 可以添加公共头部参数如token
+       */
     Request request = chain.request()
         .newBuilder()
 //        .header("TOKEN", token)
@@ -60,7 +60,7 @@ public class RequetInterceptor implements Interceptor {
       }
     }
 
-    Response response = chain.proceed(request);
+      Response response = chain.proceed(request);
     /**
      * 这里不能直接使用response.body().string()的方式输出日志
      * 因为response.body().string()之后，response中的流会被关闭，程序会报错，我们需要创建出一个新的response给应用层处理

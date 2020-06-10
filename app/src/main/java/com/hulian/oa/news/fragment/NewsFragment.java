@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hulian.oa.R;
+import com.hulian.oa.address.AddressFragment2;
 import com.hulian.oa.bean.Fab;
 import com.hulian.oa.bean.Fab2;
 import com.hulian.oa.me.activity.MeActivity;
@@ -71,7 +72,7 @@ public class NewsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fra_news, container, false);
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
-        tv_type.setText(SPUtils.get(getActivity(), "nickname", "").toString().substring(SPUtils.get(getActivity(), "nickname", "").toString().length()-2,SPUtils.get(getActivity(), "nickname", "").toString().length()));
+        iniTview();
         ArrayList<String> titleDatas = new ArrayList<>();
         titleDatas.add("新闻");
         titleDatas.add("通告");
@@ -85,7 +86,13 @@ public class NewsFragment extends Fragment {
         return view;
     }
 
+    public void iniTview(){
+        tv_type.setText(SPUtils.get(getActivity(), "nickname", "").toString().substring(SPUtils.get(getActivity(), "nickname", "").toString().length()-2,SPUtils.get(getActivity(), "nickname", "").toString().length()));
+    }
 
+    public void onEventMainThread(NewsFragment event) {
+        iniTview();
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();

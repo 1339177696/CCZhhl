@@ -15,10 +15,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.hulian.oa.BuildConfig;
 import com.hulian.oa.R;
 import com.hulian.oa.address.AddressFragment;
 import com.hulian.oa.address.pad.Address_Pad_Fragment;
+import com.hulian.oa.address.AddressFragment2;
 import com.hulian.oa.agency.AgencyFragment;
 import com.hulian.oa.message.Wechat;
 import com.hulian.oa.message.helper.SystemMessageUnreadManager;
@@ -98,6 +98,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     RadioGroup rgFooter;
     private FragmentTransaction transaction;
     private AddressFragment addressFragment;
+    private AddressFragment2 addressFragment2;
     private Wechat messageFragment;
     private NewsFragment newsFragment;
     private WorkFragment workFragment;
@@ -220,13 +221,21 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 //                    }
 //                }
 //                else {
-                    if (addressFragment == null) {
-                        addressFragment = new AddressFragment().newInstance("");
-                        transaction.add(R.id.content, addressFragment);
-                    } else {
-                        transaction.show(addressFragment);
-                    }
-//                }
+                // 我注释的
+//                    if (addressFragment == null) {
+//                        addressFragment = new AddressFragment().newInstance("");
+//                        transaction.add(R.id.content, addressFragment);
+//                    } else {
+//                        transaction.show(addressFragment);
+//                    }
+                //我加的
+                if (addressFragment2 == null) {
+                    addressFragment2 = new AddressFragment2().newInstance("");
+                    transaction.add(R.id.content, addressFragment2);
+                } else {
+                    transaction.show(addressFragment2);
+                }
+
                 break;
             case R.id.rb_work:
                 StatusBarUtil.statusBarLightMode(this);
@@ -246,7 +255,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         if (messageFragment!=null) this.transaction.hide(messageFragment);
         if (mailFragment!=null) this.transaction.hide(mailFragment);
         if (workFragment !=null) this.transaction.hide(workFragment);
-        if (addressFragment != null) this.transaction.hide(addressFragment);
+        if (addressFragment2 != null) this.transaction.hide(addressFragment2);
+//        if (addressFragment != null) this.transaction.hide(addressFragment);
         if (agencyFragment != null) this.transaction.hide(agencyFragment);
         if (address_Pad_Fragment != null) this.transaction.hide(address_Pad_Fragment);
     }

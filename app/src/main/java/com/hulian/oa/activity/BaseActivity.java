@@ -137,7 +137,8 @@ public class BaseActivity extends FragmentActivity  {
                 ac.finish();
             }
         }
-        startActivity(new Intent(this,LoginActivity.class));
+//        startActivity(new Intent(this,LoginActivity.class));
+        startActivity(new Intent(this,LoginActivity_ceshi.class));
     }
     public  void showToast(String text){
         Toast.makeText(BaseActivity.this,text+"", Toast.LENGTH_SHORT).show();

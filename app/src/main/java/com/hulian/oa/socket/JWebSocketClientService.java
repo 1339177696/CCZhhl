@@ -85,6 +85,7 @@ public class JWebSocketClientService extends Service {
             notificationManager.createNotificationChannel(channel);
         }
         startForeground(1, getNotification());
+
     }
 
     @Override
@@ -253,8 +254,7 @@ public class JWebSocketClientService extends Service {
             //获取电源管理器对象
             PowerManager pm = (PowerManager) this.getSystemService(Context.POWER_SERVICE);
             if (!pm.isScreenOn()) {
-                @SuppressLint("InvalidWakeLockTag") PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP |
-                        PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "bright");
+                @SuppressLint("InvalidWakeLockTag") PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "bright");
                 wl.acquire();  //点亮屏幕
                 wl.release();  //任务结束后释放
             }

@@ -82,8 +82,14 @@ public class MeetingListInMyFragment extends Fragment implements  BaseQuickAdapt
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Log.d("这是年",mData.get(position).getYear());
-                Collections.addAll(accounts,mData.get(position).getParticipant().split("\\s*,\\s*"));
-                TeamAVChatActivity.startActivity(AVChatKit.getContext(), false, mData.get(position).getYear(), mData.get(position).getYear(), accounts, mData.get(position).getYear());
+                if (mData.get(position).getState().equals("0")){
+                    Collections.addAll(accounts,mData.get(position).getParticipant().split("\\s*,\\s*"));
+                    TeamAVChatActivity.startActivity(AVChatKit.getContext(), false, mData.get(position).getMeetinglName(), mData.get(position).getMeetinglName(), accounts, mData.get(position).getMeetinglName());
+                    accounts.clear();
+                }else {
+                    Toast.makeText(getActivity(),"会议已结束",Toast.LENGTH_LONG).show();
+                }
+
             }
         });
         getData();

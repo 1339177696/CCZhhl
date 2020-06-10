@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45">
+
+        <FrameLayout
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:id="@+id/iv_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="@dimen/dp_30"
+                android:background="@mipmap/bg_head1_img"
+                android:layout_height="@dimen/dp_30" />
+            <TextView
+                android:id="@+id/tv_type"
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:textColor="#ffffff"
+                android:text="报"
+                android:textSize="@dimen/sp_10"
+                android:gravity="center"
+                android:layout_height="match_parent" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:text="通讯录"
+            android:textColor="#313131"
+            android:gravity="center"
+            android:textSize="@dimen/sp_17"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#dddddd" />
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <ListView
+            android:id="@+id/country_lvcountry"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:divider="@null" />
+
+        <TextView
+            android:textColor="@color/white"
+            android:background="@drawable/nim_contact_hit_letter_bg"
+            android:id="@+id/dialog"
+            android:layout_width="80.0dip"
+            android:layout_height="80.0dip"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="30.0dip"
+            android:visibility="invisible" />
+
+        <com.hulian.oa.views.SideBar
+            android:id="@+id/sidrbar"
+            android:layout_width="25.0dip"
+            android:layout_height="fill_parent"
+            android:layout_gravity="right|center"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp" />
+
+
+    </FrameLayout>
+
+
+</LinearLayout>

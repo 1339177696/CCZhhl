@@ -343,7 +343,7 @@ public class UpcomAdapter_qgl extends RecyclerView.Adapter <UpcomAdapter_qgl.Vie
                 });
                 break;
             case "3":
-                if (dataList.get(position).getName().equals("null")&&dataList.get(position).getName().equals(null)) {
+                if (TextUtils.equals(dataList.get(position).getName(),null)){
                     holder.tv_content.setText("");
                 } else {
                     holder.tv_content.setText(Html.fromHtml("发起人:"+dataList.get(position).getName()));

@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -106,11 +108,20 @@ public class CalendarFragment extends Fragment {
     TextView xbDkwaiqin;
     @BindView(R.id.xb_dk_chidao)
     TextView xbDkchidao;
+    @BindView(R.id.s_dk_remark)
+    TextView sDkRemark;
+    @BindView(R.id.s_liner_remark)
+    LinearLayout sLinerRemark;
+    @BindView(R.id.x_dk_remark)
+    TextView xDkRemark;
+    @BindView(R.id.x_liner_remark)
+    LinearLayout xLinerRemark;
     private int[] cDate = CalendarUtil.getCurrentDate();
     private boolean permi; //权限
     private String createTime = "";  // 服务器年月日
     private String clanderTime = ""; // 天
     HashMap<String, String> markData = new HashMap<>();
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -196,9 +207,9 @@ public class CalendarFragment extends Fragment {
                     } else {
                         permissionsDar_yes.setVisibility(View.VISIBLE);
                         permissionsDarno.setVisibility(View.GONE);
-                        createTime = TimeUtils.time_getDateToString(Long.parseLong(result.getJSONObject("data").getString("remark")),"yyyy-MM-dd");
-                        sSbtime.setText("上班时间   "+result.getJSONObject("data").getString("upTime"));
-                        xSbtime.setText("下班时间   "+result.getJSONObject("data").getString("downTime"));
+                        createTime = TimeUtils.time_getDateToString(Long.parseLong(result.getJSONObject("data").getString("remark")), "yyyy-MM-dd");
+                        sSbtime.setText("上班时间   " + result.getJSONObject("data").getString("upTime"));
+                        xSbtime.setText("下班时间   " + result.getJSONObject("data").getString("downTime"));
                         PostStateMonth();
                         //请求当天打卡记录
                         ClockType_from();
@@ -238,10 +249,10 @@ public class CalendarFragment extends Fragment {
     }
 
     // 请求月打卡记录
-    public void PostStateMonth(){
+    public void PostStateMonth() {
         RequestParams params = new RequestParams();
-        params.put("createBy",SPUtils.get(getActivity(), "userId", "").toString());
-        params.put("createTime",createTime);
+        params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
+        params.put("createTime", createTime);
         HttpRequest.OnClock_month(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -249,14 +260,15 @@ public class CalendarFragment extends Fragment {
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-                    if (!result.getJSONArray("data").toString().equals("[]")){
-                        List<ClueBean.DataBean> list = gson.fromJson(result.getJSONArray("data").toString(), new TypeToken<List<ClueBean.DataBean>>() {}.getType());
-                            // 标记有日程的日期
+                    if (!result.getJSONArray("data").toString().equals("[]")) {
+                        List<ClueBean.DataBean> list = gson.fromJson(result.getJSONArray("data").toString(), new TypeToken<List<ClueBean.DataBean>>() {
+                        }.getType());
+                        // 标记有日程的日期
                         for (int i = 0; i <= list.size() - 1; i++) {
-                                markData.put(TimeUtils.dateClearZero(list.get(i).getYMD()), list.get(i).getSTATE());
+                            markData.put(TimeUtils.dateClearZero(list.get(i).getYMD()), list.get(i).getSTATE());
                         }
 
-                    }else {
+                    } else {
                         markData = null;
                     }
                     //日历赋值
@@ -266,6 +278,7 @@ public class CalendarFragment extends Fragment {
                 }
 
             }
+
             @Override
             public void onFailure(OkHttpException failuer) {
 
@@ -275,7 +288,7 @@ public class CalendarFragment extends Fragment {
     }
 
     // 日历控件初始化
-    public void  calederData( HashMap<String, String> markData){
+    public void calederData(HashMap<String, String> markData) {
         calendarView
                 .setSpecifyMap(markData)
                 .setStartEndDate("2016.1", "2028.12")
@@ -294,7 +307,7 @@ public class CalendarFragment extends Fragment {
                                 if (date.getKey().equals("Y")) {
                                     bg.setVisibility(View.VISIBLE);
                                     bg.setBackground(getResources().getDrawable(R.drawable.circle_bg2, null));
-                                } else if (date.getKey().equals("N")){
+                                } else if (date.getKey().equals("N")) {
                                     bg.setVisibility(View.VISIBLE);
                                     bg.setBackground(getResources().getDrawable(R.drawable.circle_bg1, null));
                                 } else {
@@ -304,12 +317,15 @@ public class CalendarFragment extends Fragment {
                         }
                         return new TextView[]{solarDay, lunarDay, bg};
                     }
-                }).init();
+                })
+                .init();
         kqTime.setText(cDate[0] + "年" + cDate[1] + "月");
         calendarView.setOnPagerChangeListener(new OnPagerChangeListener() {
             @Override
             public void onPagerChanged(int[] date) {
                 kqTime.setText(date[0] + "年" + date[1] + "月");
+                Log.d("滑动了", "yes");
+                createTime = date[0] + "-" + date[1] + "-" + date[2];
             }
 
         });
@@ -329,7 +345,7 @@ public class CalendarFragment extends Fragment {
     }
 
     // 请求某天打卡记录
-    public void ClockType_from(){
+    public void ClockType_from() {
         RequestParams params = new RequestParams();
         params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
         params.put("createTime", createTime);
@@ -339,82 +355,93 @@ public class CalendarFragment extends Fragment {
                 //需要转化为实体对象
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-                    if (result.optString("data") != ""){
-                        // 有打卡记录，
-                        sDKtime.setText("打卡时间   "+result.getJSONObject("data").getString("registerUpTime"));
-                        sDkadress.setText(result.getJSONObject("data").getString("registerUpAddress"));
-                        Sliner.setVisibility(View.VISIBLE);
-                        //根据状态显示 registerUpState--> 0 正常,1 迟到
-                        if (result.getJSONObject("data").getString("registerUpState").equals("0"))
-                        {
-                            sbDkchidao.setVisibility(View.GONE);
-                            // regisgerUpType ---> 0 正常,1 外勤
-                            if (result.getJSONObject("data").getString("regisgerUpType").equals("0")){
-                                // 外勤改成正常，换背景颜色
-                                sbDkwaiqin.setVisibility(View.VISIBLE);
-                                sbDkwaiqin.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
-                                sbDkwaiqin.setText("正常");
-                            }else {
-                                sbDkwaiqin.setVisibility(View.VISIBLE);
-                                sbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
-                                sbDkwaiqin.setText("外勤");
-                            }
-                        }else {
-                            sbDkchidao.setVisibility(View.VISIBLE);
-                            if (result.getJSONObject("data").getString("regisgerUpType").equals("0")){
-                                sbDkwaiqin.setVisibility(View.GONE);
-                            }else {
-                                sbDkwaiqin.setVisibility(View.VISIBLE);
-                                sbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
-                                sbDkwaiqin.setText("外勤");
-                            }
-                        }
-                        if (result.getJSONObject("data").getString("registerDownTime").equals("null"))
-                        {
-                            xDKtime.setText("暂无打卡记录");
-                            Xliner.setVisibility(View.GONE);
-                            xbDkchidao.setVisibility(View.GONE);
-                            xbDkwaiqin.setVisibility(View.GONE);
-                        }
-                        else {
-                            Xliner.setVisibility(View.VISIBLE);
-                            xDKtime.setText("打卡时间   "+result.getJSONObject("data").getString("registerDownTime"));
-                            xDkadress.setText(result.getJSONObject("data").getString("registerDownAddress"));
-                            if (result.getJSONObject("data").getString("registerDownState").equals("0"))
-                            {
-                                xbDkchidao.setVisibility(View.GONE);
-                                if (result.getJSONObject("data").getString("regisgerDownType").equals("0")){
-                                    xbDkwaiqin.setVisibility(View.VISIBLE);
-                                    xbDkwaiqin.setText("正常");
-                                    xbDkwaiqin.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
-                                }else {
-                                    xbDkwaiqin.setVisibility(View.VISIBLE);
-                                    xbDkwaiqin.setText("外勤");
-                                    xbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
-                                }
-                            }else {
-                                xbDkchidao.setVisibility(View.VISIBLE);
-                                xbDkchidao.setText("早退");
-                                if (result.getJSONObject("data").getString("regisgerDownType").equals("0")){
-                                    xbDkwaiqin.setVisibility(View.GONE);
-                                }else {
-                                    xbDkwaiqin.setVisibility(View.VISIBLE);
-                                    xbDkwaiqin.setText("外勤");
-                                    xbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
-                                }
-                            }
-                        }
-
-                    }else {
+                    if (result.optString("data") == "" || TextUtils.equals(result.getJSONObject("data").getString("registerUpState"), "2")) {
                         // 未打卡
-                        sDKtime.setText("暂无打卡记录");
-                        xDKtime.setText("暂无打卡记录");
+                        sDKtime.setText("缺勤");
+                        xDKtime.setText("缺勤");
                         Xliner.setVisibility(View.GONE);
                         Sliner.setVisibility(View.GONE);
                         sbDkchidao.setVisibility(View.GONE);
                         xbDkchidao.setVisibility(View.GONE);
                         sbDkwaiqin.setVisibility(View.GONE);
                         xbDkwaiqin.setVisibility(View.GONE);
+
+                        sLinerRemark.setVisibility(View.GONE);
+                        xLinerRemark.setVisibility(View.GONE);
+                    } else {
+                        // 有打卡记录，
+                        sDKtime.setText("打卡时间   " + result.getJSONObject("data").getString("registerUpTime"));
+                        sDkadress.setText(result.getJSONObject("data").getString("registerUpAddress"));
+                        Sliner.setVisibility(View.VISIBLE);
+                        if (TextUtils.equals(result.getJSONObject("data").getString("registerUpRemark")," ")){
+                            sLinerRemark.setVisibility(View.GONE);
+                        }else {
+                            sLinerRemark.setVisibility(View.VISIBLE);
+                            sDkRemark.setText(result.getJSONObject("data").getString("registerUpRemark"));
+                        }
+                        //根据状态显示 registerUpState--> 0 正常,1 迟到
+                        if (result.getJSONObject("data").getString("registerUpState").equals("0")) {
+                            sbDkchidao.setVisibility(View.GONE);
+                            // regisgerUpType ---> 0 正常,1 外勤
+                            if (result.getJSONObject("data").getString("regisgerUpType").equals("0")) {
+                                // 外勤改成正常，换背景颜色
+                                sbDkwaiqin.setVisibility(View.VISIBLE);
+                                sbDkwaiqin.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
+                                sbDkwaiqin.setText("正常");
+                            } else {
+                                sbDkwaiqin.setVisibility(View.VISIBLE);
+                                sbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
+                                sbDkwaiqin.setText("外勤");
+                            }
+                        } else {
+                            sbDkchidao.setVisibility(View.VISIBLE);
+                            if (result.getJSONObject("data").getString("regisgerUpType").equals("0")) {
+                                sbDkwaiqin.setVisibility(View.GONE);
+                            } else {
+                                sbDkwaiqin.setVisibility(View.VISIBLE);
+                                sbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
+                                sbDkwaiqin.setText("外勤");
+                            }
+                        }
+                        if (result.getJSONObject("data").getString("registerDownTime").equals("null")) {
+                            xDKtime.setText("缺勤");
+                            Xliner.setVisibility(View.GONE);
+                            xbDkchidao.setVisibility(View.GONE);
+                            xbDkwaiqin.setVisibility(View.GONE);
+                            xLinerRemark.setVisibility(View.GONE);
+                        } else {
+                            Xliner.setVisibility(View.VISIBLE);
+                            xDKtime.setText("打卡时间   " + result.getJSONObject("data").getString("registerDownTime"));
+                            xDkadress.setText(result.getJSONObject("data").getString("registerDownAddress"));
+                            if (TextUtils.equals(result.getJSONObject("data").getString("registerDownRemark")," ")){
+                                xLinerRemark.setVisibility(View.GONE);
+                            }else {
+                                xLinerRemark.setVisibility(View.VISIBLE);
+                                xDkRemark.setText(result.getJSONObject("data").getString("registerDownRemark"));
+                            }
+                            if (result.getJSONObject("data").getString("registerDownState").equals("0")) {
+                                xbDkchidao.setVisibility(View.GONE);
+                                if (result.getJSONObject("data").getString("regisgerDownType").equals("0")) {
+                                    xbDkwaiqin.setVisibility(View.VISIBLE);
+                                    xbDkwaiqin.setText("正常");
+                                    xbDkwaiqin.setBackgroundResource(R.drawable.kqrl_tv_bg_blue);
+                                } else {
+                                    xbDkwaiqin.setVisibility(View.VISIBLE);
+                                    xbDkwaiqin.setText("外勤");
+                                    xbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
+                                }
+                            } else {
+                                xbDkchidao.setVisibility(View.VISIBLE);
+                                xbDkchidao.setText("早退");
+                                if (result.getJSONObject("data").getString("regisgerDownType").equals("0")) {
+                                    xbDkwaiqin.setVisibility(View.GONE);
+                                } else {
+                                    xbDkwaiqin.setVisibility(View.VISIBLE);
+                                    xbDkwaiqin.setText("外勤");
+                                    xbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
+                                }
+                            }
+                        }
                     }
 
                 } catch (JSONException e) {

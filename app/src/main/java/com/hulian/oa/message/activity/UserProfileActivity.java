@@ -255,6 +255,7 @@ public class UserProfileActivity extends UI {
 
     private void updateUserInfoView() {
         accountText.setText("帐号：" + account);
+
         if (TextUtils.equals(account, DemoCache.getAccount())) {
             nameText.setText(UserInfoHelper.getUserName(account));
         }
@@ -379,9 +380,8 @@ public class UserProfileActivity extends UI {
                 nameText.setText(name);
             }
             tex.setText(UserInfoHelper.getUserName(account).substring(UserInfoHelper.getUserName(account).length()-2,UserInfoHelper.getUserName(account).length()));
-            Log.e("邮箱",UserInfoHelper.getUserDisplayName(account));
             Log.e("邮箱1",userInfo.getEmail()+"dddd");
-
+            tv_email.setText(userInfo.getEmail()+"");
         } else {
             aliasLayout.setVisibility(View.GONE);
             aliasLayout.findViewById(R.id.arrow_right).setVisibility(View.GONE);
