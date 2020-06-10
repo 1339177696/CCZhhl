@@ -127,6 +127,8 @@ public class TeamListActivity extends UI implements AdapterView.OnItemClickListe
         switch (item.getItemType()) {
             case ItemTypes.TEAM:
                 SessionHelper.startTeamSession(this, ((ContactItem) item).getContact().getContactId());
+
+
                 break;
         }
     }
