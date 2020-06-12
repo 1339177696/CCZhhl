@@ -284,7 +284,6 @@ public class MeetingSponsorActivity extends BaseActivity {
         });
     }
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -407,7 +406,6 @@ public class MeetingSponsorActivity extends BaseActivity {
 
     /**
      * 拨打电话（跳转到拨号界面，用户手动点击拨打）
-     *
      * @param phoneNum 电话号码
      */
     public void callPhone(String phoneNum) {

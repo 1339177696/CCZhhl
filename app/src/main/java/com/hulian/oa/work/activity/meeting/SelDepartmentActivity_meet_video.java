@@ -25,6 +25,7 @@ import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
+import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.ToastHelper;
 import com.hulian.oa.work.activity.meeting.l_adapter.ExpandableAdapter;
 
@@ -33,6 +34,7 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -54,7 +56,6 @@ public class SelDepartmentActivity_meet_video extends BaseActivity {
     List<Department> departmentList = new ArrayList<>();
     List<People> memberList = new ArrayList<>();
     //创建适配器对象
-    private DepartmentAdapter adapter;
     private RelativeLayout iv_back;
     // 筛选
     private ExpandableListView expandableListView;
@@ -62,9 +63,6 @@ public class SelDepartmentActivity_meet_video extends BaseActivity {
     private List<Department> groupArray;
     //最外面一层 分组下面的详情
     private List<List<People>> childArray;
-    private List<List<People>> childArray_sel;
-    private Context context = this;
-
     ExpandableAdapter expandableAdapter;
 
 
@@ -79,6 +77,7 @@ public class SelDepartmentActivity_meet_video extends BaseActivity {
         if (getIntent().getStringExtra("hasTop") != null && getIntent().getStringExtra("hasTop").equals("0")) {
             llTop.setVisibility(View.GONE);
         }
+
     }
 
     public void onEventMainThread(People_x event) {
@@ -222,6 +221,12 @@ public class SelDepartmentActivity_meet_video extends BaseActivity {
                     memberList = gson.fromJson(result.getJSONArray("data").toString(),
                             new TypeToken<List<People>>() {
                             }.getType());
+                    String nkName = SPUtils.get(mContext, "nickname", "").toString();
+                     for (int i = 0;i < memberList.size();i++){
+                         if (memberList.get(i).getUserName().equals(nkName)){
+                             memberList.remove(i);
+                         }
+                     }
                     List<People> childModels = childArray.get(position);
                     childModels.addAll(memberList);
                     expandableListView.collapseGroup(position);

@@ -185,8 +185,6 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
             @Override
             public void onClick(View v) {
                 boolean isChecked = checkBox.isChecked();
-                data.setIscheck(isChecked);
-                //     notifyDataSetChanged();
                 int j = 0;
                 for (int i = 0; i < peopleList.size(); i++) {
                     if (peopleList.get(i).isIscheck()) {
@@ -199,6 +197,26 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
                 } else {
                     mDapart.setIscheck(false);
                 }
+
+                //如果是视频会议页面进入只允许选择11人加上自己12人
+                if (isVideo && isChecked) {
+                    int num = 1;
+                    for (int n = 0; n < mChildArray.size(); n++) {
+                        for (int m = 0; m < mChildArray.get(n).size(); m++) {
+                            if (mChildArray.get(n).get(m).isIscheck()) {
+                                num++;
+                            }
+                        }
+                    }
+                    if (num < 12) {
+
+                        Toast.makeText(mContext, "已选择" + num + "人", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(mContext, "已选择最大人数11人", Toast.LENGTH_SHORT).show();
+                        isChecked = false;
+                    }
+                }
+                data.setIscheck(isChecked);
                 EventBus.getDefault().post(mChildArray);
                 notifyDataSetChanged();
             }
@@ -233,10 +251,10 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
                         }
                     }
                     if (num < 12) {
-                        if (TextUtils.equals(data.getUserName(), SPUtils.get(mContext, "nickname", "").toString())) {
-                            Toast.makeText(mContext, "无法选择自己", Toast.LENGTH_SHORT).show();
-                            isChecked = false;
-                        } else
+//                        if (TextUtils.equals(data.getUserName(), SPUtils.get(mContext, "nickname", "").toString())) {
+//                            Toast.makeText(mContext, "无法选择自己", Toast.LENGTH_SHORT).show();
+//                            isChecked = false;
+//                        } else
                             Toast.makeText(mContext, "已选择" + num + "人", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(mContext, "已选择最大人数11人", Toast.LENGTH_SHORT).show();

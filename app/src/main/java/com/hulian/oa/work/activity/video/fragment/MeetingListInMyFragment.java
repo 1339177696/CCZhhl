@@ -89,13 +89,10 @@ public class MeetingListInMyFragment extends Fragment implements  BaseQuickAdapt
                 }else {
                     Toast.makeText(getActivity(),"会议已结束",Toast.LENGTH_LONG).show();
                 }
-
             }
         });
         getData();
-
     }
-
 
 
     @Override
@@ -109,7 +106,6 @@ public class MeetingListInMyFragment extends Fragment implements  BaseQuickAdapt
         swipeRefreshLayout.setRefreshing(true);
         setRefresh();
         getData();
-
     }
 
 
@@ -129,7 +125,6 @@ public class MeetingListInMyFragment extends Fragment implements  BaseQuickAdapt
                 swipeRefreshLayout.setRefreshing(false);
                 //需要转化为实体对象
                 Gson gson = new GsonBuilder().serializeNulls().create();
-
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
                     List<VideoMeeting> memberList = gson.fromJson(result.getJSONArray("rows").toString(),
@@ -142,15 +137,11 @@ public class MeetingListInMyFragment extends Fragment implements  BaseQuickAdapt
                         mAdapter.loadMoreComplete();
                     }
                     mAdapter.notifyDataSetChanged();
-
                     ((VideoConferenceActivity)getActivity()).setListSize(mData.size(),0);
-
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-
             @Override
             public void onFailure(OkHttpException failuer) {
                 Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
@@ -162,7 +153,6 @@ public class MeetingListInMyFragment extends Fragment implements  BaseQuickAdapt
 
     @Override
     public void onLoadMoreRequested() {
-
         mCount = mCount + 1;
         getData();
     }

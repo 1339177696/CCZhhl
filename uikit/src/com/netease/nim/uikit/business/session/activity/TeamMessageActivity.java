@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
@@ -133,7 +134,6 @@ public class TeamMessageActivity extends BaseMessageActivity {
         fragment.setTeam(team);
 
         setTitle(team == null ? sessionId : team.getName() + "(" + team.getMemberCount() + "人)");
-
         invalidTeamTipText.setText(team.getType() == TeamTypeEnum.Normal ? R.string.normal_team_invalid_tip : R.string.team_invalid_tip);
         invalidTeamTipView.setVisibility(team.isMyTeam() ? View.GONE : View.VISIBLE);
     }
