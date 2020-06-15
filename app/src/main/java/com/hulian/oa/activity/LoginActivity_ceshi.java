@@ -75,14 +75,14 @@ public class LoginActivity_ceshi extends BaseActivity {
     public void onViewClicked() {
 //
 //        //网易云登录
-//        if(TextUtils.isEmpty(etUserName.getText().toString().trim())){
-//            Toast.makeText(mContext,"请输入账号",Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//        if(TextUtils.isEmpty(etPass.getText().toString().trim())){
-//            Toast.makeText(mContext,"请输入密码",Toast.LENGTH_SHORT).show();
-//            return;
-//        }
+        if(TextUtils.isEmpty(etUserName.getText().toString().trim())){
+            Toast.makeText(mContext,"请输入账号",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(TextUtils.isEmpty(etPass.getText().toString().trim())){
+            Toast.makeText(mContext,"请输入密码",Toast.LENGTH_SHORT).show();
+            return;
+        }
 //        if(BuildConfig.IsPad){
 //            PostKeyValueRequet(etUserName.getText().toString(), etPass.getText().toString());
 //        }else {

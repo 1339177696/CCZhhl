@@ -153,17 +153,21 @@ public class ClockFragment extends Fragment {
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            // 上班时间大于则时间
-            if (TimeUtils.compareTwoTime((String) msg.obj, f_sb_time) >= 0) {
-                reOnBtn.setBackgroundResource(R.drawable.clock_rela_bg_yes);
-            } else {
-                reOnBtn.setBackgroundResource(R.drawable.clock_rela_bg_no);
+            if (reOnBtn != null) {
+                // 上班时间大于则时间
+                if (TimeUtils.compareTwoTime((String) msg.obj, f_sb_time) >= 0) {
+                    reOnBtn.setBackgroundResource(R.drawable.clock_rela_bg_yes);
+                } else {
+                    reOnBtn.setBackgroundResource(R.drawable.clock_rela_bg_no);
+                }
             }
-            // 下班时间大于则时间
-            if (TimeUtils.compareTwoTime((String) msg.obj, f_xb_time) > 0) {
-                reNoBtn.setBackgroundResource(R.drawable.clock_rela_bg_no);
-            } else {
-                reNoBtn.setBackgroundResource(R.drawable.clock_rela_bg_yes);
+            if (reNoBtn != null) {
+                // 下班时间大于则时间
+                if (TimeUtils.compareTwoTime((String) msg.obj, f_xb_time) > 0) {
+                    reNoBtn.setBackgroundResource(R.drawable.clock_rela_bg_no);
+                } else {
+                    reNoBtn.setBackgroundResource(R.drawable.clock_rela_bg_yes);
+                }
             }
             sbTime.setText((String) msg.obj);
             xbTime.setText((String) msg.obj);

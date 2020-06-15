@@ -119,7 +119,6 @@ public class CalendarFragment extends Fragment {
     private int[] cDate = CalendarUtil.getCurrentDate();
     private boolean permi; //权限
     private String createTime = "";  // 服务器年月日
-    private String clanderTime = ""; // 天
     HashMap<String, String> markData = new HashMap<>();
 
     @Nullable
@@ -299,9 +298,9 @@ public class CalendarFragment extends Fragment {
                     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public TextView[] convertView(View view, DateBean date) {
-                        TextView solarDay = (TextView) view.findViewById(R.id.solar_day);
-                        TextView lunarDay = (TextView) view.findViewById(R.id.lunar_day);
-                        TextView bg = (TextView) view.findViewById(R.id.bg);
+                        TextView solarDay = view.findViewById(R.id.solar_day);
+                        TextView lunarDay = view.findViewById(R.id.lunar_day);
+                        TextView bg = view.findViewById(R.id.bg);
                         if (date.getKey() != null) {
                             if (date.getKey() != null) {
                                 if (date.getKey().equals("Y")) {
@@ -365,7 +364,6 @@ public class CalendarFragment extends Fragment {
                         xbDkchidao.setVisibility(View.GONE);
                         sbDkwaiqin.setVisibility(View.GONE);
                         xbDkwaiqin.setVisibility(View.GONE);
-
                         sLinerRemark.setVisibility(View.GONE);
                         xLinerRemark.setVisibility(View.GONE);
                     } else {
@@ -449,7 +447,6 @@ public class CalendarFragment extends Fragment {
                 }
 
             }
-
             @Override
             public void onFailure(OkHttpException failuer) {
 

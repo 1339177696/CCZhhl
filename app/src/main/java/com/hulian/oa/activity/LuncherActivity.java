@@ -85,11 +85,13 @@ public class LuncherActivity extends BaseActivity {
             @Override
             public void run() {
                 if(SPUtils.contains(mContext,"userId")) {
-                    if(BuildConfig.IsPad){
-                        doLogin(SPUtils.get(mContext,"username","-1").toString(),SPUtils.get(mContext,"password","-1").toString());
-                    }else {
-                        doLogin(SPUtils.get(mContext,"username","-1").toString(),SPUtils.get(mContext,"password","-1").toString());
-                    }
+//                    if(BuildConfig.IsPad){
+//                        doLogin(SPUtils.get(mContext,"username","-1").toString(),SPUtils.get(mContext,"password","-1").toString());
+//                    }else {
+                        //doLogin(SPUtils.get(mContext,"username","-1").toString(),SPUtils.get(mContext,"password","-1").toString());
+                    PostKeyValueRequet(SPUtils.get(mContext,"username","-1").toString(),SPUtils.get(mContext,"password","-1").toString());
+
+//                    }
                 }
                 else {
                     Intent intent = new Intent(LuncherActivity.this, LoginActivity_ceshi.class);

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
@@ -56,6 +57,7 @@ public class SubordpersonActivity2 extends BaseActivity {
     private Button bt_commit;
     String name = "";
     String aid = "";
+    String bid = "";
     //最外面一层 分组下面的详情
     private List<List<People>> childArray;
     //最外面一层 分组名
@@ -98,6 +100,7 @@ public class SubordpersonActivity2 extends BaseActivity {
                     for (int i = 0; i < childArray.size(); i++) {
                         for (int j = 0; j < childArray.get(i).size(); j++) {
                             if (childArray.get(i).get(j).isIscheck()) {
+                                Log.e("qwe","qweww");
                                 mList.add(childArray.get(i).get(j));
                             }
                         }
@@ -105,6 +108,9 @@ public class SubordpersonActivity2 extends BaseActivity {
                     Intent intent = new Intent(SubordpersonActivity2.this,SubordActivity.class);
                     intent.putExtra("userId", mList.get(0).getUserId());
                     intent.putExtra("userName", mList.get(0).getUserName());
+                    intent.putExtra("deptName", mList.get(0).getDeptName());
+                    Log.e("qwe",mList.get(0).getEmail());
+                    Log.e("qwe",mList.get(0).getDeptName());
                     setResult(0x100,intent);
                     finish();
 
@@ -115,7 +121,6 @@ public class SubordpersonActivity2 extends BaseActivity {
 
         exlistview = findViewById(R.id.exlistview);
         exlistview.setGroupIndicator(null);
-
         groupArray = new ArrayList<>();
         childArray = new ArrayList<>();
         //创建适配器
@@ -139,15 +144,12 @@ public class SubordpersonActivity2 extends BaseActivity {
                         departmentList = gson.fromJson(result.getJSONArray("data").toString(),
                                 new TypeToken<List<Department>>() {
                                 }.getType());
-
                         groupArray.addAll(departmentList);
                         for (int i = 0; i < departmentList.size(); i++) {
                             List<People> temPeople = new ArrayList<>();
                             childArray.add(temPeople);
                             initPeopleData(departmentList.get(i).getDeptId(), i);
                         }
-
-
                         expandableAdapter.notifyDataSetChanged();
                         exlistview.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
                             @Override
@@ -228,7 +230,6 @@ public class SubordpersonActivity2 extends BaseActivity {
         RequestParams params = new RequestParams();
         params.put("deptId",SPUtils.get(mContext, "deptId", "").toString());
         params.put("userId", SPUtils.get(mContext, "userId", "").toString());
-
         HttpRequest.getLeadershipList(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -266,6 +267,7 @@ public class SubordpersonActivity2 extends BaseActivity {
         String username = "";
         name = "";
         aid = "";
+        bid = "";
         boolean allcheckede = false;
         if (event.size() > 0) {
 
@@ -274,6 +276,7 @@ public class SubordpersonActivity2 extends BaseActivity {
                     if (event.get(i).get(j).isIscheck()) {
                         name += event.get(i).get(j).getUserName() + ";";
                         aid += event.get(i).get(j).getUserId() + ";";
+                        bid += event.get(i).get(j).getDeptName() + ";";
                     }
                 }
             }
