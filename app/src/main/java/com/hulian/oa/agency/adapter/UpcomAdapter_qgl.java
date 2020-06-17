@@ -264,7 +264,7 @@ public class UpcomAdapter_qgl extends RecyclerView.Adapter <UpcomAdapter_qgl.Vie
                 });
                 break;
             case "2":
-                if (dataList.get(position).getName().equals("null")&&dataList.get(position).getName().equals(null)) {
+                if (("null").equals(dataList.get(position).getName()) && null == dataList.get(position).getName()){
                     holder.tv_content.setText("");
                 } else {
                     holder.tv_content.setText(Html.fromHtml("发起人:"+dataList.get(position).getName()));

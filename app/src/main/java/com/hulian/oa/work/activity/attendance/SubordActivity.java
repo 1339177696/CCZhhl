@@ -114,7 +114,7 @@ public class SubordActivity extends BaseActivity {
         //个人信息赋值
         tvType.setText(mList1.get(0).getUserName().substring(mList1.get(0).getUserName().length() - 2, mList1.get(0).getUserName().length()));
         clockName.setText(mList1.get(0).getUserName()+"");
-//        clockDepartment.setText(mList1.get(0).getDeptName()+"");
+        clockDepartment.setText(mList1.get(0).getDeptName()+"");
         currentTime.setText("" + cDate[0] + "-" + cDate[1] + "-" + cDate[2] + "   星期" + getMway());
         createTime = cDate[0] + "-" + cDate[1] + "-" + cDate[2];
         PostStateMonth();

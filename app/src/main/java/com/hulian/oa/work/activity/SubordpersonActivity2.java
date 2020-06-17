@@ -33,6 +33,7 @@ import com.hulian.oa.work.activity.meeting.l_adapter.ExpandableSingleAdapter;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,8 +110,8 @@ public class SubordpersonActivity2 extends BaseActivity {
                     intent.putExtra("userId", mList.get(0).getUserId());
                     intent.putExtra("userName", mList.get(0).getUserName());
                     intent.putExtra("deptName", mList.get(0).getDeptName());
-                    Log.e("qwe",mList.get(0).getEmail());
-                    Log.e("qwe",mList.get(0).getDeptName());
+                    intent.putExtra("userid", mList.get(0).getUserId());
+                    intent.putExtra("mList", (Serializable) mList);
                     setResult(0x100,intent);
                     finish();
 
