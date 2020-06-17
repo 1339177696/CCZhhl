@@ -49,6 +49,8 @@ public class LuncherActivity extends BaseActivity {
     private Intent login;
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         StatusBarUtil.transparencyBar(this);
         if (!isTaskRoot()) {
