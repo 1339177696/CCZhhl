@@ -22,8 +22,6 @@ import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.ToastHelper;
-import com.netease.nimlib.sdk.AbortableFuture;
-import com.netease.nimlib.sdk.auth.LoginInfo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,7 +50,6 @@ public class PostOrderActivity extends BaseActivity {
     @BindView(R.id.bt_post)
     Button btPost;
     String filePath;
-    private AbortableFuture<LoginInfo> loginRequest;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

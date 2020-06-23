@@ -9,8 +9,7 @@ import android.widget.Switch;
 import com.hulian.oa.activity.BaseActivity;
 import com.hulian.oa.R;
 import com.hulian.oa.utils.SPUtils;
-import com.netease.nimlib.sdk.NIMClient;
-import com.netease.nimlib.sdk.auth.AuthService;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,7 +40,6 @@ public class L_SetActivity extends BaseActivity {
         log_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NIMClient.getService(AuthService.class).logout();
                 SPUtils.clear(mContext);
                 exitApp(mContext);
             }

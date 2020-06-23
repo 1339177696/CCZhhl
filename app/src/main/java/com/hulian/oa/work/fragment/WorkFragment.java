@@ -9,14 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.hulian.oa.R;
 import com.hulian.oa.me.activity.MeActivity;
 import com.hulian.oa.utils.SPUtils;
-import com.hulian.oa.work.activity.leave.l_fragment.LeaveLaunchFragment;
-
 import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -28,12 +24,9 @@ public class WorkFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
     Unbinder unbinder;
     @BindView(R.id.fg_content)
     LinearLayout fgContent;
-    private ArrayList<String> list_path;
-    private ArrayList<String> list_title;
     WorkFragemt_9 workFragemt_9;
     @BindView(R.id.tv_type)
     TextView tv_type;

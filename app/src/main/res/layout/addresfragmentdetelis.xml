@@ -199,7 +199,7 @@
                 android:minHeight="50dp"
                 android:text="发消息"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_17"
+                android:textSize="@dimen/dp_17"
            />
 
             <Button
@@ -211,7 +211,7 @@
                 android:minHeight="50dp"
                 android:text="发短信"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_17"
+                android:textSize="@dimen/sp_17"
                 />
 
         </LinearLayout>

@@ -7,12 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
-import com.hulian.oa.DemoCache;
 import com.hulian.oa.R;
 import com.hulian.oa.bean.People;
-import com.hulian.oa.socket.activity.NoticActivity;
-import com.hulian.oa.socket.activity.NoticeWorkActivity;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.TimeUtils;
 import com.hulian.oa.utils.ToastHelper;
@@ -25,25 +21,8 @@ import com.hulian.oa.work.activity.SecondTaskCoopActivity;
 import com.hulian.oa.work.activity.WorkReportActivity;
 import com.hulian.oa.work.activity.attendance.ClockActivity;
 import com.hulian.oa.work.activity.attendancestatistics.activity.AnaestheticsActivity;
-import com.hulian.oa.work.activity.statistical.ExpenseStatisticalActivity;
-import com.hulian.oa.work.activity.video.activity.VideoConferenceActivity;
-import com.luck.picture.lib.entity.LocalMedia;
-import com.netease.nim.avchatkit.AVChatKit;
-import com.netease.nim.avchatkit.TeamAVChatProfile;
-import com.netease.nim.uikit.business.team.helper.TeamHelper;
-import com.netease.nim.uikit.common.util.log.LogUtil;
-import com.netease.nimlib.sdk.NIMClient;
-import com.netease.nimlib.sdk.avchat.AVChatCallback;
-import com.netease.nimlib.sdk.avchat.AVChatManager;
-import com.netease.nimlib.sdk.avchat.model.AVChatChannelInfo;
-import com.netease.nimlib.sdk.msg.MsgService;
-import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
-import com.netease.nimlib.sdk.msg.model.CustomNotification;
-import com.netease.nimlib.sdk.msg.model.CustomNotificationConfig;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -70,30 +49,16 @@ public class WorkFragemt_9 extends Fragment {
     ImageView btInstruct;
     @BindView(R.id.bt_Work_notfit)
     ImageView btWorkNotfit;
-
-    int[] images = {R.mipmap.demo, R.mipmap.demo1, R.mipmap.demo2, R.mipmap.demo3, R.mipmap.demo4};
-
-    //已经选择图片
-    private List<LocalMedia> selectList = new ArrayList<>();
     Unbinder unbinder;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view;
-//        if (BuildConfig.IsPad) {
-//            if (SPUtils.get(getActivity(), "isLead", "").equals("0")) {
-//                view = inflater.inflate(R.layout.fragment_work_fragemt_9_pad_lead, container, false);
-//            } else {
-//                view = inflater.inflate(R.layout.fragment_work_fragemt_9_pad, container, false);
-//            }
-//
-//        } else {
         if (SPUtils.get(getActivity(), "isLead", "").equals("0")) {
             view = inflater.inflate(R.layout.fragment_work_fragment_xin, container, false);
         } else {
             view = inflater.inflate(R.layout.fragment_work_fragment_xin, container, false);
         }
-//        }
         unbinder = ButterKnife.bind(this, view);
         return view;
     }
@@ -109,8 +74,8 @@ public class WorkFragemt_9 extends Fragment {
         switch (view.getId()) {
             //视频会议
             case R.id.bt_shipin:
-                startActivity(new Intent(getActivity(), VideoConferenceActivity.class));
-//                startActivityForResult(new Intent(getActivity(), SelDepartmentActivity_meet_video.class), 0);
+//                startActivity(new Intent(getActivity(), VideoConferenceActivity.class));
+                ToastHelper.showToast(getActivity(), "功能暂未开放");
                 break;
             //语音会议
             case R.id.bt_yuyin:
@@ -162,31 +127,16 @@ public class WorkFragemt_9 extends Fragment {
             case R.id.bt_Work_statistical:
                 startActivity(new Intent(getActivity(), AnaestheticsActivity.class));
                 break;
-
             case R.id.bt_Work_account:
 //                startActivity(new Intent(getActivity(), ExpenseStatisticalActivity.class));
                 ToastHelper.showToast(getActivity(), "功能暂未开放");
-
                 break;
-
-
             case R.id.bt_Work_notfit:
 //                startActivity(new Intent(getActivity(), NoticActivity.class));
                 ToastHelper.showToast(getActivity(), "功能暂未开放");
-
                 break;
         }
     }
-
-    //初始化图片信息
-    private void init(int[] images) {
-        for (int i = 0; i < images.length; i++) {
-            LocalMedia localMedia = new LocalMedia();
-            localMedia.setPath(images[i] + "");
-            selectList.add(localMedia);
-        }
-    }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -199,66 +149,11 @@ public class WorkFragemt_9 extends Fragment {
             for (People people : peopleList) {
                 accounts.add(people.getLoginName());
             }
-
-            creatRoom(roomName, accounts);
         }
     }
 
-    private void creatRoom(String roomName, ArrayList<String> accounts) {
-
-        AVChatManager.getInstance().createRoom(roomName, null, new AVChatCallback<AVChatChannelInfo>() {
-            @Override
-            public void onSuccess(AVChatChannelInfo avChatChannelInfo) {
-                LogUtil.ui("create room " + roomName + " success !");
-                onCreateRoomSuccess(roomName, accounts);
 
 
-                TeamAVChatProfile.sharedInstance().setTeamAVChatting(true);
-                AVChatKit.outgoingTeamCall(getActivity(), false, "", roomName, accounts, roomName);
-            }
-
-            @Override
-            public void onFailed(int code) {
-            }
-
-            @Override
-            public void onException(Throwable exception) {
-            }
-        });
-    }
-
-    private void onCreateRoomSuccess(String roomName, List<String> accounts) {
-        String teamID = roomName;
-        // 在群里发送tip消息
-//        IMMessage message = MessageBuilder.createTipMessage(teamID, SessionTypeEnum.Team);
-//        CustomMessageConfig tipConfig = new CustomMessageConfig();
-//        tipConfig.enableHistory = false;
-//        tipConfig.enableRoaming = false;
-//        tipConfig.enablePush = false;
-        String teamNick = TeamHelper.getDisplayNameWithoutMe(teamID, DemoCache.getAccount());
-//        message.setContent(teamNick + getActivity().getString(R.string.t_avchat_start));
-//        message.setConfig(tipConfig);
-//        sendMessage(message);
-        // 对各个成员发送点对点自定义通知
-        String teamName = TeamHelper.getTeamName(teamID);
-        String content = TeamAVChatProfile.sharedInstance().buildContent(roomName, teamID, accounts, teamName);
-        CustomNotificationConfig config = new CustomNotificationConfig();
-        config.enablePush = true;
-        config.enablePushNick = false;
-        config.enableUnreadCount = true;
-
-        for (String account : accounts) {
-            CustomNotification command = new CustomNotification();
-            command.setSessionId(account);
-            command.setSessionType(SessionTypeEnum.P2P);
-            command.setConfig(config);
-            command.setContent(content);
-            command.setApnsText(teamNick + getActivity().getString(R.string.t_avchat_push_content));
-
-            command.setSendToOnlineUserOnly(false);
-            NIMClient.getService(MsgService.class).sendCustomNotification(command);
-        }
-    }
 
 
 }

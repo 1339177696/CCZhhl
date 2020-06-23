@@ -130,7 +130,6 @@ public class AddScheduleActivity extends BaseActivity {
             public void onSuccess(Object responseObj) {
                 //需要转化为实体对象
                 try {
-
                     JSONObject result = new JSONObject(responseObj.toString());
                     JSONObject obj = new JSONObject(result.toString());
                     String code = obj.getString("code");
@@ -145,7 +144,6 @@ public class AddScheduleActivity extends BaseActivity {
                     e.printStackTrace();
                 }
             }
-
             @Override
             public void onFailure(OkHttpException failuer) {
                 Toast.makeText(AddScheduleActivity.this, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
@@ -200,7 +198,6 @@ public class AddScheduleActivity extends BaseActivity {
     }
 
     // 选择结束时间
-
     public void onTimePicker2(View view) {
         TimePicker picker = new TimePicker(this, TimePicker.HOUR_24);
         picker.setRangeStart(8, 0);//09:00

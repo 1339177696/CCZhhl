@@ -47,7 +47,7 @@
                     android:hint="请选择报销事由"
                     android:gravity="left"
                     android:padding="@dimen/dp_3"
-                    android:background="@color/colorWhite"
+                    android:background="@color/white"
                     android:textSize="14dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

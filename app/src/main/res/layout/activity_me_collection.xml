@@ -55,11 +55,11 @@
         android:layout_margin="@dimen/dp_14"
         android:layout_width="match_parent"
         android:background="@drawable/edit_background2"
-        android:layout_height="@dimen/dp_size_35">
+        android:layout_height="@dimen/dp_35">
         <TextView
-            android:drawableLeft="@drawable/search_icon"
+            android:drawableLeft="@mipmap/search_icon"
             android:id="@+id/tv_search"
-            android:drawablePadding="@dimen/dp_size_2"
+            android:drawablePadding="@dimen/dp_2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/dp_10"

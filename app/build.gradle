@@ -30,30 +30,7 @@ android {
             buildConfigField('boolean',"IsPad","${rootProject.ext.isPad}")
         }
     }
-    packagingOptions {
-        pickFirst 'lib/x86/libnrtc_sdk.so'
-        pickFirst 'lib/armeabi-v7a/libnrtc_mp4v2.so'
-        pickFirst 'lib/arm64-v8a/libvideoeffect.so'
-        pickFirst 'lib/armeabi-v7a/libnrtc_sdk.so'
-        pickFirst 'lib/x86_64/librts_network.so'
-        pickFirst 'lib/x86_64/libvideoeffect.so'
-        pickFirst 'lib/arm64-v8a/libnrtc_mp4v2.so'
-        pickFirst 'lib/x86_64/libnrtc_mp4v2.so'
-        pickFirst 'lib/x86/libvideoeffect.so'
-        pickFirst 'lib/arm64-v8a/libnrtc_sdk.so'
-        pickFirst 'lib/armeabi-v7a/libvideoeffect.so'
-        pickFirst 'lib/x86/librts_network.so'
-        pickFirst 'lib/x86/libnrtc_mp4v2.so'
-        pickFirst 'lib/armeabi-v7a/librts_network.so'
 
-        pickFirst 'lib/x86_64/libnrtc_sdk.so'
-        pickFirst 'lib/arm64-v8a/librts_network.so'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
-        doNotStrip '*/mips/*.so'
-        doNotStrip '*/mips64/*.so'
-
-    }
     compileOptions {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
@@ -79,14 +56,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.squareup.okhttp3:okhttp:3.8.0'
 
-    //二维码
-
-    //    implementation 'com.google.zxing:core:3.2.1'
-
-    //    implementation 'cn.bingoogolapple:bga-qrcodecore:1.1.7@aar'
-
-    //    implementation 'cn.bingoogolapple:bga-zxing:1.1.7@aar'
-
     /*添加依赖*/
     implementation 'com.github.yuzhiqiang1993:zxing:2.1.4'
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
@@ -99,37 +68,9 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.5.0'
     implementation 'com.android.support:design:28.0.0'
 
-    //网易云
-
-    //    // 基础功能 (必需)
-
-    //   implementation 'com.netease.nimlib:basesdk:6.1.1'
-
-    // 音视频和互动白板服务需要
-
-    //    implementation 'com.netease.nimlib:nrtc:6.1.1'
-
-    // 音视频需要
-
-    //    implementation 'com.netease.nimlib:avchat:6.1.1'
-
-    //    // 聊天室需要
-
-    //  implementation 'com.netease.nimlib:chatroom:6.1.1'
-
-    // 互动白板服务需要
-
-    //    implementation 'com.netease.nimlib:rts:6.1.1'
-
-    //    // 全文检索服务需要
-
-    //   implementation 'com.netease.nimlib:lucene:6.1.1'
-
     // 小米、华为、魅族、fcm 推送
 
     //    implementation 'com.netease.nimlib:push:6.1.1'
-    implementation project(path: ':uikit')
-    implementation project(path: ':avchatkit')
     implementation project(path: ':calendar')
     implementation 'de.greenrobot:eventbus:2.4.0'
 
@@ -149,8 +90,6 @@ dependencies {
 
     //    时间选择器
     implementation 'com.github.addappcn:android-pickers:1.0.3'
-    implementation files('libs/nim-avchat-6.6.0.jar')
-    implementation files('libs/nrtc-sdk.jar')
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
     implementation project(':calendarview')
     implementation 'com.allenliu.versionchecklib:library:2.0.9'

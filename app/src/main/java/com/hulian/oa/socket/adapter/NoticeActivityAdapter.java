@@ -4,7 +4,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.hulian.oa.R;
 import com.hulian.oa.bean.Report;
-
 import java.util.List;
 
 /**

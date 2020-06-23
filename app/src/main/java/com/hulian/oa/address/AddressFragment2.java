@@ -3,7 +3,6 @@ package com.hulian.oa.address;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +18,6 @@ import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.AddresFragmentDetelis;
 import com.hulian.oa.R;
 import com.hulian.oa.address.activity.OrganizationActivity;
-import com.hulian.oa.address.activity.TeamListActivity;
-import com.hulian.oa.address.viewholder.FuncViewHolder;
 import com.hulian.oa.adpter.SortAdapter;
 import com.hulian.oa.bean.SortModel;
 import com.hulian.oa.me.activity.MeActivity;
@@ -32,22 +29,11 @@ import com.hulian.oa.utils.CharacterParser;
 import com.hulian.oa.utils.PinyinComparator;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.views.SideBar;
-import com.hulian.oa.work.fragment.WorkFragment;
-import com.netease.nim.uikit.api.model.contact.ContactsCustomization;
-import com.netease.nim.uikit.business.contact.ContactsFragment;
-import com.netease.nim.uikit.business.contact.core.item.AbsContactItem;
-import com.netease.nim.uikit.business.contact.core.item.ContactItem;
-import com.netease.nim.uikit.business.contact.core.item.ItemTypes;
-import com.netease.nim.uikit.business.contact.core.viewholder.AbsContactViewHolder;
-import com.netease.nim.uikit.impl.NimUIKitImpl;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -57,7 +43,6 @@ public class AddressFragment2 extends Fragment {
 
     @BindView(R.id.tv_type)
     TextView tv_type;
-    private ContactsFragment fragment;
     private SideBar sideBar; // 右边的引导
     private TextView dialog;
     private SortAdapter adapter; // 排序的适配器
@@ -121,7 +106,6 @@ public class AddressFragment2 extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0){
-                    TeamListActivity.start(getActivity(), ItemTypes.TEAMS.NORMAL_TEAM);
                 }else if (position == 1){
                     startActivity(new Intent(getActivity(), OrganizationActivity.class));
                 }
@@ -153,7 +137,6 @@ public class AddressFragment2 extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        FuncViewHolder.unRegisterUnreadNumChangedCallback();
         EventBus.getDefault().unregister(this);
     }
 

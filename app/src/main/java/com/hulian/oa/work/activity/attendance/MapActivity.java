@@ -45,7 +45,7 @@ import com.amap.api.services.poisearch.PoiResult;
 import com.amap.api.services.poisearch.PoiSearch;
 import com.google.gson.Gson;
 import com.hulian.oa.R;
-import com.hulian.oa.map.activity.SearchActivity;
+import com.hulian.oa.map.activity.  SearchActivity;
 import com.hulian.oa.map.adapter.AddressAdapter;
 import com.hulian.oa.map.utils.DataConversionUtils;
 import com.hulian.oa.map.utils.DatasKey;

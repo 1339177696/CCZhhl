@@ -54,7 +54,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_size_35"
+                    android:layout_height="@dimen/dp_35"
                     android:layout_margin="@dimen/dp_14"
                     android:background="@drawable/edit_background2">
 
@@ -63,8 +63,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@null"
-                        android:drawableLeft="@drawable/search_icon"
-                        android:drawablePadding="@dimen/dp_size_2"
+                        android:drawableLeft="@mipmap/search_icon"
+                        android:drawablePadding="@dimen/dp_2"
                         android:gravity="center_vertical"
                         android:hint="搜索"
                         android:paddingLeft="@dimen/dp_10"

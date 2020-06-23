@@ -14,11 +14,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.hulian.oa.DemoCache;
 import com.hulian.oa.R;
 import com.hulian.oa.activity.BaseActivity;
 import com.hulian.oa.bean.People;
-import com.hulian.oa.listener.ListSizeListener;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
@@ -27,25 +25,10 @@ import com.hulian.oa.news.adapter.MyViewPageAdapter;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.utils.TimeUtils;
-import com.hulian.oa.work.activity.ScreenReportActivity;
-import com.hulian.oa.work.activity.WorkReportActivity;
 import com.hulian.oa.work.activity.meeting.SelDepartmentActivity_meet_video;
 import com.hulian.oa.work.activity.video.fragment.MeetingListInMyFragment;
-import com.hulian.oa.work.activity.video.fragment.MeetingListOngoingFragment;
-import com.hulian.oa.work.fragment.ReadReportFragment;
-import com.hulian.oa.work.fragment.WriteReportFragment;
-import com.netease.nim.avchatkit.AVChatKit;
-import com.netease.nim.avchatkit.TeamAVChatProfile;
-import com.netease.nim.uikit.business.team.helper.TeamHelper;
-import com.netease.nim.uikit.common.util.log.LogUtil;
-import com.netease.nimlib.sdk.NIMClient;
-import com.netease.nimlib.sdk.avchat.AVChatCallback;
-import com.netease.nimlib.sdk.avchat.AVChatManager;
-import com.netease.nimlib.sdk.avchat.model.AVChatChannelInfo;
-import com.netease.nimlib.sdk.msg.MsgService;
-import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
-import com.netease.nimlib.sdk.msg.model.CustomNotification;
-import com.netease.nimlib.sdk.msg.model.CustomNotificationConfig;
+
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -142,51 +125,9 @@ public class VideoConferenceActivity extends BaseActivity {
 
     private void createRoom(String roomName, ArrayList<String> accounts) {
 
-        AVChatManager.getInstance().createRoom(roomName, null, new AVChatCallback<AVChatChannelInfo>() {
-            @Override
-            public void onSuccess(AVChatChannelInfo avChatChannelInfo) {
-                LogUtil.ui("create room " + roomName + " success !");
-                onCreateRoomSuccess(roomName, accounts);
-                //调创建接口 传入创建人 参与人
-                createVideoRoom(roomName,getParticipantId(accounts));
 
-                TeamAVChatProfile.sharedInstance().setTeamAVChatting(true);
-                AVChatKit.outgoingTeamCall(VideoConferenceActivity.this, false, "", roomName, accounts, roomName);
-            }
-
-            @Override
-            public void onFailed(int code) {
-            }
-
-            @Override
-            public void onException(Throwable exception) {
-            }
-        });
     }
 
-    private void onCreateRoomSuccess(String roomName, List<String> accounts) {
-        String teamID = roomName;
-        String teamNick = TeamHelper.getDisplayNameWithoutMe(teamID, DemoCache.getAccount());
-        // 对各个成员发送点对点自定义通知
-        String teamName = TeamHelper.getTeamName(teamID);
-        String content = TeamAVChatProfile.sharedInstance().buildContent(roomName, teamID, accounts, teamName);
-        CustomNotificationConfig config = new CustomNotificationConfig();
-        config.enablePush = true;
-        config.enablePushNick = false;
-        config.enableUnreadCount = true;
-
-        for (String account : accounts) {
-            CustomNotification command = new CustomNotification();
-            command.setSessionId(account);
-            command.setSessionType(SessionTypeEnum.P2P);
-            command.setConfig(config);
-            command.setContent(content);
-            command.setApnsText(teamNick + getString(R.string.t_avchat_push_content));
-
-            command.setSendToOnlineUserOnly(false);
-            NIMClient.getService(MsgService.class).sendCustomNotification(command);
-        }
-    }
 
 
     public void setListSize(int size, int position) {

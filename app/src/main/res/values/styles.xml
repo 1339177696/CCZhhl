@@ -72,7 +72,6 @@
     <style name="global_search_bg" parent="@style/AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:windowBackground">@color/global_bg</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
     </style>
@@ -205,6 +204,22 @@
 
     <style name="TopTitle" parent="TextColor">
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="horizontal_light_thin_divider">
+        <item name="android:layout_height">2px</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:background">@color/color_gray_d9d9d9</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:itemTextAppearance">?android:attr/actionMenuTextAppearance</item>
+    </style>
+
+    <!-- toolbar 文本 -->
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/color_black_333333</item>
     </style>
 
 </resources>

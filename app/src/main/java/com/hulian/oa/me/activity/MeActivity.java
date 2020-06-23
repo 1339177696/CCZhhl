@@ -15,8 +15,7 @@ import com.hulian.oa.R;
 import com.hulian.oa.socket.JWebSocketClientService;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.StatusBarUtil;
-import com.netease.nimlib.sdk.NIMClient;
-import com.netease.nimlib.sdk.auth.AuthService;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -90,7 +89,6 @@ public class MeActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.main2_outlogin:
-                NIMClient.getService(AuthService.class).logout();
                 SPUtils.clear(mContext);
                 exitApp(mContext);
                 break;

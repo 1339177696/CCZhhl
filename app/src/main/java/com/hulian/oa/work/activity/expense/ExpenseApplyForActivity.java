@@ -50,7 +50,6 @@ import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
-import com.netease.nim.avchatkit.common.util.TimeUtil;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -337,7 +336,7 @@ public class ExpenseApplyForActivity extends BaseActivity {
         recycler_copyer.setLayoutManager(flowManager);
         recycler_copyer.setAdapter(copyerAdapter);
         //抄送人初始化
-        tv_time_content.setText(TimeUtil.getNowDatetime1());
+//        tv_time_content.setText(TimeUtil.getNowDatetime1());
     }
     private void initSelectImage() {
         PictureSelector.create(ExpenseApplyForActivity.this)

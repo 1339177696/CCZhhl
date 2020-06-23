@@ -42,4 +42,13 @@
     <color name="white">#ffffff</color>
     <color name="powder">#FB7293</color>
 
+    <color name="color_gray_d9d9d9">#d9d9d9</color>
+    <color name="gray7">#c5c4c4</color>
+    <color name="contact_list_hover">#d9d9d9</color>
+    <color name="color_black_ff666666">#ff666666</color>
+    <color name="color_black_333333">#333333</color>
+    <color name="grey">#333333</color>
+    <color name="color_red_ccfa3c55">#ccfa3c55</color>
+    <color name="color_split_line_d9d9d9">#d9d9d9</color>
+
 </resources>

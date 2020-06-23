@@ -7,13 +7,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.hulian.oa.activity.BaseActivity;
-import com.hulian.oa.message.helper.SessionHelper;
-import com.netease.nim.uikit.common.ToastHelper;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -51,7 +48,7 @@ public class AddresFragmentDetelis extends BaseActivity {
         ButterKnife.bind(this);
         account = getIntent().getStringExtra("loginName");
         if (TextUtils.isEmpty(account)) {
-            ToastHelper.showToast(AddresFragmentDetelis.this, "传入的帐号为空");
+//            ToastHelper.showToast(AddresFragmentDetelis.this, "传入的帐号为空");
             finish();
             return;
         }
@@ -85,6 +82,5 @@ public class AddresFragmentDetelis extends BaseActivity {
     }
     private void onChat() {
         Log.i(TAG, "onChat");
-        SessionHelper.startP2PSession(this, account);
     }
 }

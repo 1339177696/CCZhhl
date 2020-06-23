@@ -28,8 +28,6 @@ import com.hulian.oa.work.activity.video.activity.VideoConferenceActivity;
 import com.hulian.oa.work.activity.video.adapter.MeetingInMyAdapter;
 import com.hulian.oa.work.adapter.WriteReportAdapter;
 import com.hulian.oa.work.fragment.ReadReportFragment;
-import com.netease.nim.avchatkit.AVChatKit;
-import com.netease.nim.avchatkit.teamavchat.activity.TeamAVChatActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -84,7 +82,6 @@ public class MeetingListInMyFragment extends Fragment implements  BaseQuickAdapt
                 Log.d("这是年",mData.get(position).getYear());
                 if (mData.get(position).getState().equals("0")){
                     Collections.addAll(accounts,mData.get(position).getParticipant().split("\\s*,\\s*"));
-                    TeamAVChatActivity.startActivity(AVChatKit.getContext(), false, mData.get(position).getMeetinglName(), mData.get(position).getMeetinglName(), accounts, mData.get(position).getMeetinglName());
                     accounts.clear();
                 }else {
                     Toast.makeText(getActivity(),"会议已结束",Toast.LENGTH_LONG).show();

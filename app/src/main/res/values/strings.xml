@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">OA</string>
 
@@ -51,5 +52,7 @@
     <string name="delete_tip">删除提示</string>
     <string name="delete_system_message">删除该条系统消息？</string>
     <string name="delete_success">删除成功</string>
+
+    <string name="empty"></string>
 
 </resources>

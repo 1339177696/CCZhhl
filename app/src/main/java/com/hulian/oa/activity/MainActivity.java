@@ -9,45 +9,22 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.hulian.oa.R;
-import com.hulian.oa.address.AddressFragment;
 import com.hulian.oa.address.pad.Address_Pad_Fragment;
 import com.hulian.oa.address.AddressFragment2;
 import com.hulian.oa.agency.AgencyFragment;
-import com.hulian.oa.message.Wechat;
-import com.hulian.oa.message.helper.SystemMessageUnreadManager;
+import com.hulian.oa.fragment.WechatFragment;
 import com.hulian.oa.message.reminder.ReminderItem;
 import com.hulian.oa.message.reminder.ReminderManager;
-import com.hulian.oa.message.helper.SessionHelper;
 import com.hulian.oa.news.fragment.NewsFragment;
-import com.hulian.oa.message.team.TeamCreateHelper;
 import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.work.fragment.WorkFragment;
 import com.hulian.oa.work.activity.mail.pad.MailFragment;
-import com.netease.nim.avchatkit.AVChatKit;
-import com.netease.nim.avchatkit.AVChatProfile;
-import com.netease.nim.avchatkit.TeamAVChatProfile;
-import com.netease.nim.avchatkit.receiver.PhoneCallStateObserver;
-import com.netease.nim.uikit.business.contact.selector.activity.ContactSelectActivity;
-import com.netease.nim.uikit.common.ToastHelper;
-import com.netease.nim.uikit.support.permission.MPermission;
-import com.netease.nimlib.sdk.NIMClient;
-import com.netease.nimlib.sdk.NimIntent;
-import com.netease.nimlib.sdk.Observer;
-import com.netease.nimlib.sdk.avchat.AVChatManager;
-import com.netease.nimlib.sdk.avchat.constant.AVChatControlCommand;
-import com.netease.nimlib.sdk.avchat.model.AVChatData;
-import com.netease.nimlib.sdk.msg.SystemMessageObserver;
-import com.netease.nimlib.sdk.msg.SystemMessageService;
-import com.netease.nimlib.sdk.msg.model.IMMessage;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -70,13 +47,13 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS
     };
     private boolean isFirstIn;
-    private Observer<Integer> sysMsgUnreadCountChangedObserver = new Observer<Integer>() {
-        @Override
-        public void onEvent(Integer unreadCount) {
-            SystemMessageUnreadManager.getInstance().setSysMsgUnreadCount(unreadCount);
-            ReminderManager.getInstance().updateContactUnreadNum(unreadCount);
-        }
-    };
+//    private Observer<Integer> sysMsgUnreadCountChangedObserver = new Observer<Integer>() {
+//        @Override
+//        public void onEvent(Integer unreadCount) {
+//            SystemMessageUnreadManager.getInstance().setSysMsgUnreadCount(unreadCount);
+//            ReminderManager.getInstance().updateContactUnreadNum(unreadCount);
+//        }
+//    };
 
 
     boolean isgowork=false;
@@ -97,9 +74,9 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     @BindView(R.id.rg_footer)
     RadioGroup rgFooter;
     private FragmentTransaction transaction;
-    private AddressFragment addressFragment;
     private AddressFragment2 addressFragment2;
-    private Wechat messageFragment;
+//    private Wechat messageFragment;
+    private WechatFragment messageFragment;
     private NewsFragment newsFragment;
     private WorkFragment workFragment;
     private AgencyFragment agencyFragment;
@@ -114,9 +91,9 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         rgFooter.setOnCheckedChangeListener(this);
         rgFooter.check(R.id.rb_message);
         registerMsgUnreadInfoObserver(true);
-        registerSystemMessageObservers(true);
-        requestSystemMessageUnreadCount();
-        requestBasicPermission();
+//        registerSystemMessageObservers(true);
+//        requestSystemMessageUnreadCount();
+//        requestBasicPermission();
 
     }
 
@@ -142,35 +119,35 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
         Intent intent = getIntent();
 
-        if (intent.hasExtra(NimIntent.EXTRA_NOTIFY_CONTENT)) {
-            IMMessage message = (IMMessage) intent.getSerializableExtra(NimIntent.EXTRA_NOTIFY_CONTENT);
-            intent.removeExtra(NimIntent.EXTRA_NOTIFY_CONTENT);
-            switch (message.getSessionType()) {
-                case P2P:
-                    SessionHelper.startP2PSession(this, message.getSessionId());
-                    break;
-                case Team:
-                    SessionHelper.startTeamSession(this, message.getSessionId());
-                    break;
-            }
+//        if (intent.hasExtra(NimIntent.EXTRA_NOTIFY_CONTENT)) {
+//            IMMessage message = (IMMessage) intent.getSerializableExtra(NimIntent.EXTRA_NOTIFY_CONTENT);
+//            intent.removeExtra(NimIntent.EXTRA_NOTIFY_CONTENT);
+//            switch (message.getSessionType()) {
+//                case P2P:
+//                    SessionHelper.startP2PSession(this, message.getSessionId());
+//                    break;
+//                case Team:
+//                    SessionHelper.startTeamSession(this, message.getSessionId());
+//                    break;
+//            }
+//
+//            return true;
+//        }
 
-            return true;
-        }
-
-        if (intent.hasExtra(NimIntent.EXTRA_NOTIFY_CONTENT)) {
-            IMMessage message = (IMMessage) intent.getSerializableExtra(NimIntent.EXTRA_NOTIFY_CONTENT);
-            intent.removeExtra(NimIntent.EXTRA_NOTIFY_CONTENT);
-            switch (message.getSessionType()) {
-                case P2P:
-                    SessionHelper.startP2PSession(this, message.getSessionId());
-                    break;
-                case Team:
-                    SessionHelper.startTeamSession(this, message.getSessionId());
-                    break;
-            }
-
-            return true;
-        }
+//        if (intent.hasExtra(NimIntent.EXTRA_NOTIFY_CONTENT)) {
+//            IMMessage message = (IMMessage) intent.getSerializableExtra(NimIntent.EXTRA_NOTIFY_CONTENT);
+//            intent.removeExtra(NimIntent.EXTRA_NOTIFY_CONTENT);
+//            switch (message.getSessionType()) {
+//                case P2P:
+//                    SessionHelper.startP2PSession(this, message.getSessionId());
+//                    break;
+//                case Team:
+//                    SessionHelper.startTeamSession(this, message.getSessionId());
+//                    break;
+//            }
+//
+//            return true;
+//        }
 
         return false;
     }
@@ -184,7 +161,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             case R.id.rb_message:
                 StatusBarUtil.statusBarLightMode(this);
                     if (messageFragment == null) {
-                        messageFragment = new Wechat().newInstance("");
+//                        messageFragment = new Wechat().newInstance("");
+                        messageFragment = new WechatFragment().newInstance("");
                         transaction.add(R.id.content, messageFragment);
                     } else {
                         transaction.show(messageFragment);
@@ -275,27 +253,27 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     /**
      * 注册/注销系统消息未读数变化
      */
-    private void registerSystemMessageObservers(boolean register) {
-        NIMClient.getService(SystemMessageObserver.class).observeUnreadCountChange(sysMsgUnreadCountChangedObserver, register);
-    }
-
-    /**
-     * 查询系统消息未读数
-     */
-    private void requestSystemMessageUnreadCount() {
-        int unread = NIMClient.getService(SystemMessageService.class).querySystemMessageUnreadCountBlock();
-        SystemMessageUnreadManager.getInstance().setSysMsgUnreadCount(unread);
-        ReminderManager.getInstance().updateContactUnreadNum(unread);
-    }
-
-
-    private void requestBasicPermission() {
-        MPermission.printMPermissionResult(true, this, BASIC_PERMISSIONS);
-        MPermission.with(MainActivity.this)
-                .setRequestCode(BASIC_PERMISSION_REQUEST_CODE)
-                .permissions(BASIC_PERMISSIONS)
-                .request();
-    }
+//    private void registerSystemMessageObservers(boolean register) {
+//        NIMClient.getService(SystemMessageObserver.class).observeUnreadCountChange(sysMsgUnreadCountChangedObserver, register);
+//    }
+//
+//    /**
+//     * 查询系统消息未读数
+//     */
+//    private void requestSystemMessageUnreadCount() {
+//        int unread = NIMClient.getService(SystemMessageService.class).querySystemMessageUnreadCountBlock();
+//        SystemMessageUnreadManager.getInstance().setSysMsgUnreadCount(unread);
+//        ReminderManager.getInstance().updateContactUnreadNum(unread);
+//    }
+//
+//
+//    private void requestBasicPermission() {
+//        MPermission.printMPermissionResult(true, this, BASIC_PERMISSIONS);
+//        MPermission.with(MainActivity.this)
+//                .setRequestCode(BASIC_PERMISSION_REQUEST_CODE)
+//                .permissions(BASIC_PERMISSIONS)
+//                .request();
+//    }
     //未读消息数量观察者实现
     @Override
     public void onUnreadNumChanged(ReminderItem item) {
@@ -307,17 +285,17 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         if (resultCode != Activity.RESULT_OK) {
             return;
         }
-        if (requestCode == REQUEST_CODE_NORMAL) {
-            final ArrayList<String> selected = data.getStringArrayListExtra(ContactSelectActivity.RESULT_DATA);
-            if (selected != null && !selected.isEmpty()) {
-                TeamCreateHelper.createNormalTeam(this, selected, false, null);
-            } else {
-                ToastHelper.showToast(this, "请选择至少一个联系人！");
-            }
-        } else if (requestCode == REQUEST_CODE_ADVANCED) {
-            final ArrayList<String> selected = data.getStringArrayListExtra(ContactSelectActivity.RESULT_DATA);
-            TeamCreateHelper.createAdvancedTeam(this, selected);
-        }
+//        if (requestCode == REQUEST_CODE_NORMAL) {
+//            final ArrayList<String> selected = data.getStringArrayListExtra(ContactSelectActivity.RESULT_DATA);
+//            if (selected != null && !selected.isEmpty()) {
+//                TeamCreateHelper.createNormalTeam(this, selected, false, null);
+//            } else {
+//                ToastHelper.showToast(this, "请选择至少一个联系人！");
+//            }
+//        } else if (requestCode == REQUEST_CODE_ADVANCED) {
+//            final ArrayList<String> selected = data.getStringArrayListExtra(ContactSelectActivity.RESULT_DATA);
+//            TeamCreateHelper.createAdvancedTeam(this, selected);
+//        }
     }
 
 
@@ -326,23 +304,23 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     }
 
     private void registerAVChatIncomingCallObserver(boolean register) {
-        AVChatManager.getInstance().observeIncomingCall(new Observer<AVChatData>() {
-            @Override
-            public void onEvent(AVChatData data) {
-                String extra = data.getExtra();
-                Log.e("Extra", "Extra Message->" + extra);
-                if (PhoneCallStateObserver.getInstance().getPhoneCallState() != PhoneCallStateObserver.PhoneCallStateEnum.IDLE
-                        || AVChatProfile.getInstance().isAVChatting()
-                        || AVChatManager.getInstance().getCurrentChatId() != 0) {
-//                    LogUtil.i(TAG, "reject incoming call data =" + data.toString() + " as local phone is not idle");
-                    AVChatManager.getInstance().sendControlCommand(data.getChatId(), AVChatControlCommand.BUSY, null);
-                    return;
-                }
-                // 有网络来电打开AVChatActivity
-                TeamAVChatProfile.sharedInstance().setTeamAVChatting(true);
-                AVChatKit.outgoingTeamCall(MainActivity.this, true, "", "", null, "视频会议");
-            }
-        }, register);
+//        AVChatManager.getInstance().observeIncomingCall(new Observer<AVChatData>() {
+//            @Override
+//            public void onEvent(AVChatData data) {
+//                String extra = data.getExtra();
+//                Log.e("Extra", "Extra Message->" + extra);
+//                if (PhoneCallStateObserver.getInstance().getPhoneCallState() != PhoneCallStateObserver.PhoneCallStateEnum.IDLE
+//                        || AVChatProfile.getInstance().isAVChatting()
+//                        || AVChatManager.getInstance().getCurrentChatId() != 0) {
+////                    LogUtil.i(TAG, "reject incoming call data =" + data.toString() + " as local phone is not idle");
+//                    AVChatManager.getInstance().sendControlCommand(data.getChatId(), AVChatControlCommand.BUSY, null);
+//                    return;
+//                }
+//                // 有网络来电打开AVChatActivity
+//                TeamAVChatProfile.sharedInstance().setTeamAVChatting(true);
+//                AVChatKit.outgoingTeamCall(MainActivity.this, true, "", "", null, "视频会议");
+//            }
+//        }, register);
     }
 
 

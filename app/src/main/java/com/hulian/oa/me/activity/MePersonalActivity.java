@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.hulian.oa.R;
 import com.hulian.oa.activity.BaseActivity;
 import com.hulian.oa.address.AddressFragment2;
-import com.hulian.oa.message.Wechat;
+import com.hulian.oa.fragment.WechatFragment;
 import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
@@ -24,7 +24,6 @@ import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.news.fragment.NewsFragment;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.ToastHelper;
-import com.hulian.oa.work.activity.leave.l_fragment.LeaveLaunchFragment;
 import com.hulian.oa.work.fragment.WorkFragment;
 
 import org.json.JSONException;
@@ -154,7 +153,7 @@ public class MePersonalActivity extends BaseActivity {
                         SPUtils.put(mContext,"nickname",tvMePersonUserName.getText().toString().trim());
                         SPUtils.put(mContext,"phonenumber",tvMePersonPhone.getText().toString().trim());
                         SPUtils.put(mContext,"sex",sex);
-                        EventBus.getDefault().post(new Wechat());
+                        EventBus.getDefault().post(new WechatFragment());
                         EventBus.getDefault().post(new WorkFragment());
                         EventBus.getDefault().post(new AddressFragment2());
                         EventBus.getDefault().post(new NewsFragment());

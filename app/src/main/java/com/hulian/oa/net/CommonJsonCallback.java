@@ -5,7 +5,6 @@ import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.alibaba.fastjson.util.ParameterizedTypeImpl;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hulian.oa.APP;
