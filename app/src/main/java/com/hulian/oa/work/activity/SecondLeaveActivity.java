@@ -46,7 +46,7 @@ public class SecondLeaveActivity extends BaseActivity {
     LinearLayout tv_apply;
     @BindView(R.id.leave_fragment)
     FrameLayout leave_fragment;
-    private boolean perSenType;
+    private boolean perSenType = false;
     @BindView(R.id.view_zw)
     View view_zw;
 
@@ -79,24 +79,48 @@ public class SecondLeaveActivity extends BaseActivity {
 //            fragmentList.add(new LeaveLaunchFragment());
 //            fragmentList.add(new LeaveCopymeFragment());
 //        }
-        titleDatas.add("我发起");
-        fragmentList.add(new LeaveLaunchFragment());
-        imgList.add(R.drawable.leave_my_faqi);
+//        titleDatas.add("我发起");
+//        fragmentList.add(new LeaveLaunchFragment());
+//        imgList.add(R.drawable.leave_my_faqi);
         //如果身份是普通员工不显示二级滑动
         if (SPUtils.get(this, "roleKey", "").toString().equals("common")){
+            tv_apply.setVisibility(View.VISIBLE);
+
+            titleDatas.add("我发起");
+            fragmentList.add(new LeaveLaunchFragment());
+            imgList.add(R.drawable.leave_my_faqi);
             leave_fragment.setVisibility(View.GONE);
             view_zw.setVisibility(View.GONE);
-            perSenType = true;
         }else {
             leave_fragment.setVisibility(View.VISIBLE);
             view_zw.setVisibility(View.VISIBLE);
-            perSenType = false;
             // 如果王婉娇的话有抄送我的
             if (SPUtils.get(this, "userId", "").toString().equals("184")){
+                tv_apply.setVisibility(View.VISIBLE);
+
+                titleDatas.add("我发起");
+                fragmentList.add(new LeaveLaunchFragment());
+                imgList.add(R.drawable.leave_my_faqi);
                 titleDatas.add("抄送我的");
                 fragmentList.add(new LeaveCopymeFragment());
                 imgList.add(R.drawable.leave_chaosong);
+            }
+            if (SPUtils.get(this, "roleKey", "").toString().equals("boss")){
+                tv_apply.setVisibility(View.GONE);
+
+                perSenType = true;
+                titleDatas.add("待审批");
+                titleDatas.add("已审批");
+                fragmentList.add(new LeavePendFragment());
+                fragmentList.add(new LeaveApprovedFragment());
+                imgList.add(R.drawable.leave_shenpi);
+                imgList.add(R.drawable.leave_yishenpi);
             }else {
+                tv_apply.setVisibility(View.VISIBLE);
+
+                titleDatas.add("我发起");
+                fragmentList.add(new LeaveLaunchFragment());
+                imgList.add(R.drawable.leave_my_faqi);
                 titleDatas.add("待审批");
                 titleDatas.add("已审批");
                 fragmentList.add(new LeavePendFragment());
@@ -185,6 +209,9 @@ public class SecondLeaveActivity extends BaseActivity {
 
 
     public void setListSize(int size, int position) {
+        if (perSenType){
+            position = position - 1;
+        }
         numberList.get(position).setText(size + "");
     }
 }

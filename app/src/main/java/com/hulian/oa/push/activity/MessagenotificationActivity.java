@@ -191,7 +191,7 @@ public class MessagenotificationActivity extends BaseActivity {
                     JSONArray data = result.getJSONArray("data");
                     for (int i = 0; i < data.length(); i++) {
                         JSONObject value = data.getJSONObject(i);
-                        JSONObject msg = data.getJSONObject(i).getJSONObject("msg");
+                            JSONObject msg = data.getJSONObject(i).getJSONObject("msg");
                         //获取到title值
                         String type = value.getString("type");
                         String createTime = "";

@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -24,8 +25,13 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.hulian.oa.activity.BaseActivity;
 import com.hulian.oa.R;
+import com.hulian.oa.bean.AppersonBean;
+import com.hulian.oa.bean.Leave_person_bean;
 import com.hulian.oa.bean.People;
 import com.hulian.oa.bean.People_x;
 import com.hulian.oa.bean.Userqglbean;
@@ -34,12 +40,19 @@ import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.push.activity.PersonqglActivity;
+import com.hulian.oa.utils.Identity;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.TimeUtils;
 import com.hulian.oa.utils.ToastHelper;
 import com.hulian.oa.utils.FullyGridLayoutManager;
 import com.hulian.oa.adpter.GridImageAdapter;
+import com.hulian.oa.views.AlertDialog;
+import com.hulian.oa.views.MyGridView;
+import com.hulian.oa.work.activity.expense.ExpenseApplyForActivity;
+import com.hulian.oa.work.activity.expense.ExpenseApplyForPeopleActivity;
+import com.hulian.oa.work.activity.expense.ExpenseApplyForPeopleActivityS;
 import com.hulian.oa.work.activity.leave.l_fragment.LeaveLaunchFragment;
+import com.hulian.oa.work.activity.meeting.l_adapter.MeetGridViewAdapter;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
@@ -50,6 +63,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -75,12 +89,12 @@ public class LeaveApplyforActivity extends BaseActivity {
     //抄送人
     @BindView(R.id.title11)
     ImageView title11;
-    @BindView(R.id.fl_content1)
-    FrameLayout fl_content1;
-    @BindView(R.id.iv1)
-    ImageView iv1;
-    @BindView(R.id.copier)
-    TextView copier;
+//    @BindView(R.id.fl_content1)
+//    FrameLayout fl_content1;
+//    @BindView(R.id.iv1)
+//    ImageView iv1;
+//    @BindView(R.id.copier)
+//    TextView copier;
     String copierCode = "";
     String approverName = "";
     private List<People> selectList2 = new ArrayList<>();
@@ -140,7 +154,6 @@ public class LeaveApplyforActivity extends BaseActivity {
     private String jiaojiecode = "";
     @BindView(R.id.fl_content2)
     FrameLayout fl_content2;
-    private List<Userqglbean>userqgllist = new ArrayList<>();
     // 选择半天式
     private OptionsPickerView daypickerview;//时间;
     List<String> day = new ArrayList<>();
@@ -148,8 +161,29 @@ public class LeaveApplyforActivity extends BaseActivity {
     private int endType;
     private String meetingTimeEnd = "";
     private String meetingTime = "";
+    //身份角色
+    private int role = 1;
 
-
+    //抄送人
+    @BindView(R.id.gv_test)
+    MyGridView gvTest;
+    List<People> mList_cop = new ArrayList<People>();
+    String copname = "";
+    String copid = "";
+    MeetGridViewAdapter adapter1;
+    AlertDialog myDialog;
+    private List<List<Leave_person_bean.DataBean>>leave_person_beans;
+    private int a = 0;
+    private int b = 0;
+    private int c = 0;
+    private OptionsPickerView reasonPicker1;
+    private OptionsPickerView pickerView;
+    private String reason = "";
+    private String appName = "";
+    private String appId = "";
+    private String days = "";
+    private final int JIAOJIEREN_CODE = 520;
+    private final int CHAOSONGREN_CODE = 1010;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -157,6 +191,12 @@ public class LeaveApplyforActivity extends BaseActivity {
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
         mContext = this;
+        role = Identity.aa(SPUtils.get(this,"roleKey","").toString());
+//        if (role == 3){
+//            title11.setVisibility(View.VISIBLE);
+//        }else {
+//            title11.setVisibility(View.INVISIBLE);
+//        }
         init();
         initReason();
         tvReaseon.setText("事假");
@@ -181,6 +221,8 @@ public class LeaveApplyforActivity extends BaseActivity {
     }
 
     private void init() {
+        //添加事项初始化
+        myDialog = new AlertDialog(this).builder();
         FullyGridLayoutManager manager = new FullyGridLayoutManager(mContext, 4, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
         adapter = new GridImageAdapter(mContext, onAddPicClickListener);
@@ -226,6 +268,61 @@ public class LeaveApplyforActivity extends BaseActivity {
 
     }
 
+
+    @OnClick({R.id.iv_back, R.id.rl_leave_reason, R.id.rl_start_time, R.id.rl_end_time, R.id.tv_back_instruct, R.id.ci_jiaojie_pic,R.id.iv2,R.id.ci_copy_pic,R.id.ci_approved_pic,R.id.rela_xj_m1,R.id.title11})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.iv_back:
+                finish();
+                break;
+            case R.id.rl_leave_reason:
+                reasonPicker.show();
+                break;
+            case R.id.rl_start_time:
+                selectTime();
+                break;
+            case R.id.rl_end_time:
+                if (tvTimeStart.getText().toString().trim().equals("请选择开始时间")||TextUtils.isEmpty(tvTimeStart.getText().toString().trim())) {
+                    ToastHelper.showToast(mContext, "请先选择开始时间");
+                    return;
+                }
+                selectTime2();
+                break;
+                // 交接人
+            case R.id.ci_jiaojie_pic:
+                Intent intent = new Intent(LeaveApplyforActivity.this, PersonqglActivity.class);
+                startActivityForResult(intent, JIAOJIEREN_CODE);
+                break;
+            case R.id.tv_back_instruct:
+                postData();
+                break;
+            case R.id.iv2:
+                fl_content2.setVisibility(View.GONE);
+                jiaojiecode = "";
+                break;
+            case R.id.ci_approved_pic:
+                tvOpreator.setText("");
+                appId = "";
+                appName = "";
+                if (TextUtils.isEmpty(tvDay.getText().toString())){
+                    Toast.makeText(this,"请先选择请假时长！",Toast.LENGTH_LONG).show();
+                }else {
+                    getapprover_person(days,SPUtils.get(mContext,  "userId", "").toString(),SPUtils.get(mContext, "deptId", "").toString());
+                }
+                break;
+            case R.id.title11:
+                if (appId.equals("")){
+                    Toast.makeText(this,"请先选择审批人",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                Intent intent1 = new Intent(this, ExpenseApplyForPeopleActivityS.class);
+                intent1.putExtra("appId",appId + "," + SPUtils.get(mContext, "userId", "").toString());
+                startActivityForResult(intent1,CHAOSONGREN_CODE);
+               // startActivityForResult(new Intent(LeaveApplyforActivity.this, ExpenseApplyForPeopleActivity.class), CHAOSONGREN_CODE);
+                break;
+        }
+
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -254,56 +351,61 @@ public class LeaveApplyforActivity extends BaseActivity {
                     approverName = mList.get(0).getUserName();
                     break;
                 case 120:
-                    List<People> mList1 = (List<People>) data.getSerializableExtra("mList");
-                    fl_content1.setVisibility(View.VISIBLE);
-                    copier.setText(mList1.get(0).getUserName());
-                    copierCode = mList1.get(0).getUserId();
+//                    fl_content1.setVisibility(View.VISIBLE);
+//                    copier.setText(data.getStringExtra("userName"));
+//                    copierCode = data.getStringExtra("userId");
                     break;
-                case 520:
+                case JIAOJIEREN_CODE:
                     fl_content2.setVisibility(View.VISIBLE);
                     jiaojie_person.setText(data.getStringExtra("userName"));
                     jiaojiecode = data.getStringExtra("userId");
-
+                    break;
+                case CHAOSONGREN_CODE:
+                    if (data!=null){
+                        copname = "";
+                        copid = "";
+                        List<People> mList1 = (List<People>) data.getSerializableExtra("mList");
+                        mList_cop.addAll(mList1);
+                        mList_cop = TimeUtils.removeDuplicateWithOrder(mList_cop);
+                        if (mList_cop.size() > 0){
+                            // 替换了
+                            for (People params1 : mList_cop) {
+                                copname += params1.getUserName() + ",";
+                                copid += params1.getUserId() +",";
+                            }
+                            adapter1 = new MeetGridViewAdapter(LeaveApplyforActivity.this, mList_cop);
+                            gvTest.setAdapter(adapter1);
+                            //如果超过5个隐藏按钮
+                            if (mList_cop.size()>4){
+                                Toast.makeText(this,"抄从人最多5人",Toast.LENGTH_LONG).show();
+                                title11.setVisibility(View.GONE);
+                            }else {
+                                title11.setVisibility(View.VISIBLE);
+                            }
+                            List<People> finalMList = mList_cop;
+                            gvTest.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    myDialog.setGone().setTitle("提示").setMsg("确定删除么").setNegativeButton("取消", null).setPositiveButton("确定", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            finalMList.remove(position);
+                                            if (mList_cop.size()>4){
+                                                title11.setVisibility(View.GONE);
+                                            }else {
+                                                title11.setVisibility(View.VISIBLE);
+                                            }
+                                            adapter1.notifyDataSetChanged();
+                                        }
+                                    }).show();
+                                }
+                            });
+                        }
+                    }
                     break;
             }
         }
     }
-    @OnClick({R.id.iv_back, R.id.rl_leave_reason, R.id.rl_start_time, R.id.rl_end_time, R.id.tv_back_instruct, R.id.ci_jiaojie_pic,R.id.iv2})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.iv_back:
-                finish();
-                break;
-            case R.id.rl_leave_reason:
-                reasonPicker.show();
-                break;
-            case R.id.rl_start_time:
-                selectTime();
-                break;
-            case R.id.rl_end_time:
-                if (tvTimeStart.getText().toString().trim().equals("请选择开始时间")||TextUtils.isEmpty(tvTimeStart.getText().toString().trim())) {
-                    ToastHelper.showToast(mContext, "请先选择开始时间");
-                    return;
-                }
-                selectTime2();
-                break;
-                // 交接人
-            case R.id.ci_jiaojie_pic:
-                Intent intent = new Intent(LeaveApplyforActivity.this, PersonqglActivity.class);
-                startActivityForResult(intent, 520);
-                break;
-            case R.id.tv_back_instruct:
-                postData();
-                break;
-            case R.id.iv2:
-                fl_content2.setVisibility(View.GONE);
-                jiaojiecode = "";
-                break;
-
-        }
-
-    }
-
     private void postData() {
         if ("请选择请假类别".equals(tvReaseon.getText().toString().trim())) {
             ToastHelper.showToast(mContext, "请选择请假类别");
@@ -321,21 +423,25 @@ public class LeaveApplyforActivity extends BaseActivity {
             ToastHelper.showToast(mContext, "请填写请假事由");
             return;
         }
-        if (TextUtils.isEmpty(tvOpreatorCode)) {
+        if (TextUtils.isEmpty(appId)) {
             ToastHelper.showToast(mContext, "请选择审批人");
             return;
         }
-        if (TextUtils.isEmpty(copierCode)) {
+        if (TextUtils.isEmpty(copid)) {
             ToastHelper.showToast(mContext, "请选择抄送人");
+            return;
+        }
+        if (b<c){
+            Toast.makeText(this,"请选择全部审批人！",Toast.LENGTH_LONG).show();
             return;
         }
         showDialogLoading();
         loadDialog.show();
         RequestParams params = new RequestParams();
         params.put("createBy", SPUtils.get(mContext, "userId", "").toString());
-        params.put("copier", copierCode);
-        params.put("approver", tvOpreatorCode);
-        params.put("approverName", approverName);
+        params.put("copier", copid.substring(0,copid.length()-1));
+        params.put("approver", appId);
+        params.put("approverName", appName);
         params.put("describe", etContent.getText().toString());
         params.put("duration", tvDay.getText().toString().substring(0,tvDay.getText().toString().length()-1));
         params.put("startTime", tvTimeStart.getText().toString());
@@ -444,7 +550,6 @@ public class LeaveApplyforActivity extends BaseActivity {
         selectList2_x.add(event_x);
     }
 
-
     // 请求审批人,抄送人
     public void getPerson(String day,String id,String bid){
         RequestParams params = new RequestParams();
@@ -466,7 +571,7 @@ public class LeaveApplyforActivity extends BaseActivity {
                         userid += value.getString("userId") + ",";
                     }
                     tvOpreator.setText(data.getString("leaveApproveName"));
-                    copier.setText(username.substring(0, username.length() - 1));
+//                    copier.setText(username.substring(0, username.length() - 1));
                     approverName = data.getString("leaveApproveName");
                     tvOpreatorCode = data.getString("leaveApproveId");
                     copierCode =userid.substring(0, userid.length() - 1);
@@ -482,7 +587,6 @@ public class LeaveApplyforActivity extends BaseActivity {
         });
 
     }
-
 
     // 请求天数，剔除节假日
     private void postDay(String startTime,int startType,String endTime,int endType){
@@ -504,8 +608,10 @@ public class LeaveApplyforActivity extends BaseActivity {
                     }else {
                         dday = data.getString("leaveDays");
                     }
+                    days = dday;
                     tvDay.setText(dday+"天");
-                    getPerson( dday + "",SPUtils.get(mContext, "userId", "").toString(),SPUtils.get(mContext, "deptId", "").toString());
+
+                   // getPerson( dday + "",SPUtils.get(mContext, "userId", "").toString(),SPUtils.get(mContext, "deptId", "").toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -538,6 +644,7 @@ public class LeaveApplyforActivity extends BaseActivity {
         daypickerview.setPicker(day);
     }
 
+
     private void iniStartType2(String time){
         day = new ArrayList<>();
         day.add("上午");
@@ -555,4 +662,102 @@ public class LeaveApplyforActivity extends BaseActivity {
         }).setTitleText("").setContentTextSize(22).setTitleSize(22).setSubCalSize(21).build();
         daypickerview.setPicker(day);
     }
+
+    //获取审批人
+    public void getapprover_person(String day,String id,String dpid){
+        RequestParams params = new RequestParams();
+        params.put("deptId",dpid);
+        params.put("userId",id);
+        params.put("num",day);
+        HttpRequest.getPerson1(params, new ResponseCallback() {
+            @Override
+            public void onSuccess(Object responseObj) {
+                Leave_person_bean jsonBean = gson.fromJson(responseObj.toString(), Leave_person_bean.class);
+                leave_person_beans = jsonBean.getData();
+                a = leave_person_beans.size();
+                c = leave_person_beans.size();
+                framework(leave_person_beans.get(0),0);
+                pickerView.show();
+            }
+
+            @Override
+            public void onFailure(OkHttpException failuer) {
+
+            }
+        });
+    }
+
+//    private void contperson(List<Leave_person_bean.DataBean>list){
+//        List<String> oa = new ArrayList<>();
+//        for (int i = 0;i<list.size();i++){
+//            oa.add(list.get(i).getUserName());
+//        }
+//        reasonPicker1 = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+//            @Override
+//            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+////                reason = oa.get(options1);
+////                appId = appersonBeans.get(options1).getUserId();
+////                appName = reason;
+//////                list.get(positionMain).setExpense_reason(reason);
+//////                list.get(positionMain).setReason_num(options1+1+"");
+//////                adapter.notifyDataSetChanged();
+//////                approverList.add(reason);
+//////                approverAdapter.notifyItemInserted(approverList.size());
+////                tv_name.setText(reason);
+////                iv_image.setVisibility(View.GONE);
+////                tv_name1.setVisibility(View.GONE);
+////                if (type.equals("2")){
+////                    getAppror1(mony);
+////                }else {
+////
+////                }
+//                a = a-1;
+//                if (a >= 1){
+//                    Log.e("继续弹出","Yes");
+//                }else {
+//                    Log.e("继续弹出","No");
+//
+//                }
+//
+//
+//            }
+//        }).setTitleText("综合审批人").setContentTextSize(22).setTitleSize(22).setSubCalSize(21).build();
+//        reasonPicker1.setPicker(oa);
+//    }
+    // 弹框控件
+    private void framework(List<Leave_person_bean.DataBean>dataBeans,int count){
+        List<String> name = new ArrayList<>();
+        for (int i = 0;i<dataBeans.size();i++){
+            name.add(dataBeans.get(i).getUserName());
+        }
+        pickerView = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                reason = name.get(options1);
+                if (appId != ""){
+                    b = b + 1;
+                    appId += "," + dataBeans.get(options1).getUserId();
+                    appName += ","+reason;
+                }else {
+                    b = 1;
+                    appId = dataBeans.get(options1).getUserId()+"";
+                    appName = reason;
+                }
+                a = a-1;
+                if (a >= 1){
+                    framework(leave_person_beans.get(count + 1),count + 1);
+                    pickerView.show();
+                }else {
+                    Log.e("继续弹出","No");
+                    tvOpreator.setText(appName);
+                }
+
+
+            }
+        }).setTitleText("审批人").setContentTextSize(22).setTitleSize(22).setSubCalSize(21).build();
+        pickerView.setPicker(name);
+
+    }
+
+
 }

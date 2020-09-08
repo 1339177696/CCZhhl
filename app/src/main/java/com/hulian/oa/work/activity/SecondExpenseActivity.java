@@ -22,19 +22,19 @@ import com.hulian.oa.work.activity.expense.ExpenseApplyForActivity;
 import com.hulian.oa.work.activity.expense.l_fragment.ExpenseApprovedFragment;
 import com.hulian.oa.work.activity.expense.l_fragment.ExpenseCopymeFragment;
 import com.hulian.oa.work.activity.expense.l_fragment.ExpenseLaunchFragment;
+import com.hulian.oa.work.activity.expense.l_fragment.ExpensePendFragment;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 /**
- * 报销审批
+ * 报销管理
  */
 public class SecondExpenseActivity extends BaseActivity {
-
-
     @BindView(R.id.my_tablayout)
     TabLayout myTablayout;
     @BindView(R.id.my_viewpager)
@@ -46,9 +46,9 @@ public class SecondExpenseActivity extends BaseActivity {
     private ArrayList<String> list_title;
     ArrayList<String> titleDatas   = new ArrayList<>();;
     ArrayList<Fragment> fragmentList = new ArrayList<Fragment>();
+    private ArrayList<Integer> imgList = new ArrayList<>();
+    private List<TextView> numberList = new ArrayList<>();
 
-    @BindView(R.id.tv_baoxiao)
-    TextView tv_baoxiao;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,86 +58,115 @@ public class SecondExpenseActivity extends BaseActivity {
         ButterKnife.bind(this);
         mContext = this;
         //领导
-        String isLeader = (String) SPUtils.get(mContext, "isLead", "");
-        isLeader = "0";
+        String isLeader = "";
+        if (SPUtils.get(this, "roleKey", "").toString().contains("boss")|| SPUtils.get(this, "roleKey", "").toString().contains("synthesizeLead")) {
+            isLeader = "0";
+        }else {
+            isLeader = "1";
+        }
+
         if (isLeader.equals("0")) {
-//            tv_apply.setVisibility(View.GONE);
-            tv_apply.setVisibility(View.VISIBLE);
-//            titleDatas.add("待审批");
-//            titleDatas.add("已审批");
-//            titleDatas.hb_add("我发起的");
-//            titleDatas.hb_add("我审批的");
-//            titleDatas.hb_add("抄送我的");
+            titleDatas.add("我发起的");
+            titleDatas.add("待审批");
+            titleDatas.add("已审批");
             fragmentList.add(new ExpenseLaunchFragment());
-//            fragmentList.hb_add(new ExpensePendFragment());
+            fragmentList.add(new ExpensePendFragment());
             fragmentList.add(new ExpenseApprovedFragment());
+            imgList.add(R.drawable.baoxiao_pic_f);
+            imgList.add(R.drawable.baoxiao_pic_s);
+            imgList.add(R.drawable.baoxiao_pic_s);
         }
         //员工
         else {
-//            titleDatas.add("我发起的");
-//            titleDatas.add("抄送我的");
+            titleDatas.add("我发起的");
+            titleDatas.add("抄送我的");
             tv_apply.setVisibility(View.VISIBLE);
             fragmentList.add(new ExpenseLaunchFragment());
             fragmentList.add(new ExpenseCopymeFragment());
+            imgList.add(R.drawable.baoxiao_pic_f);
+            imgList.add(R.drawable.baoxiao_pic_s);
         }
-        init(isLeader);
+        init();
     }
-    private void init(String isLeader) {
+//    private void init(String isLeader) {
+//        MyViewPageAdapter myViewPageAdapter = new MyViewPageAdapter(getSupportFragmentManager(), titleDatas, fragmentList);
+//        myTablayout.setSelectedTabIndicator(0);
+//        myViewpager.setAdapter(myViewPageAdapter);
+//        myTablayout.setupWithViewPager(myViewpager);
+//        //替换tab中原有的样式(职工)
+//        myTablayout.getTabAt(0).setCustomView(R.layout.item_bx_tab_f);
+//        myTablayout.getTabAt(1).setCustomView(R.layout.item_bx_tab_s);
+//        //初始化替换后的文字和图片
+//        TextView textView = myTablayout.getTabAt(0).getCustomView().findViewById(R.id.tv_title);
+//        ImageView imageView = myTablayout.getTabAt(0).getCustomView().findViewById(R.id.iv_pic);
+//        TextView textView1 = myTablayout.getTabAt(1).getCustomView().findViewById(R.id.tv_title);
+//        ImageView imageView1 = myTablayout.getTabAt(1).getCustomView().findViewById(R.id.iv_pic);
+//        if (isLeader.equals("0")){//0 代表领导
+//            textView.setText("我发起的");
+//            textView.setText("待审批");
+//            textView1.setText("已审批");
+//        }else{
+//            textView.setText("我发起的");
+//            textView1.setText("抄送我的");
+//        }
+//        //标题左边选中和未选中的图片效果
+//        imageView.setBackground(ContextCompat.getDrawable(this,R.drawable.baoxiao_pic_f));
+//        imageView1.setBackground(ContextCompat.getDrawable(this,R.drawable.baoxiao_pic_s));
+//        myTablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(TabLayout.Tab tab) {
+//                tab.getCustomView().findViewById(R.id.tv_title).setSelected(true);
+//                myViewpager.setCurrentItem(tab.getPosition());
+//            }
+//
+//            @Override
+//            public void onTabUnselected(TabLayout.Tab tab) {
+//                tab.getCustomView().findViewById(R.id.tv_title).setSelected(false);
+//            }
+//
+//            @Override
+//            public void onTabReselected(TabLayout.Tab tab) {
+//
+//            }
+//        });
+//
+//    }
+
+    private void init() {
         MyViewPageAdapter myViewPageAdapter = new MyViewPageAdapter(getSupportFragmentManager(), titleDatas, fragmentList);
         myTablayout.setSelectedTabIndicator(0);
         myViewpager.setAdapter(myViewPageAdapter);
         myTablayout.setupWithViewPager(myViewpager);
-        //替换tab中原有的样式(职工)
-        myTablayout.getTabAt(0).setCustomView(R.layout.item_bx_tab_f);
-        myTablayout.getTabAt(1).setCustomView(R.layout.item_bx_tab_s);
-        //初始化替换后的文字和图片
-        TextView textView = myTablayout.getTabAt(0).getCustomView().findViewById(R.id.tv_title);
-        ImageView imageView = myTablayout.getTabAt(0).getCustomView().findViewById(R.id.iv_pic);
-        TextView textView1 = myTablayout.getTabAt(1).getCustomView().findViewById(R.id.tv_title);
-        ImageView imageView1 = myTablayout.getTabAt(1).getCustomView().findViewById(R.id.iv_pic);
-        if (isLeader.equals("0")){//0 代表领导
-            textView.setText("待审批");
-            textView1.setText("已审批");
-        }else{
-            textView.setText("我发起的");
-            textView1.setText("抄送我的");
+        //替换tab中原有的样式
+        for (int i = 0; i < titleDatas.size(); i++) {
+            myTablayout.getTabAt(i).setCustomView(R.layout.item_sphy_tab);
+            TextView title = myTablayout.getTabAt(i).getCustomView().findViewById(R.id.tv_title);
+            ImageView imageView = myTablayout.getTabAt(i).getCustomView().findViewById(R.id.iv_pic);
+            TextView number = myTablayout.getTabAt(i).getCustomView().findViewById(R.id.number);
+            //存储后方便赋值
+            numberList.add(number);
+            title.setText(titleDatas.get(i));
+            //标题左边选中和未选中的图片效果
+            imageView.setBackground(ContextCompat.getDrawable(this, imgList.get(i)));
+
         }
-        //标题左边选中和未选中的图片效果
-        imageView.setBackground(ContextCompat.getDrawable(this,R.drawable.baoxiao_pic_f));
-        imageView1.setBackground(ContextCompat.getDrawable(this,R.drawable.baoxiao_pic_s));
-        myTablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                tab.getCustomView().findViewById(R.id.tv_title).setSelected(true);
-                myViewpager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                tab.getCustomView().findViewById(R.id.tv_title).setSelected(false);
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
     }
-    @OnClick({R.id.tv_apply,R.id.iv_back,R.id.tv_baoxiao})
+    @OnClick({R.id.tv_apply,R.id.iv_back})
     public void onViewClicked(View view) {
         switch (view.getId()){
             case R.id.tv_apply://报销申请
                 startActivity(new Intent(mContext, ExpenseApplyForActivity.class));
 //                startActivity(new Intent(mContext, ExpenseDetailsActivity.class));
                 break;
-//            case R.id.iv_back:
-//                this.finish();
-//                break;
-            case R.id.tv_baoxiao://报销管理标题
-//                startActivity(new Intent(mContext, ExpenseApplyForActivity.class));
+            case R.id.iv_back:
                 this.finish();
                 break;
+
         }
+    }
+
+
+    public void setListSize(int size, int position) {
+        numberList.get(position).setText(size + "");
     }
 }

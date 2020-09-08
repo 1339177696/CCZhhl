@@ -1,10 +1,14 @@
 package com.hulian.oa.me.activity;
 
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -51,8 +55,20 @@ public class MeActivity extends BaseActivity {
     TextView tv_type;
     @BindView(R.id.min_rela)
     RelativeLayout min_rela;
-
+    private JWebSocketClientService.JWebSocketClientBinder binder;
     private JWebSocketClientService jWebSClientService;
+    private ServiceConnection serviceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            binder = (JWebSocketClientService.JWebSocketClientBinder) iBinder;
+            jWebSClientService = binder.getService();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            Log.e("MainActivity", "服务与活动成功断开");
+        }
+    };
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -62,6 +78,7 @@ public class MeActivity extends BaseActivity {
         setContentView(R.layout.activity_andmin_me);
         ButterKnife.bind(this);
         init();
+        bindService();
     }
 
     public void init(){
@@ -92,6 +109,7 @@ public class MeActivity extends BaseActivity {
             case R.id.main2_outlogin:
                 NIMClient.getService(AuthService.class).logout();
                 SPUtils.clear(mContext);
+                jWebSClientService.stopWebSocket();
                 exitApp(mContext);
                 break;
             case R.id.rl_mine_banben:
@@ -99,9 +117,22 @@ public class MeActivity extends BaseActivity {
                 break;
             case R.id.min_rela:
                 startActivityForResult(new Intent(mContext, MePersonalActivity.class),1);
-
                 break;
         }
+    }
+
+    /**
+     * 绑定服务
+     */
+    private void bindService() {
+        Intent bindIntent = new Intent(mContext, JWebSocketClientService.class);
+        bindService(bindIntent, serviceConnection, BIND_AUTO_CREATE);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(serviceConnection);
     }
 
     @OnClick(R.id.rl_mine_suggess)

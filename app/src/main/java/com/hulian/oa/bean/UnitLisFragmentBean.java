@@ -9,6 +9,16 @@ public class UnitLisFragmentBean {
     private String deptName; //单位name
     private String size; //
     private String deptId; //
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    private String type; //
     public String getDeptName() {
         return deptName;
     }

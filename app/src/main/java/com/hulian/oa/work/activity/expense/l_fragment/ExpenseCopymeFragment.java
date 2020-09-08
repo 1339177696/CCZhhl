@@ -38,36 +38,30 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import de.greenrobot.event.EventBus;
 
-//请假-申请中的  抄送我的
+//  抄送我的
 public class ExpenseCopymeFragment extends Fragment implements PullLoadMoreRecyclerView.PullLoadMoreListener {
-
     @BindView(R.id.recyclerView)
     PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
     private int mCount = 1;
     private RecyclerView mRecyclerView;
     L_ExpenseApplyLaunchAdapter mRecyclerViewAdapter;
-    private ArrayList<String> list_path;
-    private ArrayList<String> list_title;
     Unbinder unbinder;
-
 //    qgl修改的
     @BindView(R.id.emptyBg)
     RelativeLayout emptyBg;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.l_fra_copyme_leave,null);
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
         initList();
         return view;
     }
-    public void onEventMainThread(ExpenseLaunchFragment event) {
+    public void onEventMainThread(ExpenseCopymeFragment event) {
         onRefresh();
     }
     private void initList() {
-
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
@@ -87,7 +81,7 @@ public class ExpenseCopymeFragment extends Fragment implements PullLoadMoreRecyc
         //设置加载更多背景色
         //mPullLoadMoreRecyclerView.setFooterViewBackgroundColor(R.color.colorBackground);
         mPullLoadMoreRecyclerView.setLinearLayout();
-        mPullLoadMoreRecyclerView.addItemDecoration(new CustomDecoration(getContext(),CustomDecoration.VERTICAL_LIST,R.drawable.devide_line, DisplayUtils.dip2px(getContext(),15)));
+//        mPullLoadMoreRecyclerView.addItemDecoration(new CustomDecoration(getContext(),CustomDecoration.VERTICAL_LIST,R.drawable.devide_line, DisplayUtils.dip2px(getContext(),15)));
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new L_ExpenseApplyLaunchAdapter(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
@@ -137,10 +131,10 @@ public class ExpenseCopymeFragment extends Fragment implements PullLoadMoreRecyc
                     mRecyclerViewAdapter.addAllData(memberList);
                     if (mCount == 1 && memberList.size() == 0) {
                         emptyBg.setVisibility(View.VISIBLE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
                     } else {
                         emptyBg.setVisibility(View.GONE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     }
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                 } catch (JSONException e) {

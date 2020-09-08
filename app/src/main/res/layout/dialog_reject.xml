@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background_frame_solid_1">
+
+    <ImageView
+        android:layout_margin="@dimen/dp_10"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/im_diss"
+        android:layout_width="@dimen/dp_15"
+        android:src="@mipmap/wq_shut"
+        android:layout_height="@dimen/dp_15"/>
+
+
+    <TextView
+        android:id="@+id/tv_text1"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_30"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="驳回原因："
+        android:textColor="#ff110011"
+        android:textSize="@dimen/sp_13"
+        />
+
+
+
+    <EditText
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_20"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_text1"
+        app:layout_constraintTop_toBottomOf="@id/tv_text1"
+        android:id="@+id/et_content"
+        android:background="@drawable/edit_background"
+        android:layout_width="match_parent"
+        android:maxLength="200"
+        android:gravity="top"
+        android:maxLines="5"
+        android:hint="请输入驳回原因"
+        android:textSize="@dimen/sp_12"
+        android:padding="@dimen/dp_10"
+        android:layout_height="@dimen/dp_90" />
+
+    <TextView
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_30"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="@dimen/sp_13"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_content"
+        android:textColor="@color/bg_red_a"
+        android:background="@drawable/baoxiao_state_red"
+        android:id="@+id/tv_state"
+        android:text="确定"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10"
+        android:paddingLeft="@dimen/dp_30"
+        android:paddingRight="@dimen/dp_30"
+        />
+
+
+</android.support.constraint.ConstraintLayout>

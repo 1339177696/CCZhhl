@@ -276,8 +276,19 @@ public class SubordActivity extends BaseActivity {
                                 sbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
                                 sbDkwaiqin.setText("外勤");
                             }
+                        } else if (result.getJSONObject("data").getString("registerUpState").equals("3")){
+                            sbDkchidao.setVisibility(View.VISIBLE);
+                            sbDkchidao.setText("加班");
+                            if (result.getJSONObject("data").getString("regisgerUpType").equals("0")) {
+                                sbDkwaiqin.setVisibility(View.GONE);
+                            } else {
+                                sbDkwaiqin.setVisibility(View.VISIBLE);
+                                sbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
+                                sbDkwaiqin.setText("外勤");
+                            }
                         } else {
                             sbDkchidao.setVisibility(View.VISIBLE);
+                            sbDkchidao.setText("迟到");
                             if (result.getJSONObject("data").getString("regisgerUpType").equals("0")) {
                                 sbDkwaiqin.setVisibility(View.GONE);
                             } else {
@@ -313,7 +324,17 @@ public class SubordActivity extends BaseActivity {
                                     xbDkwaiqin.setText("外勤");
                                     xbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
                                 }
-                            } else {
+                            } else if (result.getJSONObject("data").getString("registerDownState").equals("3")){
+                                xbDkchidao.setVisibility(View.VISIBLE);
+                                xbDkchidao.setText("加班");
+                                if (result.getJSONObject("data").getString("regisgerDownType").equals("0")) {
+                                    xbDkwaiqin.setVisibility(View.GONE);
+                                } else {
+                                    xbDkwaiqin.setVisibility(View.VISIBLE);
+                                    xbDkwaiqin.setText("外勤");
+                                    xbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
+                                }
+                            }else {
                                 xbDkchidao.setVisibility(View.VISIBLE);
                                 xbDkchidao.setText("早退");
                                 if (result.getJSONObject("data").getString("regisgerDownType").equals("0")) {
@@ -324,6 +345,8 @@ public class SubordActivity extends BaseActivity {
                                     xbDkwaiqin.setBackgroundResource(R.drawable.dk_tv_bg_lv);
                                 }
                             }
+
+
                         }
                     }
 

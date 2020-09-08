@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,12 +17,12 @@ import android.widget.TextView;
 import com.hulian.oa.bean.ExpenseBean;
 import com.hulian.oa.R;
 import com.hulian.oa.utils.FullyGridLayoutManager;
+import com.hulian.oa.views.DecimalDigitsInputFilter;
 import com.luck.picture.lib.entity.LocalMedia;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExpenseImageAdapter extends
-        RecyclerView.Adapter<ExpenseImageAdapter.ViewHolder> {
+public class ExpenseImageAdapter extends RecyclerView.Adapter<ExpenseImageAdapter.ViewHolder> {
     public static final int TYPE_CAMERA = 1;
     public static final int TYPE_PICTURE = 2;
     private LayoutInflater mInflater;
@@ -75,6 +76,7 @@ public class ExpenseImageAdapter extends
             et_expense_directions =  view.findViewById(R.id.et_expense_directions);
             recycler_bill = view.findViewById(R.id.recycler_bill);
             iv_delete = view.findViewById(R.id.iv_delete);
+            ed_money.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(2)}); // 限制小数点后位数
         }
     }
 
@@ -98,8 +100,7 @@ public class ExpenseImageAdapter extends
      */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = mInflater.inflate(R.layout.item_baoxiao,
-                viewGroup, false);
+        View view = mInflater.inflate(R.layout.item_baoxiao, viewGroup, false);
         final ViewHolder holder = new ViewHolder(view);
         return holder;
     }

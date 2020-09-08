@@ -32,11 +32,13 @@ import com.luck.picture.lib.widget.longimage.SubsamplingScaleImageView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.widget.ImageView.ScaleType.CENTER;
+import static android.widget.ImageView.ScaleType.FIT_XY;
+
 /**
  */
 public class PicturePreviewActivity extends PictureBaseActivity implements View.OnClickListener {
 
-    private ImageView left_back;
     private TextView tv_title;
     private PreviewViewPager viewPager;
     private List<LocalMedia> images = new ArrayList<>();
@@ -47,15 +49,13 @@ public class PicturePreviewActivity extends PictureBaseActivity implements View.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StatusBarUtil.statusBarLightMode(this);
         setContentView(R.layout.mypreview);
-        StatusBarUtil.setStatusBarColor(this,R.color.colorTheme);
         inflater = LayoutInflater.from(this);
         tv_title = (TextView) findViewById(R.id.picture_title);
-        left_back = (ImageView) findViewById(R.id.iv_back);
         viewPager = (PreviewViewPager) findViewById(R.id.preview_pager);
         position = getIntent().getIntExtra(PictureConfig.EXTRA_POSITION, 0);
         images = (List<LocalMedia>) getIntent().getSerializableExtra(PictureConfig.EXTRA_PREVIEW_SELECT_LIST);
-        left_back.setOnClickListener(this);
         initViewPageAdapterData();
     }
 
@@ -144,7 +144,7 @@ public class PicturePreviewActivity extends PictureBaseActivity implements View.
                             .asBitmap()
                             .load(path)
                             .apply(options)
-                            .into(new SimpleTarget<Bitmap>(480, 800) {
+                            .into(new SimpleTarget<Bitmap>(480, 900) {
                                 @Override
                                 public void onLoadFailed(@Nullable Drawable errorDrawable) {
                                     super.onLoadFailed(errorDrawable);

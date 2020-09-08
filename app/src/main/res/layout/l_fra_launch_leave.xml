@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical">
     <com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/liner_border_gb_qgl"
-        android:layout_marginLeft="@dimen/dp_10"
-        android:layout_marginRight="@dimen/dp_10"
+        android:divider="@null"
+
         />
 
     <RelativeLayout
+        android:layout_centerVertical="true"
         android:visibility="gone"
         android:id="@+id/emptyBg"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="50dp"
         >
@@ -39,4 +40,4 @@
             android:layout_marginTop="5dip"
             android:gravity="center"/>
     </RelativeLayout>
-</LinearLayout>
+</RelativeLayout>

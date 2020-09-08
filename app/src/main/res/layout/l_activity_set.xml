@@ -84,4 +84,6 @@ android:visibility="gone"
             android:layout_alignParentBottom="true"
             android:text="退出登录" />
     </RelativeLayout>
+
+
 </LinearLayout>

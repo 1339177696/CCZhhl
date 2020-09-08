@@ -8,6 +8,26 @@ public class Expense {
     private String state;
     private String createBy;
 
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+    private String deptName;
+
+    public String getCreateName() {
+        return createName;
+    }
+
+    public void setCreateName(String createName) {
+        this.createName = createName;
+    }
+
+    private String createName;
+
     public String getCreateBy() {
         return createBy;
     }

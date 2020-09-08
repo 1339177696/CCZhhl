@@ -1,143 +1,216 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
     <android.support.constraint.ConstraintLayout
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_12"
-        >
-    <TextView
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
             android:id="@+id/tv_expense_reason_title"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="@dimen/dp_5"
-            android:layout_marginLeft="@dimen/dp_30"
-            android:text="报销事由"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text="报销事由"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/tv_expense_reason"
-            android:textColor="@color/color_b_black"
-            android:text="出差费用"
-            app:layout_constraintLeft_toRightOf="@id/tv_expense_reason_title"
-            app:layout_constraintTop_toTopOf="@id/tv_expense_reason_title"
-            android:layout_marginLeft="@dimen/dp_5"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:text="出差费用"
+            android:textColor="@color/color_b_black"
+            app:layout_constraintLeft_toRightOf="@id/tv_expense_reason_title"
+            app:layout_constraintTop_toTopOf="@id/tv_expense_reason_title" />
+
+        <TextView
+            app:layout_constraintRight_toRightOf="@id/tv_expense_reason_title"
+            android:layout_marginTop="@dimen/dp_5"
+            android:id="@+id/tv_m1"
+            app:layout_constraintLeft_toLeftOf="@id/tv_expense_reason_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_expense_reason"
+            android:text="报销(金额)"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_ietm_mony"
+            android:textColor="@color/color_b_black"
+            android:layout_marginLeft="@dimen/dp_5"
+            app:layout_constraintLeft_toRightOf="@id/tv_expense_reason_title"
+            android:layout_marginTop="@dimen/dp_5"
+            app:layout_constraintTop_toBottomOf="@id/tv_expense_reason"
+            android:text="1234元"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:id="@+id/view_m1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0_5"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_12"
+            android:layout_marginRight="@dimen/dp_20"
+            android:background="@color/line_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_m1" />
+
 
         <android.support.constraint.ConstraintLayout
+            android:layout_marginTop="@dimen/dp_7"
             android:id="@+id/cl_bill_pic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="@id/tv_expense_reason_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_expense_reason"
-            >
+            app:layout_constraintTop_toBottomOf="@id/view_m1">
+
             <TextView
                 android:id="@+id/tv_bill_msg_title"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="@dimen/dp_5"
-                android:layout_marginLeft="@dimen/dp_30"
-                android:text="发票信息"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_5"
+                android:text="发票信息"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_bill_pic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_5"
                 app:layout_constraintLeft_toRightOf="@id/tv_bill_msg_title"
                 app:layout_constraintTop_toTopOf="@id/tv_bill_msg_title"
-                tools:listitem="@layout/item_bill_msg"
                 tools:itemCount="1"
-                android:layout_marginLeft="@dimen/dp_5"
-                >
-            </android.support.v7.widget.RecyclerView>
+                tools:listitem="@layout/item_bill_msg"></android.support.v7.widget.RecyclerView>
         </android.support.constraint.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/tv_detail_title"
-            android:text="明细"
-            app:layout_constraintRight_toRightOf="@id/tv_expense_reason_title"
-            app:layout_constraintTop_toBottomOf="@id/cl_bill_pic"
-            android:layout_marginTop="@dimen/dp_5"
-            android:layout_marginLeft="@dimen/dp_30"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/tv_detail"
-            android:text="13000"
-            android:textColor="@color/color_b_black"
-            app:layout_constraintLeft_toLeftOf="@id/tv_expense_reason"
-            app:layout_constraintTop_toTopOf="@id/tv_detail_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/tv_amount_sub_title"
-            app:layout_constraintRight_toRightOf="@id/tv_detail_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_detail_title"
-            android:text="金额"
-            android:layout_marginTop="@dimen/dp_5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/tv_amount_sub"
-            android:text="13000"
-            android:textColor="@color/color_b_black"
-            app:layout_constraintLeft_toLeftOf="@id/tv_detail"
-            app:layout_constraintTop_toTopOf="@id/tv_amount_sub_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/tv_bill_data_title"
-            app:layout_constraintRight_toRightOf="@id/tv_amount_sub_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_amount_sub_title"
-            android:text="开票日期"
-            android:layout_marginTop="@dimen/dp_5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/tv_invoice_date"
-            android:text="2020年1月12日"
-            android:textColor="@color/color_b_black"
-            app:layout_constraintLeft_toLeftOf="@id/tv_amount_sub"
-            app:layout_constraintTop_toTopOf="@id/tv_bill_data_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/tv_expenses_title"
-            app:layout_constraintRight_toRightOf="@id/tv_bill_data_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_bill_data_title"
-            android:text="费用说明"
-            android:layout_marginTop="@dimen/dp_5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/tv_fee_description"
-            android:text="2020年1月12日"
-            android:textColor="@color/color_b_black"
-            app:layout_constraintLeft_toLeftOf="@id/tv_expenses_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_expenses_title"
-            android:layout_marginTop="@dimen/dp_5"
+<!--        <TextView-->
+<!--            android:id="@+id/tv_detail_title"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="@dimen/dp_30"-->
+<!--            android:layout_marginTop="@dimen/dp_5"-->
+<!--            android:text="明细"-->
+<!--            app:layout_constraintRight_toRightOf="@id/tv_expense_reason_title"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/cl_bill_pic" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_detail"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="13000"-->
+<!--            android:textColor="@color/color_b_black"-->
+<!--            app:layout_constraintLeft_toLeftOf="@id/tv_expense_reason"-->
+<!--            app:layout_constraintTop_toTopOf="@id/tv_detail_title" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_amount_sub_title"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/dp_5"-->
+<!--            android:text="金额"-->
+<!--            app:layout_constraintRight_toRightOf="@id/tv_detail_title"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_detail_title" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_amount_sub"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="13000"-->
+<!--            android:textColor="@color/color_b_black"-->
+<!--            app:layout_constraintLeft_toLeftOf="@id/tv_detail"-->
+<!--            app:layout_constraintTop_toTopOf="@id/tv_amount_sub_title" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_bill_data_title"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/dp_5"-->
+<!--            android:text="开票日期"-->
+<!--            app:layout_constraintRight_toRightOf="@id/tv_amount_sub_title"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_amount_sub_title" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_invoice_date"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="2020年1月12日"-->
+<!--            android:textColor="@color/color_b_black"-->
+<!--            app:layout_constraintLeft_toLeftOf="@id/tv_amount_sub"-->
+<!--            app:layout_constraintTop_toTopOf="@id/tv_bill_data_title" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_expenses_title"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/dp_5"-->
+<!--            android:text="费用说明"-->
+<!--            app:layout_constraintRight_toRightOf="@id/tv_bill_data_title"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_bill_data_title" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_fee_description"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/dp_5"-->
+<!--            android:layout_marginRight="@dimen/dp_20"-->
+<!--            android:text="2020年1月12日"-->
+<!--            android:textColor="@color/color_b_black"-->
+<!--            app:layout_constraintLeft_toLeftOf="@id/tv_expenses_title"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_expenses_title" />-->
+
+        <View
+            android:id="@+id/view_m2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0_5"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_12"
             android:layout_marginRight="@dimen/dp_20"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:background="@color/line_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_bill_pic" />
+
+        <TextView
+
+            app:layout_constraintRight_toRightOf="@id/tv_expense_reason_title"
+
+                     android:id="@+id/tv_expenses_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_12"
+                    android:text="费用说明"
+                    app:layout_constraintTop_toBottomOf="@id/view_m2" />
+
+        <TextView
+                     android:paddingRight="@dimen/dp_35"
+                    android:id="@+id/tv_fee_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:text="2020年1月12日客家话艰苦发货的数据库恢复可见等哈就开始的空间大家思考和贷款计划"
+                    android:textColor="@color/color_b_black"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_expenses_title"
+                    app:layout_constraintTop_toBottomOf="@id/tv_expenses_title" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_0_5"
-            android:background="@color/color_c_black"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginTop="@dimen/dp_12"
-            app:layout_constraintTop_toBottomOf="@id/tv_fee_description"
+            android:layout_height="@dimen/dp_1"
             android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_12"
             android:layout_marginRight="@dimen/dp_20"
-            />
+            android:background="@color/line_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_fee_description" />
+
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

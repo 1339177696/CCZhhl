@@ -2,6 +2,7 @@ package com.hulian.oa.work.activity.expense.l_adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +19,7 @@ import com.luck.picture.lib.entity.LocalMedia;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExpenseExamineAdapter extends
-        RecyclerView.Adapter<ExpenseExamineAdapter.ViewHolder> {
+public class ExpenseExamineAdapter extends RecyclerView.Adapter<ExpenseExamineAdapter.ViewHolder> {
     public static final int TYPE_CAMERA = 1;
     public static final int TYPE_PICTURE = 2;
     private LayoutInflater mInflater;
@@ -45,11 +45,9 @@ public class ExpenseExamineAdapter extends
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
         ImageView mImg;
         LinearLayout ll_del;
         TextView tv_duration;
-
         public ViewHolder(View view) {
             super(view);
             mImg = (ImageView) view.findViewById(R.id.fiv);
@@ -77,8 +75,7 @@ public class ExpenseExamineAdapter extends
      */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = mInflater.inflate(R.layout.item_examine_expense,
-                viewGroup, false);
+        View view = mInflater.inflate(R.layout.item_examine_expense, viewGroup, false);
         final ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -93,6 +90,7 @@ public class ExpenseExamineAdapter extends
      */
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
+        Log.e("ExpenseExamineAdapter","报销申请"+position+"");
             String path = "";
             LocalMedia media = list.get(position);
             if (media.isCompressed()) {

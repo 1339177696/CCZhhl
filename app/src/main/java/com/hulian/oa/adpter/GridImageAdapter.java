@@ -17,8 +17,7 @@ import com.luck.picture.lib.entity.LocalMedia;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GridImageAdapter extends
-        RecyclerView.Adapter<GridImageAdapter.ViewHolder> {
+public class GridImageAdapter extends RecyclerView.Adapter<GridImageAdapter.ViewHolder> {
     public static final int TYPE_CAMERA = 1;
     public static final int TYPE_PICTURE = 2;
     private LayoutInflater mInflater;

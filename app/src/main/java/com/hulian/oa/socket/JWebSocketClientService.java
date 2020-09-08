@@ -1,6 +1,7 @@
 package com.hulian.oa.socket;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -14,18 +15,22 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.PowerManager;
+import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.hulian.oa.R;
-import com.hulian.oa.push.activity.MessagenotificationActivity;
-import com.hulian.oa.socket.util.Util;
+import com.hulian.oa.net.Urls;
+import com.hulian.oa.socket.activity.NotiListActivity;
+import com.hulian.oa.socket.activity.NoticeMeetingActivity;
+import com.hulian.oa.socket.activity.NoticeWorkActivity;
 
 import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URI;
+import java.util.List;
 
 public class JWebSocketClientService extends Service {
     public JWebSocketClient client;
@@ -90,7 +95,6 @@ public class JWebSocketClientService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
         Intent innerIntent = new Intent(this, GrayInnerService.class);
         //设置service为前台服务，提高优先级
         if (Build.VERSION.SDK_INT < 18) {
@@ -103,14 +107,6 @@ public class JWebSocketClientService extends Service {
             //Android7.0以上app启动后通知栏会出现一条"正在运行"的通知
             startForeground(GRAY_SERVICE_ID, getNotification());
         }
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            //android8.0以上通过startForegroundService启动service
-//            startForegroundService(innerIntent);
-//        } else {
-//            startService(innerIntent);
-//        }
-
         acquireWakeLock();
         return START_STICKY;
     }
@@ -126,15 +122,19 @@ public class JWebSocketClientService extends Service {
     }
 
     private Notification getNotification() {
-        Notification.Builder builder = new Notification.Builder(this)
-                .setSmallIcon(R.mipmap.icon)
-                .setContentTitle("测试服务")
-                .setContentText("我正在运行");
-        //设置Notification的ChannelID,否则不能正常显示
+        Notification.Builder builder = new Notification.Builder(this.getApplicationContext())
+                .setSmallIcon(R.drawable.ic_launcher_me);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            builder.setChannelId("oa_web");
+            //修改安卓8.1以上系统报错
+            NotificationChannel notificationChannel = new NotificationChannel("oa_msg", "oa_msg_name", NotificationManager.IMPORTANCE_LOW);
+            notificationChannel.enableLights(false);//如果使用中的设备支持通知灯，则说明此通知通道是否应显示灯
+            notificationChannel.setShowBadge(false);//是否显示角标
+            notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_SECRET);
+            NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            manager.createNotificationChannel(notificationChannel);
+            builder.setChannelId("oa_msg");
         }
-        Notification notification = builder.build();
+        Notification notification = builder.build(); // 获取构建好的Notification
         return notification;
     }
 
@@ -147,17 +147,15 @@ public class JWebSocketClientService extends Service {
             Log.e("initSocketClient()","无效id");
             return;
         }
-        URI uri = URI.create(Util.ws + id);
+        URI uri = URI.create(Urls.webUrls + id);
         client = new JWebSocketClient(uri) {
             @Override
             public void onMessage(String message) {
                 Log.e("JWebSocketClientService", "收到的消息：" + message);
-
                 Intent intent = new Intent();
                 intent.setAction("com.xch.servicecallback.content");
                 intent.putExtra("message", message);
                 sendBroadcast(intent);
-
                 checkLockAndShowNotification(message);
             }
 
@@ -239,7 +237,6 @@ public class JWebSocketClientService extends Service {
         }
     }
 
-
 //    -----------------------------------消息通知--------------------------------------------------------
 
     /**
@@ -271,47 +268,91 @@ public class JWebSocketClientService extends Service {
      */
     private void sendNotification(String content) {
         try {
+
             JSONObject result = new JSONObject(content);
-            String msourceId = result.getString("sourceId");
-            String mtype = result.getString("type");
             String mtitle = "";
-            if (result.getString("title").equals("null")&&result.getString("title") == null){
-                 mtitle = "";
-            }else {
-                 mtitle = result.getString("title");
-            }
+            //
             String mcontext = result.getString("content");
             Intent intent = new Intent();
-            intent.setClass(this, MessagenotificationActivity.class);
-            intent.putExtra("message",content);
-            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-            NotificationManager notifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            @SuppressLint("WrongConstant")
-            Notification.Builder builder = new Notification.Builder(this.getApplicationContext())
-                    .setAutoCancel(true)
-                    .setSmallIcon(R.mipmap.icon)
-                    .setContentTitle(mtitle)
-                    .setContentText(mcontext)
-                    .setStyle(new Notification.BigPictureStyle())
-                    // 向通知添加声音、闪灯和振动效果
-                    .setDefaults(Notification.DEFAULT_VIBRATE | Notification.DEFAULT_ALL | Notification.DEFAULT_SOUND)
-                    .setContentIntent(pendingIntent);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                //修改安卓8.1以上系统报错
-                NotificationChannel notificationChannel = new NotificationChannel("oa_msg", "oa_msg_name", NotificationManager.IMPORTANCE_MIN);
-                notificationChannel.enableLights(false);//如果使用中的设备支持通知灯，则说明此通知通道是否应显示灯
-                notificationChannel.setShowBadge(false);//是否显示角标
-                notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_SECRET);
-                NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                manager.createNotificationChannel(notificationChannel);
-                builder.setChannelId("oa_msg");
+            if (result.getString("type").equals("null")&&result.getString("type") == null){
+                 mtitle = "";
+            }else {
+                String mtype = result.getString("type");
+                if (mtype.equals("1"))
+                {
+                    intent.setClass(this, NotiListActivity.class);
+                    intent.putExtra("title","邮件通知");
+                    intent.putExtra("type","1");
+                    mtitle = "邮件通知";
+                }else if (mtype.equals("3")){
+                    intent.setClass(this, NoticeWorkActivity.class);
+                    intent.putExtra("title","工作通知");
+                    intent.putExtra("type","9");
+                    mtitle = "请假通知";
+                }else if (mtype.equals("4")){
+                    intent.setClass(this, NoticeMeetingActivity.class);
+                    intent.putExtra("title","会议通知");
+                    intent.putExtra("type","4");
+                    mtitle = "会议通知";
+                }else if (mtype.equals("5")){
+                    intent.setClass(this, NotiListActivity.class);
+                    intent.putExtra("title","通告通知");
+                    intent.putExtra("type","5");
+                    mtitle = "通告通知";
+                }else if (mtype.equals("6")){
+                    intent.setClass(this, NotiListActivity.class);
+                    intent.putExtra("title","日程通知");
+                    intent.putExtra("type","6");
+                    mtitle = "日程通知";
+                }else if (mtype.equals("7")){
+                    intent.setClass(this, NoticeWorkActivity.class);
+                    intent.putExtra("title","工作通知");
+                    intent.putExtra("type","9");
+                    mtitle = "任务通知";
+                }else if (mtype.equals("8")){
+                    mcontext = mcontext + "";
+                    intent.setClass(this, NoticeWorkActivity.class);
+                    intent.putExtra("title","工作通知");
+                    intent.putExtra("type","9");
+                    mtitle = "报销通知";
+                }
+            }
+            String curAppTaskPackgeName = null;
+            String curAppTaskClassName = null;
+            ActivityManager am = (ActivityManager) this.getSystemService(Context.ACTIVITY_SERVICE);
+            List<ActivityManager.RunningTaskInfo> appTask = am.getRunningTasks(Integer.MAX_VALUE);
+            if (appTask.size() > 0) {
+                curAppTaskPackgeName = appTask.get(0).topActivity.getPackageName();
+                curAppTaskClassName = appTask.get(0).topActivity.getClassName();
+            }
+            Log.d("TAG","curAppTaskPackgeName = " + curAppTaskPackgeName +"  curAppTaskClassName = " + curAppTaskClassName);
+            if(curAppTaskPackgeName.equals("com.hulian.oa") && curAppTaskClassName.indexOf("NoticActivity") != -1){
+
+            }
+            else {
+
             }
 
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            NotificationManager notifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            Notification.Builder builder = new Notification.Builder(this)
+                    .setAutoCancel(true)
+                    .setShowWhen(true)
+                    /**通知产生的时间，会在通知信息里显示**/
+                    .setWhen(System.currentTimeMillis())
+                    /**设置该通知优先级**/
+                    .setPriority(Notification.PRIORITY_DEFAULT)
+                    .setSmallIcon(R.drawable.ic_launcher_me)
+                    .setContentTitle(mtitle)
+                    .setContentText(mcontext)
+                    .setContentIntent(pendingIntent);
 
-            Notification notification = builder.build(); // 获取构建好的Notification
-            notification.defaults = Notification.DEFAULT_SOUND; //设置为默认的声音
+            //设置Notification的ChannelID,否则不能正常显示
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                builder.setChannelId("oa_web");
+            }
+            Notification notification = builder.build();
             notifyManager.notify(1, notification);//id要保证唯一
-
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -27,6 +27,7 @@
             android:textSize="@dimen/sp_17" />
 
         <ImageView
+            android:visibility="gone"
             android:id="@+id/notice_im_screen"
             android:layout_marginRight="@dimen/dp_15"
             android:layout_centerVertical="true"

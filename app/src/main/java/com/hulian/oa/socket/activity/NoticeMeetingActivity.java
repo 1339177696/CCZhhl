@@ -1,6 +1,7 @@
 package com.hulian.oa.socket.activity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,10 +22,12 @@ import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
+import com.hulian.oa.push.bean.MeBean;
 import com.hulian.oa.socket.adapter.NoticeMeetingAdaoter;
 import com.hulian.oa.socket.adapter.NoticeWorkAdaoter;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.views.MyDialog;
+import com.hulian.oa.work.activity.meeting.MeetingSigninActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,9 +50,11 @@ public class NoticeMeetingActivity extends BaseActivity implements BaseQuickAdap
     SwipeRefreshLayout swipeRefreshLayout;
     private int mCount = 1;
     private NoticeMeetingAdaoter mAdapter;
-    private List<Report> mData = new ArrayList<>();
+    private List<MeBean> mData = new ArrayList<>();
     @BindView(R.id.notice_tv_title)
     TextView notice_tv_title;
+    List<MeBean> memberList;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +75,9 @@ public class NoticeMeetingActivity extends BaseActivity implements BaseQuickAdap
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+                Intent intent = new Intent(mContext, MeetingSigninActivity.class);
+                intent.putExtra("id",mData.get(position).getRelationId());
+                mContext.startActivity(intent);
             }
         });
         getData();
@@ -85,16 +92,13 @@ public class NoticeMeetingActivity extends BaseActivity implements BaseQuickAdap
 
     private void setRefresh() {
         mData.clear();
-        mCount = 1;
     }
 
     private void getData() {
         RequestParams params = new RequestParams();
-        params.put("pageStart", mCount * 10 - 10 + "");
-        params.put("pageEnd", mCount * 10 + "");
-        params.put("createBy", SPUtils.get(this, "userId", "").toString());
-        params.put("receivePerson", SPUtils.get(this, "userId", "").toString());
-        HttpRequest.getGetWorkReportList(params, new ResponseCallback() {
+        params.put("userId", SPUtils.get(this, "userId", "").toString());
+        params.put("type", getIntent().getStringExtra("type"));
+        HttpRequest.get_NotList(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
                 swipeRefreshLayout.setRefreshing(false);
@@ -102,14 +106,11 @@ public class NoticeMeetingActivity extends BaseActivity implements BaseQuickAdap
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
                     JSONObject result = new JSONObject(responseObj.toString());
-                    List<Report> memberList = gson.fromJson(result.getJSONArray("data").toString(),
-                            new TypeToken<List<Report>>() {}.getType());
+                    memberList = gson.fromJson(result.getJSONArray("data").toString(),
+                            new TypeToken<List<MeBean>>() {
+                            }.getType());
                     mData.addAll(memberList);
-                    if (memberList.size() < 10) {
-                        mAdapter.loadMoreEnd();
-                    } else {
-                        mAdapter.loadMoreComplete();
-                    }
+                    mAdapter.loadMoreEnd();
                     mAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -127,7 +128,6 @@ public class NoticeMeetingActivity extends BaseActivity implements BaseQuickAdap
 
     @Override
     public void onLoadMoreRequested() {
-        mCount = mCount + 1;
         getData();
     }
 
@@ -137,9 +137,9 @@ public class NoticeMeetingActivity extends BaseActivity implements BaseQuickAdap
             case R.id.iv_back:
                 finish();
                 break;
-            case R.id.notice_im_screen:
-                shouDialog();
-                break;
+//            case R.id.notice_im_screen:
+//                shouDialog();
+//                break;
         }
     }
 

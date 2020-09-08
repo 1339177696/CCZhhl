@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="@dimen/dp_20">
+
+    <ImageView
+        android:layout_marginTop="@dimen/dp_3"
+        android:layout_marginLeft="@dimen/dp_13"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/iv_remind"
+        android:layout_width="@dimen/dp_10"
+        android:layout_height="@dimen/dp_10"
+        android:background="@drawable/liner_yuan_qgl9" />
+
+
+    <TextView
+        android:id="@+id/ex_tv_money"
+        android:textSize="@dimen/sp_12"
+        android:layout_marginLeft="@dimen/dp_9"
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:layout_constraintLeft_toRightOf="@+id/iv_remind"
+        android:text="￥200 (加油费)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/ex_tv_time"
+        android:textSize="@dimen/sp_12"
+        android:layout_marginRight="@dimen/dp_23"
+        android:text="3月11日"
+        app:layout_constraintTop_toTopOf="@+id/ex_tv_money"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</android.support.constraint.ConstraintLayout>

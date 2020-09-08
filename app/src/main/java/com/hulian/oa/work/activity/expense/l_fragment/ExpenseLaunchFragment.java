@@ -40,7 +40,6 @@ import de.greenrobot.event.EventBus;
 
 //报销管理  我发起的
 public class ExpenseLaunchFragment extends Fragment implements PullLoadMoreRecyclerView.PullLoadMoreListener {
-
     @BindView(R.id.recyclerView)
     PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
     private int mCount = 1;
@@ -63,7 +62,6 @@ public class ExpenseLaunchFragment extends Fragment implements PullLoadMoreRecyc
     }
 
     private void initList() {
-
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
@@ -86,7 +84,7 @@ public class ExpenseLaunchFragment extends Fragment implements PullLoadMoreRecyc
 //        DividerItemDecoration divider = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
 //        divider.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.devide_line));
 //        mPullLoadMoreRecyclerView.addItemDecoration(divider);
-        mPullLoadMoreRecyclerView.addItemDecoration(new CustomDecoration(getContext(),CustomDecoration.VERTICAL_LIST,R.drawable.devide_line, DisplayUtils.dip2px(getContext(),15)));
+//        mPullLoadMoreRecyclerView.addItemDecoration(new CustomDecoration(getContext(),CustomDecoration.VERTICAL_LIST,R.drawable.devide_line, DisplayUtils.dip2px(getContext(),15)));
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(this);
         mRecyclerViewAdapter = new L_ExpenseApplyLaunchAdapter(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
@@ -125,6 +123,7 @@ public class ExpenseLaunchFragment extends Fragment implements PullLoadMoreRecyc
         RequestParams params = new RequestParams();
         params.put("pageStart", mCount*10-9 + "");
         params.put("pageEnd", mCount * 10 + "");
+        params.put("state", "2");
         params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
         HttpRequest.get_listWorkExpense(params, new ResponseCallback() {
             @Override
@@ -139,10 +138,10 @@ public class ExpenseLaunchFragment extends Fragment implements PullLoadMoreRecyc
                     mRecyclerViewAdapter.addAllData(memberList);
                     if (mCount == 1 && memberList.size() == 0) {
                         emptyBg.setVisibility(View.VISIBLE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
                     } else {
                         emptyBg.setVisibility(View.GONE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     }
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                 } catch (JSONException e) {

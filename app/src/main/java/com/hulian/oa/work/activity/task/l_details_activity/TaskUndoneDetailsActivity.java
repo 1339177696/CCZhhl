@@ -128,7 +128,6 @@ public class TaskUndoneDetailsActivity extends BaseActivity implements PullLoadM
                 Log.e("详情页面",position+"");
 //                Toast.makeText(TaskUndoneDetailsActivity.this,"12",Toast.LENGTH_SHORT).show();
                 get_com_Data(id);
-
             }
 
         });
@@ -169,7 +168,6 @@ public class TaskUndoneDetailsActivity extends BaseActivity implements PullLoadM
                 break;
             case R.id.iv_btn:
                 Dialog_qgl();
-
                 break;
         }
     }
@@ -188,6 +186,7 @@ public class TaskUndoneDetailsActivity extends BaseActivity implements PullLoadM
     }
     private void setRefresh() {
         mRecyclerViewAdapter.clearData();
+
     }
 
     private void getData()

@@ -16,8 +16,7 @@ import com.hulian.oa.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExpenseApproverAdapter extends
-        RecyclerView.Adapter<ExpenseApproverAdapter.ViewHolder> {
+public class ExpenseApproverAdapter extends RecyclerView.Adapter<ExpenseApproverAdapter.ViewHolder> {
     public static final int TYPE_CAMERA = 1;
     public static final int TYPE_PICTURE = 2;
     private LayoutInflater mInflater;
@@ -54,6 +53,7 @@ public class ExpenseApproverAdapter extends
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView mImg;
+        ImageView iv_image;
         LinearLayout ll_del;
         TextView tv_duration;
         TextView tv_name;
@@ -63,16 +63,13 @@ public class ExpenseApproverAdapter extends
             ll_del =  view.findViewById(R.id.ll_del);
             tv_duration =  view.findViewById(R.id.tv_duration);
             tv_name = view.findViewById(R.id.tv_name);
+            iv_image = view.findViewById(R.id.iv_image);
         }
     }
 
     @Override
     public int getItemCount() {
-        if (list.size() < selectMax) {
-            return list.size() + 1;
-        } else {
             return list.size();
-        }
     }
 
     @Override
@@ -106,36 +103,42 @@ public class ExpenseApproverAdapter extends
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
 
-
         //少于8张，显示继续添加的图标
-        if (getItemViewType(position) == TYPE_CAMERA) {
-            Drawable drawable = ContextCompat.getDrawable(context,R.drawable.addimg);
-            viewHolder.mImg.setBackground(drawable);
-            viewHolder.mImg.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mOnAddPicClickListener.onAddPicClick(position,v);
-                }
-            });
-            viewHolder.ll_del.setVisibility(View.INVISIBLE);
-        } else {
-            viewHolder.ll_del.setVisibility(View.VISIBLE);
-            viewHolder.ll_del.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int index = viewHolder.getAdapterPosition();
-                    // 这里有时会返回-1造成数据下标越界,具体可参考getAdapterPosition()源码，
-                    // 通过源码分析应该是bindViewHolder()暂未绘制完成导致，知道原因的也可联系我~感谢
-                    if (index != RecyclerView.NO_POSITION) {
-                        list.remove(index);
-                        onItemDeleteListener.onItemDelete(position,view);
-                        notifyItemRemoved(index);
-                        notifyItemRangeChanged(index, list.size());
-                    }
-                }
-            });
+//        if (getItemViewType(position) == TYPE_CAMERA) {
+//            Drawable drawable = ContextCompat.getDrawable(context,R.drawable.addimg);
+//            viewHolder.mImg.setBackground(drawable);
+//            viewHolder.mImg.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    mOnAddPicClickListener.onAddPicClick(position,v);
+//                }
+//            });
+////            viewHolder.ll_del.setVisibility(View.INVISIBLE);
+//        } else {
+//            viewHolder.ll_del.setVisibility(View.VISIBLE);
+//            viewHolder.ll_del.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    int index = viewHolder.getAdapterPosition();
+//                    // 这里有时会返回-1造成数据下标越界,具体可参考getAdapterPosition()源码，
+//                    // 通过源码分析应该是bindViewHolder()暂未绘制完成导致，知道原因的也可联系我~感谢
+//                    if (index != RecyclerView.NO_POSITION) {
+//                        list.remove(index);
+//                        onItemDeleteListener.onItemDelete(position,view);
+//                        notifyItemRemoved(index);
+//                        notifyItemRangeChanged(index, list.size());
+//                    }
+//                }
+//            });
+            if (position>0){
+                viewHolder.iv_image.setVisibility(View.VISIBLE);
+            }
+            else{
+                viewHolder.iv_image.setVisibility(View.GONE);
+            }
             viewHolder.tv_name.setText(list.get(position));
-        }
+
+//        }
     }
     public  void setPosition(int mPosition){
         this.mPosition = mPosition;

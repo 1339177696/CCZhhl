@@ -151,7 +151,12 @@ public class UnitListAdapter extends BaseExpandableListAdapter {
         TextView tv_depart = (TextView) view.findViewById(R.id.tv_depart);
         TextView group_day = (TextView) view.findViewById(R.id.group_day);
         tv_name.setText(data.getUserName());
-        group_day.setText(data.getSeveralDay()+"天");
+        if (data.getSeveralDay() == null){
+            group_day.setVisibility(View.GONE);
+        }else {
+            group_day.setVisibility(View.VISIBLE);
+            group_day.setText(data.getSeveralDay()+"天");
+        }
         tv_type.setText(data.getUserName().substring(data.getUserName().length()-2));
         tv_depart.setText(data.getDeptName());
     }

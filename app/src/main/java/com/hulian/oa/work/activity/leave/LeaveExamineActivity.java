@@ -23,6 +23,7 @@ import com.hulian.oa.net.HttpRequest;
 import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
+import com.hulian.oa.socket.activity.NoticeWorkActivity;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.utils.ToastHelper;
@@ -178,7 +179,12 @@ public class LeaveExamineActivity extends BaseActivity {
                         EventBus.getDefault().post(new LeavePendFragment());
                         EventBus.getDefault().post(new LeaveApprovedFragment());
                         EventBus.getDefault().post(new UpcomFragment());
+                        // 消息通知
+                        EventBus.getDefault().post(new NoticeWorkActivity());
+
+
                         finish();
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -258,5 +264,6 @@ public class LeaveExamineActivity extends BaseActivity {
             }
         });
     }
+
 
 }

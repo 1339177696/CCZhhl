@@ -63,7 +63,6 @@ public class ExpenseApprovedFragment extends Fragment implements PullLoadMoreRec
     }
 
     private void initList() {
-
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！
@@ -135,10 +134,10 @@ public class ExpenseApprovedFragment extends Fragment implements PullLoadMoreRec
                             }.getType());
                     if (mCount == 1 && memberList.size() == 0) {
                         emptyBg.setVisibility(View.VISIBLE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
                     }else{
                         emptyBg.setVisibility(View.GONE);
-                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     }
                     mRecyclerViewAdapter.addAllData(memberList);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();

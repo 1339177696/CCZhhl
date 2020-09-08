@@ -4,7 +4,6 @@ package com.hulian.oa.push.bean;
  * Created by qgl on 2019/12/2 16:48.
  */
 public class MeBean {
-
     private String createTime;
     private String relationId;
     private String title;
@@ -24,6 +23,119 @@ public class MeBean {
     private String meetingLocation; // 会议地点
     private String createPerson; // 请假发起人
     private String documentType; // 公文类型
+    private String count; // 未读长度
+    private String deptName; // 部门名称
+    private String duration; // 请假天数
+    private String executor; // 执行人
+    private String copier; // 抄送人
+    private String completion; // 状态
+    private String phone; // 手机号
+    private String flagType; // 抄送标识 1抄送2审批
+    private String receiptSum; // 手机号
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
+    private String createBy; // 发起人
+
+    public String getFlagState() {
+        return flagState;
+    }
+
+    public void setFlagState(String flagState) {
+        this.flagState = flagState;
+    }
+
+    private String flagState; // 报销查看状态
+
+
+    public String getFlagType() {
+        return flagType;
+    }
+
+    public void setFlagType(String flagType) {
+        this.flagType = flagType;
+    }
+
+    public String getReceiptSum() {
+        return receiptSum;
+    }
+
+    public void setReceiptSum(String receiptSum) {
+        this.receiptSum = receiptSum;
+    }
+
+    public String getMoney() {
+        return money;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
+    }
+
+    private String money; // 金额
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getCompletion() {
+        return completion;
+    }
+
+    public void setCompletion(String completion) {
+        this.completion = completion;
+    }
+
+    public String getCopier() {
+        return copier;
+    }
+
+    public void setCopier(String copier) {
+        this.copier = copier;
+    }
+
+    public String getExecutor() {
+        return executor;
+    }
+
+    public void setExecutor(String executor) {
+        this.executor = executor;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+    public String getCount() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
+    }
+
     public int getMsgType() {
         return msgType;
     }
@@ -31,8 +143,6 @@ public class MeBean {
     public void setMsgType(int msgType) {
         this.msgType = msgType;
     }
-
-
 
     public String getDocumentType() {
         return documentType;
@@ -42,8 +152,6 @@ public class MeBean {
         this.documentType = documentType;
     }
 
-
-
     public String getCreatePerson() {
         return createPerson;
     }
@@ -52,7 +160,6 @@ public class MeBean {
         this.createPerson = createPerson;
     }
 
-
     public String getApprovalPerson() {
         return approvalPerson;
     }
@@ -60,9 +167,6 @@ public class MeBean {
     public void setApprovalPerson(String approvalPerson) {
         this.approvalPerson = approvalPerson;
     }
-
-
-
 
     public String getCreateTime() {
         return createTime;
@@ -112,7 +216,6 @@ public class MeBean {
         this.type = type;
     }
 
-
     public String getCollectionStatus() {
         return collectionStatus;
     }
@@ -120,7 +223,6 @@ public class MeBean {
     public void setCollectionStatus(String collectionStatus) {
         this.collectionStatus = collectionStatus;
     }
-
 
     public String getId() {
         return id;
@@ -130,7 +232,6 @@ public class MeBean {
         this.id = id;
     }
 
-
     public String getReleaseDept() {
         return releaseDept;
     }
@@ -138,7 +239,6 @@ public class MeBean {
     public void setReleaseDept(String releaseDept) {
         this.releaseDept = releaseDept;
     }
-
 
     public String getSendPerson() {
         return sendPerson;
@@ -148,7 +248,6 @@ public class MeBean {
         this.sendPerson = sendPerson;
     }
 
-
     public String getStartDate() {
         return startDate;
     }
@@ -156,7 +255,6 @@ public class MeBean {
     public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
-
 
     public String getMeetingLocation() {
         return meetingLocation;
@@ -166,7 +264,6 @@ public class MeBean {
         this.meetingLocation = meetingLocation;
     }
 
-
     public String getEndDate() {
         return endDate;
     }
@@ -175,7 +272,6 @@ public class MeBean {
         this.endDate = endDate;
     }
 
-
     public String getCause() {
         return cause;
     }
@@ -183,7 +279,6 @@ public class MeBean {
     public void setCause(String cause) {
         this.cause = cause;
     }
-
 
     public String getApprovalStatus() {
         return approvalStatus;

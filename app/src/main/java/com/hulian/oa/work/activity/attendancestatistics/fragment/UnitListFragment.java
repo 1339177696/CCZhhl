@@ -49,7 +49,7 @@ public class UnitListFragment extends Fragment {
     private List<UnitLisFragmentBean> groupArray;
     List<ClockDepartBean> memberList = new ArrayList<>();
     List<UnitLisFragmentBean> departmentList = new ArrayList<>();
-    private int cd = 0; // 0正常，1迟到，2早退，3加班，4请假，5缺勤，6外勤
+    private int cd = 7; // 0正常，1迟到，2早退，3加班，4请假，5缺勤，6外勤,7全部
     private static String timer = "";
     private int mCount = 1;
 
@@ -95,7 +95,9 @@ public class UnitListFragment extends Fragment {
                 return false;
             }
         });
+
         getDepartMent();
+
     }
 
     private void getDepartMent(){
@@ -121,7 +123,25 @@ public class UnitListFragment extends Fragment {
                             initPeopleData(departmentList.get(i).getDeptId(), i);
                         }
                         int size = Integer.parseInt(result.getJSONObject("data").getJSONArray("kaoqin").getJSONObject(0).getString("size"));
-                        ((UnitAttendanceFragment) (UnitListFragment.this.getParentFragment())).setListSize(size,cd);
+                        int pos = 0;
+                        if (cd == 0){
+                            pos = 1;
+                        }else if (cd == 1){
+                            pos = 2;
+                        }else if (cd == 2){
+                            pos = 3;
+                        }else if (cd == 3){
+                            pos = 4;
+                        }else if (cd == 4){
+                            pos = 5;
+                        }else if (cd == 5){
+                            pos = 6;
+                        }else if (cd == 6){
+                            pos = 7;
+                        }else if (cd == 7){
+                            pos = 0;
+                        }
+                        ((UnitAttendanceFragment) (UnitListFragment.this.getParentFragment())).setListSize(size,pos);
                         ((UnitAttendanceFragment) (UnitListFragment.this.getParentFragment())).setUnit_text(departmentList.size());
 
                         exlistview.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
@@ -130,7 +150,6 @@ public class UnitListFragment extends Fragment {
                                 //返回false表示系统自己处理展开和关闭事件 返回true表示调用者自己处理展开和关闭事件
                                 return false;
                             }
-
                         });
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -150,9 +169,11 @@ public class UnitListFragment extends Fragment {
         params.put("deptId", partId);
         params.put("createTime", timer);
         params.put("type", String.valueOf(cd));
+        params.put("iden", "1");
         HttpRequest.getAttece_List(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
+                Log.e("单位考勤","yes");
                 //需要转化为实体对象
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
@@ -184,4 +205,7 @@ public class UnitListFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
     }
+
+
+
 }

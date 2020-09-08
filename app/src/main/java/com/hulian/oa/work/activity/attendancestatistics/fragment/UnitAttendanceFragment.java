@@ -87,6 +87,7 @@ public class UnitAttendanceFragment extends Fragment {
         titleDatas.clear();
         fragmentList.clear();
         numberList.clear();
+        titleDatas.add("全部");
         titleDatas.add("正常");
         titleDatas.add("迟到");
         titleDatas.add("早退");
@@ -94,6 +95,7 @@ public class UnitAttendanceFragment extends Fragment {
         titleDatas.add("请假");
         titleDatas.add("缺勤");
         titleDatas.add("外勤");
+        fragmentList.add(UnitListFragment.newInstance("7",currentTime.getText().toString()));
         fragmentList.add(UnitListFragment.newInstance("0",currentTime.getText().toString()));
         fragmentList.add(UnitListFragment.newInstance("1",currentTime.getText().toString()));
         fragmentList.add(UnitListFragment.newInstance("2",currentTime.getText().toString()));

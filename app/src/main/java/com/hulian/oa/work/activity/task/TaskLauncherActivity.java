@@ -36,6 +36,7 @@ import com.hulian.oa.views.AlertDialog;
 import com.hulian.oa.views.NonScrollGridView;
 import com.hulian.oa.utils.FullyGridLayoutManager;
 import com.hulian.oa.adpter.GridImageAdapter;
+import com.hulian.oa.work.activity.expense.ExpenseApplyForPeopleActivityS;
 import com.hulian.oa.work.activity.meeting.SelDepartmentActivity_meet_zb;
 import com.hulian.oa.work.activity.meeting.SelDepartmentActivity_meet_zb_single;
 import com.hulian.oa.work.activity.meeting.l_adapter.MeetGridViewAdapter;
@@ -168,11 +169,24 @@ public class TaskLauncherActivity extends BaseActivity {
                 selectTime(tv_deadline);
                 break;
             case R.id.rl_opreator:
-                startActivityForResult(new Intent(TaskLauncherActivity.this, SelDepartmentActivity_meet_zb.class).putExtra("hasTop","0"), 0);
+               // startActivityForResult(new Intent(TaskLauncherActivity.this, SelDepartmentActivity_meet_zb.class).putExtra("hasTop","0"), 0);
+                //startActivityForResult(new Intent(TaskLauncherActivity.this, SelDepartmentActivity_Task_meet.class), 0);
+                Intent intent2 = new Intent(this, SelDepartmentActivity_Task_meet.class);
+                intent2.putExtra("appId",SPUtils.get(mContext, "userId", "").toString());
+                startActivityForResult(intent2,0);
+
                 break;
             case R.id.iimmgg:
-                Intent intent = new Intent(TaskLauncherActivity.this, SelDepartmentActivity_meet_zb_single.class);
-                startActivityForResult(intent,110);
+//                Intent intent = new Intent(TaskLauncherActivity.this, SelDepartmentActivity_meet_zb_single.class);
+//                startActivityForResult(intent,110);
+                if (executor==null||executor.isEmpty())
+                {
+                    Toast.makeText(TaskLauncherActivity.this,"请选择执行人",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Intent intent1 = new Intent(this, ExpenseApplyForPeopleActivityS.class);
+                intent1.putExtra("appId",executor + "," + SPUtils.get(mContext, "userId", "").toString());
+                startActivityForResult(intent1,110);
                 break;
             case R.id.iv_back:
                 finish();
@@ -285,6 +299,7 @@ public class TaskLauncherActivity extends BaseActivity {
         for (String fileurl : fileList) {
             fiels.add(new File(fileurl));
         }
+
         HttpRequest.post_CoordinationRelease_add(params,fiels, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -357,6 +372,11 @@ public class TaskLauncherActivity extends BaseActivity {
                             public void onClick(View v) {
                                 finalMList.remove(position);
                                 adapter.notifyDataSetChanged();
+                                executor = "";
+                                for (People params1 : mList) {
+                                    executor += params1.getUserId() + ",";
+                                }
+                                if(!executor.equals("")) executor = executor.substring(0, executor.length() - 1);
                             }
                         }).show();
                     }

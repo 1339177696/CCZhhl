@@ -23,21 +23,10 @@
         android:paddingBottom="@dimen/dp_10"
         android:paddingTop="@dimen/dp_10"
         android:textSize="14sp"
-        android:id="@+id/dialog_not_tv_gw"
-        android:textColor="#010101"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_not_tv"
-        android:text="公文推送"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:paddingBottom="@dimen/dp_10"
-        android:paddingTop="@dimen/dp_10"
-        android:textSize="14sp"
         android:id="@+id/dialog_not_tv_qj"
         android:textColor="#010101"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_not_tv_gw"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_not_tv"
         android:text="请假推送"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

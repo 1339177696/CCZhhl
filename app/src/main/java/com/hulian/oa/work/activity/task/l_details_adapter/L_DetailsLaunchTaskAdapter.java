@@ -109,13 +109,17 @@ public class L_DetailsLaunchTaskAdapter extends RecyclerView.Adapter <RecyclerVi
                 viewHolderTop.tv_operator_person.setText(dataList.get(position).getExecutor().substring(0,dataList.get(position).getExecutor().length()-1));
                 viewHolderTop.tv_completed_count.setText(dataList.get(position).getSum()+"完成");
                 viewHolderTop.tv_task_details.setText("    "+dataList.get(position).getDetails());
+                if (dataList.get(position).getCopier()!=null){
+                    viewHolderTop.tv_chaosong.setText(""+dataList.get(position).getCopier());
+                }else {
+                    viewHolderTop.tv_chaosong.setText("");
+                }
 //                qgl
                 String aa = dataList.get(position).getFiles();
                 if (aa!=null&&aa!=""){
                     List<String> c = Arrays.asList(aa.split(","));
+                    selectList = new ArrayList<>();
                     for (int i = 0;i<=c.size()-1;i++){
-                        // 初始化list
-                        selectList = new ArrayList<>();
                         if (getMIMEType(c.get(i)).equals("image/jpeg")||getMIMEType(c.get(i)).equals("image/png")||getMIMEType(c.get(i)).equals("image/gif")){
                             LocalMedia localMedia = new LocalMedia();
                             localMedia.setPath(c.get(i));
@@ -213,6 +217,7 @@ public class L_DetailsLaunchTaskAdapter extends RecyclerView.Adapter <RecyclerVi
         TextView tv_completed_count;
         TextView tv_task_details;
         TextView tv_qgl_file;
+        TextView tv_chaosong;
         RecyclerView recyclerView;
         public ViewHolder_Top(View itemView) {
             super(itemView);
@@ -221,6 +226,7 @@ public class L_DetailsLaunchTaskAdapter extends RecyclerView.Adapter <RecyclerVi
             tv_completed_count = ((TextView) itemView.findViewById(R.id.tv_completed_count_x));
             tv_task_details = ((TextView) itemView.findViewById(R.id.tv_task_details_x));
             tv_qgl_file = ((TextView) itemView.findViewById(R.id.tv_qgl_file));
+            tv_chaosong = ((TextView) itemView.findViewById(R.id.tv_chaosong));
             recyclerView = ((RecyclerView) itemView.findViewById(R.id.recyclerView));
         }
     }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.hulian.oa.R;
 import com.hulian.oa.bean.Expense;
 import com.hulian.oa.work.activity.expense.ExpenseExamineActivity;
+import com.hulian.oa.work.activity.expense.ExpenseExamineActivityQ;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,7 @@ public class L_ExpensePendAdapter extends RecyclerView.Adapter <L_ExpensePendAda
         public TextView tv_time;
         //请假事由
         public TextView tv_expense_monkey;
+        public TextView tv_expense_dept;
         public ImageView tv_pend;
         public ViewHolder(View itemView) {
             super(itemView);
@@ -47,6 +49,7 @@ public class L_ExpensePendAdapter extends RecyclerView.Adapter <L_ExpensePendAda
             tv_time = (TextView) itemView.findViewById(R.id.tv_time);
             tv_expense_monkey = (TextView) itemView.findViewById(R.id.tv_expense_monkey);
             tv_pend = (ImageView) itemView.findViewById(R.id.tv_pend);
+            tv_expense_dept = (TextView) itemView.findViewById(R.id.tv_expense_dept);
         }
     }
 
@@ -58,17 +61,20 @@ public class L_ExpensePendAdapter extends RecyclerView.Adapter <L_ExpensePendAda
 
     @Override
     public void onBindViewHolder(L_ExpensePendAdapter.ViewHolder holder, final int position) {
-        holder.tv_title.setText(dataList.get(position).getRemark());
+        holder.tv_title.setText(dataList.get(position).getCreateName() + "发起的报销申请");
         holder.tv_time.setText(dataList.get(position).getCreateTime().split(" ")[0]);
         holder.tv_expense_monkey.setText(dataList.get(position).getMoney()+"元");
+        holder.tv_expense_dept.setText(dataList.get(position).getDeptName()+"");
         if(dataList.get(position).getState().equals("0")){
             holder.tv_pend.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_daishenpi_icon_qgl));
         }
         else if (dataList.get(position).getState().equals("1")){
             holder.tv_pend.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_shenpi_tongguo_icon_qgl));
         }
-        else {
+        else if (dataList.get(position).getState().equals("2")){
             holder.tv_pend.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_bohui_icon_qgl));
+        }else if (dataList.get(position).getState().equals("3")){
+            holder.tv_pend.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.qj_shenpizhong_icon_qgl));
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +82,7 @@ public class L_ExpensePendAdapter extends RecyclerView.Adapter <L_ExpensePendAda
                 Intent intent=new Intent();
                 intent.putExtra("id",dataList.get(position).getId());
                 intent.putExtra("createByid",dataList.get(position).getCreateBy());
-                intent.setClass(mContext, ExpenseExamineActivity.class);
+                intent.setClass(mContext, ExpenseExamineActivityQ.class);
                 mContext.startActivity(intent);
             }
         });

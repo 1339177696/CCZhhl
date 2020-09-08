@@ -12,10 +12,10 @@ import com.hulian.oa.DemoCache;
 import com.hulian.oa.R;
 import com.hulian.oa.bean.People;
 import com.hulian.oa.socket.activity.NoticActivity;
-import com.hulian.oa.socket.activity.NoticeWorkActivity;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.TimeUtils;
 import com.hulian.oa.utils.ToastHelper;
+import com.hulian.oa.work.activity.SecondExpenseActivity;
 import com.hulian.oa.work.activity.SecondInstructActivity;
 import com.hulian.oa.work.activity.SecondLeaveActivity;
 import com.hulian.oa.work.activity.SecondMailActivity;
@@ -25,7 +25,7 @@ import com.hulian.oa.work.activity.SecondTaskCoopActivity;
 import com.hulian.oa.work.activity.WorkReportActivity;
 import com.hulian.oa.work.activity.attendance.ClockActivity;
 import com.hulian.oa.work.activity.attendancestatistics.activity.AnaestheticsActivity;
-import com.hulian.oa.work.activity.statistical.ExpenseStatisticalActivity;
+import com.hulian.oa.work.activity.statistical.activity.ExpenseStatisticalActivity;
 import com.hulian.oa.work.activity.video.activity.VideoConferenceActivity;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.netease.nim.avchatkit.AVChatKit;
@@ -148,8 +148,8 @@ public class WorkFragemt_9 extends Fragment {
                 break;
             //报销
             case R.id.bt_baoxiao:
-//                startActivity(new Intent(getActivity(),SecondExpenseActivity.class));
-                ToastHelper.showToast(getActivity(), "功能暂未开放");
+                startActivity(new Intent(getActivity(), SecondExpenseActivity.class));
+//                ToastHelper.showToast(getActivity(), "功能暂未开放");
                 break;
             case R.id.bt_expense:
                 ToastHelper.showToast(getActivity(), "功能暂未开放");
@@ -164,15 +164,15 @@ public class WorkFragemt_9 extends Fragment {
                 break;
 
             case R.id.bt_Work_account:
-//                startActivity(new Intent(getActivity(), ExpenseStatisticalActivity.class));
-                ToastHelper.showToast(getActivity(), "功能暂未开放");
+                startActivity(new Intent(getActivity(), ExpenseStatisticalActivity.class));
+//                ToastHelper.showToast(getActivity(), "功能暂未开放");
 
                 break;
 
 
             case R.id.bt_Work_notfit:
-//                startActivity(new Intent(getActivity(), NoticActivity.class));
-                ToastHelper.showToast(getActivity(), "功能暂未开放");
+                startActivity(new Intent(getActivity(), NoticActivity.class));
+//                ToastHelper.showToast(getActivity(), "功能暂未开放");
 
                 break;
         }

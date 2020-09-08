@@ -99,7 +99,7 @@
             android:process=":gray" />
         <!--qgl-->
         <activity
-            android:name=".activity.LuncherActivity"
+            android:name=".activity.LuncherActivity_ceshi"
             android:configChanges="screenSize|keyboardHidden|orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -115,11 +115,11 @@
             android:configChanges="screenSize|keyboardHidden|orientation">
 
         </activity>
-<!--        <activity-->
-<!--            android:name=".activity.LoginActivity"-->
-<!--            android:configChanges="screenSize|keyboardHidden|orientation">-->
+        <!--        <activity-->
+        <!--            android:name=".activity.LoginActivity"-->
+        <!--            android:configChanges="screenSize|keyboardHidden|orientation">-->
 
-<!--        </activity>-->
+        <!--        </activity>-->
         <activity
             android:name=".activity.MainActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
@@ -318,7 +318,9 @@
             android:configChanges="screenSize|keyboardHidden|orientation" />
         <activity
             android:name=".work.activity.expense.ExpenseApplyForActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation" />
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:windowSoftInputMode="adjustPan" />
+
         <activity
             android:name=".work.activity.expense.SelDepartmentActivity"
             android:configChanges="screenSize|keyboardHidden|orientation" />
@@ -477,77 +479,123 @@
         </receiver>
         <activity
             android:name=".views.flowview.ExpenseDetailsActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
+            android:configChanges="screenSize|keyboardHidden|orientation" />
         <!--        考勤打卡-->
         <activity
             android:name=".work.activity.attendance.ClockActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
+            android:configChanges="screenSize|keyboardHidden|orientation" />
         <!--        下属打卡选择人员-->
         <activity
             android:name=".work.activity.attendance.SubordpersonActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
+            android:configChanges="screenSize|keyboardHidden|orientation" />
         <activity
             android:name=".work.activity.SubordpersonActivity2"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
+            android:configChanges="screenSize|keyboardHidden|orientation" />
         <!--        下属打卡内容-->
         <activity
             android:name=".work.activity.attendance.SubordActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
+            android:configChanges="screenSize|keyboardHidden|orientation" />
         <!--        考勤规则-->
         <activity
             android:name=".work.activity.attendance.AttendrulesActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
+            android:configChanges="screenSize|keyboardHidden|orientation" />
         <!--        考勤规则修改-->
         <activity
             android:name=".work.activity.attendance.AttendrulesmodifyActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
+            android:configChanges="screenSize|keyboardHidden|orientation" />
         <!--        地图搜索页-->
         <activity
             android:name=".map.activity.SearchActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
+            android:configChanges="screenSize|keyboardHidden|orientation" />
         <!--        地图-->
         <activity
             android:name=".work.activity.attendance.MapActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
+            android:configChanges="screenSize|keyboardHidden|orientation" />
 
-         <activity
+        <activity
             android:name=".work.activity.video.activity.VideoConferenceActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
+            android:configChanges="screenSize|keyboardHidden|orientation" />
 
-   <activity
-            android:name=".work.activity.statistical.ExpenseStatisticalActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity
+            android:name=".work.activity.statistical.activity.ExpenseStatisticalActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation" />
 
         <activity
             android:name=".work.activity.attendancestatistics.activity.AnaestheticsActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
+            android:configChanges="screenSize|keyboardHidden|orientation" />
 
-        <activity android:name=".work.activity.attendancestatistics.activity.ClockDetailsActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity
+            android:name=".work.activity.attendancestatistics.activity.ClockDetailsActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation" />
 
-        <activity android:name=".socket.activity.NoticeWorkActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity
+            android:name=".socket.activity.NoticeWorkActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:launchMode="singleTask" />
 
-        <activity android:name=".socket.activity.NoticeMeetingActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity
+            android:name=".socket.activity.NoticeMeetingActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:launchMode="singleTask" />
 
-        <activity android:name=".AddresFragmentDetelis"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity
+            android:name=".AddresFragmentDetelis"
+            android:configChanges="screenSize|keyboardHidden|orientation" />
 
-        <activity android:name=".socket.activity.NoticActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity
+            android:name=".socket.activity.NoticActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation" />
 
-        <activity android:name=".address.activity.OrganizationActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity
+            android:name=".address.activity.OrganizationActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation" />
 
-        <activity android:name=".me.activity.MePersonalActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity
+            android:name=".me.activity.MePersonalActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation" />
 
-        <activity android:name=".me.activity.MeSavePersonalActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity
+            android:name=".me.activity.MeSavePersonalActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation" />
 
-         <activity android:name=".me.activity.MeForgetPassActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity
+            android:name=".me.activity.MeForgetPassActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation" />
+
+        <activity
+            android:name=".socket.activity.NotiListActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:launchMode="singleTask" />
+
+        <activity
+            android:name=".work.activity.expense.ExpenseApplyForPeopleActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation" />
+
+        <activity
+            android:name=".work.activity.expense.ExpenseExamineActivityQ"
+            android:configChanges="screenSize|keyboardHidden|orientation" />
+
+        <activity
+            android:name=".work.activity.expense.ExpenseHistoryActivityS"
+            android:configChanges="screenSize|keyboardHidden|orientation" />
+
+        <activity
+            android:name=".work.activity.statistical.activity.ExpenseStatisDetelisActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation" />
+  <activity
+            android:name=".work.activity.statistical.activity.ExpenseStatisDetelisActivity2"
+            android:configChanges="screenSize|keyboardHidden|orientation" />
+
+        <activity
+            android:name=".work.activity.expense.ExpenseApplyForPeopleActivityS"
+            android:configChanges="screenSize|keyboardHidden|orientation" />
+        <activity
+            android:name=".work.activity.task.SelDepartmentActivity_Task_meet"
+            android:configChanges="screenSize|keyboardHidden|orientation" />
+
+        <activity android:name=".work.activity.expense.SelDepartmentActivity_meet_expenseApply"
+            android:configChanges="screenSize|keyboardHidden|orientation" />
+
 
     </application>
 

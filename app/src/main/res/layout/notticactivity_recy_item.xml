@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -29,6 +30,9 @@
         android:layout_height="wrap_content"/>
 
     <TextView
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:maxEms="15"
         android:id="@+id/not_rect_item_content"
         android:textColor="#37447A"
         android:textSize="@dimen/sp_12"
@@ -36,8 +40,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/not_rect_item_img"
         android:layout_marginLeft="@dimen/dp_10"
         app:layout_constraintLeft_toRightOf="@+id/not_rect_item_img"
-        android:singleLine="true"
-        android:ellipsize="end"
         android:text="关于某某"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

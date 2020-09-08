@@ -587,15 +587,47 @@ public class HttpRequest {
         RequestMode.postMultipart(Urls.commUrls + "system/workReimbursement/add", params, files, callback, null);
     }
 
+     /**
+     * 申请报销3
+     *
+     * @param params
+     * @param callback
+     */
+    public static void post_sendExpense3(RequestParams params, List<File> files, ResponseCallback callback) {
+        RequestMode.postMultipart_qgl(Urls.commUrls + "system/expenseReport/android/addExpenseReportLine", params, files, callback, null);
+    }
+
+
+
+//    /**
+//     * 申请报销2
+//     * @param params
+//     * @param callback
+//     */
+//    public static void post_sendExpense2(RequestParams params, List<File> files, ResponseCallback callback) {
+//        RequestMode.postMultipart(Urls.commUrls + "system/expenseReport/android/add", params, files, callback, null);
+//    }
+
     /**
      * 申请报销2
      *
      * @param params
      * @param callback
      */
-    public static void post_sendExpense2(RequestParams params, List<File> files, ResponseCallback callback) {
-        RequestMode.postMultipart(Urls.commUrls + "system/expenseReport/android/add", params, files, callback, null);
+    public static void post_sendExpense2(RequestParams params,ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/expenseReport/android/add", params, callback, null);
     }
+
+
+//    /**
+//     * 报销列表
+//     *
+//     * @param params
+//     * @param callback
+//     */
+//    public static void get_listWorkExpense(RequestParams params, ResponseCallback callback) {
+//        RequestMode.postRequest(Urls.commUrls + "system/workReimbursement/list", params, callback, null);
+//    }
 
     /**
      * 报销列表
@@ -604,8 +636,11 @@ public class HttpRequest {
      * @param callback
      */
     public static void get_listWorkExpense(RequestParams params, ResponseCallback callback) {
-        RequestMode.postRequest(Urls.commUrls + "system/workReimbursement/list", params, callback, null);
+        RequestMode.postRequest(Urls.commUrls + "system/expenseReport/android/list", params, callback, null);
     }
+
+
+
 
     /**
      * 报销详情
@@ -618,6 +653,17 @@ public class HttpRequest {
     }
 
     /**
+     * 报销详情1
+     *
+     * @param params
+     * @param callback
+     */
+    public static void get_WorkExpense1(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/expenseReport/android/selectById", params, callback, null);
+    }
+
+
+    /**
      * 报销同意，拒绝，驳回
      *
      * @param params
@@ -627,6 +673,20 @@ public class HttpRequest {
         RequestMode.postRequest(Urls.commUrls + "system/workReimbursement/edit", params, callback, null);
     }
 
+
+    /**
+     * 报销同意，驳回
+     *
+     * @param params
+     * @param callback
+     */
+    public static void get_WorkExpense_edit1(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/expenseReport/android/approve", params, callback, null);
+    }
+
+
+
+
     /**
      * 报销历史
      *
@@ -635,6 +695,16 @@ public class HttpRequest {
      */
     public static void get_WorkExpense_history(RequestParams params, ResponseCallback callback) {
         RequestMode.postRequest(Urls.commUrls + "system/workReimbursement/edit", params, callback, null);
+    }
+
+    /**
+     * 报销历史
+     *
+     * @param params
+     * @param callback
+     */
+    public static void get_WorkExpense_history1(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/expenseReport/android/approveHistory", params, callback, null);
     }
 
     /**
@@ -831,6 +901,16 @@ public class HttpRequest {
     public static void getPerson(RequestParams params, ResponseCallback callback) {
         RequestMode.postRequest(Urls.commUrls + "system/workLeave/getUserInfo", params, callback, null);
     }
+    /**
+     * 请假审批人，抄送人
+     *
+     * @param params
+     * @param callback
+     */
+    public static void getPerson1(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/workLeave/getUserInfos", params, callback, null);
+    }
+
 
     public static void getrcYiDu(RequestParams params, ResponseCallback callback) {
         RequestMode.postRequest(Urls.commUrls + "system/viewMsg/clearMsgByType", params, callback, null);
@@ -1088,6 +1168,36 @@ public class HttpRequest {
     public static void getForget_PassWord(RequestParams params, ResponseCallback callback) {
         RequestMode.postRequest(Urls.commUrls + "system/workLeave/leaveDays", params, callback, null);
     }
+
+
+    public static void get_NotList(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/viewMsg/android/workList", params, callback, null);
+    }
+
+  public static void get_Expense_aper(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/workExpense/getApproverAndCopier", params, callback, null);
+    }
+
+
+    /**
+     * 报销统计列表
+     * @param params
+     * @param callback
+     */
+    public static void get_Expense_List(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/statistical/expense/list", params, callback, null);
+    }
+
+
+ /**
+     * 报销统计详情
+     * @param params
+     * @param callback
+     */
+    public static void get_Expense_List_detelis(RequestParams params, ResponseCallback callback) {
+        RequestMode.postRequest(Urls.commUrls + "system/statistical/expense/myList", params, callback, null);
+    }
+
 
 
 

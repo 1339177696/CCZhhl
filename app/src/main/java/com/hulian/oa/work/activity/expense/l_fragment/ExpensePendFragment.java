@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -49,7 +50,9 @@ public class ExpensePendFragment extends Fragment implements PullLoadMoreRecycle
     private ArrayList<String> list_path;
     private ArrayList<String> list_title;
     Unbinder unbinder;
-
+    //    qgl修改
+    @BindView(R.id.emptyBg)
+    RelativeLayout emptyBg;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -118,6 +121,7 @@ public class ExpensePendFragment extends Fragment implements PullLoadMoreRecycle
         RequestParams params = new RequestParams();
         params.put("pageStart", mCount*10-9 + "");
         params.put("pageEnd", mCount * 10 + "");
+        params.put("state", "0");
         params.put("approver", SPUtils.get(getActivity(), "userId", "").toString());
         HttpRequest.get_listWorkExpense(params, new ResponseCallback() {
             @Override
@@ -129,6 +133,13 @@ public class ExpensePendFragment extends Fragment implements PullLoadMoreRecycle
                     List<Expense> memberList = gson.fromJson(result.getJSONArray("data").toString(),
                             new TypeToken<List<Expense>>() {
                             }.getType());
+                    if (mCount == 1 && memberList.size() == 0) {
+                        emptyBg.setVisibility(View.VISIBLE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
+                    } else {
+                        emptyBg.setVisibility(View.GONE);
+//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
+                    }
                     mRecyclerViewAdapter.addAllData(memberList);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                 } catch (JSONException e) {

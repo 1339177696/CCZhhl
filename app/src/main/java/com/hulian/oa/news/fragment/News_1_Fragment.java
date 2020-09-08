@@ -53,7 +53,6 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
     private RecyclerView mRecyclerView;
     NewsViewAdapter mRecyclerViewAdapter;
     private ArrayList<String> list_path = new ArrayList<>();
-    private ArrayList<String> list_title;
     @BindView(R.id.banner)
     Banner banner;
     @BindView(R.id.recycler_banner)
@@ -97,7 +96,6 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
         mRecyclerViewAdapter = new NewsViewAdapter(getActivity());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
         getData();
-
     }
 
     private void initView() {
@@ -191,6 +189,7 @@ public class News_1_Fragment extends Fragment implements OnBannerListener, PullL
                         list_path.add(memberList.get(1).getJournalismImage());
                         list_path.add(memberList.get(2).getJournalismImage());
                         initView();
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

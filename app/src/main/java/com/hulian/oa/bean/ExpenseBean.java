@@ -11,6 +11,16 @@ public class ExpenseBean {
     private String expense_legend;//费用说明
     private List<LocalMedia> list_invoice;//发票说明
 
+    public String getReason_num() {
+        return reason_num;
+    }
+
+    public void setReason_num(String reason_num) {
+        this.reason_num = reason_num;
+    }
+
+    private String reason_num;
+
     public String getIndex() {
         return index;
     }

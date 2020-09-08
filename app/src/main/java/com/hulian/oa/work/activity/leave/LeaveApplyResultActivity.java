@@ -187,7 +187,6 @@ public class LeaveApplyResultActivity extends BaseActivity {
     private void init(String[] images) {
 //        修改了images.length
         LocalMedia localMedia = new LocalMedia();
-
         for (int i = 0; i < 1; i++) {
             localMedia.setPath(images[i]);
             selectList.add(localMedia);

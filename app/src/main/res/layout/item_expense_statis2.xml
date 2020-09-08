@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="@dimen/dp_20"
+    android:paddingLeft="@dimen/dp_15"
+    android:paddingRight="@dimen/dp_15">
+
+
+    <ImageView
+        android:layout_marginLeft="@dimen/dp_13"
+        android:layout_marginTop="@dimen/dp_5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/iv_remind"
+        android:layout_width="@dimen/dp_11"
+        android:layout_height="@dimen/dp_11"
+        android:background="@drawable/liner_yuan_qgl1" />
+
+
+    <TextView
+        android:id="@+id/expens_name"
+        app:layout_constraintTop_toTopOf="@+id/iv_remind"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_remind"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:textColor="#333333"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toRightOf="@+id/iv_remind"
+        android:text="采购费"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+    <TextView
+        android:id="@+id/expens_num1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(40%)"
+        android:textColor="#ff999999"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_remind"
+        app:layout_constraintTop_toTopOf="@+id/iv_remind" />
+
+    <TextView
+        android:layout_marginRight="@dimen/dp_5"
+        android:id="@+id/expens_num2"
+        app:layout_constraintTop_toTopOf="@+id/iv_remind"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_remind"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¥8,621,00"
+        android:textColor="#ff333333"
+        android:textSize="12sp"
+        />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_remind"
+        android:layout_marginTop="@dimen/dp_20"
+        android:background="@color/line_color"
+        />
+
+
+</android.support.constraint.ConstraintLayout>

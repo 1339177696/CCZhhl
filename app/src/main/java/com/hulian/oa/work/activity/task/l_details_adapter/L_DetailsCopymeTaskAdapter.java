@@ -115,10 +115,13 @@ public class L_DetailsCopymeTaskAdapter extends RecyclerView.Adapter <RecyclerVi
                 viewHolderTop.tv_operator_person.setText(dataList.get(position).getExecutor().substring(0,dataList.get(position).getExecutor().length()-1));
                 viewHolderTop.tv_chaosong.setText(SPUtils.get(mContext, "nickname", "").toString());
                 viewHolderTop.tv_completed_count.setText(dataList.get(position).getSum()+"完成");
+
                 //图片信息适配
                 String aa = dataList.get(position).getFiles();
                 if (aa!=null&&aa!=""){
                     List<String> c = Arrays.asList(aa.split(","));
+                    selectList = new ArrayList<>();
+
                     for (int i = 0;i<=c.size()-1;i++){
                         if (getMIMEType(c.get(i)).equals("image/jpeg")||getMIMEType(c.get(i)).equals("image/png")||getMIMEType(c.get(i)).equals("image/gif")){
                             LocalMedia localMedia = new LocalMedia();

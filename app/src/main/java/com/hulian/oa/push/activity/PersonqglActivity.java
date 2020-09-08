@@ -95,7 +95,6 @@ public class PersonqglActivity extends BaseActivity {
         });
 
     }
-
     @OnClick(R.id.iv_back)
     public void onViewClicked(View view) {
         switch (view.getId()) {

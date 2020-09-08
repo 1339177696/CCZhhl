@@ -180,7 +180,7 @@ public class ExpenseExamineActivity extends BaseActivity {
         FullyGridLayoutManager manager = new FullyGridLayoutManager(ExpenseExamineActivity.this, 4, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
         adapter = new ExpenseExamineAdapter(mContext);
-        adapter.setList(selectList);
+       // adapter.setList(selectList);
         recyclerView.setAdapter(adapter);
 
         //图片信息大图预览

@@ -23,8 +23,6 @@ import com.hulian.oa.net.OkHttpException;
 import com.hulian.oa.net.RequestParams;
 import com.hulian.oa.net.ResponseCallback;
 import com.hulian.oa.socket.JWebSocketClientService;
-import com.hulian.oa.socket.activity.NoticeMeetingActivity;
-import com.hulian.oa.socket.activity.NoticeWorkActivity;
 import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.utils.ToastHelper;

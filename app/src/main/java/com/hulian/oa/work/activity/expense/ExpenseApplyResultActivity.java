@@ -126,8 +126,6 @@ public class ExpenseApplyResultActivity extends BaseActivity {
                     } else {
                         tv_approved_time.setText("暂无");
                     }
-
-
                     tv_expense_title.setText(result.getJSONObject("data").getString("remark"));
                     tv_expense_reason.setText(result.getJSONObject("data").getString("cause"));
                     tv_expense_money.setText(result.getJSONObject("data").getString("money"));

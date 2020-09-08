@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
@@ -8,27 +8,36 @@
     android:background="#EBEBEB">
 
     <LinearLayout
+        android:background="@mipmap/bg_img"
+        android:id="@+id/work_leave_list_liner"
         android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:background="@drawable/baoxiao_bg"
-        android:id="@+id/ll_top"
-        android:orientation="vertical"
-        >
-    </LinearLayout>
+        android:layout_height="@dimen/dp_170"
+        android:orientation="vertical">
+
         <RelativeLayout
-            android:id="@+id/iv_back"
+            android:layout_marginTop="@dimen/dp_25"
             android:layout_width="match_parent"
-            android:gravity="center_vertical"
             android:layout_height="@dimen/dp_53"
-            android:background="@drawable/baoxiao_bg"
-            >
-            <ImageView
-                android:layout_marginLeft="@dimen/dp_10"
-                android:layout_width="@dimen/dp_15"
+            android:gravity="center_vertical">
+
+            <RelativeLayout
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:background="@mipmap/ic_left_white"
-                android:layout_height="@dimen/dp_15"
-                />
+                android:background="@drawable/relatout_bg2"
+                android:padding="@dimen/dp_12">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_15"
+                    android:layout_height="@dimen/dp_15"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:background="@mipmap/ic_left_white" />
+
+            </RelativeLayout>
+
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -38,34 +47,29 @@
                 android:textSize="@dimen/dp_18" />
 
         </RelativeLayout>
-        <FrameLayout
+
+
+    </LinearLayout>
+    <FrameLayout
+            android:layout_marginTop="@dimen/dp_85"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/banner_bg_qgl"
-                />
+            android:layout_height="match_parent">
+
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/dp_20"
                 android:paddingLeft="@dimen/dp_10"
-                android:paddingRight="@dimen/dp_10"
-                >
+                android:paddingRight="@dimen/dp_10">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/liner_border_gb_qgl"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
                 <!--申请人-->
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_10"
-                    >
+                    android:padding="@dimen/dp_10">
                     <ImageView
                         android:id="@+id/iv_apply_person"
                         android:background="@mipmap/apply_person"
@@ -100,7 +104,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_0_5"
-                    android:background="@color/color_c_black"
+                    android:background="@color/line_color"
                     android:layout_marginLeft="@dimen/dp_14"
                     android:layout_marginRight="@dimen/dp_14"
                     />
@@ -144,16 +148,14 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_0_5"
-                    android:background="@color/color_c_black"
+                    android:background="@color/line_color"
                     android:layout_marginLeft="@dimen/dp_14"
-                    android:layout_marginRight="@dimen/dp_14"
-                    />
+                    android:layout_marginRight="@dimen/dp_14" />
                 <!--申请日期-->
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_10"
-                    >
+                    android:padding="@dimen/dp_10">
                     <ImageView
                         android:id="@+id/iv_time"
                         android:background="@mipmap/hb_time"
@@ -161,8 +163,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/dp_5"
-                        />
+                        android:layout_marginLeft="@dimen/dp_5" />
                     <TextView
                         android:text="申请日期"
                         android:textSize="14dp"
@@ -171,8 +172,7 @@
                         android:layout_toRightOf="@id/iv_time"
                         android:layout_centerVertical="true"
                         android:textColor="@color/color_b_black"
-                        android:layout_marginLeft="@dimen/dp_5"
-                        />
+                        android:layout_marginLeft="@dimen/dp_5" />
 
                         <TextView
                             android:id="@+id/tv_time_content"
@@ -183,30 +183,20 @@
                             android:layout_marginRight="@dimen/dp_16"
                             android:layout_centerVertical="true"
                             android:textColor="@color/color_b_black"
-                            android:layout_alignParentRight="true"
-                            />
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@mipmap/right_icon"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/dp_2"
-                            />
+                            android:layout_alignParentRight="true" />
+
                 </RelativeLayout>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_0_5"
-                    android:background="@color/color_c_black"
+                    android:background="@color/line_color"
                     android:layout_marginLeft="@dimen/dp_14"
-                    android:layout_marginRight="@dimen/dp_14"
-                    />
+                    android:layout_marginRight="@dimen/dp_14" />
                 <!--添加事项-->
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_10"
-                    >
+                    android:padding="@dimen/dp_10">
                 <ImageView
                     android:id="@+id/iv_addItem"
                     android:background="@mipmap/hb_add"
@@ -214,8 +204,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/dp_5"
-                    />
+                    android:layout_marginLeft="@dimen/dp_5" />
                 <TextView
                     android:id="@+id/tv_addItem"
                     android:text="添加事项"
@@ -225,17 +214,9 @@
                     android:layout_toRightOf="@id/iv_addItem"
                     android:layout_centerVertical="true"
                     android:textColor="@color/bg_blue_a"
-                    android:layout_marginLeft="@dimen/dp_5"
-                    />
+                    android:layout_marginLeft="@dimen/dp_5" />
                 </RelativeLayout>
-                <!--添加事项内容模块-->
-                <!--<LinearLayout-->
-                    <!--android:id="@+id/ll_addItem"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:orientation="vertical"-->
-                    <!--&gt;-->
-                <!--</LinearLayout>-->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -244,16 +225,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:listitem="@layout/item_baoxiao"
-                    tools:itemCount="1"
-                    >
+                    tools:itemCount="1">
 
                 </com.hulian.oa.views.flowview.NoScrollRecyclerView>
                 </LinearLayout>
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_10"
-                    >
+                    android:padding="@dimen/dp_10">
                     <ImageView
                         android:id="@+id/iv_bill"
                         android:background="@mipmap/bill_count"
@@ -261,8 +240,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/dp_5"
-                        />
+                        android:layout_marginLeft="@dimen/dp_5" />
                     <TextView
                         android:text="票据张数(张)"
                         android:textSize="14dp"
@@ -271,10 +249,10 @@
                         android:layout_toRightOf="@id/iv_bill"
                         android:layout_centerVertical="true"
                         android:textColor="@color/color_b_black"
-                        android:layout_marginLeft="@dimen/dp_5"
-                        />
+                        android:layout_marginLeft="@dimen/dp_5" />
 
                     <EditText
+                        android:enabled="false"
                         android:id="@+id/tv_bill_count"
                         android:textSize="14dp"
                         android:layout_width="@dimen/dp_60"
@@ -284,21 +262,18 @@
                         android:textColor="@color/color_b_black"
                         android:layout_alignParentRight="true"
                         android:background="@null"
-                        android:gravity="right"
-                        />
+                        android:gravity="right" />
                 </RelativeLayout>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_0_5"
-                    android:background="@color/color_c_black"
+                    android:background="@color/line_color"
                     android:layout_marginLeft="@dimen/dp_14"
-                    android:layout_marginRight="@dimen/dp_14"
-                    />
+                    android:layout_marginRight="@dimen/dp_14" />
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_10"
-                    >
+                    android:padding="@dimen/dp_10">
                     <ImageView
                         android:id="@+id/iv_total_money"
                         android:background="@mipmap/amount"
@@ -306,8 +281,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/dp_5"
-                        />
+                        android:layout_marginLeft="@dimen/dp_5" />
                     <TextView
                         android:text="金额合计(元)"
                         android:textSize="14dp"
@@ -316,10 +290,11 @@
                         android:layout_toRightOf="@id/iv_total_money"
                         android:layout_centerVertical="true"
                         android:textColor="@color/color_b_black"
-                        android:layout_marginLeft="@dimen/dp_5"
-                        />
+                        android:layout_marginLeft="@dimen/dp_5" />
 
                     <EditText
+                        android:enabled="false"
+                        android:inputType="number|numberDecimal"
                         android:id="@+id/et_sub_money"
                         android:textSize="14dp"
                         android:layout_width="@dimen/dp_80"
@@ -329,21 +304,18 @@
                         android:textColor="@color/color_b_black"
                         android:layout_alignParentRight="true"
                         android:background="@null"
-                        android:gravity="right"
-                        />
+                        android:gravity="right" />
                 </RelativeLayout>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_0_5"
-                    android:background="@color/color_c_black"
+                    android:background="@color/line_color"
                     android:layout_marginLeft="@dimen/dp_14"
-                    android:layout_marginRight="@dimen/dp_14"
-                    />
+                    android:layout_marginRight="@dimen/dp_14" />
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_10"
-                    >
+                    android:padding="@dimen/dp_10">
                     <RelativeLayout
                         android:id="@+id/rl_approver"
                         android:layout_width="match_parent"
@@ -355,8 +327,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/dp_5"
-                        />
+                        android:layout_marginLeft="@dimen/dp_5" />
                     <TextView
                         android:text="审批人"
                         android:textSize="14dp"
@@ -365,35 +336,67 @@
                         android:layout_toRightOf="@id/iv_approver"
                         android:layout_centerVertical="true"
                         android:textColor="@color/color_b_black"
-                        android:layout_marginLeft="@dimen/dp_5"
-                        />
+                        android:layout_marginLeft="@dimen/dp_5" />
+
+                        <ImageView
+                            android:layout_marginRight="@dimen/dp_16"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:id="@+id/titleView1"
+                            android:src="@mipmap/qj_zuzhi_jigou_icon_qgl"
+                            android:layout_width="@dimen/dp_19"
+                            android:layout_height="@dimen/dp_19" />
+
                     </RelativeLayout>
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recycler_approver"
+
+                    <LinearLayout
                         android:layout_below="@id/rl_approver"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_10"
                         android:layout_marginRight="@dimen/dp_10"
                         android:layout_marginTop="@dimen/dp_10"
-                        tools:listitem="@layout/item_baoxiao_approver"
-                        tools:itemCount="1"
-                        >
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_gravity="center"
+                            android:id="@+id/tv_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="" />
 
-                    </android.support.v7.widget.RecyclerView>
+                        <ImageView
+                            android:visibility="gone"
+                            android:layout_marginRight="@dimen/dp_5"
+                            android:layout_marginLeft="@dimen/dp_5"
+                            android:layout_gravity="center"
+                            android:id="@+id/iv_image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@mipmap/jiaohu_icon"
+                            android:gravity="center" />
+                        <TextView
+                            android:visibility="gone"
+                            android:id="@+id/tv_name1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="" />
+
+                    </LinearLayout>
+
                 </RelativeLayout>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_0_5"
-                    android:background="@color/color_c_black"
+                    android:background="@color/line_color"
                     android:layout_marginLeft="@dimen/dp_14"
                     android:layout_marginRight="@dimen/dp_14"
                     />
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_10"
-                    >
+                    android:padding="@dimen/dp_10">
                     <RelativeLayout
                         android:id="@+id/rl_copyer"
                         android:layout_width="match_parent"
@@ -405,8 +408,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentLeft="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="@dimen/dp_5"
-                            />
+                            android:layout_marginLeft="@dimen/dp_5" />
                         <TextView
                             android:text="抄送人"
                             android:textSize="14dp"
@@ -415,25 +417,32 @@
                             android:layout_toRightOf="@id/iv_copyer"
                             android:layout_centerVertical="true"
                             android:textColor="@color/color_b_black"
-                            android:layout_marginLeft="@dimen/dp_5"
-                            />
+                            android:layout_marginLeft="@dimen/dp_5" />
+
+                        <ImageView
+                            android:layout_marginRight="@dimen/dp_16"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:id="@+id/titleView"
+                            android:src="@mipmap/qj_zuzhi_jigou_icon_qgl"
+                            android:layout_width="@dimen/dp_19"
+                            android:layout_height="@dimen/dp_19" />
                     </RelativeLayout>
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recycler_copyer"
-                        android:layout_below="@id/rl_copyer"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                    <com.hulian.oa.views.MyGridView
                         android:layout_marginLeft="@dimen/dp_10"
                         android:layout_marginRight="@dimen/dp_10"
                         android:layout_marginTop="@dimen/dp_10"
-                        >
+                        android:layout_below="@id/rl_copyer"
+                        android:id="@+id/gv_test"
+                        android:numColumns="4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
-                    </android.support.v7.widget.RecyclerView>
                 </RelativeLayout>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_0_5"
-                    android:background="@color/color_c_black"
+                    android:background="@color/line_color"
                     android:layout_marginLeft="@dimen/dp_14"
                     android:layout_marginRight="@dimen/dp_14"
                     />
@@ -457,4 +466,4 @@
             </LinearLayout>
             </ScrollView>
         </FrameLayout>
-</LinearLayout>
+</RelativeLayout>

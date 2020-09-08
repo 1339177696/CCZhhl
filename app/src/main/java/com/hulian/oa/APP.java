@@ -6,7 +6,7 @@ import android.graphics.Color;
 import android.text.TextUtils;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.hulian.oa.activity.LoginActivity;
+import com.hulian.oa.activity.LoginActivity_ceshi;
 import com.hulian.oa.activity.LuncherActivity;
 import com.hulian.oa.message.helper.ContactHelper;
 import com.hulian.oa.message.helper.SessionHelper;
@@ -82,12 +82,10 @@ public class APP extends Application {
 
         // 如果将新消息通知提醒托管给 SDK 完成，需要添加以下配置。否则无需设置。
         StatusBarNotificationConfig config = new StatusBarNotificationConfig();
-        config.notificationEntrance = LoginActivity.class; // 点击通知栏跳转到该Activity
+        config.notificationEntrance = LoginActivity_ceshi.class; // 点击通知栏跳转到该Activity
         config.notificationSmallIconId = R.drawable.ic_launcher_foreground;
         // 呼吸灯配置
         config.ledARGB = Color.GREEN;
-
-
         config.ledOnMs = 1000;
         config.ledOffMs = 1500;
         // 通知铃声的uri字符串

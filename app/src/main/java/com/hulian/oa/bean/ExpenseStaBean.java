@@ -8,12 +8,48 @@ import com.google.gson.annotations.SerializedName;
  */
 public class ExpenseStaBean {
 
-    @SerializedName("initiatorName")
-    private String state; // 类型
-    @SerializedName("initiatorName")
+    @SerializedName("typeName")
+    private String state; // 类型名称
+    @SerializedName("bfb")
     private String num_per; // 百分比
-    @SerializedName("initiatorName")
+    @SerializedName("sum")
     private String num; // 金额
+
+    @SerializedName("type")
+    private String type; // 类型
+
+    public String getApproveType() {
+        return approveType;
+    }
+
+    public void setApproveType(String approveType) {
+        this.approveType = approveType;
+    }
+
+    @SerializedName("approveType")
+    private String approveType; // 类型
+
+    public String getMoney() {
+        return money;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
+    }
+
+    @SerializedName("money")
+    private String money; // 类型
+
+
+
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getState() {
         return state;

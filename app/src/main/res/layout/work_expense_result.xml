@@ -1,469 +1,470 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#EBEBEB">
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#EBEBEB">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:background="@mipmap/banner_bg_qgl"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_170">
-
-        <RelativeLayout
-            android:layout_marginTop="@dimen/dp_25"
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="@mipmap/banner_bg_qgl"
             android:layout_width="match_parent"
-            android:gravity="center_vertical"
-            android:id="@+id/iv_back"
-            android:layout_height="@dimen/dp_53">
-            <ImageView
-                android:layout_marginLeft="@dimen/dp_15"
-                android:layout_width="@dimen/dp_15"
-                android:background="@mipmap/ic_left_white"
-                android:layout_centerVertical="true"
-                android:layout_height="@dimen/dp_15" />
+            android:layout_height="@dimen/dp_170">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="报销审批"
-                android:textColor="#ffffff"
-                android:textSize="@dimen/sp_17" />
-
-        </RelativeLayout>
-
-    <LinearLayout
-        android:layout_marginTop="@dimen/dp_15"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/tv_start"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2019/8/8"
-                android:textColor="#ffffffff"
-                android:textSize="@dimen/sp_17"
-                />
-
-            <TextView
-                android:layout_marginTop="@dimen/dp_14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="发起时间"
-                android:textColor="#ffffffff"
-                android:textSize="12sp"
-                />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/tv_approved_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2019/8/8"
-                android:textColor="#ffffffff"
-                android:textSize="@dimen/sp_17"
-                />
-
-            <TextView
-                android:layout_marginTop="@dimen/dp_14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="审批时间"
-                android:textColor="#ffffffff"
-                android:textSize="12sp"
-                />
-
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-    </LinearLayout>
-
-    <ScrollView
-        android:layout_marginTop="@dimen/dp_145"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
             <RelativeLayout
-                android:background="@drawable/liner_border_gb_qgl"
+                android:layout_marginTop="@dimen/dp_25"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dp_10"
-                >
-                <LinearLayout
-                    android:layout_alignParentLeft="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginRight="@dimen/dp_20"
-                    android:layout_marginLeft="@dimen/dp_20"
-                    >
-                    <RelativeLayout
-                        android:layout_marginTop="@dimen/dp_15"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:text="审批人："
-                            android:textSize="@dimen/dp_14"
-                            android:textColor="@color/black"
-                            android:id="@+id/tv_person_title"
-                            android:layout_width="@dimen/dp_80"
-                            android:layout_height="wrap_content" />
-                        <TextView
-                            android:id="@+id/tv_approved_person"
-                            android:text="审批人"
-                            android:layout_toRightOf="@id/tv_person_title"
-                            android:textSize="@dimen/dp_14"
-                            android:textColor="@color/black"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="@dimen/dp_10"
-                        >
-                        <TextView
-                            android:text="审批状态："
-                            android:textSize="@dimen/dp_14"
-                            android:textColor="@color/black"
-                            android:id="@+id/tv_state_title"
-                            android:layout_width="@dimen/dp_80"
-                            android:layout_height="wrap_content" />
-                        <TextView
-                            android:id="@+id/tv_approved_state"
-                            android:text="审批状态"
-                            android:layout_toRightOf="@id/tv_state_title"
-                            android:textSize="@dimen/dp_14"
-                            android:textColor="@color/black"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                    </RelativeLayout>
-
-                    <TextView
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:id="@+id/tv_expense_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="报销标题"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/dp_14" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        >
-                        <TextView
-                            android:id="@+id/tv_expense_reason_title"
-                            android:text="报销事由:"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dp_14"
-                            android:layout_width="@dimen/dp_80"
-                            android:layout_height="wrap_content" />
-
-                        <TextView
-                            android:id="@+id/tv_expense_reason"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginBottom="0dp"
-                            android:layout_toRightOf="@id/tv_expense_reason_title"
-                            android:text="出差"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dp_14" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        >
-                        <TextView
-                            android:id="@+id/tv_expense_money_title"
-                            android:text="金额 (元):"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dp_14"
-                            android:layout_width="@dimen/dp_80"
-                            android:layout_height="wrap_content" />
-                        <TextView
-                            android:id="@+id/tv_expense_money"
-                            android:text="3000"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dp_14"
-                            android:layout_toRightOf="@id/tv_expense_money_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                    </RelativeLayout>
-                    <!--qgl-->
-                    <!--<RelativeLayout-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="@dimen/dp_10"-->
-                        <!--&gt;-->
-                        <!--<TextView-->
-                            <!--android:id="@+id/tv_expense_time_title"-->
-                            <!--android:text="报销时间:"-->
-                            <!--android:textColor="@color/black"-->
-                            <!--android:textSize="@dimen/dp_14"-->
-                            <!--android:layout_width="@dimen/dp_80"-->
-                            <!--android:layout_height="wrap_content" />-->
-                        <!--<TextView-->
-                            <!--android:id="@+id/tv_expense_time"-->
-                            <!--android:text="2019-01-10"-->
-                            <!--android:textColor="@color/black"-->
-                            <!--android:textSize="@dimen/dp_14"-->
-                            <!--android:layout_toRightOf="@id/tv_expense_time_title"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content" />-->
-                    <!--</RelativeLayout>-->
-
-                    <View
-                        android:layout_marginTop="@dimen/dp_15"
-                        android:background="#EBEBEB"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_1"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="@dimen/dp_15"
-                        >
-                        <TextView
-                            android:text="发票信息:"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dp_14"
-                            android:id="@id/tv_leave_reason_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:minHeight="@dimen/dp_80"
-                            >
-                            <android.support.v7.widget.RecyclerView
-                                android:id="@+id/recyclerView"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginTop="5dp"
-                                android:overScrollMode="never" />
-                        </RelativeLayout>
-                    </LinearLayout>
-
-                    <RelativeLayout
-                        android:layout_marginBottom="@dimen/dp_15"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_40">
-                        <TextView
-                            android:id="@+id/tv_check_history"
-                            android:text="查看他的历史记录>"
-                            android:textColor="@color/color_a_blue"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_alignParentBottom="true"
-                            />
-                    </RelativeLayout>
-
-
-                    <!--qgl-->
-                    <!--<RelativeLayout-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:paddingTop="@dimen/dp_5"-->
-                        <!--&gt;-->
-                        <!--<TextView-->
-                            <!--android:text="审批时间："-->
-                            <!--android:textSize="@dimen/dp_14"-->
-                            <!--android:textColor="@color/black"-->
-                            <!--android:id="@+id/tv_time_title"-->
-                            <!--android:layout_width="@dimen/dp_80"-->
-                            <!--android:layout_height="wrap_content" />-->
-                        <!--<TextView-->
-                            <!--android:id="@+id/tv_approved_time"-->
-                            <!--android:layout_toRightOf="@id/tv_time_title"-->
-                            <!--android:textSize="@dimen/dp_14"-->
-                            <!--android:textColor="@color/black"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content" />-->
-                    <!--</RelativeLayout>-->
-                </LinearLayout>
-                <!--qgl-->
+                android:gravity="center_vertical"
+                android:id="@+id/iv_back"
+                android:layout_height="@dimen/dp_53">
                 <ImageView
-                    android:visibility="gone"
-                    android:id="@+id/iv_result"
-                    android:layout_alignParentRight="true"
-                    android:background="@drawable/nim_avatar_default"
-                    android:layout_width="@dimen/dp_60"
-                    android:layout_height="@dimen/dp_60"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_width="@dimen/dp_15"
+                    android:background="@mipmap/ic_left_white"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_15" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="报销审批"
+                    android:textColor="#ffffff"
+                    android:textSize="@dimen/sp_17" />
+
+            </RelativeLayout>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/dp_15"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2019/8/8"
+                    android:textColor="#ffffffff"
+                    android:textSize="@dimen/sp_17"
+                    />
+
+                <TextView
+                    android:layout_marginTop="@dimen/dp_14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="发起时间"
+                    android:textColor="#ffffffff"
+                    android:textSize="12sp"
                     />
 
 
-            </RelativeLayout>
-            <!--<LinearLayout-->
-                <!--android:layout_marginLeft="@dimen/dp_10"-->
-                <!--android:layout_marginRight="@dimen/dp_10"-->
-                <!--android:layout_marginBottom="@dimen/dp_20"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:background="@color/colorwhite"-->
-                <!--android:orientation="vertical"-->
-                <!--android:padding="@dimen/dp_20"-->
-                <!--&gt;-->
-                <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:orientation="vertical"-->
-                    <!--&gt;-->
-                    <!--&lt;!&ndash;qgl&ndash;&gt;-->
-                    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:id="@+id/tv_expense_title"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:text="报销标题"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:textSize="@dimen/dp_14" />&ndash;&gt;-->
-                    <!--&lt;!&ndash;<RelativeLayout&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:layout_marginTop="@dimen/dp_5"&ndash;&gt;-->
-                        <!--&lt;!&ndash;&gt;&ndash;&gt;-->
-                        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:id="@+id/tv_expense_reason_title"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:text="报销事由:"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:textSize="@dimen/dp_14"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:layout_width="@dimen/dp_80"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:layout_height="wrap_content" />&ndash;&gt;-->
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_approved_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2019/8/8"
+                    android:textColor="#ffffffff"
+                    android:textSize="@dimen/sp_17"
+                    />
+
+                <TextView
+                    android:layout_marginTop="@dimen/dp_14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="审批时间"
+                    android:textColor="#ffffffff"
+                    android:textSize="12sp"
+                    />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_marginTop="@dimen/dp_145"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <RelativeLayout
+                    android:background="@drawable/liner_border_gb_qgl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_10"
+                    >
+                    <LinearLayout
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginRight="@dimen/dp_20"
+                        android:layout_marginLeft="@dimen/dp_20"
+                        >
+                        <RelativeLayout
+                            android:layout_marginTop="@dimen/dp_15"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:text="审批人："
+                                android:textSize="@dimen/dp_14"
+                                android:textColor="@color/black"
+                                android:id="@+id/tv_person_title"
+                                android:layout_width="@dimen/dp_80"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:id="@+id/tv_approved_person"
+                                android:text="审批人"
+                                android:layout_toRightOf="@id/tv_person_title"
+                                android:textSize="@dimen/dp_14"
+                                android:textColor="@color/black"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/dp_10"
+                            >
+                            <TextView
+                                android:text="审批状态："
+                                android:textSize="@dimen/dp_14"
+                                android:textColor="@color/black"
+                                android:id="@+id/tv_state_title"
+                                android:layout_width="@dimen/dp_80"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:id="@+id/tv_approved_state"
+                                android:text="审批状态"
+                                android:layout_toRightOf="@id/tv_state_title"
+                                android:textSize="@dimen/dp_14"
+                                android:textColor="@color/black"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </RelativeLayout>
+
+                        <TextView
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:id="@+id/tv_expense_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="报销标题"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dp_14" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            >
+                            <TextView
+                                android:id="@+id/tv_expense_reason_title"
+                                android:text="报销事由:"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dp_14"
+                                android:layout_width="@dimen/dp_80"
+                                android:layout_height="wrap_content" />
+
+                            <TextView
+                                android:id="@+id/tv_expense_reason"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginBottom="0dp"
+                                android:layout_toRightOf="@id/tv_expense_reason_title"
+                                android:text="出差"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dp_14" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            >
+                            <TextView
+                                android:id="@+id/tv_expense_money_title"
+                                android:text="金额 (元):"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dp_14"
+                                android:layout_width="@dimen/dp_80"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:id="@+id/tv_expense_money"
+                                android:text="3000"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dp_14"
+                                android:layout_toRightOf="@id/tv_expense_money_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </RelativeLayout>
+                        <!--qgl-->
+                        <!--<RelativeLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginTop="@dimen/dp_10"-->
+                            <!--&gt;-->
+                            <!--<TextView-->
+                                <!--android:id="@+id/tv_expense_time_title"-->
+                                <!--android:text="报销时间:"-->
+                                <!--android:textColor="@color/black"-->
+                                <!--android:textSize="@dimen/dp_14"-->
+                                <!--android:layout_width="@dimen/dp_80"-->
+                                <!--android:layout_height="wrap_content" />-->
+                            <!--<TextView-->
+                                <!--android:id="@+id/tv_expense_time"-->
+                                <!--android:text="2019-01-10"-->
+                                <!--android:textColor="@color/black"-->
+                                <!--android:textSize="@dimen/dp_14"-->
+                                <!--android:layout_toRightOf="@id/tv_expense_time_title"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content" />-->
+                        <!--</RelativeLayout>-->
+
+                        <View
+                            android:layout_marginTop="@dimen/dp_15"
+                            android:background="#EBEBEB"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_1"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="@dimen/dp_15"
+                            >
+                            <TextView
+                                android:text="发票信息:"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dp_14"
+                                android:id="@id/tv_leave_reason_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:minHeight="@dimen/dp_80"
+                                >
+                                <android.support.v7.widget.RecyclerView
+                                    android:id="@+id/recyclerView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginTop="5dp"
+                                    android:overScrollMode="never" />
+                            </RelativeLayout>
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:layout_marginBottom="@dimen/dp_15"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_40">
+                            <TextView
+                                android:id="@+id/tv_check_history"
+                                android:text="查看他的历史记录>"
+                                android:textColor="@color/color_a_blue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                />
+                        </RelativeLayout>
+
+
+                        <!--qgl-->
+                        <!--<RelativeLayout-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:paddingTop="@dimen/dp_5"-->
+                            <!--&gt;-->
+                            <!--<TextView-->
+                                <!--android:text="审批时间："-->
+                                <!--android:textSize="@dimen/dp_14"-->
+                                <!--android:textColor="@color/black"-->
+                                <!--android:id="@+id/tv_time_title"-->
+                                <!--android:layout_width="@dimen/dp_80"-->
+                                <!--android:layout_height="wrap_content" />-->
+                            <!--<TextView-->
+                                <!--android:id="@+id/tv_approved_time"-->
+                                <!--android:layout_toRightOf="@id/tv_time_title"-->
+                                <!--android:textSize="@dimen/dp_14"-->
+                                <!--android:textColor="@color/black"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content" />-->
+                        <!--</RelativeLayout>-->
+                    </LinearLayout>
+                    <!--qgl-->
+                    <ImageView
+                        android:visibility="gone"
+                        android:id="@+id/iv_result"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/nim_avatar_default"
+                        android:layout_width="@dimen/dp_60"
+                        android:layout_height="@dimen/dp_60"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp_20"
+                        />
+
+
+                </RelativeLayout>
+                <!--<LinearLayout-->
+                    <!--android:layout_marginLeft="@dimen/dp_10"-->
+                    <!--android:layout_marginRight="@dimen/dp_10"-->
+                    <!--android:layout_marginBottom="@dimen/dp_20"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:background="@color/colorwhite"-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:padding="@dimen/dp_20"-->
+                    <!--&gt;-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="vertical"-->
+                        <!--&gt;-->
+                        <!--&lt;!&ndash;qgl&ndash;&gt;-->
                         <!--&lt;!&ndash;<TextView&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:id="@+id/tv_expense_reason"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:id="@+id/tv_expense_title"&ndash;&gt;-->
                             <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
                             <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:layout_alignParentBottom="true"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:layout_marginBottom="0dp"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:layout_toRightOf="@id/tv_expense_reason_title"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:text="出差"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:text="报销标题"&ndash;&gt;-->
                             <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
                             <!--&lt;!&ndash;android:textSize="@dimen/dp_14" />&ndash;&gt;-->
-                    <!--&lt;!&ndash;</RelativeLayout>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<RelativeLayout&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:layout_marginTop="@dimen/dp_5"&ndash;&gt;-->
-                        <!--&lt;!&ndash;&gt;&ndash;&gt;-->
-                        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:id="@+id/tv_expense_money_title"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:text="金额 (元):"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:textSize="@dimen/dp_14"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:layout_width="@dimen/dp_80"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:layout_height="wrap_content" />&ndash;&gt;-->
-                        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:id="@+id/tv_expense_money"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:text="3000"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:textSize="@dimen/dp_14"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:layout_toRightOf="@id/tv_expense_money_title"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:layout_height="wrap_content" />&ndash;&gt;-->
-                    <!--&lt;!&ndash;</RelativeLayout>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<RelativeLayout&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:layout_marginTop="@dimen/dp_5"&ndash;&gt;-->
-                        <!--&lt;!&ndash;&gt;&ndash;&gt;-->
-                        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:id="@+id/tv_expense_time_title"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:text="报销时间:"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:textSize="@dimen/dp_14"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:layout_width="@dimen/dp_80"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:layout_height="wrap_content" />&ndash;&gt;-->
-                        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:id="@+id/tv_expense_time"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:text="2019-01-10"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:textSize="@dimen/dp_14"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:layout_toRightOf="@id/tv_expense_time_title"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:layout_height="wrap_content" />&ndash;&gt;-->
-                    <!--&lt;!&ndash;</RelativeLayout>&ndash;&gt;-->
-                <!--</LinearLayout>-->
-                <!--&lt;!&ndash;<View&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:layout_marginTop="@dimen/dp_20"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:background="@color/colorText"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:layout_height="@dimen/dp_1"/>&ndash;&gt;-->
-                <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:orientation="vertical"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:layout_marginTop="@dimen/dp_20"&ndash;&gt;-->
-                    <!--&lt;!&ndash;&gt;&ndash;&gt;-->
-                    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:text="发票信息:"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:textSize="@dimen/dp_14"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:id="@id/tv_leave_reason_title"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:layout_height="wrap_content" />&ndash;&gt;-->
-                    <!--&lt;!&ndash;<RelativeLayout&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:layout_below="@id/tv_roam_title"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:minHeight="@dimen/dp_80"&ndash;&gt;-->
-                        <!--&lt;!&ndash;&gt;&ndash;&gt;-->
-                        <!--&lt;!&ndash;<android.support.v7.widget.RecyclerView&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:id="@+id/recyclerView"&ndash;&gt;-->
+                        <!--&lt;!&ndash;<RelativeLayout&ndash;&gt;-->
                             <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
                             <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:layout_marginLeft="5dp"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:layout_marginTop="5dp"&ndash;&gt;-->
-                            <!--&lt;!&ndash;android:overScrollMode="never" />&ndash;&gt;-->
-                    <!--&lt;!&ndash;</RelativeLayout>&ndash;&gt;-->
-                <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
-                <!--&lt;!&ndash;<RelativeLayout&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:layout_height="@dimen/dp_40">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:id="@+id/tv_check_history"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:text="查看他的历史记录>"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:textColor="@color/color_a_blue"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_marginTop="@dimen/dp_5"&ndash;&gt;-->
+                            <!--&lt;!&ndash;&gt;&ndash;&gt;-->
+                            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:id="@+id/tv_expense_reason_title"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:text="报销事由:"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:textSize="@dimen/dp_14"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:layout_width="@dimen/dp_80"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:layout_height="wrap_content" />&ndash;&gt;-->
+
+                            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:id="@+id/tv_expense_reason"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:layout_alignParentBottom="true"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:layout_marginBottom="0dp"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:layout_toRightOf="@id/tv_expense_reason_title"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:text="出差"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:textSize="@dimen/dp_14" />&ndash;&gt;-->
+                        <!--&lt;!&ndash;</RelativeLayout>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<RelativeLayout&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_marginTop="@dimen/dp_5"&ndash;&gt;-->
+                            <!--&lt;!&ndash;&gt;&ndash;&gt;-->
+                            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:id="@+id/tv_expense_money_title"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:text="金额 (元):"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:textSize="@dimen/dp_14"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:layout_width="@dimen/dp_80"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:layout_height="wrap_content" />&ndash;&gt;-->
+                            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:id="@+id/tv_expense_money"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:text="3000"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:textSize="@dimen/dp_14"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:layout_toRightOf="@id/tv_expense_money_title"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:layout_height="wrap_content" />&ndash;&gt;-->
+                        <!--&lt;!&ndash;</RelativeLayout>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<RelativeLayout&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_marginTop="@dimen/dp_5"&ndash;&gt;-->
+                            <!--&lt;!&ndash;&gt;&ndash;&gt;-->
+                            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:id="@+id/tv_expense_time_title"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:text="报销时间:"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:textSize="@dimen/dp_14"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:layout_width="@dimen/dp_80"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:layout_height="wrap_content" />&ndash;&gt;-->
+                            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:id="@+id/tv_expense_time"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:text="2019-01-10"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:textSize="@dimen/dp_14"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:layout_toRightOf="@id/tv_expense_time_title"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:layout_height="wrap_content" />&ndash;&gt;-->
+                        <!--&lt;!&ndash;</RelativeLayout>&ndash;&gt;-->
+                    <!--</LinearLayout>-->
+                    <!--&lt;!&ndash;<View&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_marginTop="@dimen/dp_20"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:background="@color/colorText"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_height="@dimen/dp_1"/>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
                         <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:layout_alignParentRight="true"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:layout_alignParentBottom="true"&ndash;&gt;-->
-                        <!--&lt;!&ndash;/>&ndash;&gt;-->
-                <!--&lt;!&ndash;</RelativeLayout>&ndash;&gt;-->
-            <!--</LinearLayout>-->
-        </LinearLayout>
-    </ScrollView>
-</RelativeLayout>
+                        <!--&lt;!&ndash;android:orientation="vertical"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_marginTop="@dimen/dp_20"&ndash;&gt;-->
+                        <!--&lt;!&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:text="发票信息:"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:textSize="@dimen/dp_14"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:id="@id/tv_leave_reason_title"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_height="wrap_content" />&ndash;&gt;-->
+                        <!--&lt;!&ndash;<RelativeLayout&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_below="@id/tv_roam_title"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:minHeight="@dimen/dp_80"&ndash;&gt;-->
+                            <!--&lt;!&ndash;&gt;&ndash;&gt;-->
+                            <!--&lt;!&ndash;<android.support.v7.widget.RecyclerView&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:id="@+id/recyclerView"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:layout_marginLeft="5dp"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:layout_marginTop="5dp"&ndash;&gt;-->
+                                <!--&lt;!&ndash;android:overScrollMode="never" />&ndash;&gt;-->
+                        <!--&lt;!&ndash;</RelativeLayout>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<RelativeLayout&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_height="@dimen/dp_40">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:id="@+id/tv_check_history"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:text="查看他的历史记录>"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:textColor="@color/color_a_blue"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_alignParentRight="true"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_alignParentBottom="true"&ndash;&gt;-->
+                            <!--&lt;!&ndash;/>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</RelativeLayout>&ndash;&gt;-->
+                <!--</LinearLayout>-->
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+

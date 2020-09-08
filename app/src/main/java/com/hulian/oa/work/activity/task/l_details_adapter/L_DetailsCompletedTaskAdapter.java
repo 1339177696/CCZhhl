@@ -103,10 +103,17 @@ public class L_DetailsCompletedTaskAdapter extends RecyclerView.Adapter <Recycle
                 viewHolderTop.tv_launch_person.setText(dataList.get(position).getCreateBy()+"发起");
                 viewHolderTop.tv_operator_person.setText(dataList.get(position).getExecutor().substring(0,dataList.get(position).getExecutor().length()-1));
                 viewHolderTop.tv_completed_count.setText(dataList.get(position).getSum()+"完成");
+                if (dataList.get(position).getCopier()!=null){
+                    viewHolderTop.tv_chaosong.setText(""+dataList.get(position).getCopier());
+                }else {
+                    viewHolderTop.tv_chaosong.setText("");
+                }
+
                 //图片信息适配
                 String aa = dataList.get(position).getFiles();
                 if (aa!=null&&aa!=""){
                     List<String> c = Arrays.asList(aa.split(","));
+                    selectList = new ArrayList<>();
                     for (int i = 0;i<=c.size()-1;i++){
                         if (getMIMEType(c.get(i)).equals("image/jpeg")||getMIMEType(c.get(i)).equals("image/png")||getMIMEType(c.get(i)).equals("image/gif")){
                             LocalMedia localMedia = new LocalMedia();
@@ -178,6 +185,7 @@ public class L_DetailsCompletedTaskAdapter extends RecyclerView.Adapter <Recycle
         TextView tv_completed_count;
         TextView tv_task_details;
         RecyclerView recyclerView;
+        TextView tv_chaosong;
 
         public ViewHolder_Top(View itemView)
         {
@@ -186,6 +194,7 @@ public class L_DetailsCompletedTaskAdapter extends RecyclerView.Adapter <Recycle
             tv_operator_person = ((TextView) itemView.findViewById(R.id.tv_operator_person_x));
             tv_completed_count = ((TextView) itemView.findViewById(R.id.tv_completed_count_x));
             recyclerView = ((RecyclerView) itemView.findViewById(R.id.recyclerView));
+            tv_chaosong= ((TextView) itemView.findViewById(R.id.tv_chaosong));
         }
     }
     public static class ViewHolder_List extends RecyclerView.ViewHolder {
