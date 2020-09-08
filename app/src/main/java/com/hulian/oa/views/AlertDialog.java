@@ -22,6 +22,7 @@ import com.hulian.oa.R;
  * 弹框提示
  */
 public class AlertDialog {
+
     private Context context;
     private Dialog dialog;
     private LinearLayout lLayout_bg;
