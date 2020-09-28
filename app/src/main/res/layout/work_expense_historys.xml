@@ -6,14 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EBEBEB">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="25dp"
         android:background="@drawable/baoxiao_bg"
         android:id="@+id/ll_top"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
     </LinearLayout>
     <RelativeLayout
         android:id="@+id/iv_back"
@@ -40,8 +38,7 @@
     </RelativeLayout>
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

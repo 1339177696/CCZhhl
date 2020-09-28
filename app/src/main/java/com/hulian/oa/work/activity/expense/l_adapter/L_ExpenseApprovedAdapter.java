@@ -45,11 +45,11 @@ public class L_ExpenseApprovedAdapter extends RecyclerView.Adapter <L_ExpenseApp
         public TextView tv_expense_dept;
         public ViewHolder(View itemView) {
             super(itemView);
-            tv_title = (TextView) itemView.findViewById(R.id.tv_title);
-            tv_time = (TextView) itemView.findViewById(R.id.tv_time);
-            tv_expense_monkey = (TextView) itemView.findViewById(R.id.tv_expense_monkey);
-            tv_pend = (ImageView) itemView.findViewById(R.id.tv_pend);
-            tv_expense_dept = (TextView) itemView.findViewById(R.id.tv_expense_dept);
+            tv_title =  itemView.findViewById(R.id.tv_title);
+            tv_time =  itemView.findViewById(R.id.tv_time);
+            tv_expense_monkey =  itemView.findViewById(R.id.tv_expense_monkey);
+            tv_pend = itemView.findViewById(R.id.tv_pend);
+            tv_expense_dept =  itemView.findViewById(R.id.tv_expense_dept);
         }
     }
 
@@ -84,7 +84,6 @@ public class L_ExpenseApprovedAdapter extends RecyclerView.Adapter <L_ExpenseApp
             public void onClick(View view) {
                 Intent intent=new Intent();
                 intent.putExtra("id",dataList.get(position).getId());
-//                intent.setClass(mContext, ExpenseApplyResultActivity.class);
                 intent.setClass(mContext, ExpenseExamineActivityS.class);
                 mContext.startActivity(intent);
             }

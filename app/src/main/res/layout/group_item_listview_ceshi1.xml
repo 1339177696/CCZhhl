@@ -45,7 +45,6 @@
             android:textSize="15sp" />
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/tv_role"
             android:layout_marginLeft="@dimen/dp_4"
             android:layout_centerVertical="true"

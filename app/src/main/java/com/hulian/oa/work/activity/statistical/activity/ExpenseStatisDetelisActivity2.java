@@ -34,6 +34,7 @@ import com.hulian.oa.utils.SPUtils;
 import com.hulian.oa.utils.StatusBarUtil;
 import com.hulian.oa.work.activity.statistical.adapter.ExpenStatisDetelisAdapter;
 import com.hulian.oa.work.activity.statistical.adapter.ExpenseListAdapter;
+import com.hulian.oa.work.activity.statistical.adapter.ExpenseListAdapter2;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -73,7 +74,7 @@ public class ExpenseStatisDetelisActivity2 extends BaseActivity {
     private List<Expen_Statis_Person_Bean> groupArray;
     List<Expen_Statis_Person_Bean> departmentList = new ArrayList<>();
     List<ExpenseStaBean> memberList = new ArrayList<>();
-    private ExpenseListAdapter expenseListAdapter;
+    private ExpenseListAdapter2 expenseListAdapter;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -96,7 +97,7 @@ public class ExpenseStatisDetelisActivity2 extends BaseActivity {
         groupArray = new ArrayList<>();
         childArray = new ArrayList<>();
         //创建适配器
-        expenseListAdapter = new ExpenseListAdapter(ExpenseStatisDetelisActivity2.this, groupArray, R.layout.group_layout_expenselist_single, childArray, R.layout.item_expense_statis2);
+        expenseListAdapter = new ExpenseListAdapter2(ExpenseStatisDetelisActivity2.this, groupArray, R.layout.group_layout_expenselist_single, childArray, R.layout.item_expense_statis2);
         exlistview.setAdapter(expenseListAdapter);
         post_data();
 
@@ -264,6 +265,7 @@ public class ExpenseStatisDetelisActivity2 extends BaseActivity {
     }
 
     public void onResult(){
+        memberList.clear();
         post_data();
     }
 

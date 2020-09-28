@@ -4,83 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EBEBEB"
-    android:orientation="vertical"
+    android:orientation="vertical">
 
-    >
-
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="25dp"-->
-    <!--        android:background="@drawable/baoxiao_bg"-->
-    <!--        android:id="@+id/ll_top"-->
-    <!--        android:orientation="vertical"-->
-    <!--        >-->
-    <!--    </LinearLayout>-->
-    <!--    <LinearLayout-->
-    <!--        android:layout_below="@id/ll_top"-->
-    <!--        android:id="@+id/work_leave_list_liner"-->
-    <!--        android:orientation="vertical"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        >-->
-    <!--        <RelativeLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:gravity="center_vertical"-->
-    <!--            android:layout_height="@dimen/dp_53"-->
-    <!--            android:background="@drawable/baoxiao_bg"-->
-    <!--            >-->
-    <!--            <ImageView-->
-    <!--                android:id="@+id/iv_back"-->
-    <!--                android:layout_marginLeft="@dimen/dp_10"-->
-    <!--                android:layout_width="@dimen/dp_15"-->
-    <!--                android:layout_centerVertical="true"-->
-    <!--                android:background="@mipmap/ic_left_white"-->
-    <!--                android:layout_height="@dimen/dp_15" />-->
-    <!--            <TextView-->
-    <!--                android:id="@+id/tv_baoxiao"-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="match_parent"-->
-    <!--                android:gravity="center"-->
-    <!--                android:text="报销管理"-->
-    <!--                android:textColor="#ffffff"-->
-    <!--                android:textSize="@dimen/dp_18" />-->
-    <!--            <TextView-->
-    <!--                android:id="@+id/tv_apply"-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:gravity="center"-->
-    <!--                android:layout_alignParentRight="true"-->
-    <!--                android:text="申请"-->
-    <!--                android:textColor="#ffffff"-->
-    <!--                android:layout_centerVertical="true"-->
-    <!--                android:textSize="@dimen/dp_14"-->
-    <!--                android:layout_marginRight="@dimen/dp_10"-->
-    <!--                />-->
-
-    <!--        </RelativeLayout>-->
-    <!--        <FrameLayout-->
-    <!--            android:layout_gravity="center"-->
-    <!--            android:paddingRight="@dimen/dp_25"-->
-    <!--            android:paddingLeft="@dimen/dp_25"-->
-    <!--            android:id="@+id/leave_fragment"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content">-->
-    <!--            <android.support.design.widget.TabLayout-->
-    <!--                android:id="@+id/my_tablayout"-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="@dimen/dp_40"-->
-    <!--                android:layout_gravity="center_horizontal"-->
-    <!--                app:tabBackground="@android:color/transparent"-->
-    <!--                app:tabIndicatorColor="@color/colorwhite"-->
-    <!--                app:tabIndicatorFullWidth="false"-->
-    <!--                app:tabMaxWidth="0dp"-->
-    <!--                app:tabMode="scrollable"-->
-    <!--                app:tabRippleColor="@android:color/transparent"-->
-    <!--                app:tabSelectedTextColor="@color/colorwhite"-->
-    <!--                app:tabTextAppearance="@style/TabLayoutTextSize"-->
-    <!--                app:tabTextColor="#A0C2F3" />-->
-    <!--        </FrameLayout>-->
-    <!--    </LinearLayout>-->
     <LinearLayout
         android:id="@+id/work_leave_list_liner"
         android:layout_width="match_parent"
@@ -121,6 +46,7 @@
                 android:textSize="@dimen/sp_17" />
 
             <TextView
+                android:padding="@dimen/dp_6"
                 android:id="@+id/tv_apply"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -172,30 +98,5 @@
             android:id="@+id/my_viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-        <!--<LinearLayout-->
-        <!--android:layout_gravity="bottom|right"-->
-        <!--android:layout_marginRight="16dp"-->
-        <!--android:layout_marginBottom="14dp"-->
-        <!--android:gravity="center"-->
-        <!--android:background="@drawable/liner_yuan_qgl8"-->
-        <!--android:orientation="vertical"-->
-        <!--android:id="@+id/tv_apply"-->
-        <!--android:layout_width="@dimen/dp_50"-->
-        <!--android:layout_height="@dimen/dp_50">-->
-
-        <!--<ImageView-->
-        <!--android:src="@mipmap/shenqing_qgl"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content" />-->
-
-        <!--<TextView-->
-        <!--android:layout_marginTop="@dimen/dp_2"-->
-        <!--android:text="申请"-->
-        <!--android:textColor="#ffffffff"-->
-        <!--android:textSize="8sp"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content" />-->
-
-        <!--</LinearLayout>-->
     </FrameLayout>
 </RelativeLayout>

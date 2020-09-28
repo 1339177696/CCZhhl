@@ -47,11 +47,11 @@ public class L_ExpenseApplyLaunchAdapter extends RecyclerView.Adapter <L_Expense
         //已审批
         public ViewHolder(View itemView) {
             super(itemView);
-            tv_title = (TextView) itemView.findViewById(R.id.tv_title);
-            tv_time = (TextView) itemView.findViewById(R.id.tv_time);
-            tv_expense_monkey = (TextView) itemView.findViewById(R.id.tv_expense_monkey);
-            tv_state = (TextView) itemView.findViewById(R.id.tv_state);
-            tv_dpname = (TextView) itemView.findViewById(R.id.tv_dpname);
+            tv_title = itemView.findViewById(R.id.tv_title);
+            tv_time = itemView.findViewById(R.id.tv_time);
+            tv_expense_monkey = itemView.findViewById(R.id.tv_expense_monkey);
+            tv_state = itemView.findViewById(R.id.tv_state);
+            tv_dpname = itemView.findViewById(R.id.tv_dpname);
         }
     }
 
@@ -93,11 +93,8 @@ public class L_ExpenseApplyLaunchAdapter extends RecyclerView.Adapter <L_Expense
             public void onClick(View view) {
                 Intent intent=new Intent();
                 intent.putExtra("id",dataList.get(position).getId());
-//                intent.setClass(mContext, ExpenseApplyResultActivity.class);
                 intent.setClass(mContext, ExpenseExamineActivityS.class);
                 mContext.startActivity(intent);
-
-
             }
         });
     }

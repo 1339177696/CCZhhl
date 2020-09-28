@@ -117,8 +117,8 @@ public class AttenListFragment extends Fragment implements  BaseQuickAdapter.Req
 
     private void getData() {
         RequestParams params = new RequestParams();
-        params.put("pageStart", mCount*10-10 + "");
-        params.put("pageEnd", mCount * 10 + "");
+        params.put("pageStart", mCount*30-30 + "");
+        params.put("pageEnd", mCount * 30 + "");
         params.put("createBy", SPUtils.get(getActivity(), "userId", "").toString());
         params.put("type",String.valueOf(cd));
         params.put("createTime",a);

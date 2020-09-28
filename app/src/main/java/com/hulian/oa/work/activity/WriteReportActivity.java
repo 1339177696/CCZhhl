@@ -29,6 +29,7 @@ import com.hulian.oa.utils.ToastHelper;
 import com.hulian.oa.views.MyDialog;
 import com.hulian.oa.utils.FullyGridLayoutManager;
 import com.hulian.oa.adpter.GridImageAdapter;
+import com.hulian.oa.work.activity.leave.LeaveApplyforActivity;
 import com.hulian.oa.work.fragment.ReadReportFragment;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
@@ -250,13 +251,17 @@ public class WriteReportActivity extends BaseActivity {
         adapter_grid.setList(selectList);
         adapter_grid.setSelectMax(maxSelectNum);
         recycler.setAdapter(adapter_grid);
+        adapter_grid.setOnItemClickListener(new GridImageAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                PictureSelector.create(WriteReportActivity.this).themeStyle(R.style.picture_default_style).openExternalPreview(position, selectList);
+            }
+        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-
         switch (requestCode) {
             case PictureConfig.CHOOSE_REQUEST:
                 // 图片选择结果回调

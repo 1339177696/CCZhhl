@@ -109,6 +109,7 @@ public class ReadReportFragment extends Fragment implements  BaseQuickAdapter.Re
         HttpRequest.getGetWorkReportList(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
+                if (getActivity()!=null)
                 swipeRefreshLayout.setRefreshing(false);
                 //需要转化为实体对象
                 Gson gson = new GsonBuilder().serializeNulls().create();
@@ -134,7 +135,7 @@ public class ReadReportFragment extends Fragment implements  BaseQuickAdapter.Re
 
             @Override
             public void onFailure(OkHttpException failuer) {
-                Toast.makeText(getActivity(), "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "请求失败=", Toast.LENGTH_SHORT).show();
             }
         });
 

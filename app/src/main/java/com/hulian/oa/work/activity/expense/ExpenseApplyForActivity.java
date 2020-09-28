@@ -58,6 +58,7 @@ import com.hulian.oa.work.activity.expense.l_fragment.ExpenseApprovedFragment;
 import com.hulian.oa.work.activity.expense.l_fragment.ExpenseCopymeFragment;
 import com.hulian.oa.work.activity.expense.l_fragment.ExpenseLaunchFragment;
 import com.hulian.oa.work.activity.expense.l_fragment.ExpensePendFragment;
+import com.hulian.oa.work.activity.leave.LeaveApplyforActivity;
 import com.hulian.oa.work.activity.meeting.SelDepartmentActivity_meet_video;
 import com.hulian.oa.work.activity.meeting.SelDepartmentActivity_meet_zb;
 import com.hulian.oa.work.activity.meeting.l_adapter.MeetGridViewAdapter;
@@ -89,10 +90,6 @@ public class ExpenseApplyForActivity extends BaseActivity {
     TextView tv_time_content;
     @BindView(R.id.recycler_item)
     NoScrollRecyclerView recycler_item;//发票说明列表
-//    @BindView(R.id.recycler_approver)
-//    RecyclerView recycler_approver;//审批人
-//    @BindView(R.id.recycler_copyer)
-//    RecyclerView recycler_copyer;//抄送人
     @BindView(R.id.iv_back)
     RelativeLayout iv_back;
     @BindView(R.id.et_sub_money)
@@ -103,13 +100,10 @@ public class ExpenseApplyForActivity extends BaseActivity {
     TextView tv_sqbm;
     @BindView(R.id.tv_bill_count)
     EditText tv_bill_count;
-
     @BindView(R.id.rl_approver)
     RelativeLayout rl_approver; // 审批人按钮
     @BindView(R.id.rl_copyer)
     RelativeLayout rl_copyer; // 抄送人人按钮
-
-
     //已经选择图片
     private List<LocalMedia> selectList = new ArrayList<>();
     List<String> reasonlist = new ArrayList<>();//报销事由
@@ -117,10 +111,7 @@ public class ExpenseApplyForActivity extends BaseActivity {
     String reason = "";
     //审批人
     private List<String> approverList = new ArrayList<>();
-    //抄送人
-    private List<People> copyerList = new ArrayList<>();
     private int count1 = 0;
-    public  int count2 = 0;
     List<ExpenseBean> list = new ArrayList<>();
     private ExpenseImageAdapter adapter;
     private ExpenseApproverAdapter approverAdapter;
@@ -154,7 +145,6 @@ public class ExpenseApplyForActivity extends BaseActivity {
     @BindView(R.id.iv_image)
     ImageView iv_image;
     private  Dialog dialog;
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -204,7 +194,6 @@ public class ExpenseApplyForActivity extends BaseActivity {
                 break;
             case R.id.tv_sum:
                 Rule_form();
-//                submit1();
                 break;
             case R.id.iv_back:
                 finish();
@@ -237,81 +226,6 @@ public class ExpenseApplyForActivity extends BaseActivity {
 
         }
     }
-    private void submint() {
-        RequestParams params = new RequestParams();
-        //创建人id
-        params.put("createBy", SPUtils.get(mContext, "userId", "").toString());
-        //创建人名称
-        params.put("createName",SPUtils.get(ExpenseApplyForActivity.this, "nickname", "").toString());
-        //部门id
-        params.put("deptId", SPUtils.get(ExpenseApplyForActivity.this, "deptId", "").toString());
-        //部门名称
-        params.put("deptName", SPUtils.get(ExpenseApplyForActivity.this, "deptname", "").toString());
-        //创建时间
-        params.put("createTime",tv_time_content.getText().toString().trim());
-        //	单据张数
-        params.put("receiptSum", tv_bill_count.getText().toString().trim());
-        //	总金额
-        params.put("money",et_sub_money.getText().toString().trim());
-        params.put("approver","185");
-        params.put("approverName","曹宇");
-        HttpRequest.post_sendExpense2(params, new ResponseCallback() {
-            @Override
-            public void onSuccess(Object responseObj) {
-                Log.e("报销申请","请求成功");
-                String id = "";
-                showDialog();
-            }
-
-            @Override
-            public void onFailure(OkHttpException failuer) {
-                Log.e("报销申请","请求失败");
-            }
-        });
-//
-//
-
-//
-//        //创建人id
-//        params.put("createBy", SPUtils.get(mContext, "userId", "").toString());
-//        //创建人名称
-//        params.put("createName",SPUtils.get(ExpenseApplyForActivity.this, "nickname", "").toString());
-//        //部门id
-//        params.put("deptId", SPUtils.get(ExpenseApplyForActivity.this, "deptId", "").toString());
-//        //部门名称
-//        params.put("deptName", SPUtils.get(ExpenseApplyForActivity.this, "deptname", "").toString());
-//        //创建时间
-//        params.put("createTime",tv_time_content.getText().toString().trim());
-//        //	单据张数
-//        params.put("receiptSum", tv_bill_count.getText().toString().trim());
-//        //	总金额
-//        params.put("money",et_sub_money.getText().toString().trim());
-        //审批人id
-//        params.put("approver", approverList.get(0));
-        //审批人名称
-//        params.put("approverName", approverList.get(0));
-        //抄送人id
-//        params.put("copier", copyerList.get(0).getUserId());
-        //抄送人名称
-//        params.put("copierName", copyerList.get(0).getUserName());
-        List<File> list = new ArrayList<>();
-        for (LocalMedia imgurl : selectList) {
-            list.add(new File(imgurl.getPath()));
-        }
-//        HttpRequest.post_sendExpense2(params, list, new ResponseCallback() {
-//            @Override
-//            public void onSuccess(Object responseObj) {
-//                Log.e("报销申请","请求成功");
-//                showDialog();
-//            }
-//
-//            @Override
-//            public void onFailure(OkHttpException failuer) {
-//                Log.e("报销申请","请求失败");
-//            }
-//        });
-    }
-
     /**
      * 判断发票是否上传了
      */
@@ -441,8 +355,6 @@ public class ExpenseApplyForActivity extends BaseActivity {
                         }
                     }
                     et_sub_money.setText(money+"");
-
-
                     a = 0;
                     Log.e("Item数量:",list.size()+"");
                     for (int i = 0;i<list.size();i++){
@@ -451,14 +363,6 @@ public class ExpenseApplyForActivity extends BaseActivity {
                         a =a+ size;
                     }
                     Log.e("picCount数量:",picCount+"");
-//                    a = 0;
-//                    Log.e("Item数量:",list.size()+"");
-//                    for (int i = 0;i<list.size();i++){
-//                        int size = list.get(i).getList_invoice().size();
-//                        Log.e("图片数量:",size+"");
-//                        a =a+ size;
-//                    }
-//                    Log.e("picCount数量:",picCount+"");
                     tv_bill_count.setText(a + "");
                     break;
                 case R.id.tv_expense_reason:
@@ -519,17 +423,25 @@ public class ExpenseApplyForActivity extends BaseActivity {
                 for (int j=0;j<localMediaList.size();j++){
                     Log.e("第二层数据",localMediaList.get(j).getCompressPath());
                 }
+
             }
             a = a - 1;
             tv_bill_count.setText(a+"");
 
         }
     };
+    // 点击已选择的图片事件回调
+    public ExpenseSecondAdapter.OnItemClickListener mItemClickListener = new ExpenseSecondAdapter.OnItemClickListener() {
+        @Override
+        public void onItemClick(int position, int positionChild, View v) {
+            List<LocalMedia> localMediaList = list.get(positionChild).getList_invoice();
+            PictureSelector.create(ExpenseApplyForActivity.this).themeStyle(R.style.picture_default_style).openExternalPreview(position, localMediaList);
+        }
+    };
     //添加审批人
     public ExpenseApproverAdapter.onAddPicClickListener onAddExpenseClickListener = new ExpenseApproverAdapter.onAddPicClickListener() {
         @Override
         public void onAddPicClick(int position, View view) {
-//            startActivity(new Intent(mContext, SubordpersonActivity.class));
             startActivity(new Intent(mContext, SelDepartmentActivity.class));
             count1++;
             approverList.add("大老板"+count1);
@@ -548,7 +460,6 @@ public class ExpenseApplyForActivity extends BaseActivity {
     public ExpenseCopyerAdapter.onAddPicClickListener onAddCopyer = new ExpenseCopyerAdapter.onAddPicClickListener() {
         @Override
         public void onAddPicClick(int position, View view) {
-//            count2++;
             startActivityForResult(new Intent(mContext, SelDepartmentActivity_meet_zb.class), 0);
 
         }
@@ -563,36 +474,22 @@ public class ExpenseApplyForActivity extends BaseActivity {
     public void init(){
         //添加事项初始化
         myDialog = new AlertDialog(this).builder();
-        adapter = new ExpenseImageAdapter(mContext,onItemClickListener,onItemEditListener,onItemEditListener2,onAddPicClickListener,onItemDeleteListener);
+        adapter = new ExpenseImageAdapter(mContext,onItemClickListener,onItemEditListener,onItemEditListener2,onAddPicClickListener,onItemDeleteListener,mItemClickListener);
         MyLinearLayoutManager layoutManager = new MyLinearLayoutManager(mContext);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager.setScrollEnabled(false);
         recycler_item.setLayoutManager(layoutManager);
-//            holder.recycler_bill.addItemDecoration();
         recycler_item.setAdapter(adapter);
         //添加事件
         adapter.setSelectMax(maxSelectNum);
         adapter.setList(list);
         recycler_item.setAdapter(adapter);
-
         //审批人初始化
         approverAdapter = new ExpenseApproverAdapter(mContext,onAddExpenseClickListener,onItemCopyerDeleteListener);
-//        FlowLayoutManager flowLayoutManager = new FlowLayoutManager(mContext,true);
         MyLayoutManager flowLayoutManager = new MyLayoutManager();
-//        recycler_approver.addItemDecoration(new ItemDecoration(DisplayUtils.dip2px(mContext,6)));
         //必须，防止recyclerview高度为wrap时测量item高度0
         flowLayoutManager.setAutoMeasureEnabled(true);
         approverAdapter.setList(approverList);
-//        recycler_approver.setLayoutManager(flowLayoutManager);
-//        recycler_approver.setAdapter(approverAdapter);
-//        copyerAdapter = new ExpenseCopyerAdapter(mContext,onAddCopyer,onDeleteCopyer);
-//        MyLayoutManager flowManager = new MyLayoutManager();
-//        recycler_copyer.addItemDecoration(new ItemDecoration(DisplayUtils.dip2px(mContext,6)));
-//        //必须，防止recyclerview高度为wrap时测量item高度0
-//        flowManager.setAutoMeasureEnabled(true);
-//        copyerAdapter.setList(copyerList);
-//        recycler_copyer.setLayoutManager(flowManager);
-//        recycler_copyer.setAdapter(copyerAdapter);
         //抄送人初始化
         tv_time_content.setText(TimeUtil.getNowDatetime1());
     }
@@ -606,13 +503,10 @@ public class ExpenseApplyForActivity extends BaseActivity {
                 .previewImage(true)// 是否可预览图片
                 .isCamera(true)// 是否显示拍照按钮
                 .isZoomAnim(true)// 图片列表点击 缩放效果 默认true
-                //.imageFormat(PictureMimeType.PNG)// 拍照保存图片格式后缀,默认jpeg
-                //.setOutputCameraPath("/CustomPath")// 自定义拍照保存路径
                 .compress(true)// 是否压缩
                 .synOrAsy(true)//同步true或异步false 压缩 默认同步
                 .glideOverride(160, 160)// glide 加载宽高，越小图片列表越流畅，但会影响列表图片浏览的清晰度
                 .withAspectRatio(1, 1)// 裁剪比例 如16:9 3:2 3:4 1:1 可自定义
-//                .selectionMedia(selectListPic)// 是否传入已选图片
                 .minimumCompressSize(100)// 小于100kb的图片不压缩
                 .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
 
@@ -625,7 +519,6 @@ public class ExpenseApplyForActivity extends BaseActivity {
                 case PictureConfig.CHOOSE_REQUEST:
                     // 图片选择结果回调
                     selectList = PictureSelector.obtainMultipleResult(data);
-//                    a += selectList.size();
                     Log.e("这是多少",a+"");
                     // 例如 LocalMedia 里面返回三种path
                     // 1.media.getPath(); 为原图path
@@ -753,7 +646,6 @@ public class ExpenseApplyForActivity extends BaseActivity {
             }
         });
     }
-
     /**
      * 200元一下
      * 获取审批人
@@ -771,20 +663,8 @@ public class ExpenseApplyForActivity extends BaseActivity {
             public void onSuccess(Object responseObj) {
                 Gson gson = new GsonBuilder().serializeNulls().create();
                 try {
-//                    memberList.clear();
-//                    approverList.clear();
-//                    appId = "";
-//                    appName = "";
                     JSONObject result = new JSONObject(responseObj.toString());
                     memberList = gson.fromJson(result.getJSONArray("data").toString(), new TypeToken<List<AppersonBean>>() {}.getType());
-//                    for (int i = 0;i < memberList.size();i++){
-//                        appName += memberList.get(i).getUserName() + ",";
-//                        appId += memberList.get(i).getUserId() + ",";
-//                        approverList.add(memberList.get(i).getUserName());
-//                    }
-//                    approverAdapter.notifyItemInserted(approverList.size());
-//                    Log.e("ID+名字",appName+"---->"+appId);
-
                     hideInput();
                     initreason1(memberList,type);
                     reasonPicker1.show();
@@ -799,7 +679,6 @@ public class ExpenseApplyForActivity extends BaseActivity {
             }
         });
     }
-
     /**
      * 选择审批人
      */
@@ -816,11 +695,6 @@ public class ExpenseApplyForActivity extends BaseActivity {
                 reason = oa.get(options1);
                 appId = appersonBeans.get(options1).getUserId();
                 appName = reason;
-//                list.get(positionMain).setExpense_reason(reason);
-//                list.get(positionMain).setReason_num(options1+1+"");
-//                adapter.notifyDataSetChanged();
-//                approverList.add(reason);
-//                approverAdapter.notifyItemInserted(approverList.size());
                 tv_name.setText(reason);
                 iv_image.setVisibility(View.GONE);
                 tv_name1.setVisibility(View.GONE);
@@ -834,7 +708,6 @@ public class ExpenseApplyForActivity extends BaseActivity {
         reasonPicker1.setPicker(oa);
 
     }
-
     /**
      * 隐藏键盘
      */
@@ -845,8 +718,6 @@ public class ExpenseApplyForActivity extends BaseActivity {
             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
         }
     }
-
-
     /**
      * 200元以上
      * 获取审批人
@@ -875,7 +746,6 @@ public class ExpenseApplyForActivity extends BaseActivity {
             }
         });
     }
-
     public void initreason2(List<AppersonBean>appersonBeans){
         List<String> oa = new ArrayList<>();
         for (int i = 0;i<appersonBeans.size();i++){
@@ -887,9 +757,6 @@ public class ExpenseApplyForActivity extends BaseActivity {
                 reason = oa.get(options1);
                 appId += "," + appersonBeans.get(options1).getUserId();
                 appName += ","+reason;
-//                adapter.notifyDataSetChanged();
-//                approverList.add(reason);
-//                approverAdapter.notifyItemInserted(approverList.size());
                 iv_image.setVisibility(View.VISIBLE);
                 tv_name1.setVisibility(View.VISIBLE);
                 tv_name1.setText(reason);

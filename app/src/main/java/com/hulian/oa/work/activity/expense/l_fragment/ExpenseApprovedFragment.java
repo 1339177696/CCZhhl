@@ -46,15 +46,12 @@ public class ExpenseApprovedFragment extends Fragment implements PullLoadMoreRec
     private int mCount = 1;
     private RecyclerView mRecyclerView;
     L_ExpenseApprovedAdapter mRecyclerViewAdapter;
-    private ArrayList<String> list_path;
-    private ArrayList<String> list_title;
     Unbinder unbinder;
     @BindView(R.id.emptyBg)
     RelativeLayout emptyBg;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.l_fra_approved_leave,null);
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
@@ -134,10 +131,8 @@ public class ExpenseApprovedFragment extends Fragment implements PullLoadMoreRec
                             }.getType());
                     if (mCount == 1 && memberList.size() == 0) {
                         emptyBg.setVisibility(View.VISIBLE);
-//                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
                     }else{
                         emptyBg.setVisibility(View.GONE);
-//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     }
                     mRecyclerViewAdapter.addAllData(memberList);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();

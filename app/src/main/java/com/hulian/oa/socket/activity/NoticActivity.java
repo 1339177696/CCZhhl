@@ -70,6 +70,7 @@ public class NoticActivity extends BaseActivity implements BaseQuickAdapter.Requ
         setContentView(R.layout.notticactivity);
         ButterKnife.bind(this);
         initList();
+
     }
 
     private void initList() {
@@ -141,6 +142,7 @@ public class NoticActivity extends BaseActivity implements BaseQuickAdapter.Requ
 
     private void setRefresh() {
         mData.clear();
+        noticeActivityAdapter.notifyDataSetChanged();
 
     }
     @Override
@@ -183,4 +185,7 @@ public class NoticActivity extends BaseActivity implements BaseQuickAdapter.Requ
         // 回到前台刷洗一下
          onRefresh();
     }
+
+
 }
+

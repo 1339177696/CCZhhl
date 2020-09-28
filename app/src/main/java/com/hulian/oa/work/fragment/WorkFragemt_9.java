@@ -71,8 +71,6 @@ public class WorkFragemt_9 extends Fragment {
     @BindView(R.id.bt_Work_notfit)
     ImageView btWorkNotfit;
 
-    int[] images = {R.mipmap.demo, R.mipmap.demo1, R.mipmap.demo2, R.mipmap.demo3, R.mipmap.demo4};
-
     //已经选择图片
     private List<LocalMedia> selectList = new ArrayList<>();
     Unbinder unbinder;
@@ -166,27 +164,15 @@ public class WorkFragemt_9 extends Fragment {
             case R.id.bt_Work_account:
                 startActivity(new Intent(getActivity(), ExpenseStatisticalActivity.class));
 //                ToastHelper.showToast(getActivity(), "功能暂未开放");
-
                 break;
 
 
             case R.id.bt_Work_notfit:
                 startActivity(new Intent(getActivity(), NoticActivity.class));
 //                ToastHelper.showToast(getActivity(), "功能暂未开放");
-
                 break;
         }
     }
-
-    //初始化图片信息
-    private void init(int[] images) {
-        for (int i = 0; i < images.length; i++) {
-            LocalMedia localMedia = new LocalMedia();
-            localMedia.setPath(images[i] + "");
-            selectList.add(localMedia);
-        }
-    }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -205,14 +191,11 @@ public class WorkFragemt_9 extends Fragment {
     }
 
     private void creatRoom(String roomName, ArrayList<String> accounts) {
-
         AVChatManager.getInstance().createRoom(roomName, null, new AVChatCallback<AVChatChannelInfo>() {
             @Override
             public void onSuccess(AVChatChannelInfo avChatChannelInfo) {
                 LogUtil.ui("create room " + roomName + " success !");
                 onCreateRoomSuccess(roomName, accounts);
-
-
                 TeamAVChatProfile.sharedInstance().setTeamAVChatting(true);
                 AVChatKit.outgoingTeamCall(getActivity(), false, "", roomName, accounts, roomName);
             }

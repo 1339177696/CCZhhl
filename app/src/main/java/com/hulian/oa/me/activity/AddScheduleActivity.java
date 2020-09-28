@@ -69,7 +69,7 @@ public class AddScheduleActivity extends BaseActivity {
                 swSelect.setChecked(isChecked);
                 if(isChecked){
                     time2="08:00";
-                    time3="16:59";
+                    time3="19:59";
                     tv_select_time.setText(time2);
                     tv_select_time2.setText(time3);
                 }
@@ -171,7 +171,7 @@ public class AddScheduleActivity extends BaseActivity {
     public void onTimePicker(View view) {
         TimePicker picker = new TimePicker(this, TimePicker.HOUR_24);
         picker.setRangeStart(8, 0);//09:00
-        picker.setRangeEnd(16, 0);//18:30
+        picker.setRangeEnd(19, 0);//18:30
         picker.setTopLineVisible(false);
         picker.setLineVisible(false);
         picker.setWheelModeEnable(false);
@@ -191,7 +191,7 @@ public class AddScheduleActivity extends BaseActivity {
                 if(!time2.equals("08:00")){
                     swSelect.setChecked(false);
                 }
-                else if(time3.equals("16:59")){
+                else if(time3.equals("19:59")){
                     swSelect.setChecked(true);
                 }
             }
@@ -204,7 +204,7 @@ public class AddScheduleActivity extends BaseActivity {
     public void onTimePicker2(View view) {
         TimePicker picker = new TimePicker(this, TimePicker.HOUR_24);
         picker.setRangeStart(8, 0);//09:00
-        picker.setRangeEnd(16, 0);//18:30
+        picker.setRangeEnd(19, 0);//18:30
         picker.setTopLineVisible(false);
         picker.setLineVisible(false);
         picker.setWheelModeEnable(false);
@@ -221,7 +221,7 @@ public class AddScheduleActivity extends BaseActivity {
                 }
                 tv_select_time2.setText(hour+":"+minute);
                 time3 =hour+":"+minute;
-                if(!time3.equals("16:59")){
+                if(!time3.equals("19:59")){
                     swSelect.setChecked(false);
                 }
                 else if(time2.equals("08:00")){

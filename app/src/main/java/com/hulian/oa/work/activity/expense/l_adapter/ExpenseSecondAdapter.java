@@ -38,11 +38,12 @@ public class ExpenseSecondAdapter extends
         void onAddPicClick(int position,int positionChaild,View view);
     }
 
-    public ExpenseSecondAdapter(Context context, onAddPicClickListener mOnAddPicClickListener, OnItemDeleteListener onItemDeleteListener,int mPosition) {
+    public ExpenseSecondAdapter(Context context, onAddPicClickListener mOnAddPicClickListener, OnItemDeleteListener onItemDeleteListener,OnItemClickListener onItemClickListener,int mPosition) {
         this.context = context;
         mInflater = LayoutInflater.from(context);
         this.mOnAddPicClickListener = mOnAddPicClickListener;
         this.onItemDeleteListener = onItemDeleteListener;
+        this.mItemClickListener = onItemClickListener;
         this.mPosition = mPosition;
 
     }
@@ -56,11 +57,9 @@ public class ExpenseSecondAdapter extends
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
         ImageView mImg;
         LinearLayout ll_del;
         TextView tv_duration;
-
         public ViewHolder(View view) {
             super(view);
             mImg =  view.findViewById(R.id.fiv);
@@ -92,8 +91,7 @@ public class ExpenseSecondAdapter extends
      */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = mInflater.inflate(R.layout.gv_expense_image,
-                viewGroup, false);
+        View view = mInflater.inflate(R.layout.gv_expense_image, viewGroup, false);
         final ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -108,8 +106,6 @@ public class ExpenseSecondAdapter extends
      */
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
-
-
         //少于8张，显示继续添加的图标
         if (getItemViewType(position) == TYPE_CAMERA) {
             Drawable drawable = ContextCompat.getDrawable(context,R.mipmap.upload);
@@ -163,7 +159,7 @@ public class ExpenseSecondAdapter extends
                         @Override
                         public void onClick(View v) {
                             int adapterPosition = viewHolder.getAdapterPosition();
-                            mItemClickListener.onItemClick(adapterPosition, v);
+                            mItemClickListener.onItemClick(adapterPosition,mPosition, v);
                         }
                     });
                 }
@@ -176,7 +172,7 @@ public class ExpenseSecondAdapter extends
     protected OnItemClickListener mItemClickListener;
 
     public interface OnItemClickListener {
-        void onItemClick(int position, View v);
+        void onItemClick(int position, int positionChild,View v);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {

@@ -121,12 +121,14 @@ public class NoticeWorkActivity extends BaseActivity implements BaseQuickAdapter
     }
 
     private void getData() {
+        loadDialog.show();
         RequestParams params = new RequestParams();
         params.put("userId", SPUtils.get(this, "userId", "").toString());
         params.put("type", getIntent().getStringExtra("type"));
         HttpRequest.get_NotList(params, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
+                loadDialog.dismiss();
                 swipeRefreshLayout.setRefreshing(false);
                 //需要转化为实体对象
                 Gson gson = new GsonBuilder().serializeNulls().create();
@@ -145,6 +147,7 @@ public class NoticeWorkActivity extends BaseActivity implements BaseQuickAdapter
 
             @Override
             public void onFailure(OkHttpException failuer) {
+                loadDialog.dismiss();
                 Toast.makeText(NoticeWorkActivity.this, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });

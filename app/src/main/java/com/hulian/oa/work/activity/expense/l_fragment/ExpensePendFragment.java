@@ -47,8 +47,6 @@ public class ExpensePendFragment extends Fragment implements PullLoadMoreRecycle
     private int mCount = 1;
     private RecyclerView mRecyclerView;
     L_ExpensePendAdapter mRecyclerViewAdapter;
-    private ArrayList<String> list_path;
-    private ArrayList<String> list_title;
     Unbinder unbinder;
     //    qgl修改
     @BindView(R.id.emptyBg)
@@ -56,7 +54,6 @@ public class ExpensePendFragment extends Fragment implements PullLoadMoreRecycle
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.l_fra_pend_leave,null);
         unbinder = ButterKnife.bind(this, view);
         initList();
@@ -135,10 +132,8 @@ public class ExpensePendFragment extends Fragment implements PullLoadMoreRecycle
                             }.getType());
                     if (mCount == 1 && memberList.size() == 0) {
                         emptyBg.setVisibility(View.VISIBLE);
-//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     } else {
                         emptyBg.setVisibility(View.GONE);
-//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     }
                     mRecyclerViewAdapter.addAllData(memberList);
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();

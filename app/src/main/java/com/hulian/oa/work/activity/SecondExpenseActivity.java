@@ -42,8 +42,6 @@ public class SecondExpenseActivity extends BaseActivity {
     Context mContext;
     @BindView(R.id.tv_apply)
     TextView tv_apply;
-    private ArrayList<String> list_path;
-    private ArrayList<String> list_title;
     ArrayList<String> titleDatas   = new ArrayList<>();;
     ArrayList<Fragment> fragmentList = new ArrayList<Fragment>();
     private ArrayList<Integer> imgList = new ArrayList<>();
@@ -88,49 +86,6 @@ public class SecondExpenseActivity extends BaseActivity {
         }
         init();
     }
-//    private void init(String isLeader) {
-//        MyViewPageAdapter myViewPageAdapter = new MyViewPageAdapter(getSupportFragmentManager(), titleDatas, fragmentList);
-//        myTablayout.setSelectedTabIndicator(0);
-//        myViewpager.setAdapter(myViewPageAdapter);
-//        myTablayout.setupWithViewPager(myViewpager);
-//        //替换tab中原有的样式(职工)
-//        myTablayout.getTabAt(0).setCustomView(R.layout.item_bx_tab_f);
-//        myTablayout.getTabAt(1).setCustomView(R.layout.item_bx_tab_s);
-//        //初始化替换后的文字和图片
-//        TextView textView = myTablayout.getTabAt(0).getCustomView().findViewById(R.id.tv_title);
-//        ImageView imageView = myTablayout.getTabAt(0).getCustomView().findViewById(R.id.iv_pic);
-//        TextView textView1 = myTablayout.getTabAt(1).getCustomView().findViewById(R.id.tv_title);
-//        ImageView imageView1 = myTablayout.getTabAt(1).getCustomView().findViewById(R.id.iv_pic);
-//        if (isLeader.equals("0")){//0 代表领导
-//            textView.setText("我发起的");
-//            textView.setText("待审批");
-//            textView1.setText("已审批");
-//        }else{
-//            textView.setText("我发起的");
-//            textView1.setText("抄送我的");
-//        }
-//        //标题左边选中和未选中的图片效果
-//        imageView.setBackground(ContextCompat.getDrawable(this,R.drawable.baoxiao_pic_f));
-//        imageView1.setBackground(ContextCompat.getDrawable(this,R.drawable.baoxiao_pic_s));
-//        myTablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-//            @Override
-//            public void onTabSelected(TabLayout.Tab tab) {
-//                tab.getCustomView().findViewById(R.id.tv_title).setSelected(true);
-//                myViewpager.setCurrentItem(tab.getPosition());
-//            }
-//
-//            @Override
-//            public void onTabUnselected(TabLayout.Tab tab) {
-//                tab.getCustomView().findViewById(R.id.tv_title).setSelected(false);
-//            }
-//
-//            @Override
-//            public void onTabReselected(TabLayout.Tab tab) {
-//
-//            }
-//        });
-//
-//    }
 
     private void init() {
         MyViewPageAdapter myViewPageAdapter = new MyViewPageAdapter(getSupportFragmentManager(), titleDatas, fragmentList);
@@ -156,7 +111,6 @@ public class SecondExpenseActivity extends BaseActivity {
         switch (view.getId()){
             case R.id.tv_apply://报销申请
                 startActivity(new Intent(mContext, ExpenseApplyForActivity.class));
-//                startActivity(new Intent(mContext, ExpenseDetailsActivity.class));
                 break;
             case R.id.iv_back:
                 this.finish();

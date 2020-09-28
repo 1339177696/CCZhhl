@@ -15,8 +15,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
+import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
+import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.duke.dfileselector.activity.DefaultSelectorActivity;
 import com.duke.dfileselector.util.FileSelectorUtils;
@@ -36,6 +39,7 @@ import com.hulian.oa.views.AlertDialog;
 import com.hulian.oa.views.NonScrollGridView;
 import com.hulian.oa.utils.FullyGridLayoutManager;
 import com.hulian.oa.adpter.GridImageAdapter;
+import com.hulian.oa.work.activity.WriteReportActivity;
 import com.hulian.oa.work.activity.expense.ExpenseApplyForPeopleActivityS;
 import com.hulian.oa.work.activity.meeting.SelDepartmentActivity_meet_zb;
 import com.hulian.oa.work.activity.meeting.SelDepartmentActivity_meet_zb_single;
@@ -89,24 +93,19 @@ public class TaskLauncherActivity extends BaseActivity {
     // 提醒name
     @BindView(R.id.tv_remind)
     TextView tv_remind;
-
     // 執行人nmae
     @BindView(R.id.tv_opreator)
     TextView tv_opreator;
-
     //发起按钮
     @BindView(R.id.tv_back_instruct)
     TextView tv_back_instruct;
-
     // 抄送人name
     @BindView(R.id.tv_copyperson)
     TextView tv_copyperson;
     @BindView(R.id.iv_back)
     RelativeLayout iv_back;
     private Context mContext;
-
     private List<People> selectList2 = new ArrayList<>();
-    private List<People_x> selectList2_x = new ArrayList<>();
     // 标题、任务详情、执行人、截止时间、抄送人、提醒
     private String title;
     private String context;
@@ -115,23 +114,17 @@ public class TaskLauncherActivity extends BaseActivity {
     private String copier = "";
     private String remind = "不提醒";
     private String startTime = "";
-
     private int maxSelectNum = 9;
-
     @BindView(R.id.iv)
     ImageView iv;
-
     @BindView(R.id.fl_content)
     FrameLayout fl_content;
-
     @BindView(R.id.iimmgg)
     ImageView iimmgg;
-
     MeetGridViewAdapter adapter;
     @BindView(R.id.gv_test)
     NonScrollGridView gvTest;
     AlertDialog myDialog;
-
     // 选择文件
     @BindView(R.id.file_btn)
     TextView filebtn;
@@ -142,6 +135,10 @@ public class TaskLauncherActivity extends BaseActivity {
     //已经选择图片
     private List<LocalMedia> selectList = new ArrayList<>();
     private GridImageAdapter adapter_grid;
+    //提醒list
+    List<String> Tasklist = new ArrayList<>();//提醒
+    private OptionsPickerView reasonPicker;
+    private String taskson = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -163,22 +160,21 @@ public class TaskLauncherActivity extends BaseActivity {
         remind = tv_remind.getText().toString().trim();
         switch (view.getId()){
             case R.id.rl_remind:
-                startActivity(new Intent(mContext, L_TaskRemindActivity.class));
+               // startActivity(new Intent(mContext, L_TaskRemindActivity.class));
+                Tasklist.clear();
+                initReason();
+                reasonPicker.show();
                 break;
             case R.id.rl_deadline:
                 selectTime(tv_deadline);
                 break;
             case R.id.rl_opreator:
-               // startActivityForResult(new Intent(TaskLauncherActivity.this, SelDepartmentActivity_meet_zb.class).putExtra("hasTop","0"), 0);
-                //startActivityForResult(new Intent(TaskLauncherActivity.this, SelDepartmentActivity_Task_meet.class), 0);
                 Intent intent2 = new Intent(this, SelDepartmentActivity_Task_meet.class);
                 intent2.putExtra("appId",SPUtils.get(mContext, "userId", "").toString());
                 startActivityForResult(intent2,0);
 
                 break;
             case R.id.iimmgg:
-//                Intent intent = new Intent(TaskLauncherActivity.this, SelDepartmentActivity_meet_zb_single.class);
-//                startActivityForResult(intent,110);
                 if (executor==null||executor.isEmpty())
                 {
                     Toast.makeText(TaskLauncherActivity.this,"请选择执行人",Toast.LENGTH_SHORT).show();
@@ -192,32 +188,22 @@ public class TaskLauncherActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_back_instruct:
-                if (title.isEmpty())
-                {
+                if (title.isEmpty()) {
                   Toast.makeText(TaskLauncherActivity.this,"请输入标题",Toast.LENGTH_SHORT).show();
                   return;
                 }
-                else if (context.isEmpty())
-                {
+                else if (context.isEmpty()) {
                     Toast.makeText(TaskLauncherActivity.this,"请输入任务详情",Toast.LENGTH_SHORT).show();
                     return;
-
                 }
-                else if (executor==null||executor.isEmpty())
-                {
+                else if (executor==null||executor.isEmpty()) {
                     Toast.makeText(TaskLauncherActivity.this,"请选择执行人",Toast.LENGTH_SHORT).show();
                     return;
-
                 }
-                else if (executor==null||deadline.isEmpty())
-                {
-
+                else if (executor==null||deadline.isEmpty()) {
                     Toast.makeText(TaskLauncherActivity.this,"请选择截止时间",Toast.LENGTH_SHORT).show();
                     return;
-
-                }
-                else
-                {
+                } else {
                     getData();
                 }
                 break;
@@ -234,7 +220,6 @@ public class TaskLauncherActivity extends BaseActivity {
     }
 
     private void selectTime(TextView textView) {
-
         TimePickerView pvTime = new TimePickerBuilder(mContext, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
@@ -250,7 +235,6 @@ public class TaskLauncherActivity extends BaseActivity {
                 .setLabel("年","月","日","时","分","秒")
                 .build();
         pvTime.show();
-
     }
     private String getTime(Date date) {//可根据需要自行截取数据显示
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -261,8 +245,7 @@ public class TaskLauncherActivity extends BaseActivity {
         selectList2 .addAll(event);
         String uids="";
         String uname="";
-        for(People params1:selectList2)
-        {
+        for(People params1:selectList2) {
             uids+=params1.getUserId()+",";
             uname+=params1.getUserName()+",";
         }
@@ -274,14 +257,12 @@ public class TaskLauncherActivity extends BaseActivity {
     }
 
     @Override
-    protected void onDestroy()
-    {
+    protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
 
-    private void getData()
-    {
+    private void getData() {
         loadDialog.show();
         RequestParams params = new RequestParams();
         params.put("title",title);
@@ -299,7 +280,6 @@ public class TaskLauncherActivity extends BaseActivity {
         for (String fileurl : fileList) {
             fiels.add(new File(fileurl));
         }
-
         HttpRequest.post_CoordinationRelease_add(params,fiels, new ResponseCallback() {
             @Override
             public void onSuccess(Object responseObj) {
@@ -333,7 +313,6 @@ public class TaskLauncherActivity extends BaseActivity {
                 Toast.makeText(mContext, "请求失败=" + failuer.getEmsg(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     //照片
@@ -344,12 +323,17 @@ public class TaskLauncherActivity extends BaseActivity {
         adapter_grid.setList(selectList);
         adapter_grid.setSelectMax(maxSelectNum);
         recyclerView.setAdapter(adapter_grid);
+        adapter_grid.setOnItemClickListener(new GridImageAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                PictureSelector.create(TaskLauncherActivity.this).themeStyle(R.style.picture_default_style).openExternalPreview(position, selectList);
+            }
+        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (resultCode == 1 && requestCode == 0&&data!=null) {
             List<People> mList = (List<People>) data.getSerializableExtra("mList");
             if (mList.size() > 0) {
@@ -383,15 +367,13 @@ public class TaskLauncherActivity extends BaseActivity {
                 });
             }
         }
-        if (requestCode == 110&&data!=null)
-        {
+        if (requestCode == 110&&data!=null) {
             List<People> mList = (List<People>) data.getSerializableExtra("mList");
             fl_content.setVisibility(View.VISIBLE);
             tv_copyperson.setText(mList.get(0).getUserName());
             copier = mList.get(0).getUserId();
             Log.e("ID",copier);
         }
-
         switch (requestCode){
             case PictureConfig.CHOOSE_REQUEST:
                 // 图片选择结果回调
@@ -416,7 +398,6 @@ public class TaskLauncherActivity extends BaseActivity {
     }
 
     private GridImageAdapter.onAddPicClickListener onAddPicClickListener = new GridImageAdapter.onAddPicClickListener() {
-
         @Override
         public void onAddPicClick() {
             initSelectImage();
@@ -461,5 +442,20 @@ public class TaskLauncherActivity extends BaseActivity {
         filebtn.setText(file_name);
         fileList = list;
         Log.v("EMAIL", "获取到数据-结束");
+    }
+
+    private void initReason() {
+        Tasklist.add("不提醒");
+        Tasklist.add("截止前5分钟");
+        Tasklist.add("截止前30分钟");
+        Tasklist.add("截止前一个小时");
+        reasonPicker = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                taskson = Tasklist.get(options1);
+                tv_remind.setText(taskson);
+            }
+        }).setTitleText("任务提醒").setContentTextSize(22).setTitleSize(22).setSubCalSize(21).build();
+        reasonPicker.setPicker(Tasklist);
     }
 }

@@ -46,10 +46,7 @@ public class LeaveApprovedFragment extends Fragment implements PullLoadMoreRecyc
     private int mCount = 1;
     private RecyclerView mRecyclerView;
     L_LeaveApprovedAdapter mRecyclerViewAdapter;
-    private ArrayList<String> list_path;
-    private ArrayList<String> list_title;
     Unbinder unbinder;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -66,7 +63,6 @@ public class LeaveApprovedFragment extends Fragment implements PullLoadMoreRecyc
     }
 
     private void initList() {
-
         //获取mRecyclerView对象
         mRecyclerView = mPullLoadMoreRecyclerView.getRecyclerView();
         //代码设置scrollbar无效？未解决！

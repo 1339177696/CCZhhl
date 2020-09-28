@@ -49,12 +49,10 @@ public class SecondLeaveActivity extends BaseActivity {
     private boolean perSenType = false;
     @BindView(R.id.view_zw)
     View view_zw;
-
     ArrayList<String> titleDatas   = new ArrayList<>();;
     ArrayList<Fragment> fragmentList = new ArrayList<Fragment>();
     private ArrayList<Integer> imgList = new ArrayList<>();
     private List<TextView> numberList = new ArrayList<>();
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,29 +61,9 @@ public class SecondLeaveActivity extends BaseActivity {
         setContentView(R.layout.work_leave_list_applyfor);
         ButterKnife.bind(this);
         mContext = this;
-        //领导
-//        if (SPUtils.get(mContext, "isLead", "").equals("0")) {
-//            tv_apply.setVisibility(View.GONE);
-//            titleDatas.add("待审批");
-//            titleDatas.add("已审批");
-//            fragmentList.add(new LeavePendFragment());
-//            fragmentList.add(new LeaveApprovedFragment());
-//        }
-//        //员工
-//        else {
-//            titleDatas.add("我发起的");
-//            titleDatas.add("抄送我的");
-//            tv_apply.setVisibility(View.VISIBLE);
-//            fragmentList.add(new LeaveLaunchFragment());
-//            fragmentList.add(new LeaveCopymeFragment());
-//        }
-//        titleDatas.add("我发起");
-//        fragmentList.add(new LeaveLaunchFragment());
-//        imgList.add(R.drawable.leave_my_faqi);
         //如果身份是普通员工不显示二级滑动
         if (SPUtils.get(this, "roleKey", "").toString().equals("common")){
             tv_apply.setVisibility(View.VISIBLE);
-
             titleDatas.add("我发起");
             fragmentList.add(new LeaveLaunchFragment());
             imgList.add(R.drawable.leave_my_faqi);
@@ -97,7 +75,6 @@ public class SecondLeaveActivity extends BaseActivity {
             // 如果王婉娇的话有抄送我的
             if (SPUtils.get(this, "userId", "").toString().equals("184")){
                 tv_apply.setVisibility(View.VISIBLE);
-
                 titleDatas.add("我发起");
                 fragmentList.add(new LeaveLaunchFragment());
                 imgList.add(R.drawable.leave_my_faqi);
@@ -107,7 +84,6 @@ public class SecondLeaveActivity extends BaseActivity {
             }
             if (SPUtils.get(this, "roleKey", "").toString().equals("boss")){
                 tv_apply.setVisibility(View.GONE);
-
                 perSenType = true;
                 titleDatas.add("待审批");
                 titleDatas.add("已审批");
@@ -117,7 +93,6 @@ public class SecondLeaveActivity extends BaseActivity {
                 imgList.add(R.drawable.leave_yishenpi);
             }else {
                 tv_apply.setVisibility(View.VISIBLE);
-
                 titleDatas.add("我发起");
                 fragmentList.add(new LeaveLaunchFragment());
                 imgList.add(R.drawable.leave_my_faqi);
@@ -131,51 +106,6 @@ public class SecondLeaveActivity extends BaseActivity {
         }
         init();
     }
-//    private void init() {
-//        MyViewPageAdapter myViewPageAdapter = new MyViewPageAdapter(getSupportFragmentManager(), titleDatas, fragmentList);
-//        myTablayout.setSelectedTabIndicator(0);
-//        myViewpager.setAdapter(myViewPageAdapter);
-//        myTablayout.setupWithViewPager(myViewpager);
-//        myTablayout.getTabAt(0).setCustomView(R.layout.item_bx_tab_f);
-//        myTablayout.getTabAt(1).setCustomView(R.layout.item_bx_tab_s);
-//        TextView textView = myTablayout.getTabAt(0).getCustomView().findViewById(R.id.tv_title);
-//        ImageView imageView = myTablayout.getTabAt(0).getCustomView().findViewById(R.id.iv_pic);
-//        TextView textView1 = myTablayout.getTabAt(1).getCustomView().findViewById(R.id.tv_title);
-//        ImageView imageView1 = myTablayout.getTabAt(1).getCustomView().findViewById(R.id.iv_pic);
-//        if (SPUtils.get(mContext, "isLead", "").equals("0")) {
-//            textView.setText("待审批");
-//            textView1.setText("已审批");
-//            //标题左边选中和未选中的图片效果
-//            imageView.setBackground(ContextCompat.getDrawable(this, R.drawable.leave_shenpi));
-//            imageView1.setBackground(ContextCompat.getDrawable(this, R.drawable.leave_yishenpi));
-//        }else {
-//            textView.setText("我发起的");
-//            textView1.setText("抄送我的");
-//            //标题左边选中和未选中的图片效果
-//            imageView.setBackground(ContextCompat.getDrawable(this, R.drawable.leave_my_faqi));
-//            imageView1.setBackground(ContextCompat.getDrawable(this, R.drawable.leave_chaosong));
-//        }
-//
-//        //初始化替换后的文字和图片
-//        myTablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-//            @Override
-//            public void onTabSelected(TabLayout.Tab tab) {
-//                tab.getCustomView().findViewById(R.id.tv_title).setSelected(true);
-//                myViewpager.setCurrentItem(tab.getPosition());
-//            }
-//
-//            @Override
-//            public void onTabUnselected(TabLayout.Tab tab) {
-//                tab.getCustomView().findViewById(R.id.tv_title).setSelected(false);
-//            }
-//
-//            @Override
-//            public void onTabReselected(TabLayout.Tab tab) {
-//
-//            }
-//        });
-//    }
-
     private void init() {
         MyViewPageAdapter myViewPageAdapter = new MyViewPageAdapter(getSupportFragmentManager(), titleDatas, fragmentList);
         myTablayout.setSelectedTabIndicator(0);
@@ -206,7 +136,6 @@ public class SecondLeaveActivity extends BaseActivity {
                 break;
         }
     }
-
 
     public void setListSize(int size, int position) {
         if (perSenType){

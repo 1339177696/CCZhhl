@@ -45,8 +45,6 @@ public class ExpenseLaunchFragment extends Fragment implements PullLoadMoreRecyc
     private int mCount = 1;
     private RecyclerView mRecyclerView;
     L_ExpenseApplyLaunchAdapter mRecyclerViewAdapter;
-    private ArrayList<String> list_path;
-    private ArrayList<String> list_title;
     Unbinder unbinder;
 //    qgl修改
     @BindView(R.id.emptyBg)
@@ -138,10 +136,8 @@ public class ExpenseLaunchFragment extends Fragment implements PullLoadMoreRecyc
                     mRecyclerViewAdapter.addAllData(memberList);
                     if (mCount == 1 && memberList.size() == 0) {
                         emptyBg.setVisibility(View.VISIBLE);
-//                        mPullLoadMoreRecyclerView.setVisibility(View.GONE);
                     } else {
                         emptyBg.setVisibility(View.GONE);
-//                        mPullLoadMoreRecyclerView.setVisibility(View.VISIBLE);
                     }
                     mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                 } catch (JSONException e) {

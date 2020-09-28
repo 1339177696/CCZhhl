@@ -313,14 +313,14 @@ public class ScheduleActivity extends BaseActivity {
 //                    if (memberList2.size() > 0) {
                     //时间这是为8点----17点
 //                        for (int i = 0; i < 24; i++) {
-                    for (int i = 8; i < 18; i++) {
+                    for (int i = 8; i < 21; i++) {
                         ScheduleBean3 bean3 = new ScheduleBean3();
                         String str = String.format("%02d", i);
                         bean3.setTimeTitle("" + str + ":00");
                         bean3.setHasContent(false);
                         bean3.setNow(false);
                         if (timeNow.split(":")[0].toString().equals(str)) {
-                            if (TimeUtils.differentDaysByMillisecond2(timeNow,"18:00")<0)
+                            if (TimeUtils.differentDaysByMillisecond2(timeNow,"21:00")<0)
                             {
                                 bean3.setNow(false);
                             }else {

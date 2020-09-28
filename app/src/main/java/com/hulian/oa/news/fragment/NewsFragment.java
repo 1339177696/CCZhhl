@@ -11,12 +11,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hulian.oa.R;
-import com.hulian.oa.address.AddressFragment2;
 import com.hulian.oa.bean.Fab;
 import com.hulian.oa.bean.Fab2;
 import com.hulian.oa.me.activity.MeActivity;
 import com.hulian.oa.news.adapter.MyViewPageAdapter;
+import com.hulian.oa.utils.Identity;
 import com.hulian.oa.utils.SPUtils;
+import com.hulian.oa.work.activity.notice.NoticeIssueActivity;
 
 import java.util.ArrayList;
 
@@ -40,7 +41,9 @@ public class NewsFragment extends Fragment {
     ViewPager myViewpager;
     @BindView(R.id.tv_type)
     TextView tv_type;
-
+    @BindView(R.id.tv_send)
+    TextView tvSend;
+    private int role = 0;
     public NewsFragment() {
         // Required empty public constructor
     }
@@ -82,29 +85,60 @@ public class NewsFragment extends Fragment {
         MyViewPageAdapter myViewPageAdapter = new MyViewPageAdapter(getChildFragmentManager(), titleDatas, fragmentList);
         myViewpager.setAdapter(myViewPageAdapter);
         myTablayout.setupWithViewPager(myViewpager);
+        role = Identity.aa(SPUtils.get(getActivity(),"roleKey","").toString());
+        myTablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition()) {
+                    case 0:
+                        tvSend.setVisibility(View.GONE);
+                        break;
+                    case 1:
+                        if (role == 3 || role == 4){
+                            tvSend.setVisibility(View.VISIBLE);
+                        }else {
+                            tvSend.setVisibility(View.GONE);
+                        }
+                        break;
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
         myTablayout.setTabsFromPagerAdapter(myViewPageAdapter);
         return view;
     }
 
-    public void iniTview(){
-        tv_type.setText(SPUtils.get(getActivity(), "nickname", "").toString().substring(SPUtils.get(getActivity(), "nickname", "").toString().length()-2,SPUtils.get(getActivity(), "nickname", "").toString().length()));
+    public void iniTview() {
+        tv_type.setText(SPUtils.get(getActivity(), "nickname", "").toString().substring(SPUtils.get(getActivity(), "nickname", "").toString().length() - 2, SPUtils.get(getActivity(), "nickname", "").toString().length()));
     }
 
     public void onEventMainThread(NewsFragment event) {
         iniTview();
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
         EventBus.getDefault().unregister(this);
     }
+
     @OnClick(R.id.tv_mengban)
     public void onViewClicked2() {
         Fab2 fab2 = new Fab2();
         fab2.setTag("0");
         EventBus.getDefault().post(fab2);
     }
+
     public void onEventMainThread(Fab event) {
         if (event.getTag().equals("0")) {
             tvMengban.setVisibility(View.GONE);
@@ -112,9 +146,19 @@ public class NewsFragment extends Fragment {
             tvMengban.setVisibility(View.VISIBLE);
         }
     }
-    @OnClick(R.id.tv_type)
-    public void onViewClicked() {
-        startActivity(new Intent(getActivity(), MeActivity.class));
+
+    @OnClick({R.id.tv_type, R.id.tv_send})
+    public void onViewClicked(View v) {
+        switch (v.getId()) {
+            case R.id.tv_type:
+                startActivity(new Intent(getActivity(), MeActivity.class));
+                break;
+            case R.id.tv_send:
+                Intent intent = new Intent(getActivity(), NoticeIssueActivity.class);
+                startActivityForResult(intent, 1);
+                break;
+        }
+
     }
 
 }

@@ -47,8 +47,6 @@ public class LeavePendFragment extends Fragment implements PullLoadMoreRecyclerV
     private int mCount = 1;
     private RecyclerView mRecyclerView;
     L_LeavePendAdapter mRecyclerViewAdapter;
-    private ArrayList<String> list_path;
-    private ArrayList<String> list_title;
     Unbinder unbinder;
 
     @Nullable

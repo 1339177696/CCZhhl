@@ -34,6 +34,7 @@ public class ExpenseImageAdapter extends RecyclerView.Adapter<ExpenseImageAdapte
      */
     private ExpenseSecondAdapter.onAddPicClickListener mOnAddPicClickListener;
     private ExpenseSecondAdapter.OnItemDeleteListener onItemDeleteListener;
+    private ExpenseSecondAdapter.OnItemClickListener onItemClickListener;
 
     //点击
     protected OnItemClickListener mItemClickListener;
@@ -43,7 +44,7 @@ public class ExpenseImageAdapter extends RecyclerView.Adapter<ExpenseImageAdapte
 
     public ExpenseImageAdapter(Context mContext, OnItemClickListener mItemClickListener, OnItemEditListener mItemEditListener
                                 , OnItemEditListener2 mItemEditListener2, ExpenseSecondAdapter.onAddPicClickListener mOnAddPicClickListener,
-                               ExpenseSecondAdapter.OnItemDeleteListener onItemDeleteListener) {
+                               ExpenseSecondAdapter.OnItemDeleteListener onItemDeleteListener,ExpenseSecondAdapter.OnItemClickListener onItemClickListener) {
         this.mContext = mContext;
         mInflater = LayoutInflater.from(mContext);
         this.mItemClickListener = mItemClickListener;
@@ -51,6 +52,7 @@ public class ExpenseImageAdapter extends RecyclerView.Adapter<ExpenseImageAdapte
         this.mItemEditListener2 = mItemEditListener2;
         this.mOnAddPicClickListener = mOnAddPicClickListener;
         this.onItemDeleteListener = onItemDeleteListener;
+        this.onItemClickListener = onItemClickListener;
     }
 
     public void setSelectMax(int selectMax) {
@@ -126,7 +128,7 @@ public class ExpenseImageAdapter extends RecyclerView.Adapter<ExpenseImageAdapte
             holder.iv_delete.setVisibility(View.GONE);
         }
         if (holder.expenseAdapter == null) {
-            holder.expenseAdapter = new ExpenseSecondAdapter(mContext, mOnAddPicClickListener,onItemDeleteListener,position);
+            holder.expenseAdapter = new ExpenseSecondAdapter(mContext, mOnAddPicClickListener,onItemDeleteListener,onItemClickListener,position);
             holder.expenseAdapter.setList(holder.listMedia);//设置数据
             FullyGridLayoutManager manager = new FullyGridLayoutManager(mContext, 4, GridLayoutManager.VERTICAL, false);
             holder.recycler_bill.setLayoutManager(manager);

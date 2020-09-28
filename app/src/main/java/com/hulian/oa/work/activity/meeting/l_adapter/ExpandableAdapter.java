@@ -39,26 +39,22 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
      * @param childData
      * @param childLayout         详情视图布局
      */
-    public ExpandableAdapter(Context context, List<Department> groupData, int expandedGroupLayout,
-                             List<List<People>> childData, int childLayout) {
+    public ExpandableAdapter(Context context, List<Department> groupData, int expandedGroupLayout, List<List<People>> childData, int childLayout) {
         mContext = context;
         mExpandedGroupLayout = expandedGroupLayout;
         mChildLayout = childLayout;
         mGroupArray = groupData;
         mChildArray = childData;
-        mInflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    public ExpandableAdapter(Context context, List<Department> groupData, int expandedGroupLayout,
-                             List<List<People>> childData, int childLayout, boolean isVideo) {
+    public ExpandableAdapter(Context context, List<Department> groupData, int expandedGroupLayout, List<List<People>> childData, int childLayout, boolean isVideo) {
         mContext = context;
         mExpandedGroupLayout = expandedGroupLayout;
         mChildLayout = childLayout;
         mGroupArray = groupData;
         mChildArray = childData;
-        mInflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.isVideo = isVideo;
     }
 
@@ -70,8 +66,7 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         return childPosition;
     }
 
-    public View getChildView(int groupPosition, int childPosition,
-                             boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         // 取得显示给定分组给定子位置的数据用的视图。
         View v;
         if (convertView == null) {
@@ -108,8 +103,7 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         return groupPosition;
     }
 
-    public View getGroupView(int groupPosition, boolean isExpanded,
-                             View convertView, ViewGroup parent) {
+    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         // 取得用于显示给定分组的视图。 这个方法仅返回分组的视图对象， 要想获取子元素的视图对象，
         // 就需要调用 getChildView(int, int, boolean, View, ViewGroup)。
         View v;
@@ -144,7 +138,6 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
                 } else {
                     data.setCount("0");
                 }
-
                 EventBus.getDefault().post(mChildArray);
                 notifyDataSetChanged();
             }
@@ -185,19 +178,6 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
             @Override
             public void onClick(View v) {
                 boolean isChecked = checkBox.isChecked();
-                int j = 0;
-                for (int i = 0; i < peopleList.size(); i++) {
-                    if (peopleList.get(i).isIscheck()) {
-                        j++;
-                    }
-                }
-                mDapart.setCount(j + "");
-                if (j == peopleList.size()) {
-                    mDapart.setIscheck(true);
-                } else {
-                    mDapart.setIscheck(false);
-                }
-
                 //如果是视频会议页面进入只允许选择11人加上自己12人
                 if (isVideo && isChecked) {
                     int num = 1;
@@ -217,16 +197,6 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
                     }
                 }
                 data.setIscheck(isChecked);
-                EventBus.getDefault().post(mChildArray);
-                notifyDataSetChanged();
-            }
-        });
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                boolean isChecked = !data.isIscheck();
-
-
                 int j = 0;
                 for (int i = 0; i < peopleList.size(); i++) {
                     if (peopleList.get(i).isIscheck()) {
@@ -239,7 +209,14 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
                 } else {
                     mDapart.setIscheck(false);
                 }
-
+                EventBus.getDefault().post(mChildArray);
+                notifyDataSetChanged();
+            }
+        });
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean isChecked = !data.isIscheck();
                 //如果是视频会议页面进入只允许选择11人加上自己12人
                 if (isVideo && isChecked) {
                     int num = 1;
@@ -264,6 +241,18 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
                 data.setIscheck(isChecked);
                 checkBox.setChecked(isChecked);
 
+                int j = 0;
+                for (int i = 0; i < peopleList.size(); i++) {
+                    if (peopleList.get(i).isIscheck()) {
+                        j++;
+                    }
+                }
+                mDapart.setCount(j + "");
+                if (j == peopleList.size()) {
+                    mDapart.setIscheck(true);
+                } else {
+                    mDapart.setIscheck(false);
+                }
                 EventBus.getDefault().post(mChildArray);
                 notifyDataSetChanged();
             }

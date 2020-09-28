@@ -174,7 +174,7 @@ public class SelDepartmentActivity_meet_zb extends BaseActivity {
         groupArray = new ArrayList<>();
         childArray = new ArrayList<>();
         //创建适配器
-        expandableAdapter = new ExpandableAdapter(this, groupArray, R.layout.group_layout_ceshi, childArray, R.layout.group_item_listview_ceshi);
+        expandableAdapter = new ExpandableAdapter(this, groupArray, R.layout.group_layout_ceshi, childArray, R.layout.group_item_listview_ceshi1);
         expandableListView.setAdapter(expandableAdapter);
         getDepartMent();
 

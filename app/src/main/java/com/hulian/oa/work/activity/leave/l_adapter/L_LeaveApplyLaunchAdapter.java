@@ -53,12 +53,12 @@ public class L_LeaveApplyLaunchAdapter extends RecyclerView.Adapter <L_LeaveAppl
         public TextView l_item_time;
         public ViewHolder(View itemView) {
             super(itemView);
-            tv_title = (TextView) itemView.findViewById(R.id.tv_title);
-            tv_time = (TextView) itemView.findViewById(R.id.tv_time);
-            tv_leave_reason = (TextView) itemView.findViewById(R.id.tv_leave_reason);
-            tv_duration = (TextView) itemView.findViewById(R.id.tv_duration);
-            tv_pend = (ImageView) itemView.findViewById(R.id.tv_pend);
-            l_item_time = (TextView) itemView.findViewById(R.id.l_item_time);
+            tv_title = itemView.findViewById(R.id.tv_title);
+            tv_time = itemView.findViewById(R.id.tv_time);
+            tv_leave_reason = itemView.findViewById(R.id.tv_leave_reason);
+            tv_duration = itemView.findViewById(R.id.tv_duration);
+            tv_pend = itemView.findViewById(R.id.tv_pend);
+            l_item_time = itemView.findViewById(R.id.l_item_time);
         }
     }
 

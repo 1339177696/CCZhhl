@@ -28,7 +28,6 @@ public class DefaultSelectorActivity extends BasePermissionActivity implements V
     private String[] mTypes = new String[]{".txt",".doc"};
     private RelativeLayout imageViewBack;
     private FileSelectorLayout fileSelectorLayout;
-
     //接收到的参数
     private boolean isForResult;//是否是 startActivityForResult 方式启动的
     private boolean isNeedBroadCast;//是否需要发送广播传递选中的数据

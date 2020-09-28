@@ -40,6 +40,25 @@ public class ExpenseStaBean {
     @SerializedName("money")
     private String money; // 类型
 
+    public String getCause() {
+        return cause;
+    }
+
+    public void setCause(String cause) {
+        this.cause = cause;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    private String cause;
+    private String createTime;
+
 
 
 

@@ -5,20 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EBEBEB">
-
     <LinearLayout
         android:id="@+id/work_leave_list_liner"
         android:orientation="vertical"
         android:background="@mipmap/banner_bg_qgl"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_170">
-
+        <!--titleBar-->
         <RelativeLayout
             android:layout_marginTop="@dimen/dp_25"
             android:layout_width="match_parent"
             android:gravity="center_vertical"
             android:layout_height="@dimen/dp_53">
-
+            <!--返回键-->
             <RelativeLayout
                 android:id="@+id/iv_back"
                 android:layout_width="wrap_content"
@@ -35,8 +34,7 @@
                     android:background="@mipmap/ic_left_white" />
 
             </RelativeLayout>
-
-
+            <!--Title-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -45,7 +43,7 @@
                 android:textColor="#ffffff"
                 android:textSize="@dimen/sp_17" />
         </RelativeLayout>
-
+<!--        TabLayout-->
         <FrameLayout
             android:layout_gravity="center"
             android:paddingRight="@dimen/dp_25"
@@ -115,10 +113,5 @@
 
         </LinearLayout>
 
-
-
     </FrameLayout>
-
-
-
 </RelativeLayout>

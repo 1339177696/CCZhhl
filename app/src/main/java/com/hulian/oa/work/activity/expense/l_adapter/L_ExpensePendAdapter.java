@@ -45,11 +45,11 @@ public class L_ExpensePendAdapter extends RecyclerView.Adapter <L_ExpensePendAda
         public ImageView tv_pend;
         public ViewHolder(View itemView) {
             super(itemView);
-            tv_title = (TextView) itemView.findViewById(R.id.tv_title);
-            tv_time = (TextView) itemView.findViewById(R.id.tv_time);
-            tv_expense_monkey = (TextView) itemView.findViewById(R.id.tv_expense_monkey);
-            tv_pend = (ImageView) itemView.findViewById(R.id.tv_pend);
-            tv_expense_dept = (TextView) itemView.findViewById(R.id.tv_expense_dept);
+            tv_title = itemView.findViewById(R.id.tv_title);
+            tv_time = itemView.findViewById(R.id.tv_time);
+            tv_expense_monkey = itemView.findViewById(R.id.tv_expense_monkey);
+            tv_pend = itemView.findViewById(R.id.tv_pend);
+            tv_expense_dept = itemView.findViewById(R.id.tv_expense_dept);
         }
     }
 
